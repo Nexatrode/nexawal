@@ -44,3 +44,7 @@ Xcode resolves `MoneroWalletCoreFFI` from GitHub on branch `main` (prebuilt xcfr
 - Uses a native wallet core built from `monero-oxide` via `MoneroWalletCoreFFI`
 - Syncs against standard Monero nodes (local or remote), including the configured I2P RPC path when enabled
 - Feature parity target: [nexawal-android](https://github.com/cacaosteve/nexawal-android)
+
+## License
+
+[MIT](LICENSE). Downstream code such as `monero-oxide` remains under its own MIT terms; keep those notices when you redistribute.
