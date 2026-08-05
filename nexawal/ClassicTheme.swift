@@ -20,6 +20,7 @@ struct ClassicPalette {
     let progress: Color
     let cta: Color
     let ctaText: Color
+    let isLight: Bool
 
     static func resolve(colorScheme: ColorScheme) -> ClassicPalette {
         switch colorScheme {
@@ -35,7 +36,8 @@ struct ClassicPalette {
                 danger: Color(red: 0.70, green: 0.12, blue: 0.12),
                 progress: Color(red: 0.039, green: 0.478, blue: 0.184),
                 cta: Color(red: 0.039, green: 0.478, blue: 0.184),
-                ctaText: Color.white
+                ctaText: Color.white,
+                isLight: true
             )
         default:
             return ClassicPalette(
@@ -49,7 +51,8 @@ struct ClassicPalette {
                 danger: Color(red: 1.0, green: 0.35, blue: 0.35),
                 progress: Color(red: 0.0, green: 0.902, blue: 0.463),
                 cta: Color(red: 0.224, green: 1.0, blue: 0.078), // #39FF14 neon green (not cyan)
-                ctaText: Color(red: 0.0, green: 0.102, blue: 0.071) // #001A12
+                ctaText: Color(red: 0.0, green: 0.102, blue: 0.071), // #001A12
+                isLight: false
             )
         }
     }
@@ -116,17 +119,41 @@ extension View {
     @ViewBuilder
     func neonSecondaryButtonStyle(classicUI: Bool, palette: ClassicPalette?) -> some View {
         if classicUI, let palette {
-            self
-                .font(.system(.body, design: .monospaced).weight(.medium))
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color(red: 0.07, green: 0.09, blue: 0.07))
-                .foregroundColor(palette.accent)
-                .overlay(Capsule().stroke(palette.border, lineWidth: 1))
-                .clipShape(Capsule())
+            self.modifier(NeonSecondaryChrome(palette: palette))
         } else {
             self
         }
+    }
+}
+
+struct NeonSecondaryButtonStyle: ButtonStyle {
+    let palette: ClassicPalette
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .modifier(NeonSecondaryChrome(palette: palette, pressed: configuration.isPressed))
+    }
+}
+
+private struct NeonSecondaryChrome: ViewModifier {
+    let palette: ClassicPalette
+    var pressed: Bool = false
+    @Environment(\.isEnabled) private var isEnabled
+
+    func body(content: Content) -> some View {
+        let light = palette.isLight
+        let fill = light ? palette.panel : Color(red: 0.07, green: 0.09, blue: 0.07)
+        let shape = RoundedRectangle(cornerRadius: light ? 14 : 999, style: .continuous)
+        content
+            .font(.system(.body, design: .monospaced).weight(.semibold))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .padding(.horizontal, 12)
+            .background(fill)
+            .foregroundStyle(palette.accent.opacity(isEnabled ? 1 : 0.45))
+            .overlay(shape.stroke(palette.border.opacity(isEnabled ? 1 : 0.4), lineWidth: light ? 1.5 : 1))
+            .clipShape(shape)
+            .opacity(pressed ? 0.82 : 1)
     }
 }
 

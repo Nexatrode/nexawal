@@ -186,6 +186,15 @@ class WalletViewModel: ObservableObject {
             return
         }
 
+        if metadata.biometricsEnabled && !enabled {
+            do {
+                try await storage.evaluateBiometricsIfNeeded(prompt: "Authenticate to turn off Face ID protection")
+            } catch {
+                errorMessage = error.localizedDescription
+                return
+            }
+        }
+
         do {
             let updatedMetadata = StoredWalletMetadata(
                 walletId: metadata.walletId,
@@ -415,33 +424,11 @@ class WalletViewModel: ObservableObject {
                     requireBiometrics: requireBiometrics
                 )
             } catch {
-                // Fallback: if biometric-protected Keychain storage fails, retry storing without biometrics.
-                // This keeps the wallet usable while still storing the mnemonic in the Keychain.
-                if requireBiometrics {
-                    print("⚠️ Wallet persistence failed with biometrics enabled; retrying without biometrics. error=\(error.localizedDescription)")
-                    do {
-                        try await storage.storeWallet(
-                            mnemonic: normalizedMnemonic,
-                            metadata: metadata,
-                            requireBiometrics: false
-                        )
-                        biometricsEnabled = false
-                        storedMetadata?.biometricsEnabled = false
-                        print("🔐 Wallet persisted successfully without biometrics fallback.")
-                    } catch {
-                        let message = "Wallet persistence failed (biometrics + fallback): \(error.localizedDescription)"
-                        print("⚠️ \(message)")
-                        errorMessage = message
-                        isWalletOpen = false
-                        return
-                    }
-                } else {
-                    let message = "Wallet persistence failed: \(error.localizedDescription)"
-                    print("⚠️ \(message)")
-                    errorMessage = message
-                    isWalletOpen = false
-                    return
-                }
+                let message = "Wallet persistence failed: \(error.localizedDescription)"
+                print("⚠️ \(message)")
+                errorMessage = message
+                isWalletOpen = false
+                return
             }
 
             await refreshWallet()
@@ -451,6 +438,17 @@ class WalletViewModel: ObservableObject {
         }
 
         isLoading = false
+    }
+
+    /// Cancel any in-flight scan and refresh against the currently saved node/policy.
+    /// Call after persisting network settings. No-op if no wallet is open.
+    func applyNetworkAndReconnect() async {
+        guard isWalletOpen else { return }
+        if isRefreshing || refreshTask != nil {
+            cancelRefresh()
+            try? await Task.sleep(nanoseconds: 400_000_000)
+        }
+        await refreshWallet()
     }
 
     func refreshWallet() async {
@@ -628,8 +626,9 @@ class WalletViewModel: ObservableObject {
             return
         }
 
-        if isRefreshing {
-            return
+        if isRefreshing || refreshTask != nil {
+            cancelRefresh()
+            try? await Task.sleep(nanoseconds: 400_000_000)
         }
 
         isManualRescanInProgress = true

@@ -626,9 +626,17 @@ actor WalletManager {
         }
     }
 
-    /// If a prepared payload is on disk, relay it (idempotent) before any new prepare.
-    private func completePendingPreparedSend(for walletId: String, preferredNodeURL: String) throws {
-        guard let pending = loadPendingPrepared(for: walletId) else { return }
+    private struct RecoveredPreparedSend {
+        let txid: String
+        let amount: UInt64
+        let fee: UInt64
+    }
+
+    /// If a prepared payload is on disk, relay it (idempotent) and return that result.
+    /// Callers must not construct a second transaction in the same user action.
+    @discardableResult
+    private func completePendingPreparedSend(for walletId: String, preferredNodeURL: String) throws -> RecoveredPreparedSend? {
+        guard let pending = loadPendingPrepared(for: walletId) else { return nil }
         applyBroadcastProxy()
         let endpoint = pending.nodeURL.isEmpty ? preferredNodeURL : pending.nodeURL
         print("↩️ Recovering pending prepared send txid=\(pending.prepared.txid) via \(endpoint)")
@@ -640,11 +648,16 @@ actor WalletManager {
         clearPendingPrepared(for: walletId)
         exportCacheAndPersist(for: walletId)
         print("✅ Recovered pending prepared send txid=\(relay.txid) status=\(relay.status)")
+        return RecoveredPreparedSend(
+            txid: relay.txid,
+            amount: pending.prepared.amount,
+            fee: pending.prepared.fee
+        )
     }
 
     private func recoverPendingPreparedSendBestEffort(for walletId: String) {
         do {
-            try completePendingPreparedSend(
+            _ = try completePendingPreparedSend(
                 for: walletId,
                 preferredNodeURL: MoneroConfig.broadcastNodeURL()
             )
@@ -721,10 +734,14 @@ actor WalletManager {
         unsetenv("WALLETCORE_WALLET2_FAST_FALLBACK")
         unsetenv("WALLETCORE_BULK_BIN_DEBUG")
         applyBulkRangeBatchEnv(batch: refreshBatch)
+        #if DEBUG
         setenv("WALLETCORE_SCAN_LOG", "1", 1)
+        #else
+        setenv("WALLETCORE_SCAN_LOG", "0", 1)
+        #endif
 
         let node = MoneroConfig.scanNodeURL()
-        print("🧪 scan tuning fast-sync: node=\(node) bulk_mode=range bulk_fetch_batch=\(refreshBatch) upstream_block_batch=\(refreshBatch) scan_log=1")
+        print("🧪 scan tuning fast-sync: node=\(node) bulk_mode=range bulk_fetch_batch=\(refreshBatch) upstream_block_batch=\(refreshBatch)")
     }
 
     private func applyBulkRangeBatchEnv(batch: Int) {
@@ -884,7 +901,9 @@ actor WalletManager {
             applyBroadcastProxy()
 
             let endpoint = MoneroConfig.broadcastNodeURL()
-            try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)
+            if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
+                return (txid: recovered.txid, amount: recovered.amount, fee: recovered.fee)
+            }
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String
@@ -925,7 +944,9 @@ actor WalletManager {
             applyBroadcastProxy()
 
             let endpoint = MoneroConfig.broadcastNodeURL()
-            try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)
+            if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
+                return (txid: recovered.txid, fee: recovered.fee)
+            }
 
             let dest = WalletCoreFFIClient.Destination(address: toAddress, amount: amountPiconero)
             let prepared: WalletCoreFFIClient.PreparedSend
@@ -1013,7 +1034,9 @@ actor WalletManager {
                 print("📤 Sweep start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
             }
 
-            try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)
+            if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
+                return (txid: recovered.txid, amount: recovered.amount, fee: recovered.fee)
+            }
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String
@@ -1065,8 +1088,10 @@ actor WalletManager {
                 print("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
             }
 
-            // Finish any prior prepared payload before constructing a new one (shared inputs).
-            try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)
+            // Finish any prior prepared payload. Do not also construct a new tx in this tap.
+            if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
+                return (txid: recovered.txid, fee: recovered.fee)
+            }
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String

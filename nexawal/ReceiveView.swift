@@ -117,9 +117,8 @@ struct ReceiveView: View {
                             showCreateSubaddressPrompt = true
                         } label: {
                             Label("New Address", systemImage: "plus.circle")
-                                .neonSecondaryButtonStyle(classicUI: true, palette: palette)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
                     } else {
                         Button {
                             showCreateSubaddressPrompt = true
@@ -262,9 +261,8 @@ struct ReceiveView: View {
                 if hasPaymentAmount {
                     Button(action: copyPaymentURI) {
                         Label("Copy Payment URI", systemImage: "link")
-                            .neonSecondaryButtonStyle(classicUI: true, palette: palette)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
                 }
 
                 if #available(iOS 16.0, *) {
@@ -278,9 +276,8 @@ struct ReceiveView: View {
                         showShareSheet = true
                     } label: {
                         Label("Share Payment Link", systemImage: "square.and.arrow.up")
-                            .neonSecondaryButtonStyle(classicUI: true, palette: palette)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
                 }
             } else {
                 Button(action: copyAddress) {

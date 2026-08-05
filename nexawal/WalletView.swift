@@ -6,6 +6,7 @@
 //
 
 import MoneroWalletCoreFFI
+import NexaWalLogic
 import SwiftUI
 import UIKit
 
@@ -647,10 +648,6 @@ struct SettingsView: View {
         self._requireBiometrics = State(initialValue: viewModel.biometricsEnabled)
     }
 
-    private var isRescanInProgress: Bool {
-        viewModel.isRefreshing
-    }
-
     var body: some View {
         NavigationView {
             Form {
@@ -662,14 +659,27 @@ struct SettingsView: View {
                 }
 
                 Section(header: NeonSectionHeader(title: "Network & Node")) {
-                    TextField("Daemon hostname:port", text: $nodeAddress)
+                    TextField("https://rpc.nexatrode.com", text: $nodeAddress)
                         .font(.system(.body, design: .monospaced))
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
-                    Text("Example: 127.0.0.1:18092\n(Full URL will be: http://127.0.0.1:18092)")
+                    Text("Type the full URL, including http:// or https://.\nPublic: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+                    if classicUI, let palette = classicPalette {
+                        Button("Use this node") {
+                            useThisNode()
+                        }
+                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 12, trailing: 16))
+                    } else {
+                        Button("Use this node") {
+                            useThisNode()
+                        }
+                    }
                 }
 
                 Section(header: NeonSectionHeader(title: "Network Policy & I2P")) {
@@ -705,23 +715,15 @@ struct SettingsView: View {
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                 }
 
-                Section(header: NeonSectionHeader(title: "Restore & Rescan")) {
-                    TextField("Restore height (optional)", text: $rescanHeightInput)
-                        .keyboardType(.numberPad)
-                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                    Text("Use an earlier height if funds are missing after import, or rescan from 0 if you need a full recovery.")
-                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                }
-
                 Section(header: NeonSectionHeader(title: "Security")) {
                     NeonToggle(
                         title: "Require Face ID / Touch ID",
                         isOn: $requireBiometrics,
                         disabled: !biometricsAvailable || !biometricsEnrolled
                     )
+                    .onChange(of: requireBiometrics) { _, newValue in
+                        persistBiometrics(newValue)
+                    }
 
                     if !biometricsAvailable {
                         Text("Biometric or device authentication is not available on this device.")
@@ -738,23 +740,11 @@ struct SettingsView: View {
                     }
                 }
 
-                Section(header: NeonSectionHeader(title: "Maintenance")) {
-                    Button {
-                        Task {
-                            do {
-                                try await WalletManager.shared.clearScanCache()
-                            } catch {
-                                print("⚠️ Clear cache failed: \(error)")
-                            }
-                        }
-                    } label: {
-                        Text("Clear scan cache (this network)")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : .red)
-                }
-
                 Section(header: NeonSectionHeader(title: "Recovery")) {
+                    Text("Wrong node? Use this node above — you do not need a rescan.\nMissing funds? Rescan from your restore height.\nLast resort: full rescan from block 0.")
+                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
                     TextField("Restore height", text: $rescanHeightInput)
                         .keyboardType(.numberPad)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
@@ -762,37 +752,31 @@ struct SettingsView: View {
                         .textInputAutocapitalization(.never)
 
                     if classicUI, let palette = classicPalette {
-                        Button {
-                            initiateRescan()
-                        } label: {
-                            Text("Rescan from Height")
-                                .neonSecondaryButtonStyle(classicUI: true, palette: palette)
-                        }
-                        .disabled(parsedRescanHeight() == nil || isRescanInProgress)
-                        .listRowBackground(Color.clear)
-                        .buttonStyle(.plain)
-
-                        Button {
-                            rescanHeightInput = "0"
-                            initiateRescan()
-                        } label: {
-                            Text("Full Rescan (from block 0)")
-                                .neonSecondaryButtonStyle(classicUI: true, palette: palette)
-                        }
-                        .disabled(isRescanInProgress)
-                        .listRowBackground(Color.clear)
-                        .buttonStyle(.plain)
-                    } else {
                         Button("Rescan from Height") {
                             initiateRescan()
                         }
-                        .disabled(parsedRescanHeight() == nil || isRescanInProgress)
+                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                        .disabled(parsedRescanHeight() == nil)
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
 
                         Button("Full Rescan (from block 0)") {
                             rescanHeightInput = "0"
                             initiateRescan()
                         }
-                        .disabled(isRescanInProgress)
+                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 12, trailing: 16))
+                    } else {
+                        Button("Rescan from Height") {
+                            initiateRescan()
+                        }
+                        .disabled(parsedRescanHeight() == nil)
+
+                        Button("Full Rescan (from block 0)") {
+                            rescanHeightInput = "0"
+                            initiateRescan()
+                        }
                     }
                 }
 
@@ -823,6 +807,29 @@ struct SettingsView: View {
                             Text("Controls how many Monero accounts are scanned starting at account 0.")
                                 .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+                            Button {
+                                persistScanTuning()
+                                flashStatus("Saved scan lookahead")
+                            } label: {
+                                Text("Save scan lookahead")
+                                    .frame(maxWidth: .infinity)
+                            }
+
+                            Button {
+                                Task {
+                                    do {
+                                        try await WalletManager.shared.clearScanCache()
+                                        flashStatus("Cleared scan cache")
+                                    } catch {
+                                        flashStatus("Clear cache failed: \(error.localizedDescription)")
+                                    }
+                                }
+                            } label: {
+                                Text("Clear scan cache (this network)")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : .red)
                         }
                     }
                 }
@@ -835,26 +842,6 @@ struct SettingsView: View {
                     Text(classicUI ? "SETTINGS" : "Settings")
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    if classicUI, let palette = classicPalette {
-                        Button {
-                            saveSettings()
-                        } label: {
-                            Text("Save")
-                                .font(.system(.body, design: .monospaced).weight(.semibold))
-                                .padding(.horizontal, 14)
-                                .padding(.vertical, 6)
-                                .background(palette.cta)
-                                .foregroundStyle(palette.ctaText)
-                                .clipShape(Capsule())
-                        }
-                        .buttonStyle(.plain)
-                    } else {
-                        Button("Save") {
-                            saveSettings()
-                        }
-                    }
                 }
             }
             .overlay(alignment: .bottom) {
@@ -877,36 +864,70 @@ struct SettingsView: View {
         }
     }
 
-    private func saveSettings() {
-        MoneroConfig.setDaemonAddress(nodeAddress)
+    private func useThisNode() {
+        let trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
+            flashStatus("Start the node URL with http:// or https://")
+            return
+        }
+        nodeAddress = explicit
+        MoneroConfig.setDaemonAddress(explicit)
         MoneroConfig.setNetworkPolicy(networkPolicy)
         MoneroConfig.setI2PRPCAddress(i2pRPCAddress.trimmingCharacters(in: .whitespacesAndNewlines))
         let proxy = i2pProxyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         MoneroConfig.setI2PHTTPProxyAddress(proxy.isEmpty ? nil : proxy)
         MoneroConfig.setUseI2P(networkPolicy == .i2p || networkPolicy == .hybrid)
-        MoneroConfig.setClassicUIEnabled(classicUIEnabled)
+        persistScanTuning()
+
+        Task {
+            await viewModel.applyNetworkAndReconnect()
+            if let err = viewModel.errorMessage, !err.isEmpty, viewModel.isWalletOpen {
+                flashStatus(err)
+            } else if viewModel.isWalletOpen {
+                flashStatus("Connecting to \(trimmed)")
+            } else {
+                flashStatus("Saved node")
+            }
+        }
+    }
+
+    private func persistBiometrics(_ enabled: Bool) {
+        guard enabled != viewModel.biometricsEnabled else { return }
+        Task {
+            await viewModel.updateBiometricProtection(enabled: enabled)
+            if viewModel.biometricsEnabled != enabled {
+                requireBiometrics = viewModel.biometricsEnabled
+                flashStatus(viewModel.errorMessage ?? "Could not update Face ID setting")
+            }
+        }
+    }
+
+    private func persistScanTuning() {
         if let gap = parsedGapLimit() {
             MoneroConfig.setGapLimit(gap)
             Task {
                 if let id = await WalletManager.shared.getCurrentWalletId() {
-                    try? WalletCoreFFIClient.setGapLimit(
-                        walletId: id, gapLimit: gap)
+                    try? WalletCoreFFIClient.setGapLimit(walletId: id, gapLimit: gap)
                 }
             }
         }
-        if let acc = Int(accountGapInput) {
-            let clamped = max(1, min(acc, 1000))
-            MoneroConfig.setAccountGap(clamped)
+        if let acc = Int(accountGapInput.trimmingCharacters(in: .whitespacesAndNewlines)) {
+            MoneroConfig.setAccountGap(max(1, min(acc, 1000)))
         }
+    }
 
+    private func flashStatus(_ message: String) {
+        withAnimation {
+            saveConfirmation = message
+        }
         Task {
-            await viewModel.updateBiometricProtection(enabled: requireBiometrics)
-            withAnimation {
-                saveConfirmation = "Saved"
-            }
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
-            withAnimation {
-                saveConfirmation = nil
+            try? await Task.sleep(nanoseconds: 1_800_000_000)
+            await MainActor.run {
+                withAnimation {
+                    if saveConfirmation == message {
+                        saveConfirmation = nil
+                    }
+                }
             }
         }
     }
@@ -928,8 +949,14 @@ struct SettingsView: View {
 
     private func initiateRescan() {
         guard let height = parsedRescanHeight() else { return }
+        persistScanTuning()
         Task {
             await viewModel.rescan(from: height)
+            if let err = viewModel.errorMessage, !err.isEmpty {
+                flashStatus(err)
+            } else {
+                flashStatus("Rescanning from \(height)")
+            }
         }
     }
 }

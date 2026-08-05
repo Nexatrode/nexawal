@@ -24,6 +24,14 @@ final class NetworkRoutingTests: XCTestCase {
         XCTAssertEqual(NetworkRouting.broadcastNodeURL(policy: .clearnet, clearnetNodeURL: clearnet, i2pRPCAddress: i2p), clearnet)
     }
 
+    func testNormalizeURLKeepsExplicitSchemesAndDefaultsLegacyHostPortToHTTP() {
+        XCTAssertEqual(NetworkRouting.normalizeURL("https://rpc.nexatrode.com"), "https://rpc.nexatrode.com")
+        XCTAssertEqual(NetworkRouting.normalizeURL("http://host:18081"), "http://host:18081")
+        XCTAssertEqual(NetworkRouting.normalizeURL("host:18081"), "http://host:18081")
+        XCTAssertNil(NetworkRouting.explicitNodeURL("rpc.nexatrode.com"))
+        XCTAssertEqual(NetworkRouting.explicitNodeURL("https://rpc.nexatrode.com"), "https://rpc.nexatrode.com")
+    }
+
     func testProxyRequiredAndPolicyAware() {
         XCTAssertFalse(NetworkRouting.shouldUseI2PHTTPProxy(policy: .i2p, proxyConfigured: false, forBroadcast: true))
         XCTAssertFalse(NetworkRouting.shouldUseI2PHTTPProxy(policy: .clearnet, proxyConfigured: true, forBroadcast: true))

@@ -7,11 +7,12 @@
 
 import SwiftUI
 import MoneroWalletCoreFFI
+import NexaWalLogic
 
 struct WalletCreationView: View {
     @ObservedObject var viewModel: WalletViewModel
-    @State private var mnemonicInput: String = ""
-    @State private var restoreHeightInput: String = "0"
+    @State private var mnemonicInput: String = Self.debugTestMnemonic()
+    @State private var restoreHeightInput: String = Self.debugTestRestoreHeight()
     @State private var isMainnet: Bool = true
     @FocusState private var isMnemonicFocused: Bool
     @Environment(\.classicUI) private var classicUI
@@ -21,6 +22,27 @@ struct WalletCreationView: View {
         case create = "Create new wallet (fast)"
         case `import` = "Import existing wallet"
         var id: String { rawValue }
+    }
+
+    /// DEBUG-only first-run testing: scheme Environment Variables
+    /// `NEXAWAL_TEST_MNEMONIC` and `NEXAWAL_TEST_RESTORE_HEIGHT` prefill Import fields.
+    private static func debugTestMnemonic() -> String {
+        #if DEBUG
+        ProcessInfo.processInfo.environment["NEXAWAL_TEST_MNEMONIC"]?
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        #else
+        ""
+        #endif
+    }
+
+    private static func debugTestRestoreHeight() -> String {
+        #if DEBUG
+        let raw = ProcessInfo.processInfo.environment["NEXAWAL_TEST_RESTORE_HEIGHT"]?
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        return raw.isEmpty ? "0" : raw.replacingOccurrences(of: ",", with: "")
+        #else
+        "0"
+        #endif
     }
 
     // Create-mode seed backup gate: the app generates the mnemonic (never a user paste),
@@ -51,6 +73,10 @@ struct WalletCreationView: View {
     @State private var biometricsAvailable: Bool = false
     @State private var biometricsEnrolled: Bool = false
 
+    // Pre-wallet node config (same UserDefaults key as Settings).
+    @State private var nodeAddress: String = MoneroConfig.daemonAddress
+    @State private var nodeSaveStatus: String?
+
     var body: some View {
         NavigationView {
             Form {
@@ -80,6 +106,7 @@ struct WalletCreationView: View {
                             .focused($isMnemonicFocused)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
+                            .privacySensitive()
                     }
 
                     // Restore height controls:
@@ -223,6 +250,30 @@ struct WalletCreationView: View {
                     }
                 }
 
+                Section(header: NeonSectionHeader(title: "Network & Node")) {
+                    TextField("https://rpc.nexatrode.com", text: $nodeAddress)
+                        .font(.system(.body, design: .monospaced))
+                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.never)
+                    Text("Type the full URL, including http:// or https://.\nPublic: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089")
+                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+                    Button {
+                        saveNodeAddress()
+                    } label: {
+                        Text(classicUI ? "SAVE NODE" : "Save node")
+                    }
+                    .neonCTAStyle(classicUI: classicUI, palette: classicPalette)
+
+                    if let nodeSaveStatus {
+                        Text(nodeSaveStatus)
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    }
+                }
+
                 Section(header: NeonSectionHeader(title: "Info")) {
                     HStack {
                         Text("WalletCore Version:")
@@ -231,15 +282,6 @@ struct WalletCreationView: View {
                         Text(viewModel.getVersion())
                             .font(.system(.body, design: .monospaced))
                             .foregroundColor(classicPalette?.primaryText)
-                    }
-
-                    HStack {
-                        Text("Node Address:")
-                            .foregroundColor(classicPalette?.secondaryText)
-                        Spacer()
-                        Text(MoneroConfig.daemonAddress)
-                            .font(.system(.body, design: .monospaced))
-                            .foregroundColor(classicPalette?.secondaryText ?? .secondary)
                     }
                 }
             }
@@ -302,7 +344,7 @@ struct WalletCreationView: View {
                 .buttonStyle(.plain)
             }
         }
-        .background(palette.card)
+        .background(palette.panel)
         .overlay(
             RoundedRectangle(cornerRadius: 4)
                 .stroke(palette.border, lineWidth: 1)
@@ -359,6 +401,7 @@ struct WalletCreationView: View {
         .padding(8)
         .background(RoundedRectangle(cornerRadius: 8).fill(Color.secondary.opacity(0.08)))
         .textSelection(.disabled)
+        .privacySensitive()
     }
 
     private var seedChallengeView: some View {
@@ -441,6 +484,17 @@ struct WalletCreationView: View {
     }
 
     private func createOrImport(isReplace: Bool) async {
+        // Persist whatever is in the node field so create/import works even if Save wasn't tapped.
+        let trimmedNode = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmedNode.isEmpty {
+            guard let explicit = NetworkRouting.explicitNodeURL(trimmedNode) else {
+                viewModel.errorMessage = "Start the node URL with http:// or https://"
+                return
+            }
+            nodeAddress = explicit
+            MoneroConfig.setDaemonAddress(explicit)
+        }
+
         // For create mode, we hide the restore height input and use the suggested height.
         // For import mode, we take the user's input.
         let rawHeight = UInt64(restoreHeightInput.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0
@@ -473,6 +527,24 @@ struct WalletCreationView: View {
 
         // After importing/replacing, refresh persisted-wallet flag.
         hasStoredWallet = await viewModel.hasStoredWallet()
+    }
+
+    private func saveNodeAddress() {
+        let trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
+            nodeSaveStatus = "Start the node URL with http:// or https://"
+            return
+        }
+        nodeAddress = explicit
+        MoneroConfig.setDaemonAddress(explicit)
+        nodeSaveStatus = "Saved node"
+        Task {
+            await refreshSuggestedRestoreHeightIfNeeded()
+            try? await Task.sleep(nanoseconds: 1_500_000_000)
+            if nodeSaveStatus == "Saved node" {
+                nodeSaveStatus = nil
+            }
+        }
     }
 
     private func refreshSuggestedRestoreHeightIfNeeded() async {

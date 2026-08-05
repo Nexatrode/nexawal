@@ -18,13 +18,21 @@ public enum NetworkRouting: Sendable {
 
     public static func normalizeURL(_ raw: String) -> String {
         let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.hasPrefix("http://") || trimmed.hasPrefix("https://") {
-            return trimmed
+        if let explicit = explicitNodeURL(trimmed) {
+            return explicit
         }
-        if trimmed.hasSuffix(":443") {
-            return "https://\(trimmed)"
+        // I2P / legacy host:port values have no scheme. Default those to http.
+        return trimmed.isEmpty ? trimmed : "http://\(trimmed)"
+    }
+
+    /// Clearnet node field: user must type http:// or https://. No scheme guessing.
+    public static func explicitNodeURL(_ raw: String) -> String? {
+        let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lower = trimmed.lowercased()
+        guard lower.hasPrefix("http://") || lower.hasPrefix("https://") else {
+            return nil
         }
-        return "http://\(trimmed)"
+        return trimmed
     }
 
     public static func scanNodeAddress(policy: Policy, clearnetNodeAddress: String, i2pRPCAddress: String) -> String {

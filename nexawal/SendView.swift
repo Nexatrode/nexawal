@@ -11,7 +11,6 @@ struct SendView: View {
     // Inputs
     @State private var toAddress: String = ""
     @State private var amountXMR: String = ""
-    @State private var ringLenInput: String = "16"
 
     // State
     @State private var isEstimating: Bool = false
@@ -22,7 +21,6 @@ struct SendView: View {
     @State private var infoMessage: String?
     @State private var showSendConfirmation: Bool = false
     @State private var showScanner: Bool = false
-    @State private var showAdvanced: Bool = false
 
     // Subaddress send selection (account 0 only for MVP)
     @State private var fromSubaddressMinor: UInt32 = 0
@@ -93,16 +91,6 @@ struct SendView: View {
                         Text(viewModel.formatDisplayPiconero(availablePiconero()))
                             .font(.system(.caption, design: .monospaced))
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    }
-
-                    HStack {
-                        NeonFormLabel(text: "Ring size")
-                        Spacer()
-                        TextField("16", text: $ringLenInput)
-                            .keyboardType(.numberPad)
-                            .frame(width: 70)
-                            .multilineTextAlignment(.trailing)
-                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
                     }
                 }
 
@@ -182,9 +170,8 @@ struct SendView: View {
                                     }
                                     Text(isEstimating ? "Estimating..." : "Preview Fee")
                                 }
-                                .neonSecondaryButtonStyle(classicUI: true, palette: palette)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
                             .disabled(isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
 
                             Button {
@@ -212,9 +199,8 @@ struct SendView: View {
                                 Image(systemName: "arrow.up.circle")
                                 Text("Send Max")
                             }
-                            .neonSecondaryButtonStyle(classicUI: true, palette: palette)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
                         .listRowBackground(Color.clear)
                         .disabled(isEstimating || isSending)
                     } else {
@@ -266,60 +252,6 @@ struct SendView: View {
                         }
                         .buttonStyle(.bordered)
                         .disabled(isEstimating || isSending)
-                    }
-                }
-
-                Section {
-                    NeonDisclosureGroup(
-                        title: classicUI ? "ADVANCED" : "Advanced",
-                        isExpanded: $showAdvanced
-                    ) {
-                        NeonToggle(title: "Send from specific subaddress", isOn: $sendFromSubaddressEnabled)
-
-                        if sendFromSubaddressEnabled {
-                            Picker("Subaddress", selection: $fromSubaddressMinor) {
-                                ForEach(viewModel.receiveSubaddresses, id: \.subaddressIndex) { e in
-                                    let label = e.label.trimmingCharacters(in: .whitespacesAndNewlines)
-                                    let title = label.isEmpty ? "Subaddress \(e.subaddressIndex)" : label
-                                    Text(title).tag(e.subaddressIndex)
-                                }
-                            }
-                            .pickerStyle(.menu)
-                            .tint(classicPalette?.accent ?? .accentColor)
-
-                            Text("This constrains inputs to account 0, subaddress \(fromSubaddressMinor).")
-                                .font(.caption)
-                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                        }
-
-                        HStack {
-                            NeonFormLabel(text: "Policy")
-                            Spacer()
-                            Text(policyText())
-                                .font(.system(.caption, design: .monospaced))
-                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                        }
-
-                        HStack {
-                            NeonFormLabel(text: "Broadcast")
-                            Spacer()
-                            Text(MoneroConfig.broadcastNodeURL())
-                                .font(.system(.caption, design: .monospaced))
-                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                        }
-
-                        if (MoneroConfig.networkPolicy == .i2p || MoneroConfig.networkPolicy == .hybrid),
-                           let proxy = MoneroConfig.i2pHTTPProxyAddress,
-                           !proxy.isEmpty
-                        {
-                            HStack {
-                                NeonFormLabel(text: "I2P Proxy")
-                                Spacer()
-                                Text(proxy)
-                                    .font(.system(.caption, design: .monospaced))
-                                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                            }
-                        }
                     }
                 }
             }
@@ -586,31 +518,11 @@ struct SendView: View {
     // MARK: - Helpers
 
     private func parsedRingLen() -> UInt8? {
-        let trimmed = ringLenInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let v = UInt8(trimmed), v >= 3 && v <= 128 else { return nil }
-        return v
+        16
     }
 
     private func parsedAmountPiconero() -> UInt64? {
-        let raw = amountXMR.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !raw.isEmpty else { return nil }
-        // Support comma decimal by normalizing to dot
-        let norm = raw.replacingOccurrences(of: ",", with: ".")
-        // Parse up to 12 decimals
-        let parts = norm.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false)
-        guard let intPartStr = parts.first else { return nil }
-        let fracPartStr = parts.count > 1 ? String(parts[1]) : ""
-        guard let intPart = UInt64(intPartStr) else { return nil }
-
-        let scale = 12
-        let frac = fracPartStr.prefix(scale)
-        let padCount = scale - frac.count
-        let fracPadded = frac + String(repeating: "0", count: padCount)
-        guard let fracPart = UInt64(fracPadded) else { return nil }
-
-        let base: UInt64 = 1_000_000_000_000
-        let total = safeMul(intPart, base)
-        return safeAdd(total, fracPart)
+        XmrAmount.parsePiconero(amountXMR)
     }
 
     private func canSend() -> Bool {
@@ -645,11 +557,6 @@ struct SendView: View {
         return overflow ? UInt64.max : sum
     }
 
-    private func safeMul(_ a: UInt64, _ b: UInt64) -> UInt64 {
-        let (prod, overflow) = a.multipliedReportingOverflow(by: b)
-        return overflow ? UInt64.max : prod
-    }
-    
     private func handleScannedCode(_ code: String) {
         let trimmed = code.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -668,52 +575,18 @@ struct SendView: View {
 
     /// Parse `monero:<address>?…` and `monero://<address>?…` without lowercasing Base58.
     private func parseMoneroUri(_ uri: String) {
-        let trimmed = uri.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard trimmed.lowercased().hasPrefix("monero:") else {
+        guard let parsed = MoneroPaymentURI.parse(uri) else {
             errorMessage = "Invalid payment URI format."
             return
         }
-
-        var remainder = String(trimmed.dropFirst("monero:".count))
-        if remainder.hasPrefix("//") {
-            remainder = String(remainder.dropFirst(2))
-        }
-
-        let addressCandidate: String
-        let queryString: String?
-        if let q = remainder.firstIndex(of: "?") {
-            addressCandidate = String(remainder[..<q])
-            queryString = String(remainder[remainder.index(after: q)...])
-        } else {
-            addressCandidate = remainder
-            queryString = nil
-        }
-
-        // Strip any accidental path slashes; keep Base58 case intact.
-        let address = addressCandidate
-            .trimmingCharacters(in: CharacterSet(charactersIn: "/"))
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-
-        guard looksLikeAddress(address) else {
+        guard looksLikeAddress(parsed.address) else {
             errorMessage = "No valid address in payment URI."
             return
         }
 
-        toAddress = address
-
-        if let queryString, !queryString.isEmpty {
-            for pair in queryString.split(separator: "&") {
-                let parts = pair.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
-                guard let rawName = parts.first.map(String.init) else { continue }
-                let name = rawName.lowercased()
-                let value = parts.count > 1 ? String(parts[1]).removingPercentEncoding ?? String(parts[1]) : ""
-
-                if name == "amount" || name == "tx_amount", !value.isEmpty {
-                    if let xmr = Double(value) {
-                        amountXMR = String(format: "%.12f", xmr)
-                    }
-                }
-            }
+        toAddress = parsed.address
+        if let amount = parsed.amountXmr, XmrAmount.parsePiconero(amount) != nil {
+            amountXMR = amount.replacingOccurrences(of: ",", with: ".")
         }
 
         infoMessage = "Payment details loaded from QR code."

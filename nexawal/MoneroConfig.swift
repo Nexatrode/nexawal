@@ -8,7 +8,7 @@ import NexaWalLogic
 struct MoneroConfig {
 
     // MARK: - Constants / Defaults
-    nonisolated static let defaultAddress = "192.168.4.137:18089"
+    nonisolated static let defaultAddress = "https://rpc.nexatrode.com"
     nonisolated static let userDefaultsKey = "monero_daemon_address"
 
     // I2P defaults and keys (kept for UI compatibility)
@@ -76,40 +76,53 @@ struct MoneroConfig {
     }
 
     // MARK: - Node address helpers
+    /// Previous shipped defaults. Matching these (or the live default) means "no override".
+    private nonisolated static let legacyDefaultAddresses: Set<String> = [
+        "rpc.nexatrode.com",
+        "http://rpc.nexatrode.com",
+        "http://rpc.nexatrode.com:443",
+        "https://rpc.nexatrode.com",
+        "node.sethforprivacy.com:443",
+        "https://node.sethforprivacy.com:443",
+        "node.monerod.org:443",
+        "https://node.monerod.org:443",
+        "mini.nexatrode.com:18089",
+        "http://mini.nexatrode.com:18089",
+        "https://mini.nexatrode.com:18089",
+    ]
+
+    nonisolated static func isShippedDefaultAddress(_ address: String) -> Bool {
+        let trimmed = address.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty { return true }
+        let folded = trimmed.lowercased().trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        let live = defaultAddress.lowercased().trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        if folded == live { return true }
+        return legacyDefaultAddresses.contains(trimmed)
+    }
+
     nonisolated static var daemonAddress: String {
         if let saved = UserDefaults.standard.string(forKey: userDefaultsKey), !saved.isEmpty {
-            switch saved {
-            case "node.sethforprivacy.com:443",
-                 "https://node.sethforprivacy.com:443",
-                 "node.monerod.org:443",
-                 "https://node.monerod.org:443",
-                 "192.168.4.137:18081",
-                 "http://192.168.4.137:18081",
-                 "10.0.2.2:18081",
-                 "http://10.0.2.2:18081":
-                UserDefaults.standard.set(defaultAddress, forKey: userDefaultsKey)
+            if isShippedDefaultAddress(saved) {
+                UserDefaults.standard.removeObject(forKey: userDefaultsKey)
                 return defaultAddress
-            default:
-                return saved
             }
+            return saved
         }
         return defaultAddress
     }
 
     @MainActor
     static func setDaemonAddress(_ address: String) {
-        UserDefaults.standard.set(address, forKey: userDefaultsKey)
+        let trimmed = address.trimmingCharacters(in: .whitespacesAndNewlines)
+        if isShippedDefaultAddress(trimmed) {
+            UserDefaults.standard.removeObject(forKey: userDefaultsKey)
+        } else {
+            UserDefaults.standard.set(trimmed, forKey: userDefaultsKey)
+        }
     }
 
     private nonisolated static func urlFromAddress(_ address: String) -> String {
-        if address.hasPrefix("http://") || address.hasPrefix("https://") {
-            return address
-        }
-        let trimmed = address.trimmingCharacters(in: .whitespacesAndNewlines)
-        if trimmed.hasSuffix(":443") {
-            return "https://\(trimmed)"
-        }
-        return "http://\(trimmed)"
+        NetworkRouting.normalizeURL(address)
     }
 
     nonisolated static func scanNodeAddress() -> String {
