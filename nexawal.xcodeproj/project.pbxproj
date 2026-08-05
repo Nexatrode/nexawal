@@ -362,7 +362,7 @@
 			repositoryURL = "https://github.com/cacaosteve/MoneroWalletCoreFFI.git";
 			requirement = {
 				kind = branch;
-				branch = walletcore/aligned-2026-07-18;
+				branch = main;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
