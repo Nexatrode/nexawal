@@ -43,7 +43,13 @@ Xcode resolves `MoneroWalletCoreFFI` from GitHub on branch `main` (prebuilt xcfr
 
 - Uses a native wallet core built from `monero-oxide` via `MoneroWalletCoreFFI`
 - Syncs against standard Monero nodes (local or remote), including the configured I2P RPC path when enabled
+- Default daemon is `https://rpc.nexatrode.com` (type a full `http://` or `https://` URL to override)
 - Feature parity target: [nexawal-android](https://github.com/cacaosteve/nexawal-android)
+- Unaudited software. You are responsible for backups and funds. A remote node can see your IP and sync queries.
+
+## Privacy
+
+See [docs/PRIVACY.md](docs/PRIVACY.md). App Store listings can use that GitHub URL as the privacy policy link.
 
 ## License
 

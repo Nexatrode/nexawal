@@ -833,6 +833,18 @@ struct SettingsView: View {
                         }
                     }
                 }
+
+                Section(header: NeonSectionHeader(title: "About")) {
+                    let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+                    let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+                    Text("NexaWal \(version) (\(build))")
+                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                    Text("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy.")
+                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    Link("Privacy policy", destination: URL(string: "https://github.com/cacaosteve/nexawal/blob/main/docs/PRIVACY.md")!)
+                    Link("Source & license (MIT)", destination: URL(string: "https://github.com/cacaosteve/nexawal/blob/main/LICENSE")!)
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .neonFormChrome(classicUI: classicUI, palette: classicPalette)
