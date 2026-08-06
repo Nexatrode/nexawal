@@ -12,6 +12,7 @@ import UIKit
 
 struct WalletView: View {
     @ObservedObject var viewModel: WalletViewModel
+    @ObservedObject private var fiatPrices = FiatPriceService.shared
     @Binding var selectedTab: MainTab
 
     // Transaction details
@@ -24,11 +25,11 @@ struct WalletView: View {
     private func directionLabel(_ t: WalletCoreFFIClient.Transfer) -> String {
         switch t.direction.lowercased() {
         case "in":
-            return classicUI ? "RECEIVED" : "Received"
+            return L10n.neon("Received", classicUI: classicUI)
         case "out":
-            return classicUI ? "SENT" : "Sent"
+            return L10n.neon("Sent", classicUI: classicUI)
         case "self":
-            return classicUI ? "SELF" : "Self"
+            return L10n.neon("Self", classicUI: classicUI)
         default:
             return classicUI ? t.direction.uppercased() : t.direction
         }
@@ -131,19 +132,19 @@ struct WalletView: View {
     }
 
     private func syncHeadline() -> String {
-        let text: String
+        let key: String.LocalizationValue
         if let error = viewModel.errorMessage, !error.isEmpty, !viewModel.isRefreshing {
-            text = "Node unreachable"
+            key = "Node unreachable"
         } else if viewModel.isSynced {
-            text = "Wallet synced"
+            key = "Wallet synced"
         } else if !viewModel.hasObservedNetworkTipForUI {
-            text = "Connecting to node"
+            key = "Connecting to node"
         } else if viewModel.lastScannedHeight == viewModel.restoreHeight {
-            text = "Scanning blockchain"
+            key = "Scanning blockchain"
         } else {
-            text = "Syncing wallet"
+            key = "Syncing wallet"
         }
-        return classicUI ? text.uppercased() : text
+        return L10n.neon(key, classicUI: classicUI)
     }
 
     private func syncDetail() -> String {
@@ -153,15 +154,15 @@ struct WalletView: View {
             return String(trimmed.prefix(117)) + "…"
         }
         if viewModel.isSynced {
-            return "Scanned to block \(viewModel.lastScannedHeight)"
+            return L10n.format("Scanned to block %lld", Int64(viewModel.lastScannedHeight))
         }
         if !viewModel.hasObservedNetworkTipForUI {
-            return "Waiting for network height"
+            return L10n.t("Waiting for network height")
         }
         if viewModel.lastScannedHeight == viewModel.restoreHeight {
-            return "Fetching initial blocks from \(viewModel.restoreHeight)"
+            return L10n.format("Fetching initial blocks from %lld", Int64(viewModel.restoreHeight))
         }
-        return "\(viewModel.remainingBlocks) blocks remaining"
+        return L10n.format("%lld blocks remaining", Int64(viewModel.remainingBlocks))
     }
 
     var body: some View {
@@ -182,7 +183,7 @@ struct WalletView: View {
                         }
 
                         VStack(alignment: .leading, spacing: 16) {
-                            Text(classicUI ? "NEXAWAL" : "Wallet")
+                            Text(classicUI ? "NEXAWAL" : L10n.t("Wallet"))
                                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                                 .foregroundColor(classicUI ? primaryText : .secondary)
                                 .tracking(classicUI ? 2 : 0)
@@ -190,15 +191,27 @@ struct WalletView: View {
                             Text(viewModel.formatDisplayPiconero(viewModel.totalBalance))
                                 .font(.system(size: 38, weight: .bold, design: .monospaced))
                                 .foregroundColor(primaryText)
+                            FiatApproxText(
+                                piconero: viewModel.totalBalance,
+                                rate: fiatPrices.displayRate,
+                                font: classicUI ? .system(.subheadline, design: .monospaced) : .subheadline,
+                                color: secondaryText
+                            )
 
                             if viewModel.unlockedBalance != viewModel.totalBalance {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text(classicUI ? "UNLOCKED" : "Unlocked")
+                                    Text(L10n.neon("Unlocked", classicUI: classicUI))
                                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                         .foregroundColor(secondaryText)
                                     Text(viewModel.formatDisplayPiconero(viewModel.unlockedBalance))
                                         .font(.system(size: 20, weight: .semibold, design: .monospaced))
                                         .foregroundColor(classicPalette?.accent ?? .blue)
+                                    FiatApproxText(
+                                        piconero: viewModel.unlockedBalance,
+                                        rate: fiatPrices.displayRate,
+                                        font: classicUI ? .system(.caption, design: .monospaced) : .caption,
+                                        color: secondaryText
+                                    )
                                 }
                             }
 
@@ -212,7 +225,7 @@ struct WalletView: View {
                                 Button(action: {
                                     selectedTab = .send
                                 }) {
-                                    Label(classicUI ? "SEND" : "Send", systemImage: "paperplane.fill")
+                                    Label(L10n.neon("Send", classicUI: classicUI), systemImage: "paperplane.fill")
                                         .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
                                         .frame(maxWidth: .infinity)
                                         .padding()
@@ -228,7 +241,7 @@ struct WalletView: View {
                                 Button(action: {
                                     selectedTab = .receive
                                 }) {
-                                    Label(classicUI ? "RECEIVE" : "Receive", systemImage: "qrcode")
+                                    Label(L10n.neon("Receive", classicUI: classicUI), systemImage: "qrcode")
                                         .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
                                         .frame(maxWidth: .infinity)
                                         .padding()
@@ -255,7 +268,7 @@ struct WalletView: View {
 
                     // Status
                     VStack(alignment: .leading, spacing: 12) {
-                        Text(classicUI ? "STATUS" : "Status")
+                        Text(L10n.neon("Status", classicUI: classicUI))
                             .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                             .foregroundColor(primaryText)
 
@@ -280,12 +293,12 @@ struct WalletView: View {
                             ProgressView(value: viewModel.syncProgress)
                                 .progressViewStyle(LinearProgressViewStyle(tint: classicPalette?.progress ?? .accentColor))
 
-                            classicStatusRow(label: classicUI ? "NODE" : "Node", value: MoneroConfig.daemonAddress)
-                            classicStatusRow(label: classicUI ? "SCANNED" : "Scanned", value: "\(viewModel.lastScannedHeight)")
-                            classicStatusRow(label: classicUI ? "NETWORK HEIGHT" : "Network Height", value: "\(viewModel.chainHeight)")
-                            classicStatusRow(label: classicUI ? "REMAINING" : "Remaining", value: "\(viewModel.remainingBlocks) blocks")
+                            classicStatusRow(label: L10n.neon("Node", classicUI: classicUI), value: MoneroConfig.daemonAddress)
+                            classicStatusRow(label: L10n.neon("Scanned", classicUI: classicUI), value: "\(viewModel.lastScannedHeight)")
+                            classicStatusRow(label: L10n.neon("Network Height", classicUI: classicUI), value: "\(viewModel.chainHeight)")
+                            classicStatusRow(label: L10n.neon("Remaining", classicUI: classicUI), value: L10n.format("%lld blocks", Int64(viewModel.remainingBlocks)))
                             classicStatusRow(
-                                label: classicUI ? "THROUGHPUT" : "Throughput",
+                                label: L10n.neon("Throughput", classicUI: classicUI),
                                 value: String(format: "%.1f blk/s", viewModel.scanBlocksPerSecond)
                             )
                         }
@@ -303,7 +316,7 @@ struct WalletView: View {
                     // Recent transactions
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
-                            Text(classicUI ? "RECENT TRANSACTIONS" : "Recent Transactions")
+                            Text(L10n.neon("Recent Transactions", classicUI: classicUI))
                                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                                 .foregroundColor(primaryText)
                             Spacer()
@@ -342,7 +355,7 @@ struct WalletView: View {
                                                             .foregroundColor(secondaryText)
                                                             .accessibilityLabel(formatTransferTimestampAbsolute(t) ?? ts)
                                                     }
-                                                    Text((t.isPending || t.confirmations == 0) ? (classicUI ? "PENDING" : "Pending") : "\(t.confirmations) conf")
+                                                    Text((t.isPending || t.confirmations == 0) ? L10n.neon("Pending", classicUI: classicUI) : L10n.format("%lld conf", Int64(t.confirmations)))
                                                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                                         .foregroundColor(secondaryText)
                                                 }
@@ -363,7 +376,7 @@ struct WalletView: View {
                                                     .foregroundColor(amountColor(t))
 
                                                 if let fee = t.fee {
-                                                    Text("Fee \(viewModel.formatDisplayPiconero(fee))")
+                                                    Text(L10n.format("Fee %@", viewModel.formatDisplayPiconero(fee)))
                                                         .font(classicUI ? .system(.caption2, design: .monospaced) : .caption2)
                                                         .foregroundColor(secondaryText)
                                                 }
@@ -416,6 +429,19 @@ struct WalletView: View {
                                                         )
                                                         .foregroundColor(amountColor(t))
                                                     }
+                                                    if let snap = FiatSnapshotStore.snapshot(for: t.txid),
+                                                       let perXmr = FiatEstimate.decimal(from: snap.fiatPerXmr) {
+                                                        HStack {
+                                                            Spacer()
+                                                            Text(FiatEstimate.recordedApproxText(
+                                                                piconero: t.amount,
+                                                                fiatPerXmr: perXmr,
+                                                                currency: snap.currency
+                                                            ))
+                                                            .font(.system(.caption, design: .monospaced))
+                                                            .foregroundColor(.secondary)
+                                                        }
+                                                    }
                                                     if let fee = t.fee {
                                                         HStack {
                                                             Text("Fee")
@@ -426,6 +452,19 @@ struct WalletView: View {
                                                                     .caption, design: .monospaced)
                                                             )
                                                             .foregroundColor(.secondary)
+                                                        }
+                                                        if let snap = FiatSnapshotStore.snapshot(for: t.txid),
+                                                           let perXmr = FiatEstimate.decimal(from: snap.fiatPerXmr) {
+                                                            HStack {
+                                                                Spacer()
+                                                                Text(FiatEstimate.recordedApproxText(
+                                                                    piconero: fee,
+                                                                    fiatPerXmr: perXmr,
+                                                                    currency: snap.currency
+                                                                ))
+                                                                .font(.system(.caption, design: .monospaced))
+                                                                .foregroundColor(.secondary)
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -536,8 +575,8 @@ struct WalletView: View {
                                     Image(systemName: "arrow.clockwise")
                                 }
                                 Text(viewModel.isRefreshing
-                                     ? (classicUI ? "REFRESHING..." : "Refreshing...")
-                                     : (classicUI ? "REFRESH WALLET" : "Refresh Wallet"))
+                                     ? L10n.neon("Refreshing...", classicUI: classicUI)
+                                     : L10n.neon("Refresh Wallet", classicUI: classicUI))
                                     .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
                             }
                             .frame(maxWidth: .infinity)
@@ -558,7 +597,7 @@ struct WalletView: View {
                             }) {
                                 HStack {
                                     Image(systemName: "xmark.circle.fill")
-                                    Text(classicUI ? "CANCEL" : "Cancel")
+                                    Text(L10n.neon("Cancel", classicUI: classicUI))
                                         .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
                                 }
                                 .frame(maxWidth: .infinity)
@@ -598,6 +637,9 @@ struct WalletView: View {
             .refreshable {
                 await viewModel.refreshWallet()
             }
+            .task {
+                await FiatPriceService.shared.refreshIfNeeded(force: false)
+            }
         }
     }
 
@@ -627,6 +669,8 @@ struct SettingsView: View {
     @State private var gapLimitInput: String
     @State private var accountGapInput: String
     @State private var requireBiometrics: Bool
+    @State private var fiatEstimatesEnabled: Bool
+    @State private var fiatCurrency: String
     @State private var biometricsAvailable: Bool = false
     @State private var biometricsEnrolled: Bool = false
     @State private var showAdvancedRecovery: Bool = false
@@ -646,78 +690,100 @@ struct SettingsView: View {
         self._gapLimitInput = State(initialValue: String(MoneroConfig.gapLimit))
         self._accountGapInput = State(initialValue: String(MoneroConfig.accountGap))
         self._requireBiometrics = State(initialValue: viewModel.biometricsEnabled)
+        self._fiatEstimatesEnabled = State(initialValue: MoneroConfig.fiatEstimatesEnabled)
+        self._fiatCurrency = State(initialValue: MoneroConfig.fiatCurrency)
     }
 
     var body: some View {
         NavigationView {
             Form {
-                Section(header: NeonSectionHeader(title: "Appearance")) {
-                    NeonToggle(title: "Classic UI", isOn: $classicUIEnabled)
+                Section(header: NeonSectionHeader(title: L10n.t("Appearance"))) {
+                    NeonToggle(title: L10n.t("Classic UI"), isOn: $classicUIEnabled)
                     Text("Standard non-neon look. Leave off for the neon terminal theme (default).")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                 }
 
-                Section(header: NeonSectionHeader(title: "Network & Node")) {
-                    TextField("https://rpc.nexatrode.com", text: $nodeAddress)
-                        .font(.system(.body, design: .monospaced))
-                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                    Text("Type the full URL, including http:// or https://.\nPublic: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089")
-                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-
-                    if classicUI, let palette = classicPalette {
-                        Button("Use this node") {
-                            useThisNode()
-                        }
-                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 12, trailing: 16))
-                    } else {
-                        Button("Use this node") {
-                            useThisNode()
-                        }
-                    }
-                }
-
-                Section(header: NeonSectionHeader(title: "Network Policy & I2P")) {
-                    Picker("Policy", selection: $networkPolicy) {
+                Section(header: NeonSectionHeader(title: L10n.t("How to connect"))) {
+                    Picker("How to connect", selection: $networkPolicy) {
                         Text("Clearnet only").tag(MoneroConfig.NetworkPolicy.clearnet)
                         Text("I2P only").tag(MoneroConfig.NetworkPolicy.i2p)
-                        Text("Hybrid (scan clearnet, broadcast I2P)").tag(MoneroConfig.NetworkPolicy.hybrid)
+                        Text("Both (scan clearnet, broadcast I2P)").tag(MoneroConfig.NetworkPolicy.hybrid)
                     }
                     .tint(classicPalette?.accent ?? .accentColor)
-
-                    Text("Clearnet uses your daemon above. I2P/hybrid use the I2P RPC node and HTTP proxy for .b32.i2p traffic.")
-                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-
-                    TextField("I2P RPC hostname:port", text: $i2pRPCAddress)
-                        .font(.system(.body, design: .monospaced))
-                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .disabled(networkPolicy == .clearnet)
-                        .opacity(networkPolicy == .clearnet ? 0.45 : 1)
-
-                    TextField("I2P HTTP proxy host:port", text: $i2pProxyAddress)
-                        .font(.system(.body, design: .monospaced))
-                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .disabled(networkPolicy == .clearnet)
-                        .opacity(networkPolicy == .clearnet ? 0.45 : 1)
-
-                    Text("Proxy example: 127.0.0.1:4444 (I2P HTTP proxy). Required for I2P-only and hybrid broadcast.")
+                    .onChange(of: networkPolicy) { _, newValue in
+                        applyNetwork(policy: newValue)
+                    }
+                    Text("Clearnet only uses a clearnet node. I2P only uses an I2P node and proxy. Both scans on clearnet and broadcasts over I2P.")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                 }
 
-                Section(header: NeonSectionHeader(title: "Security")) {
+                if networkPolicy != .i2p {
+                    Section(header: NeonSectionHeader(title: L10n.t("Clearnet node"))) {
+                        TextField("https://rpc.nexatrode.com", text: $nodeAddress)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .onSubmit { applyNetwork() }
+                        Text("Type the full URL, including http:// or https://.")
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+                        if classicUI, let palette = classicPalette {
+                            Button("Use this node") {
+                                applyNetwork()
+                            }
+                            .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                            .listRowBackground(Color.clear)
+                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 12, trailing: 16))
+                        } else {
+                            Button("Use this node") {
+                                applyNetwork()
+                            }
+                        }
+                    }
+                }
+
+                if networkPolicy != .clearnet {
+                    Section(header: NeonSectionHeader(title: L10n.t("I2P"))) {
+                        TextField("I2P node (host:port)", text: $i2pRPCAddress)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .onSubmit { applyNetwork() }
+
+                        TextField("I2P HTTP proxy (host:port)", text: $i2pProxyAddress)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .onSubmit { applyNetwork() }
+
+                        Text("Proxy example: 127.0.0.1:4444. Leave blank if you want — sync will fail until a working I2P node and proxy are set.")
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+                        if classicUI, let palette = classicPalette {
+                            Button("Apply I2P settings") {
+                                applyNetwork()
+                            }
+                            .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                            .listRowBackground(Color.clear)
+                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 12, trailing: 16))
+                        } else {
+                            Button("Apply I2P settings") {
+                                applyNetwork()
+                            }
+                        }
+                    }
+                }
+
+                Section(header: NeonSectionHeader(title: L10n.t("Security"))) {
                     NeonToggle(
-                        title: "Require Face ID / Touch ID",
+                        title: L10n.t("Require Face ID / Touch ID"),
                         isOn: $requireBiometrics,
                         disabled: !biometricsAvailable || !biometricsEnrolled
                     )
@@ -740,8 +806,8 @@ struct SettingsView: View {
                     }
                 }
 
-                Section(header: NeonSectionHeader(title: "Recovery")) {
-                    Text("Wrong node? Use this node above — you do not need a rescan.\nMissing funds? Rescan from your restore height.\nLast resort: full rescan from block 0.")
+                Section(header: NeonSectionHeader(title: L10n.t("Recovery"))) {
+                    Text("Wrong node? Change how to connect or the node above — you do not need a rescan.\nMissing funds? Rescan from your restore height.\nLast resort: full rescan from block 0.")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 
@@ -780,9 +846,9 @@ struct SettingsView: View {
                     }
                 }
 
-                Section(header: NeonSectionHeader(title: "Advanced Recovery")) {
+                Section(header: NeonSectionHeader(title: L10n.t("Advanced Recovery"))) {
                     NeonDisclosureGroup(
-                        title: "Scan additional accounts or subaddresses",
+                        title: L10n.t("Scan additional accounts or subaddresses"),
                         isExpanded: $showAdvancedRecovery
                     ) {
                         VStack(alignment: .leading, spacing: 10) {
@@ -810,7 +876,7 @@ struct SettingsView: View {
 
                             Button {
                                 persistScanTuning()
-                                flashStatus("Saved scan lookahead")
+                                flashStatus(L10n.t("Saved scan lookahead"))
                             } label: {
                                 Text("Save scan lookahead")
                                     .frame(maxWidth: .infinity)
@@ -820,9 +886,9 @@ struct SettingsView: View {
                                 Task {
                                     do {
                                         try await WalletManager.shared.clearScanCache()
-                                        flashStatus("Cleared scan cache")
+                                        flashStatus(L10n.t("Cleared scan cache"))
                                     } catch {
-                                        flashStatus("Clear cache failed: \(error.localizedDescription)")
+                                        flashStatus(L10n.format("Clear cache failed: %@", error.localizedDescription))
                                     }
                                 }
                             } label: {
@@ -834,12 +900,35 @@ struct SettingsView: View {
                     }
                 }
 
-                Section(header: NeonSectionHeader(title: "About")) {
+                Section(header: NeonSectionHeader(title: L10n.t("Fiat estimates"))) {
+                    NeonToggle(title: L10n.t("Show fiat estimates"), isOn: $fiatEstimatesEnabled)
+                        .onChange(of: fiatEstimatesEnabled) { _, newValue in
+                            MoneroConfig.setFiatEstimatesEnabled(newValue)
+                            fiatCurrency = MoneroConfig.fiatCurrency
+                            FiatPriceService.shared.settingsDidChange()
+                        }
+                    Text("Optional. When on, NexaWal fetches a public XMR price from Kraken (api.kraken.com) and, if needed, fiat FX from Frankfurter (api.frankfurter.dev). Those servers see your IP. Amounts and addresses are not sent. Fiat lookups use clearnet HTTPS and are separate from node / I2P proxy settings. Estimates only — XMR is what you send and hold.")
+                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    if fiatEstimatesEnabled {
+                        Picker("Currency", selection: $fiatCurrency) {
+                            ForEach(FiatEstimate.supportedCurrencies, id: \.self) { code in
+                                Text("\(code) — \(FiatEstimate.currencyNames[code] ?? code)").tag(code)
+                            }
+                        }
+                        .onChange(of: fiatCurrency) { _, newValue in
+                            MoneroConfig.setFiatCurrency(newValue)
+                            FiatPriceService.shared.settingsDidChange()
+                        }
+                    }
+                }
+
+                Section(header: NeonSectionHeader(title: L10n.t("About"))) {
                     let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
                     let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
-                    Text("NexaWal \(version) (\(build))")
+                    Text(L10n.format("NexaWal %@ (%@)", version, build))
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                    Text("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy.")
+                    Text("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact api.kraken.com and api.frankfurter.dev.")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                     Link("Privacy policy", destination: URL(string: "https://github.com/cacaosteve/nexawal/blob/main/docs/PRIVACY.md")!)
@@ -851,7 +940,7 @@ struct SettingsView: View {
             .tint(classicPalette?.accent ?? .accentColor)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(classicUI ? "SETTINGS" : "Settings")
+                    Text(L10n.neon("Settings", classicUI: classicUI))
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                 }
@@ -876,29 +965,51 @@ struct SettingsView: View {
         }
     }
 
-    private func useThisNode() {
-        let trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
-            flashStatus("Start the node URL with http:// or https://")
-            return
+    private func applyNetwork(policy: MoneroConfig.NetworkPolicy? = nil) {
+        let policy = policy ?? networkPolicy
+        if networkPolicy != policy {
+            networkPolicy = policy
         }
-        nodeAddress = explicit
-        MoneroConfig.setDaemonAddress(explicit)
-        MoneroConfig.setNetworkPolicy(networkPolicy)
-        MoneroConfig.setI2PRPCAddress(i2pRPCAddress.trimmingCharacters(in: .whitespacesAndNewlines))
+        let i2pNode = i2pRPCAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         let proxy = i2pProxyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        MoneroConfig.setNetworkPolicy(policy)
+        MoneroConfig.setI2PRPCAddress(i2pNode)
         MoneroConfig.setI2PHTTPProxyAddress(proxy.isEmpty ? nil : proxy)
-        MoneroConfig.setUseI2P(networkPolicy == .i2p || networkPolicy == .hybrid)
+        MoneroConfig.setUseI2P(policy != .clearnet)
+
+        if policy != .i2p {
+            var trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+            if trimmed.isEmpty {
+                trimmed = MoneroConfig.defaultAddress
+                nodeAddress = trimmed
+            }
+            guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
+                flashStatus(L10n.t("Start the node URL with http:// or https://"))
+                return
+            }
+            nodeAddress = explicit
+            MoneroConfig.setDaemonAddress(explicit)
+        }
+
         persistScanTuning()
+        FiatPriceService.shared.settingsDidChange()
+
+        let status: String
+        switch policy {
+        case .clearnet:
+            status = viewModel.isWalletOpen ? L10n.format("Connecting to %@", MoneroConfig.daemonAddress) : L10n.t("Saved clearnet")
+        case .i2p:
+            status = viewModel.isWalletOpen ? L10n.t("Connecting over I2P") : L10n.t("Saved I2P")
+        case .hybrid:
+            status = viewModel.isWalletOpen ? L10n.t("Connecting (clearnet scan, I2P broadcast)") : L10n.t("Saved both")
+        }
 
         Task {
             await viewModel.applyNetworkAndReconnect()
             if let err = viewModel.errorMessage, !err.isEmpty, viewModel.isWalletOpen {
                 flashStatus(err)
-            } else if viewModel.isWalletOpen {
-                flashStatus("Connecting to \(trimmed)")
             } else {
-                flashStatus("Saved node")
+                flashStatus(status)
             }
         }
     }
@@ -909,7 +1020,7 @@ struct SettingsView: View {
             await viewModel.updateBiometricProtection(enabled: enabled)
             if viewModel.biometricsEnabled != enabled {
                 requireBiometrics = viewModel.biometricsEnabled
-                flashStatus(viewModel.errorMessage ?? "Could not update Face ID setting")
+                flashStatus(viewModel.errorMessage ?? L10n.t("Could not update Face ID setting"))
             }
         }
     }
@@ -967,7 +1078,7 @@ struct SettingsView: View {
             if let err = viewModel.errorMessage, !err.isEmpty {
                 flashStatus(err)
             } else {
-                flashStatus("Rescanning from \(height)")
+                flashStatus(L10n.format("Rescanning from %lld", Int64(height)))
             }
         }
     }

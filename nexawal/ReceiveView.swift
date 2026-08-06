@@ -1,13 +1,15 @@
 import SwiftUI
 import CoreImage.CIFilterBuiltins
+import NexaWalLogic
 
 struct ReceiveView: View {
     @ObservedObject var viewModel: WalletViewModel
+    @ObservedObject private var fiatPrices = FiatPriceService.shared
 
     @State private var amountInput: String = ""
     @State private var descriptionInput: String = ""
     @State private var showCopyConfirmation: Bool = false
-    @State private var copyConfirmationText: String = "Address copied to clipboard"
+    @State private var copyConfirmationText: String = L10n.t("Address copied to clipboard")
     @State private var showShareSheet: Bool = false
 
     // Subaddress UI
@@ -35,14 +37,14 @@ struct ReceiveView: View {
                 }
                 .padding()
             }
-            .navigationTitle(classicUI ? "RECEIVE" : "Receive XMR")
+            .navigationTitle(classicUI ? L10n.t("Receive").uppercased() : L10n.t("Receive XMR"))
             .navigationBarTitleDisplayMode(.inline)
             .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
             .tint(classicPalette?.accent ?? .accentColor)
             .scrollContentBackground(classicUI ? .hidden : .automatic)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(classicUI ? "RECEIVE" : "Receive XMR")
+                    Text(classicUI ? L10n.t("Receive").uppercased() : L10n.t("Receive XMR"))
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                 }
@@ -80,7 +82,7 @@ struct ReceiveView: View {
 
     private var heroSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(classicUI ? "RECEIVE XMR" : "Receive Monero")
+            Text(classicUI ? L10n.t("Receive XMR").uppercased() : L10n.t("Receive Monero"))
                 .font(classicUI ? .system(.title2, design: .monospaced).weight(.bold) : .title2.weight(.bold))
                 .foregroundColor(classicPalette?.primaryText ?? .primary)
             Text("Show the QR code, copy the address, or create a fresh receive address for better privacy.")
@@ -105,7 +107,7 @@ struct ReceiveView: View {
                     Picker("Address", selection: $viewModel.selectedReceiveSubaddressIndex) {
                         ForEach(viewModel.receiveSubaddresses, id: \.subaddressIndex) { e in
                             let label = e.label.trimmingCharacters(in: .whitespacesAndNewlines)
-                            let title = label.isEmpty ? "Subaddress \(e.subaddressIndex)" : label
+                            let title = label.isEmpty ? L10n.format("Subaddress %lld", Int64(e.subaddressIndex)) : label
                             Text(title).tag(e.subaddressIndex)
                         }
                     }
@@ -135,7 +137,7 @@ struct ReceiveView: View {
 
     private var qrSection: some View {
         VStack(spacing: 16) {
-            Text(classicUI ? "SCAN TO PAY" : "Scan to Pay")
+            Text(L10n.neon("Scan to Pay", classicUI: classicUI))
                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                 .foregroundColor(classicPalette?.primaryText ?? .primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -168,7 +170,7 @@ struct ReceiveView: View {
 
     private var addressSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(classicUI ? "ADDRESS" : "Address")
+            Text(L10n.neon("Address", classicUI: classicUI))
                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                 .foregroundColor(classicPalette?.primaryText ?? .primary)
             Text(viewModel.currentReceiveAddress())
@@ -195,7 +197,7 @@ struct ReceiveView: View {
 
     private var amountSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(classicUI ? "PAYMENT REQUEST (OPTIONAL)" : "Payment Request (optional)")
+            Text(L10n.neon("Payment Request (optional)", classicUI: classicUI))
                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                 .foregroundColor(classicPalette?.primaryText ?? .primary)
 
@@ -216,6 +218,14 @@ struct ReceiveView: View {
                                 .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
                         )
                         .cornerRadius(classicUI ? 4 : 8)
+                    if let piconero = XmrAmount.parsePiconero(amountInput) {
+                        FiatApproxText(
+                            piconero: piconero,
+                            rate: fiatPrices.displayRate,
+                            font: classicUI ? .system(.caption, design: .monospaced) : .caption,
+                            color: classicPalette?.secondaryText ?? .secondary
+                        )
+                    }
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
@@ -366,14 +376,14 @@ struct ReceiveView: View {
     private func copyAddress() {
         flashCopyConfirmation(
             text: viewModel.currentReceiveAddress(),
-            message: "Address copied to clipboard"
+            message: L10n.t("Address copied to clipboard")
         )
     }
 
     private func copyPaymentURI() {
         flashCopyConfirmation(
             text: moneroURI,
-            message: "Payment URI copied to clipboard"
+            message: L10n.t("Payment URI copied to clipboard")
         )
     }
 

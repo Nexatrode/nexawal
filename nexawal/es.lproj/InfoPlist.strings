@@ -1,0 +1,2 @@
+"NSCameraUsageDescription" = "NexaWal necesita acceso a la cámara para escanear códigos QR al enviar Monero.";
+"NSFaceIDUsageDescription" = "Puedes usar Face ID para proteger tu cartera.";

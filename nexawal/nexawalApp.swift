@@ -32,6 +32,7 @@ struct nexawalApp: App {
         .onChange(of: scenePhase) {
             if scenePhase == .active {
                 viewModel.resumeOnForeground()
+                FiatPriceService.shared.onForeground()
                 return
             }
 

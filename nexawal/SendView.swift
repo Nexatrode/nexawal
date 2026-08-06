@@ -3,6 +3,7 @@ import NexaWalLogic
 
 struct SendView: View {
     @ObservedObject var viewModel: WalletViewModel
+    @ObservedObject private var fiatPrices = FiatPriceService.shared
 
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
@@ -43,9 +44,9 @@ struct SendView: View {
 
     private func availableLabel() -> String {
         if sendFromSubaddressEnabled {
-            return "Available (selected subaddress)"
+            return L10n.t("Available (selected subaddress)")
         }
-        return "Available"
+        return L10n.t("Available")
     }
 
     private func refreshSubaddressBalanceIfNeeded() async {
@@ -65,7 +66,7 @@ struct SendView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: NeonSectionHeader(title: "Recipient")) {
+                Section(header: NeonSectionHeader(title: L10n.t("Recipient"))) {
                     TextField("Monero address", text: $toAddress)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
@@ -73,7 +74,7 @@ struct SendView: View {
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                 }
 
-                Section(header: NeonSectionHeader(title: "Amount")) {
+                Section(header: NeonSectionHeader(title: L10n.t("Amount"))) {
                     HStack {
                         TextField("0.0", text: $amountXMR)
                             .keyboardType(.decimalPad)
@@ -83,6 +84,13 @@ struct SendView: View {
                         Spacer()
                         Text("XMR")
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    }
+                    if let amount = parsedAmountPiconero() {
+                        FiatApproxText(
+                            piconero: amount,
+                            rate: fiatPrices.displayRate,
+                            color: classicPalette?.secondaryText ?? .secondary
+                        )
                     }
 
                     HStack {
@@ -95,13 +103,18 @@ struct SendView: View {
                 }
 
                 if let fee = estimatedFeePiconero {
-                    Section(header: NeonSectionHeader(title: "Confirm")) {
+                    Section(header: NeonSectionHeader(title: L10n.t("Confirm"))) {
                         HStack {
                             Text("Estimated fee")
                             Spacer()
                             Text(viewModel.formatExactPiconero(fee))
                                 .font(.system(.caption, design: .monospaced))
                         }
+                        FiatApproxText(
+                            piconero: fee,
+                            rate: fiatPrices.displayRate,
+                            color: classicPalette?.secondaryText ?? .secondary
+                        )
                         if let amt = parsedAmountPiconero() {
                             HStack {
                                 Text("Total (amount + fee)")
@@ -110,6 +123,11 @@ struct SendView: View {
                                 Text(viewModel.formatExactPiconero(total))
                                     .font(.system(.caption, design: .monospaced))
                             }
+                            FiatApproxText(
+                                piconero: safeAdd(amt, fee),
+                                rate: fiatPrices.displayRate,
+                                color: classicPalette?.secondaryText ?? .secondary
+                            )
                         }
 
                         HStack {
@@ -124,7 +142,7 @@ struct SendView: View {
                 }
 
                 if let txid = sentTxid, let fee = sentFeePiconero {
-                    Section(header: NeonSectionHeader(title: "Sent")) {
+                    Section(header: NeonSectionHeader(title: L10n.t("Sent"))) {
                         HStack {
                             Text("TXID")
                             Spacer()
@@ -156,7 +174,7 @@ struct SendView: View {
                     }
                 }
 
-                Section(header: NeonSectionHeader(title: "Actions")) {
+                Section(header: NeonSectionHeader(title: L10n.t("Actions"))) {
                     if classicUI, let palette = classicPalette {
                         HStack(spacing: 12) {
                             Button {
@@ -258,7 +276,7 @@ struct SendView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(classicUI ? "SEND" : "Send XMR")
+                    Text(classicUI ? L10n.t("Send").uppercased() : L10n.t("Send XMR"))
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                 }
@@ -349,7 +367,7 @@ struct SendView: View {
                   let ring = parsedRingLen(),
                   looksLikeAddress(toAddress) else {
                 await MainActor.run {
-                    errorMessage = "Enter a valid address and amount."
+                    errorMessage = L10n.t("Enter a valid address and amount.")
                     previewReady = false
                 }
                 return
@@ -376,13 +394,13 @@ struct SendView: View {
                     )
                     if Task.isCancelled { return }
                     await MainActor.run {
-                        infoMessage = "Fee estimated (inputs constrained to selected subaddress)."
+                        infoMessage = L10n.t("Fee estimated (inputs constrained to selected subaddress).")
                     }
                 } else {
                     fee = try await walletManager.previewFee(toAddress: toAddress, amountPiconero: amountPico, ringLen: ring)
                     if Task.isCancelled { return }
                     await MainActor.run {
-                        infoMessage = "Fee estimated using broadcast policy."
+                        infoMessage = L10n.t("Fee estimated using broadcast policy.")
                     }
                 }
 
@@ -395,7 +413,7 @@ struct SendView: View {
                 if Task.isCancelled { return }
                 await MainActor.run {
                     previewReady = false
-                    errorMessage = "Fee preview failed: \(error.localizedDescription)"
+                    errorMessage = L10n.format("Fee preview failed: %@", error.localizedDescription)
                 }
             }
 
@@ -417,11 +435,11 @@ struct SendView: View {
 
         guard let ring = parsedRingLen(),
               looksLikeAddress(toAddress) else {
-            errorMessage = "Enter a valid address and amount."
+            errorMessage = L10n.t("Enter a valid address and amount.")
             return
         }
         guard previewReady, estimatedFeePiconero != nil else {
-            errorMessage = "Preview the fee before sending."
+            errorMessage = L10n.t("Preview the fee before sending.")
             return
         }
 
@@ -432,28 +450,29 @@ struct SendView: View {
         sentFeePiconero = nil
 
         do {
-            try await viewModel.authenticateForSensitiveAction(prompt: "Authenticate to send Monero")
+            try await viewModel.authenticateForSensitiveAction(prompt: L10n.t("Authenticate to send Monero"))
             if isMaxMode {
                 // In max mode, always sweep at send time so fee changes are handled correctly.
                 let result: (txid: String, amount: UInt64, fee: UInt64)
                 if sendFromSubaddressEnabled {
                     result = try await walletManager.sweep(fromSubaddressMinor: fromSubaddressMinor, toAddress: toAddress, ringLen: ring)
-                    infoMessage = "Swept max spendable from selected subaddress via \(policyText())."
+                    infoMessage = L10n.format("Swept max spendable from selected subaddress via %@.", policyText())
                 } else {
                     result = try await walletManager.sweep(toAddress: toAddress, ringLen: ring)
-                    infoMessage = "Swept max spendable via \(policyText())."
+                    infoMessage = L10n.format("Swept max spendable via %@.", policyText())
                 }
 
                 sentTxid = result.txid
                 sentFeePiconero = result.fee
                 estimatedFeePiconero = result.fee
+                FiatPriceService.shared.recordSend(txid: result.txid)
 
                 // Keep UI honest: set the amount field to what was actually sent.
                 let xmr = viewModel.piconeroToXMR(result.amount)
                 amountXMR = String(format: "%.12f", xmr)
             } else {
                 guard let amountPico = parsedAmountPiconero() else {
-                    errorMessage = "Enter a valid address and amount."
+                    errorMessage = L10n.t("Enter a valid address and amount.")
                     return
                 }
 
@@ -466,11 +485,11 @@ struct SendView: View {
                         feePiconero: fee,
                         unlockedPiconero: available
                     ) {
-                        errorMessage = "Insufficient unlocked balance for amount + fee."
+                        errorMessage = L10n.t("Insufficient unlocked balance for amount + fee.")
                         return
                     }
                 } else if amountPico > available {
-                    errorMessage = "Insufficient unlocked balance."
+                    errorMessage = L10n.t("Insufficient unlocked balance.")
                     return
                 }
 
@@ -482,22 +501,23 @@ struct SendView: View {
                         amountPiconero: amountPico,
                         ringLen: ring
                     )
-                    infoMessage = "Transaction broadcast from selected subaddress via \(policyText())."
+                    infoMessage = L10n.format("Transaction broadcast from selected subaddress via %@.", policyText())
                 } else {
                     result = try await walletManager.send(toAddress: toAddress, amountPiconero: amountPico, ringLen: ring)
-                    infoMessage = "Transaction broadcast via \(policyText())."
+                    infoMessage = L10n.format("Transaction broadcast via %@.", policyText())
                 }
 
                 sentTxid = result.txid
                 sentFeePiconero = result.fee
                 estimatedFeePiconero = result.fee
+                FiatPriceService.shared.recordSend(txid: result.txid)
             }
 
             // Refresh balance after send
             await viewModel.updateBalance()
             await refreshSubaddressBalanceIfNeeded()
         } catch {
-            errorMessage = authRetryMessage(for: error) ?? "Send failed: \(error.localizedDescription)"
+            errorMessage = authRetryMessage(for: error) ?? L10n.format("Send failed: %@", error.localizedDescription)
         }
     }
 
@@ -509,7 +529,7 @@ struct SendView: View {
              WalletStorageError.biometryNotAvailable,
              WalletStorageError.biometryNotEnrolled,
              WalletStorageError.authenticationFailed:
-            return "Authentication required to send. Try again."
+            return L10n.t("Authentication required to send. Try again.")
         default:
             return nil
         }
@@ -546,9 +566,9 @@ struct SendView: View {
 
     private func policyText() -> String {
         switch MoneroConfig.networkPolicy {
-        case .clearnet: return "Clearnet only"
-        case .i2p: return "I2P only"
-        case .hybrid: return "Scan clearnet, broadcast I2P"
+        case .clearnet: return L10n.t("Clearnet only")
+        case .i2p: return L10n.t("I2P only")
+        case .hybrid: return L10n.t("Scan clearnet, broadcast I2P")
         }
     }
 
@@ -564,9 +584,9 @@ struct SendView: View {
             parseMoneroUri(trimmed)
         } else if looksLikeAddress(trimmed) {
             toAddress = trimmed
-            infoMessage = "Address loaded from QR code."
+            infoMessage = L10n.t("Address loaded from QR code.")
         } else {
-            errorMessage = "Invalid QR code. Expected Monero address or payment URI."
+            errorMessage = L10n.t("Invalid QR code. Expected Monero address or payment URI.")
         }
 
         estimatedFeePiconero = nil
@@ -576,11 +596,11 @@ struct SendView: View {
     /// Parse `monero:<address>?…` and `monero://<address>?…` without lowercasing Base58.
     private func parseMoneroUri(_ uri: String) {
         guard let parsed = MoneroPaymentURI.parse(uri) else {
-            errorMessage = "Invalid payment URI format."
+            errorMessage = L10n.t("Invalid payment URI format.")
             return
         }
         guard looksLikeAddress(parsed.address) else {
-            errorMessage = "No valid address in payment URI."
+            errorMessage = L10n.t("No valid address in payment URI.")
             return
         }
 
@@ -589,16 +609,30 @@ struct SendView: View {
             amountXMR = amount.replacingOccurrences(of: ",", with: ".")
         }
 
-        infoMessage = "Payment details loaded from QR code."
+        infoMessage = L10n.t("Payment details loaded from QR code.")
     }
 
     private func confirmationMessage() -> String {
-        let destination = toAddress.isEmpty ? "Unknown address" : toAddress
+        let destination = toAddress.isEmpty ? L10n.t("Unknown address") : toAddress
         if let fee = estimatedFeePiconero, let amount = parsedAmountPiconero() {
             let total = safeAdd(amount, fee)
-            return "Send \(viewModel.formatExactPiconero(amount)) to \(destination).\nFee: \(viewModel.formatExactPiconero(fee))\nTotal: \(viewModel.formatExactPiconero(total))"
+            var message = L10n.format(
+                "Send %@ to %@.\nFee: %@\nTotal: %@",
+                viewModel.formatExactPiconero(amount),
+                destination,
+                viewModel.formatExactPiconero(fee),
+                viewModel.formatExactPiconero(total)
+            )
+            let now = Int64(Date().timeIntervalSince1970 * 1000)
+            if let amountFiat = FiatEstimate.liveApproxText(piconero: amount, rate: fiatPrices.displayRate, nowMs: now) {
+                message += L10n.format("\nAmount %@", amountFiat)
+            }
+            if let feeFiat = FiatEstimate.liveApproxText(piconero: fee, rate: fiatPrices.displayRate, nowMs: now) {
+                message += L10n.format("\nFee %@", feeFiat)
+            }
+            return message
         }
-        return "Preview the fee before sending to \(destination)."
+        return L10n.format("Preview the fee before sending to %@.", destination)
     }
 
     // One-shot "Send Max": ask the core to compute the maximum sendable amount (unlocked - fee),
@@ -624,7 +658,7 @@ struct SendView: View {
 
             guard looksLikeAddress(toAddress) else {
                 await MainActor.run {
-                    errorMessage = "Enter a valid address."
+                    errorMessage = L10n.t("Enter a valid address.")
                 }
                 return
             }
@@ -646,7 +680,7 @@ struct SendView: View {
 
                 guard amount > 0 else {
                     await MainActor.run {
-                        errorMessage = "No unlocked balance available to send after fee."
+                        errorMessage = L10n.t("No unlocked balance available to send after fee.")
                         isMaxMode = false
                         previewReady = false
                     }
@@ -661,14 +695,14 @@ struct SendView: View {
 
                     let xmr = viewModel.piconeroToXMR(amount)
                     amountXMR = String(format: "%.12f", xmr)
-                    infoMessage = "Amount set to max spendable. Final fee may change slightly at send time."
+                    infoMessage = L10n.t("Amount set to max spendable. Final fee may change slightly at send time.")
                 }
             } catch {
                 if Task.isCancelled { return }
                 await MainActor.run {
                     previewReady = false
                     isMaxMode = false
-                    errorMessage = "Fee preview failed: \(error.localizedDescription)"
+                    errorMessage = L10n.format("Fee preview failed: %@", error.localizedDescription)
                 }
             }
         }

@@ -15,10 +15,10 @@ enum MainTab: Hashable {
 
     var title: String {
         switch self {
-        case .wallet: return "Wallet"
-        case .receive: return "Receive"
-        case .send: return "Send"
-        case .settings: return "Settings"
+        case .wallet: return L10n.t("Wallet")
+        case .receive: return L10n.t("Receive")
+        case .send: return L10n.t("Send")
+        case .settings: return L10n.t("Settings")
         }
     }
 

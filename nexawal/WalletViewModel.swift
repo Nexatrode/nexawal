@@ -182,13 +182,13 @@ class WalletViewModel: ObservableObject {
             return
         }
         guard !mnemonic.isEmpty else {
-            errorMessage = "Wallet must be unlocked before changing biometric protection."
+            errorMessage = L10n.t("Wallet must be unlocked before changing biometric protection.")
             return
         }
 
         if metadata.biometricsEnabled && !enabled {
             do {
-                try await storage.evaluateBiometricsIfNeeded(prompt: "Authenticate to turn off Face ID protection")
+                try await storage.evaluateBiometricsIfNeeded(prompt: L10n.t("Authenticate to turn off Face ID protection"))
             } catch {
                 errorMessage = error.localizedDescription
                 return
@@ -365,7 +365,7 @@ class WalletViewModel: ObservableObject {
             .replacingOccurrences(of: "\n", with: " ")
 
         guard !normalizedMnemonic.isEmpty else {
-            errorMessage = "Mnemonic cannot be empty."
+            errorMessage = L10n.t("Mnemonic cannot be empty.")
             return
         }
 
@@ -424,7 +424,7 @@ class WalletViewModel: ObservableObject {
                     requireBiometrics: requireBiometrics
                 )
             } catch {
-                let message = "Wallet persistence failed: \(error.localizedDescription)"
+                let message = L10n.format("Wallet persistence failed: %@", error.localizedDescription)
                 print("⚠️ \(message)")
                 errorMessage = message
                 isWalletOpen = false
@@ -498,7 +498,10 @@ class WalletViewModel: ObservableObject {
 
                     // 2) Decode into typed rows and publish to UI.
                     let rows = try WalletCoreFFIClient.listTransfers(walletId: self.walletId)
-                    await MainActor.run { self.transfers = rows }
+                    await MainActor.run {
+                        self.transfers = rows
+                        FiatPriceService.shared.recordSeenTransfers(rows.map { self.seenTransfer($0) })
+                    }
 
                     // 3) Summarize directions to quickly see if we have any outgoing/spend rows.
                     var inCount = 0
@@ -523,7 +526,7 @@ class WalletViewModel: ObservableObject {
                 await MainActor.run { self.errorMessage = nil }
             } catch {
                 await MainActor.run {
-                    self.errorMessage = "Refresh failed: \(error.localizedDescription)"
+                    self.errorMessage = L10n.format("Refresh failed: %@", error.localizedDescription)
                 }
             }
         }
@@ -615,14 +618,14 @@ class WalletViewModel: ObservableObject {
                 metadata.unlockedBalance = balance.unlocked
             }
         } catch {
-            errorMessage = "Failed to get balance: \(error.localizedDescription)"
+            errorMessage = L10n.format("Failed to get balance: %@", error.localizedDescription)
         }
     }
 
     func rescan(from height: UInt64) async {
         let trimmedMnemonic = mnemonic.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedMnemonic.isEmpty else {
-            errorMessage = "Rescan failed: mnemonic is unavailable."
+            errorMessage = L10n.t("Rescan failed: mnemonic is unavailable.")
             return
         }
 
@@ -668,7 +671,7 @@ class WalletViewModel: ObservableObject {
                 metadata.unlockedBalance = self.unlockedBalance
             }
         } catch {
-            errorMessage = "Rescan failed: \(error.localizedDescription)"
+            errorMessage = L10n.format("Rescan failed: %@", error.localizedDescription)
         }
     }
 
@@ -826,6 +829,7 @@ class WalletViewModel: ObservableObject {
                             await MainActor.run {
                                 self.transfers = rows
                                 self.lastTransfersPollAt = Date()
+                                FiatPriceService.shared.recordSeenTransfers(rows.map { self.seenTransfer($0) })
                             }
                         }
                     }
@@ -950,7 +954,7 @@ class WalletViewModel: ObservableObject {
             errorMessage = nil
             await applyMetadataSnapshot(metadata)
 
-            let mnemonic = try await storage.loadMnemonic(prompt: "Authenticate to unlock NexaWal")
+            let mnemonic = try await storage.loadMnemonic(prompt: L10n.t("Authenticate to unlock NexaWal"))
             self.mnemonic = mnemonic
             lastOpenedMnemonicFingerprint = Self.mnemonicFingerprint(mnemonic)
             let normalizedWords = mnemonic
@@ -1043,6 +1047,13 @@ class WalletViewModel: ObservableObject {
         totalBalance = total
         unlockedBalance = unlocked
         balanceIsStaleWhileSyncing = false
+    }
+
+    private func seenTransfer(_ row: WalletCoreFFIClient.Transfer) -> (txid: String, timestampSeconds: Int64?) {
+        guard let ts = row.timestamp, ts > 0 else {
+            return (row.txid, nil)
+        }
+        return (row.txid, Int64(ts))
     }
 
     private func logObservedOutputsSummary(context: String) {

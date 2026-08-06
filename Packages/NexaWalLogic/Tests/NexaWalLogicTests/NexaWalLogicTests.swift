@@ -39,6 +39,7 @@ final class NetworkRoutingTests: XCTestCase {
         XCTAssertTrue(NetworkRouting.shouldUseI2PHTTPProxy(policy: .hybrid, proxyConfigured: true, forBroadcast: true))
         XCTAssertFalse(NetworkRouting.shouldUseI2PHTTPProxy(policy: .hybrid, proxyConfigured: true, forBroadcast: false))
     }
+
 }
 
 final class SendSafetyTests: XCTestCase {

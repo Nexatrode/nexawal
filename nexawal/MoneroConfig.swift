@@ -11,8 +11,7 @@ struct MoneroConfig {
     nonisolated static let defaultAddress = "https://rpc.nexatrode.com"
     nonisolated static let userDefaultsKey = "monero_daemon_address"
 
-    // I2P defaults and keys (kept for UI compatibility)
-    nonisolated static let defaultI2PRPCAddress = "cvxtgqjorfif6i5x5fenys6fj7hzddbgavpyutps6gphywnlklqa.b32.i2p:18081"
+    // I2P keys (no shipped I2P node — user fills this in)
     nonisolated static let userDefaultsI2PModeKey = "monero_i2p_mode"
     nonisolated static let userDefaultsI2PRPCKey = "monero_i2p_rpc_address"
     nonisolated static let userDefaultsI2PProxyKey = "monero_i2p_http_proxy"
@@ -57,6 +56,15 @@ struct MoneroConfig {
     // Appearance: Classic UI ON = standard non-neon look; OFF (default) = neon terminal theme.
     nonisolated static let userDefaultsClassicUIKey = "ui_classic_mode"
     nonisolated static let defaultClassicUIEnabled: Bool = false
+
+    nonisolated static let userDefaultsFiatEstimatesEnabledKey = "fiat_estimates_enabled"
+    nonisolated static let userDefaultsFiatEstimatesEnabledAtKey = "fiat_estimates_enabled_at_ms"
+    nonisolated static let userDefaultsFiatCurrencyKey = "fiat_currency"
+    nonisolated static let userDefaultsFiatCurrencyInitializedKey = "fiat_currency_initialized"
+    nonisolated static let userDefaultsFiatRateCurrencyKey = "fiat_rate_currency"
+    nonisolated static let userDefaultsFiatRatePerXmrKey = "fiat_rate_per_xmr"
+    nonisolated static let userDefaultsFiatRateFetchedAtKey = "fiat_rate_fetched_at_ms"
+    nonisolated static let userDefaultsFiatRateSourceKey = "fiat_rate_source"
 
     enum WalletError: Error {
         case invalidAddress
@@ -169,16 +177,29 @@ struct MoneroConfig {
         UserDefaults.standard.set(enabled, forKey: userDefaultsI2PModeKey)
     }
 
+    private nonisolated static let legacyDefaultI2PRPCAddresses: Set<String> = [
+        "cvxtgqjorfif6i5x5fenys6fj7hzddbgavpyutps6gphywnlklqa.b32.i2p:18081",
+    ]
+
     nonisolated static var i2pRPCAddress: String {
-        if let saved = UserDefaults.standard.string(forKey: userDefaultsI2PRPCKey), !saved.isEmpty {
-            return saved
+        let saved = UserDefaults.standard.string(forKey: userDefaultsI2PRPCKey)?
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        if saved.isEmpty { return "" }
+        if legacyDefaultI2PRPCAddresses.contains(saved.lowercased()) {
+            UserDefaults.standard.removeObject(forKey: userDefaultsI2PRPCKey)
+            return ""
         }
-        return defaultI2PRPCAddress
+        return saved
     }
 
     @MainActor
     static func setI2PRPCAddress(_ address: String) {
-        UserDefaults.standard.set(address, forKey: userDefaultsI2PRPCKey)
+        let trimmed = address.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty {
+            UserDefaults.standard.removeObject(forKey: userDefaultsI2PRPCKey)
+        } else {
+            UserDefaults.standard.set(trimmed, forKey: userDefaultsI2PRPCKey)
+        }
     }
 
     nonisolated static var i2pHTTPProxyAddress: String? {
@@ -208,6 +229,86 @@ struct MoneroConfig {
     @MainActor
     static func setClassicUIEnabled(_ enabled: Bool) {
         UserDefaults.standard.set(enabled, forKey: userDefaultsClassicUIKey)
+    }
+
+    // MARK: - Fiat estimates
+    nonisolated static var fiatEstimatesEnabled: Bool {
+        UserDefaults.standard.bool(forKey: userDefaultsFiatEstimatesEnabledKey)
+    }
+
+    nonisolated static var fiatCurrencyInitialized: Bool {
+        UserDefaults.standard.bool(forKey: userDefaultsFiatCurrencyInitializedKey)
+    }
+
+    nonisolated static var fiatCurrency: String {
+        let raw = UserDefaults.standard.string(forKey: userDefaultsFiatCurrencyKey) ?? ""
+        if FiatEstimate.isSupported(raw) { return raw.uppercased() }
+        return FiatEstimate.hintedCurrency(localeCurrencyCode: Locale.current.currency?.identifier)
+    }
+
+    nonisolated static var routingPolicy: NetworkRouting.Policy {
+        NetworkRouting.Policy.fromRaw(networkPolicy.rawValue)
+    }
+
+    @MainActor
+    static func setFiatCurrency(_ code: String) {
+        let normalized = FiatEstimate.isSupported(code) ? code.uppercased() : "USD"
+        UserDefaults.standard.set(normalized, forKey: userDefaultsFiatCurrencyKey)
+        UserDefaults.standard.set(true, forKey: userDefaultsFiatCurrencyInitializedKey)
+    }
+
+    nonisolated static var fiatEstimatesEnabledAtMs: Int64 {
+        Int64(UserDefaults.standard.double(forKey: userDefaultsFiatEstimatesEnabledAtKey))
+    }
+
+    @MainActor
+    static func setFiatEstimatesEnabled(_ enabled: Bool) {
+        if enabled && !fiatCurrencyInitialized {
+            setFiatCurrency(FiatEstimate.hintedCurrency(localeCurrencyCode: Locale.current.currency?.identifier))
+        }
+        if enabled && fiatEstimatesEnabledAtMs <= 0 {
+            UserDefaults.standard.set(Date().timeIntervalSince1970 * 1000, forKey: userDefaultsFiatEstimatesEnabledAtKey)
+        }
+        UserDefaults.standard.set(enabled, forKey: userDefaultsFiatEstimatesEnabledKey)
+    }
+
+    @MainActor
+    @discardableResult
+    static func ensureFiatEstimatesEnabledAtMs() -> Int64 {
+        let stored = fiatEstimatesEnabledAtMs
+        if stored > 0 { return stored }
+        guard fiatEstimatesEnabled else { return 0 }
+        let now = Int64(Date().timeIntervalSince1970 * 1000)
+        UserDefaults.standard.set(Double(now), forKey: userDefaultsFiatEstimatesEnabledAtKey)
+        return now
+    }
+
+    nonisolated static func cachedFiatRate() -> FiatRate? {
+        guard let currency = UserDefaults.standard.string(forKey: userDefaultsFiatRateCurrencyKey),
+              FiatEstimate.isSupported(currency),
+              let raw = UserDefaults.standard.string(forKey: userDefaultsFiatRatePerXmrKey),
+              let perXmr = FiatEstimate.decimal(from: raw)
+        else {
+            return nil
+        }
+        let fetchedAt = Int64(UserDefaults.standard.double(forKey: userDefaultsFiatRateFetchedAtKey))
+        let source = UserDefaults.standard.string(forKey: userDefaultsFiatRateSourceKey) ?? "kraken"
+        return FiatRate(currency: currency, fiatPerXmr: perXmr, fetchedAtMs: fetchedAt, source: source)
+    }
+
+    @MainActor
+    static func setCachedFiatRate(_ rate: FiatRate?) {
+        if let rate {
+            UserDefaults.standard.set(rate.currency, forKey: userDefaultsFiatRateCurrencyKey)
+            UserDefaults.standard.set(FiatEstimate.decimalString(rate.fiatPerXmr), forKey: userDefaultsFiatRatePerXmrKey)
+            UserDefaults.standard.set(Double(rate.fetchedAtMs), forKey: userDefaultsFiatRateFetchedAtKey)
+            UserDefaults.standard.set(rate.source, forKey: userDefaultsFiatRateSourceKey)
+        } else {
+            UserDefaults.standard.removeObject(forKey: userDefaultsFiatRateCurrencyKey)
+            UserDefaults.standard.removeObject(forKey: userDefaultsFiatRatePerXmrKey)
+            UserDefaults.standard.removeObject(forKey: userDefaultsFiatRateFetchedAtKey)
+            UserDefaults.standard.removeObject(forKey: userDefaultsFiatRateSourceKey)
+        }
     }
 
     // MARK: - Gap limits

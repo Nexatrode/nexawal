@@ -18,10 +18,17 @@ struct WalletCreationView: View {
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
-    enum WalletSetupMode: String, CaseIterable, Identifiable {
-        case create = "Create new wallet (fast)"
-        case `import` = "Import existing wallet"
-        var id: String { rawValue }
+    enum WalletSetupMode: CaseIterable, Identifiable, Hashable {
+        case create
+        case `import`
+        var id: Self { self }
+
+        var title: String {
+            switch self {
+            case .create: return L10n.t("Create new wallet (fast)")
+            case .import: return L10n.t("Import existing wallet")
+            }
+        }
     }
 
     /// DEBUG-only first-run testing: scheme Environment Variables
@@ -80,8 +87,8 @@ struct WalletCreationView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: NeonSectionHeader(title: "Wallet Setup")) {
-                    Text("Choose whether you’re creating a brand new wallet (fast sync) or importing an existing wallet (full scan unless you set a restore height).")
+                Section(header: NeonSectionHeader(title: L10n.t("Wallet Setup"))) {
+                    Text("Choose whether you're creating a brand new wallet (fast sync) or importing an existing wallet (full scan unless you set a restore height).")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 
@@ -90,7 +97,7 @@ struct WalletCreationView: View {
                     } else {
                         Picker("Mode", selection: $setupMode) {
                             ForEach(WalletSetupMode.allCases) { mode in
-                                Text(mode.rawValue).tag(mode)
+                                Text(mode.title).tag(mode)
                             }
                         }
                         .pickerStyle(.segmented)
@@ -120,7 +127,7 @@ struct WalletCreationView: View {
                                     .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                     .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                             } else if let suggested = suggestedRestoreHeight {
-                                Text("Starting height (fast): \(suggested) (node tip − 10)")
+                                Text(L10n.format("Starting height (fast): %lld (node tip − 10)", Int64(suggested)))
                                     .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                     .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                             } else {
@@ -147,7 +154,7 @@ struct WalletCreationView: View {
 
                                 let height = UInt64(restoreHeightInput.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0
                                 if height == 0 {
-                                    Text("Tip: 0 scans the full chain history. This is the safest option if you’re unsure, but it can take longer to sync.")
+                                    Text("Tip: 0 scans the full chain history. This is the safest option if you're unsure, but it can take longer to sync.")
                                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                                 } else {
@@ -159,10 +166,10 @@ struct WalletCreationView: View {
                         }
                     }
 
-                    NeonToggle(title: "Mainnet", isOn: $isMainnet)
+                    NeonToggle(title: L10n.t("Mainnet"), isOn: $isMainnet)
 
                     NeonToggle(
-                        title: "Require Face ID / Touch ID",
+                        title: L10n.t("Require Face ID / Touch ID"),
                         isOn: $requireBiometrics,
                         disabled: !biometricsAvailable || !biometricsEnrolled
                     )
@@ -250,7 +257,7 @@ struct WalletCreationView: View {
                     }
                 }
 
-                Section(header: NeonSectionHeader(title: "Network & Node")) {
+                Section(header: NeonSectionHeader(title: L10n.t("Network & Node"))) {
                     TextField("https://rpc.nexatrode.com", text: $nodeAddress)
                         .font(.system(.body, design: .monospaced))
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
@@ -263,7 +270,7 @@ struct WalletCreationView: View {
                     Button {
                         saveNodeAddress()
                     } label: {
-                        Text(classicUI ? "SAVE NODE" : "Save node")
+                        Text(L10n.neon("Save node", classicUI: classicUI))
                     }
                     .neonCTAStyle(classicUI: classicUI, palette: classicPalette)
 
@@ -274,7 +281,7 @@ struct WalletCreationView: View {
                     }
                 }
 
-                Section(header: NeonSectionHeader(title: "Info")) {
+                Section(header: NeonSectionHeader(title: L10n.t("Info"))) {
                     HStack {
                         Text("WalletCore Version:")
                             .foregroundColor(classicPalette?.secondaryText)
@@ -288,7 +295,7 @@ struct WalletCreationView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(classicUI ? "NEXAWAL" : "Create Wallet")
+                    Text(classicUI ? "NEXAWAL" : L10n.t("Create Wallet"))
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                         .tracking(classicUI ? 2 : 0)
@@ -334,7 +341,7 @@ struct WalletCreationView: View {
                 Button {
                     setupMode = mode
                 } label: {
-                    Text(mode.rawValue)
+                    Text(mode.title)
                         .font(.system(.caption, design: .monospaced).weight(.semibold))
                         .foregroundStyle(selected ? palette.ctaText : palette.primaryText)
                         .frame(maxWidth: .infinity)
@@ -374,7 +381,7 @@ struct WalletCreationView: View {
             }
             .disabled(viewModel.isLoading)
 
-            NeonToggle(title: "I wrote down my recovery seed", isOn: $wroteSeedDown)
+            NeonToggle(title: L10n.t("I wrote down my recovery seed"), isOn: $wroteSeedDown)
                 .disabled(generatedMnemonic.isEmpty)
 
             if wroteSeedDown {
@@ -412,7 +419,7 @@ struct WalletCreationView: View {
 
             ForEach(Array(seedChallengeIndices.enumerated()), id: \.offset) { i, wordIndex in
                 HStack {
-                    Text("Word #\(wordIndex + 1):")
+                    Text(L10n.format("Word #%lld:", Int64(wordIndex + 1)))
                         .font(.system(.body, design: .monospaced))
                     TextField("", text: challengeBinding(for: i))
                         .autocorrectionDisabled()
@@ -446,7 +453,7 @@ struct WalletCreationView: View {
             generatedMnemonic = try WalletCoreFFIClient.generateMnemonicEnglish()
         } catch {
             generatedMnemonic = ""
-            seedGenerationError = "Couldn’t generate a seed: \(error.localizedDescription)"
+            seedGenerationError = L10n.format("Couldn't generate a seed: %@", error.localizedDescription)
         }
         wroteSeedDown = false
         seedChallengeAnswers = ["", "", ""]
@@ -488,7 +495,7 @@ struct WalletCreationView: View {
         let trimmedNode = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         if !trimmedNode.isEmpty {
             guard let explicit = NetworkRouting.explicitNodeURL(trimmedNode) else {
-                viewModel.errorMessage = "Start the node URL with http:// or https://"
+                viewModel.errorMessage = L10n.t("Start the node URL with http:// or https://")
                 return
             }
             nodeAddress = explicit
@@ -532,16 +539,17 @@ struct WalletCreationView: View {
     private func saveNodeAddress() {
         let trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
-            nodeSaveStatus = "Start the node URL with http:// or https://"
+            nodeSaveStatus = L10n.t("Start the node URL with http:// or https://")
             return
         }
         nodeAddress = explicit
         MoneroConfig.setDaemonAddress(explicit)
-        nodeSaveStatus = "Saved node"
+        let savedNodeStatus = L10n.t("Saved node")
+        nodeSaveStatus = savedNodeStatus
         Task {
             await refreshSuggestedRestoreHeightIfNeeded()
             try? await Task.sleep(nanoseconds: 1_500_000_000)
-            if nodeSaveStatus == "Saved node" {
+            if nodeSaveStatus == savedNodeStatus {
                 nodeSaveStatus = nil
             }
         }
@@ -577,7 +585,7 @@ struct WalletCreationView: View {
         } catch {
             // Non-fatal: this is only used to suggest a fast height.
             suggestedRestoreHeight = nil
-            suggestedHeightError = "Couldn’t fetch a fast restore height from the node. Leaving restore height as 0."
+            suggestedHeightError = L10n.t("Couldn't fetch a fast restore height from the node. Leaving restore height as 0.")
             #if DEBUG
             print("🛰️ Suggested height failed: \(error.localizedDescription)")
             #endif

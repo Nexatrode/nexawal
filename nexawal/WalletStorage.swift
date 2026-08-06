@@ -29,26 +29,26 @@ enum WalletStorageError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .encodingFailed:
-            return "Unable to encode wallet metadata."
+            return L10n.t("Unable to encode wallet metadata.")
         case .decodingFailed:
-            return "Unable to decode wallet metadata."
+            return L10n.t("Unable to decode wallet metadata.")
         case .walletNotStored:
-            return "No wallet has been stored on this device."
+            return L10n.t("No wallet has been stored on this device.")
         case .missingMnemonic:
-            return "Stored mnemonic could not be found."
+            return L10n.t("Stored mnemonic could not be found.")
         case .authenticationFailed:
-            return "Authentication was not successful."
+            return L10n.t("Authentication was not successful.")
         case .cancelled:
-            return "Authentication was cancelled."
+            return L10n.t("Authentication was cancelled.")
         case .biometryNotAvailable:
-            return "Biometric authentication is not available on this device."
+            return L10n.t("Biometric authentication is not available on this device.")
         case .biometryNotEnrolled:
-            return "No biometric information is enrolled on this device."
+            return L10n.t("No biometric information is enrolled on this device.")
         case .keychain(let status):
             if let message = SecCopyErrorMessageString(status, nil) as String? {
                 return "\(message) (status: \(status))"
             }
-            return "Keychain error (status: \(status))."
+            return L10n.format("Keychain error (status: %lld).", Int64(status))
         }
     }
 }
@@ -241,7 +241,7 @@ actor WalletStorage {
     }
 
     /// Retrieve mnemonic from the Keychain, authenticating if needed.
-    func loadMnemonic(prompt: String = "Unlock your wallet") throws -> String {
+    func loadMnemonic(prompt: String = L10n.t("Unlock your wallet")) throws -> String {
         guard let metadata = try loadMetadata() else {
             throw WalletStorageError.walletNotStored
         }
@@ -288,7 +288,7 @@ actor WalletStorage {
     }
 
     /// Prompt the user for biometric/passcode authentication if it is required.
-    func evaluateBiometricsIfNeeded(prompt: String = "Unlock your wallet") async throws {
+    func evaluateBiometricsIfNeeded(prompt: String = L10n.t("Unlock your wallet")) async throws {
         guard let metadata = try loadMetadata(), metadata.biometricsEnabled else {
             return
         }

@@ -69,26 +69,26 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
                     if granted {
                         self?.setupCamera()
                     } else {
-                        self?.showCameraUnavailable("Camera permission denied")
+                        self?.showCameraUnavailable(L10n.t("Camera permission denied"))
                     }
                 }
             }
         case .denied, .restricted:
-            showCameraUnavailable("Camera access denied")
+            showCameraUnavailable(L10n.t("Camera access denied"))
         @unknown default:
-            showCameraUnavailable("Unknown camera permission status")
+            showCameraUnavailable(L10n.t("Unknown camera permission status"))
         }
     }
     
     private func setupCamera() {
         #if targetEnvironment(simulator)
-        showCameraUnavailable("Camera not available on simulator")
+        showCameraUnavailable(L10n.t("Camera not available on simulator"))
         return
         #else
         let session = AVCaptureSession()
         
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            showCameraUnavailable("No camera found")
+            showCameraUnavailable(L10n.t("No camera found"))
             return
         }
         
@@ -96,14 +96,14 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         do {
             videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
         } catch {
-            showCameraUnavailable("Could not access camera: \(error.localizedDescription)")
+            showCameraUnavailable(L10n.format("Could not access camera: %@", error.localizedDescription))
             return
         }
         
         if session.canAddInput(videoInput) {
             session.addInput(videoInput)
         } else {
-            showCameraUnavailable("Could not add camera input")
+            showCameraUnavailable(L10n.t("Could not add camera input"))
             return
         }
         
@@ -114,7 +114,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-            showCameraUnavailable("Could not add metadata output")
+            showCameraUnavailable(L10n.t("Could not add metadata output"))
             return
         }
         
@@ -166,7 +166,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         overlayView.layer.addSublayer(borderLayer)
         
         let instructionLabel = UILabel()
-        instructionLabel.text = neonMode ? "SCAN MONERO QR" : "Scan Monero QR code"
+        instructionLabel.text = L10n.neon("Scan Monero QR code", classicUI: neonMode)
         instructionLabel.textColor = neonMode ? neonGreen : .white
         instructionLabel.font = neonMode
             ? .monospacedSystemFont(ofSize: 17, weight: .bold)
@@ -193,7 +193,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         overlayView.addSubview(closeButton)
         
         let cancelButton = UIButton(type: .system)
-        cancelButton.setTitle(neonMode ? "CANCEL" : "Cancel", for: .normal)
+        cancelButton.setTitle(L10n.neon("Cancel", classicUI: neonMode), for: .normal)
         cancelButton.setTitleColor(neonMode ? neonGreen : .white, for: .normal)
         cancelButton.titleLabel?.font = neonMode
             ? .monospacedSystemFont(ofSize: 17, weight: .semibold)
@@ -229,7 +229,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         view.addSubview(label)
         
         let cancelButton = UIButton(type: .system)
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitle(L10n.t("Cancel"), for: .normal)
         cancelButton.setTitleColor(.white, for: .normal)
         cancelButton.frame = CGRect(x: (view.bounds.width - 80) / 2, y: view.bounds.height - 100, width: 80, height: 44)
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
