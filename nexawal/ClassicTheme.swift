@@ -298,7 +298,7 @@ struct NeonDisclosureGroup<Content: View>: View {
                             .font(.system(.body, design: .monospaced))
                             .foregroundStyle(palette.primaryText)
                         Spacer(minLength: 8)
-                        Image(systemName: "chevron.right")
+                        Image(systemName: "chevron.forward")
                             .font(.system(size: 13, weight: .semibold, design: .monospaced))
                             .foregroundStyle(palette.accent)
                             .rotationEffect(.degrees(isExpanded ? 90 : 0))

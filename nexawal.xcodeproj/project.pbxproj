@@ -113,6 +113,19 @@
 				tr,
 				hi,
 				Base,
+				ro,
+				nb,
+				ar,
+				cs,
+				fa,
+				he,
+				bg,
+				sv,
+				uk,
+				pl,
+				vi,
+				th,
+				"zh-Hant",
 			);
 			mainGroup = AAABE4452EDEBF11004D56AB;
 			minimizedProjectReferenceProxies = 1;
