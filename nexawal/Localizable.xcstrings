@@ -74,6 +74,12 @@
             "state": "translated",
             "value": ""
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ""
+          }
         }
       }
     },
@@ -156,6 +162,12 @@
             "state": "translated",
             "value": "\nMiktar %@"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\nराशि %@"
+          }
         }
       }
     },
@@ -237,6 +249,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "\nÜcret %@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\nफ़ीस %@"
           }
         }
       }
@@ -321,6 +339,12 @@
             "state": "translated",
             "value": "(kullanılamıyor)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(अनुपलब्ध)"
+          }
         }
       }
     },
@@ -404,6 +428,12 @@
             "state": "translated",
             "value": "%.1f blk/sn"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f ब्लॉक/सेकंड"
+          }
         }
       }
     },
@@ -480,6 +510,12 @@
             "state": "translated",
             "value": "%1$@ — %2$@"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ — %2$@"
+          }
         }
       }
     },
@@ -552,6 +588,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld"
@@ -638,6 +680,12 @@
             "state": "translated",
             "value": "%lld blok"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ब्लॉक"
+          }
         }
       }
     },
@@ -719,6 +767,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld blok kaldı"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ब्लॉक शेष"
           }
         }
       }
@@ -802,6 +856,12 @@
             "state": "translated",
             "value": "%lld onay"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld पुष्टि"
+          }
         }
       }
     },
@@ -874,6 +934,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld."
@@ -954,6 +1020,12 @@
             "state": "translated",
             "value": "%llu"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%llu"
+          }
         }
       }
     },
@@ -1026,6 +1098,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "0"
@@ -1107,6 +1185,12 @@
             "state": "translated",
             "value": "0.0"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0"
+          }
         }
       }
     },
@@ -1180,6 +1264,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0000"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "0.0000"
@@ -1267,6 +1357,12 @@
             "state": "translated",
             "value": "0.0 XMR"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0 XMR"
+          }
         }
       }
     },
@@ -1348,6 +1444,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gizlilik için yeni bir alım adresi (alt adres) oluşturulacak."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गोपनीयता के लिए एक नया प्राप्तकर्ता पता (सब-एड्रेस) जनरेट किया जाएगा।"
           }
         }
       }
@@ -1432,6 +1534,12 @@
             "state": "translated",
             "value": "Zaten devam eden bir gönderim var. Tamamlanmasını bekleyin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक भेजना पहले से जारी है। इसके पूरा होने की प्रतीक्षा करें।"
+          }
         }
       }
     },
@@ -1515,6 +1623,12 @@
             "state": "translated",
             "value": "Bu cihazda zaten kayıtlı bir cüzdan var."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस डिवाइस पर एक वॉलेट पहले से संग्रहित है।"
+          }
         }
       }
     },
@@ -1597,6 +1711,12 @@
             "state": "translated",
             "value": "Hakkında"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "परिचय"
+          }
         }
       }
     },
@@ -1678,6 +1798,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hesap ileri tarama (1-1000)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अकाउंट लुकअहेड (1-1000)"
           }
         }
       }
@@ -1762,6 +1888,12 @@
             "state": "translated",
             "value": "Hesaplar (ileri tarama)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अकाउंट (लुकअहेड)"
+          }
         }
       }
     },
@@ -1844,6 +1976,12 @@
             "state": "translated",
             "value": "İşlemler"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्रियाएं"
+          }
         }
       }
     },
@@ -1925,6 +2063,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adres"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पता"
           }
         }
       }
@@ -2009,6 +2153,12 @@
             "state": "translated",
             "value": "Adres kopyalandı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पता कॉपी किया गया"
+          }
         }
       }
     },
@@ -2091,6 +2241,12 @@
             "state": "translated",
             "value": "Adres panoya kopyalandı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पता क्लिपबोर्ड पर कॉपी किया गया"
+          }
         }
       }
     },
@@ -2172,6 +2328,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adres QR koddan yüklendi."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR कोड से पता लोड किया गया।"
           }
         }
       }
@@ -2256,6 +2418,12 @@
             "state": "translated",
             "value": "Gelişmiş kurtarma"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एडवांस्ड रिकवरी"
+          }
         }
       }
     },
@@ -2338,6 +2506,12 @@
             "state": "translated",
             "value": "Gelişmiş Kurtarma"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एडवांस्ड रिकवरी"
+          }
         }
       }
     },
@@ -2419,6 +2593,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Miktar"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "राशि"
           }
         }
       }
@@ -2503,6 +2683,12 @@
             "state": "translated",
             "value": "Miktar (XMR)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "राशि (XMR)"
+          }
         }
       }
     },
@@ -2584,6 +2770,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Miktar, harcanabilir maksimuma ayarlandı. Nihai ücret gönderim sırasında hafifçe değişebilir."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "राशि अधिकतम व्यय-योग्य राशि पर सेट की गई। भेजते समय अंतिम फ़ीस में थोड़ा बदलाव हो सकता है।"
           }
         }
       }
@@ -2667,6 +2859,12 @@
             "state": "translated",
             "value": "Görünüm"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दिखावट"
+          }
         }
       }
     },
@@ -2748,6 +2946,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I2P ayarlarını uygula"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P सेटिंग्स लागू करें"
           }
         }
       }
@@ -2832,6 +3036,12 @@
             "state": "translated",
             "value": "Kayıtlı Monero cüzdanını açmak için kimlik doğrulayın"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संग्रहित Monero वॉलेट खोलने के लिए प्रमाणीकरण करें"
+          }
         }
       }
     },
@@ -2913,6 +3123,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Monero göndermek için kimlik doğrulayın"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero भेजने के लिए प्रमाणीकरण करें"
           }
         }
       }
@@ -2997,6 +3213,12 @@
             "state": "translated",
             "value": "Cüzdan bakiyesini süpürmek için kimlik doğrulayın"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट बैलेंस स्वीप करने के लिए प्रमाणीकरण करें"
+          }
         }
       }
     },
@@ -3079,6 +3301,12 @@
             "state": "translated",
             "value": "Face ID korumasını kapatmak için kimlik doğrulayın"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID सुरक्षा बंद करने के लिए प्रमाणीकरण करें"
+          }
         }
       }
     },
@@ -3160,6 +3388,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "NexaWal'ın kilidini açmak için kimlik doğrulayın"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal अनलॉक करने के लिए प्रमाणीकरण करें"
           }
         }
       }
@@ -3244,6 +3478,12 @@
             "state": "translated",
             "value": "Kimlik doğrulama başarısız oldu"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रमाणीकरण विफल"
+          }
         }
       }
     },
@@ -3325,6 +3565,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Göndermek için kimlik doğrulama gerekli. Tekrar deneyin."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजने के लिए प्रमाणीकरण आवश्यक है। पुनः प्रयास करें।"
           }
         }
       }
@@ -3408,6 +3654,12 @@
             "state": "translated",
             "value": "Kimlik doğrulama iptal edildi."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रमाणीकरण रद्द कर दिया गया।"
+          }
         }
       }
     },
@@ -3489,6 +3741,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kimlik doğrulama başarılı olmadı."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रमाणीकरण सफल नहीं हुआ।"
           }
         }
       }
@@ -3572,6 +3830,12 @@
             "state": "translated",
             "value": "Kullanılabilir"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उपलब्ध"
+          }
         }
       }
     },
@@ -3653,6 +3917,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kullanılabilir (seçili alt adres)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उपलब्ध (चयनित सब-एड्रेस)"
           }
         }
       }
@@ -3736,6 +4006,12 @@
             "state": "translated",
             "value": "Senkronizasyon tamamlanırken bakiye güncelleniyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सिंक पूरा होने तक बैलेंस अपडेट हो रहा है"
+          }
         }
       }
     },
@@ -3817,6 +4093,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Biyometrik kimlik doğrulama kullanılabilir, ancak kayıtlı biyometrik veri yok."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बायोमेट्रिक प्रमाणीकरण उपलब्ध है, लेकिन कोई बायोमेट्रिक डेटा दर्ज नहीं है।"
           }
         }
       }
@@ -3900,6 +4182,12 @@
             "state": "translated",
             "value": "Bu cihazda biyometrik kimlik doğrulama kullanılamıyor."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस डिवाइस पर बायोमेट्रिक प्रमाणीकरण उपलब्ध नहीं है।"
+          }
         }
       }
     },
@@ -3981,6 +4269,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu cihazda biyometrik veya cihaz kimlik doğrulaması kullanılamıyor."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस डिवाइस पर बायोमेट्रिक या डिवाइस प्रमाणीकरण उपलब्ध नहीं है।"
           }
         }
       }
@@ -4065,6 +4359,12 @@
             "state": "translated",
             "value": "Bu cihazda biyometrik veya cihaz kimlik bilgisi doğrulaması kullanılabilir."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस डिवाइस पर बायोमेट्रिक या डिवाइस क्रेडेंशियल प्रमाणीकरण उपलब्ध है।"
+          }
         }
       }
     },
@@ -4147,6 +4447,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Biyometrik veya cihaz kimlik bilgisi doğrulaması kullanılamıyor"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बायोमेट्रिक या डिवाइस क्रेडेंशियल प्रमाणीकरण उपलब्ध नहीं है"
           }
         }
       }
@@ -4231,6 +4537,12 @@
             "state": "translated",
             "value": "Bu cihazda biyometrik veya cihaz kimlik bilgisi doğrulaması şu anda kullanılamıyor."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस डिवाइस पर बायोमेट्रिक या डिवाइस क्रेडेंशियल प्रमाणीकरण अभी उपलब्ध नहीं है।"
+          }
         }
       }
     },
@@ -4314,6 +4626,12 @@
             "state": "translated",
             "value": "Biyometrik izin eksik veya kullanılamıyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बायोमेट्रिक अनुमति गुम है या उपलब्ध नहीं है"
+          }
         }
       }
     },
@@ -4396,6 +4714,12 @@
             "state": "translated",
             "value": "Her ikisi (clearnet üzerinden tara, I2P üzerinden yayınla)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दोनों (क्लियरनेट स्कैन करें, I2P पर प्रसारित करें)"
+          }
         }
       }
     },
@@ -4477,6 +4801,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kamera erişimi reddedildi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैमरा एक्सेस अस्वीकृत"
           }
         }
       }
@@ -4561,6 +4891,12 @@
             "state": "translated",
             "value": "Kamera simülatörde kullanılamıyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सिमुलेटर पर कैमरा उपलब्ध नहीं है"
+          }
         }
       }
     },
@@ -4642,6 +4978,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kamera izni reddedildi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैमरा अनुमति अस्वीकृत"
           }
         }
       }
@@ -4725,6 +5067,12 @@
             "state": "translated",
             "value": "Monero QR kodlarını taramak için kamera önizlemesi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero QR कोड स्कैन करने के लिए कैमरा पूर्वावलोकन"
+          }
         }
       }
     },
@@ -4806,6 +5154,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İptal"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रद्द करें"
           }
         }
       }
@@ -4890,6 +5244,12 @@
             "state": "translated",
             "value": "İptal istendi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रद्द करने का अनुरोध किया गया"
+          }
         }
       }
     },
@@ -4971,6 +5331,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zincir"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चेन"
           }
         }
       }
@@ -5054,6 +5420,12 @@
             "state": "translated",
             "value": "Yepyeni bir cüzdan mı oluşturduğunuzu (hızlı senkronizasyon) yoksa mevcut bir cüzdanı mı içe aktardığınızı (bir kurtarma yüksekliği belirlemezseniz tam tarama) seçin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चुनें कि क्या आप एक नया वॉलेट बना रहे हैं (फास्ट सिंक) या मौजूदा वॉलेट इम्पोर्ट कर रहे हैं (जब तक आप रिस्टोर हाइट सेट न करें, तब तक पूरा स्कैन होगा)।"
+          }
         }
       }
     },
@@ -5135,6 +5507,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klasik Arayüz"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्लासिक UI"
           }
         }
       }
@@ -5218,6 +5596,12 @@
             "state": "translated",
             "value": "Önbellek temizleme başarısız oldu: %@"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैश साफ़ करना विफल: %@"
+          }
         }
       }
     },
@@ -5300,6 +5684,12 @@
             "state": "translated",
             "value": "Tarama önbelleğini temizle (bu ağ)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्कैन कैश साफ़ करें (यह नेटवर्क)"
+          }
         }
       }
     },
@@ -5381,6 +5771,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tarama önbelleği temizlendi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्कैन कैश साफ़ किया गया"
           }
         }
       }
@@ -5465,6 +5861,12 @@
             "state": "translated",
             "value": "Bu ağ için tarama önbelleği temizlendi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस नेटवर्क के लिए स्कैन कैश साफ़ किया गया"
+          }
         }
       }
     },
@@ -5546,6 +5948,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clearnet düğümü"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्लियरनेट नोड"
           }
         }
       }
@@ -5629,6 +6037,12 @@
             "state": "translated",
             "value": "Clearnet düğüm URL'si"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्लियरनेट नोड URL"
+          }
         }
       }
     },
@@ -5710,6 +6124,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yalnızca clearnet"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "केवल क्लियरनेट"
           }
         }
       }
@@ -5793,6 +6213,12 @@
             "state": "translated",
             "value": "Yalnızca clearnet, bir clearnet düğümü kullanır. Yalnızca I2P, bir I2P düğümü ve proxy kullanır. Her ikisi, clearnet üzerinde tarar ve I2P üzerinden yayınlar."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "केवल क्लियरनेट में केवल क्लियरनेट नोड का उपयोग होता है। केवल I2P में केवल I2P नोड और प्रॉक्सी का उपयोग होता है। दोनों में क्लियरनेट पर स्कैन और I2P पर प्रसारण होता है।"
+          }
         }
       }
     },
@@ -5875,6 +6301,12 @@
             "state": "translated",
             "value": "Kapat"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बंद करें"
+          }
         }
       }
     },
@@ -5956,6 +6388,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Onayla"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पुष्टि करें"
           }
         }
       }
@@ -6040,6 +6478,12 @@
             "state": "translated",
             "value": "Gönderimi onayla"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजने की पुष्टि करें"
+          }
         }
       }
     },
@@ -6121,6 +6565,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gönderimi Onayla"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजने की पुष्टि करें"
           }
         }
       }
@@ -6205,6 +6655,12 @@
             "state": "translated",
             "value": "Maksimum gönderimi onayla"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम भेजने की पुष्टि करें"
+          }
         }
       }
     },
@@ -6288,6 +6744,12 @@
             "state": "translated",
             "value": "Maksimum Gönderimi Onayla"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम भेजने की पुष्टि करें"
+          }
         }
       }
     },
@@ -6369,6 +6831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yazdığınızı onaylayın: aşağıda istenen kelimeleri girin."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पुष्टि करें कि आपने इसे लिख लिया है: नीचे मांगे गए शब्द दर्ज करें।"
           }
         }
       }
@@ -6453,6 +6921,12 @@
             "state": "translated",
             "value": "Yedeğinizi onaylayın — istenen kelimeleri girin:"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपने बैकअप की पुष्टि करें — मांगे गए शब्द दर्ज करें:"
+          }
         }
       }
     },
@@ -6534,6 +7008,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Onaylar"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पुष्टियां"
           }
         }
       }
@@ -6617,6 +7097,12 @@
             "state": "translated",
             "value": "Onaylandı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पुष्टि हो गई"
+          }
         }
       }
     },
@@ -6698,6 +7184,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bağlanıyor (clearnet tarama, I2P yayını)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कनेक्ट हो रहा है (क्लियरनेट स्कैन, I2P प्रसारण)"
           }
         }
       }
@@ -6781,6 +7273,12 @@
             "state": "translated",
             "value": "I2P üzerinden bağlanıyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P पर कनेक्ट हो रहा है"
+          }
         }
       }
     },
@@ -6862,6 +7360,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ adresine bağlanıyor"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ से कनेक्ट हो रहा है"
           }
         }
       }
@@ -6945,6 +7449,12 @@
             "state": "translated",
             "value": "Düğüme bağlanıyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड से कनेक्ट हो रहा है"
+          }
         }
       }
     },
@@ -7026,6 +7536,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "0. hesaptan başlayarak kaç Monero hesabının taranacağını denetler."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह नियंत्रित करता है कि अकाउंट 0 से शुरू करके कितने Monero अकाउंट स्कैन किए जाएं।"
           }
         }
       }
@@ -7109,6 +7625,12 @@
             "state": "translated",
             "value": "Bu cüzdan için kaç alım alt adresinin taranacağını denetler."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह नियंत्रित करता है कि इस वॉलेट के लिए कितने प्राप्तकर्ता सब-एड्रेस स्कैन किए जाएं।"
+          }
         }
       }
     },
@@ -7190,6 +7712,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adresi Kopyala"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पता कॉपी करें"
           }
         }
       }
@@ -7273,6 +7801,12 @@
             "state": "translated",
             "value": "Ödeme URI'sini Kopyala"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट URI कॉपी करें"
+          }
         }
       }
     },
@@ -7354,6 +7888,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "TXID'yi Kopyala"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TXID कॉपी करें"
           }
         }
       }
@@ -7437,6 +7977,12 @@
             "state": "translated",
             "value": "Kameraya erişilemedi: %@"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैमरा एक्सेस नहीं हो सका: %@"
+          }
         }
       }
     },
@@ -7518,6 +8064,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kamera girişi eklenemedi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैमरा इनपुट जोड़ा नहीं जा सका"
           }
         }
       }
@@ -7601,6 +8153,12 @@
             "state": "translated",
             "value": "Meta veri çıkışı eklenemedi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेटाडेटा आउटपुट जोड़ा नहीं जा सका"
+          }
         }
       }
     },
@@ -7682,6 +8240,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Face ID ayarı güncellenemedi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID सेटिंग अपडेट नहीं की जा सकी"
           }
         }
       }
@@ -7765,6 +8329,12 @@
             "state": "translated",
             "value": "Düğümden hızlı bir kurtarma yüksekliği alınamadı. Kurtarma yüksekliği 0 olarak bırakılıyor."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड से फास्ट रिस्टोर हाइट प्राप्त नहीं हो सकी। रिस्टोर हाइट को 0 पर छोड़ा जा रहा है।"
+          }
         }
       }
     },
@@ -7846,6 +8416,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tohum oluşturulamadı: %@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सीड जनरेट नहीं हो सकी: %@"
           }
         }
       }
@@ -7929,6 +8505,12 @@
             "state": "translated",
             "value": "Oluştur"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बनाएं"
+          }
         }
       }
     },
@@ -8010,6 +8592,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeni cüzdan oluştur (hızlı)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया वॉलेट बनाएं (फास्ट)"
           }
         }
       }
@@ -8093,6 +8681,12 @@
             "state": "translated",
             "value": "Cüzdan Oluştur"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट बनाएं"
+          }
         }
       }
     },
@@ -8175,6 +8769,12 @@
             "state": "translated",
             "value": "Cüzdan Oluşturuluyor..."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट बनाया जा रहा है..."
+          }
         }
       }
     },
@@ -8256,6 +8856,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Para birimi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मुद्रा"
           }
         }
       }
@@ -8340,6 +8946,12 @@
             "state": "translated",
             "value": "Daemon URL'si"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "डेमन URL"
+          }
         }
       }
     },
@@ -8422,6 +9034,12 @@
             "state": "translated",
             "value": "Açıklama"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "विवरण"
+          }
         }
       }
     },
@@ -8503,6 +9121,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hedef"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गंतव्य"
           }
         }
       }
@@ -8587,6 +9211,12 @@
             "state": "translated",
             "value": "Cihaz kimlik doğrulaması gerekli ama kullanılamıyor. Biyometrikleri veya ekran kilidini etkinleştirip tekrar deneyin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "डिवाइस प्रमाणीकरण आवश्यक है लेकिन उपलब्ध नहीं है। बायोमेट्रिक्स या स्क्रीन लॉक सक्षम करें, फिर पुनः प्रयास करें।"
+          }
         }
       }
     },
@@ -8669,6 +9299,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klasik Arayüz Devre Dışı Bırakıldı"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्लासिक UI अक्षम किया गया"
           }
         }
       }
@@ -8753,6 +9389,12 @@
             "state": "translated",
             "value": "Fiat tahminleri devre dışı bırakıldı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फिएट अनुमान अक्षम किए गए"
+          }
         }
       }
     },
@@ -8835,6 +9477,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klasik Arayüz Etkinleştirildi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्लासिक UI सक्षम किया गया"
           }
         }
       }
@@ -8919,6 +9567,12 @@
             "state": "translated",
             "value": "Fiat tahminleri etkinleştirildi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फिएट अनुमान सक्षम किए गए"
+          }
         }
       }
     },
@@ -9001,6 +9655,12 @@
             "state": "translated",
             "value": "Geçerli bir adres ve miktar girin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक मान्य पता और राशि दर्ज करें।"
+          }
         }
       }
     },
@@ -9082,6 +9742,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçerli bir adres girin."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक मान्य पता दर्ज करें।"
           }
         }
       }
@@ -9166,6 +9832,12 @@
             "state": "translated",
             "value": "Geçerli bir kurtarma yüksekliği girin"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक मान्य रिस्टोर हाइट दर्ज करें"
+          }
         }
       }
     },
@@ -9248,6 +9920,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bir tam sayı girin"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक पूर्ण संख्या दर्ज करें"
           }
         }
       }
@@ -9332,6 +10010,12 @@
             "state": "translated",
             "value": "Alıcıyı ve miktarı girin, ücreti önizleyin, ardından işlemi onaylayın."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राप्तकर्ता और राशि दर्ज करें, फ़ीस का पूर्वावलोकन करें, फिर ट्रांज़ैक्शन की पुष्टि करें।"
+          }
         }
       }
     },
@@ -9413,6 +10097,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tahmini ücret"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनुमानित फ़ीस"
           }
         }
       }
@@ -9497,6 +10187,12 @@
             "state": "translated",
             "value": "Maksimum tahmin ediliyor..."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम का अनुमान लगाया जा रहा है..."
+          }
         }
       }
     },
@@ -9579,6 +10275,12 @@
             "state": "translated",
             "value": "Tahmin ediliyor..."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनुमान लगाया जा रहा है..."
+          }
         }
       }
     },
@@ -9660,6 +10362,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bakiye alınamadı: %@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बैलेंस प्राप्त करना विफल: %@"
           }
         }
       }
@@ -9744,6 +10452,12 @@
             "state": "translated",
             "value": "Kayıtlı cüzdan meta verisi okunamadı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संग्रहित वॉलेट मेटाडेटा पढ़ना विफल"
+          }
         }
       }
     },
@@ -9825,6 +10539,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ücret"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ीस"
           }
         }
       }
@@ -9908,6 +10628,12 @@
             "state": "translated",
             "value": "Ücret %@"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ीस %@"
+          }
         }
       }
     },
@@ -9989,6 +10715,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ücret tahmin edildi (girişler seçili alt adresle sınırlandı)."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ीस का अनुमान लगाया गया (इनपुट चयनित सब-एड्रेस तक सीमित)।"
           }
         }
       }
@@ -10073,6 +10805,12 @@
             "state": "translated",
             "value": "Ücret başarıyla tahmin edildi."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ीस का अनुमान सफलतापूर्वक लगाया गया।"
+          }
         }
       }
     },
@@ -10155,6 +10893,12 @@
             "state": "translated",
             "value": "Ücret, yayın politikası kullanılarak tahmin edildi."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रसारण नीति का उपयोग करके फ़ीस का अनुमान लगाया गया।"
+          }
         }
       }
     },
@@ -10236,6 +10980,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ücret önizlemesi başarısız oldu: %@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ीस पूर्वावलोकन विफल: %@"
           }
         }
       }
@@ -10320,6 +11070,12 @@
             "state": "translated",
             "value": "Düğümden alınıyor…"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड से प्राप्त किया जा रहा है…"
+          }
         }
       }
     },
@@ -10402,6 +11158,12 @@
             "state": "translated",
             "value": "%lld'den başlangıç blokları alınıyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld से प्रारंभिक ब्लॉक प्राप्त किए जा रहे हैं"
+          }
         }
       }
     },
@@ -10483,6 +11245,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fiat tahminleri"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फिएट अनुमान"
           }
         }
       }
@@ -10567,6 +11335,12 @@
             "state": "translated",
             "value": "Tam yeniden tarama (blok 0'dan)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा रीस्कैन (ब्लॉक 0 से)"
+          }
         }
       }
     },
@@ -10648,6 +11422,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tam Yeniden Tarama (blok 0'dan)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा रीस्कैन (ब्लॉक 0 से)"
           }
         }
       }
@@ -10732,6 +11512,12 @@
             "state": "translated",
             "value": "0'dan tam yeniden tarama — ilerleme Cüzdan sekmesinde"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0 से पूरा रीस्कैन — प्रगति वॉलेट टैब पर देखें"
+          }
         }
       }
     },
@@ -10813,6 +11599,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Boşluk sınırı (1-100000)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गैप लिमिट (1-100000)"
           }
         }
       }
@@ -10897,6 +11689,12 @@
             "state": "translated",
             "value": "Boşluk sınırı (hesap başına alt adres)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गैप लिमिट (प्रति अकाउंट सब-एड्रेस)"
+          }
         }
       }
     },
@@ -10978,6 +11776,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeni tohum oluştur"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नई सीड जनरेट करें"
           }
         }
       }
@@ -11062,6 +11866,12 @@
             "state": "translated",
             "value": "Kamera İzni Ver"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैमरा अनुमति दें"
+          }
         }
       }
     },
@@ -11143,6 +11953,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yükseklik"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हाइट"
           }
         }
       }
@@ -11227,6 +12043,12 @@
             "state": "translated",
             "value": "Gizle"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "छुपाएं"
+          }
         }
       }
     },
@@ -11309,6 +12131,12 @@
             "state": "translated",
             "value": "Nasıl bağlanılır"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कैसे कनेक्ट करें"
+          }
         }
       }
     },
@@ -11381,6 +12209,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "https://rpc.nexatrode.com"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "https://rpc.nexatrode.com"
@@ -11467,6 +12301,12 @@
             "state": "translated",
             "value": "Kurtarma tohumumu yazdım"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैंने अपनी रिकवरी सीड लिख ली है"
+          }
         }
       }
     },
@@ -11545,6 +12385,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "I2P"
@@ -11631,6 +12477,12 @@
             "state": "translated",
             "value": "I2P HTTP proxy (host:port)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P HTTP प्रॉक्सी (host:port)"
+          }
         }
       }
     },
@@ -11712,6 +12564,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I2P düğümü (host:port)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P नोड (host:port)"
           }
         }
       }
@@ -11795,6 +12653,12 @@
             "state": "translated",
             "value": "Yalnızca I2P"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "केवल I2P"
+          }
         }
       }
     },
@@ -11876,6 +12740,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tanımlayıcılar"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आइडेंटिफायर"
           }
         }
       }
@@ -11959,6 +12829,12 @@
             "state": "translated",
             "value": "Mevcut cüzdanı içe aktar"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मौजूदा वॉलेट इम्पोर्ट करें"
+          }
         }
       }
     },
@@ -12040,6 +12916,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdanı İçe Aktar"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट इम्पोर्ट करें"
           }
         }
       }
@@ -12123,6 +13005,12 @@
             "state": "translated",
             "value": "Cüzdan İçe Aktarılıyor..."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट इम्पोर्ट किया जा रहा है..."
+          }
         }
       }
     },
@@ -12204,6 +13092,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bilgi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जानकारी"
           }
         }
       }
@@ -12287,6 +13181,12 @@
             "state": "translated",
             "value": "Miktar + ücret için kilidi açık bakiye yetersiz."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "राशि + फ़ीस के लिए अनलॉक्ड बैलेंस अपर्याप्त है।"
+          }
         }
       }
     },
@@ -12368,6 +13268,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kilidi açık bakiye yetersiz."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनलॉक्ड बैलेंस अपर्याप्त है।"
           }
         }
       }
@@ -12452,6 +13358,12 @@
             "state": "translated",
             "value": "Geçersiz miktar"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अमान्य राशि"
+          }
         }
       }
     },
@@ -12533,6 +13445,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geçersiz ödeme URI biçimi."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अमान्य पेमेंट URI फ़ॉर्मेट।"
           }
         }
       }
@@ -12616,6 +13534,12 @@
             "state": "translated",
             "value": "Geçersiz QR kodu. Monero adresi veya ödeme URI'si bekleniyordu."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अमान्य QR कोड। Monero पता या पेमेंट URI अपेक्षित था।"
+          }
         }
       }
     },
@@ -12697,6 +13621,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anahtarlık hatası (durum: %lld)."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कीचेन एरर (स्थिति: %lld)।"
           }
         }
       }
@@ -12780,6 +13710,12 @@
             "state": "translated",
             "value": "Etiket"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "लेबल"
+          }
         }
       }
     },
@@ -12861,6 +13797,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adresler yükleniyor…"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पते लोड हो रहे हैं…"
           }
         }
       }
@@ -12945,6 +13887,12 @@
             "state": "translated",
             "value": "Alım adresleri yükleniyor…"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राप्तकर्ता पते लोड हो रहे हैं…"
+          }
         }
       }
     },
@@ -13026,6 +13974,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mainnet"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मेननेट"
           }
         }
       }
@@ -13110,6 +14064,12 @@
             "state": "translated",
             "value": "Düğüm erişimini, cihaz güvenliğini ve kurtarma davranışını yönetin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड एक्सेस, डिवाइस सुरक्षा और रिकवरी व्यवहार प्रबंधित करें।"
+          }
         }
       }
     },
@@ -13192,6 +14152,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gönderilebilecek maksimum miktar tahmin edildi."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम भेजने योग्य राशि का अनुमान लगाया गया।"
           }
         }
       }
@@ -13276,6 +14242,12 @@
             "state": "translated",
             "value": "Harcanabilir maksimum bakiye yayınlandı."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम व्यय-योग्य बैलेंस प्रसारित किया गया।"
+          }
         }
       }
     },
@@ -13357,6 +14329,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "MIT lisanslı, denetlenmemiş yazılım. Tohumunuzdan ve fonlarınızdan siz sorumlusunuz. Varsayılan uzak düğüm, IP adresinizi ve cüzdan senkronizasyon sorgularınızı görebilir — daha güçlü gizlilik için kendi düğümünüzü çalıştırın. Etkinleştirilirse, isteğe bağlı fiat tahminleri api.kraken.com ve api.frankfurter.dev ile iletişim kurar."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MIT-लाइसेंस प्राप्त, अनऑडिटेड सॉफ़्टवेयर। अपने सीड और फंड के लिए आप स्वयं जिम्मेदार हैं। डिफ़ॉल्ट रिमोट नोड आपका IP और वॉलेट सिंक क्वेरी देख सकता है — बेहतर प्राइवेसी के लिए अपना स्वयं का नोड चलाएं। वैकल्पिक फिएट अनुमान, यदि सक्षम हैं, तो api.kraken.com और api.frankfurter.dev से संपर्क करते हैं।"
           }
         }
       }
@@ -13440,6 +14418,12 @@
             "state": "translated",
             "value": "Anımsatıcı (yapıştır):"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "म्नेमोनिक (पेस्ट करें):"
+          }
         }
       }
     },
@@ -13521,6 +14505,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anımsatıcı boş olamaz."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "म्नेमोनिक खाली नहीं हो सकता।"
           }
         }
       }
@@ -13604,6 +14594,12 @@
             "state": "translated",
             "value": "Mod"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मोड"
+          }
         }
       }
     },
@@ -13685,6 +14681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Monero adresi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero पता"
           }
         }
       }
@@ -13768,6 +14770,12 @@
             "state": "translated",
             "value": "Monero alım QR'ı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero प्राप्तकर्ता QR"
+          }
         }
       }
     },
@@ -13849,6 +14857,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ağ ve Düğüm"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नेटवर्क और नोड"
           }
         }
       }
@@ -13932,6 +14946,12 @@
             "state": "translated",
             "value": "Ağ Yüksekliği"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नेटवर्क हाइट"
+          }
         }
       }
     },
@@ -14013,6 +15033,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeni Adres"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया पता"
           }
         }
       }
@@ -14097,6 +15123,12 @@
             "state": "translated",
             "value": "Yeni adres etiketi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया पता लेबल"
+          }
         }
       }
     },
@@ -14178,6 +15210,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeni adres etiketi (isteğe bağlı)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया पता लेबल (वैकल्पिक)"
           }
         }
       }
@@ -14262,6 +15300,12 @@
             "state": "translated",
             "value": "Yeni alım adresi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नया प्राप्तकर्ता पता"
+          }
         }
       }
     },
@@ -14345,6 +15389,12 @@
             "state": "translated",
             "value": "NEXAWAL"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEXAWAL"
+          }
         }
       }
     },
@@ -14423,6 +15473,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal %@ (%@)"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "NexaWal %@ (%@)"
@@ -14510,6 +15566,12 @@
             "state": "translated",
             "value": "NexaWal, Monero göndermek için QR kodlarını taramak amacıyla kamera erişimine ihtiyaç duyar."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero भेजने के लिए QR कोड स्कैन करने हेतु NexaWal को कैमरा एक्सेस की आवश्यकता है।"
+          }
         }
       }
     },
@@ -14592,6 +15654,12 @@
             "state": "translated",
             "value": "Bu cihazda kayıtlı biyometrik bilgi yok."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस डिवाइस पर कोई बायोमेट्रिक जानकारी दर्ज नहीं है।"
+          }
         }
       }
     },
@@ -14673,6 +15741,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kamera bulunamadı"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई कैमरा नहीं मिला"
           }
         }
       }
@@ -14757,6 +15831,12 @@
             "state": "translated",
             "value": "Kayıtlı cüzdan meta verisi bulunamadı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई संग्रहित वॉलेट मेटाडेटा नहीं मिला"
+          }
         }
       }
     },
@@ -14840,6 +15920,12 @@
             "state": "translated",
             "value": "Kayıtlı bir cüzdan bulunamadı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई संग्रहित वॉलेट नहीं मिला"
+          }
         }
       }
     },
@@ -14921,6 +16007,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Henüz işlem yok."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी तक कोई ट्रांज़ैक्शन नहीं।"
           }
         }
       }
@@ -15004,6 +16096,12 @@
             "state": "translated",
             "value": "Ücretten sonra gönderilebilecek kilidi açık bakiye yok."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ीस के बाद भेजने के लिए कोई अनलॉक्ड बैलेंस उपलब्ध नहीं है।"
+          }
         }
       }
     },
@@ -15086,6 +16184,12 @@
             "state": "translated",
             "value": "Ödeme URI'sinde geçerli bir adres yok."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट URI में कोई मान्य पता नहीं है।"
+          }
         }
       }
     },
@@ -15167,6 +16271,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu cihazda kayıtlı bir cüzdan yok."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस डिवाइस पर कोई वॉलेट संग्रहित नहीं है।"
           }
         }
       }
@@ -15251,6 +16361,12 @@
             "state": "translated",
             "value": "Açık cüzdan yok"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कोई वॉलेट खुला नहीं है"
+          }
         }
       }
     },
@@ -15332,6 +16448,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Düğüm"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड"
           }
         }
       }
@@ -15415,6 +16537,12 @@
             "state": "translated",
             "value": "Düğüme erişilemiyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड अनुपलब्ध"
+          }
         }
       }
     },
@@ -15496,6 +16624,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ödeyen için not"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भुगतानकर्ता के लिए नोट"
           }
         }
       }
@@ -15580,6 +16714,12 @@
             "state": "translated",
             "value": "Henüz paylaşılacak bir şey yok"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अभी शेयर करने के लिए कुछ नहीं है"
+          }
         }
       }
     },
@@ -15662,6 +16802,12 @@
             "state": "translated",
             "value": "Kapalı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बंद"
+          }
         }
       }
     },
@@ -15743,6 +16889,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Açık"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चालू"
           }
         }
       }
@@ -15827,6 +16979,12 @@
             "state": "translated",
             "value": "Doğru kurtarma yüksekliğini kullandıktan sonra içe aktarma eksik görünüyorsa tarama ileri bakışını değiştirin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सही रिस्टोर हाइट का उपयोग करने के बाद भी यदि इम्पोर्ट अधूरा दिखे, तभी स्कैन लुकअहेड बदलें।"
+          }
         }
       }
     },
@@ -15909,6 +17067,12 @@
             "state": "translated",
             "value": "Doğru kurtarma yüksekliğini kullandıktan sonra cüzdan içe aktarımı eksik görünüyorsa bu değerleri değiştirin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सही रिस्टोर हाइट का उपयोग करने के बाद भी यदि वॉलेट इम्पोर्ट अधूरा दिखे, तभी इन मूल्यों को बदलें।"
+          }
         }
       }
     },
@@ -15990,6 +17154,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Explorer'da Aç"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक्सप्लोरर में खोलें"
           }
         }
       }
@@ -16074,6 +17244,12 @@
             "state": "translated",
             "value": "İsteğe bağlı etiket"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वैकल्पिक लेबल"
+          }
         }
       }
     },
@@ -16155,6 +17331,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İsteğe bağlı. Açıkken NexaWal, Kraken'den (api.kraken.com) genel bir XMR fiyatı ve gerekirse Frankfurter'dan (api.frankfurter.dev) fiat döviz kuru alır. Bu sunucular IP adresinizi görür. Miktarlar ve adresler gönderilmez. Fiat sorguları clearnet HTTPS kullanır ve düğüm / I2P proxy ayarlarından bağımsızdır. Sadece tahmindir — gönderdiğiniz ve elinizde tuttuğunuz şey XMR'dir."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वैकल्पिक। चालू होने पर, NexaWal Kraken (api.kraken.com) से सार्वजनिक XMR मूल्य और, यदि आवश्यक हो, Frankfurter (api.frankfurter.dev) से फिएट FX प्राप्त करता है। वे सर्वर आपका IP देखते हैं। राशि और पते नहीं भेजे जाते। फिएट लुकअप क्लियरनेट HTTPS का उपयोग करते हैं और नोड / I2P प्रॉक्सी सेटिंग्स से अलग हैं। ये केवल अनुमान हैं — आप जो भेजते और रखते हैं वह XMR है।"
           }
         }
       }
@@ -16239,6 +17421,12 @@
             "state": "translated",
             "value": "25 kelimelik anımsatıcıyı yapıştırın…"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "25-शब्द का म्नेमोनिक पेस्ट करें…"
+          }
         }
       }
     },
@@ -16320,6 +17508,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ödeme ayrıntıları QR koddan yüklendi."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR कोड से पेमेंट विवरण लोड किया गया।"
           }
         }
       }
@@ -16404,6 +17598,12 @@
             "state": "translated",
             "value": "Ödeme isteği (isteğe bağlı)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट रिक्वेस्ट (वैकल्पिक)"
+          }
         }
       }
     },
@@ -16485,6 +17685,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ödeme İsteği (isteğe bağlı)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट रिक्वेस्ट (वैकल्पिक)"
           }
         }
       }
@@ -16569,6 +17775,12 @@
             "state": "translated",
             "value": "Ödeme URI'si"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट URI"
+          }
         }
       }
     },
@@ -16652,6 +17864,12 @@
             "state": "translated",
             "value": "Ödeme URI'si kopyalandı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट URI कॉपी किया गया"
+          }
         }
       }
     },
@@ -16734,6 +17952,12 @@
             "state": "translated",
             "value": "Ödeme URI'si panoya kopyalandı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट URI क्लिपबोर्ड पर कॉपी किया गया"
+          }
         }
       }
     },
@@ -16815,6 +18039,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Beklemede"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रतीक्षित"
           }
         }
       }
@@ -16899,6 +18129,12 @@
             "state": "translated",
             "value": "Ücreti önizle"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ीस का पूर्वावलोकन"
+          }
         }
       }
     },
@@ -16980,6 +18216,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ücreti Önizle"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फ़ीस का पूर्वावलोकन"
           }
         }
       }
@@ -17064,6 +18306,12 @@
             "state": "translated",
             "value": "Maksimum gönderimi önizle"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम भेजने का पूर्वावलोकन"
+          }
         }
       }
     },
@@ -17146,6 +18394,12 @@
             "state": "translated",
             "value": "%@ adresine göndermeden önce ücreti önizleyin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को भेजने से पहले फ़ीस का पूर्वावलोकन करें।"
+          }
         }
       }
     },
@@ -17227,6 +18481,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Göndermeden önce ücreti önizleyin."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजने से पहले फ़ीस का पूर्वावलोकन करें।"
           }
         }
       }
@@ -17311,6 +18571,12 @@
             "state": "translated",
             "value": "Göndermeden önce maksimum miktarı önizleyin."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजने से पहले अधिकतम राशि का पूर्वावलोकन करें।"
+          }
         }
       }
     },
@@ -17394,6 +18660,12 @@
             "state": "translated",
             "value": "Birincil"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राइमरी"
+          }
         }
       }
     },
@@ -17475,6 +18747,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gizlilik politikası"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राइवेसी पॉलिसी"
           }
         }
       }
@@ -17559,6 +18837,12 @@
             "state": "translated",
             "value": "İlerleme"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रगति"
+          }
         }
       }
     },
@@ -17640,6 +18924,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Proxy örneği: 127.0.0.1:4444. İsterseniz boş bırakabilirsiniz — çalışan bir I2P düğümü ve proxy ayarlanana kadar senkronizasyon başarısız olur."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रॉक्सी उदाहरण: 127.0.0.1:4444। चाहें तो खाली छोड़ दें — जब तक एक काम करता I2P नोड और प्रॉक्सी सेट न हो, सिंक विफल रहेगा।"
           }
         }
       }
@@ -17724,6 +19014,12 @@
             "state": "translated",
             "value": "QR kullanılamıyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR अनुपलब्ध"
+          }
         }
       }
     },
@@ -17805,6 +19101,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Al"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राप्त करें"
           }
         }
       }
@@ -17889,6 +19191,12 @@
             "state": "translated",
             "value": "Alım adresi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राप्तकर्ता पता"
+          }
         }
       }
     },
@@ -17970,6 +19278,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alım Adresi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राप्तकर्ता पता"
           }
         }
       }
@@ -18053,6 +19367,12 @@
             "state": "translated",
             "value": "Monero Al"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero प्राप्त करें"
+          }
         }
       }
     },
@@ -18134,6 +19454,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "XMR Al"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR प्राप्त करें"
           }
         }
       }
@@ -18217,6 +19543,12 @@
             "state": "translated",
             "value": "Alındı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राप्त हुआ"
+          }
         }
       }
     },
@@ -18298,6 +19630,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Son İşlemler"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हाल के ट्रांज़ैक्शन"
           }
         }
       }
@@ -18381,6 +19719,12 @@
             "state": "translated",
             "value": "Alıcı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राप्तकर्ता"
+          }
         }
       }
     },
@@ -18462,6 +19806,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kurtarma"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिकवरी"
           }
         }
       }
@@ -18545,6 +19895,12 @@
             "state": "translated",
             "value": "Yenileme başarısız oldu: %@"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिफ्रेश विफल: %@"
+          }
         }
       }
     },
@@ -18626,6 +19982,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdanı Yenile"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट रिफ्रेश करें"
           }
         }
       }
@@ -18710,6 +20072,12 @@
             "state": "translated",
             "value": "Yenilendi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिफ्रेश हो गया"
+          }
         }
       }
     },
@@ -18791,6 +20159,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yenileniyor..."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिफ्रेश हो रहा है..."
           }
         }
       }
@@ -18875,6 +20249,12 @@
             "state": "translated",
             "value": "Yenileniyor…"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिफ्रेश हो रहा है…"
+          }
         }
       }
     },
@@ -18956,6 +20336,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kalan"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शेष"
           }
         }
       }
@@ -19039,6 +20425,12 @@
             "state": "translated",
             "value": "Değiştir"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बदलें"
+          }
         }
       }
     },
@@ -19120,6 +20512,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mevcut cüzdan değiştirilsin mi?"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मौजूदा वॉलेट बदलें?"
           }
         }
       }
@@ -19204,6 +20602,12 @@
             "state": "translated",
             "value": "Cihaz kimlik doğrulaması iste"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "डिवाइस प्रमाणीकरण आवश्यक करें"
+          }
         }
       }
     },
@@ -19285,6 +20689,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Face ID / Touch ID İste"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID / Touch ID आवश्यक करें"
           }
         }
       }
@@ -19368,6 +20778,12 @@
             "state": "translated",
             "value": "Yeniden tarama başarısız oldu: %@"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रीस्कैन विफल: %@"
+          }
         }
       }
     },
@@ -19449,6 +20865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeniden tarama başarısız oldu: anımsatıcı kullanılamıyor."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रीस्कैन विफल: म्नेमोनिक उपलब्ध नहीं है।"
           }
         }
       }
@@ -19533,6 +20955,12 @@
             "state": "translated",
             "value": "Yükseklikten yeniden tara"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हाइट से रीस्कैन करें"
+          }
         }
       }
     },
@@ -19615,6 +21043,12 @@
             "state": "translated",
             "value": "Yükseklikten Yeniden Tara"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "हाइट से रीस्कैन करें"
+          }
         }
       }
     },
@@ -19696,6 +21130,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld'den yeniden taranıyor"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld से रीस्कैन किया जा रहा है"
           }
         }
       }
@@ -19780,6 +21220,12 @@
             "state": "translated",
             "value": "Geri yükle ve yeniden tara"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिस्टोर करें और रीस्कैन करें"
+          }
         }
       }
     },
@@ -19861,6 +21307,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kurtarma yüksekliği"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिस्टोर हाइट"
           }
         }
       }
@@ -19944,6 +21396,12 @@
             "state": "translated",
             "value": "Kurtarma Yüksekliği:"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रिस्टोर हाइट:"
+          }
         }
       }
     },
@@ -20025,6 +21483,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Düğümü kaydet"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड सहेजें"
           }
         }
       }
@@ -20108,6 +21572,12 @@
             "state": "translated",
             "value": "Tarama ileri bakışını kaydet"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्कैन लुकअहेड सहेजें"
+          }
         }
       }
     },
@@ -20189,6 +21659,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İkisi de kaydedildi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दोनों सहेजे गए"
           }
         }
       }
@@ -20272,6 +21748,12 @@
             "state": "translated",
             "value": "Clearnet kaydedildi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्लियरनेट सहेजा गया"
+          }
         }
       }
     },
@@ -20353,6 +21835,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I2P kaydedildi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P सहेजा गया"
           }
         }
       }
@@ -20436,6 +21924,12 @@
             "state": "translated",
             "value": "Düğüm kaydedildi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड सहेजा गया"
+          }
         }
       }
     },
@@ -20517,6 +22011,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tarama ileri bakışı kaydedildi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्कैन लुकअहेड सहेजा गया"
           }
         }
       }
@@ -20600,6 +22100,12 @@
             "state": "translated",
             "value": "Ek hesapları veya alt adresleri tara"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अतिरिक्त अकाउंट या सब-एड्रेस स्कैन करें"
+          }
         }
       }
     },
@@ -20681,6 +22187,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clearnet'te tara, I2P üzerinden yayınla"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "क्लियरनेट स्कैन करें, I2P पर प्रसारित करें"
           }
         }
       }
@@ -20764,6 +22276,12 @@
             "state": "translated",
             "value": "Monero QR kodunu tara"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero QR कोड स्कैन करें"
+          }
         }
       }
     },
@@ -20845,6 +22363,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "QR kodunu tara"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR कोड स्कैन करें"
           }
         }
       }
@@ -20928,6 +22452,12 @@
             "state": "translated",
             "value": "Ödemek için Tara"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट के लिए स्कैन करें"
+          }
         }
       }
     },
@@ -21009,6 +22539,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tarandı"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्कैन हो गया"
           }
         }
       }
@@ -21092,6 +22628,12 @@
             "state": "translated",
             "value": "%lld blokuna kadar tarandı"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ब्लॉक %lld तक स्कैन हुआ"
+          }
         }
       }
     },
@@ -21173,6 +22715,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Blok zinciri taranıyor"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ब्लॉकचेन स्कैन हो रहा है"
           }
         }
       }
@@ -21256,6 +22804,12 @@
             "state": "translated",
             "value": "Güvenlik"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सुरक्षा"
+          }
         }
       }
     },
@@ -21337,6 +22891,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kendisi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्वयं"
           }
         }
       }
@@ -21420,6 +22980,12 @@
             "state": "translated",
             "value": "Gönder"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजें"
+          }
         }
       }
     },
@@ -21502,6 +23068,12 @@
             "state": "translated",
             "value": "%@ tutarını %@ adresine gönder.\nÜcret: %@\nToplam: %@"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ को %@ भेजें।\nफ़ीस: %@\nकुल: %@"
+          }
         }
       }
     },
@@ -21583,6 +23155,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gönderim başarısız oldu: %@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजना विफल: %@"
           }
         }
       }
@@ -21667,6 +23245,12 @@
             "state": "translated",
             "value": "Maksimum gönder"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम भेजें"
+          }
         }
       }
     },
@@ -21748,6 +23332,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maksimum Gönder"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम भेजें"
           }
         }
       }
@@ -21831,6 +23421,12 @@
             "state": "translated",
             "value": "XMR Gönder"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR भेजें"
+          }
         }
       }
     },
@@ -21913,6 +23509,12 @@
             "state": "translated",
             "value": "Gönderiliyor..."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजा जा रहा है..."
+          }
         }
       }
     },
@@ -21994,6 +23596,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gönderildi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "भेजा गया"
           }
         }
       }
@@ -22078,6 +23686,12 @@
             "state": "translated",
             "value": "Maksimum gönderildi"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अधिकतम भेजा गया"
+          }
         }
       }
     },
@@ -22159,6 +23773,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ayarlar"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सेटिंग्स"
           }
         }
       }
@@ -22243,6 +23863,12 @@
             "state": "translated",
             "value": "Paylaş"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शेयर करें"
+          }
         }
       }
     },
@@ -22324,6 +23950,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ödeme Bağlantısını Paylaş"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट लिंक शेयर करें"
           }
         }
       }
@@ -22408,6 +24040,12 @@
             "state": "translated",
             "value": "Göster"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "दिखाएं"
+          }
         }
       }
     },
@@ -22489,6 +24127,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fiat tahminlerini göster"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "फिएट अनुमान दिखाएं"
           }
         }
       }
@@ -22572,6 +24216,12 @@
             "state": "translated",
             "value": "QR kodunu gösterin, adresi kopyalayın veya daha iyi gizlilik için yeni bir alım adresi oluşturun."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR कोड दिखाएं, पता कॉपी करें, या बेहतर प्राइवेसी के लिए एक नया प्राप्तकर्ता पता बनाएं।"
+          }
         }
       }
     },
@@ -22653,6 +24303,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kaynak ve lisans (MIT)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सोर्स और लाइसेंस (MIT)"
           }
         }
       }
@@ -22736,6 +24392,12 @@
             "state": "translated",
             "value": "Standart neon olmayan görünüm. Neon terminal teması (varsayılan) için kapalı bırakın."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्टैंडर्ड नॉन-नियॉन लुक। नियॉन टर्मिनल थीम (डिफ़ॉल्ट) के लिए इसे बंद छोड़ें।"
+          }
         }
       }
     },
@@ -22817,6 +24479,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Düğüm URL'sine http:// veya https:// ile başlayın"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड URL की शुरुआत http:// या https:// से करें"
           }
         }
       }
@@ -22901,6 +24569,12 @@
             "state": "translated",
             "value": "Başlangıç yüksekliği (hızlı):"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रारंभिक हाइट (फास्ट):"
+          }
         }
       }
     },
@@ -22982,6 +24656,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başlangıç yüksekliği (hızlı): %lld (düğüm ucu − 10)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रारंभिक हाइट (फास्ट): %lld (नोड टिप − 10)"
           }
         }
       }
@@ -23065,6 +24745,12 @@
             "state": "translated",
             "value": "Başlangıç yüksekliği (hızlı): kullanılamıyor (0 kullanılacak)"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रारंभिक हाइट (फास्ट): अनुपलब्ध (0 का उपयोग होगा)"
+          }
         }
       }
     },
@@ -23147,6 +24833,12 @@
             "state": "translated",
             "value": "Başlangıç yüksekliği: düğümden alınıyor…"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रारंभिक हाइट: नोड से प्राप्त की जा रही है…"
+          }
         }
       }
     },
@@ -23228,6 +24920,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Durum"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "स्थिति"
           }
         }
       }
@@ -23312,6 +25010,12 @@
             "state": "translated",
             "value": "Kayıtlı meta veri bir anımsatıcı içermiyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संग्रहित मेटाडेटा में म्नेमोनिक शामिल नहीं है"
+          }
         }
       }
     },
@@ -23393,6 +25097,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kayıtlı anımsatıcı bulunamadı."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "संग्रहित म्नेमोनिक नहीं मिल सका।"
           }
         }
       }
@@ -23476,6 +25186,12 @@
             "state": "translated",
             "value": "Alt adres %lld"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सब-एड्रेस %lld"
+          }
         }
       }
     },
@@ -23557,6 +25273,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Özet"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सारांश"
           }
         }
       }
@@ -23640,6 +25362,12 @@
             "state": "translated",
             "value": "Seçili alt adresten harcanabilir maksimum, %@ üzerinden süpürüldü."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ के माध्यम से चयनित सब-एड्रेस से अधिकतम व्यय-योग्य राशि स्वीप की गई।"
+          }
         }
       }
     },
@@ -23721,6 +25449,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Harcanabilir maksimum, %@ üzerinden süpürüldü."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ के माध्यम से अधिकतम व्यय-योग्य राशि स्वीप की गई।"
           }
         }
       }
@@ -23804,6 +25538,12 @@
             "state": "translated",
             "value": "XMR ve %@ arasında geçiş yap"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR और %@ के बीच स्विच करें"
+          }
         }
       }
     },
@@ -23885,6 +25625,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Senkronizasyon ilerlemesi yüzde %lld"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सिंक प्रगति %lld प्रतिशत"
           }
         }
       }
@@ -23968,6 +25714,12 @@
             "state": "translated",
             "value": "Senkronizasyon durdu"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सिंक रुक गया"
+          }
         }
       }
     },
@@ -24049,6 +25801,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdan senkronize ediliyor"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट सिंक हो रहा है"
           }
         }
       }
@@ -24132,6 +25890,12 @@
             "state": "translated",
             "value": "Devam etmek için Cüzdanı Yenile'ye dokunun (veya uygulamayı yeniden açın)."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "जारी रखने के लिए वॉलेट रिफ्रेश करें पर टैप करें (या ऐप को फिर से खोलें)।"
+          }
         }
       }
     },
@@ -24213,6 +25977,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu sizin kurtarma tohumunuzdur. Onu kağıda yazın ve güvenli bir yerde saklayın. Bu kelimelere sahip olan herkes fonlarınıza erişebilir — nexawal onu sizin için asla yüklemez veya yedeklemez."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह आपकी रिकवरी सीड है। इसे कागज़ पर लिखें और किसी सुरक्षित जगह रखें। इन शब्दों को जानने वाला कोई भी व्यक्ति आपके फंड एक्सेस कर सकता है — nexawal इसे कभी अपलोड या आपके लिए बैकअप नहीं करता।"
           }
         }
       }
@@ -24297,6 +26067,12 @@
             "state": "translated",
             "value": "Bu, tarama durumunu sıfırlar ve girdiğiniz yükseklikten yeniden başlar."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इससे स्कैन स्थिति रीसेट हो जाती है और आपके द्वारा दर्ज की गई हाइट से फिर से शुरू होता है।"
+          }
         }
       }
     },
@@ -24378,6 +26154,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu, bu cihazdaki mevcut cüzdanın yerini alacaktır.\n\nDevam ederseniz, şu anda kayıtlı olan anımsatıcı ve tarama durumu kaldırılacaktır. Devam etmeden önce anımsatıcınızı yedeklediğinizden emin olun."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह इस डिवाइस पर मौजूदा वॉलेट को बदल देगा।\n\nयदि आप जारी रखते हैं, तो वर्तमान में संग्रहित म्नेमोनिक और स्कैन स्थिति हटा दी जाएगी। आगे बढ़ने से पहले सुनिश्चित करें कि आपके पास अपने म्नेमोनिक का बैकअप है।"
           }
         }
       }
@@ -24461,6 +26243,12 @@
             "state": "translated",
             "value": "Verim"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "थ्रूपुट"
+          }
         }
       }
     },
@@ -24543,6 +26331,12 @@
             "state": "translated",
             "value": "Zaman"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "समय"
+          }
         }
       }
     },
@@ -24624,6 +26418,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İpucu: 0, zincirin tüm geçmişini tarar. Emin değilseniz bu en güvenli seçenektir ancak senkronizasyonu daha uzun sürebilir."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "टिप: 0 पूरी चेन हिस्ट्री को स्कैन करता है। यदि आप निश्चित नहीं हैं तो यह सबसे सुरक्षित विकल्प है, लेकिन सिंक होने में अधिक समय लग सकता है।"
           }
         }
       }
@@ -24708,6 +26508,12 @@
             "state": "translated",
             "value": "Kime"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रति"
+          }
         }
       }
     },
@@ -24790,6 +26596,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alıcı adresi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्राप्तकर्ता पता"
           }
         }
       }
@@ -24874,6 +26686,12 @@
             "state": "translated",
             "value": "Toplam"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कुल"
+          }
         }
       }
     },
@@ -24955,6 +26773,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Toplam (miktar + ücret)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कुल (राशि + फ़ीस)"
           }
         }
       }
@@ -25039,6 +26863,12 @@
             "state": "translated",
             "value": "Toplam Bakiye"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "कुल बैलेंस"
+          }
         }
       }
     },
@@ -25120,6 +26950,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İşlem"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ट्रांज़ैक्शन"
           }
         }
       }
@@ -25203,6 +27039,12 @@
             "state": "translated",
             "value": "İşlem, seçili alt adresten %@ üzerinden yayınlandı."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ के माध्यम से चयनित सब-एड्रेस से ट्रांज़ैक्शन प्रसारित किया गया।"
+          }
         }
       }
     },
@@ -25284,6 +27126,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "İşlem, %@ üzerinden yayınlandı."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ के माध्यम से ट्रांज़ैक्शन प्रसारित किया गया।"
           }
         }
       }
@@ -25368,6 +27216,12 @@
             "state": "translated",
             "value": "İşlem yayınlandı."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ट्रांज़ैक्शन प्रसारित किया गया।"
+          }
         }
       }
     },
@@ -25446,6 +27300,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TXID"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "TXID"
@@ -25532,6 +27392,12 @@
             "state": "translated",
             "value": "Tür"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "प्रकार"
+          }
         }
       }
     },
@@ -25613,6 +27479,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "http:// veya https:// dahil olmak üzere tam URL'yi girin."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा URL टाइप करें, जिसमें http:// या https:// शामिल हो।"
           }
         }
       }
@@ -25696,6 +27568,12 @@
             "state": "translated",
             "value": "http:// veya https:// dahil olmak üzere tam URL'yi girin.\nGenel: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा URL टाइप करें, जिसमें http:// या https:// शामिल हो।\nसार्वजनिक: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
+          }
         }
       }
     },
@@ -25777,6 +27655,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdan meta verisi çözümlenemedi."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट मेटाडेटा डिकोड नहीं किया जा सका।"
           }
         }
       }
@@ -25860,6 +27744,12 @@
             "state": "translated",
             "value": "Cüzdan meta verisi kodlanamadı."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट मेटाडेटा एनकोड नहीं किया जा सका।"
+          }
         }
       }
     },
@@ -25941,6 +27831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bilinmeyen adres"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अज्ञात पता"
           }
         }
       }
@@ -26024,6 +27920,12 @@
             "state": "translated",
             "value": "Bilinmeyen kamera izni durumu"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अज्ञात कैमरा अनुमति स्थिति"
+          }
         }
       }
     },
@@ -26105,6 +28007,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mevcut Cüzdanın Kilidini Aç"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मौजूदा वॉलेट अनलॉक करें"
           }
         }
       }
@@ -26189,6 +28097,12 @@
             "state": "translated",
             "value": "Cüzdanın kilidini aç"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट अनलॉक करें"
+          }
         }
       }
     },
@@ -26270,6 +28184,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdanınızın kilidini açın"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना वॉलेट अनलॉक करें"
           }
         }
       }
@@ -26353,6 +28273,12 @@
             "state": "translated",
             "value": "Kilidi Açık"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनलॉक्ड"
+          }
         }
       }
     },
@@ -26434,6 +28360,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdanın Kilidi Açılıyor..."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट अनलॉक हो रहा है..."
           }
         }
       }
@@ -26518,6 +28450,12 @@
             "state": "translated",
             "value": "Kilit açılıyor..."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अनलॉक हो रहा है..."
+          }
         }
       }
     },
@@ -26600,6 +28538,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdan erişimi ve gönderim için biyometrik veya cihaz kimlik bilgilerini kullanın."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट एक्सेस और भेजने के लिए बायोमेट्रिक्स या डिवाइस क्रेडेंशियल का उपयोग करें।"
           }
         }
       }
@@ -26684,6 +28628,12 @@
             "state": "translated",
             "value": "Ödemeler ve yeni adresler için Gönder ve Al'ı kullanın."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पेमेंट और नए पतों के लिए भेजें और प्राप्त करें का उपयोग करें।"
+          }
         }
       }
     },
@@ -26765,6 +28715,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu düğümü kullan"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस नोड का उपयोग करें"
           }
         }
       }
@@ -26848,6 +28804,12 @@
             "state": "translated",
             "value": "Ağ yüksekliği bekleniyor"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नेटवर्क हाइट की प्रतीक्षा हो रही है"
+          }
         }
       }
     },
@@ -26929,6 +28891,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdan"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट"
           }
         }
       }
@@ -27012,6 +28980,12 @@
             "state": "translated",
             "value": "Biyometrik korumayı değiştirmeden önce cüzdanın kilidi açılmalıdır."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बायोमेट्रिक सुरक्षा बदलने से पहले वॉलेट को अनलॉक करना आवश्यक है।"
+          }
         }
       }
     },
@@ -27093,6 +29067,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdan kalıcılığı başarısız oldu: %@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट संग्रहण विफल: %@"
           }
         }
       }
@@ -27176,6 +29156,12 @@
             "state": "translated",
             "value": "Cüzdan Kurulumu"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट सेटअप"
+          }
         }
       }
     },
@@ -27257,6 +29243,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cüzdan senkronize edildi"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वॉलेट सिंक हो गया"
           }
         }
       }
@@ -27340,6 +29332,12 @@
             "state": "translated",
             "value": "WalletCore Sürümü:"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WalletCore संस्करण:"
+          }
         }
       }
     },
@@ -27421,6 +29419,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uyarı: İlk işleminizden sonra bir kurtarma yüksekliği belirlerseniz, daha eski fonlar daha önceki bir yükseklikten yeniden tarama yapana kadar görünmez."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "चेतावनी: यदि आप अपने पहले ट्रांज़ैक्शन के बाद रिस्टोर हाइट सेट करते हैं, तो पहले के फंड तब तक नहीं दिखेंगे जब तक आप पहले की हाइट से रीस्कैन नहीं करते।"
           }
         }
       }
@@ -27505,6 +29509,12 @@
             "state": "translated",
             "value": "Bu ne için?"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह किसके लिए है?"
+          }
         }
       }
     },
@@ -27586,6 +29596,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Etkinleştirildiğinde, kayıtlı cüzdanı açmak ve fon göndermek cihaz kimlik doğrulaması gerektirir."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सक्षम होने पर, संग्रहित वॉलेट खोलने और फंड भेजने के लिए डिवाइस प्रमाणीकरण आवश्यक होगा।"
           }
         }
       }
@@ -27669,6 +29685,12 @@
             "state": "translated",
             "value": "Kelime #%lld:"
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शब्द #%lld:"
+          }
         }
       }
     },
@@ -27750,6 +29772,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kelime(ler) henüz eşleşmiyor."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "शब्द अभी मेल नहीं खाते।"
           }
         }
       }
@@ -27834,6 +29862,12 @@
             "state": "translated",
             "value": "Bu kelimeleri sırayla yazın ve güvenli bir yerde saklayın. Cüzdanınızı geri yüklemek için bunlara ihtiyacınız olacak — bu cihazda hiçbir zaman saklanmazlar."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इन शब्दों को क्रम में लिखें और किसी सुरक्षित जगह रखें। अपना वॉलेट रिस्टोर करने के लिए आपको इनकी आवश्यकता होगी — ये इस डिवाइस पर कभी संग्रहित नहीं किए जाते।"
+          }
         }
       }
     },
@@ -27916,6 +29950,12 @@
             "state": "translated",
             "value": "Yanlış düğüm mü? Yukarıdaki bağlantı yöntemini veya düğümü değiştirin — yeniden taramaya gerek yok.\nFonlar mı eksik? Kurtarma yüksekliğinizden yeniden tarayın.\nSon çare: blok 0'dan tam yeniden tarama."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "गलत नोड? कनेक्ट करने का तरीका या ऊपर दिया गया नोड बदलें — आपको रीस्कैन की आवश्यकता नहीं है।\nफंड गुम हैं? अपनी रिस्टोर हाइट से रीस्कैन करें।\nअंतिम उपाय: ब्लॉक 0 से पूरा रीस्कैन करें।"
+          }
         }
       }
     },
@@ -27989,6 +30029,12 @@
           }
         },
         "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR"
+          }
+        },
+        "hi": {
           "stringUnit": {
             "state": "translated",
             "value": "XMR"
@@ -28076,6 +30122,12 @@
             "state": "translated",
             "value": "Cüzdanınızı güvence altına almak için Face ID kullanabilirsiniz."
           }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आप अपने वॉलेट को सुरक्षित करने के लिए Face ID का उपयोग कर सकते हैं।"
+          }
         }
       }
     },
@@ -28158,6 +30210,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kurtarma tohumunuz:"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "आपकी रिकवरी सीड:"
           }
         }
       }
