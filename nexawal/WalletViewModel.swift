@@ -455,11 +455,10 @@ class WalletViewModel: ObservableObject {
         await refreshWallet()
     }
 
-    /// Heuristic match for stall-related error text (from WalletManager's stall fallback/throw,
-    /// or any future core error mentioning a stalled/timed-out scan).
+    /// Match the distinct stall error thrown by WalletManager after sequential fallback fails.
+    /// Avoid broad "timeout" matching — that would mislabel ordinary network timeouts as stalls.
     private static func isStallMessage(_ message: String) -> Bool {
-        let lower = message.lowercased()
-        return lower.contains("stall") || lower.contains("timed out") || lower.contains("timeout")
+        message.lowercased().contains("sync stalled")
     }
 
     func refreshWallet() async {

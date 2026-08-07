@@ -158,7 +158,9 @@ struct WalletView: View {
     }
 
     private func isStallError(_ error: String) -> Bool {
-        viewModel.syncStalled || error.lowercased().contains("stall")
+        // Prefer the typed flag set by WalletViewModel from WalletManager's stall throw.
+        // Narrow string fallback only for the explicit "Sync stalled:" payload.
+        viewModel.syncStalled || error.lowercased().contains("sync stalled")
     }
 
     private func syncHeadline() -> String {
