@@ -27,6 +27,10 @@ class WalletViewModel: ObservableObject {
     @Published var isRefreshing: Bool = false
     @Published var isWalletOpen: Bool = false
     @Published var errorMessage: String?
+    /// True when the most recent refresh failure was a sync stall (no scan progress for an
+    /// extended period, even after falling back to a safer sequential scan) rather than a
+    /// generic node-unreachable/connection error. Mirrors the Android "Refresh stalled" signal.
+    @Published var syncStalled: Bool = false
 
     // Keep a handle to the in-flight refresh so the UI can cancel it explicitly.
     private var refreshTask: Task<Void, Never>?
@@ -451,6 +455,13 @@ class WalletViewModel: ObservableObject {
         await refreshWallet()
     }
 
+    /// Heuristic match for stall-related error text (from WalletManager's stall fallback/throw,
+    /// or any future core error mentioning a stalled/timed-out scan).
+    private static func isStallMessage(_ message: String) -> Bool {
+        let lower = message.lowercased()
+        return lower.contains("stall") || lower.contains("timed out") || lower.contains("timeout")
+    }
+
     func refreshWallet() async {
         guard isWalletOpen else { return }
 
@@ -459,6 +470,7 @@ class WalletViewModel: ObservableObject {
 
         isRefreshing = true
         errorMessage = nil
+        syncStalled = false
         startSyncStatusPolling()
 
         // Run refresh in a tracked task so we can cancel it via `cancelRefresh()`.
@@ -523,10 +535,15 @@ class WalletViewModel: ObservableObject {
                 await self.persistMetadataUpdate()
             } catch is CancellationError {
                 // User-cancelled refresh: keep UI calm; polling teardown happens in defer.
-                await MainActor.run { self.errorMessage = nil }
-            } catch {
                 await MainActor.run {
-                    self.errorMessage = L10n.format("Refresh failed: %@", error.localizedDescription)
+                    self.errorMessage = nil
+                    self.syncStalled = false
+                }
+            } catch {
+                let message = L10n.format("Refresh failed: %@", error.localizedDescription)
+                await MainActor.run {
+                    self.errorMessage = message
+                    self.syncStalled = Self.isStallMessage(message)
                 }
             }
         }
@@ -637,6 +654,7 @@ class WalletViewModel: ObservableObject {
         isManualRescanInProgress = true
         isRefreshing = true
         errorMessage = nil
+        syncStalled = false
         mnemonic = trimmedMnemonic
         restoreHeight = height
         lastScannedHeight = height
@@ -671,7 +689,9 @@ class WalletViewModel: ObservableObject {
                 metadata.unlockedBalance = self.unlockedBalance
             }
         } catch {
-            errorMessage = L10n.format("Rescan failed: %@", error.localizedDescription)
+            let message = L10n.format("Rescan failed: %@", error.localizedDescription)
+            errorMessage = message
+            syncStalled = Self.isStallMessage(message)
         }
     }
 

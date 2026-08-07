@@ -37,11 +37,28 @@ struct WalletView: View {
 
     private func transferAccessibilityLabel(_ t: WalletCoreFFIClient.Transfer) -> String {
         let direction = directionLabel(t)
-        let amount = viewModel.formatDisplayPiconero(t.amount)
+        let amount = signedAmountText(t)
         let status = (t.isPending || t.confirmations == 0)
             ? L10n.t("Pending")
             : L10n.format("%lld conf", Int64(t.confirmations))
         return "\(direction), \(amount), \(status)"
+    }
+
+    /// Direction must not be conveyed by color alone: prefix the amount with a sign glyph
+    /// (in addition to the icon + direction label already shown). Matches Android parity.
+    private func amountSign(_ t: WalletCoreFFIClient.Transfer) -> String {
+        switch t.direction.lowercased() {
+        case "in":
+            return "+ "
+        case "out":
+            return "\u{2212} " // unicode minus, visually distinct from a hyphen
+        default:
+            return ""
+        }
+    }
+
+    private func signedAmountText(_ t: WalletCoreFFIClient.Transfer) -> String {
+        amountSign(t) + viewModel.formatDisplayPiconero(t.amount)
     }
 
     private func amountColor(_ t: WalletCoreFFIClient.Transfer) -> Color {
@@ -140,10 +157,14 @@ struct WalletView: View {
         }
     }
 
+    private func isStallError(_ error: String) -> Bool {
+        viewModel.syncStalled || error.lowercased().contains("stall")
+    }
+
     private func syncHeadline() -> String {
         let key: String.LocalizationValue
         if let error = viewModel.errorMessage, !error.isEmpty, !viewModel.isRefreshing {
-            key = "Node unreachable"
+            key = isStallError(error) ? "Sync stalled" : "Node unreachable"
         } else if viewModel.isSynced {
             key = "Wallet synced"
         } else if !viewModel.hasObservedNetworkTipForUI {
@@ -158,6 +179,9 @@ struct WalletView: View {
 
     private func syncDetail() -> String {
         if let error = viewModel.errorMessage, !error.isEmpty, !viewModel.isRefreshing {
+            if isStallError(error) {
+                return L10n.t("Tap Refresh Wallet to continue (or reopen the app).")
+            }
             let trimmed = error.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmed.count <= 120 { return trimmed }
             return String(trimmed.prefix(117)) + "…"
@@ -383,7 +407,7 @@ struct WalletView: View {
                                             Spacer()
 
                                             VStack(alignment: .trailing, spacing: 4) {
-                                                Text(viewModel.formatDisplayPiconero(t.amount))
+                                                Text(signedAmountText(t))
                                                     .font(.system(.subheadline, design: .monospaced))
                                                     .fontWeight(.semibold)
                                                     .foregroundColor(amountColor(t))
@@ -439,7 +463,7 @@ struct WalletView: View {
                                                     HStack {
                                                         Text("Amount")
                                                         Spacer()
-                                                        Text(viewModel.formatExactPiconero(t.amount))
+                                                        Text(amountSign(t) + viewModel.formatExactPiconero(t.amount))
                                                         .font(
                                                             .system(.caption, design: .monospaced)
                                                         )

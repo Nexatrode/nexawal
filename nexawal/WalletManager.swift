@@ -331,6 +331,11 @@ actor WalletManager {
             min(300.0, max(60.0, (par > 0 ? Double(batch) * 0.15 : Double(batch) * 0.25)))
         )
 
+        // Track whether we've already fallen back to the safe sequential path once.
+        // If we stall again after that fallback, surface a distinct "stalled" error to the UI
+        // (Android parity) instead of retrying forever in silence.
+        var stallFallbackUsed = false
+
         // If the UI requested cancel, exit early.
         if refreshCancelRequested || Task.isCancelled {
             exportCacheAndPersist(for: walletId)
@@ -410,8 +415,18 @@ actor WalletManager {
                 }
             }
 
-            // Stall-based handling: on first stall, fallback to reliable sequential scan and continue
+            // Stall-based handling: on first stall, fallback to reliable sequential scan and continue.
+            // On a second stall after that fallback, surface a distinct "stalled" error (Android parity)
+            // so the UI can show "Sync stalled" instead of silently retrying forever.
             if Date().timeIntervalSince(lastProgressAt) > dynamicStallTimeout {
+                if stallFallbackUsed {
+                    print("🛑 Stall persisted (>\(Int(dynamicStallTimeout))s) after sequential fallback. Surfacing stall error.")
+                    exportCacheAndPersist(for: walletId)
+                    throw WalletError.refreshFailed(
+                        "Sync stalled: no scan progress for over \(Int(dynamicStallTimeout))s (lastScanned=\(lastScannedSnapshot), target=\(targetHeight ?? 0))"
+                    )
+                }
+                stallFallbackUsed = true
                 print("↩️ Stall detected (>\(Int(dynamicStallTimeout))s). Falling back to sequential scan (par=0, batch=150) and retrying…")
                 refreshPar = 0
                 refreshBatch = 150
