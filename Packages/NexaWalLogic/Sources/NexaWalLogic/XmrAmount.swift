@@ -23,4 +23,18 @@ public enum XmrAmount: Sendable {
         if addOverflow { return nil }
         return total
     }
+
+    /// Format piconero as an XMR decimal string suitable for amount text fields (trim trailing zeros).
+    public static func formatForInput(_ piconero: UInt64) -> String {
+        let whole = piconero / piconeroPerXmr
+        let frac = piconero % piconeroPerXmr
+        if frac == 0 {
+            return "\(whole)"
+        }
+        var fracStr = String(format: "%012llu", frac)
+        while fracStr.last == "0" {
+            fracStr.removeLast()
+        }
+        return "\(whole).\(fracStr)"
+    }
 }

@@ -12,6 +12,7 @@ struct SendView: View {
     // Inputs
     @State private var toAddress: String = ""
     @State private var amountXMR: String = ""
+    @State private var amountInputMode: AmountInputMode = .xmr
 
     // State
     @State private var isEstimating: Bool = false
@@ -76,23 +77,24 @@ struct SendView: View {
                 }
 
                 Section(header: NeonSectionHeader(title: L10n.t("Amount"))) {
-                    HStack {
-                        TextField("0.0", text: $amountXMR)
-                            .keyboardType(.decimalPad)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
-                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                            .accessibilityLabel(L10n.t("Amount"))
-                        Spacer()
-                        Text("XMR")
+                    AmountUnitField(
+                        text: $amountXMR,
+                        mode: $amountInputMode,
+                        rate: fiatPrices.displayRate,
+                        placeholder: "0.0",
+                        accessibilityLabel: L10n.t("Amount"),
+                        classicUI: classicUI,
+                        classicPalette: classicPalette
+                    )
+                    if let amount = parsedAmountPiconero(),
+                       let secondary = AmountUnitParsing.secondaryLine(
+                        piconero: amount,
+                        mode: amountInputMode,
+                        rate: fiatPrices.displayRate
+                       ) {
+                        Text(secondary)
+                            .font(.caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    }
-                    if let amount = parsedAmountPiconero() {
-                        FiatApproxText(
-                            piconero: amount,
-                            rate: fiatPrices.displayRate,
-                            color: classicPalette?.secondaryText ?? .secondary
-                        )
                     }
 
                     HStack {
@@ -472,8 +474,7 @@ struct SendView: View {
                 FiatPriceService.shared.recordSend(txid: result.txid)
 
                 // Keep UI honest: set the amount field to what was actually sent.
-                let xmr = viewModel.piconeroToXMR(result.amount)
-                amountXMR = String(format: "%.12f", xmr)
+                setAmountFieldToXmrPiconero(result.amount)
             } else {
                 guard let amountPico = parsedAmountPiconero() else {
                     errorMessage = L10n.t("Enter a valid address and amount.")
@@ -546,7 +547,12 @@ struct SendView: View {
     }
 
     private func parsedAmountPiconero() -> UInt64? {
-        XmrAmount.parsePiconero(amountXMR)
+        AmountUnitParsing.piconero(text: amountXMR, mode: amountInputMode, rate: fiatPrices.displayRate)
+    }
+
+    private func setAmountFieldToXmrPiconero(_ piconero: UInt64) {
+        amountInputMode = .xmr
+        amountXMR = FiatEstimate.formatXmrForInput(piconero: piconero)
     }
 
     private func canSend() -> Bool {
@@ -609,8 +615,8 @@ struct SendView: View {
         }
 
         toAddress = parsed.address
-        if let amount = parsed.amountXmr, XmrAmount.parsePiconero(amount) != nil {
-            amountXMR = amount.replacingOccurrences(of: ",", with: ".")
+        if let amount = parsed.amountXmr, let pico = XmrAmount.parsePiconero(amount) {
+            setAmountFieldToXmrPiconero(pico)
         }
 
         infoMessage = L10n.t("Payment details loaded from QR code.")
@@ -697,8 +703,7 @@ struct SendView: View {
                     // One-shot behavior: do NOT set isMaxMode=true here.
                     isMaxMode = false
 
-                    let xmr = viewModel.piconeroToXMR(amount)
-                    amountXMR = String(format: "%.12f", xmr)
+                    setAmountFieldToXmrPiconero(amount)
                     infoMessage = L10n.t("Amount set to max spendable. Final fee may change slightly at send time.")
                 }
             } catch {

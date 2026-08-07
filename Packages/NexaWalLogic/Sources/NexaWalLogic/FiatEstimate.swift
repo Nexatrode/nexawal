@@ -170,10 +170,51 @@ public enum FiatEstimate: Sendable {
         return xmr * fiatPerXmr
     }
 
+    public static func symbol(for currency: String) -> String? {
+        symbols[currency.uppercased()]
+    }
+
+    /// Convert a typed fiat amount to piconero using the live rate. Rounds **down** so send never
+    /// exceeds the typed fiat value.
+    public static func piconeroFromFiat(fiatText: String, rate: FiatRate) -> UInt64? {
+        guard rate.fiatPerXmr > 0 else { return nil }
+        guard let fiat = decimal(from: fiatText.replacingOccurrences(of: ",", with: ".")), fiat >= 0 else {
+            return nil
+        }
+        if fiat == 0 { return 0 }
+        let xmr = fiat / rate.fiatPerXmr
+        let picoDec = xmr * Decimal(XmrAmount.piconeroPerXmr)
+        let floored = round(picoDec, scale: 0, mode: .down)
+        guard floored >= 0 else { return nil }
+        let raw = decimalString(floored)
+        guard let whole = raw.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false).first,
+              let pico = UInt64(whole)
+        else {
+            return nil
+        }
+        return pico
+    }
+
+    /// Fiat amount string for the input field (no ≈ prefix, currency decimal places).
+    public static func formatFiatForInput(piconero: UInt64, rate: FiatRate) -> String {
+        let places = decimalPlaces(for: rate.currency)
+        let amount = fiatAmount(piconero: piconero, fiatPerXmr: rate.fiatPerXmr)
+        return formatPlainNumber(round(amount, scale: places, mode: .plain), decimals: places)
+    }
+
+    public static func formatXmrForInput(piconero: UInt64) -> String {
+        XmrAmount.formatForInput(piconero)
+    }
+
+    /// Secondary line when the user is typing fiat: `≈ 0.123456 XMR`.
+    public static func formatXmrApprox(piconero: UInt64) -> String {
+        "≈ \(formatXmrForInput(piconero: piconero)) XMR"
+    }
+
     public static func formatApprox(_ amount: Decimal, currency: String) -> String {
         let code = currency.uppercased()
         let places = decimalPlaces(for: code)
-        let number = formatNumber(round(amount, scale: places), decimals: places)
+        let number = formatNumber(round(amount, scale: places, mode: .plain), decimals: places)
         if let symbol = symbols[code] {
             return "≈ \(symbol)\(number)"
         }
@@ -204,17 +245,51 @@ public enum FiatEstimate: Sendable {
         return NSDecimalString(&v, Locale(identifier: "en_US_POSIX"))
     }
 
-    private static func round(_ value: Decimal, scale: Int) -> Decimal {
+    private static func round(
+        _ value: Decimal,
+        scale: Int,
+        mode: NSDecimalNumber.RoundingMode = .plain
+    ) -> Decimal {
         var result = Decimal()
         var input = value
-        NSDecimalRound(&result, &input, scale, .plain)
+        NSDecimalRound(&result, &input, scale, mode)
         return result
+    }
+
+    /// Plain number without thousand separators (for text fields).
+    private static func formatPlainNumber(_ value: Decimal, decimals: Int) -> String {
+        let negative = value < 0
+        let absValue = negative ? -value : value
+        var rounded = round(absValue, scale: decimals, mode: .plain)
+        let raw = NSDecimalString(&rounded, Locale(identifier: "en_US_POSIX"))
+        let parts = raw.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false)
+        let wholeDigits = digitsOnly(String(parts.first ?? "0"))
+        let whole = wholeDigits.isEmpty ? "0" : wholeDigits
+        if decimals == 0 {
+            return negative ? "-\(whole)" : whole
+        }
+        var frac = parts.count > 1 ? digitsOnly(String(parts[1])) : ""
+        if frac.count > decimals {
+            frac = String(frac.prefix(decimals))
+        }
+        while frac.count < decimals {
+            frac.append("0")
+        }
+        // Trim trailing zeros in the fractional part for a cleaner input rewrite,
+        // but keep at least one digit after the decimal when decimals > 0 and value is non-integer.
+        while frac.count > 1 && frac.last == "0" {
+            frac.removeLast()
+        }
+        if frac.allSatisfy({ $0 == "0" }) {
+            return negative ? "-\(whole)" : whole
+        }
+        return "\(negative ? "-" : "")\(whole).\(frac)"
     }
 
     private static func formatNumber(_ value: Decimal, decimals: Int) -> String {
         let negative = value < 0
         let absValue = negative ? -value : value
-        var rounded = round(absValue, scale: decimals)
+        var rounded = round(absValue, scale: decimals, mode: .plain)
         let raw = NSDecimalString(&rounded, Locale(identifier: "en_US_POSIX"))
         let parts = raw.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false)
         let wholeDigits = digitsOnly(String(parts.first ?? "0"))

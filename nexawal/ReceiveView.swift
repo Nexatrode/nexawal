@@ -7,6 +7,7 @@ struct ReceiveView: View {
     @ObservedObject private var fiatPrices = FiatPriceService.shared
 
     @State private var amountInput: String = ""
+    @State private var amountInputMode: AmountInputMode = .xmr
     @State private var descriptionInput: String = ""
     @State private var showCopyConfirmation: Bool = false
     @State private var copyConfirmationText: String = L10n.t("Address copied to clipboard")
@@ -206,29 +207,38 @@ struct ReceiveView: View {
 
             VStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Amount (XMR)")
+                    Text(L10n.t("Amount"))
                         .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
                         .foregroundColor(classicPalette?.secondaryText ?? .secondary)
-                    TextField("0.0000", text: $amountInput)
-                        .keyboardType(.decimalPad)
-                        .textInputAutocapitalization(.never)
-                        .disableAutocorrection(true)
-                        .foregroundColor(classicPalette?.primaryText)
-                        .padding(12)
-                        .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: classicUI ? 4 : 8)
-                                .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-                        )
-                        .cornerRadius(classicUI ? 4 : 8)
-                        .accessibilityLabel(L10n.t("Amount (XMR)"))
-                    if let piconero = XmrAmount.parsePiconero(amountInput) {
-                        FiatApproxText(
-                            piconero: piconero,
-                            rate: fiatPrices.displayRate,
-                            font: classicUI ? .system(.caption, design: .monospaced) : .caption,
-                            color: classicPalette?.secondaryText ?? .secondary
-                        )
+                    AmountUnitField(
+                        text: $amountInput,
+                        mode: $amountInputMode,
+                        rate: fiatPrices.displayRate,
+                        placeholder: "0.0000",
+                        accessibilityLabel: L10n.t("Amount"),
+                        classicUI: classicUI,
+                        classicPalette: classicPalette
+                    )
+                    .padding(12)
+                    .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: classicUI ? 4 : 8)
+                            .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
+                    )
+                    .cornerRadius(classicUI ? 4 : 8)
+                    if let piconero = AmountUnitParsing.piconero(
+                        text: amountInput,
+                        mode: amountInputMode,
+                        rate: fiatPrices.displayRate
+                    ),
+                       let secondary = AmountUnitParsing.secondaryLine(
+                        piconero: piconero,
+                        mode: amountInputMode,
+                        rate: fiatPrices.displayRate
+                       ) {
+                        Text(secondary)
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundColor(classicPalette?.secondaryText ?? .secondary)
                     }
                 }
 
@@ -369,21 +379,14 @@ struct ReceiveView: View {
     }
 
     private var sanitizedAmountString: String? {
-        let trimmed = amountInput.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty else { return nil }
-
-        // Ensure valid decimal with up to 12 fractional digits
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.maximumFractionDigits = 12
-        formatter.minimumFractionDigits = 0
-        formatter.numberStyle = .decimal
-
-        guard let decimal = Decimal(string: trimmed, locale: formatter.locale), decimal > 0 else {
+        guard let piconero = AmountUnitParsing.piconero(
+            text: amountInput,
+            mode: amountInputMode,
+            rate: fiatPrices.displayRate
+        ), piconero > 0 else {
             return nil
         }
-
-        return formatter.string(from: decimal as NSDecimalNumber)
+        return FiatEstimate.formatXmrForInput(piconero: piconero)
     }
 
     private func copyAddress() {

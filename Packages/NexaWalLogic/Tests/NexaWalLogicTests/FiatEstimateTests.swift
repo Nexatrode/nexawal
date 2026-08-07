@@ -63,6 +63,27 @@ final class FiatEstimateTests: XCTestCase {
         )
     }
 
+    func testPiconeroFromFiatRoundsDown() {
+        let usdRate = FiatRate(
+            currency: "USD",
+            fiatPerXmr: Decimal(string: "100")!,
+            fetchedAtMs: 10,
+            source: "test"
+        )
+        // $50 at $100/XMR = 0.5 XMR exactly
+        XCTAssertEqual(FiatEstimate.piconeroFromFiat(fiatText: "50", rate: usdRate), 500_000_000_000)
+        // Slightly more than 0.5 XMR fiat equivalent should still floor
+        XCTAssertEqual(FiatEstimate.piconeroFromFiat(fiatText: "50.000000000001", rate: usdRate), 500_000_000_000)
+        XCTAssertEqual(FiatEstimate.piconeroFromFiat(fiatText: "0", rate: usdRate), 0)
+        XCTAssertNil(FiatEstimate.piconeroFromFiat(fiatText: "", rate: usdRate))
+        XCTAssertNil(FiatEstimate.piconeroFromFiat(fiatText: "abc", rate: usdRate))
+
+        XCTAssertEqual(FiatEstimate.formatFiatForInput(piconero: 500_000_000_000, rate: usdRate), "50")
+        XCTAssertEqual(FiatEstimate.formatXmrForInput(piconero: 500_000_000_000), "0.5")
+        XCTAssertEqual(FiatEstimate.formatXmrApprox(piconero: 500_000_000_000), "≈ 0.5 XMR")
+        XCTAssertEqual(FiatEstimate.symbol(for: "USD"), "$")
+    }
+
     func testLocaleHint() {
         XCTAssertEqual(FiatEstimate.hintedCurrency(localeCurrencyCode: "eur"), "EUR")
         XCTAssertEqual(FiatEstimate.hintedCurrency(localeCurrencyCode: "UAH"), "USD")

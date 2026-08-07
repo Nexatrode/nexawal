@@ -11,6 +11,12 @@ final class XmrAmountTests: XCTestCase {
         XCTAssertEqual(XmrAmount.parsePiconero("0.000000000001"), 1)
     }
 
+    func testFormatForInput() {
+        XCTAssertEqual(XmrAmount.formatForInput(1_000_000_000_000), "1")
+        XCTAssertEqual(XmrAmount.formatForInput(500_000_000_000), "0.5")
+        XCTAssertEqual(XmrAmount.formatForInput(1), "0.000000000001")
+    }
+
     func testOverflowRejected() {
         XCTAssertNil(XmrAmount.parsePiconero("18446745"))
         XCTAssertNil(XmrAmount.parsePiconero("18446744073710.0"))
