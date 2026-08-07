@@ -68,6 +68,12 @@
             "state": "translated",
             "value": ""
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ""
+          }
         }
       }
     },
@@ -144,6 +150,12 @@
             "state": "translated",
             "value": "\nJumlah %@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\nMiktar %@"
+          }
         }
       }
     },
@@ -219,6 +231,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "\nBiaya %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\nÜcret %@"
           }
         }
       }
@@ -297,6 +315,12 @@
             "state": "translated",
             "value": "(tidak tersedia)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(kullanılamıyor)"
+          }
         }
       }
     },
@@ -374,6 +398,12 @@
             "state": "translated",
             "value": "%.1f blk/s"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f blk/sn"
+          }
         }
       }
     },
@@ -444,6 +474,12 @@
             "state": "translated",
             "value": "%1$@ — %2$@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ — %2$@"
+          }
         }
       }
     },
@@ -510,6 +546,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld"
@@ -590,6 +632,12 @@
             "state": "translated",
             "value": "%lld blok"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld blok"
+          }
         }
       }
     },
@@ -665,6 +713,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld blok tersisa"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld blok kaldı"
           }
         }
       }
@@ -742,6 +796,12 @@
             "state": "translated",
             "value": "%lld konf"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld onay"
+          }
         }
       }
     },
@@ -808,6 +868,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld."
@@ -882,6 +948,12 @@
             "state": "translated",
             "value": "%llu"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%llu"
+          }
         }
       }
     },
@@ -948,6 +1020,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "0"
@@ -1023,6 +1101,12 @@
             "state": "translated",
             "value": "0.0"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0"
+          }
         }
       }
     },
@@ -1090,6 +1174,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0000"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "0.0000"
@@ -1171,6 +1261,12 @@
             "state": "translated",
             "value": "0.0 XMR"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0 XMR"
+          }
         }
       }
     },
@@ -1246,6 +1342,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alamat terima baru (subalamat) akan dibuat untuk privasi."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizlilik için yeni bir alım adresi (alt adres) oluşturulacak."
           }
         }
       }
@@ -1324,6 +1426,12 @@
             "state": "translated",
             "value": "Pengiriman sedang berlangsung. Tunggu hingga selesai."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaten devam eden bir gönderim var. Tamamlanmasını bekleyin."
+          }
         }
       }
     },
@@ -1401,6 +1509,12 @@
             "state": "translated",
             "value": "Sebuah dompet sudah tersimpan di perangkat ini."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cihazda zaten kayıtlı bir cüzdan var."
+          }
         }
       }
     },
@@ -1477,6 +1591,12 @@
             "state": "translated",
             "value": "Tentang"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hakkında"
+          }
         }
       }
     },
@@ -1552,6 +1672,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lookahead akun (1-1000)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hesap ileri tarama (1-1000)"
           }
         }
       }
@@ -1630,6 +1756,12 @@
             "state": "translated",
             "value": "Akun (lookahead)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hesaplar (ileri tarama)"
+          }
         }
       }
     },
@@ -1706,6 +1838,12 @@
             "state": "translated",
             "value": "Tindakan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlemler"
+          }
         }
       }
     },
@@ -1781,6 +1919,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alamat"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres"
           }
         }
       }
@@ -1859,6 +2003,12 @@
             "state": "translated",
             "value": "Alamat disalin"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres kopyalandı"
+          }
         }
       }
     },
@@ -1935,6 +2085,12 @@
             "state": "translated",
             "value": "Alamat disalin ke papan klip"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres panoya kopyalandı"
+          }
         }
       }
     },
@@ -2010,6 +2166,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alamat dimuat dari kode QR."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres QR koddan yüklendi."
           }
         }
       }
@@ -2088,6 +2250,12 @@
             "state": "translated",
             "value": "Pemulihan lanjutan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelişmiş kurtarma"
+          }
         }
       }
     },
@@ -2164,6 +2332,12 @@
             "state": "translated",
             "value": "Pemulihan Lanjutan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelişmiş Kurtarma"
+          }
         }
       }
     },
@@ -2239,6 +2413,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jumlah"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miktar"
           }
         }
       }
@@ -2317,6 +2497,12 @@
             "state": "translated",
             "value": "Jumlah (XMR)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miktar (XMR)"
+          }
         }
       }
     },
@@ -2392,6 +2578,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jumlah diatur ke maksimum yang dapat dibelanjakan. Biaya akhir dapat sedikit berubah saat pengiriman."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miktar, harcanabilir maksimuma ayarlandı. Nihai ücret gönderim sırasında hafifçe değişebilir."
           }
         }
       }
@@ -2469,6 +2661,12 @@
             "state": "translated",
             "value": "Tampilan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Görünüm"
+          }
         }
       }
     },
@@ -2544,6 +2742,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terapkan pengaturan I2P"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P ayarlarını uygula"
           }
         }
       }
@@ -2622,6 +2826,12 @@
             "state": "translated",
             "value": "Autentikasi untuk membuka dompet Monero yang tersimpan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı Monero cüzdanını açmak için kimlik doğrulayın"
+          }
         }
       }
     },
@@ -2697,6 +2907,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autentikasi untuk mengirim Monero"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero göndermek için kimlik doğrulayın"
           }
         }
       }
@@ -2775,6 +2991,12 @@
             "state": "translated",
             "value": "Autentikasi untuk menyapu saldo dompet"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan bakiyesini süpürmek için kimlik doğrulayın"
+          }
         }
       }
     },
@@ -2851,6 +3073,12 @@
             "state": "translated",
             "value": "Autentikasi untuk mematikan proteksi Face ID"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID korumasını kapatmak için kimlik doğrulayın"
+          }
         }
       }
     },
@@ -2926,6 +3154,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autentikasi untuk membuka kunci NexaWal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal'ın kilidini açmak için kimlik doğrulayın"
           }
         }
       }
@@ -3004,6 +3238,12 @@
             "state": "translated",
             "value": "Autentikasi gagal"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kimlik doğrulama başarısız oldu"
+          }
         }
       }
     },
@@ -3079,6 +3319,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autentikasi diperlukan untuk mengirim. Coba lagi."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Göndermek için kimlik doğrulama gerekli. Tekrar deneyin."
           }
         }
       }
@@ -3156,6 +3402,12 @@
             "state": "translated",
             "value": "Autentikasi dibatalkan."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kimlik doğrulama iptal edildi."
+          }
         }
       }
     },
@@ -3231,6 +3483,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autentikasi tidak berhasil."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kimlik doğrulama başarılı olmadı."
           }
         }
       }
@@ -3308,6 +3566,12 @@
             "state": "translated",
             "value": "Tersedia"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılabilir"
+          }
         }
       }
     },
@@ -3383,6 +3647,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tersedia (subalamat terpilih)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanılabilir (seçili alt adres)"
           }
         }
       }
@@ -3460,6 +3730,12 @@
             "state": "translated",
             "value": "Saldo diperbarui selagi sinkronisasi menyusul"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senkronizasyon tamamlanırken bakiye güncelleniyor"
+          }
         }
       }
     },
@@ -3535,6 +3811,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autentikasi biometrik tersedia, tetapi tidak ada data biometrik yang terdaftar."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biyometrik kimlik doğrulama kullanılabilir, ancak kayıtlı biyometrik veri yok."
           }
         }
       }
@@ -3612,6 +3894,12 @@
             "state": "translated",
             "value": "Autentikasi biometrik tidak tersedia di perangkat ini."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cihazda biyometrik kimlik doğrulama kullanılamıyor."
+          }
         }
       }
     },
@@ -3687,6 +3975,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autentikasi biometrik atau perangkat tidak tersedia di perangkat ini."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cihazda biyometrik veya cihaz kimlik doğrulaması kullanılamıyor."
           }
         }
       }
@@ -3765,6 +4059,12 @@
             "state": "translated",
             "value": "Autentikasi biometrik atau kredensial perangkat tersedia di perangkat ini."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cihazda biyometrik veya cihaz kimlik bilgisi doğrulaması kullanılabilir."
+          }
         }
       }
     },
@@ -3841,6 +4141,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autentikasi biometrik atau kredensial perangkat tidak tersedia"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biyometrik veya cihaz kimlik bilgisi doğrulaması kullanılamıyor"
           }
         }
       }
@@ -3919,6 +4225,12 @@
             "state": "translated",
             "value": "Autentikasi biometrik atau kredensial perangkat saat ini tidak tersedia di perangkat ini."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cihazda biyometrik veya cihaz kimlik bilgisi doğrulaması şu anda kullanılamıyor."
+          }
         }
       }
     },
@@ -3996,6 +4308,12 @@
             "state": "translated",
             "value": "Izin biometrik tidak ada atau tidak tersedia"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biyometrik izin eksik veya kullanılamıyor"
+          }
         }
       }
     },
@@ -4072,6 +4390,12 @@
             "state": "translated",
             "value": "Keduanya (pindai clearnet, siarkan I2P)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Her ikisi (clearnet üzerinden tara, I2P üzerinden yayınla)"
+          }
         }
       }
     },
@@ -4147,6 +4471,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Akses kamera ditolak"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera erişimi reddedildi"
           }
         }
       }
@@ -4225,6 +4555,12 @@
             "state": "translated",
             "value": "Kamera tidak tersedia di simulator"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera simülatörde kullanılamıyor"
+          }
         }
       }
     },
@@ -4300,6 +4636,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Izin kamera ditolak"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera izni reddedildi"
           }
         }
       }
@@ -4377,6 +4719,12 @@
             "state": "translated",
             "value": "Pratinjau kamera untuk memindai kode QR Monero"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero QR kodlarını taramak için kamera önizlemesi"
+          }
         }
       }
     },
@@ -4452,6 +4800,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Batal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İptal"
           }
         }
       }
@@ -4530,6 +4884,12 @@
             "state": "translated",
             "value": "Pembatalan diminta"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İptal istendi"
+          }
         }
       }
     },
@@ -4605,6 +4965,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rantai"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zincir"
           }
         }
       }
@@ -4682,6 +5048,12 @@
             "state": "translated",
             "value": "Pilih apakah Anda membuat dompet baru (sinkronisasi cepat) atau mengimpor dompet yang sudah ada (pemindaian lengkap kecuali Anda menetapkan tinggi pemulihan)."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yepyeni bir cüzdan mı oluşturduğunuzu (hızlı senkronizasyon) yoksa mevcut bir cüzdanı mı içe aktardığınızı (bir kurtarma yüksekliği belirlemezseniz tam tarama) seçin."
+          }
         }
       }
     },
@@ -4757,6 +5129,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "UI Klasik"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasik Arayüz"
           }
         }
       }
@@ -4834,6 +5212,12 @@
             "state": "translated",
             "value": "Gagal menghapus cache: %@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önbellek temizleme başarısız oldu: %@"
+          }
         }
       }
     },
@@ -4910,6 +5294,12 @@
             "state": "translated",
             "value": "Hapus cache pemindaian (jaringan ini)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarama önbelleğini temizle (bu ağ)"
+          }
         }
       }
     },
@@ -4985,6 +5375,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cache pemindaian dihapus"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarama önbelleği temizlendi"
           }
         }
       }
@@ -5063,6 +5459,12 @@
             "state": "translated",
             "value": "Cache pemindaian untuk jaringan ini dihapus"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ağ için tarama önbelleği temizlendi"
+          }
         }
       }
     },
@@ -5138,6 +5540,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Node clearnet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearnet düğümü"
           }
         }
       }
@@ -5215,6 +5623,12 @@
             "state": "translated",
             "value": "URL node clearnet"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearnet düğüm URL'si"
+          }
         }
       }
     },
@@ -5290,6 +5704,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hanya clearnet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca clearnet"
           }
         }
       }
@@ -5367,6 +5787,12 @@
             "state": "translated",
             "value": "Hanya clearnet menggunakan node clearnet. Hanya I2P menggunakan node dan proksi I2P. Keduanya memindai di clearnet dan menyiarkan melalui I2P."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca clearnet, bir clearnet düğümü kullanır. Yalnızca I2P, bir I2P düğümü ve proxy kullanır. Her ikisi, clearnet üzerinde tarar ve I2P üzerinden yayınlar."
+          }
         }
       }
     },
@@ -5443,6 +5869,12 @@
             "state": "translated",
             "value": "Tutup"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapat"
+          }
         }
       }
     },
@@ -5518,6 +5950,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Konfirmasi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onayla"
           }
         }
       }
@@ -5596,6 +6034,12 @@
             "state": "translated",
             "value": "Konfirmasi pengiriman"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderimi onayla"
+          }
         }
       }
     },
@@ -5671,6 +6115,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Konfirmasi Pengiriman"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderimi Onayla"
           }
         }
       }
@@ -5749,6 +6199,12 @@
             "state": "translated",
             "value": "Konfirmasi kirim maksimum"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maksimum gönderimi onayla"
+          }
         }
       }
     },
@@ -5826,6 +6282,12 @@
             "state": "translated",
             "value": "Konfirmasi Kirim Maksimum"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maksimum Gönderimi Onayla"
+          }
         }
       }
     },
@@ -5901,6 +6363,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Konfirmasi bahwa Anda telah menulisnya: masukkan kata-kata yang diminta di bawah ini."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazdığınızı onaylayın: aşağıda istenen kelimeleri girin."
           }
         }
       }
@@ -5979,6 +6447,12 @@
             "state": "translated",
             "value": "Konfirmasi cadangan Anda — masukkan kata-kata yang diminta:"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yedeğinizi onaylayın — istenen kelimeleri girin:"
+          }
         }
       }
     },
@@ -6054,6 +6528,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Konfirmasi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onaylar"
           }
         }
       }
@@ -6131,6 +6611,12 @@
             "state": "translated",
             "value": "Terkonfirmasi"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onaylandı"
+          }
         }
       }
     },
@@ -6206,6 +6692,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menghubungkan (pindai clearnet, siar I2P)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bağlanıyor (clearnet tarama, I2P yayını)"
           }
         }
       }
@@ -6283,6 +6775,12 @@
             "state": "translated",
             "value": "Menghubungkan melalui I2P"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P üzerinden bağlanıyor"
+          }
         }
       }
     },
@@ -6358,6 +6856,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menghubungkan ke %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ adresine bağlanıyor"
           }
         }
       }
@@ -6435,6 +6939,12 @@
             "state": "translated",
             "value": "Menghubungkan ke node"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğüme bağlanıyor"
+          }
         }
       }
     },
@@ -6510,6 +7020,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mengatur berapa banyak akun Monero yang dipindai mulai dari akun 0."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0. hesaptan başlayarak kaç Monero hesabının taranacağını denetler."
           }
         }
       }
@@ -6587,6 +7103,12 @@
             "state": "translated",
             "value": "Mengatur berapa banyak subalamat terima yang dipindai untuk dompet ini."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cüzdan için kaç alım alt adresinin taranacağını denetler."
+          }
         }
       }
     },
@@ -6662,6 +7184,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Salin Alamat"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adresi Kopyala"
           }
         }
       }
@@ -6739,6 +7267,12 @@
             "state": "translated",
             "value": "Salin URI Pembayaran"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme URI'sini Kopyala"
+          }
         }
       }
     },
@@ -6814,6 +7348,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Salin TXID"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TXID'yi Kopyala"
           }
         }
       }
@@ -6891,6 +7431,12 @@
             "state": "translated",
             "value": "Tidak dapat mengakses kamera: %@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kameraya erişilemedi: %@"
+          }
         }
       }
     },
@@ -6966,6 +7512,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tidak dapat menambahkan input kamera"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera girişi eklenemedi"
           }
         }
       }
@@ -7043,6 +7595,12 @@
             "state": "translated",
             "value": "Tidak dapat menambahkan output metadata"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta veri çıkışı eklenemedi"
+          }
         }
       }
     },
@@ -7118,6 +7676,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tidak dapat memperbarui pengaturan Face ID"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID ayarı güncellenemedi"
           }
         }
       }
@@ -7195,6 +7759,12 @@
             "state": "translated",
             "value": "Tidak dapat mengambil tinggi pemulihan cepat dari node. Tinggi pemulihan dibiarkan pada 0."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğümden hızlı bir kurtarma yüksekliği alınamadı. Kurtarma yüksekliği 0 olarak bırakılıyor."
+          }
         }
       }
     },
@@ -7270,6 +7840,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tidak dapat membuat seed: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tohum oluşturulamadı: %@"
           }
         }
       }
@@ -7347,6 +7923,12 @@
             "state": "translated",
             "value": "Buat"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oluştur"
+          }
         }
       }
     },
@@ -7422,6 +8004,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buat dompet baru (cepat)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni cüzdan oluştur (hızlı)"
           }
         }
       }
@@ -7499,6 +8087,12 @@
             "state": "translated",
             "value": "Buat Dompet"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan Oluştur"
+          }
         }
       }
     },
@@ -7575,6 +8169,12 @@
             "state": "translated",
             "value": "Membuat Dompet..."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan Oluşturuluyor..."
+          }
         }
       }
     },
@@ -7650,6 +8250,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mata Uang"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para birimi"
           }
         }
       }
@@ -7728,6 +8334,12 @@
             "state": "translated",
             "value": "URL Daemon"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daemon URL'si"
+          }
         }
       }
     },
@@ -7804,6 +8416,12 @@
             "state": "translated",
             "value": "Deskripsi"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açıklama"
+          }
         }
       }
     },
@@ -7879,6 +8497,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tujuan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hedef"
           }
         }
       }
@@ -7957,6 +8581,12 @@
             "state": "translated",
             "value": "Autentikasi perangkat diperlukan tetapi tidak tersedia. Aktifkan biometrik atau kunci layar, lalu coba lagi."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cihaz kimlik doğrulaması gerekli ama kullanılamıyor. Biyometrikleri veya ekran kilidini etkinleştirip tekrar deneyin."
+          }
         }
       }
     },
@@ -8033,6 +8663,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "UI Klasik dinonaktifkan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasik Arayüz Devre Dışı Bırakıldı"
           }
         }
       }
@@ -8111,6 +8747,12 @@
             "state": "translated",
             "value": "Estimasi fiat dinonaktifkan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiat tahminleri devre dışı bırakıldı"
+          }
         }
       }
     },
@@ -8187,6 +8829,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "UI Klasik diaktifkan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klasik Arayüz Etkinleştirildi"
           }
         }
       }
@@ -8265,6 +8913,12 @@
             "state": "translated",
             "value": "Estimasi fiat diaktifkan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiat tahminleri etkinleştirildi"
+          }
         }
       }
     },
@@ -8341,6 +8995,12 @@
             "state": "translated",
             "value": "Masukkan alamat dan jumlah yang valid."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçerli bir adres ve miktar girin."
+          }
         }
       }
     },
@@ -8416,6 +9076,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Masukkan alamat yang valid."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçerli bir adres girin."
           }
         }
       }
@@ -8494,6 +9160,12 @@
             "state": "translated",
             "value": "Masukkan tinggi pemulihan yang valid"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçerli bir kurtarma yüksekliği girin"
+          }
         }
       }
     },
@@ -8570,6 +9242,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Masukkan angka bulat"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bir tam sayı girin"
           }
         }
       }
@@ -8648,6 +9326,12 @@
             "state": "translated",
             "value": "Masukkan penerima dan jumlah, pratinjau biaya, lalu konfirmasi transaksi."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcıyı ve miktarı girin, ücreti önizleyin, ardından işlemi onaylayın."
+          }
         }
       }
     },
@@ -8723,6 +9407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Estimasi biaya"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tahmini ücret"
           }
         }
       }
@@ -8801,6 +9491,12 @@
             "state": "translated",
             "value": "Mengestimasi maksimum..."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maksimum tahmin ediliyor..."
+          }
         }
       }
     },
@@ -8877,6 +9573,12 @@
             "state": "translated",
             "value": "Mengestimasi..."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tahmin ediliyor..."
+          }
         }
       }
     },
@@ -8952,6 +9654,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gagal mendapatkan saldo: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bakiye alınamadı: %@"
           }
         }
       }
@@ -9030,6 +9738,12 @@
             "state": "translated",
             "value": "Gagal membaca metadata dompet yang tersimpan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı cüzdan meta verisi okunamadı"
+          }
         }
       }
     },
@@ -9105,6 +9819,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Biaya"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücret"
           }
         }
       }
@@ -9182,6 +9902,12 @@
             "state": "translated",
             "value": "Biaya %@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücret %@"
+          }
         }
       }
     },
@@ -9257,6 +9983,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Biaya diestimasi (input dibatasi ke subalamat terpilih)."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücret tahmin edildi (girişler seçili alt adresle sınırlandı)."
           }
         }
       }
@@ -9335,6 +10067,12 @@
             "state": "translated",
             "value": "Biaya berhasil diestimasi."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücret başarıyla tahmin edildi."
+          }
         }
       }
     },
@@ -9411,6 +10149,12 @@
             "state": "translated",
             "value": "Biaya diestimasi menggunakan kebijakan siaran."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücret, yayın politikası kullanılarak tahmin edildi."
+          }
         }
       }
     },
@@ -9486,6 +10230,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pratinjau biaya gagal: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücret önizlemesi başarısız oldu: %@"
           }
         }
       }
@@ -9564,6 +10314,12 @@
             "state": "translated",
             "value": "Mengambil dari node…"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğümden alınıyor…"
+          }
         }
       }
     },
@@ -9640,6 +10396,12 @@
             "state": "translated",
             "value": "Mengambil blok awal dari %lld"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld'den başlangıç blokları alınıyor"
+          }
         }
       }
     },
@@ -9715,6 +10477,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Estimasi fiat"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiat tahminleri"
           }
         }
       }
@@ -9793,6 +10561,12 @@
             "state": "translated",
             "value": "Pindai ulang penuh (dari blok 0)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tam yeniden tarama (blok 0'dan)"
+          }
         }
       }
     },
@@ -9868,6 +10642,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pindai Ulang Penuh (dari blok 0)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tam Yeniden Tarama (blok 0'dan)"
           }
         }
       }
@@ -9946,6 +10726,12 @@
             "state": "translated",
             "value": "Pindai ulang penuh dari 0 — progres ada di tab Dompet"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0'dan tam yeniden tarama — ilerleme Cüzdan sekmesinde"
+          }
         }
       }
     },
@@ -10021,6 +10807,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Batas gap (1-100000)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boşluk sınırı (1-100000)"
           }
         }
       }
@@ -10099,6 +10891,12 @@
             "state": "translated",
             "value": "Batas gap (subalamat per akun)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boşluk sınırı (hesap başına alt adres)"
+          }
         }
       }
     },
@@ -10174,6 +10972,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buat seed baru"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni tohum oluştur"
           }
         }
       }
@@ -10252,6 +11056,12 @@
             "state": "translated",
             "value": "Berikan Izin Kamera"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera İzni Ver"
+          }
         }
       }
     },
@@ -10327,6 +11137,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tinggi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükseklik"
           }
         }
       }
@@ -10405,6 +11221,12 @@
             "state": "translated",
             "value": "Sembunyikan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizle"
+          }
         }
       }
     },
@@ -10481,6 +11303,12 @@
             "state": "translated",
             "value": "Cara menghubungkan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nasıl bağlanılır"
+          }
         }
       }
     },
@@ -10547,6 +11375,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "https://rpc.nexatrode.com"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "https://rpc.nexatrode.com"
@@ -10627,6 +11461,12 @@
             "state": "translated",
             "value": "Saya telah menulis seed pemulihan saya"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurtarma tohumumu yazdım"
+          }
         }
       }
     },
@@ -10699,6 +11539,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "I2P"
@@ -10779,6 +11625,12 @@
             "state": "translated",
             "value": "Proksi HTTP I2P (host:port)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P HTTP proxy (host:port)"
+          }
         }
       }
     },
@@ -10854,6 +11706,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Node I2P (host:port)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P düğümü (host:port)"
           }
         }
       }
@@ -10931,6 +11789,12 @@
             "state": "translated",
             "value": "Hanya I2P"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca I2P"
+          }
         }
       }
     },
@@ -11006,6 +11870,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pengidentifikasi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tanımlayıcılar"
           }
         }
       }
@@ -11083,6 +11953,12 @@
             "state": "translated",
             "value": "Impor dompet yang sudah ada"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mevcut cüzdanı içe aktar"
+          }
         }
       }
     },
@@ -11158,6 +12034,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impor Dompet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdanı İçe Aktar"
           }
         }
       }
@@ -11235,6 +12117,12 @@
             "state": "translated",
             "value": "Mengimpor Dompet..."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan İçe Aktarılıyor..."
+          }
         }
       }
     },
@@ -11310,6 +12198,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Info"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilgi"
           }
         }
       }
@@ -11387,6 +12281,12 @@
             "state": "translated",
             "value": "Saldo yang tidak terkunci tidak cukup untuk jumlah + biaya."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Miktar + ücret için kilidi açık bakiye yetersiz."
+          }
         }
       }
     },
@@ -11462,6 +12362,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saldo yang tidak terkunci tidak cukup."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilidi açık bakiye yetersiz."
           }
         }
       }
@@ -11540,6 +12446,12 @@
             "state": "translated",
             "value": "Jumlah tidak valid"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçersiz miktar"
+          }
         }
       }
     },
@@ -11615,6 +12527,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Format URI pembayaran tidak valid."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçersiz ödeme URI biçimi."
           }
         }
       }
@@ -11692,6 +12610,12 @@
             "state": "translated",
             "value": "Kode QR tidak valid. Diharapkan alamat Monero atau URI pembayaran."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçersiz QR kodu. Monero adresi veya ödeme URI'si bekleniyordu."
+          }
         }
       }
     },
@@ -11767,6 +12691,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kesalahan keychain (status: %lld)."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anahtarlık hatası (durum: %lld)."
           }
         }
       }
@@ -11844,6 +12774,12 @@
             "state": "translated",
             "value": "Label"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etiket"
+          }
         }
       }
     },
@@ -11919,6 +12855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Memuat alamat…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adresler yükleniyor…"
           }
         }
       }
@@ -11997,6 +12939,12 @@
             "state": "translated",
             "value": "Memuat alamat terima…"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alım adresleri yükleniyor…"
+          }
         }
       }
     },
@@ -12069,6 +13017,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mainnet"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "Mainnet"
@@ -12150,6 +13104,12 @@
             "state": "translated",
             "value": "Kelola akses node, keamanan perangkat, dan perilaku pemulihan."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğüm erişimini, cihaz güvenliğini ve kurtarma davranışını yönetin."
+          }
         }
       }
     },
@@ -12226,6 +13186,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jumlah maksimum yang dapat dikirim telah diestimasi."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderilebilecek maksimum miktar tahmin edildi."
           }
         }
       }
@@ -12304,6 +13270,12 @@
             "state": "translated",
             "value": "Saldo maksimum yang dapat dibelanjakan telah disiarkan."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harcanabilir maksimum bakiye yayınlandı."
+          }
         }
       }
     },
@@ -12379,6 +13351,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Perangkat lunak berlisensi MIT, belum diaudit. Anda bertanggung jawab atas seed dan dana Anda. Node jarak jauh default dapat melihat IP dan kueri sinkronisasi dompet Anda — jalankan node Anda sendiri untuk privasi yang lebih kuat. Estimasi fiat opsional, jika diaktifkan, akan menghubungi api.kraken.com dan api.frankfurter.dev."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MIT lisanslı, denetlenmemiş yazılım. Tohumunuzdan ve fonlarınızdan siz sorumlusunuz. Varsayılan uzak düğüm, IP adresinizi ve cüzdan senkronizasyon sorgularınızı görebilir — daha güçlü gizlilik için kendi düğümünüzü çalıştırın. Etkinleştirilirse, isteğe bağlı fiat tahminleri api.kraken.com ve api.frankfurter.dev ile iletişim kurar."
           }
         }
       }
@@ -12456,6 +13434,12 @@
             "state": "translated",
             "value": "Mnemonic (tempel):"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anımsatıcı (yapıştır):"
+          }
         }
       }
     },
@@ -12531,6 +13515,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mnemonic tidak boleh kosong."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anımsatıcı boş olamaz."
           }
         }
       }
@@ -12608,6 +13598,12 @@
             "state": "translated",
             "value": "Mode"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mod"
+          }
         }
       }
     },
@@ -12683,6 +13679,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alamat Monero"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero adresi"
           }
         }
       }
@@ -12760,6 +13762,12 @@
             "state": "translated",
             "value": "QR terima Monero"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero alım QR'ı"
+          }
         }
       }
     },
@@ -12835,6 +13843,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jaringan & Node"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ ve Düğüm"
           }
         }
       }
@@ -12912,6 +13926,12 @@
             "state": "translated",
             "value": "Tinggi Jaringan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ Yüksekliği"
+          }
         }
       }
     },
@@ -12987,6 +14007,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alamat Baru"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni Adres"
           }
         }
       }
@@ -13065,6 +14091,12 @@
             "state": "translated",
             "value": "Label alamat baru"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni adres etiketi"
+          }
         }
       }
     },
@@ -13140,6 +14172,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Label alamat baru (opsional)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni adres etiketi (isteğe bağlı)"
           }
         }
       }
@@ -13218,6 +14256,12 @@
             "state": "translated",
             "value": "Alamat terima baru"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni alım adresi"
+          }
         }
       }
     },
@@ -13295,6 +14339,12 @@
             "state": "translated",
             "value": "NEXAWAL"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEXAWAL"
+          }
         }
       }
     },
@@ -13367,6 +14417,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal %@ (%@)"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "NexaWal %@ (%@)"
@@ -13448,6 +14504,12 @@
             "state": "translated",
             "value": "NexaWal membutuhkan akses kamera untuk memindai kode QR guna mengirim Monero."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal, Monero göndermek için QR kodlarını taramak amacıyla kamera erişimine ihtiyaç duyar."
+          }
         }
       }
     },
@@ -13524,6 +14586,12 @@
             "state": "translated",
             "value": "Tidak ada informasi biometrik yang terdaftar di perangkat ini."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cihazda kayıtlı biyometrik bilgi yok."
+          }
         }
       }
     },
@@ -13599,6 +14667,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tidak ada kamera yang ditemukan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera bulunamadı"
           }
         }
       }
@@ -13677,6 +14751,12 @@
             "state": "translated",
             "value": "Tidak ada metadata dompet tersimpan yang ditemukan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı cüzdan meta verisi bulunamadı"
+          }
         }
       }
     },
@@ -13754,6 +14834,12 @@
             "state": "translated",
             "value": "Tidak ada dompet tersimpan yang ditemukan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı bir cüzdan bulunamadı"
+          }
         }
       }
     },
@@ -13829,6 +14915,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Belum ada transaksi."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz işlem yok."
           }
         }
       }
@@ -13906,6 +14998,12 @@
             "state": "translated",
             "value": "Tidak ada saldo tidak terkunci yang tersedia untuk dikirim setelah biaya."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücretten sonra gönderilebilecek kilidi açık bakiye yok."
+          }
         }
       }
     },
@@ -13982,6 +15080,12 @@
             "state": "translated",
             "value": "Tidak ada alamat valid dalam URI pembayaran."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme URI'sinde geçerli bir adres yok."
+          }
         }
       }
     },
@@ -14057,6 +15161,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Belum ada dompet yang tersimpan di perangkat ini."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu cihazda kayıtlı bir cüzdan yok."
           }
         }
       }
@@ -14135,6 +15245,12 @@
             "state": "translated",
             "value": "Tidak ada dompet yang terbuka"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık cüzdan yok"
+          }
         }
       }
     },
@@ -14210,6 +15326,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Node"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğüm"
           }
         }
       }
@@ -14287,6 +15409,12 @@
             "state": "translated",
             "value": "Node tidak dapat dijangkau"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğüme erişilemiyor"
+          }
         }
       }
     },
@@ -14362,6 +15490,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catatan untuk pembayar"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeyen için not"
           }
         }
       }
@@ -14440,6 +15574,12 @@
             "state": "translated",
             "value": "Belum ada yang bisa dibagikan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Henüz paylaşılacak bir şey yok"
+          }
         }
       }
     },
@@ -14516,6 +15656,12 @@
             "state": "translated",
             "value": "Nonaktif"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapalı"
+          }
         }
       }
     },
@@ -14591,6 +15737,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aktif"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açık"
           }
         }
       }
@@ -14669,6 +15821,12 @@
             "state": "translated",
             "value": "Ubah lookahead pemindaian hanya jika impor terlihat tidak lengkap setelah menggunakan tinggi pemulihan yang benar."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doğru kurtarma yüksekliğini kullandıktan sonra içe aktarma eksik görünüyorsa tarama ileri bakışını değiştirin."
+          }
         }
       }
     },
@@ -14745,6 +15903,12 @@
             "state": "translated",
             "value": "Ubah nilai-nilai ini hanya jika impor dompet terlihat tidak lengkap setelah menggunakan tinggi pemulihan yang benar."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doğru kurtarma yüksekliğini kullandıktan sonra cüzdan içe aktarımı eksik görünüyorsa bu değerleri değiştirin."
+          }
         }
       }
     },
@@ -14820,6 +15984,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buka di Explorer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer'da Aç"
           }
         }
       }
@@ -14898,6 +16068,12 @@
             "state": "translated",
             "value": "Label opsional"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İsteğe bağlı etiket"
+          }
         }
       }
     },
@@ -14973,6 +16149,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opsional. Jika diaktifkan, NexaWal mengambil harga XMR publik dari Kraken (api.kraken.com) dan, jika perlu, kurs fiat dari Frankfurter (api.frankfurter.dev). Server tersebut dapat melihat IP Anda. Jumlah dan alamat tidak dikirim. Pencarian fiat menggunakan HTTPS clearnet dan terpisah dari pengaturan node / proksi I2P. Hanya estimasi — XMR adalah yang Anda kirim dan simpan."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İsteğe bağlı. Açıkken NexaWal, Kraken'den (api.kraken.com) genel bir XMR fiyatı ve gerekirse Frankfurter'dan (api.frankfurter.dev) fiat döviz kuru alır. Bu sunucular IP adresinizi görür. Miktarlar ve adresler gönderilmez. Fiat sorguları clearnet HTTPS kullanır ve düğüm / I2P proxy ayarlarından bağımsızdır. Sadece tahmindir — gönderdiğiniz ve elinizde tuttuğunuz şey XMR'dir."
           }
         }
       }
@@ -15051,6 +16233,12 @@
             "state": "translated",
             "value": "Tempel mnemonic 25 kata…"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "25 kelimelik anımsatıcıyı yapıştırın…"
+          }
         }
       }
     },
@@ -15126,6 +16314,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Detail pembayaran dimuat dari kode QR."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme ayrıntıları QR koddan yüklendi."
           }
         }
       }
@@ -15204,6 +16398,12 @@
             "state": "translated",
             "value": "Permintaan pembayaran (opsional)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme isteği (isteğe bağlı)"
+          }
         }
       }
     },
@@ -15279,6 +16479,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permintaan Pembayaran (opsional)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme İsteği (isteğe bağlı)"
           }
         }
       }
@@ -15357,6 +16563,12 @@
             "state": "translated",
             "value": "URI Pembayaran"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme URI'si"
+          }
         }
       }
     },
@@ -15434,6 +16646,12 @@
             "state": "translated",
             "value": "URI Pembayaran disalin"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme URI'si kopyalandı"
+          }
         }
       }
     },
@@ -15510,6 +16728,12 @@
             "state": "translated",
             "value": "URI Pembayaran disalin ke papan klip"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme URI'si panoya kopyalandı"
+          }
         }
       }
     },
@@ -15585,6 +16809,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tertunda"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beklemede"
           }
         }
       }
@@ -15663,6 +16893,12 @@
             "state": "translated",
             "value": "Pratinjau biaya"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücreti önizle"
+          }
         }
       }
     },
@@ -15738,6 +16974,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pratinjau Biaya"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ücreti Önizle"
           }
         }
       }
@@ -15816,6 +17058,12 @@
             "state": "translated",
             "value": "Pratinjau kirim maksimum"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maksimum gönderimi önizle"
+          }
         }
       }
     },
@@ -15892,6 +17140,12 @@
             "state": "translated",
             "value": "Pratinjau biaya sebelum mengirim ke %@."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ adresine göndermeden önce ücreti önizleyin."
+          }
         }
       }
     },
@@ -15967,6 +17221,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pratinjau biaya sebelum mengirim."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Göndermeden önce ücreti önizleyin."
           }
         }
       }
@@ -16045,6 +17305,12 @@
             "state": "translated",
             "value": "Pratinjau jumlah maksimum sebelum mengirim."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Göndermeden önce maksimum miktarı önizleyin."
+          }
         }
       }
     },
@@ -16122,6 +17388,12 @@
             "state": "translated",
             "value": "Utama"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Birincil"
+          }
         }
       }
     },
@@ -16197,6 +17469,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kebijakan privasi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gizlilik politikası"
           }
         }
       }
@@ -16275,6 +17553,12 @@
             "state": "translated",
             "value": "Progres"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İlerleme"
+          }
         }
       }
     },
@@ -16350,6 +17634,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contoh proksi: 127.0.0.1:4444. Kosongkan jika Anda mau — sinkronisasi akan gagal sampai node dan proksi I2P yang berfungsi ditetapkan."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proxy örneği: 127.0.0.1:4444. İsterseniz boş bırakabilirsiniz — çalışan bir I2P düğümü ve proxy ayarlanana kadar senkronizasyon başarısız olur."
           }
         }
       }
@@ -16428,6 +17718,12 @@
             "state": "translated",
             "value": "QR tidak tersedia"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR kullanılamıyor"
+          }
         }
       }
     },
@@ -16503,6 +17799,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terima"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al"
           }
         }
       }
@@ -16581,6 +17883,12 @@
             "state": "translated",
             "value": "Alamat terima"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alım adresi"
+          }
         }
       }
     },
@@ -16656,6 +17964,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alamat Terima"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alım Adresi"
           }
         }
       }
@@ -16733,6 +18047,12 @@
             "state": "translated",
             "value": "Terima Monero"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero Al"
+          }
         }
       }
     },
@@ -16808,6 +18128,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terima XMR"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR Al"
           }
         }
       }
@@ -16885,6 +18211,12 @@
             "state": "translated",
             "value": "Diterima"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alındı"
+          }
         }
       }
     },
@@ -16960,6 +18292,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transaksi Terbaru"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son İşlemler"
           }
         }
       }
@@ -17037,6 +18375,12 @@
             "state": "translated",
             "value": "Penerima"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı"
+          }
         }
       }
     },
@@ -17112,6 +18456,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pemulihan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurtarma"
           }
         }
       }
@@ -17189,6 +18539,12 @@
             "state": "translated",
             "value": "Gagal menyegarkan: %@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenileme başarısız oldu: %@"
+          }
         }
       }
     },
@@ -17264,6 +18620,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Segarkan Dompet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdanı Yenile"
           }
         }
       }
@@ -17342,6 +18704,12 @@
             "state": "translated",
             "value": "Disegarkan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenilendi"
+          }
         }
       }
     },
@@ -17417,6 +18785,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menyegarkan..."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenileniyor..."
           }
         }
       }
@@ -17495,6 +18869,12 @@
             "state": "translated",
             "value": "Menyegarkan…"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenileniyor…"
+          }
         }
       }
     },
@@ -17570,6 +18950,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tersisa"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalan"
           }
         }
       }
@@ -17647,6 +19033,12 @@
             "state": "translated",
             "value": "Ganti"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Değiştir"
+          }
         }
       }
     },
@@ -17722,6 +19114,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ganti dompet yang sudah ada?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mevcut cüzdan değiştirilsin mi?"
           }
         }
       }
@@ -17800,6 +19198,12 @@
             "state": "translated",
             "value": "Wajibkan autentikasi perangkat"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cihaz kimlik doğrulaması iste"
+          }
         }
       }
     },
@@ -17875,6 +19279,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wajibkan Face ID / Touch ID"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID / Touch ID İste"
           }
         }
       }
@@ -17952,6 +19362,12 @@
             "state": "translated",
             "value": "Pindai ulang gagal: %@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden tarama başarısız oldu: %@"
+          }
         }
       }
     },
@@ -18027,6 +19443,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pindai ulang gagal: mnemonic tidak tersedia."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden tarama başarısız oldu: anımsatıcı kullanılamıyor."
           }
         }
       }
@@ -18105,6 +19527,12 @@
             "state": "translated",
             "value": "Pindai ulang dari tinggi"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükseklikten yeniden tara"
+          }
         }
       }
     },
@@ -18181,6 +19609,12 @@
             "state": "translated",
             "value": "Pindai Ulang dari Tinggi"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yükseklikten Yeniden Tara"
+          }
         }
       }
     },
@@ -18256,6 +19690,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Memindai ulang dari %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld'den yeniden taranıyor"
           }
         }
       }
@@ -18334,6 +19774,12 @@
             "state": "translated",
             "value": "Pulihkan dan pindai ulang"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geri yükle ve yeniden tara"
+          }
         }
       }
     },
@@ -18409,6 +19855,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tinggi pemulihan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurtarma yüksekliği"
           }
         }
       }
@@ -18486,6 +19938,12 @@
             "state": "translated",
             "value": "Tinggi Pemulihan:"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurtarma Yüksekliği:"
+          }
         }
       }
     },
@@ -18561,6 +20019,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Simpan node"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğümü kaydet"
           }
         }
       }
@@ -18638,6 +20102,12 @@
             "state": "translated",
             "value": "Simpan lookahead pemindaian"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarama ileri bakışını kaydet"
+          }
         }
       }
     },
@@ -18713,6 +20183,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Keduanya disimpan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İkisi de kaydedildi"
           }
         }
       }
@@ -18790,6 +20266,12 @@
             "state": "translated",
             "value": "Clearnet disimpan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearnet kaydedildi"
+          }
         }
       }
     },
@@ -18865,6 +20347,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I2P disimpan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P kaydedildi"
           }
         }
       }
@@ -18942,6 +20430,12 @@
             "state": "translated",
             "value": "Node disimpan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğüm kaydedildi"
+          }
         }
       }
     },
@@ -19017,6 +20511,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lookahead pemindaian disimpan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarama ileri bakışı kaydedildi"
           }
         }
       }
@@ -19094,6 +20594,12 @@
             "state": "translated",
             "value": "Pindai akun atau subalamat tambahan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ek hesapları veya alt adresleri tara"
+          }
         }
       }
     },
@@ -19169,6 +20675,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pindai clearnet, siarkan I2P"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearnet'te tara, I2P üzerinden yayınla"
           }
         }
       }
@@ -19246,6 +20758,12 @@
             "state": "translated",
             "value": "Pindai kode QR Monero"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero QR kodunu tara"
+          }
         }
       }
     },
@@ -19321,6 +20839,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pindai kode QR"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR kodunu tara"
           }
         }
       }
@@ -19398,6 +20922,12 @@
             "state": "translated",
             "value": "Pindai untuk Membayar"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödemek için Tara"
+          }
         }
       }
     },
@@ -19473,6 +21003,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dipindai"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarandı"
           }
         }
       }
@@ -19550,6 +21086,12 @@
             "state": "translated",
             "value": "Dipindai hingga blok %lld"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld blokuna kadar tarandı"
+          }
         }
       }
     },
@@ -19625,6 +21167,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Memindai blockchain"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok zinciri taranıyor"
           }
         }
       }
@@ -19702,6 +21250,12 @@
             "state": "translated",
             "value": "Keamanan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenlik"
+          }
         }
       }
     },
@@ -19777,6 +21331,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sendiri"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kendisi"
           }
         }
       }
@@ -19854,6 +21414,12 @@
             "state": "translated",
             "value": "Kirim"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönder"
+          }
         }
       }
     },
@@ -19930,6 +21496,12 @@
             "state": "translated",
             "value": "Kirim %@ ke %@.\nBiaya: %@\nTotal: %@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tutarını %@ adresine gönder.\nÜcret: %@\nToplam: %@"
+          }
         }
       }
     },
@@ -20005,6 +21577,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pengiriman gagal: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderim başarısız oldu: %@"
           }
         }
       }
@@ -20083,6 +21661,12 @@
             "state": "translated",
             "value": "Kirim maksimum"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maksimum gönder"
+          }
         }
       }
     },
@@ -20158,6 +21742,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kirim Maksimum"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maksimum Gönder"
           }
         }
       }
@@ -20235,6 +21825,12 @@
             "state": "translated",
             "value": "Kirim XMR"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR Gönder"
+          }
         }
       }
     },
@@ -20311,6 +21907,12 @@
             "state": "translated",
             "value": "Mengirim..."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderiliyor..."
+          }
         }
       }
     },
@@ -20386,6 +21988,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terkirim"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gönderildi"
           }
         }
       }
@@ -20464,6 +22072,12 @@
             "state": "translated",
             "value": "Maksimum terkirim"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maksimum gönderildi"
+          }
         }
       }
     },
@@ -20539,6 +22153,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pengaturan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarlar"
           }
         }
       }
@@ -20617,6 +22237,12 @@
             "state": "translated",
             "value": "Bagikan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paylaş"
+          }
         }
       }
     },
@@ -20692,6 +22318,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bagikan Tautan Pembayaran"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödeme Bağlantısını Paylaş"
           }
         }
       }
@@ -20770,6 +22402,12 @@
             "state": "translated",
             "value": "Tampilkan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Göster"
+          }
         }
       }
     },
@@ -20845,6 +22483,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tampilkan estimasi fiat"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiat tahminlerini göster"
           }
         }
       }
@@ -20922,6 +22566,12 @@
             "state": "translated",
             "value": "Tampilkan kode QR, salin alamat, atau buat alamat terima baru untuk privasi yang lebih baik."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR kodunu gösterin, adresi kopyalayın veya daha iyi gizlilik için yeni bir alım adresi oluşturun."
+          }
         }
       }
     },
@@ -20997,6 +22647,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sumber & lisensi (MIT)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaynak ve lisans (MIT)"
           }
         }
       }
@@ -21074,6 +22730,12 @@
             "state": "translated",
             "value": "Tampilan standar non-neon. Biarkan nonaktif untuk tema terminal neon (default)."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standart neon olmayan görünüm. Neon terminal teması (varsayılan) için kapalı bırakın."
+          }
         }
       }
     },
@@ -21149,6 +22811,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mulai URL node dengan http:// atau https://"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğüm URL'sine http:// veya https:// ile başlayın"
           }
         }
       }
@@ -21227,6 +22895,12 @@
             "state": "translated",
             "value": "Tinggi mulai (cepat):"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç yüksekliği (hızlı):"
+          }
         }
       }
     },
@@ -21302,6 +22976,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tinggi mulai (cepat): %lld (ujung node − 10)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç yüksekliği (hızlı): %lld (düğüm ucu − 10)"
           }
         }
       }
@@ -21379,6 +23059,12 @@
             "state": "translated",
             "value": "Tinggi mulai (cepat): tidak tersedia (akan menggunakan 0)"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç yüksekliği (hızlı): kullanılamıyor (0 kullanılacak)"
+          }
         }
       }
     },
@@ -21455,6 +23141,12 @@
             "state": "translated",
             "value": "Tinggi mulai: mengambil dari node…"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç yüksekliği: düğümden alınıyor…"
+          }
         }
       }
     },
@@ -21530,6 +23222,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Status"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durum"
           }
         }
       }
@@ -21608,6 +23306,12 @@
             "state": "translated",
             "value": "Metadata tersimpan tidak mengandung mnemonic"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı meta veri bir anımsatıcı içermiyor"
+          }
         }
       }
     },
@@ -21683,6 +23387,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mnemonic tersimpan tidak dapat ditemukan."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kayıtlı anımsatıcı bulunamadı."
           }
         }
       }
@@ -21760,6 +23470,12 @@
             "state": "translated",
             "value": "Subalamat %lld"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alt adres %lld"
+          }
         }
       }
     },
@@ -21835,6 +23551,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ringkasan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Özet"
           }
         }
       }
@@ -21912,6 +23634,12 @@
             "state": "translated",
             "value": "Menyapu maksimum yang dapat dibelanjakan dari subalamat terpilih melalui %@."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili alt adresten harcanabilir maksimum, %@ üzerinden süpürüldü."
+          }
         }
       }
     },
@@ -21987,6 +23715,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menyapu maksimum yang dapat dibelanjakan melalui %@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harcanabilir maksimum, %@ üzerinden süpürüldü."
           }
         }
       }
@@ -22064,6 +23798,12 @@
             "state": "translated",
             "value": "Beralih antara XMR dan %@"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR ve %@ arasında geçiş yap"
+          }
         }
       }
     },
@@ -22139,6 +23879,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Progres sinkronisasi %lld persen"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senkronizasyon ilerlemesi yüzde %lld"
           }
         }
       }
@@ -22216,6 +23962,12 @@
             "state": "translated",
             "value": "Sinkronisasi terhenti"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senkronizasyon durdu"
+          }
         }
       }
     },
@@ -22291,6 +24043,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menyinkronkan dompet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan senkronize ediliyor"
           }
         }
       }
@@ -22368,6 +24126,12 @@
             "state": "translated",
             "value": "Ketuk Segarkan Dompet untuk melanjutkan (atau buka ulang aplikasi)."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Devam etmek için Cüzdanı Yenile'ye dokunun (veya uygulamayı yeniden açın)."
+          }
         }
       }
     },
@@ -22443,6 +24207,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ini adalah seed pemulihan Anda. Tuliskan di atas kertas dan simpan di tempat yang aman. Siapa pun yang memiliki kata-kata ini dapat mengakses dana Anda — nexawal tidak pernah mengunggah atau membuat cadangannya untuk Anda."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu sizin kurtarma tohumunuzdur. Onu kağıda yazın ve güvenli bir yerde saklayın. Bu kelimelere sahip olan herkes fonlarınıza erişebilir — nexawal onu sizin için asla yüklemez veya yedeklemez."
           }
         }
       }
@@ -22521,6 +24291,12 @@
             "state": "translated",
             "value": "Ini akan mengatur ulang status pemindaian dan mulai dari awal dari tinggi yang Anda masukkan."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu, tarama durumunu sıfırlar ve girdiğiniz yükseklikten yeniden başlar."
+          }
         }
       }
     },
@@ -22596,6 +24372,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ini akan mengganti dompet yang sudah ada di perangkat ini.\n\nJika Anda melanjutkan, mnemonic dan status pemindaian yang tersimpan saat ini akan dihapus. Pastikan Anda telah mencadangkan mnemonic Anda sebelum melanjutkan."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu, bu cihazdaki mevcut cüzdanın yerini alacaktır.\n\nDevam ederseniz, şu anda kayıtlı olan anımsatıcı ve tarama durumu kaldırılacaktır. Devam etmeden önce anımsatıcınızı yedeklediğinizden emin olun."
           }
         }
       }
@@ -22673,6 +24455,12 @@
             "state": "translated",
             "value": "Throughput"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verim"
+          }
         }
       }
     },
@@ -22749,6 +24537,12 @@
             "state": "translated",
             "value": "Waktu"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaman"
+          }
         }
       }
     },
@@ -22824,6 +24618,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tip: 0 memindai seluruh riwayat rantai. Ini adalah opsi paling aman jika Anda tidak yakin, tetapi sinkronisasi bisa memakan waktu lebih lama."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İpucu: 0, zincirin tüm geçmişini tarar. Emin değilseniz bu en güvenli seçenektir ancak senkronizasyonu daha uzun sürebilir."
           }
         }
       }
@@ -22902,6 +24702,12 @@
             "state": "translated",
             "value": "Ke"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kime"
+          }
         }
       }
     },
@@ -22978,6 +24784,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ke alamat"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alıcı adresi"
           }
         }
       }
@@ -23056,6 +24868,12 @@
             "state": "translated",
             "value": "Total"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toplam"
+          }
         }
       }
     },
@@ -23131,6 +24949,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Total (jumlah + biaya)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toplam (miktar + ücret)"
           }
         }
       }
@@ -23209,6 +25033,12 @@
             "state": "translated",
             "value": "Saldo Total"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toplam Bakiye"
+          }
         }
       }
     },
@@ -23284,6 +25114,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transaksi"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlem"
           }
         }
       }
@@ -23361,6 +25197,12 @@
             "state": "translated",
             "value": "Transaksi disiarkan dari subalamat terpilih melalui %@."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlem, seçili alt adresten %@ üzerinden yayınlandı."
+          }
         }
       }
     },
@@ -23436,6 +25278,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transaksi disiarkan melalui %@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlem, %@ üzerinden yayınlandı."
           }
         }
       }
@@ -23514,6 +25362,12 @@
             "state": "translated",
             "value": "Transaksi disiarkan."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlem yayınlandı."
+          }
         }
       }
     },
@@ -23586,6 +25440,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TXID"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "TXID"
@@ -23666,6 +25526,12 @@
             "state": "translated",
             "value": "Tipe"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tür"
+          }
         }
       }
     },
@@ -23741,6 +25607,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ketik URL lengkap, termasuk http:// atau https://."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "http:// veya https:// dahil olmak üzere tam URL'yi girin."
           }
         }
       }
@@ -23818,6 +25690,12 @@
             "state": "translated",
             "value": "Ketik URL lengkap, termasuk http:// atau https://.\nPublik: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "http:// veya https:// dahil olmak üzere tam URL'yi girin.\nGenel: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
+          }
         }
       }
     },
@@ -23893,6 +25771,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tidak dapat mendekode metadata dompet."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan meta verisi çözümlenemedi."
           }
         }
       }
@@ -23970,6 +25854,12 @@
             "state": "translated",
             "value": "Tidak dapat mengenkode metadata dompet."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan meta verisi kodlanamadı."
+          }
         }
       }
     },
@@ -24045,6 +25935,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alamat tidak dikenal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilinmeyen adres"
           }
         }
       }
@@ -24122,6 +26018,12 @@
             "state": "translated",
             "value": "Status izin kamera tidak dikenal"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilinmeyen kamera izni durumu"
+          }
         }
       }
     },
@@ -24197,6 +26099,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buka Kunci Dompet yang Ada"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mevcut Cüzdanın Kilidini Aç"
           }
         }
       }
@@ -24275,6 +26183,12 @@
             "state": "translated",
             "value": "Buka kunci dompet"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdanın kilidini aç"
+          }
         }
       }
     },
@@ -24350,6 +26264,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Buka kunci dompet Anda"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdanınızın kilidini açın"
           }
         }
       }
@@ -24427,6 +26347,12 @@
             "state": "translated",
             "value": "Tidak terkunci"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilidi Açık"
+          }
         }
       }
     },
@@ -24502,6 +26428,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Membuka Kunci Dompet..."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdanın Kilidi Açılıyor..."
           }
         }
       }
@@ -24580,6 +26512,12 @@
             "state": "translated",
             "value": "Membuka kunci..."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilit açılıyor..."
+          }
         }
       }
     },
@@ -24656,6 +26594,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gunakan biometrik atau kredensial perangkat untuk akses dompet dan pengiriman."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan erişimi ve gönderim için biyometrik veya cihaz kimlik bilgilerini kullanın."
           }
         }
       }
@@ -24734,6 +26678,12 @@
             "state": "translated",
             "value": "Gunakan Kirim dan Terima untuk pembayaran dan alamat baru."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ödemeler ve yeni adresler için Gönder ve Al'ı kullanın."
+          }
         }
       }
     },
@@ -24809,6 +26759,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gunakan node ini"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu düğümü kullan"
           }
         }
       }
@@ -24886,6 +26842,12 @@
             "state": "translated",
             "value": "Menunggu tinggi jaringan"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ağ yüksekliği bekleniyor"
+          }
         }
       }
     },
@@ -24961,6 +26923,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dompet"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan"
           }
         }
       }
@@ -25038,6 +27006,12 @@
             "state": "translated",
             "value": "Dompet harus dibuka kuncinya sebelum mengubah proteksi biometrik."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biyometrik korumayı değiştirmeden önce cüzdanın kilidi açılmalıdır."
+          }
         }
       }
     },
@@ -25113,6 +27087,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Penyimpanan dompet gagal: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan kalıcılığı başarısız oldu: %@"
           }
         }
       }
@@ -25190,6 +27170,12 @@
             "state": "translated",
             "value": "Penyiapan Dompet"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan Kurulumu"
+          }
         }
       }
     },
@@ -25265,6 +27251,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dompet tersinkronkan"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdan senkronize edildi"
           }
         }
       }
@@ -25342,6 +27334,12 @@
             "state": "translated",
             "value": "Versi WalletCore:"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WalletCore Sürümü:"
+          }
         }
       }
     },
@@ -25417,6 +27415,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Peringatan: Jika Anda menetapkan tinggi pemulihan setelah transaksi pertama Anda, dana yang lebih lama tidak akan muncul sampai Anda memindai ulang dari tinggi yang lebih awal."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uyarı: İlk işleminizden sonra bir kurtarma yüksekliği belirlerseniz, daha eski fonlar daha önceki bir yükseklikten yeniden tarama yapana kadar görünmez."
           }
         }
       }
@@ -25495,6 +27499,12 @@
             "state": "translated",
             "value": "Untuk apa ini?"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu ne için?"
+          }
         }
       }
     },
@@ -25570,6 +27580,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jika diaktifkan, membuka dompet yang tersimpan dan mengirim dana akan memerlukan autentikasi perangkat."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etkinleştirildiğinde, kayıtlı cüzdanı açmak ve fon göndermek cihaz kimlik doğrulaması gerektirir."
           }
         }
       }
@@ -25647,6 +27663,12 @@
             "state": "translated",
             "value": "Kata #%lld:"
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kelime #%lld:"
+          }
         }
       }
     },
@@ -25722,6 +27744,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kata belum cocok."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kelime(ler) henüz eşleşmiyor."
           }
         }
       }
@@ -25800,6 +27828,12 @@
             "state": "translated",
             "value": "Tuliskan kata-kata ini secara berurutan dan simpan di tempat yang aman. Anda akan membutuhkannya untuk memulihkan dompet Anda — kata-kata ini tidak pernah disimpan di perangkat ini."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu kelimeleri sırayla yazın ve güvenli bir yerde saklayın. Cüzdanınızı geri yüklemek için bunlara ihtiyacınız olacak — bu cihazda hiçbir zaman saklanmazlar."
+          }
         }
       }
     },
@@ -25876,6 +27910,12 @@
             "state": "translated",
             "value": "Node salah? Ubah cara menghubungkan atau node di atas — Anda tidak perlu memindai ulang.\nDana hilang? Pindai ulang dari tinggi pemulihan Anda.\nPilihan terakhir: pindai ulang penuh dari blok 0."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yanlış düğüm mü? Yukarıdaki bağlantı yöntemini veya düğümü değiştirin — yeniden taramaya gerek yok.\nFonlar mı eksik? Kurtarma yüksekliğinizden yeniden tarayın.\nSon çare: blok 0'dan tam yeniden tarama."
+          }
         }
       }
     },
@@ -25943,6 +27983,12 @@
           }
         },
         "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR"
+          }
+        },
+        "tr": {
           "stringUnit": {
             "state": "translated",
             "value": "XMR"
@@ -26024,6 +28070,12 @@
             "state": "translated",
             "value": "Anda dapat menggunakan Face ID untuk mengamankan dompet Anda."
           }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cüzdanınızı güvence altına almak için Face ID kullanabilirsiniz."
+          }
         }
       }
     },
@@ -26100,6 +28152,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seed pemulihan Anda:"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurtarma tohumunuz:"
           }
         }
       }
