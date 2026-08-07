@@ -63,8 +63,10 @@ class WalletViewModel: ObservableObject {
     private var isManualRescanInProgress: Bool = false
     private var lastPollingStatus: (chainHeight: UInt64, lastScanned: UInt64)?
     private var lastPollingUpdate: Date?
-    private var scanRateWindowStart: Date?
-    private var scanRateWindowScanned: UInt64?
+    /// Session-average throughput: blocks scanned since refresh start / wall time since first progress.
+    /// Not a burst/instant rate — avoids spikes when a large get_blocks batch lands at once.
+    private var scanRateSessionStart: Date?
+    private var scanRateSessionScanned: UInt64?
     private var lastScanProgressAt: Date?
     private var pendingSyncPollRestart: Bool = false
     private let pollingStagnationInterval: TimeInterval = 5.0
@@ -470,6 +472,7 @@ class WalletViewModel: ObservableObject {
         isRefreshing = true
         errorMessage = nil
         syncStalled = false
+        resetScanRateSession()
         startSyncStatusPolling()
 
         // Run refresh in a tracked task so we can cancel it via `cancelRefresh()`.
@@ -477,7 +480,8 @@ class WalletViewModel: ObservableObject {
             guard let self else { return }
             defer {
                 Task { @MainActor in
-                    self.stopSyncStatusPolling()
+                    // Keep the final session-average blk/s visible after sync completes.
+                    self.stopSyncStatusPolling(clearThroughput: false)
                     self.isRefreshing = false
                     self.refreshTask = nil
                 }
@@ -609,7 +613,7 @@ class WalletViewModel: ObservableObject {
         refreshTask = nil
 
         Task { await walletManager.cancelRefresh() }
-        stopSyncStatusPolling()
+        stopSyncStatusPolling(clearThroughput: true)
         isRefreshing = false
     }
 
@@ -661,11 +665,12 @@ class WalletViewModel: ObservableObject {
         totalBalance = 0
         unlockedBalance = 0
         balanceIsStaleWhileSyncing = false
+        resetScanRateSession()
         startSyncStatusPolling()
 
         defer {
             isManualRescanInProgress = false
-            stopSyncStatusPolling()
+            stopSyncStatusPolling(clearThroughput: false)
             isRefreshing = false
         }
 
@@ -700,14 +705,19 @@ class WalletViewModel: ObservableObject {
 
     // MARK: - Private helpers
 
+    private func resetScanRateSession() {
+        scanRateSessionStart = nil
+        scanRateSessionScanned = nil
+        lastScanProgressAt = nil
+        scanBlocksPerSecond = 0.0
+    }
+
     private func startSyncStatusPolling() {
         syncStatusPollTask?.cancel()
         pendingSyncPollRestart = false
         lastPollingStatus = (chainHeight: chainHeight, lastScanned: lastScannedHeight)
         lastPollingUpdate = Date()
-        scanRateWindowStart = nil
-        scanRateWindowScanned = nil
-        lastScanProgressAt = nil
+        // Keep session-average baseline across poll restarts so batch landings don't look like 800 blk/s.
         lastBalancePollAt = nil
         lastTransfersPollAt = nil
         syncStatusPollTask = Task { [weak self] in
@@ -731,28 +741,25 @@ class WalletViewModel: ObservableObject {
                                 if db > 0 {
                                     self.lastScanProgressAt = now
 
-                                    if self.scanRateWindowStart == nil || self.scanRateWindowScanned == nil {
-                                        self.scanRateWindowStart = lastUpdate
-                                        self.scanRateWindowScanned = prev.lastScanned
+                                    if self.scanRateSessionStart == nil || self.scanRateSessionScanned == nil {
+                                        self.scanRateSessionStart = lastUpdate
+                                        self.scanRateSessionScanned = prev.lastScanned
                                     }
 
-                                    if let windowStart = self.scanRateWindowStart,
-                                       let windowScanned = self.scanRateWindowScanned {
-                                        let windowDt = now.timeIntervalSince(windowStart)
-                                        let windowDb = status.lastScanned >= windowScanned ? (status.lastScanned - windowScanned) : 0
+                                    if let sessionStart = self.scanRateSessionStart,
+                                       let sessionScanned = self.scanRateSessionScanned {
+                                        let sessionDt = now.timeIntervalSince(sessionStart)
+                                        let sessionDb = status.lastScanned >= sessionScanned
+                                            ? (status.lastScanned - sessionScanned)
+                                            : 0
 
-                                        if windowDb > 0, windowDt >= 0.5 {
-                                            self.scanBlocksPerSecond = Double(windowDb) / windowDt
+                                        // Overall session average (not per-batch burst).
+                                        if sessionDb > 0, sessionDt >= 0.5 {
+                                            self.scanBlocksPerSecond = Double(sessionDb) / sessionDt
                                         }
                                     }
-                                } else {
-                                    let staleRate = self.lastScanProgressAt.map { now.timeIntervalSince($0) > 1.5 } ?? true
-                                    if staleRate {
-                                        self.scanBlocksPerSecond = 0.0
-                                    }
                                 }
-                            } else {
-                                self.scanBlocksPerSecond = 0.0
+                                // Keep last session average while a fetch batch is in flight.
                             }
                             self.lastPollingStatus = tuple
                             self.lastPollingUpdate = now
@@ -866,10 +873,7 @@ class WalletViewModel: ObservableObject {
                     self.syncStatusPollTask = nil
                     self.lastPollingStatus = nil
                     self.lastPollingUpdate = nil
-                    self.scanRateWindowStart = nil
-                    self.scanRateWindowScanned = nil
                     self.lastScanProgressAt = nil
-                    self.scanBlocksPerSecond = 0.0
                     self.lastBalancePollAt = nil
                     self.lastTransfersPollAt = nil
                 }
@@ -877,15 +881,17 @@ class WalletViewModel: ObservableObject {
         }
     }
 
-    private func stopSyncStatusPolling() {
+    private func stopSyncStatusPolling(clearThroughput: Bool = true) {
         syncStatusPollTask?.cancel()
         syncStatusPollTask = nil
         lastPollingStatus = nil
         lastPollingUpdate = nil
-        scanRateWindowStart = nil
-        scanRateWindowScanned = nil
         lastScanProgressAt = nil
-        scanBlocksPerSecond = 0.0
+        if clearThroughput {
+            scanRateSessionStart = nil
+            scanRateSessionScanned = nil
+            scanBlocksPerSecond = 0.0
+        }
         pendingSyncPollRestart = false
     }
 
@@ -893,7 +899,6 @@ class WalletViewModel: ObservableObject {
         let normalizedChainHeight = max(status.chainHeight, status.restoreHeight, status.lastScanned)
         let normalizedRestoreHeight = min(status.restoreHeight, normalizedChainHeight)
         let normalizedLastScanned = min(max(status.lastScanned, normalizedRestoreHeight), normalizedChainHeight)
-        let tol: UInt64 = 3
 
         chainHeight = normalizedChainHeight
         if status.chainTime > 0 {
@@ -901,9 +906,7 @@ class WalletViewModel: ObservableObject {
         }
         restoreHeight = normalizedRestoreHeight
         lastScannedHeight = normalizedLastScanned
-        if normalizedChainHeight > 0 && normalizedLastScanned + tol >= normalizedChainHeight {
-            scanBlocksPerSecond = 0.0
-        }
+        // Keep session-average throughput visible after reaching tip; reset only on next refresh/cancel.
     }
 
     private func applyMetadataSnapshot(_ metadata: StoredWalletMetadata) async {
