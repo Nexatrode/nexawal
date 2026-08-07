@@ -72,6 +72,7 @@ struct SendView: View {
                         .autocorrectionDisabled()
                         .font(.system(.body, design: .monospaced))
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                        .accessibilityLabel(L10n.t("Recipient"))
                 }
 
                 Section(header: NeonSectionHeader(title: L10n.t("Amount"))) {
@@ -81,6 +82,7 @@ struct SendView: View {
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
                             .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                            .accessibilityLabel(L10n.t("Amount"))
                         Spacer()
                         Text("XMR")
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
@@ -287,6 +289,8 @@ struct SendView: View {
                         Image(systemName: "qrcode.viewfinder")
                     }
                     .foregroundStyle(classicPalette?.accent ?? .accentColor)
+                    .accessibilityLabel(L10n.t("Scan QR code"))
+                    .accessibilityAddTraits(.isButton)
                 }
             }
             .neonFormChrome(classicUI: classicUI, palette: classicPalette)

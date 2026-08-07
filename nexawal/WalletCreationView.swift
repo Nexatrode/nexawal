@@ -114,6 +114,7 @@ struct WalletCreationView: View {
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
                             .privacySensitive()
+                            .accessibilityLabel(L10n.t("Mnemonic (paste):"))
                     }
 
                     // Restore height controls:
@@ -150,6 +151,7 @@ struct WalletCreationView: View {
                                     Text("Restore Height:")
                                     TextField("0", text: $restoreHeightInput)
                                         .keyboardType(.numberPad)
+                                        .accessibilityLabel(L10n.t("Restore Height:"))
                                 }
 
                                 let height = UInt64(restoreHeightInput.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0
@@ -263,6 +265,7 @@ struct WalletCreationView: View {
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
+                        .accessibilityLabel(L10n.t("Clearnet node URL"))
                     Text("Type the full URL, including http:// or https://.\nPublic: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)

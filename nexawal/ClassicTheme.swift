@@ -184,7 +184,7 @@ struct NeonToggle: View {
                 .font(classicUI ? .system(.body, design: .monospaced) : .body)
                 .foregroundStyle(classicPalette?.primaryText ?? .primary)
         }
-        .toggleStyle(NeonSwitchToggleStyle())
+        .toggleStyle(NeonSwitchToggleStyle(title: title))
         .disabled(disabled)
         .opacity(disabled ? 0.45 : 1)
     }
@@ -193,6 +193,7 @@ struct NeonToggle: View {
 /// Custom switch chrome aligned with Android `nexaSwitchColors`:
 /// on = neon track + dark thumb; off = separator track + muted-green thumb.
 struct NeonSwitchToggleStyle: ToggleStyle {
+    var title: String? = nil
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
@@ -201,7 +202,7 @@ struct NeonSwitchToggleStyle: ToggleStyle {
             configuration.label
             Spacer(minLength: 12)
             if classicUI, let palette = classicPalette {
-                NeonThemeSwitch(isOn: configuration.isOn, palette: palette) {
+                NeonThemeSwitch(isOn: configuration.isOn, title: title, palette: palette) {
                     configuration.isOn.toggle()
                 }
             } else {
@@ -215,6 +216,7 @@ struct NeonSwitchToggleStyle: ToggleStyle {
 
 private struct NeonThemeSwitch: View {
     let isOn: Bool
+    let title: String?
     let palette: ClassicPalette
     let action: () -> Void
 
@@ -255,8 +257,8 @@ private struct NeonThemeSwitch: View {
         }
         .buttonStyle(.plain)
         .frame(width: width, height: max(height, 44), alignment: .center) // HIG-friendly hit target
-        .accessibilityLabel("Toggle")
-        .accessibilityValue(isOn ? "On" : "Off")
+        .accessibilityLabel(title ?? "Toggle")
+        .accessibilityValue(isOn ? L10n.t("On") : L10n.t("Off"))
         .accessibilityAddTraits(.isButton)
         .accessibilityAction { action() }
     }

@@ -785,6 +785,22 @@
         }
       }
     },
+    "Camera preview for scanning Monero QR codes": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera preview for scanning Monero QR codes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista previa de la cámara para escanear códigos QR de Monero"
+          }
+        }
+      }
+    },
     "Cancel": {
       "localizations": {
         "en": {
@@ -2881,6 +2897,38 @@
         }
       }
     },
+    "Off": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivado"
+          }
+        }
+      }
+    },
+    "On": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activado"
+          }
+        }
+      }
+    },
     "Only change scan lookahead if an import appears incomplete after using the right restore height.": {
       "localizations": {
         "en": {
@@ -4429,6 +4477,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se envió el máximo gastable vía %@."
+          }
+        }
+      }
+    },
+    "Sync progress %lld percent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sync progress %lld percent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progreso de sincronización %lld por ciento"
           }
         }
       }

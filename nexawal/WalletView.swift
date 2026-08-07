@@ -35,6 +35,15 @@ struct WalletView: View {
         }
     }
 
+    private func transferAccessibilityLabel(_ t: WalletCoreFFIClient.Transfer) -> String {
+        let direction = directionLabel(t)
+        let amount = viewModel.formatDisplayPiconero(t.amount)
+        let status = (t.isPending || t.confirmations == 0)
+            ? L10n.t("Pending")
+            : L10n.format("%lld conf", Int64(t.confirmations))
+        return "\(direction), \(amount), \(status)"
+    }
+
     private func amountColor(_ t: WalletCoreFFIClient.Transfer) -> Color {
         if let p = classicPalette {
             switch t.direction.lowercased() {
@@ -281,6 +290,7 @@ struct WalletView: View {
                                             : (viewModel.isSynced ? (classicPalette?.success ?? .green) : (classicPalette?.accent ?? .orange))
                                     )
                                     .frame(width: 10, height: 10)
+                                    .accessibilityHidden(true)
                                 Text(syncHeadline())
                                     .font(classicUI ? .system(.headline, design: .monospaced) : .headline)
                                     .foregroundColor(primaryText)
@@ -292,6 +302,7 @@ struct WalletView: View {
 
                             ProgressView(value: viewModel.syncProgress)
                                 .progressViewStyle(LinearProgressViewStyle(tint: classicPalette?.progress ?? .accentColor))
+                                .accessibilityValue(L10n.format("Sync progress %lld percent", Int64((viewModel.syncProgress * 100).rounded())))
 
                             classicStatusRow(label: L10n.neon("Node", classicUI: classicUI), value: MoneroConfig.daemonAddress)
                             classicStatusRow(label: L10n.neon("Scanned", classicUI: classicUI), value: "\(viewModel.lastScannedHeight)")
@@ -302,6 +313,7 @@ struct WalletView: View {
                                 value: String(format: "%.1f blk/s", viewModel.scanBlocksPerSecond)
                             )
                         }
+                        .accessibilityAddTraits(.updatesFrequently)
                     }
                     .padding()
                     .frame(maxWidth: .infinity)
@@ -342,6 +354,7 @@ struct WalletView: View {
                                             Image(systemName: t.direction.lowercased() == "in" ? "arrow.down.left.circle.fill" : "arrow.up.right.circle.fill")
                                                 .font(.title3)
                                                 .foregroundColor(amountColor(t))
+                                                .accessibilityHidden(true)
 
                                             VStack(alignment: .leading, spacing: 4) {
                                                 Text(directionLabel(t))
@@ -383,6 +396,9 @@ struct WalletView: View {
                                             }
                                         }
                                         .padding(.vertical, 12)
+                                        .accessibilityElement(children: .combine)
+                                        .accessibilityLabel(transferAccessibilityLabel(t))
+                                        .accessibilityAddTraits(.isButton)
                                     }
                                     .buttonStyle(.plain)
 
@@ -571,8 +587,10 @@ struct WalletView: View {
                                 if viewModel.isRefreshing {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle(tint: classicUI ? (classicPalette?.accent ?? .accentColor) : .white))
+                                        .accessibilityHidden(true)
                                 } else {
                                     Image(systemName: "arrow.clockwise")
+                                        .accessibilityHidden(true)
                                 }
                                 Text(viewModel.isRefreshing
                                      ? L10n.neon("Refreshing...", classicUI: classicUI)
@@ -597,6 +615,7 @@ struct WalletView: View {
                             }) {
                                 HStack {
                                     Image(systemName: "xmark.circle.fill")
+                                        .accessibilityHidden(true)
                                     Text(L10n.neon("Cancel", classicUI: classicUI))
                                         .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
                                 }
@@ -628,6 +647,7 @@ struct WalletView: View {
                         .background((classicPalette?.danger ?? .red).opacity(0.1))
                         .cornerRadius(8)
                         .padding(.horizontal)
+                        .accessibilityAddTraits(.updatesFrequently)
                     }
                 }
                 .padding(.vertical)

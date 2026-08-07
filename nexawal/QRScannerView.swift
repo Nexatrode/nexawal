@@ -125,6 +125,15 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         
         self.previewLayer = previewLayer
         self.captureSession = session
+
+        // The preview itself is rendered via a CALayer (not a UIView), so VoiceOver
+        // needs an explicit accessible view describing what the camera is showing.
+        let previewAccessibilityView = UIView(frame: view.bounds)
+        previewAccessibilityView.isUserInteractionEnabled = false
+        previewAccessibilityView.isAccessibilityElement = true
+        previewAccessibilityView.accessibilityLabel = L10n.t("Camera preview for scanning Monero QR codes")
+        previewAccessibilityView.accessibilityTraits = .image
+        view.addSubview(previewAccessibilityView)
         
         DispatchQueue.global(qos: .userInitiated).async {
             session.startRunning()
@@ -190,6 +199,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             height: 44
         )
         closeButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+        closeButton.accessibilityLabel = L10n.t("Cancel")
         overlayView.addSubview(closeButton)
         
         let cancelButton = UIButton(type: .system)
@@ -212,6 +222,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
             height: 44
         )
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+        cancelButton.accessibilityLabel = L10n.neon("Cancel", classicUI: neonMode)
         overlayView.addSubview(cancelButton)
     }
     

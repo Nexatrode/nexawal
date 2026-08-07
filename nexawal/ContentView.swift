@@ -115,6 +115,7 @@ private struct NeonTabBar: View {
                         VStack(spacing: 4) {
                             Image(systemName: tab.systemImage)
                                 .font(.system(size: 20, weight: selected ? .semibold : .regular))
+                                .accessibilityHidden(true)
                             Text(classicUI ? tab.neonTitle : tab.title)
                                 .font(
                                     classicUI
@@ -129,6 +130,7 @@ private struct NeonTabBar: View {
                         .padding(.top, 8)
                         .padding(.bottom, 6)
                         .contentShape(Rectangle())
+                        .accessibilityElement(children: .combine)
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(tab.title)

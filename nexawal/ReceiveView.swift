@@ -55,7 +55,8 @@ struct ReceiveView: View {
                         Image(systemName: "doc.on.doc")
                     }
                     .foregroundStyle(classicPalette?.accent ?? .accentColor)
-                    .accessibilityLabel("Copy Address")
+                    .accessibilityLabel(L10n.t("Copy Address"))
+                    .accessibilityAddTraits(.isButton)
                 }
             }
             .sheet(isPresented: $showShareSheet) {
@@ -152,6 +153,7 @@ struct ReceiveView: View {
                         .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
                 )
                 .shadow(color: classicUI ? .clear : Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+                .accessibilityLabel(L10n.t("Monero receive QR"))
 
             Text(moneroURI)
                 .font(.footnote)
@@ -218,6 +220,7 @@ struct ReceiveView: View {
                                 .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
                         )
                         .cornerRadius(classicUI ? 4 : 8)
+                        .accessibilityLabel(L10n.t("Amount (XMR)"))
                     if let piconero = XmrAmount.parsePiconero(amountInput) {
                         FiatApproxText(
                             piconero: piconero,
@@ -243,6 +246,7 @@ struct ReceiveView: View {
                                 .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
                         )
                         .cornerRadius(classicUI ? 4 : 8)
+                        .accessibilityLabel(L10n.t("Description"))
                 }
             }
         }
