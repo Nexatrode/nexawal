@@ -143,6 +143,15 @@
 				hr,
 				et,
 				sk,
+				sq,
+				gl,
+				gn,
+				eo,
+				eu,
+				ga,
+				ky,
+				ha,
+				hy,
 				Base,
 			);
 			mainGroup = AAABE4452EDEBF11004D56AB;
