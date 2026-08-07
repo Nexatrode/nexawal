@@ -137,6 +137,12 @@
 				ur,
 				fi,
 				lv,
+				da,
+				ca,
+				el,
+				hr,
+				et,
+				sk,
 				Base,
 			);
 			mainGroup = AAABE4452EDEBF11004D56AB;
