@@ -68,6 +68,7 @@ struct ReceiveView: View {
         }
         .alert("New address label (optional)", isPresented: $showCreateSubaddressPrompt) {
             TextField("Label", text: $newSubaddressLabel)
+                .accessibilityLabel(L10n.t("Label"))
             Button("Cancel", role: .cancel) {
                 newSubaddressLabel = ""
             }
@@ -271,12 +272,14 @@ struct ReceiveView: View {
                         .neonCTAStyle(classicUI: true, palette: palette)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(L10n.t("Copy Address"))
 
                 if hasPaymentAmount {
                     Button(action: copyPaymentURI) {
                         Label("Copy Payment URI", systemImage: "link")
                     }
                     .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                    .accessibilityLabel(L10n.t("Copy Payment URI"))
                 }
 
                 if #available(iOS 16.0, *) {
@@ -285,6 +288,7 @@ struct ReceiveView: View {
                             .neonSecondaryButtonStyle(classicUI: true, palette: palette)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(L10n.t("Share Payment Link"))
                 } else {
                     Button {
                         showShareSheet = true
@@ -292,6 +296,7 @@ struct ReceiveView: View {
                         Label("Share Payment Link", systemImage: "square.and.arrow.up")
                     }
                     .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                    .accessibilityLabel(L10n.t("Share Payment Link"))
                 }
             } else {
                 Button(action: copyAddress) {
@@ -299,6 +304,7 @@ struct ReceiveView: View {
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
+                .accessibilityLabel(L10n.t("Copy Address"))
 
                 if hasPaymentAmount {
                     Button(action: copyPaymentURI) {
@@ -306,6 +312,7 @@ struct ReceiveView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
+                    .accessibilityLabel(L10n.t("Copy Payment URI"))
                 }
 
                 if #available(iOS 16.0, *) {
@@ -314,6 +321,7 @@ struct ReceiveView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
+                    .accessibilityLabel(L10n.t("Share Payment Link"))
                 } else {
                     Button {
                         showShareSheet = true
@@ -322,6 +330,7 @@ struct ReceiveView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
+                    .accessibilityLabel(L10n.t("Share Payment Link"))
                 }
             }
         }

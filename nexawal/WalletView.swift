@@ -676,6 +676,7 @@ struct WalletView: View {
                 .lineLimit(1)
                 .truncationMode(.middle)
         }
+        .accessibilityElement(children: .combine)
     }
 }
 

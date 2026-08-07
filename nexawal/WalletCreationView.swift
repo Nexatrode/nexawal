@@ -382,6 +382,7 @@ struct WalletCreationView: View {
             Button(action: { generateNewSeed() }) {
                 Text("Generate new seed")
             }
+            .accessibilityLabel(L10n.t("Generate new seed"))
             .disabled(viewModel.isLoading)
 
             NeonToggle(title: L10n.t("I wrote down my recovery seed"), isOn: $wroteSeedDown)
@@ -429,6 +430,7 @@ struct WalletCreationView: View {
                         .textInputAutocapitalization(.never)
                         .font(.system(.body, design: .monospaced))
                         .focused($focusedChallengeIndex, equals: i)
+                        .accessibilityLabel(L10n.format("Word #%lld:", Int64(wordIndex + 1)))
                 }
             }
 
