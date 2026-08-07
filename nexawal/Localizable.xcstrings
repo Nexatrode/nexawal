@@ -62,6 +62,12 @@
             "state": "translated",
             "value": ""
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ""
+          }
         }
       }
     },
@@ -132,6 +138,12 @@
             "state": "translated",
             "value": "\nBedrag %@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\nJumlah %@"
+          }
         }
       }
     },
@@ -201,6 +213,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "\nVergoeding %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\nBiaya %@"
           }
         }
       }
@@ -273,6 +291,12 @@
             "state": "translated",
             "value": "(niet beschikbaar)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(tidak tersedia)"
+          }
         }
       }
     },
@@ -344,6 +368,12 @@
             "state": "translated",
             "value": "%.1f blk/s"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f blk/s"
+          }
         }
       }
     },
@@ -408,6 +438,12 @@
             "state": "translated",
             "value": "%1$@ — %2$@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ — %2$@"
+          }
         }
       }
     },
@@ -468,6 +504,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld"
@@ -542,6 +584,12 @@
             "state": "translated",
             "value": "%lld blokken"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld blok"
+          }
         }
       }
     },
@@ -611,6 +659,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld blokken resterend"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld blok tersisa"
           }
         }
       }
@@ -682,6 +736,12 @@
             "state": "translated",
             "value": "%lld bev."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld konf"
+          }
         }
       }
     },
@@ -742,6 +802,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld."
@@ -810,6 +876,12 @@
             "state": "translated",
             "value": "%llu"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%llu"
+          }
         }
       }
     },
@@ -870,6 +942,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "0"
@@ -939,6 +1017,12 @@
             "state": "translated",
             "value": "0.0"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0"
+          }
         }
       }
     },
@@ -1000,6 +1084,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0000"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "0.0000"
@@ -1075,6 +1165,12 @@
             "state": "translated",
             "value": "0.0 XMR"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0 XMR"
+          }
         }
       }
     },
@@ -1144,6 +1240,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Er wordt een nieuw ontvangstadres (subadres) gegenereerd voor privacy."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat terima baru (subalamat) akan dibuat untuk privasi."
           }
         }
       }
@@ -1216,6 +1318,12 @@
             "state": "translated",
             "value": "Er is al een verzending bezig. Wacht tot deze is voltooid."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengiriman sedang berlangsung. Tunggu hingga selesai."
+          }
         }
       }
     },
@@ -1287,6 +1395,12 @@
             "state": "translated",
             "value": "Er is al een wallet opgeslagen op dit apparaat."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sebuah dompet sudah tersimpan di perangkat ini."
+          }
         }
       }
     },
@@ -1357,6 +1471,12 @@
             "state": "translated",
             "value": "Over"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tentang"
+          }
         }
       }
     },
@@ -1426,6 +1546,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Account-lookahead (1-1000)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lookahead akun (1-1000)"
           }
         }
       }
@@ -1498,6 +1624,12 @@
             "state": "translated",
             "value": "Accounts (lookahead)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akun (lookahead)"
+          }
         }
       }
     },
@@ -1568,6 +1700,12 @@
             "state": "translated",
             "value": "Acties"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tindakan"
+          }
         }
       }
     },
@@ -1637,6 +1775,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat"
           }
         }
       }
@@ -1709,6 +1853,12 @@
             "state": "translated",
             "value": "Adres gekopieerd"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat disalin"
+          }
         }
       }
     },
@@ -1779,6 +1929,12 @@
             "state": "translated",
             "value": "Adres gekopieerd naar klembord"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat disalin ke papan klip"
+          }
         }
       }
     },
@@ -1848,6 +2004,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adres geladen vanaf QR-code."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat dimuat dari kode QR."
           }
         }
       }
@@ -1920,6 +2082,12 @@
             "state": "translated",
             "value": "Geavanceerd herstel"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemulihan lanjutan"
+          }
         }
       }
     },
@@ -1990,6 +2158,12 @@
             "state": "translated",
             "value": "Geavanceerd Herstel"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemulihan Lanjutan"
+          }
         }
       }
     },
@@ -2059,6 +2233,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bedrag"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jumlah"
           }
         }
       }
@@ -2131,6 +2311,12 @@
             "state": "translated",
             "value": "Bedrag (XMR)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jumlah (XMR)"
+          }
         }
       }
     },
@@ -2200,6 +2386,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bedrag ingesteld op maximaal besteedbaar. De uiteindelijke vergoeding kan iets afwijken bij verzending."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jumlah diatur ke maksimum yang dapat dibelanjakan. Biaya akhir dapat sedikit berubah saat pengiriman."
           }
         }
       }
@@ -2271,6 +2463,12 @@
             "state": "translated",
             "value": "Weergave"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilan"
+          }
         }
       }
     },
@@ -2340,6 +2538,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I2P-instellingen toepassen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terapkan pengaturan I2P"
           }
         }
       }
@@ -2412,6 +2616,12 @@
             "state": "translated",
             "value": "Verifieer om de opgeslagen Monero-wallet te openen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi untuk membuka dompet Monero yang tersimpan"
+          }
         }
       }
     },
@@ -2481,6 +2691,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verifieer om Monero te verzenden"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi untuk mengirim Monero"
           }
         }
       }
@@ -2553,6 +2769,12 @@
             "state": "translated",
             "value": "Verifieer om het volledige walletsaldo over te maken"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi untuk menyapu saldo dompet"
+          }
         }
       }
     },
@@ -2623,6 +2845,12 @@
             "state": "translated",
             "value": "Verifieer om Face ID-beveiliging uit te schakelen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi untuk mematikan proteksi Face ID"
+          }
         }
       }
     },
@@ -2692,6 +2920,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verifieer om NexaWal te ontgrendelen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi untuk membuka kunci NexaWal"
           }
         }
       }
@@ -2764,6 +2998,12 @@
             "state": "translated",
             "value": "Verificatie mislukt"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi gagal"
+          }
         }
       }
     },
@@ -2833,6 +3073,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verificatie vereist om te verzenden. Probeer het opnieuw."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi diperlukan untuk mengirim. Coba lagi."
           }
         }
       }
@@ -2904,6 +3150,12 @@
             "state": "translated",
             "value": "Verificatie is geannuleerd."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi dibatalkan."
+          }
         }
       }
     },
@@ -2973,6 +3225,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verificatie is niet gelukt."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi tidak berhasil."
           }
         }
       }
@@ -3044,6 +3302,12 @@
             "state": "translated",
             "value": "Beschikbaar"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tersedia"
+          }
         }
       }
     },
@@ -3113,6 +3377,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Beschikbaar (geselecteerd subadres)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tersedia (subalamat terpilih)"
           }
         }
       }
@@ -3184,6 +3454,12 @@
             "state": "translated",
             "value": "Saldo wordt bijgewerkt terwijl synchronisatie wordt ingehaald"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo diperbarui selagi sinkronisasi menyusul"
+          }
         }
       }
     },
@@ -3253,6 +3529,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Biometrische verificatie is beschikbaar, maar er zijn geen biometrische gegevens geregistreerd."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi biometrik tersedia, tetapi tidak ada data biometrik yang terdaftar."
           }
         }
       }
@@ -3324,6 +3606,12 @@
             "state": "translated",
             "value": "Biometrische verificatie is niet beschikbaar op dit apparaat."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi biometrik tidak tersedia di perangkat ini."
+          }
         }
       }
     },
@@ -3393,6 +3681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Biometrische verificatie of apparaatverificatie is niet beschikbaar op dit apparaat."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi biometrik atau perangkat tidak tersedia di perangkat ini."
           }
         }
       }
@@ -3465,6 +3759,12 @@
             "state": "translated",
             "value": "Biometrische verificatie of verificatie met apparaatgegevens is beschikbaar op dit apparaat."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi biometrik atau kredensial perangkat tersedia di perangkat ini."
+          }
         }
       }
     },
@@ -3535,6 +3835,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Biometrische verificatie of verificatie met apparaatgegevens is niet beschikbaar"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi biometrik atau kredensial perangkat tidak tersedia"
           }
         }
       }
@@ -3607,6 +3913,12 @@
             "state": "translated",
             "value": "Biometrische verificatie of verificatie met apparaatgegevens is momenteel niet beschikbaar op dit apparaat."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi biometrik atau kredensial perangkat saat ini tidak tersedia di perangkat ini."
+          }
         }
       }
     },
@@ -3678,6 +3990,12 @@
             "state": "translated",
             "value": "Toestemming voor biometrie ontbreekt of is niet beschikbaar"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izin biometrik tidak ada atau tidak tersedia"
+          }
         }
       }
     },
@@ -3748,6 +4066,12 @@
             "state": "translated",
             "value": "Beide (scannen via clearnet, uitzenden via I2P)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keduanya (pindai clearnet, siarkan I2P)"
+          }
         }
       }
     },
@@ -3817,6 +4141,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cameratoegang geweigerd"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses kamera ditolak"
           }
         }
       }
@@ -3889,6 +4219,12 @@
             "state": "translated",
             "value": "Camera niet beschikbaar in simulator"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera tidak tersedia di simulator"
+          }
         }
       }
     },
@@ -3958,6 +4294,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Camera-toestemming geweigerd"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izin kamera ditolak"
           }
         }
       }
@@ -4029,6 +4371,12 @@
             "state": "translated",
             "value": "Cameravoorbeeld voor het scannen van Monero-QR-codes"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratinjau kamera untuk memindai kode QR Monero"
+          }
         }
       }
     },
@@ -4098,6 +4446,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Annuleren"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batal"
           }
         }
       }
@@ -4170,6 +4524,12 @@
             "state": "translated",
             "value": "Annulering aangevraagd"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pembatalan diminta"
+          }
         }
       }
     },
@@ -4239,6 +4599,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chain"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rantai"
           }
         }
       }
@@ -4310,6 +4676,12 @@
             "state": "translated",
             "value": "Kies of je een volledig nieuwe wallet aanmaakt (snelle synchronisatie) of een bestaande wallet importeert (volledige scan, tenzij je een hersteldhoogte instelt)."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilih apakah Anda membuat dompet baru (sinkronisasi cepat) atau mengimpor dompet yang sudah ada (pemindaian lengkap kecuali Anda menetapkan tinggi pemulihan)."
+          }
         }
       }
     },
@@ -4379,6 +4751,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Classic UI"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UI Klasik"
           }
         }
       }
@@ -4450,6 +4828,12 @@
             "state": "translated",
             "value": "Cache wissen mislukt: %@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gagal menghapus cache: %@"
+          }
         }
       }
     },
@@ -4520,6 +4904,12 @@
             "state": "translated",
             "value": "Scancache wissen (dit netwerk)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus cache pemindaian (jaringan ini)"
+          }
         }
       }
     },
@@ -4589,6 +4979,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scancache gewist"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache pemindaian dihapus"
           }
         }
       }
@@ -4661,6 +5057,12 @@
             "state": "translated",
             "value": "Scancache gewist voor dit netwerk"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache pemindaian untuk jaringan ini dihapus"
+          }
         }
       }
     },
@@ -4730,6 +5132,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clearnet-node"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node clearnet"
           }
         }
       }
@@ -4801,6 +5209,12 @@
             "state": "translated",
             "value": "Clearnet-node-URL"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URL node clearnet"
+          }
         }
       }
     },
@@ -4870,6 +5284,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alleen clearnet"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya clearnet"
           }
         }
       }
@@ -4941,6 +5361,12 @@
             "state": "translated",
             "value": "Alleen clearnet gebruikt een clearnet-node. Alleen I2P gebruikt een I2P-node en proxy. Beide scant via clearnet en zendt uit via I2P."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya clearnet menggunakan node clearnet. Hanya I2P menggunakan node dan proksi I2P. Keduanya memindai di clearnet dan menyiarkan melalui I2P."
+          }
         }
       }
     },
@@ -5011,6 +5437,12 @@
             "state": "translated",
             "value": "Sluiten"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutup"
+          }
         }
       }
     },
@@ -5080,6 +5512,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bevestigen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konfirmasi"
           }
         }
       }
@@ -5152,6 +5590,12 @@
             "state": "translated",
             "value": "Verzending bevestigen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konfirmasi pengiriman"
+          }
         }
       }
     },
@@ -5221,6 +5665,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verzending Bevestigen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konfirmasi Pengiriman"
           }
         }
       }
@@ -5293,6 +5743,12 @@
             "state": "translated",
             "value": "Maximale verzending bevestigen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konfirmasi kirim maksimum"
+          }
         }
       }
     },
@@ -5364,6 +5820,12 @@
             "state": "translated",
             "value": "Maximale Verzending Bevestigen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konfirmasi Kirim Maksimum"
+          }
         }
       }
     },
@@ -5433,6 +5895,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bevestig dat je het hebt opgeschreven: voer de gevraagde woorden hieronder in."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konfirmasi bahwa Anda telah menulisnya: masukkan kata-kata yang diminta di bawah ini."
           }
         }
       }
@@ -5505,6 +5973,12 @@
             "state": "translated",
             "value": "Bevestig je backup — voer de gevraagde woorden in:"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konfirmasi cadangan Anda — masukkan kata-kata yang diminta:"
+          }
         }
       }
     },
@@ -5574,6 +6048,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bevestigingen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konfirmasi"
           }
         }
       }
@@ -5645,6 +6125,12 @@
             "state": "translated",
             "value": "Bevestigd"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terkonfirmasi"
+          }
         }
       }
     },
@@ -5714,6 +6200,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verbinden (clearnet-scan, I2P-uitzending)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menghubungkan (pindai clearnet, siar I2P)"
           }
         }
       }
@@ -5785,6 +6277,12 @@
             "state": "translated",
             "value": "Verbinden via I2P"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menghubungkan melalui I2P"
+          }
         }
       }
     },
@@ -5854,6 +6352,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verbinden met %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menghubungkan ke %@"
           }
         }
       }
@@ -5925,6 +6429,12 @@
             "state": "translated",
             "value": "Verbinden met node"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menghubungkan ke node"
+          }
         }
       }
     },
@@ -5994,6 +6504,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bepaalt hoeveel Monero-accounts worden gescand, vanaf account 0."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengatur berapa banyak akun Monero yang dipindai mulai dari akun 0."
           }
         }
       }
@@ -6065,6 +6581,12 @@
             "state": "translated",
             "value": "Bepaalt hoeveel ontvangstsubadressen worden gescand voor deze wallet."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengatur berapa banyak subalamat terima yang dipindai untuk dompet ini."
+          }
         }
       }
     },
@@ -6134,6 +6656,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adres Kopiëren"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salin Alamat"
           }
         }
       }
@@ -6205,6 +6733,12 @@
             "state": "translated",
             "value": "Betalings-URI Kopiëren"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salin URI Pembayaran"
+          }
         }
       }
     },
@@ -6274,6 +6808,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "TXID Kopiëren"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salin TXID"
           }
         }
       }
@@ -6345,6 +6885,12 @@
             "state": "translated",
             "value": "Kon geen toegang krijgen tot camera: %@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat mengakses kamera: %@"
+          }
         }
       }
     },
@@ -6414,6 +6960,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kon camera-invoer niet toevoegen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat menambahkan input kamera"
           }
         }
       }
@@ -6485,6 +7037,12 @@
             "state": "translated",
             "value": "Kon metadata-uitvoer niet toevoegen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat menambahkan output metadata"
+          }
         }
       }
     },
@@ -6554,6 +7112,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kon Face ID-instelling niet bijwerken"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat memperbarui pengaturan Face ID"
           }
         }
       }
@@ -6625,6 +7189,12 @@
             "state": "translated",
             "value": "Kon geen snelle hersteldhoogte ophalen bij de node. Hersteldhoogte blijft op 0."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat mengambil tinggi pemulihan cepat dari node. Tinggi pemulihan dibiarkan pada 0."
+          }
         }
       }
     },
@@ -6694,6 +7264,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kon geen seed genereren: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat membuat seed: %@"
           }
         }
       }
@@ -6765,6 +7341,12 @@
             "state": "translated",
             "value": "Aanmaken"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buat"
+          }
         }
       }
     },
@@ -6834,6 +7416,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nieuwe wallet aanmaken (snel)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buat dompet baru (cepat)"
           }
         }
       }
@@ -6905,6 +7493,12 @@
             "state": "translated",
             "value": "Wallet Aanmaken"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buat Dompet"
+          }
         }
       }
     },
@@ -6975,6 +7569,12 @@
             "state": "translated",
             "value": "Wallet wordt aangemaakt..."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuat Dompet..."
+          }
         }
       }
     },
@@ -7044,6 +7644,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Valuta"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mata Uang"
           }
         }
       }
@@ -7116,6 +7722,12 @@
             "state": "translated",
             "value": "Daemon-URL"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URL Daemon"
+          }
         }
       }
     },
@@ -7186,6 +7798,12 @@
             "state": "translated",
             "value": "Beschrijving"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deskripsi"
+          }
         }
       }
     },
@@ -7255,6 +7873,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bestemming"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tujuan"
           }
         }
       }
@@ -7327,6 +7951,12 @@
             "state": "translated",
             "value": "Apparaatverificatie is vereist maar niet beschikbaar. Schakel biometrie of een schermvergrendeling in en probeer het opnieuw."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autentikasi perangkat diperlukan tetapi tidak tersedia. Aktifkan biometrik atau kunci layar, lalu coba lagi."
+          }
         }
       }
     },
@@ -7397,6 +8027,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Classic UI uitgeschakeld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UI Klasik dinonaktifkan"
           }
         }
       }
@@ -7469,6 +8105,12 @@
             "state": "translated",
             "value": "Fiatschattingen uitgeschakeld"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimasi fiat dinonaktifkan"
+          }
         }
       }
     },
@@ -7539,6 +8181,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Classic UI ingeschakeld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UI Klasik diaktifkan"
           }
         }
       }
@@ -7611,6 +8259,12 @@
             "state": "translated",
             "value": "Fiatschattingen ingeschakeld"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimasi fiat diaktifkan"
+          }
         }
       }
     },
@@ -7681,6 +8335,12 @@
             "state": "translated",
             "value": "Voer een geldig adres en bedrag in."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masukkan alamat dan jumlah yang valid."
+          }
         }
       }
     },
@@ -7750,6 +8410,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Voer een geldig adres in."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masukkan alamat yang valid."
           }
         }
       }
@@ -7822,6 +8488,12 @@
             "state": "translated",
             "value": "Voer een geldige hersteldhoogte in"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masukkan tinggi pemulihan yang valid"
+          }
         }
       }
     },
@@ -7892,6 +8564,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Voer een geheel getal in"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masukkan angka bulat"
           }
         }
       }
@@ -7964,6 +8642,12 @@
             "state": "translated",
             "value": "Voer de ontvanger en het bedrag in, bekijk de vergoeding en bevestig daarna de transactie."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masukkan penerima dan jumlah, pratinjau biaya, lalu konfirmasi transaksi."
+          }
         }
       }
     },
@@ -8033,6 +8717,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geschatte vergoeding"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimasi biaya"
           }
         }
       }
@@ -8105,6 +8795,12 @@
             "state": "translated",
             "value": "Maximum wordt geschat..."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengestimasi maksimum..."
+          }
         }
       }
     },
@@ -8175,6 +8871,12 @@
             "state": "translated",
             "value": "Bezig met schatten..."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengestimasi..."
+          }
         }
       }
     },
@@ -8244,6 +8946,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ophalen van saldo mislukt: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gagal mendapatkan saldo: %@"
           }
         }
       }
@@ -8316,6 +9024,12 @@
             "state": "translated",
             "value": "Lezen van opgeslagen walletmetadata mislukt"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gagal membaca metadata dompet yang tersimpan"
+          }
         }
       }
     },
@@ -8385,6 +9099,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vergoeding"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biaya"
           }
         }
       }
@@ -8456,6 +9176,12 @@
             "state": "translated",
             "value": "Vergoeding %@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biaya %@"
+          }
         }
       }
     },
@@ -8525,6 +9251,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vergoeding geschat (invoer beperkt tot geselecteerd subadres)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biaya diestimasi (input dibatasi ke subalamat terpilih)."
           }
         }
       }
@@ -8597,6 +9329,12 @@
             "state": "translated",
             "value": "Vergoeding succesvol geschat."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biaya berhasil diestimasi."
+          }
         }
       }
     },
@@ -8667,6 +9405,12 @@
             "state": "translated",
             "value": "Vergoeding geschat met behulp van uitzendbeleid."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biaya diestimasi menggunakan kebijakan siaran."
+          }
         }
       }
     },
@@ -8736,6 +9480,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Voorbeeld van vergoeding mislukt: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratinjau biaya gagal: %@"
           }
         }
       }
@@ -8808,6 +9558,12 @@
             "state": "translated",
             "value": "Bezig met ophalen bij node…"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengambil dari node…"
+          }
         }
       }
     },
@@ -8878,6 +9634,12 @@
             "state": "translated",
             "value": "Bezig met ophalen van initiële blokken vanaf %lld"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengambil blok awal dari %lld"
+          }
         }
       }
     },
@@ -8947,6 +9709,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fiatschattingen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimasi fiat"
           }
         }
       }
@@ -9019,6 +9787,12 @@
             "state": "translated",
             "value": "Volledige herscan (vanaf blok 0)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai ulang penuh (dari blok 0)"
+          }
         }
       }
     },
@@ -9088,6 +9862,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Volledige Herscan (vanaf blok 0)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai Ulang Penuh (dari blok 0)"
           }
         }
       }
@@ -9160,6 +9940,12 @@
             "state": "translated",
             "value": "Volledige herscan vanaf 0 — voortgang is te zien op het tabblad Wallet"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai ulang penuh dari 0 — progres ada di tab Dompet"
+          }
         }
       }
     },
@@ -9229,6 +10015,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gap-limiet (1-100000)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas gap (1-100000)"
           }
         }
       }
@@ -9301,6 +10093,12 @@
             "state": "translated",
             "value": "Gap-limiet (subadressen per account)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas gap (subalamat per akun)"
+          }
         }
       }
     },
@@ -9370,6 +10168,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nieuwe seed genereren"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buat seed baru"
           }
         }
       }
@@ -9442,6 +10246,12 @@
             "state": "translated",
             "value": "Camera-toestemming Verlenen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berikan Izin Kamera"
+          }
         }
       }
     },
@@ -9511,6 +10321,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hoogte"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi"
           }
         }
       }
@@ -9583,6 +10399,12 @@
             "state": "translated",
             "value": "Verbergen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sembunyikan"
+          }
         }
       }
     },
@@ -9653,6 +10475,12 @@
             "state": "translated",
             "value": "Hoe te verbinden"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cara menghubungkan"
+          }
         }
       }
     },
@@ -9713,6 +10541,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "https://rpc.nexatrode.com"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "https://rpc.nexatrode.com"
@@ -9787,6 +10621,12 @@
             "state": "translated",
             "value": "Ik heb mijn herstelseed opgeschreven"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saya telah menulis seed pemulihan saya"
+          }
         }
       }
     },
@@ -9853,6 +10693,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "I2P"
@@ -9927,6 +10773,12 @@
             "state": "translated",
             "value": "I2P-HTTP-proxy (host:port)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proksi HTTP I2P (host:port)"
+          }
         }
       }
     },
@@ -9996,6 +10848,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I2P-node (host:port)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node I2P (host:port)"
           }
         }
       }
@@ -10067,6 +10925,12 @@
             "state": "translated",
             "value": "Alleen I2P"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya I2P"
+          }
         }
       }
     },
@@ -10136,6 +11000,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Identificatiegegevens"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengidentifikasi"
           }
         }
       }
@@ -10207,6 +11077,12 @@
             "state": "translated",
             "value": "Bestaande wallet importeren"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impor dompet yang sudah ada"
+          }
         }
       }
     },
@@ -10276,6 +11152,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wallet Importeren"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impor Dompet"
           }
         }
       }
@@ -10347,6 +11229,12 @@
             "state": "translated",
             "value": "Wallet wordt geïmporteerd..."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengimpor Dompet..."
+          }
         }
       }
     },
@@ -10413,6 +11301,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Info"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "Info"
@@ -10487,6 +11381,12 @@
             "state": "translated",
             "value": "Onvoldoende ontgrendeld saldo voor bedrag + vergoeding."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo yang tidak terkunci tidak cukup untuk jumlah + biaya."
+          }
         }
       }
     },
@@ -10556,6 +11456,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Onvoldoende ontgrendeld saldo."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo yang tidak terkunci tidak cukup."
           }
         }
       }
@@ -10628,6 +11534,12 @@
             "state": "translated",
             "value": "Ongeldig bedrag"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jumlah tidak valid"
+          }
         }
       }
     },
@@ -10697,6 +11609,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ongeldig formaat voor betalings-URI."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format URI pembayaran tidak valid."
           }
         }
       }
@@ -10768,6 +11686,12 @@
             "state": "translated",
             "value": "Ongeldige QR-code. Monero-adres of betalings-URI verwacht."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kode QR tidak valid. Diharapkan alamat Monero atau URI pembayaran."
+          }
         }
       }
     },
@@ -10838,6 +11762,12 @@
             "state": "translated",
             "value": "Keychain-fout (status: %lld)."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kesalahan keychain (status: %lld)."
+          }
         }
       }
     },
@@ -10904,6 +11834,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Label"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "Label"
@@ -10978,6 +11914,12 @@
             "state": "translated",
             "value": "Adressen worden geladen…"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memuat alamat…"
+          }
         }
       }
     },
@@ -11049,6 +11991,12 @@
             "state": "translated",
             "value": "Ontvangstadressen worden geladen…"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memuat alamat terima…"
+          }
         }
       }
     },
@@ -11115,6 +12063,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mainnet"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "Mainnet"
@@ -11190,6 +12144,12 @@
             "state": "translated",
             "value": "Beheer node-toegang, apparaatbeveiliging en herstelgedrag."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kelola akses node, keamanan perangkat, dan perilaku pemulihan."
+          }
         }
       }
     },
@@ -11260,6 +12220,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maximaal verzendbaar bedrag geschat."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jumlah maksimum yang dapat dikirim telah diestimasi."
           }
         }
       }
@@ -11332,6 +12298,12 @@
             "state": "translated",
             "value": "Maximaal besteedbaar saldo uitgezonden."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo maksimum yang dapat dibelanjakan telah disiarkan."
+          }
         }
       }
     },
@@ -11401,6 +12373,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "MIT-gelicentieerde, niet-geauditeerde software. Je bent zelf verantwoordelijk voor je seed en tegoeden. De standaard externe node kan je IP-adres en walletsynchronisatieverzoeken zien — draai je eigen node voor sterkere privacy. Optionele fiatschattingen maken, indien ingeschakeld, verbinding met api.kraken.com en api.frankfurter.dev."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perangkat lunak berlisensi MIT, belum diaudit. Anda bertanggung jawab atas seed dan dana Anda. Node jarak jauh default dapat melihat IP dan kueri sinkronisasi dompet Anda — jalankan node Anda sendiri untuk privasi yang lebih kuat. Estimasi fiat opsional, jika diaktifkan, akan menghubungi api.kraken.com dan api.frankfurter.dev."
           }
         }
       }
@@ -11472,6 +12450,12 @@
             "state": "translated",
             "value": "Mnemonic (plakken):"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mnemonic (tempel):"
+          }
         }
       }
     },
@@ -11541,6 +12525,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mnemonic mag niet leeg zijn."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mnemonic tidak boleh kosong."
           }
         }
       }
@@ -11612,6 +12602,12 @@
             "state": "translated",
             "value": "Modus"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
+          }
         }
       }
     },
@@ -11681,6 +12677,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Monero-adres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat Monero"
           }
         }
       }
@@ -11752,6 +12754,12 @@
             "state": "translated",
             "value": "Monero-ontvangst-QR"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR terima Monero"
+          }
         }
       }
     },
@@ -11821,6 +12829,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Netwerk & Node"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaringan & Node"
           }
         }
       }
@@ -11892,6 +12906,12 @@
             "state": "translated",
             "value": "Netwerkhoogte"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi Jaringan"
+          }
         }
       }
     },
@@ -11961,6 +12981,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nieuw Adres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat Baru"
           }
         }
       }
@@ -12033,6 +13059,12 @@
             "state": "translated",
             "value": "Label voor nieuw adres"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Label alamat baru"
+          }
         }
       }
     },
@@ -12102,6 +13134,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Label voor nieuw adres (optioneel)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Label alamat baru (opsional)"
           }
         }
       }
@@ -12174,6 +13212,12 @@
             "state": "translated",
             "value": "Nieuw ontvangstadres"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat terima baru"
+          }
         }
       }
     },
@@ -12245,6 +13289,12 @@
             "state": "translated",
             "value": "NEXAWAL"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEXAWAL"
+          }
         }
       }
     },
@@ -12311,6 +13361,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal %@ (%@)"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "NexaWal %@ (%@)"
@@ -12386,6 +13442,12 @@
             "state": "translated",
             "value": "NexaWal heeft cameratoegang nodig om QR-codes te scannen voor het verzenden van Monero."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal membutuhkan akses kamera untuk memindai kode QR guna mengirim Monero."
+          }
         }
       }
     },
@@ -12456,6 +13518,12 @@
             "state": "translated",
             "value": "Er zijn geen biometrische gegevens geregistreerd op dit apparaat."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada informasi biometrik yang terdaftar di perangkat ini."
+          }
         }
       }
     },
@@ -12525,6 +13593,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geen camera gevonden"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada kamera yang ditemukan"
           }
         }
       }
@@ -12597,6 +13671,12 @@
             "state": "translated",
             "value": "Geen opgeslagen walletmetadata gevonden"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada metadata dompet tersimpan yang ditemukan"
+          }
         }
       }
     },
@@ -12668,6 +13748,12 @@
             "state": "translated",
             "value": "Er is geen opgeslagen wallet gevonden"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada dompet tersimpan yang ditemukan"
+          }
         }
       }
     },
@@ -12737,6 +13823,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nog geen transacties."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada transaksi."
           }
         }
       }
@@ -12808,6 +13900,12 @@
             "state": "translated",
             "value": "Geen ontgrendeld saldo beschikbaar om te verzenden na de vergoeding."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada saldo tidak terkunci yang tersedia untuk dikirim setelah biaya."
+          }
         }
       }
     },
@@ -12878,6 +13976,12 @@
             "state": "translated",
             "value": "Geen geldig adres in betalings-URI."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada alamat valid dalam URI pembayaran."
+          }
         }
       }
     },
@@ -12947,6 +14051,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Er is geen wallet opgeslagen op dit apparaat."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada dompet yang tersimpan di perangkat ini."
           }
         }
       }
@@ -13019,6 +14129,12 @@
             "state": "translated",
             "value": "Geen wallet geopend"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada dompet yang terbuka"
+          }
         }
       }
     },
@@ -13085,6 +14201,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "Node"
@@ -13159,6 +14281,12 @@
             "state": "translated",
             "value": "Node onbereikbaar"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node tidak dapat dijangkau"
+          }
         }
       }
     },
@@ -13228,6 +14356,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Notitie voor de betaler"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catatan untuk pembayar"
           }
         }
       }
@@ -13300,6 +14434,12 @@
             "state": "translated",
             "value": "Nog niets om te delen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada yang bisa dibagikan"
+          }
         }
       }
     },
@@ -13370,6 +14510,12 @@
             "state": "translated",
             "value": "Uit"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nonaktif"
+          }
         }
       }
     },
@@ -13439,6 +14585,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aan"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktif"
           }
         }
       }
@@ -13511,6 +14663,12 @@
             "state": "translated",
             "value": "Wijzig de scan-lookahead alleen als een import onvolledig lijkt na het gebruik van de juiste hersteldhoogte."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ubah lookahead pemindaian hanya jika impor terlihat tidak lengkap setelah menggunakan tinggi pemulihan yang benar."
+          }
         }
       }
     },
@@ -13581,6 +14739,12 @@
             "state": "translated",
             "value": "Wijzig deze waarden alleen als een walletimport onvolledig lijkt na het gebruik van de juiste hersteldhoogte."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ubah nilai-nilai ini hanya jika impor dompet terlihat tidak lengkap setelah menggunakan tinggi pemulihan yang benar."
+          }
         }
       }
     },
@@ -13650,6 +14814,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Openen in Explorer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka di Explorer"
           }
         }
       }
@@ -13722,6 +14892,12 @@
             "state": "translated",
             "value": "Optioneel label"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Label opsional"
+          }
         }
       }
     },
@@ -13791,6 +14967,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Optioneel. Indien ingeschakeld, haalt NexaWal een publieke XMR-koers op bij Kraken (api.kraken.com) en, indien nodig, fiat-wisselkoersen bij Frankfurter (api.frankfurter.dev). Deze servers zien je IP-adres. Bedragen en adressen worden niet verzonden. Fiatopzoekingen gebruiken clearnet-HTTPS en staan los van de node-/I2P-proxy-instellingen. Alleen schattingen — XMR is wat je verzendt en aanhoudt."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opsional. Jika diaktifkan, NexaWal mengambil harga XMR publik dari Kraken (api.kraken.com) dan, jika perlu, kurs fiat dari Frankfurter (api.frankfurter.dev). Server tersebut dapat melihat IP Anda. Jumlah dan alamat tidak dikirim. Pencarian fiat menggunakan HTTPS clearnet dan terpisah dari pengaturan node / proksi I2P. Hanya estimasi — XMR adalah yang Anda kirim dan simpan."
           }
         }
       }
@@ -13863,6 +15045,12 @@
             "state": "translated",
             "value": "Plak mnemonic van 25 woorden…"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempel mnemonic 25 kata…"
+          }
         }
       }
     },
@@ -13932,6 +15120,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Betalingsgegevens geladen vanaf QR-code."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detail pembayaran dimuat dari kode QR."
           }
         }
       }
@@ -14004,6 +15198,12 @@
             "state": "translated",
             "value": "Betalingsverzoek (optioneel)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan pembayaran (opsional)"
+          }
         }
       }
     },
@@ -14073,6 +15273,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Betalingsverzoek (Optioneel)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan Pembayaran (opsional)"
           }
         }
       }
@@ -14145,6 +15351,12 @@
             "state": "translated",
             "value": "Betalings-URI"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URI Pembayaran"
+          }
         }
       }
     },
@@ -14216,6 +15428,12 @@
             "state": "translated",
             "value": "Betalings-URI gekopieerd"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URI Pembayaran disalin"
+          }
         }
       }
     },
@@ -14286,6 +15504,12 @@
             "state": "translated",
             "value": "Betalings-URI gekopieerd naar klembord"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URI Pembayaran disalin ke papan klip"
+          }
         }
       }
     },
@@ -14355,6 +15579,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "In behandeling"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tertunda"
           }
         }
       }
@@ -14427,6 +15657,12 @@
             "state": "translated",
             "value": "Vergoeding bekijken"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratinjau biaya"
+          }
         }
       }
     },
@@ -14496,6 +15732,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vergoeding Bekijken"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratinjau Biaya"
           }
         }
       }
@@ -14568,6 +15810,12 @@
             "state": "translated",
             "value": "Maximale verzending bekijken"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratinjau kirim maksimum"
+          }
         }
       }
     },
@@ -14638,6 +15886,12 @@
             "state": "translated",
             "value": "Bekijk de vergoeding voordat je verzendt naar %@."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratinjau biaya sebelum mengirim ke %@."
+          }
         }
       }
     },
@@ -14707,6 +15961,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bekijk de vergoeding voordat je verzendt."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratinjau biaya sebelum mengirim."
           }
         }
       }
@@ -14779,6 +16039,12 @@
             "state": "translated",
             "value": "Bekijk het maximale bedrag voordat je verzendt."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pratinjau jumlah maksimum sebelum mengirim."
+          }
         }
       }
     },
@@ -14850,6 +16116,12 @@
             "state": "translated",
             "value": "Primair"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utama"
+          }
         }
       }
     },
@@ -14919,6 +16191,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Privacybeleid"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kebijakan privasi"
           }
         }
       }
@@ -14991,6 +16269,12 @@
             "state": "translated",
             "value": "Voortgang"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progres"
+          }
         }
       }
     },
@@ -15060,6 +16344,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Voorbeeld van proxy: 127.0.0.1:4444. Laat dit leeg als je wilt — synchronisatie mislukt totdat een werkende I2P-node en proxy zijn ingesteld."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contoh proksi: 127.0.0.1:4444. Kosongkan jika Anda mau — sinkronisasi akan gagal sampai node dan proksi I2P yang berfungsi ditetapkan."
           }
         }
       }
@@ -15132,6 +16422,12 @@
             "state": "translated",
             "value": "QR niet beschikbaar"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR tidak tersedia"
+          }
         }
       }
     },
@@ -15201,6 +16497,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ontvangen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terima"
           }
         }
       }
@@ -15273,6 +16575,12 @@
             "state": "translated",
             "value": "Ontvangstadres"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat terima"
+          }
         }
       }
     },
@@ -15342,6 +16650,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ontvangstadres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat Terima"
           }
         }
       }
@@ -15413,6 +16727,12 @@
             "state": "translated",
             "value": "Monero Ontvangen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terima Monero"
+          }
         }
       }
     },
@@ -15482,6 +16802,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "XMR Ontvangen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terima XMR"
           }
         }
       }
@@ -15553,6 +16879,12 @@
             "state": "translated",
             "value": "Ontvangen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diterima"
+          }
         }
       }
     },
@@ -15622,6 +16954,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recente Transacties"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transaksi Terbaru"
           }
         }
       }
@@ -15693,6 +17031,12 @@
             "state": "translated",
             "value": "Ontvanger"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penerima"
+          }
         }
       }
     },
@@ -15762,6 +17106,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Herstel"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemulihan"
           }
         }
       }
@@ -15833,6 +17183,12 @@
             "state": "translated",
             "value": "Vernieuwen mislukt: %@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gagal menyegarkan: %@"
+          }
         }
       }
     },
@@ -15902,6 +17258,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wallet Vernieuwen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segarkan Dompet"
           }
         }
       }
@@ -15974,6 +17336,12 @@
             "state": "translated",
             "value": "Vernieuwd"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disegarkan"
+          }
         }
       }
     },
@@ -16043,6 +17411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bezig met vernieuwen..."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menyegarkan..."
           }
         }
       }
@@ -16115,6 +17489,12 @@
             "state": "translated",
             "value": "Bezig met vernieuwen…"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menyegarkan…"
+          }
         }
       }
     },
@@ -16184,6 +17564,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Resterend"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tersisa"
           }
         }
       }
@@ -16255,6 +17641,12 @@
             "state": "translated",
             "value": "Vervangen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganti"
+          }
         }
       }
     },
@@ -16324,6 +17716,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bestaande wallet vervangen?"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganti dompet yang sudah ada?"
           }
         }
       }
@@ -16396,6 +17794,12 @@
             "state": "translated",
             "value": "Apparaatverificatie vereisen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wajibkan autentikasi perangkat"
+          }
         }
       }
     },
@@ -16465,6 +17869,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Face ID / Touch ID Vereisen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wajibkan Face ID / Touch ID"
           }
         }
       }
@@ -16536,6 +17946,12 @@
             "state": "translated",
             "value": "Herscannen mislukt: %@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai ulang gagal: %@"
+          }
         }
       }
     },
@@ -16605,6 +18021,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Herscannen mislukt: mnemonic is niet beschikbaar."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai ulang gagal: mnemonic tidak tersedia."
           }
         }
       }
@@ -16677,6 +18099,12 @@
             "state": "translated",
             "value": "Herscannen vanaf hoogte"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai ulang dari tinggi"
+          }
         }
       }
     },
@@ -16747,6 +18175,12 @@
             "state": "translated",
             "value": "Herscannen vanaf Hoogte"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai Ulang dari Tinggi"
+          }
         }
       }
     },
@@ -16816,6 +18250,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bezig met herscannen vanaf %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memindai ulang dari %lld"
           }
         }
       }
@@ -16888,6 +18328,12 @@
             "state": "translated",
             "value": "Herstellen en herscannen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulihkan dan pindai ulang"
+          }
         }
       }
     },
@@ -16957,6 +18403,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hersteldhoogte"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi pemulihan"
           }
         }
       }
@@ -17028,6 +18480,12 @@
             "state": "translated",
             "value": "Hersteldhoogte:"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi Pemulihan:"
+          }
         }
       }
     },
@@ -17097,6 +18555,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Node opslaan"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan node"
           }
         }
       }
@@ -17168,6 +18632,12 @@
             "state": "translated",
             "value": "Scan-lookahead opslaan"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan lookahead pemindaian"
+          }
         }
       }
     },
@@ -17237,6 +18707,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Beide opgeslagen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keduanya disimpan"
           }
         }
       }
@@ -17308,6 +18784,12 @@
             "state": "translated",
             "value": "Clearnet opgeslagen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearnet disimpan"
+          }
         }
       }
     },
@@ -17377,6 +18859,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I2P opgeslagen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P disimpan"
           }
         }
       }
@@ -17448,6 +18936,12 @@
             "state": "translated",
             "value": "Node opgeslagen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node disimpan"
+          }
         }
       }
     },
@@ -17517,6 +19011,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scan-lookahead opgeslagen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lookahead pemindaian disimpan"
           }
         }
       }
@@ -17588,6 +19088,12 @@
             "state": "translated",
             "value": "Extra accounts of subadressen scannen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai akun atau subalamat tambahan"
+          }
         }
       }
     },
@@ -17657,6 +19163,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scannen via clearnet, uitzenden via I2P"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai clearnet, siarkan I2P"
           }
         }
       }
@@ -17728,6 +19240,12 @@
             "state": "translated",
             "value": "Monero-QR-code Scannen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai kode QR Monero"
+          }
         }
       }
     },
@@ -17797,6 +19315,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "QR-code scannen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai kode QR"
           }
         }
       }
@@ -17868,6 +19392,12 @@
             "state": "translated",
             "value": "Scannen om te Betalen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pindai untuk Membayar"
+          }
         }
       }
     },
@@ -17937,6 +19467,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gescand"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dipindai"
           }
         }
       }
@@ -18008,6 +19544,12 @@
             "state": "translated",
             "value": "Gescand tot blok %lld"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dipindai hingga blok %lld"
+          }
         }
       }
     },
@@ -18077,6 +19619,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Blockchain wordt gescand"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memindai blockchain"
           }
         }
       }
@@ -18148,6 +19696,12 @@
             "state": "translated",
             "value": "Beveiliging"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keamanan"
+          }
         }
       }
     },
@@ -18217,6 +19771,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Zelf"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sendiri"
           }
         }
       }
@@ -18288,6 +19848,12 @@
             "state": "translated",
             "value": "Verzenden"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim"
+          }
         }
       }
     },
@@ -18358,6 +19924,12 @@
             "state": "translated",
             "value": "Verzend %@ naar %@.\nVergoeding: %@\nTotaal: %@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim %@ ke %@.\nBiaya: %@\nTotal: %@"
+          }
         }
       }
     },
@@ -18427,6 +19999,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verzenden mislukt: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengiriman gagal: %@"
           }
         }
       }
@@ -18499,6 +20077,12 @@
             "state": "translated",
             "value": "Maximaal verzenden"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim maksimum"
+          }
         }
       }
     },
@@ -18568,6 +20152,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maximaal Verzenden"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim Maksimum"
           }
         }
       }
@@ -18639,6 +20229,12 @@
             "state": "translated",
             "value": "XMR Verzenden"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim XMR"
+          }
         }
       }
     },
@@ -18709,6 +20305,12 @@
             "state": "translated",
             "value": "Bezig met verzenden..."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengirim..."
+          }
         }
       }
     },
@@ -18778,6 +20380,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verzonden"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terkirim"
           }
         }
       }
@@ -18850,6 +20458,12 @@
             "state": "translated",
             "value": "Maximum verzonden"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maksimum terkirim"
+          }
         }
       }
     },
@@ -18919,6 +20533,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Instellingen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan"
           }
         }
       }
@@ -18991,6 +20611,12 @@
             "state": "translated",
             "value": "Delen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bagikan"
+          }
         }
       }
     },
@@ -19060,6 +20686,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Betalingslink Delen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bagikan Tautan Pembayaran"
           }
         }
       }
@@ -19132,6 +20764,12 @@
             "state": "translated",
             "value": "Tonen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan"
+          }
         }
       }
     },
@@ -19201,6 +20839,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fiatschattingen tonen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan estimasi fiat"
           }
         }
       }
@@ -19272,6 +20916,12 @@
             "state": "translated",
             "value": "Toon de QR-code, kopieer het adres, of maak een nieuw ontvangstadres aan voor meer privacy."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan kode QR, salin alamat, atau buat alamat terima baru untuk privasi yang lebih baik."
+          }
         }
       }
     },
@@ -19341,6 +20991,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Broncode & licentie (MIT)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumber & lisensi (MIT)"
           }
         }
       }
@@ -19412,6 +21068,12 @@
             "state": "translated",
             "value": "Standaard niet-neon uiterlijk. Laat uit voor het neon-terminalthema (standaard)."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilan standar non-neon. Biarkan nonaktif untuk tema terminal neon (default)."
+          }
         }
       }
     },
@@ -19481,6 +21143,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Begin de node-URL met http:// of https://"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mulai URL node dengan http:// atau https://"
           }
         }
       }
@@ -19553,6 +21221,12 @@
             "state": "translated",
             "value": "Startshoogte (snel):"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi mulai (cepat):"
+          }
         }
       }
     },
@@ -19622,6 +21296,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Startshoogte (snel): %lld (nodetop − 10)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi mulai (cepat): %lld (ujung node − 10)"
           }
         }
       }
@@ -19693,6 +21373,12 @@
             "state": "translated",
             "value": "Startshoogte (snel): niet beschikbaar (gebruikt 0)"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi mulai (cepat): tidak tersedia (akan menggunakan 0)"
+          }
         }
       }
     },
@@ -19763,6 +21449,12 @@
             "state": "translated",
             "value": "Startshoogte: bezig met ophalen bij node…"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinggi mulai: mengambil dari node…"
+          }
         }
       }
     },
@@ -19829,6 +21521,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "Status"
@@ -19904,6 +21602,12 @@
             "state": "translated",
             "value": "Opgeslagen metadata bevat geen mnemonic"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Metadata tersimpan tidak mengandung mnemonic"
+          }
         }
       }
     },
@@ -19973,6 +21677,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opgeslagen mnemonic kon niet worden gevonden."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mnemonic tersimpan tidak dapat ditemukan."
           }
         }
       }
@@ -20044,6 +21754,12 @@
             "state": "translated",
             "value": "Subadres %lld"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subalamat %lld"
+          }
         }
       }
     },
@@ -20113,6 +21829,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Samenvatting"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan"
           }
         }
       }
@@ -20184,6 +21906,12 @@
             "state": "translated",
             "value": "Maximaal besteedbaar bedrag verzonden vanaf geselecteerd subadres via %@."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menyapu maksimum yang dapat dibelanjakan dari subalamat terpilih melalui %@."
+          }
         }
       }
     },
@@ -20253,6 +21981,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maximaal besteedbaar bedrag verzonden via %@."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menyapu maksimum yang dapat dibelanjakan melalui %@."
           }
         }
       }
@@ -20324,6 +22058,12 @@
             "state": "translated",
             "value": "Wisselen tussen XMR en %@"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beralih antara XMR dan %@"
+          }
         }
       }
     },
@@ -20393,6 +22133,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Synchronisatievoortgang %lld procent"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progres sinkronisasi %lld persen"
           }
         }
       }
@@ -20464,6 +22210,12 @@
             "state": "translated",
             "value": "Synchronisatie gestagneerd"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sinkronisasi terhenti"
+          }
         }
       }
     },
@@ -20533,6 +22285,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wallet wordt gesynchroniseerd"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menyinkronkan dompet"
           }
         }
       }
@@ -20604,6 +22362,12 @@
             "state": "translated",
             "value": "Tik op Wallet Vernieuwen om door te gaan (of open de app opnieuw)."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketuk Segarkan Dompet untuk melanjutkan (atau buka ulang aplikasi)."
+          }
         }
       }
     },
@@ -20673,6 +22437,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dit is je herstelseed. Schrijf het op papier en bewaar het op een veilige plek. Iedereen met deze woorden heeft toegang tot je tegoeden — nexawal uploadt of maakt hier nooit een back-up van voor jou."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ini adalah seed pemulihan Anda. Tuliskan di atas kertas dan simpan di tempat yang aman. Siapa pun yang memiliki kata-kata ini dapat mengakses dana Anda — nexawal tidak pernah mengunggah atau membuat cadangannya untuk Anda."
           }
         }
       }
@@ -20745,6 +22515,12 @@
             "state": "translated",
             "value": "Dit reset de scanstatus en begint opnieuw vanaf de hoogte die je invoert."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ini akan mengatur ulang status pemindaian dan mulai dari awal dari tinggi yang Anda masukkan."
+          }
         }
       }
     },
@@ -20814,6 +22590,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dit vervangt de bestaande wallet op dit apparaat.\n\nAls je doorgaat, worden de huidige opgeslagen mnemonic en scanstatus verwijderd. Zorg ervoor dat je een back-up van je mnemonic hebt voordat je doorgaat."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ini akan mengganti dompet yang sudah ada di perangkat ini.\n\nJika Anda melanjutkan, mnemonic dan status pemindaian yang tersimpan saat ini akan dihapus. Pastikan Anda telah mencadangkan mnemonic Anda sebelum melanjutkan."
           }
         }
       }
@@ -20885,6 +22667,12 @@
             "state": "translated",
             "value": "Doorvoer"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Throughput"
+          }
         }
       }
     },
@@ -20955,6 +22743,12 @@
             "state": "translated",
             "value": "Tijd"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waktu"
+          }
         }
       }
     },
@@ -21024,6 +22818,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tip: 0 scant de volledige chaingeschiedenis. Dit is de veiligste optie als je het niet zeker weet, maar synchronisatie kan langer duren."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tip: 0 memindai seluruh riwayat rantai. Ini adalah opsi paling aman jika Anda tidak yakin, tetapi sinkronisasi bisa memakan waktu lebih lama."
           }
         }
       }
@@ -21096,6 +22896,12 @@
             "state": "translated",
             "value": "Naar"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ke"
+          }
         }
       }
     },
@@ -21166,6 +22972,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Naar adres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ke alamat"
           }
         }
       }
@@ -21238,6 +23050,12 @@
             "state": "translated",
             "value": "Totaal"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total"
+          }
         }
       }
     },
@@ -21307,6 +23125,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Totaal (bedrag + vergoeding)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total (jumlah + biaya)"
           }
         }
       }
@@ -21379,6 +23203,12 @@
             "state": "translated",
             "value": "Totaal Saldo"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo Total"
+          }
         }
       }
     },
@@ -21448,6 +23278,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transactie"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transaksi"
           }
         }
       }
@@ -21519,6 +23355,12 @@
             "state": "translated",
             "value": "Transactie uitgezonden vanaf geselecteerd subadres via %@."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transaksi disiarkan dari subalamat terpilih melalui %@."
+          }
         }
       }
     },
@@ -21588,6 +23430,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transactie uitgezonden via %@."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transaksi disiarkan melalui %@."
           }
         }
       }
@@ -21660,6 +23508,12 @@
             "state": "translated",
             "value": "Transactie uitgezonden."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transaksi disiarkan."
+          }
         }
       }
     },
@@ -21726,6 +23580,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TXID"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "TXID"
@@ -21800,6 +23660,12 @@
             "state": "translated",
             "value": "Type"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tipe"
+          }
         }
       }
     },
@@ -21869,6 +23735,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Voer de volledige URL in, inclusief http:// of https://."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketik URL lengkap, termasuk http:// atau https://."
           }
         }
       }
@@ -21940,6 +23812,12 @@
             "state": "translated",
             "value": "Voer de volledige URL in, inclusief http:// of https://.\nPubliek: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketik URL lengkap, termasuk http:// atau https://.\nPublik: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
+          }
         }
       }
     },
@@ -22009,6 +23887,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kan walletmetadata niet decoderen."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat mendekode metadata dompet."
           }
         }
       }
@@ -22080,6 +23964,12 @@
             "state": "translated",
             "value": "Kan walletmetadata niet coderen."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat mengenkode metadata dompet."
+          }
         }
       }
     },
@@ -22149,6 +24039,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Onbekend adres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alamat tidak dikenal"
           }
         }
       }
@@ -22220,6 +24116,12 @@
             "state": "translated",
             "value": "Onbekende status van camera-toestemming"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status izin kamera tidak dikenal"
+          }
         }
       }
     },
@@ -22289,6 +24191,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bestaande Wallet Ontgrendelen"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Kunci Dompet yang Ada"
           }
         }
       }
@@ -22361,6 +24269,12 @@
             "state": "translated",
             "value": "Wallet ontgrendelen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka kunci dompet"
+          }
         }
       }
     },
@@ -22430,6 +24344,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ontgrendel je wallet"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka kunci dompet Anda"
           }
         }
       }
@@ -22501,6 +24421,12 @@
             "state": "translated",
             "value": "Ontgrendeld"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak terkunci"
+          }
         }
       }
     },
@@ -22570,6 +24496,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wallet wordt ontgrendeld..."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka Kunci Dompet..."
           }
         }
       }
@@ -22642,6 +24574,12 @@
             "state": "translated",
             "value": "Bezig met ontgrendelen..."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka kunci..."
+          }
         }
       }
     },
@@ -22712,6 +24650,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gebruik biometrie of apparaatgegevens voor toegang tot de wallet en verzenden."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gunakan biometrik atau kredensial perangkat untuk akses dompet dan pengiriman."
           }
         }
       }
@@ -22784,6 +24728,12 @@
             "state": "translated",
             "value": "Gebruik Verzenden en Ontvangen voor betalingen en nieuwe adressen."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gunakan Kirim dan Terima untuk pembayaran dan alamat baru."
+          }
         }
       }
     },
@@ -22853,6 +24803,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gebruik deze node"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gunakan node ini"
           }
         }
       }
@@ -22924,6 +24880,12 @@
             "state": "translated",
             "value": "Wachten op netwerkhoogte"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menunggu tinggi jaringan"
+          }
         }
       }
     },
@@ -22993,6 +24955,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wallet"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dompet"
           }
         }
       }
@@ -23064,6 +25032,12 @@
             "state": "translated",
             "value": "Wallet moet ontgrendeld zijn voordat je de biometrische beveiliging wijzigt."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dompet harus dibuka kuncinya sebelum mengubah proteksi biometrik."
+          }
         }
       }
     },
@@ -23133,6 +25107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opslaan van wallet mislukt: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penyimpanan dompet gagal: %@"
           }
         }
       }
@@ -23204,6 +25184,12 @@
             "state": "translated",
             "value": "Wallet Instellen"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penyiapan Dompet"
+          }
         }
       }
     },
@@ -23273,6 +25259,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wallet gesynchroniseerd"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dompet tersinkronkan"
           }
         }
       }
@@ -23344,6 +25336,12 @@
             "state": "translated",
             "value": "WalletCore-versie:"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi WalletCore:"
+          }
         }
       }
     },
@@ -23413,6 +25411,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Waarschuwing: als je een hersteldhoogte instelt na je eerste transactie, verschijnen oudere tegoeden pas nadat je opnieuw scant vanaf een eerdere hoogte."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peringatan: Jika Anda menetapkan tinggi pemulihan setelah transaksi pertama Anda, dana yang lebih lama tidak akan muncul sampai Anda memindai ulang dari tinggi yang lebih awal."
           }
         }
       }
@@ -23485,6 +25489,12 @@
             "state": "translated",
             "value": "Waarvoor is dit?"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Untuk apa ini?"
+          }
         }
       }
     },
@@ -23554,6 +25564,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indien ingeschakeld, is apparaatverificatie vereist om de opgeslagen wallet te openen en tegoeden te verzenden."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika diaktifkan, membuka dompet yang tersimpan dan mengirim dana akan memerlukan autentikasi perangkat."
           }
         }
       }
@@ -23625,6 +25641,12 @@
             "state": "translated",
             "value": "Woord #%lld:"
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata #%lld:"
+          }
         }
       }
     },
@@ -23694,6 +25716,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Woord(en) komen nog niet overeen."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata belum cocok."
           }
         }
       }
@@ -23766,6 +25794,12 @@
             "state": "translated",
             "value": "Schrijf deze woorden in volgorde op en bewaar ze op een veilige plek. Je hebt ze nodig om je wallet te herstellen — ze worden nooit op dit apparaat opgeslagen."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tuliskan kata-kata ini secara berurutan dan simpan di tempat yang aman. Anda akan membutuhkannya untuk memulihkan dompet Anda — kata-kata ini tidak pernah disimpan di perangkat ini."
+          }
         }
       }
     },
@@ -23836,6 +25870,12 @@
             "state": "translated",
             "value": "Verkeerde node? Wijzig de verbindingsmethode of de node hierboven — een herscan is niet nodig.\nOntbrekende tegoeden? Herscan vanaf je hersteldhoogte.\nLaatste redmiddel: volledige herscan vanaf blok 0."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node salah? Ubah cara menghubungkan atau node di atas — Anda tidak perlu memindai ulang.\nDana hilang? Pindai ulang dari tinggi pemulihan Anda.\nPilihan terakhir: pindai ulang penuh dari blok 0."
+          }
         }
       }
     },
@@ -23897,6 +25937,12 @@
           }
         },
         "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR"
+          }
+        },
+        "id": {
           "stringUnit": {
             "state": "translated",
             "value": "XMR"
@@ -23972,6 +26018,12 @@
             "state": "translated",
             "value": "Je kunt Face ID gebruiken om je wallet te beveiligen."
           }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anda dapat menggunakan Face ID untuk mengamankan dompet Anda."
+          }
         }
       }
     },
@@ -24042,6 +26094,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Je herstelseed:"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seed pemulihan Anda:"
           }
         }
       }
