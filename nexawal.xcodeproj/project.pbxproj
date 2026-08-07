@@ -112,7 +112,6 @@
 				id,
 				tr,
 				hi,
-				Base,
 				ro,
 				nb,
 				ar,
@@ -126,6 +125,19 @@
 				vi,
 				th,
 				"zh-Hant",
+				yo,
+				hu,
+				tl,
+				sl,
+				my,
+				az,
+				ms,
+				bn,
+				lt,
+				ur,
+				fi,
+				lv,
+				Base,
 			);
 			mainGroup = AAABE4452EDEBF11004D56AB;
 			minimizedProjectReferenceProxies = 1;
