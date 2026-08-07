@@ -56,6 +56,12 @@
             "state": "translated",
             "value": ""
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ""
+          }
         }
       }
     },
@@ -120,6 +126,12 @@
             "state": "translated",
             "value": "\nImporto %@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\nBedrag %@"
+          }
         }
       }
     },
@@ -183,6 +195,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "\nCommissione %@"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "\nVergoeding %@"
           }
         }
       }
@@ -249,6 +267,12 @@
             "state": "translated",
             "value": "(non disponibile)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(niet beschikbaar)"
+          }
         }
       }
     },
@@ -314,6 +338,12 @@
             "state": "translated",
             "value": "%.1f blocchi/s"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%.1f blk/s"
+          }
         }
       }
     },
@@ -372,6 +402,12 @@
             "state": "translated",
             "value": "%1$@ — %2$@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ — %2$@"
+          }
         }
       }
     },
@@ -426,6 +462,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld"
@@ -494,6 +536,12 @@
             "state": "translated",
             "value": "%lld blocchi"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld blokken"
+          }
         }
       }
     },
@@ -557,6 +605,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld blocchi rimanenti"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld blokken resterend"
           }
         }
       }
@@ -622,6 +676,12 @@
             "state": "translated",
             "value": "%lld conf"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld bev."
+          }
         }
       }
     },
@@ -676,6 +736,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld."
@@ -738,6 +804,12 @@
             "state": "translated",
             "value": "%llu"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%llu"
+          }
         }
       }
     },
@@ -792,6 +864,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "0"
@@ -855,6 +933,12 @@
             "state": "translated",
             "value": "0.0"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0"
+          }
         }
       }
     },
@@ -910,6 +994,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0000"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "0.0000"
@@ -979,6 +1069,12 @@
             "state": "translated",
             "value": "0.0 XMR"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0 XMR"
+          }
         }
       }
     },
@@ -1042,6 +1138,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verrà generato un nuovo indirizzo di ricezione (sottoindirizzo) per la privacy."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er wordt een nieuw ontvangstadres (subadres) gegenereerd voor privacy."
           }
         }
       }
@@ -1108,6 +1210,12 @@
             "state": "translated",
             "value": "Un invio è già in corso. Attendi che finisca."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er is al een verzending bezig. Wacht tot deze is voltooid."
+          }
         }
       }
     },
@@ -1173,6 +1281,12 @@
             "state": "translated",
             "value": "Un wallet è già memorizzato su questo dispositivo."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er is al een wallet opgeslagen op dit apparaat."
+          }
         }
       }
     },
@@ -1237,6 +1351,12 @@
             "state": "translated",
             "value": "Informazioni"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Over"
+          }
         }
       }
     },
@@ -1300,6 +1420,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lookahead account (1-1000)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Account-lookahead (1-1000)"
           }
         }
       }
@@ -1366,6 +1492,12 @@
             "state": "translated",
             "value": "Account (lookahead)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accounts (lookahead)"
+          }
         }
       }
     },
@@ -1430,6 +1562,12 @@
             "state": "translated",
             "value": "Azioni"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acties"
+          }
         }
       }
     },
@@ -1493,6 +1631,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indirizzo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres"
           }
         }
       }
@@ -1559,6 +1703,12 @@
             "state": "translated",
             "value": "Indirizzo copiato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres gekopieerd"
+          }
         }
       }
     },
@@ -1623,6 +1773,12 @@
             "state": "translated",
             "value": "Indirizzo copiato negli appunti"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres gekopieerd naar klembord"
+          }
         }
       }
     },
@@ -1686,6 +1842,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indirizzo caricato dal codice QR."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres geladen vanaf QR-code."
           }
         }
       }
@@ -1752,6 +1914,12 @@
             "state": "translated",
             "value": "Ripristino avanzato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geavanceerd herstel"
+          }
         }
       }
     },
@@ -1816,6 +1984,12 @@
             "state": "translated",
             "value": "Ripristino Avanzato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geavanceerd Herstel"
+          }
         }
       }
     },
@@ -1879,6 +2053,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bedrag"
           }
         }
       }
@@ -1945,6 +2125,12 @@
             "state": "translated",
             "value": "Importo (XMR)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bedrag (XMR)"
+          }
         }
       }
     },
@@ -2008,6 +2194,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importo impostato al massimo spendibile. La commissione finale potrebbe variare leggermente al momento dell'invio."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bedrag ingesteld op maximaal besteedbaar. De uiteindelijke vergoeding kan iets afwijken bij verzending."
           }
         }
       }
@@ -2073,6 +2265,12 @@
             "state": "translated",
             "value": "Aspetto"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weergave"
+          }
         }
       }
     },
@@ -2136,6 +2334,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Applica impostazioni I2P"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P-instellingen toepassen"
           }
         }
       }
@@ -2202,6 +2406,12 @@
             "state": "translated",
             "value": "Autenticati per aprire il wallet Monero memorizzato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifieer om de opgeslagen Monero-wallet te openen"
+          }
         }
       }
     },
@@ -2265,6 +2475,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autenticati per inviare Monero"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifieer om Monero te verzenden"
           }
         }
       }
@@ -2331,6 +2547,12 @@
             "state": "translated",
             "value": "Autenticati per svuotare il saldo del wallet"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifieer om het volledige walletsaldo over te maken"
+          }
         }
       }
     },
@@ -2395,6 +2617,12 @@
             "state": "translated",
             "value": "Autenticati per disattivare la protezione Face ID"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifieer om Face ID-beveiliging uit te schakelen"
+          }
         }
       }
     },
@@ -2458,6 +2686,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autenticati per sbloccare NexaWal"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifieer om NexaWal te ontgrendelen"
           }
         }
       }
@@ -2524,6 +2758,12 @@
             "state": "translated",
             "value": "Autenticazione non riuscita"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificatie mislukt"
+          }
         }
       }
     },
@@ -2587,6 +2827,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autenticazione richiesta per inviare. Riprova."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificatie vereist om te verzenden. Probeer het opnieuw."
           }
         }
       }
@@ -2652,6 +2898,12 @@
             "state": "translated",
             "value": "Autenticazione annullata."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificatie is geannuleerd."
+          }
         }
       }
     },
@@ -2715,6 +2967,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Autenticazione non riuscita."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificatie is niet gelukt."
           }
         }
       }
@@ -2780,6 +3038,12 @@
             "state": "translated",
             "value": "Disponibile"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beschikbaar"
+          }
         }
       }
     },
@@ -2843,6 +3107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Disponibile (sottoindirizzo selezionato)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beschikbaar (geselecteerd subadres)"
           }
         }
       }
@@ -2908,6 +3178,12 @@
             "state": "translated",
             "value": "Il saldo si aggiorna durante il completamento della sincronizzazione"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo wordt bijgewerkt terwijl synchronisatie wordt ingehaald"
+          }
         }
       }
     },
@@ -2971,6 +3247,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'autenticazione biometrica è disponibile, ma non sono stati registrati dati biometrici."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biometrische verificatie is beschikbaar, maar er zijn geen biometrische gegevens geregistreerd."
           }
         }
       }
@@ -3036,6 +3318,12 @@
             "state": "translated",
             "value": "L'autenticazione biometrica non è disponibile su questo dispositivo."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biometrische verificatie is niet beschikbaar op dit apparaat."
+          }
         }
       }
     },
@@ -3099,6 +3387,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'autenticazione biometrica o del dispositivo non è disponibile su questo dispositivo."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biometrische verificatie of apparaatverificatie is niet beschikbaar op dit apparaat."
           }
         }
       }
@@ -3165,6 +3459,12 @@
             "state": "translated",
             "value": "L'autenticazione biometrica o con credenziali del dispositivo è disponibile su questo dispositivo."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biometrische verificatie of verificatie met apparaatgegevens is beschikbaar op dit apparaat."
+          }
         }
       }
     },
@@ -3229,6 +3529,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'autenticazione biometrica o con credenziali del dispositivo non è disponibile"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biometrische verificatie of verificatie met apparaatgegevens is niet beschikbaar"
           }
         }
       }
@@ -3295,6 +3601,12 @@
             "state": "translated",
             "value": "L'autenticazione biometrica o con credenziali del dispositivo non è attualmente disponibile su questo dispositivo."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biometrische verificatie of verificatie met apparaatgegevens is momenteel niet beschikbaar op dit apparaat."
+          }
         }
       }
     },
@@ -3360,6 +3672,12 @@
             "state": "translated",
             "value": "Il permesso biometrico è assente o non disponibile"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toestemming voor biometrie ontbreekt of is niet beschikbaar"
+          }
         }
       }
     },
@@ -3424,6 +3742,12 @@
             "state": "translated",
             "value": "Entrambi (scansione clearnet, trasmissione I2P)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beide (scannen via clearnet, uitzenden via I2P)"
+          }
         }
       }
     },
@@ -3487,6 +3811,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Accesso alla fotocamera negato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cameratoegang geweigerd"
           }
         }
       }
@@ -3553,6 +3883,12 @@
             "state": "translated",
             "value": "Fotocamera non disponibile sul simulatore"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera niet beschikbaar in simulator"
+          }
         }
       }
     },
@@ -3616,6 +3952,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Permesso fotocamera negato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera-toestemming geweigerd"
           }
         }
       }
@@ -3681,6 +4023,12 @@
             "state": "translated",
             "value": "Anteprima fotocamera per la scansione di codici QR Monero"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cameravoorbeeld voor het scannen van Monero-QR-codes"
+          }
         }
       }
     },
@@ -3744,6 +4092,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Annulla"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleren"
           }
         }
       }
@@ -3810,6 +4164,12 @@
             "state": "translated",
             "value": "Annullamento richiesto"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annulering aangevraagd"
+          }
         }
       }
     },
@@ -3873,6 +4233,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catena"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chain"
           }
         }
       }
@@ -3938,6 +4304,12 @@
             "state": "translated",
             "value": "Scegli se stai creando un wallet completamente nuovo (sincronizzazione rapida) o importando un wallet esistente (scansione completa a meno che non imposti un'altezza di ripristino)."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kies of je een volledig nieuwe wallet aanmaakt (snelle synchronisatie) of een bestaande wallet importeert (volledige scan, tenzij je een hersteldhoogte instelt)."
+          }
         }
       }
     },
@@ -4001,6 +4373,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Interfaccia classica"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classic UI"
           }
         }
       }
@@ -4066,6 +4444,12 @@
             "state": "translated",
             "value": "Pulizia cache non riuscita: %@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cache wissen mislukt: %@"
+          }
         }
       }
     },
@@ -4130,6 +4514,12 @@
             "state": "translated",
             "value": "Cancella cache di scansione (questa rete)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scancache wissen (dit netwerk)"
+          }
         }
       }
     },
@@ -4193,6 +4583,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cache di scansione cancellata"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scancache gewist"
           }
         }
       }
@@ -4259,6 +4655,12 @@
             "state": "translated",
             "value": "Cache di scansione cancellata per questa rete"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scancache gewist voor dit netwerk"
+          }
         }
       }
     },
@@ -4322,6 +4724,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nodo clearnet"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearnet-node"
           }
         }
       }
@@ -4387,6 +4795,12 @@
             "state": "translated",
             "value": "URL del nodo clearnet"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearnet-node-URL"
+          }
         }
       }
     },
@@ -4450,6 +4864,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Solo clearnet"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen clearnet"
           }
         }
       }
@@ -4515,6 +4935,12 @@
             "state": "translated",
             "value": "Solo clearnet usa un nodo clearnet. Solo I2P usa un nodo e un proxy I2P. Entrambi effettua la scansione su clearnet e la trasmissione su I2P."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen clearnet gebruikt een clearnet-node. Alleen I2P gebruikt een I2P-node en proxy. Beide scant via clearnet en zendt uit via I2P."
+          }
         }
       }
     },
@@ -4579,6 +5005,12 @@
             "state": "translated",
             "value": "Chiudi"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sluiten"
+          }
         }
       }
     },
@@ -4642,6 +5074,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Conferma"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevestigen"
           }
         }
       }
@@ -4708,6 +5146,12 @@
             "state": "translated",
             "value": "Conferma invio"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verzending bevestigen"
+          }
         }
       }
     },
@@ -4771,6 +5215,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Conferma Invio"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verzending Bevestigen"
           }
         }
       }
@@ -4837,6 +5287,12 @@
             "state": "translated",
             "value": "Conferma invio massimo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximale verzending bevestigen"
+          }
         }
       }
     },
@@ -4902,6 +5358,12 @@
             "state": "translated",
             "value": "Conferma Invio Massimo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximale Verzending Bevestigen"
+          }
         }
       }
     },
@@ -4965,6 +5427,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Conferma di averlo annotato: inserisci qui sotto le parole richieste."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevestig dat je het hebt opgeschreven: voer de gevraagde woorden hieronder in."
           }
         }
       }
@@ -5031,6 +5499,12 @@
             "state": "translated",
             "value": "Conferma il tuo backup — inserisci le parole richieste:"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevestig je backup — voer de gevraagde woorden in:"
+          }
         }
       }
     },
@@ -5094,6 +5568,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Conferme"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevestigingen"
           }
         }
       }
@@ -5159,6 +5639,12 @@
             "state": "translated",
             "value": "Confermato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bevestigd"
+          }
         }
       }
     },
@@ -5222,6 +5708,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connessione in corso (scansione clearnet, trasmissione I2P)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbinden (clearnet-scan, I2P-uitzending)"
           }
         }
       }
@@ -5287,6 +5779,12 @@
             "state": "translated",
             "value": "Connessione tramite I2P"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbinden via I2P"
+          }
         }
       }
     },
@@ -5350,6 +5848,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connessione a %@"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbinden met %@"
           }
         }
       }
@@ -5415,6 +5919,12 @@
             "state": "translated",
             "value": "Connessione al nodo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbinden met node"
+          }
         }
       }
     },
@@ -5478,6 +5988,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Controlla quanti account Monero vengono scansionati a partire dall'account 0."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bepaalt hoeveel Monero-accounts worden gescand, vanaf account 0."
           }
         }
       }
@@ -5543,6 +6059,12 @@
             "state": "translated",
             "value": "Controlla quanti sottoindirizzi di ricezione vengono scansionati per questo wallet."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bepaalt hoeveel ontvangstsubadressen worden gescand voor deze wallet."
+          }
         }
       }
     },
@@ -5606,6 +6128,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copia indirizzo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adres Kopiëren"
           }
         }
       }
@@ -5671,6 +6199,12 @@
             "state": "translated",
             "value": "Copia URI di pagamento"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalings-URI Kopiëren"
+          }
         }
       }
     },
@@ -5734,6 +6268,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Copia TXID"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TXID Kopiëren"
           }
         }
       }
@@ -5799,6 +6339,12 @@
             "state": "translated",
             "value": "Impossibile accedere alla fotocamera: %@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kon geen toegang krijgen tot camera: %@"
+          }
         }
       }
     },
@@ -5862,6 +6408,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossibile aggiungere l'ingresso della fotocamera"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kon camera-invoer niet toevoegen"
           }
         }
       }
@@ -5927,6 +6479,12 @@
             "state": "translated",
             "value": "Impossibile aggiungere l'uscita dei metadati"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kon metadata-uitvoer niet toevoegen"
+          }
         }
       }
     },
@@ -5990,6 +6548,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossibile aggiornare l'impostazione Face ID"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kon Face ID-instelling niet bijwerken"
           }
         }
       }
@@ -6055,6 +6619,12 @@
             "state": "translated",
             "value": "Impossibile recuperare un'altezza di ripristino rapida dal nodo. L'altezza di ripristino resta a 0."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kon geen snelle hersteldhoogte ophalen bij de node. Hersteldhoogte blijft op 0."
+          }
         }
       }
     },
@@ -6118,6 +6688,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossibile generare un seed: %@"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kon geen seed genereren: %@"
           }
         }
       }
@@ -6183,6 +6759,12 @@
             "state": "translated",
             "value": "Crea"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aanmaken"
+          }
         }
       }
     },
@@ -6246,6 +6828,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Crea nuovo wallet (rapido)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuwe wallet aanmaken (snel)"
           }
         }
       }
@@ -6311,6 +6899,12 @@
             "state": "translated",
             "value": "Crea Wallet"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet Aanmaken"
+          }
         }
       }
     },
@@ -6375,6 +6969,12 @@
             "state": "translated",
             "value": "Creazione wallet in corso..."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet wordt aangemaakt..."
+          }
         }
       }
     },
@@ -6435,6 +7035,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valuta"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Valuta"
@@ -6504,6 +7110,12 @@
             "state": "translated",
             "value": "URL del daemon"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daemon-URL"
+          }
         }
       }
     },
@@ -6568,6 +7180,12 @@
             "state": "translated",
             "value": "Descrizione"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beschrijving"
+          }
         }
       }
     },
@@ -6631,6 +7249,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Destinazione"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestemming"
           }
         }
       }
@@ -6697,6 +7321,12 @@
             "state": "translated",
             "value": "L'autenticazione del dispositivo è richiesta ma non disponibile. Attiva la biometria o un blocco schermo, poi riprova."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparaatverificatie is vereist maar niet beschikbaar. Schakel biometrie of een schermvergrendeling in en probeer het opnieuw."
+          }
         }
       }
     },
@@ -6761,6 +7391,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Interfaccia classica disattivata"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classic UI uitgeschakeld"
           }
         }
       }
@@ -6827,6 +7463,12 @@
             "state": "translated",
             "value": "Stime in valuta fiat disattivate"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiatschattingen uitgeschakeld"
+          }
         }
       }
     },
@@ -6891,6 +7533,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Interfaccia classica attivata"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classic UI ingeschakeld"
           }
         }
       }
@@ -6957,6 +7605,12 @@
             "state": "translated",
             "value": "Stime in valuta fiat attivate"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiatschattingen ingeschakeld"
+          }
         }
       }
     },
@@ -7021,6 +7675,12 @@
             "state": "translated",
             "value": "Inserisci un indirizzo e un importo validi."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voer een geldig adres en bedrag in."
+          }
         }
       }
     },
@@ -7084,6 +7744,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Inserisci un indirizzo valido."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voer een geldig adres in."
           }
         }
       }
@@ -7150,6 +7816,12 @@
             "state": "translated",
             "value": "Inserisci un'altezza di ripristino valida"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voer een geldige hersteldhoogte in"
+          }
         }
       }
     },
@@ -7214,6 +7886,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Inserisci un numero intero"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voer een geheel getal in"
           }
         }
       }
@@ -7280,6 +7958,12 @@
             "state": "translated",
             "value": "Inserisci il destinatario e l'importo, visualizza l'anteprima della commissione, poi conferma la transazione."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voer de ontvanger en het bedrag in, bekijk de vergoeding en bevestig daarna de transactie."
+          }
         }
       }
     },
@@ -7343,6 +8027,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Commissione stimata"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geschatte vergoeding"
           }
         }
       }
@@ -7409,6 +8099,12 @@
             "state": "translated",
             "value": "Stima del massimo in corso..."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximum wordt geschat..."
+          }
         }
       }
     },
@@ -7473,6 +8169,12 @@
             "state": "translated",
             "value": "Stima in corso..."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met schatten..."
+          }
         }
       }
     },
@@ -7536,6 +8238,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossibile ottenere il saldo: %@"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ophalen van saldo mislukt: %@"
           }
         }
       }
@@ -7602,6 +8310,12 @@
             "state": "translated",
             "value": "Impossibile leggere i metadati del wallet memorizzato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lezen van opgeslagen walletmetadata mislukt"
+          }
         }
       }
     },
@@ -7665,6 +8379,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Commissione"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergoeding"
           }
         }
       }
@@ -7730,6 +8450,12 @@
             "state": "translated",
             "value": "Commissione %@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergoeding %@"
+          }
         }
       }
     },
@@ -7793,6 +8519,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Commissione stimata (input limitati al sottoindirizzo selezionato)."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergoeding geschat (invoer beperkt tot geselecteerd subadres)."
           }
         }
       }
@@ -7859,6 +8591,12 @@
             "state": "translated",
             "value": "Commissione stimata con successo."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergoeding succesvol geschat."
+          }
         }
       }
     },
@@ -7923,6 +8661,12 @@
             "state": "translated",
             "value": "Commissione stimata usando la politica di trasmissione."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergoeding geschat met behulp van uitzendbeleid."
+          }
         }
       }
     },
@@ -7986,6 +8730,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anteprima commissione non riuscita: %@"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voorbeeld van vergoeding mislukt: %@"
           }
         }
       }
@@ -8052,6 +8802,12 @@
             "state": "translated",
             "value": "Recupero dal nodo…"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met ophalen bij node…"
+          }
         }
       }
     },
@@ -8116,6 +8872,12 @@
             "state": "translated",
             "value": "Recupero blocchi iniziali da %lld"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met ophalen van initiële blokken vanaf %lld"
+          }
         }
       }
     },
@@ -8179,6 +8941,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Stime in valuta fiat"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiatschattingen"
           }
         }
       }
@@ -8245,6 +9013,12 @@
             "state": "translated",
             "value": "Riscansione completa (dal blocco 0)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volledige herscan (vanaf blok 0)"
+          }
         }
       }
     },
@@ -8308,6 +9082,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Riscansione Completa (dal blocco 0)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volledige Herscan (vanaf blok 0)"
           }
         }
       }
@@ -8374,6 +9154,12 @@
             "state": "translated",
             "value": "Riscansione completa da 0 — l'avanzamento è nella scheda Wallet"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volledige herscan vanaf 0 — voortgang is te zien op het tabblad Wallet"
+          }
         }
       }
     },
@@ -8437,6 +9223,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Limite gap (1-100000)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gap-limiet (1-100000)"
           }
         }
       }
@@ -8503,6 +9295,12 @@
             "state": "translated",
             "value": "Limite gap (sottoindirizzi per account)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gap-limiet (subadressen per account)"
+          }
         }
       }
     },
@@ -8566,6 +9364,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Genera nuovo seed"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuwe seed genereren"
           }
         }
       }
@@ -8632,6 +9436,12 @@
             "state": "translated",
             "value": "Concedi permesso fotocamera"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera-toestemming Verlenen"
+          }
         }
       }
     },
@@ -8695,6 +9505,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Altezza"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoogte"
           }
         }
       }
@@ -8761,6 +9577,12 @@
             "state": "translated",
             "value": "Nascondi"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbergen"
+          }
         }
       }
     },
@@ -8825,6 +9647,12 @@
             "state": "translated",
             "value": "Come connettersi"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoe te verbinden"
+          }
         }
       }
     },
@@ -8879,6 +9707,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "https://rpc.nexatrode.com"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "https://rpc.nexatrode.com"
@@ -8947,6 +9781,12 @@
             "state": "translated",
             "value": "Ho annotato il mio seed di recupero"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ik heb mijn herstelseed opgeschreven"
+          }
         }
       }
     },
@@ -9007,6 +9847,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "I2P"
@@ -9075,6 +9921,12 @@
             "state": "translated",
             "value": "Proxy HTTP I2P (host:porta)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P-HTTP-proxy (host:port)"
+          }
         }
       }
     },
@@ -9138,6 +9990,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nodo I2P (host:porta)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P-node (host:port)"
           }
         }
       }
@@ -9203,6 +10061,12 @@
             "state": "translated",
             "value": "Solo I2P"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen I2P"
+          }
         }
       }
     },
@@ -9266,6 +10130,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Identificatori"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Identificatiegegevens"
           }
         }
       }
@@ -9331,6 +10201,12 @@
             "state": "translated",
             "value": "Importa wallet esistente"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestaande wallet importeren"
+          }
         }
       }
     },
@@ -9394,6 +10270,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importa Wallet"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet Importeren"
           }
         }
       }
@@ -9459,6 +10341,12 @@
             "state": "translated",
             "value": "Importazione wallet in corso..."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet wordt geïmporteerd..."
+          }
         }
       }
     },
@@ -9519,6 +10407,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Info"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Info"
@@ -9587,6 +10481,12 @@
             "state": "translated",
             "value": "Saldo sbloccato insufficiente per importo + commissione."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onvoldoende ontgrendeld saldo voor bedrag + vergoeding."
+          }
         }
       }
     },
@@ -9650,6 +10550,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saldo sbloccato insufficiente."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onvoldoende ontgrendeld saldo."
           }
         }
       }
@@ -9716,6 +10622,12 @@
             "state": "translated",
             "value": "Importo non valido"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ongeldig bedrag"
+          }
         }
       }
     },
@@ -9779,6 +10691,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Formato URI di pagamento non valido."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ongeldig formaat voor betalings-URI."
           }
         }
       }
@@ -9844,6 +10762,12 @@
             "state": "translated",
             "value": "Codice QR non valido. Previsto un indirizzo Monero o un URI di pagamento."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ongeldige QR-code. Monero-adres of betalings-URI verwacht."
+          }
         }
       }
     },
@@ -9907,6 +10831,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Errore keychain (stato: %lld)."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keychain-fout (status: %lld)."
           }
         }
       }
@@ -9972,6 +10902,12 @@
             "state": "translated",
             "value": "Etichetta"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Label"
+          }
         }
       }
     },
@@ -10035,6 +10971,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Caricamento indirizzi…"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adressen worden geladen…"
           }
         }
       }
@@ -10101,6 +11043,12 @@
             "state": "translated",
             "value": "Caricamento indirizzi di ricezione…"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontvangstadressen worden geladen…"
+          }
         }
       }
     },
@@ -10161,6 +11109,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mainnet"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Mainnet"
@@ -10230,6 +11184,12 @@
             "state": "translated",
             "value": "Gestisci l'accesso al nodo, la sicurezza del dispositivo e il comportamento di ripristino."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beheer node-toegang, apparaatbeveiliging en herstelgedrag."
+          }
         }
       }
     },
@@ -10294,6 +11254,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importo massimo inviabile stimato."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximaal verzendbaar bedrag geschat."
           }
         }
       }
@@ -10360,6 +11326,12 @@
             "state": "translated",
             "value": "Saldo massimo spendibile trasmesso."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximaal besteedbaar saldo uitgezonden."
+          }
         }
       }
     },
@@ -10423,6 +11395,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Software con licenza MIT, non sottoposto ad audit. Sei responsabile del tuo seed e dei tuoi fondi. Il nodo remoto predefinito può vedere il tuo IP e le query di sincronizzazione del wallet — esegui un tuo nodo per una maggiore privacy. Le stime in valuta fiat opzionali, se attivate, contattano api.kraken.com e api.frankfurter.dev."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MIT-gelicentieerde, niet-geauditeerde software. Je bent zelf verantwoordelijk voor je seed en tegoeden. De standaard externe node kan je IP-adres en walletsynchronisatieverzoeken zien — draai je eigen node voor sterkere privacy. Optionele fiatschattingen maken, indien ingeschakeld, verbinding met api.kraken.com en api.frankfurter.dev."
           }
         }
       }
@@ -10488,6 +11466,12 @@
             "state": "translated",
             "value": "Mnemonica (incolla):"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mnemonic (plakken):"
+          }
         }
       }
     },
@@ -10551,6 +11535,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La mnemonica non può essere vuota."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mnemonic mag niet leeg zijn."
           }
         }
       }
@@ -10616,6 +11606,12 @@
             "state": "translated",
             "value": "Modalità"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modus"
+          }
         }
       }
     },
@@ -10679,6 +11675,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indirizzo Monero"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero-adres"
           }
         }
       }
@@ -10744,6 +11746,12 @@
             "state": "translated",
             "value": "QR di ricezione Monero"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero-ontvangst-QR"
+          }
         }
       }
     },
@@ -10807,6 +11815,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rete e nodo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netwerk & Node"
           }
         }
       }
@@ -10872,6 +11886,12 @@
             "state": "translated",
             "value": "Altezza della rete"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Netwerkhoogte"
+          }
         }
       }
     },
@@ -10935,6 +11955,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nuovo indirizzo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuw Adres"
           }
         }
       }
@@ -11001,6 +12027,12 @@
             "state": "translated",
             "value": "Etichetta nuovo indirizzo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Label voor nieuw adres"
+          }
         }
       }
     },
@@ -11064,6 +12096,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Etichetta nuovo indirizzo (opzionale)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Label voor nieuw adres (optioneel)"
           }
         }
       }
@@ -11130,6 +12168,12 @@
             "state": "translated",
             "value": "Nuovo indirizzo di ricezione"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuw ontvangstadres"
+          }
         }
       }
     },
@@ -11195,6 +12239,12 @@
             "state": "translated",
             "value": "NEXAWAL"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEXAWAL"
+          }
         }
       }
     },
@@ -11255,6 +12305,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal %@ (%@)"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "NexaWal %@ (%@)"
@@ -11324,6 +12380,12 @@
             "state": "translated",
             "value": "NexaWal necessita dell'accesso alla fotocamera per scansionare i codici QR per l'invio di Monero."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal heeft cameratoegang nodig om QR-codes te scannen voor het verzenden van Monero."
+          }
         }
       }
     },
@@ -11388,6 +12450,12 @@
             "state": "translated",
             "value": "Nessuna informazione biometrica registrata su questo dispositivo."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er zijn geen biometrische gegevens geregistreerd op dit apparaat."
+          }
         }
       }
     },
@@ -11451,6 +12519,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nessuna fotocamera trovata"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen camera gevonden"
           }
         }
       }
@@ -11517,6 +12591,12 @@
             "state": "translated",
             "value": "Nessun metadato del wallet memorizzato trovato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen opgeslagen walletmetadata gevonden"
+          }
         }
       }
     },
@@ -11582,6 +12662,12 @@
             "state": "translated",
             "value": "Nessun wallet memorizzato trovato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er is geen opgeslagen wallet gevonden"
+          }
         }
       }
     },
@@ -11645,6 +12731,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nessuna transazione ancora."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog geen transacties."
           }
         }
       }
@@ -11710,6 +12802,12 @@
             "state": "translated",
             "value": "Nessun saldo sbloccato disponibile da inviare dopo la commissione."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen ontgrendeld saldo beschikbaar om te verzenden na de vergoeding."
+          }
         }
       }
     },
@@ -11774,6 +12872,12 @@
             "state": "translated",
             "value": "Nessun indirizzo valido nell'URI di pagamento."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen geldig adres in betalings-URI."
+          }
         }
       }
     },
@@ -11837,6 +12941,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nessun wallet è stato memorizzato su questo dispositivo."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er is geen wallet opgeslagen op dit apparaat."
           }
         }
       }
@@ -11903,6 +13013,12 @@
             "state": "translated",
             "value": "Nessun wallet aperto"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen wallet geopend"
+          }
         }
       }
     },
@@ -11966,6 +13082,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nodo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node"
           }
         }
       }
@@ -12031,6 +13153,12 @@
             "state": "translated",
             "value": "Nodo irraggiungibile"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node onbereikbaar"
+          }
         }
       }
     },
@@ -12094,6 +13222,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nota per chi paga"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notitie voor de betaler"
           }
         }
       }
@@ -12160,6 +13294,12 @@
             "state": "translated",
             "value": "Niente da condividere ancora"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nog niets om te delen"
+          }
         }
       }
     },
@@ -12224,6 +13364,12 @@
             "state": "translated",
             "value": "Disattivato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uit"
+          }
         }
       }
     },
@@ -12287,6 +13433,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Attivato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aan"
           }
         }
       }
@@ -12353,6 +13505,12 @@
             "state": "translated",
             "value": "Modifica il lookahead di scansione solo se un'importazione risulta incompleta dopo aver usato l'altezza di ripristino corretta."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wijzig de scan-lookahead alleen als een import onvolledig lijkt na het gebruik van de juiste hersteldhoogte."
+          }
         }
       }
     },
@@ -12417,6 +13575,12 @@
             "state": "translated",
             "value": "Modifica questi valori solo se un'importazione del wallet risulta incompleta dopo aver usato l'altezza di ripristino corretta."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wijzig deze waarden alleen als een walletimport onvolledig lijkt na het gebruik van de juiste hersteldhoogte."
+          }
         }
       }
     },
@@ -12480,6 +13644,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apri in Explorer"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Openen in Explorer"
           }
         }
       }
@@ -12546,6 +13716,12 @@
             "state": "translated",
             "value": "Etichetta opzionale"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optioneel label"
+          }
         }
       }
     },
@@ -12609,6 +13785,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Opzionale. Se attivo, NexaWal recupera un prezzo XMR pubblico da Kraken (api.kraken.com) e, se necessario, il cambio fiat da Frankfurter (api.frankfurter.dev). Questi server vedono il tuo IP. Importi e indirizzi non vengono inviati. Le ricerche fiat usano HTTPS su clearnet e sono separate dalle impostazioni del nodo / proxy I2P. Solo stime — XMR è ciò che invii e detieni."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optioneel. Indien ingeschakeld, haalt NexaWal een publieke XMR-koers op bij Kraken (api.kraken.com) en, indien nodig, fiat-wisselkoersen bij Frankfurter (api.frankfurter.dev). Deze servers zien je IP-adres. Bedragen en adressen worden niet verzonden. Fiatopzoekingen gebruiken clearnet-HTTPS en staan los van de node-/I2P-proxy-instellingen. Alleen schattingen — XMR is wat je verzendt en aanhoudt."
           }
         }
       }
@@ -12675,6 +13857,12 @@
             "state": "translated",
             "value": "Incolla la mnemonica di 25 parole…"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plak mnemonic van 25 woorden…"
+          }
         }
       }
     },
@@ -12738,6 +13926,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dettagli di pagamento caricati dal codice QR."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalingsgegevens geladen vanaf QR-code."
           }
         }
       }
@@ -12804,6 +13998,12 @@
             "state": "translated",
             "value": "Richiesta di pagamento (opzionale)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalingsverzoek (optioneel)"
+          }
         }
       }
     },
@@ -12867,6 +14067,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Richiesta di Pagamento (opzionale)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalingsverzoek (Optioneel)"
           }
         }
       }
@@ -12933,6 +14139,12 @@
             "state": "translated",
             "value": "URI di pagamento"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalings-URI"
+          }
         }
       }
     },
@@ -12998,6 +14210,12 @@
             "state": "translated",
             "value": "URI di pagamento copiato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalings-URI gekopieerd"
+          }
         }
       }
     },
@@ -13062,6 +14280,12 @@
             "state": "translated",
             "value": "URI di pagamento copiato negli appunti"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalings-URI gekopieerd naar klembord"
+          }
         }
       }
     },
@@ -13125,6 +14349,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "In attesa"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In behandeling"
           }
         }
       }
@@ -13191,6 +14421,12 @@
             "state": "translated",
             "value": "Anteprima commissione"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergoeding bekijken"
+          }
         }
       }
     },
@@ -13254,6 +14490,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Anteprima Commissione"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergoeding Bekijken"
           }
         }
       }
@@ -13320,6 +14562,12 @@
             "state": "translated",
             "value": "Anteprima invio massimo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximale verzending bekijken"
+          }
         }
       }
     },
@@ -13384,6 +14632,12 @@
             "state": "translated",
             "value": "Visualizza l'anteprima della commissione prima di inviare a %@."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekijk de vergoeding voordat je verzendt naar %@."
+          }
         }
       }
     },
@@ -13447,6 +14701,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Visualizza l'anteprima della commissione prima di inviare."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekijk de vergoeding voordat je verzendt."
           }
         }
       }
@@ -13513,6 +14773,12 @@
             "state": "translated",
             "value": "Visualizza l'anteprima dell'importo massimo prima di inviare."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekijk het maximale bedrag voordat je verzendt."
+          }
         }
       }
     },
@@ -13578,6 +14844,12 @@
             "state": "translated",
             "value": "Principale"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primair"
+          }
         }
       }
     },
@@ -13641,6 +14913,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Informativa sulla privacy"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacybeleid"
           }
         }
       }
@@ -13707,6 +14985,12 @@
             "state": "translated",
             "value": "Avanzamento"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voortgang"
+          }
         }
       }
     },
@@ -13770,6 +15054,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esempio di proxy: 127.0.0.1:4444. Lascia vuoto se preferisci — la sincronizzazione fallirà finché non verranno impostati un nodo e un proxy I2P funzionanti."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voorbeeld van proxy: 127.0.0.1:4444. Laat dit leeg als je wilt — synchronisatie mislukt totdat een werkende I2P-node en proxy zijn ingesteld."
           }
         }
       }
@@ -13836,6 +15126,12 @@
             "state": "translated",
             "value": "QR non disponibile"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR niet beschikbaar"
+          }
         }
       }
     },
@@ -13899,6 +15195,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ricevi"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontvangen"
           }
         }
       }
@@ -13965,6 +15267,12 @@
             "state": "translated",
             "value": "Indirizzo di ricezione"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontvangstadres"
+          }
         }
       }
     },
@@ -14028,6 +15336,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indirizzo di Ricezione"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontvangstadres"
           }
         }
       }
@@ -14093,6 +15407,12 @@
             "state": "translated",
             "value": "Ricevi Monero"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero Ontvangen"
+          }
         }
       }
     },
@@ -14156,6 +15476,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ricevi XMR"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR Ontvangen"
           }
         }
       }
@@ -14221,6 +15547,12 @@
             "state": "translated",
             "value": "Ricevuto"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontvangen"
+          }
         }
       }
     },
@@ -14284,6 +15616,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transazioni Recenti"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recente Transacties"
           }
         }
       }
@@ -14349,6 +15687,12 @@
             "state": "translated",
             "value": "Destinatario"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontvanger"
+          }
         }
       }
     },
@@ -14412,6 +15756,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ripristino"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herstel"
           }
         }
       }
@@ -14477,6 +15827,12 @@
             "state": "translated",
             "value": "Aggiornamento non riuscito: %@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vernieuwen mislukt: %@"
+          }
         }
       }
     },
@@ -14540,6 +15896,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aggiorna Wallet"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet Vernieuwen"
           }
         }
       }
@@ -14606,6 +15968,12 @@
             "state": "translated",
             "value": "Aggiornato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vernieuwd"
+          }
         }
       }
     },
@@ -14669,6 +16037,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aggiornamento in corso..."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met vernieuwen..."
           }
         }
       }
@@ -14735,6 +16109,12 @@
             "state": "translated",
             "value": "Aggiornamento in corso…"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met vernieuwen…"
+          }
         }
       }
     },
@@ -14798,6 +16178,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Rimanente"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resterend"
           }
         }
       }
@@ -14863,6 +16249,12 @@
             "state": "translated",
             "value": "Sostituisci"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vervangen"
+          }
         }
       }
     },
@@ -14926,6 +16318,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sostituire il wallet esistente?"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestaande wallet vervangen?"
           }
         }
       }
@@ -14992,6 +16390,12 @@
             "state": "translated",
             "value": "Richiedi autenticazione del dispositivo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparaatverificatie vereisen"
+          }
         }
       }
     },
@@ -15055,6 +16459,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Richiedi Face ID / Touch ID"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID / Touch ID Vereisen"
           }
         }
       }
@@ -15120,6 +16530,12 @@
             "state": "translated",
             "value": "Riscansione non riuscita: %@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herscannen mislukt: %@"
+          }
         }
       }
     },
@@ -15183,6 +16599,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Riscansione non riuscita: la mnemonica non è disponibile."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herscannen mislukt: mnemonic is niet beschikbaar."
           }
         }
       }
@@ -15249,6 +16671,12 @@
             "state": "translated",
             "value": "Riscansiona da altezza"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herscannen vanaf hoogte"
+          }
         }
       }
     },
@@ -15313,6 +16741,12 @@
             "state": "translated",
             "value": "Riscansiona da Altezza"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herscannen vanaf Hoogte"
+          }
         }
       }
     },
@@ -15376,6 +16810,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Riscansione da %lld in corso"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met herscannen vanaf %lld"
           }
         }
       }
@@ -15442,6 +16882,12 @@
             "state": "translated",
             "value": "Ripristina e riscansiona"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herstellen en herscannen"
+          }
         }
       }
     },
@@ -15505,6 +16951,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Altezza di ripristino"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hersteldhoogte"
           }
         }
       }
@@ -15570,6 +17022,12 @@
             "state": "translated",
             "value": "Altezza di Ripristino:"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hersteldhoogte:"
+          }
         }
       }
     },
@@ -15633,6 +17091,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Salva nodo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node opslaan"
           }
         }
       }
@@ -15698,6 +17162,12 @@
             "state": "translated",
             "value": "Salva lookahead di scansione"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan-lookahead opslaan"
+          }
         }
       }
     },
@@ -15761,6 +17231,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Entrambi salvati"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beide opgeslagen"
           }
         }
       }
@@ -15826,6 +17302,12 @@
             "state": "translated",
             "value": "Clearnet salvato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clearnet opgeslagen"
+          }
         }
       }
     },
@@ -15889,6 +17371,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "I2P salvato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I2P opgeslagen"
           }
         }
       }
@@ -15954,6 +17442,12 @@
             "state": "translated",
             "value": "Nodo salvato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node opgeslagen"
+          }
         }
       }
     },
@@ -16017,6 +17511,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lookahead di scansione salvato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan-lookahead opgeslagen"
           }
         }
       }
@@ -16082,6 +17582,12 @@
             "state": "translated",
             "value": "Scansiona account o sottoindirizzi aggiuntivi"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra accounts of subadressen scannen"
+          }
         }
       }
     },
@@ -16145,6 +17651,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scansiona clearnet, trasmetti I2P"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scannen via clearnet, uitzenden via I2P"
           }
         }
       }
@@ -16210,6 +17722,12 @@
             "state": "translated",
             "value": "Scansiona codice QR Monero"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monero-QR-code Scannen"
+          }
         }
       }
     },
@@ -16273,6 +17791,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scansiona codice QR"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "QR-code scannen"
           }
         }
       }
@@ -16338,6 +17862,12 @@
             "state": "translated",
             "value": "Scansiona per Pagare"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scannen om te Betalen"
+          }
         }
       }
     },
@@ -16401,6 +17931,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scansionato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gescand"
           }
         }
       }
@@ -16466,6 +18002,12 @@
             "state": "translated",
             "value": "Scansionato fino al blocco %lld"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gescand tot blok %lld"
+          }
         }
       }
     },
@@ -16529,6 +18071,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Scansione della blockchain in corso"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blockchain wordt gescand"
           }
         }
       }
@@ -16594,6 +18142,12 @@
             "state": "translated",
             "value": "Sicurezza"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beveiliging"
+          }
         }
       }
     },
@@ -16657,6 +18211,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se stesso"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zelf"
           }
         }
       }
@@ -16722,6 +18282,12 @@
             "state": "translated",
             "value": "Invia"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verzenden"
+          }
         }
       }
     },
@@ -16786,6 +18352,12 @@
             "state": "translated",
             "value": "Invia %@ a %@.\nCommissione: %@\nTotale: %@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verzend %@ naar %@.\nVergoeding: %@\nTotaal: %@"
+          }
         }
       }
     },
@@ -16849,6 +18421,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Invio non riuscito: %@"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verzenden mislukt: %@"
           }
         }
       }
@@ -16915,6 +18493,12 @@
             "state": "translated",
             "value": "Invia massimo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximaal verzenden"
+          }
         }
       }
     },
@@ -16978,6 +18562,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Invia Massimo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximaal Verzenden"
           }
         }
       }
@@ -17043,6 +18633,12 @@
             "state": "translated",
             "value": "Invia XMR"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR Verzenden"
+          }
         }
       }
     },
@@ -17107,6 +18703,12 @@
             "state": "translated",
             "value": "Invio in corso..."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met verzenden..."
+          }
         }
       }
     },
@@ -17170,6 +18772,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Inviato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verzonden"
           }
         }
       }
@@ -17236,6 +18844,12 @@
             "state": "translated",
             "value": "Massimo inviato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximum verzonden"
+          }
         }
       }
     },
@@ -17299,6 +18913,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impostazioni"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instellingen"
           }
         }
       }
@@ -17365,6 +18985,12 @@
             "state": "translated",
             "value": "Condividi"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delen"
+          }
         }
       }
     },
@@ -17428,6 +19054,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Condividi Link di Pagamento"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betalingslink Delen"
           }
         }
       }
@@ -17494,6 +19126,12 @@
             "state": "translated",
             "value": "Mostra"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonen"
+          }
         }
       }
     },
@@ -17557,6 +19195,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mostra stime in valuta fiat"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiatschattingen tonen"
           }
         }
       }
@@ -17622,6 +19266,12 @@
             "state": "translated",
             "value": "Mostra il codice QR, copia l'indirizzo o crea un nuovo indirizzo di ricezione per una maggiore privacy."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toon de QR-code, kopieer het adres, of maak een nieuw ontvangstadres aan voor meer privacy."
+          }
         }
       }
     },
@@ -17685,6 +19335,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Codice sorgente e licenza (MIT)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Broncode & licentie (MIT)"
           }
         }
       }
@@ -17750,6 +19406,12 @@
             "state": "translated",
             "value": "Aspetto standard non al neon. Lascia disattivato per il tema terminale al neon (predefinito)."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standaard niet-neon uiterlijk. Laat uit voor het neon-terminalthema (standaard)."
+          }
         }
       }
     },
@@ -17813,6 +19475,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fai iniziare l'URL del nodo con http:// o https://"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Begin de node-URL met http:// of https://"
           }
         }
       }
@@ -17879,6 +19547,12 @@
             "state": "translated",
             "value": "Altezza di partenza (rapida):"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startshoogte (snel):"
+          }
         }
       }
     },
@@ -17942,6 +19616,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Altezza di partenza (rapida): %lld (cima del nodo − 10)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startshoogte (snel): %lld (nodetop − 10)"
           }
         }
       }
@@ -18007,6 +19687,12 @@
             "state": "translated",
             "value": "Altezza di partenza (rapida): non disponibile (verrà usato 0)"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startshoogte (snel): niet beschikbaar (gebruikt 0)"
+          }
         }
       }
     },
@@ -18071,6 +19757,12 @@
             "state": "translated",
             "value": "Altezza di partenza: recupero dal nodo in corso…"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startshoogte: bezig met ophalen bij node…"
+          }
         }
       }
     },
@@ -18134,6 +19826,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Stato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
           }
         }
       }
@@ -18200,6 +19898,12 @@
             "state": "translated",
             "value": "I metadati memorizzati non contengono una mnemonica"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opgeslagen metadata bevat geen mnemonic"
+          }
         }
       }
     },
@@ -18263,6 +19967,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossibile trovare la mnemonica memorizzata."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opgeslagen mnemonic kon niet worden gevonden."
           }
         }
       }
@@ -18328,6 +20038,12 @@
             "state": "translated",
             "value": "Sottoindirizzo %lld"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subadres %lld"
+          }
         }
       }
     },
@@ -18391,6 +20107,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Riepilogo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Samenvatting"
           }
         }
       }
@@ -18456,6 +20178,12 @@
             "state": "translated",
             "value": "Massimo spendibile svuotato dal sottoindirizzo selezionato tramite %@."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximaal besteedbaar bedrag verzonden vanaf geselecteerd subadres via %@."
+          }
         }
       }
     },
@@ -18519,6 +20247,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Massimo spendibile svuotato tramite %@."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maximaal besteedbaar bedrag verzonden via %@."
           }
         }
       }
@@ -18584,6 +20318,12 @@
             "state": "translated",
             "value": "Passa tra XMR e %@"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wisselen tussen XMR en %@"
+          }
         }
       }
     },
@@ -18647,6 +20387,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Avanzamento sincronizzazione %lld percento"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronisatievoortgang %lld procent"
           }
         }
       }
@@ -18712,6 +20458,12 @@
             "state": "translated",
             "value": "Sincronizzazione bloccata"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Synchronisatie gestagneerd"
+          }
         }
       }
     },
@@ -18775,6 +20527,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sincronizzazione del wallet in corso"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet wordt gesynchroniseerd"
           }
         }
       }
@@ -18840,6 +20598,12 @@
             "state": "translated",
             "value": "Tocca Aggiorna Wallet per continuare (o riapri l'app)."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tik op Wallet Vernieuwen om door te gaan (of open de app opnieuw)."
+          }
         }
       }
     },
@@ -18903,6 +20667,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Questo è il tuo seed di recupero. Scrivilo su carta e conservalo in un luogo sicuro. Chiunque possieda queste parole può accedere ai tuoi fondi — nexawal non lo carica né ne esegue mai il backup per te."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit is je herstelseed. Schrijf het op papier en bewaar het op een veilige plek. Iedereen met deze woorden heeft toegang tot je tegoeden — nexawal uploadt of maakt hier nooit een back-up van voor jou."
           }
         }
       }
@@ -18969,6 +20739,12 @@
             "state": "translated",
             "value": "Questo azzera lo stato di scansione e ricomincia dall'altezza che inserisci."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit reset de scanstatus en begint opnieuw vanaf de hoogte die je invoert."
+          }
         }
       }
     },
@@ -19032,6 +20808,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Questo sostituirà il wallet esistente su questo dispositivo.\n\nSe continui, la mnemonica attualmente memorizzata e lo stato di scansione verranno rimossi. Assicurati di aver fatto il backup della tua mnemonica prima di procedere."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit vervangt de bestaande wallet op dit apparaat.\n\nAls je doorgaat, worden de huidige opgeslagen mnemonic en scanstatus verwijderd. Zorg ervoor dat je een back-up van je mnemonic hebt voordat je doorgaat."
           }
         }
       }
@@ -19097,6 +20879,12 @@
             "state": "translated",
             "value": "Velocità"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doorvoer"
+          }
         }
       }
     },
@@ -19161,6 +20949,12 @@
             "state": "translated",
             "value": "Tempo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tijd"
+          }
         }
       }
     },
@@ -19224,6 +21018,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suggerimento: 0 scansiona tutta la cronologia della catena. È l'opzione più sicura se non sei sicuro, ma la sincronizzazione può richiedere più tempo."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tip: 0 scant de volledige chaingeschiedenis. Dit is de veiligste optie als je het niet zeker weet, maar synchronisatie kan langer duren."
           }
         }
       }
@@ -19290,6 +21090,12 @@
             "state": "translated",
             "value": "A"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naar"
+          }
         }
       }
     },
@@ -19354,6 +21160,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indirizzo di destinazione"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naar adres"
           }
         }
       }
@@ -19420,6 +21232,12 @@
             "state": "translated",
             "value": "Totale"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totaal"
+          }
         }
       }
     },
@@ -19483,6 +21301,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Totale (importo + commissione)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totaal (bedrag + vergoeding)"
           }
         }
       }
@@ -19549,6 +21373,12 @@
             "state": "translated",
             "value": "Saldo Totale"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Totaal Saldo"
+          }
         }
       }
     },
@@ -19612,6 +21442,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transazione"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transactie"
           }
         }
       }
@@ -19677,6 +21513,12 @@
             "state": "translated",
             "value": "Transazione trasmessa dal sottoindirizzo selezionato tramite %@."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transactie uitgezonden vanaf geselecteerd subadres via %@."
+          }
         }
       }
     },
@@ -19740,6 +21582,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Transazione trasmessa tramite %@."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transactie uitgezonden via %@."
           }
         }
       }
@@ -19806,6 +21654,12 @@
             "state": "translated",
             "value": "Transazione trasmessa."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transactie uitgezonden."
+          }
         }
       }
     },
@@ -19866,6 +21720,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TXID"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "TXID"
@@ -19934,6 +21794,12 @@
             "state": "translated",
             "value": "Tipo"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type"
+          }
         }
       }
     },
@@ -19997,6 +21863,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Digita l'URL completo, incluso http:// o https://."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voer de volledige URL in, inclusief http:// of https://."
           }
         }
       }
@@ -20062,6 +21934,12 @@
             "state": "translated",
             "value": "Digita l'URL completo, incluso http:// o https://.\nPubblico: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voer de volledige URL in, inclusief http:// of https://.\nPubliek: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
+          }
         }
       }
     },
@@ -20125,6 +22003,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossibile decodificare i metadati del wallet."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kan walletmetadata niet decoderen."
           }
         }
       }
@@ -20190,6 +22074,12 @@
             "state": "translated",
             "value": "Impossibile codificare i metadati del wallet."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kan walletmetadata niet coderen."
+          }
         }
       }
     },
@@ -20253,6 +22143,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Indirizzo sconosciuto"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onbekend adres"
           }
         }
       }
@@ -20318,6 +22214,12 @@
             "state": "translated",
             "value": "Stato permesso fotocamera sconosciuto"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onbekende status van camera-toestemming"
+          }
         }
       }
     },
@@ -20381,6 +22283,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sblocca Wallet Esistente"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestaande Wallet Ontgrendelen"
           }
         }
       }
@@ -20447,6 +22355,12 @@
             "state": "translated",
             "value": "Sblocca wallet"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet ontgrendelen"
+          }
         }
       }
     },
@@ -20510,6 +22424,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sblocca il tuo wallet"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontgrendel je wallet"
           }
         }
       }
@@ -20575,6 +22495,12 @@
             "state": "translated",
             "value": "Sbloccato"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontgrendeld"
+          }
         }
       }
     },
@@ -20638,6 +22564,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sblocco Wallet in corso..."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet wordt ontgrendeld..."
           }
         }
       }
@@ -20704,6 +22636,12 @@
             "state": "translated",
             "value": "Sblocco in corso..."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met ontgrendelen..."
+          }
         }
       }
     },
@@ -20768,6 +22706,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Usa la biometria o le credenziali del dispositivo per l'accesso al wallet e per l'invio."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gebruik biometrie of apparaatgegevens voor toegang tot de wallet en verzenden."
           }
         }
       }
@@ -20834,6 +22778,12 @@
             "state": "translated",
             "value": "Usa Invia e Ricevi per i pagamenti e i nuovi indirizzi."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gebruik Verzenden en Ontvangen voor betalingen en nieuwe adressen."
+          }
         }
       }
     },
@@ -20897,6 +22847,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Usa questo nodo"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gebruik deze node"
           }
         }
       }
@@ -20962,6 +22918,12 @@
             "state": "translated",
             "value": "Attesa dell'altezza della rete"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wachten op netwerkhoogte"
+          }
         }
       }
     },
@@ -21022,6 +22984,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "Wallet"
@@ -21090,6 +23058,12 @@
             "state": "translated",
             "value": "Il wallet deve essere sbloccato prima di modificare la protezione biometrica."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet moet ontgrendeld zijn voordat je de biometrische beveiliging wijzigt."
+          }
         }
       }
     },
@@ -21153,6 +23127,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Persistenza del wallet non riuscita: %@"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opslaan van wallet mislukt: %@"
           }
         }
       }
@@ -21218,6 +23198,12 @@
             "state": "translated",
             "value": "Configurazione Wallet"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet Instellen"
+          }
         }
       }
     },
@@ -21281,6 +23267,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Wallet sincronizzato"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet gesynchroniseerd"
           }
         }
       }
@@ -21346,6 +23338,12 @@
             "state": "translated",
             "value": "Versione WalletCore:"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WalletCore-versie:"
+          }
         }
       }
     },
@@ -21409,6 +23407,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Avviso: se imposti un'altezza di ripristino successiva alla tua prima transazione, i fondi più vecchi non appariranno finché non riscansioni da un'altezza precedente."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waarschuwing: als je een hersteldhoogte instelt na je eerste transactie, verschijnen oudere tegoeden pas nadat je opnieuw scant vanaf een eerdere hoogte."
           }
         }
       }
@@ -21475,6 +23479,12 @@
             "state": "translated",
             "value": "A cosa serve?"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waarvoor is dit?"
+          }
         }
       }
     },
@@ -21538,6 +23548,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Se attivato, l'apertura del wallet memorizzato e l'invio di fondi richiederanno l'autenticazione del dispositivo."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indien ingeschakeld, is apparaatverificatie vereist om de opgeslagen wallet te openen en tegoeden te verzenden."
           }
         }
       }
@@ -21603,6 +23619,12 @@
             "state": "translated",
             "value": "Parola #%lld:"
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Woord #%lld:"
+          }
         }
       }
     },
@@ -21666,6 +23688,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "La parola/le parole non corrispondono ancora."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Woord(en) komen nog niet overeen."
           }
         }
       }
@@ -21732,6 +23760,12 @@
             "state": "translated",
             "value": "Scrivi queste parole in ordine e conservale in un luogo sicuro. Ti serviranno per ripristinare il tuo wallet — non vengono mai memorizzate su questo dispositivo."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schrijf deze woorden in volgorde op en bewaar ze op een veilige plek. Je hebt ze nodig om je wallet te herstellen — ze worden nooit op dit apparaat opgeslagen."
+          }
         }
       }
     },
@@ -21796,6 +23830,12 @@
             "state": "translated",
             "value": "Nodo sbagliato? Cambia la modalità di connessione o il nodo sopra — non serve una riscansione.\nFondi mancanti? Riscansiona dalla tua altezza di ripristino.\nUltima risorsa: riscansione completa dal blocco 0."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkeerde node? Wijzig de verbindingsmethode of de node hierboven — een herscan is niet nodig.\nOntbrekende tegoeden? Herscan vanaf je hersteldhoogte.\nLaatste redmiddel: volledige herscan vanaf blok 0."
+          }
         }
       }
     },
@@ -21851,6 +23891,12 @@
           }
         },
         "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "XMR"
+          }
+        },
+        "nl": {
           "stringUnit": {
             "state": "translated",
             "value": "XMR"
@@ -21920,6 +23966,12 @@
             "state": "translated",
             "value": "Puoi usare Face ID per proteggere il tuo wallet."
           }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je kunt Face ID gebruiken om je wallet te beveiligen."
+          }
         }
       }
     },
@@ -21984,6 +24036,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Il tuo seed di recupero:"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je herstelseed:"
           }
         }
       }
