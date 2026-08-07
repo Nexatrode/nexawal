@@ -1,0 +1,2 @@
+"NSCameraUsageDescription" = "NexaWal 需要相机权限以扫描二维码发送 Monero。";
+"NSFaceIDUsageDescription" = "你可以使用 Face ID 保护钱包。";

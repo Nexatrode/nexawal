@@ -1,0 +1,2 @@
+"NSCameraUsageDescription" = "NexaWal は Monero 送金時に QR コードを読み取るためカメラへのアクセスが必要です。";
+"NSFaceIDUsageDescription" = "Face ID を使ってウォレットを保護できます。";

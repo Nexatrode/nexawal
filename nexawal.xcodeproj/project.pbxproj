@@ -100,6 +100,12 @@
 			knownRegions = (
 				en,
 				es,
+				"pt-BR",
+				"zh-Hans",
+				ru,
+				de,
+				fr,
+				ja,
 				Base,
 			);
 			mainGroup = AAABE4452EDEBF11004D56AB;
