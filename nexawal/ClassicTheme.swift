@@ -2,8 +2,8 @@
 //  ClassicTheme.swift
 //  nexawal
 //
-//  Neon terminal palette (used when Classic UI setting is OFF).
-//  Classic UI setting ON uses the standard non-neon system look instead.
+//  Neon terminal palette (used when Techno Theme is ON).
+//  Techno Theme OFF (default) uses the standard non-neon system look.
 //
 
 import SwiftUI
@@ -170,7 +170,7 @@ struct NeonSectionHeader: View {
 }
 
 /// Form Toggle whose label color is not overridden by system list styling.
-/// Neon mode uses a custom switch (matches Android); Classic UI uses the system control.
+/// Neon/Techno mode uses a custom switch (matches Android); standard UI uses the system control.
 struct NeonToggle: View {
     let title: String
     @Binding var isOn: Bool

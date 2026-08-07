@@ -32,7 +32,7 @@ Xcode resolves `MoneroWalletCoreFFI` from GitHub on branch `main` (prebuilt xcfr
 - Single-wallet Monero app (create or import)
 - Create-flow seed backup gate (write-down confirmation + word check) before the wallet is persisted
 - Optional Face ID / Touch ID for unlock and send
-- Classic UI toggle (on = standard look; off = neon terminal theme)
+- Techno Theme toggle (on = neon terminal look; off/default = standard look)
 - Clearnet / I2P / hybrid node routing
 - Sync status with honest tip/scanned progress; node errors surface when refresh fails
 - Receive: QR, copy address, copy payment URI when an amount is set, subaddresses

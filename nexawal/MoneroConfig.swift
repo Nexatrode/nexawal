@@ -53,9 +53,10 @@ struct MoneroConfig {
     nonisolated private static let userDefaultsWallet2LockoutsKey = "monero_wallet2_bulk_lockouts_v1"
     nonisolated private static let wallet2LockoutDefaultSeconds: TimeInterval = 60 * 30
 
-    // Appearance: Classic UI ON = standard non-neon look; OFF (default) = neon terminal theme.
-    nonisolated static let userDefaultsClassicUIKey = "ui_classic_mode"
-    nonisolated static let defaultClassicUIEnabled: Bool = false
+    // Appearance: Techno Theme ON = neon terminal look; OFF (default) = standard look.
+    nonisolated static let userDefaultsTechnoThemeKey = "ui_techno_theme"
+    nonisolated static let userDefaultsClassicUIKeyLegacy = "ui_classic_mode"
+    nonisolated static let defaultTechnoThemeEnabled: Bool = false
 
     nonisolated static let userDefaultsFiatEstimatesEnabledKey = "fiat_estimates_enabled"
     nonisolated static let userDefaultsFiatEstimatesEnabledAtKey = "fiat_estimates_enabled_at_ms"
@@ -219,16 +220,27 @@ struct MoneroConfig {
     }
 
     // MARK: - Appearance
-    nonisolated static var classicUIEnabled: Bool {
-        if UserDefaults.standard.object(forKey: userDefaultsClassicUIKey) == nil {
-            return defaultClassicUIEnabled
+    /// One-shot migration from legacy Classic UI (inverted) into Techno Theme.
+    nonisolated static func migrateAppearancePreferenceIfNeeded() {
+        guard UserDefaults.standard.object(forKey: userDefaultsTechnoThemeKey) == nil else { return }
+        guard UserDefaults.standard.object(forKey: userDefaultsClassicUIKeyLegacy) != nil else { return }
+        let techno = !UserDefaults.standard.bool(forKey: userDefaultsClassicUIKeyLegacy)
+        UserDefaults.standard.set(techno, forKey: userDefaultsTechnoThemeKey)
+        UserDefaults.standard.removeObject(forKey: userDefaultsClassicUIKeyLegacy)
+    }
+
+    nonisolated static var technoThemeEnabled: Bool {
+        migrateAppearancePreferenceIfNeeded()
+        if UserDefaults.standard.object(forKey: userDefaultsTechnoThemeKey) != nil {
+            return UserDefaults.standard.bool(forKey: userDefaultsTechnoThemeKey)
         }
-        return UserDefaults.standard.bool(forKey: userDefaultsClassicUIKey)
+        return defaultTechnoThemeEnabled
     }
 
     @MainActor
-    static func setClassicUIEnabled(_ enabled: Bool) {
-        UserDefaults.standard.set(enabled, forKey: userDefaultsClassicUIKey)
+    static func setTechnoThemeEnabled(_ enabled: Bool) {
+        UserDefaults.standard.set(enabled, forKey: userDefaultsTechnoThemeKey)
+        UserDefaults.standard.removeObject(forKey: userDefaultsClassicUIKeyLegacy)
     }
 
     // MARK: - Fiat estimates

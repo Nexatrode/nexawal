@@ -19,6 +19,10 @@ struct nexawalApp: App {
     @State private var lastSnapshotAt: Date = .distantPast
     private let snapshotDebounceSeconds: TimeInterval = 3.0
 
+    init() {
+        MoneroConfig.migrateAppearancePreferenceIfNeeded()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView(viewModel: viewModel)

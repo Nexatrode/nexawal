@@ -722,7 +722,7 @@ struct SettingsView: View {
     @State private var biometricsEnrolled: Bool = false
     @State private var showAdvancedRecovery: Bool = false
     @State private var saveConfirmation: String?
-    @AppStorage(MoneroConfig.userDefaultsClassicUIKey) private var classicUIEnabled: Bool = false
+    @AppStorage(MoneroConfig.userDefaultsTechnoThemeKey) private var technoThemeEnabled: Bool = MoneroConfig.defaultTechnoThemeEnabled
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
@@ -745,8 +745,8 @@ struct SettingsView: View {
         NavigationView {
             Form {
                 Section(header: NeonSectionHeader(title: L10n.t("Appearance"))) {
-                    NeonToggle(title: L10n.t("Classic UI"), isOn: $classicUIEnabled)
-                    Text("Standard non-neon look. Leave off for the neon terminal theme (default).")
+                    NeonToggle(title: L10n.t("Techno Theme"), isOn: $technoThemeEnabled)
+                    Text("Neon terminal look. Leave off for the standard theme (default).")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                 }

@@ -36,7 +36,7 @@ enum MainTab: Hashable {
 
 struct ContentView: View {
     @ObservedObject var viewModel: WalletViewModel
-    @AppStorage(MoneroConfig.userDefaultsClassicUIKey) private var classicUIEnabled: Bool = false
+    @AppStorage(MoneroConfig.userDefaultsTechnoThemeKey) private var technoThemeEnabled: Bool = MoneroConfig.defaultTechnoThemeEnabled
     @Environment(\.colorScheme) private var colorScheme
     @State private var selectedTab: MainTab = .wallet
 
@@ -48,9 +48,8 @@ struct ContentView: View {
                 WalletCreationView(viewModel: viewModel)
             }
         }
-        // Classic UI setting ON = non-neon standard look.
-        // Setting OFF (default) = neon terminal theme.
-        .classicTheme(enabled: !classicUIEnabled, colorScheme: colorScheme)
+        // Techno Theme ON = neon terminal look; OFF (default) = standard look.
+        .classicTheme(enabled: technoThemeEnabled, colorScheme: colorScheme)
         .task {
             // WalletViewModel handles loading any stored wallet on launch.
         }
