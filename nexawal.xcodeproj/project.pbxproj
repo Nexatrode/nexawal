@@ -107,6 +107,7 @@
 				fr,
 				ja,
 				ko,
+				it,
 				Base,
 			);
 			mainGroup = AAABE4452EDEBF11004D56AB;
