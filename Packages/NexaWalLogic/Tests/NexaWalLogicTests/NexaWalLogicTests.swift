@@ -65,6 +65,22 @@ final class SendSafetyTests: XCTestCase {
         XCTAssertNil(
             SendSafety.shouldRetryViaSiblingMonerod(errorText: "fee_rate failed", coreMessage: "", endpoint: "http://127.0.0.1:18081")
         )
+        XCTAssertEqual(
+            SendSafety.shouldRetryViaSiblingMonerod(
+                errorText: "fee_rate failed",
+                coreMessage: "",
+                endpoint: "https://rpc.nexatrode.com"
+            ),
+            "https://monero.nexatrode.com"
+        )
+        XCTAssertEqual(
+            SendSafety.shouldRetryViaSiblingMonerod(
+                errorText: "fee_rate failed",
+                coreMessage: "",
+                endpoint: "https://cuprate.nexatrode.com/"
+            ),
+            "https://monero.nexatrode.com"
+        )
     }
 }
 

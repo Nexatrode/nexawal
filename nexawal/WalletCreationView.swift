@@ -266,7 +266,7 @@ struct WalletCreationView: View {
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .accessibilityLabel(L10n.t("Clearnet node URL"))
-                    Text("Type the full URL, including http:// or https://.\nPublic: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089")
+                    Text("Type the full URL, including http:// or https://.\nPublic (Cuprate): https://rpc.nexatrode.com\nPublic (monerod): https://monero.nexatrode.com\nLAN: http://192.168.4.137:18089")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 

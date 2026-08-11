@@ -33,10 +33,19 @@ public enum SendSafety: Sendable {
         return markers.contains { normalized.contains($0) }
     }
 
-    /// Cuprate (18092) sibling Monero RPC (18081) fallback URL, or nil if not applicable.
+    /// Cuprate sibling Monero RPC fallback URL, or nil if not applicable.
+    ///
+    /// - LAN/dev: `*:18092` → same host on `18081`
+    /// - Public HTTPS: `rpc.nexatrode.com` / `cuprate.nexatrode.com` → `https://monero.nexatrode.com`
     public static func siblingMonerodURLIfNeeded(for endpoint: String) -> String? {
-        guard var components = URLComponents(string: endpoint),
-              components.port == 18092 else {
+        guard var components = URLComponents(string: endpoint) else {
+            return nil
+        }
+        let host = (components.host ?? "").lowercased()
+        if host == "rpc.nexatrode.com" || host == "cuprate.nexatrode.com" {
+            return "https://monero.nexatrode.com"
+        }
+        guard components.port == 18092 else {
             return nil
         }
         components.port = 18081
