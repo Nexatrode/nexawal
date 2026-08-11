@@ -40,6 +40,10 @@ class WalletViewModel: ObservableObject {
     /// iOS typically grants ~30s; we use it to keep scanning instead of only snapshotting.
     private var syncBackgroundTaskID: UIBackgroundTaskIdentifier = .invalid
 
+    /// Periodic tip probe + auto-resume while the app is in the foreground.
+    private var catchUpTask: Task<Void, Never>?
+    private let catchUpIntervalNanoseconds: UInt64 = 60_000_000_000
+
     @Published var biometricsEnabled: Bool = false
     @Published var restoreHeight: UInt64 = 0
     @Published var lastScannedHeight: UInt64 = 0
@@ -591,6 +595,7 @@ class WalletViewModel: ObservableObject {
 
     func resumeOnForeground() {
         guard isWalletOpen else { return }
+        startForegroundCatchUp()
         if needsRefreshRetryOnNextActive {
             resumeOnDidBecomeActive()
             return
@@ -601,6 +606,48 @@ class WalletViewModel: ObservableObject {
         Task { [weak self] in
             await self?.refreshWallet()
         }
+    }
+
+    /// Start periodic tip checks while the app is active. Stops on background.
+    func startForegroundCatchUp() {
+        guard isWalletOpen else { return }
+        guard catchUpTask == nil else { return }
+        catchUpTask = Task { [weak self] in
+            while !Task.isCancelled {
+                await self?.checkTipAndResumeIfNeeded()
+                try? await Task.sleep(nanoseconds: self?.catchUpIntervalNanoseconds ?? 60_000_000_000)
+            }
+        }
+    }
+
+    func stopForegroundCatchUp() {
+        catchUpTask?.cancel()
+        catchUpTask = nil
+    }
+
+    /// Probe daemon tip; if we are behind and idle, start a refresh.
+    func checkTipAndResumeIfNeeded() async {
+        guard isWalletOpen else { return }
+        guard !isRefreshing else { return }
+
+        do {
+            let baseURL = MoneroConfig.scanNodeURL()
+            let proxy: String? = (MoneroConfig.networkPolicy == .i2p) ? MoneroConfig.i2pHTTPProxyAddress : nil
+            let info = try await MoneroDaemonClient.getInfo(baseURL: baseURL, proxyAddress: proxy, timeout: 8.0)
+            let tip = max(info.height, info.targetHeight)
+            if tip > chainHeight {
+                print("🧭 Catch-up tip advanced: chainHeight \(chainHeight) -> \(tip)")
+                chainHeight = tip
+            }
+        } catch {
+            // Non-fatal: still try resume from last-known tip if we already know we are behind.
+            print("⚠️ Catch-up tip probe failed: \(error.localizedDescription)")
+        }
+
+        guard !isRefreshing else { return }
+        guard !isSynced else { return }
+        print("🧭 Catch-up starting refresh (lastScanned=\(lastScannedHeight) chainHeight=\(chainHeight))")
+        await refreshWallet()
     }
 
     func markNeedsRefreshRetryIfInitialSyncInterrupted() {
@@ -1054,6 +1101,7 @@ class WalletViewModel: ObservableObject {
             }
 
             isWalletOpen = true
+            startForegroundCatchUp()
 
             if let balance = try? await walletManager.getBalance() {
                 applyBalanceSnapshot(
