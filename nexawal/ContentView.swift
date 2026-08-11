@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 enum MainTab: Hashable {
     case wallet
@@ -52,6 +53,14 @@ struct ContentView: View {
         .classicTheme(enabled: technoThemeEnabled, colorScheme: colorScheme)
         .task {
             // WalletViewModel handles loading any stored wallet on launch.
+        }
+        // Keep the display awake during an active scan so a full sync can finish with the
+        // app open on a table. iOS will still suspend once the user backgrounds the app.
+        .onChange(of: viewModel.isRefreshing) { _, refreshing in
+            UIApplication.shared.isIdleTimerDisabled = refreshing
+        }
+        .onDisappear {
+            UIApplication.shared.isIdleTimerDisabled = false
         }
     }
 }

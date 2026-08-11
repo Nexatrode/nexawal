@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIKit
 import MoneroWalletCoreFFI
 import Combine
 import CryptoKit
@@ -34,6 +35,10 @@ class WalletViewModel: ObservableObject {
 
     // Keep a handle to the in-flight refresh so the UI can cancel it explicitly.
     private var refreshTask: Task<Void, Never>?
+
+    /// Short iOS background execution window while a refresh is in flight (app switch / lock).
+    /// iOS typically grants ~30s; we use it to keep scanning instead of only snapshotting.
+    private var syncBackgroundTaskID: UIBackgroundTaskIdentifier = .invalid
 
     @Published var biometricsEnabled: Bool = false
     @Published var restoreHeight: UInt64 = 0
@@ -314,6 +319,37 @@ class WalletViewModel: ObservableObject {
         }
     }
 
+    /// Ask iOS for a brief background window so an in-flight scan can keep making progress
+    /// while the user switches apps or glances at another screen.
+    ///
+    /// This is not multi-hour background sync — when the system expiration handler fires we
+    /// snapshot and release the task so the process can suspend cleanly.
+    func beginBriefBackgroundSyncIfNeeded() {
+        snapshotForBackground()
+        guard isRefreshing else { return }
+        guard syncBackgroundTaskID == .invalid else { return }
+
+        syncBackgroundTaskID = UIApplication.shared.beginBackgroundTask(withName: "wallet_sync") { [weak self] in
+            Task { @MainActor in
+                self?.endBriefBackgroundSync(reason: "expired")
+            }
+        }
+        print("⏳ brief background sync: began (refresh still running)")
+    }
+
+    /// End any outstanding background-sync task. Safe to call from foreground / refresh completion.
+    func endBriefBackgroundSync(reason: String) {
+        let id = syncBackgroundTaskID
+        guard id != .invalid else { return }
+        if reason == "expired" {
+            // Last chance to persist progress before iOS suspends the process.
+            snapshotForBackground()
+        }
+        syncBackgroundTaskID = .invalid
+        UIApplication.shared.endBackgroundTask(id)
+        print("⏳ brief background sync: ended (\(reason))")
+    }
+
     /// Replace the existing single wallet with a new mnemonic (destructive).
     /// Call this only after explicit user confirmation.
     func replaceWallet(
@@ -484,6 +520,7 @@ class WalletViewModel: ObservableObject {
                     self.stopSyncStatusPolling(clearThroughput: false)
                     self.isRefreshing = false
                     self.refreshTask = nil
+                    self.endBriefBackgroundSync(reason: "refresh-done")
                 }
             }
 
@@ -615,6 +652,7 @@ class WalletViewModel: ObservableObject {
         Task { await walletManager.cancelRefresh() }
         stopSyncStatusPolling(clearThroughput: true)
         isRefreshing = false
+        endBriefBackgroundSync(reason: "cancelled")
     }
 
     /// Update balance without refreshing (quick check)

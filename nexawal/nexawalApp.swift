@@ -35,24 +35,27 @@ struct nexawalApp: App {
         }
         .onChange(of: scenePhase) {
             if scenePhase == .active {
+                viewModel.endBriefBackgroundSync(reason: "foreground")
                 viewModel.resumeOnForeground()
                 FiatPriceService.shared.onForeground()
                 return
             }
 
-            // Snapshot on either inactive or background, then resume on foreground.
-            // We don't attempt to keep scanning in background; this is best-effort persistence only.
-            guard scenePhase == .inactive || scenePhase == .background else { return }
+            // While refreshing, request iOS's short background window so a quick app-switch
+            // (Messages, Control Center → back) can keep scanning for ~30s instead of freezing
+            // immediately. On expiration we snapshot and let the process suspend.
+            if scenePhase == .background {
+                viewModel.beginBriefBackgroundSyncIfNeeded()
+                return
+            }
+
+            // Inactive (e.g. Control Center / app switcher peek): debounced cache snapshot only.
+            guard scenePhase == .inactive else { return }
 
             let now = Date()
             guard now.timeIntervalSince(lastSnapshotAt) >= snapshotDebounceSeconds else { return }
             lastSnapshotAt = now
-
-            // Best-effort: iOS gives a short window to finish work when transitioning away.
-            // Use it to snapshot wallet state for fast resume (cache export).
-            let taskID = UIApplication.shared.beginBackgroundTask(withName: "wallet_snapshot") {}
             viewModel.snapshotForBackground()
-            UIApplication.shared.endBackgroundTask(taskID)
         }
     }
 }
