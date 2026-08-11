@@ -112537,6 +112537,2630 @@
           }
         }
       }
+    },
+    "Terms of Use": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terms of Use"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شروط الاستخدام"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İstifadə Şərtləri"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Условия за ползване"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ব্যবহারের শর্তাবলী"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condicions d'ús"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podmínky použití"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brugsvilkår"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nutzungsbedingungen"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Όροι χρήσης"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzokondiĉoj"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Términos de uso"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kasutustingimused"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erabilera-baldintzak"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شرایط استفاده"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Käyttöehdot"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conditions d'utilisation"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téarmaí Úsáide"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termos de uso"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeporu ñe'ẽme'ẽ"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sharuɗan Amfani"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "תנאי השימוש"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "उपयोग की शर्तें"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uvjeti korištenja"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Felhasználási feltételek"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Օգտագործման պայմաններ"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketentuan Penggunaan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termini di utilizzo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "利用規約"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이용 약관"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Колдонуу шарттары"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naudojimo sąlygos"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lietošanas noteikumi"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Syarat Penggunaan"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "အသုံးပြုမှု စည်းကမ်းများ"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bruksvilkår"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gebruiksvoorwaarden"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warunki użytkowania"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termos de Uso"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termeni de utilizare"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Условия использования"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podmienky používania"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pogoji uporabe"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kushtet e përdorimit"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Användarvillkor"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ข้อกำหนดการใช้งาน"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mga Tuntunin ng Paggamit"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanım Koşulları"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Умови використання"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استعمال کی شرائط"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Điều khoản sử dụng"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Àwọn Òfin Lílò"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用条款"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用條款"
+          }
+        }
+      }
+    },
+    "NexaWal by Nexatrode LLC is a self-custodial interface for managing digital assets. You hold exclusive responsibility for your private keys and 25-word seed phrase.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal by Nexatrode LLC is a self-custodial interface for managing digital assets. You hold exclusive responsibility for your private keys and 25-word seed phrase."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal من Nexatrode LLC واجهة ذاتية الحفظ لإدارة الأصول الرقمية. أنت تتحمل المسؤولية الحصرية عن مفاتيحك الخاصة وعبارة الاسترداد المكوّنة من 25 كلمة."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC-nin NexaWal-ı rəqəmsal aktivləri idarə etmək üçün özünə saxlama interfeysidir. Şəxsi açarlarınız və 25 sözlük seed ifadəniz üçün müstəsna məsuliyyət sizə aiddir."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal от Nexatrode LLC е интерфейс със самостоятелно съхранение за управление на цифрови активи. Вие носите изключителна отговорност за частните си ключове и seed фразата от 25 думи."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC-এর NexaWal ডিজিটাল সম্পদ পরিচালনার জন্য একটি স্ব-অভিভাবক ইন্টারফেস। আপনার প্রাইভেট কী এবং ২৫-শব্দের সিড বাক্যাংশের সম্পূর্ণ দায়িত্ব আপনার।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal de Nexatrode LLC és una interfície d’autocustòdia per gestionar actius digitals. Teniu la responsabilitat exclusiva de les claus privades i de la frase llavor de 25 paraules."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal od Nexatrode LLC je self-custodial rozhraní pro správu digitálních aktiv. Výhradní odpovědnost za soukromé klíče a 25slovnou seed frázi neseš ty."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal fra Nexatrode LLC er en self-custodial grænseflade til at administrere digitale aktiver. Du har det fulde ansvar for dine private nøgler og 25-ords seed-sætning."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal von Nexatrode LLC ist eine selbstverwahrte Schnittstelle zur Verwaltung digitaler Vermögenswerte. Du trägst die alleinige Verantwortung für deine privaten Schlüssel und die 25-Wort-Seed-Phrase."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Το NexaWal της Nexatrode LLC είναι μια διεπαφή αυτοφύλαξης για τη διαχείριση ψηφιακών περιουσιακών στοιχείων. Έχετε αποκλειστική ευθύνη για τα ιδιωτικά σας κλειδιά και τη φράση seed 25 λέξεων."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal de Nexatrode LLC estas mem-garda interfaco por administri ciferecajn aktivojn. Vi sole respondecas pri viaj privataj ŝlosiloj kaj 25-vorta semfrazo."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal de Nexatrode LLC es una interfaz de autocustodia para gestionar activos digitales. Usted tiene la responsabilidad exclusiva de sus claves privadas y de su frase semilla de 25 palabras."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC NexaWal on isehoidlik liides digitaalse vara haldamiseks. Kannate ainuisikulist vastutust privaatvõtmete ja 25-sõnalise seemnelause eest."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC-ren NexaWal auto-zaintzako interfazea da aktibo digitalak kudeatzeko. Zure gako pribatuen eta 25 hitzeko seed esaldiaren erantzukizun esklusiboa duzu."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal از Nexatrode LLC یک رابط خودنگهدار برای مدیریت دارایی‌های دیجیتال است. مسئولیت انحصاری کلیدهای خصوصی و عبارت بازیابی ۲۵ کلمه‌ای بر عهده شماست."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC:n NexaWal on itsehallinnollinen käyttöliittymä digitaalisten varojen hallintaan. Olet yksin vastuussa yksityisavaimistasi ja 25 sanan siemenlauseesta."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal par Nexatrode LLC est une interface en auto-conservation pour gérer des actifs numériques. Vous êtes seul responsable de vos clés privées et de votre phrase de récupération de 25 mots."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is comhéadan féinchoimeádta é NexaWal ó Nexatrode LLC chun sócmhainní digiteacha a bhainistiú. Tá freagracht eisiach ort as do phríomheochracha agus as an bhfrása síl 25 focal."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal de Nexatrode LLC é unha interface de autocustodia para xestionar activos dixitais. Ten a responsabilidade exclusiva das súas chaves privadas e da frase semente de 25 palabras."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal Nexatrode LLC mba'éva ha'e peteĩ interface autocustodia oñangareko hag̃ua mba'e rehegua digital-pe. Ndévoi reñangarekóta ne llave privada ha ne semilla ñe'ẽ 25-pe."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal na Nexatrode LLC interface ne na kula da kai don sarrafa kadarorin dijital. Kai ne kaɗai ke da alhakin maɓallan sirri da jimlar iri ta kalmomi 25."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal של Nexatrode LLC הוא ממשק בשמירה עצמית לניהול נכסים דיגיטליים. האחריות הבלעדית למפתחות הפרטיים ולביטוי הזרע בן 25 המילים היא שלך."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC का NexaWal डिजिटल संपत्तियों के प्रबंधन के लिए एक स्व-अभिरक्षा इंटरफ़ेस है। आपकी निजी कुंजियों और 25-शब्द सीड वाक्यांश की पूरी ज़िम्मेदारी आपकी है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal tvrtke Nexatrode LLC samostalno je skrbničko sučelje za upravljanje digitalnom imovinom. Isključivo ste odgovorni za svoje privatne ključeve i seed frazu od 25 riječi."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Nexatrode LLC NexaWal alkalmazása önőrzésű felület digitális eszközök kezeléséhez. A privát kulcsokért és a 25 szavas seed kifejezésért kizárólag Ön felel."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC-ի NexaWal-ը ինքնապահպանման միջերես է թվային ակտիվները կառավարելու համար։ Դուք կրում եք բացառիկ պատասխանատվություն ձեր մասնավոր բանալիների և 25 բառանոց seed արտահայտության համար։"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal oleh Nexatrode LLC adalah antarmuka self-custodial untuk mengelola aset digital. Anda memegang tanggung jawab penuh atas kunci pribadi dan frasa seed 25 kata."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal di Nexatrode LLC è un’interfaccia self-custodial per gestire asset digitali. Hai la responsabilità esclusiva delle tue chiavi private e della frase seed di 25 parole."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC の NexaWal は、デジタル資産を管理するためのセルフカストディ型インターフェースです。秘密鍵および 25 語のシードフレーズについて、あなたが単独で責任を負います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC의 NexaWal은 디지털 자산을 관리하기 위한 셀프 커스터디 인터페이스입니다. 개인 키와 25단어 시드 구문에 대한 전적인 책임은 사용자에게 있습니다."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC’нин NexaWal’ы — санарип активдерди башкаруу үчүн өзүнчө сактоо интерфейси. Жеке ачкычтарыңыз жана 25 сөздүк seed фразаңыз үчүн жоопкерчилик сизде."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal iš Nexatrode LLC yra savarankiškos saugojimo sąsaja skaitmeniniam turtui valdyti. Jūs vieninteliai atsakingi už privačius raktus ir 25 žodžių seed frazę."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal no Nexatrode LLC ir pašpārvaldības saskarne digitālo aktīvu pārvaldībai. Jūs uzņematies ekskluzīvu atbildību par privātajām atslēgām un 25 vārdu seed frāzi."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal oleh Nexatrode LLC ialah antara muka penjagaan sendiri untuk mengurus aset digital. Anda memegang tanggungjawab eksklusif ke atas kunci peribadi dan frasa benih 25 perkataan."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC ၏ NexaWal သည် ဒစ်ဂျစ်တယ် ပိုင်ဆိုင်မှုများကို စီမံရန် ကိုယ်တိုင်ထိန်းသိမ်းသည့် အင်တာဖေ့စ်ဖြစ်သည်။ သင့်ပုဂ္ဂလိက သော့များနှင့် စကားလုံး ၂၅ လုံးပါ seed စကားစုအတွက် တာဝန်အားလုံး သင့်အပေါ်တွင်သာရှိသည်။"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal fra Nexatrode LLC er et self-custodial-grensesnitt for å administrere digitale eiendeler. Du har eneansvar for dine private nøkler og 25-ords seed-frase."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal van Nexatrode LLC is een self-custodial interface voor het beheren van digitale activa. Jij bent als enige verantwoordelijk voor je privésleutels en 25-woorden seedzin."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal od Nexatrode LLC to interfejs self-custodial do zarządzania aktywami cyfrowymi. Ponosisz wyłączną odpowiedzialność za swoje klucze prywatne i 25-wyrazową frazę seed."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O NexaWal da Nexatrode LLC é uma interface de autocustódia para gerenciar ativos digitais. Você tem responsabilidade exclusiva pelas suas chaves privadas e pela frase-semente de 25 palavras."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal de la Nexatrode LLC este o interfață cu auto-custodie pentru gestionarea activelor digitale. Aveți responsabilitatea exclusivă pentru cheile private și fraza seed de 25 de cuvinte."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal от Nexatrode LLC — это интерфейс с самостоятельной ответственностью за хранение цифровых активов. Вы несёте исключительную ответственность за свои закрытые ключи и seed-фразу из 25 слов."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal od Nexatrode LLC je self-custodial rozhranie na správu digitálnych aktív. Výhradnú zodpovednosť za súkromné kľúče a 25-slovnú seed frázu nesiete vy."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal podjetja Nexatrode LLC je vmesnik s samostojnim skrbništvom za upravljanje digitalnih sredstev. Izključno ste odgovorni za zasebne ključe in 25-besedno seed frazo."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal nga Nexatrode LLC është një ndërfaqe vetë-ruajtëse për menaxhimin e aseteve digjitale. Ju mbani përgjegjësi ekskluzive për çelësat tuaj privatë dhe frazën seed me 25 fjalë."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal från Nexatrode LLC är ett self-custodial-gränssnitt för att hantera digitala tillgångar. Du har ensamt ansvar för dina privata nycklar och 25-ords fröfras."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal โดย Nexatrode LLC เป็นอินเทอร์เฟซแบบดูแลเองสำหรับจัดการสินทรัพย์ดิจิทัล คุณรับผิดชอบแต่เพียงผู้เดียวต่อคีย์ส่วนตัวและวลีซีด 25 คำ"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ang NexaWal ng Nexatrode LLC ay isang self-custodial na interface para sa pamamahala ng digital na asset. Ikaw ang may eksklusibong responsibilidad sa iyong mga private key at 25-salitang seed phrase."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC’nin NexaWal’ı, dijital varlıkları yönetmek için bir öz-saklama arayüzüdür. Özel anahtarlarınız ve 25 kelimelik tohum ifadeniz için münhasır sorumluluk size aittir."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal від Nexatrode LLC — це інтерфейс із самостійним зберіганням цифрових активів. Ви несете виключну відповідальність за свої приватні ключі та seed-фразу з 25 слів."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC کا NexaWal ڈیجیٹل اثاثوں کے انتظام کے لیے سیلف کسٹوڈیل انٹرفیس ہے۔ آپ کی نجی کلیدیں اور 25 الفاظ کی سیڈ فریز کی مکمل ذمہ داری آپ پر ہے۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal của Nexatrode LLC là giao diện tự lưu ký để quản lý tài sản số. Bạn chịu trách nhiệm duy nhất về khóa riêng và cụm từ khôi phục 25 từ."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NexaWal láti ọwọ́ Nexatrode LLC jẹ́ ìfojúṣe ìtọ́jú ara ẹni fún ṣíṣàkóso àwọn ohun-ìní oníṣirò. Ìdájọ́ dúró lórí rẹ nìkan fún àwọn kọ́kọ́rọ́ àdáni àti ọ̀rọ̀ irúgbìn ọ̀rọ̀ 25."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC 的 NexaWal 是用于管理数字资产的自托管界面。您对私钥和 25 词助记词负有全部责任。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC 的 NexaWal 是用於管理數位資產的自託管介面。您對私鑰與 25 詞助記詞負有全部責任。"
+          }
+        }
+      }
+    },
+    "The app is provided as is, with no warranties express or implied. Use is at your own risk. Nexatrode LLC is not liable for lost assets, user errors, downtime, or issues with third-party services or nodes.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The app is provided as is, with no warranties express or implied. Use is at your own risk. Nexatrode LLC is not liable for lost assets, user errors, downtime, or issues with third-party services or nodes."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُقدَّم التطبيق كما هو، دون ضمانات صريحة أو ضمنية. الاستخدام على مسؤوليتك الخاصة. لا تتحمل Nexatrode LLC المسؤولية عن الأصول المفقودة أو أخطاء المستخدم أو التوقف أو مشكلات خدمات أو عُقد جهات خارجية."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tətbiq olduğu kimi, açıq və ya nəzərdə tutulan zəmanət olmadan təqdim olunur. İstifadə öz riskinizədir. Nexatrode LLC itirilmiş aktivlər, istifadəçi səhvləri, dayanmalar və ya üçüncü tərəf xidmət/node problemlərinə görə məsuliyyət daşımır."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приложението се предоставя „такова, каквото е“, без изрични или подразбиращи се гаранции. Използването е на ваш риск. Nexatrode LLC не носи отговорност за загубени активи, потребителски грешки, прекъсвания или проблеми с услуги или нодове на трети страни."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "অ্যাপটি যেমন আছে তেমনই প্রদান করা হয়, কোনো প্রকাশ্য বা উহ্য ওয়ারেন্টি ছাড়াই। ব্যবহার আপনার নিজস্ব ঝুঁকিতে। হারানো সম্পদ, ব্যবহারকারীর ত্রুটি, ডাউনটাইম বা তৃতীয় পক্ষের সেবা/নোডের সমস্যার জন্য Nexatrode LLC দায়ী নয়।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'aplicació es proporciona tal com és, sense garanties expresses o implícites. L'ús és sota la vostra responsabilitat. Nexatrode LLC no respon d'actius perduts, errors de l'usuari, interrupcions o problemes amb serveis o nodes de tercers."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikace je poskytována tak, jak je, bez výslovných či předpokládaných záruk. Použití je na vlastní riziko. Nexatrode LLC neodpovídá za ztracená aktiva, chyby uživatele, výpadky ani problémy se službami či nody třetích stran."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appen leveres som den er, uden udtrykkelige eller underforståede garantier. Brug sker på egen risiko. Nexatrode LLC er ikke ansvarlig for mistede aktiver, brugerfejl, nedetid eller problemer med tredjepartstjenester eller noder."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die App wird „wie besehen“ ohne ausdrückliche oder stillschweigende Garantien bereitgestellt. Die Nutzung erfolgt auf eigenes Risiko. Nexatrode LLC haftet nicht für verlorene Vermögenswerte, Benutzerfehler, Ausfallzeiten oder Probleme mit Diensten oder Nodes Dritter."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Η εφαρμογή παρέχεται ως έχει, χωρίς ρητές ή σιωπηρές εγγυήσεις. Η χρήση γίνεται με δική σας ευθύνη. Η Nexatrode LLC δεν ευθύνεται για χαμένα περιουσιακά στοιχεία, σφάλματα χρήστη, διακοπές ή προβλήματα με υπηρεσίες ή κόμβους τρίτων."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La apo estas provizita kiel estas, sen esprimitaj aŭ implicaj garantioj. Uzo estas je via propra risko. Nexatrode LLC ne respondecas pri perditaj aktivoj, uzantaj eraroj, malfunkcioj aŭ problemoj kun triaj servoj aŭ nodoj."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La aplicación se proporciona tal cual, sin garantías expresas o implícitas. El uso es bajo su propio riesgo. Nexatrode LLC no es responsable de activos perdidos, errores del usuario, interrupciones o problemas con servicios o nodos de terceros."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rakendus esitatakse nii nagu on, ilma otseste või kaudsete garantiideta. Kasutamine on omal riisikol. Nexatrode LLC ei vastuta kaotatud vara, kasutajavigade, seisakute ega kolmandate osapoolte teenuste või nodede probleemide eest."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikazioa dagoen bezala ematen da, bermerik gabe, esplizitu edo inplizitu. Erabilera zure arriskuan da. Nexatrode LLC ez da arduratzen galdutako aktiboez, erabiltzaile-erroreez, eteneeaz edo hirugarrenen zerbitzuen/nodoen arazoez."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برنامه به‌صورت «همان‌گونه که هست» و بدون هرگونه ضمانت صریح یا ضمنی ارائه می‌شود. استفاده بر عهده خود شماست. Nexatrode LLC مسئول دارایی‌های ازدست‌رفته، خطای کاربر، قطعی یا مشکلات خدمات یا نودهای شخص ثالث نیست."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sovellus tarjotaan sellaisenaan ilman nimenomaisia tai oletettuja takuita. Käyttö on omalla vastuullasi. Nexatrode LLC ei ole vastuussa menetetyistä varoista, käyttäjävirheistä, käyttökatkoista tai kolmansien osapuolten palveluiden tai nodien ongelmista."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'application est fournie telle quelle, sans garantie expresse ou implicite. L'utilisation se fait à vos propres risques. Nexatrode LLC n'est pas responsable des actifs perdus, des erreurs d'utilisateur, des interruptions ou des problèmes liés à des services ou nœuds tiers."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuirtear an aip ar fáil mar atá, gan barántais shainráite nó intuigthe. Is ar do phriacal féin an úsáid. Níl Nexatrode LLC freagrach as sócmhainní caillte, earráidí úsáideora, aga neamhfhónaimh, ná fadhbanna le seirbhísí nó nóid tríú páirtí."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A aplicación proporciónase tal cal, sen garantías expresas ou implícitas. O uso é baixo a súa responsabilidade. Nexatrode LLC non responde por activos perdidos, erros do usuario, interrupcións ou problemas con servizos ou nodos de terceiros."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ko app ome'ẽva oĩháicha, ndaipóri garantía. Reiporu ne riesgópe. Nexatrode LLC ndojapói cargo mba'e oñehundíva, usuario jejavy, oñepytỹhague térã servicio térã nodo ambuéva apañuãi rehe."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ana bayar da app ɗin yadda yake, ba tare da wani garantin bayyane ko na ciki ba. Amfani yana kan haɗarin ku. Nexatrode LLC ba ta da alhakin kadarorin da suka ɓace, kuskuren mai amfani, katsewa, ko matsalolin sabis ko node na waje."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "האפליקציה מסופקת כפי שהיא, ללא אחריות מפורשת או משתמעת. השימוש על אחריותך בלבד. Nexatrode LLC אינה אחראית לאובדן נכסים, טעויות משתמש, השבתות או בעיות בשירותים או צמתים של צד שלישי."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ऐप जैसा है वैसा प्रदान किया जाता है, बिना किसी व्यक्त या निहित वारंटी के। उपयोग आपके अपने जोखिम पर है। Nexatrode LLC खोई संपत्ति, उपयोगकर्ता त्रुटियों, डाउनटाइम, या तृतीय-पक्ष सेवाओं/नोड्स की समस्याओं के लिए उत्तरदायी नहीं है।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacija se pruža kakva jest, bez izričitih ili podrazumijevanih jamstava. Korištenje je na vlastiti rizik. Nexatrode LLC nije odgovoran za izgubljenu imovinu, greške korisnika, zastoje ili probleme s uslugama ili čvorovima trećih strana."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Az alkalmazás „ahogy van” állapotban kerül biztosításra, kifejezett vagy hallgatólagos garancia nélkül. A használat saját felelősségre történik. A Nexatrode LLC nem felel elveszett eszközökért, felhasználói hibákért, kiesésekért vagy harmadik felek szolgáltatásainak/node-jainak problémáiért."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Հավելվածը տրամադրվում է «ինչպես կա»՝ առանց բացահայտ կամ ենթադրյալ երաշխիքների։ Օգտագործումը ձեր ռիսկով է։ Nexatrode LLC-ն պատասխանատու չէ կորած ակտիվների, օգտատիրոջ սխալների, պարապուրդների կամ երրորդ կողմի ծառայությունների/հանգույցների խնդիրների համար։"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikasi disediakan apa adanya, tanpa jaminan tersurat maupun tersirat. Penggunaan menjadi risiko Anda sendiri. Nexatrode LLC tidak bertanggung jawab atas aset yang hilang, kesalahan pengguna, downtime, atau masalah layanan/node pihak ketiga."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'app è fornita così com'è, senza garanzie espresse o implicite. L'uso è a tuo rischio. Nexatrode LLC non è responsabile per asset persi, errori dell'utente, interruzioni o problemi con servizi o nodi di terze parti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本アプリは現状のまま提供され、明示または黙示を問わず一切の保証はありません。利用は自己責任です。Nexatrode LLC は、資産の損失、ユーザーエラー、ダウンタイム、または第三者のサービスやノードに関する問題について責任を負いません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱은 명시적 또는 묵시적 보증 없이 있는 그대로 제공됩니다. 사용은 사용자 본인 책임입니다. Nexatrode LLC는 자산 손실, 사용자 오류, 다운타임 또는 제3자 서비스/노드 문제에 대해 책임지지 않습니다."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Колдонмо «кандай болсо ошондой» берилет, ачык же кыйыр кепилдиктерсиз. Колдонуу өз тобокелиңизде. Nexatrode LLC жоголгон активдер, колдонуучу каталары, иштебөө же үчүнчү тараптын кызмат/нод көйгөйлөрү үчүн жооп бербейт."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Programa pateikiama tokia, kokia yra, be jokių išreikštų ar numanomų garantijų. Naudojimasis – jūsų rizika. Nexatrode LLC neatsako už prarastą turtą, vartotojo klaidas, prastovas ar trečiųjų šalių paslaugų ar mazgų problemas."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lietotne tiek nodrošināta “kā ir”, bez izteiktām vai netiešām garantijām. Lietošana ir uz jūsu pašu risku. Nexatrode LLC nav atbildīgs par zaudētiem aktīviem, lietotāja kļūdām, dīkstāvi vai trešo pušu pakalpojumu vai mezglu problēmām."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikasi disediakan seperti sedia ada, tanpa waranti nyata atau tersirat. Penggunaan adalah atas risiko anda sendiri. Nexatrode LLC tidak bertanggungjawab atas aset hilang, ralat pengguna, masa henti, atau isu dengan perkhidmatan/nod pihak ketiga."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "အက်ပ်ကို အာမခံမှု မရှိဘဲ ရှိသည့်အတိုင်း ပေးသည်။ အသုံးပြုမှုသည် သင့်အန္တရာယ်တွင်သာဖြစ်သည်။ ပိုင်ဆိုင်မှု ဆုံးရှုံးမှု၊ အသုံးပြုသူ အမှား၊ ရပ်နားချိန် သို့မဟုတ် ပြင်ပ ဝန်ဆောင်မှု/node ပြဿနာများအတွက် Nexatrode LLC တာဝန်မယူပါ။"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appen leveres som den er, uten uttrykte eller underforståtte garantier. Bruk skjer på egen risiko. Nexatrode LLC er ikke ansvarlig for tapte eiendeler, brukerfeil, nedetid eller problemer med tredjepartstjenester eller noder."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De app wordt geleverd zoals deze is, zonder uitdrukkelijke of stilzwijgende garanties. Gebruik is op eigen risico. Nexatrode LLC is niet aansprakelijk voor verloren activa, gebruikersfouten, downtime of problemen met diensten of nodes van derden."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacja jest dostarczana w stanie „tak jak jest”, bez żadnych gwarancji wyraźnych ani dorozumianych. Korzystasz na własne ryzyko. Nexatrode LLC nie ponosi odpowiedzialności za utracone aktywa, błędy użytkownika, przestoje ani problemy z usługami lub węzłami stron trzecich."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O aplicativo é fornecido no estado em que se encontra, sem garantias expressas ou implícitas. O uso é por sua conta e risco. A Nexatrode LLC não se responsabiliza por ativos perdidos, erros do usuário, indisponibilidade ou problemas com serviços ou nós de terceiros."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplicația este furnizată ca atare, fără garanții exprese sau implicite. Utilizarea este pe propriul risc. Nexatrode LLC nu răspunde pentru active pierdute, erori ale utilizatorului, întreruperi sau probleme cu servicii ori noduri terțe."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приложение предоставляется «как есть», без каких-либо явных или подразумеваемых гарантий. Использование на ваш собственный риск. Nexatrode LLC не несёт ответственности за утраченные активы, ошибки пользователя, простои или проблемы со сторонними сервисами или нодами."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikácia sa poskytuje tak, ako je, bez výslovných alebo predpokladaných záruk. Použitie je na vlastné riziko. Nexatrode LLC nezodpovedá za stratené aktíva, chyby používateľa, výpadky ani problémy so službami alebo nodmi tretích strán."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacija je na voljo takšna, kakršna je, brez izrecnih ali implicitnih jamstev. Uporaba je na lastno odgovornost. Nexatrode LLC ni odgovoren za izgubljena sredstva, napake uporabnika, izpade ali težave s storitvami ali vozlišči tretjih oseb."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikacioni ofrohet ashtu si është, pa garanci të shprehura ose të nënkuptuara. Përdorimi është në rrezikun tuaj. Nexatrode LLC nuk është përgjegjës për asete të humbura, gabime të përdoruesit, ndërprerje ose probleme me shërbime apo nyje të palëve të treta."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appen tillhandahålls i befintligt skick, utan uttryckliga eller underförstådda garantier. Användning sker på egen risk. Nexatrode LLC ansvarar inte för förlorade tillgångar, användarfel, driftstopp eller problem med tredjepartstjänster eller noder."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "แอปให้บริการตามสภาพ โดยไม่มีการรับประกันใด ๆ ทั้งโดยชัดแจ้งหรือโดยนัย การใช้งานเป็นความเสี่ยงของคุณเอง Nexatrode LLC ไม่รับผิดชอบต่อสินทรัพย์ที่สูญหาย ข้อผิดพลาดของผู้ใช้ ช่วงเวลาหยุดทำงาน หรือปัญหาของบริการ/โหนดบุคคลที่สาม"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ang app ay ibinibigay nang gaya ng kasalukuyan, nang walang tahasan o ipinahiwatig na warranty. Ang paggamit ay sa iyong sariling panganib. Hindi mananagot ang Nexatrode LLC sa nawalang asset, error ng user, downtime, o isyu sa serbisyo o node ng third party."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama açık veya zımni hiçbir garanti olmaksızın olduğu gibi sağlanır. Kullanım kendi riskinizdedir. Nexatrode LLC kayıp varlıklar, kullanıcı hataları, kesintiler veya üçüncü taraf hizmet/düğüm sorunlarından sorumlu değildir."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додаток надається «як є», без явних чи подразумеваних гарантій. Використання на ваш власний ризик. Nexatrode LLC не несе відповідальності за втрачені активи, помилки користувача, простої або проблеми зі сторонніми сервісами чи нодами."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ایپ جیسی ہے ویسی فراہم کی جاتی ہے، بغیر کسی ظاہری یا مضمر وارنٹی کے۔ استعمال آپ کے اپنے خطرے پر ہے۔ کھوئے ہوئے اثاثے، صارف کی غلطیاں، ڈاؤن ٹائم، یا فریقِ ثالث کی سروسز/نوڈز کے مسائل کے لیے Nexatrode LLC ذمہ دار نہیں۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ứng dụng được cung cấp nguyên trạng, không có bảo đảm rõ ràng hoặc ngụ ý. Việc sử dụng do bạn tự chịu rủi ro. Nexatrode LLC không chịu trách nhiệm về tài sản bị mất, lỗi người dùng, thời gian ngừng hoạt động hoặc sự cố với dịch vụ/nút của bên thứ ba."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A pèsè app náà gẹ́gẹ́ bí ó ṣe wà, láìsí èròǹgbà àti ìdúróṣinṣin kankan. Lílo wà lórí ewu tirẹ. Nexatrode LLC kò ní ẹjọ́ fún ohun-ìní tí ó sọnù, àṣìṣe olùlò, ìdádúró, tàbí ìṣòro pẹ̀lú iṣẹ́ tàbí node ẹni kẹta."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本应用按“现状”提供，不作任何明示或暗示的保证。使用风险自负。Nexatrode LLC 不对资产丢失、用户错误、停机或第三方服务/节点问题承担责任。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本應用程式依「現況」提供，不作任何明示或暗示保證。使用風險自負。Nexatrode LLC 不對資產遺失、使用者錯誤、停機或第三方服務／節點問題負責。"
+          }
+        }
+      }
+    },
+    "Running or connecting to your own Monero node is recommended. Public defaults are for convenience only.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running or connecting to your own Monero node is recommended. Public defaults are for convenience only."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُنصح بتشغيل عقدة Monero الخاصة بك أو الاتصال بها. القيم العامة الافتراضية للراحة فقط."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öz Monero node-unuzu işə salmaq və ya ona qoşulmaq tövsiyə olunur. İctimai standartlar yalnız rahatlıq üçündür."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Препоръчва се да стартирате или да се свържете към собствен Monero нод. Публичните стойности по подразбиране са само за удобство."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "নিজের Monero নোড চালানো বা সংযুক্ত হওয়ার পরামর্শ দেওয়া হয়। পাবলিক ডিফল্ট কেবল সুবিধার জন্য।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es recomana executar o connectar-vos al vostre propi node de Monero. Els valors públics per defecte són només per comoditat."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doporučuje se provozovat nebo se připojit k vlastnímu Monero nodu. Veřejné výchozí hodnoty jsou pouze pro pohodlí."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Det anbefales at køre eller oprette forbindelse til din egen Monero-node. Offentlige standardværdier er kun for bekvemmelighed."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es wird empfohlen, einen eigenen Monero-Node zu betreiben oder sich damit zu verbinden. Öffentliche Standardwerte dienen nur der Bequemlichkeit."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Συνιστάται να εκτελείτε ή να συνδέεστε στον δικό σας κόμβο Monero. Οι δημόσιες προεπιλογές είναι μόνο για ευκολία."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oni rekomendas ruli aŭ konekti al via propra Monero-nodo. Publikaj defaŭltoj estas nur por komforto."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se recomienda ejecutar o conectarse a su propio nodo de Monero. Los valores públicos predeterminados son solo por comodidad."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soovitatav on käivitada või ühenduda oma Monero node’iga. Avalikud vaikeväärtused on ainult mugavuseks."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gomendagarria da zure Monero nodoa exekutatzea edo konektatzea. Publiko lehenetsiak erosotasunerako soilik dira."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اجرا یا اتصال به نود Monero خودتان توصیه می‌شود. مقادیر پیش‌فرض عمومی فقط برای راحتی هستند."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suosittelemme oman Monero-noden käyttämistä tai siihen yhdistämistä. Julkiset oletukset ovat vain mukavuutta varten."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il est recommandé d’exécuter ou de vous connecter à votre propre nœud Monero. Les valeurs publiques par défaut sont uniquement destinées à la commodité."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moltar do nód Monero féin a rith nó ceangal leis. Níl na réamhshocruithe poiblí ach ar mhaithe le háisiúlacht."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recoméndase executar ou conectarse ao seu propio nodo de Monero. Os valores públicos predeterminados son só por comodidade."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ojejerure ehechauka térã eike ne nodo Monero-pe. Oĩva público oĩ confortoñguaránte."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ana ba da shawarar gudanar da ko haɗawa da naku na Monero. Tsohuwar jama'a don sauƙi ne kawai."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "מומלץ להפעיל או להתחבר לצומת Monero משלך. ברירות המחדל הציבוריות נועדו לנוחות בלבד."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अपना स्वयं का Monero नोड चलाना या उससे कनेक्ट करना अनुशंसित है। सार्वजनिक डिफ़ॉल्ट केवल सुविधा के लिए हैं।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preporučuje se pokretanje ili povezivanje s vlastitim Monero čvorom. Javne zadane vrijednosti služe samo radi praktičnosti."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajánlott saját Monero node futtatása vagy ahhoz csatlakozás. A nyilvános alapértelmezések csak a kényelemért vannak."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Խորհուրդ է տրվում գործարկել կամ միանալ ձեր սեփական Monero հանգույցին։ Հանրային լռելյայնները միայն հարմարության համար են։"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disarankan menjalankan atau terhubung ke node Monero Anda sendiri. Default publik hanya untuk kenyamanan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si raccomanda di eseguire o collegarsi al proprio nodo Monero. I valori pubblici predefiniti sono solo per comodità."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "独自の Monero ノードを運用するか接続することを推奨します。公開の既定値は利便性のためのみです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자체 Monero 노드를 실행하거나 연결하는 것을 권장합니다. 공개 기본값은 편의용일 뿐입니다."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Өз Monero нодуңузду иштетүү же ага туташуу сунушталат. Коомдук демейкилер ыңгайлуулук үчүн гана."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekomenduojama paleisti arba prisijungti prie savo Monero mazgo. Viešosios numatytosios reikšmės skirtos tik patogumui."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ieteicams palaist vai savienoties ar savu Monero mezglu. Publiskās noklusējuma vērtības ir tikai ērtībai."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disyorkan menjalankan atau menyambung ke nod Monero anda sendiri. Lalai awam hanya untuk kemudahan."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ကိုယ်ပိုင် Monero node ကို ဖွင့်ရန် သို့မဟုတ် ချိတ်ဆက်ရန် အကြံပြုသည်။ အများသုံး မူရင်းတန်ဖိုးများသည် အဆင်ပြေစေရန်သာဖြစ်သည်။"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Det anbefales å kjøre eller koble til din egen Monero-node. Offentlige standardverdier er kun for bekvemmelighet."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het wordt aanbevolen om je eigen Monero-node te draaien of ermee te verbinden. Openbare standaardwaarden zijn alleen voor het gemak."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zalecane jest uruchomienie lub połączenie z własnym węzłem Monero. Publiczne wartości domyślne służą wyłącznie wygodzie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É recomendável executar ou conectar-se ao seu próprio nó Monero. Os padrões públicos são apenas por conveniência."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se recomandă rularea sau conectarea la propriul nod Monero. Valorile publice implicite sunt doar pentru comoditate."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рекомендуется запускать или подключаться к собственной ноде Monero. Публичные значения по умолчанию предназначены только для удобства."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odporúča sa prevádzkovať alebo sa pripojiť k vlastnému Monero nodu. Verejné predvolené hodnoty sú len pre pohodlie."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Priporočeno je zagnati ali se povezati z lastnim vozliščem Monero. Javne privzete vrednosti so le zaradi udobja."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekomandohet të ekzekutoni ose të lidheni me nyjen tuaj Monero. Vlerat e parazgjedhura publike janë vetëm për lehtësi."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Det rekommenderas att köra eller ansluta till din egen Monero-nod. Offentliga standardvärden är endast för bekvämlighet."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "แนะนำให้รันหรือเชื่อมต่อโหนด Monero ของคุณเอง ค่าเริ่มต้นสาธารณะมีไว้เพื่อความสะดวกเท่านั้น"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inirerekomenda ang pagpapatakbo o pagkonekta sa sarili mong Monero node. Ang mga pampublikong default ay para lamang sa kaginhawahan."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kendi Monero düğümünüzü çalıştırmanız veya bağlanmanız önerilir. Genel varsayılanlar yalnızca kolaylık içindir."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рекомендується запускати або підключатися до власної ноди Monero. Публічні значення за замовчуванням лише для зручності."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اپنا Monero نوڈ چلانا یا اس سے جڑنا تجویز کیا جاتا ہے۔ عوامی ڈیفالٹس صرف سہولت کے لیے ہیں۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nên chạy hoặc kết nối với nút Monero của riêng bạn. Các mặc định công khai chỉ nhằm tiện lợi."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A dábàá pé kí o ṣiṣẹ́ tàbí so mọ́ node Monero tirẹ. Àwọn àìyípadà gbogbogbòò jẹ́ fún ìrọ̀rùn nìkan."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "建议运行或连接您自己的 Monero 节点。公开默认设置仅图方便。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "建議執行或連線至您自己的 Monero 節點。公開預設值僅為方便之用。"
+          }
+        }
+      }
+    },
+    "Review full terms on the Nexatrode LLC website": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review full terms on the Nexatrode LLC website"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "راجع الشروط الكاملة على موقع Nexatrode LLC"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tam şərtlərə Nexatrode LLC saytında baxın"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прегледайте пълните условия на сайта на Nexatrode LLC"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC ওয়েবসাইটে সম্পূর্ণ শর্তাবলী দেখুন"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reviseu les condicions completes al lloc web de Nexatrode LLC"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zobrazit úplné podmínky na webu Nexatrode LLC"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gennemgå de fulde vilkår på Nexatrode LLC’s websted"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vollständige Bedingungen auf der Website von Nexatrode LLC lesen"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Δείτε τους πλήρεις όρους στον ιστότοπο της Nexatrode LLC"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reviziu la plenajn kondiĉojn ĉe la retejo de Nexatrode LLC"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar los términos completos en el sitio web de Nexatrode LLC"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaadake täielikke tingimusi Nexatrode LLC veebisaidil"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikusi baldintza osoak Nexatrode LLC webgunean"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شرایط کامل را در وب‌سایت Nexatrode LLC ببینید"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutustu täydellisiin ehtoihin Nexatrode LLC:n verkkosivustolla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulter les conditions complètes sur le site de Nexatrode LLC"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Athbhreithnigh na téarmaí iomlána ar shuíomh Gréasáin Nexatrode LLC"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revise os termos completos no sitio web de Nexatrode LLC"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ehecha ñe'ẽme'ẽ tuicháva Nexatrode LLC ñanduti renda-pe"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duba cikakkun sharuɗa a gidan yanar gizon Nexatrode LLC"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "עיין בתנאים המלאים באתר של Nexatrode LLC"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC वेबसाइट पर पूर्ण शर्तें देखें"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregledajte potpune uvjete na web-stranici Nexatrode LLC"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A teljes feltételek megtekintése a Nexatrode LLC webhelyén"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Դիտեք ամբողջական պայմանները Nexatrode LLC կայքում"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinjau ketentuan lengkap di situs Nexatrode LLC"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulta i termini completi sul sito di Nexatrode LLC"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC のウェブサイトで利用規約全文を確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC 웹사이트에서 전체 약관 확인"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Толук шарттарды Nexatrode LLC сайтынан караңыз"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peržiūrėkite visas sąlygas Nexatrode LLC svetainėje"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skatiet pilnos noteikumus Nexatrode LLC vietnē"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semak syarat penuh di tapak web Nexatrode LLC"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC ဝဘ်ဆိုက်တွင် စည်းကမ်းအပြည့်အစုံကို ကြည့်ပါ"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se fullstendige vilkår på Nexatrode LLC sitt nettsted"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekijk de volledige voorwaarden op de website van Nexatrode LLC"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przejrzyj pełne warunki na stronie Nexatrode LLC"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulte os termos completos no site da Nexatrode LLC"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consultați termenii compleți pe site-ul Nexatrode LLC"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ознакомиться с полными условиями на сайте Nexatrode LLC"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pozrite si úplné podmienky na webe Nexatrode LLC"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preglejte celotne pogoje na spletnem mestu Nexatrode LLC"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rishikoni kushtet e plota në faqen e Nexatrode LLC"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Läs de fullständiga villkoren på Nexatrode LLC:s webbplats"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ดูข้อกำหนดฉบับเต็มบนเว็บไซต์ Nexatrode LLC"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suriin ang buong mga tuntunin sa website ng Nexatrode LLC"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tam koşulları Nexatrode LLC web sitesinde inceleyin"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Переглянути повні умови на сайті Nexatrode LLC"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nexatrode LLC کی ویب سائٹ پر مکمل شرائط دیکھیں"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xem đầy đủ điều khoản trên trang web Nexatrode LLC"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ṣàtúnyẹ̀wò àwọn òfin níkún lórí ojú òpó wẹ́ẹ̀bù Nexatrode LLC"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 Nexatrode LLC 网站查看完整条款"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "於 Nexatrode LLC 網站檢視完整條款"
+          }
+        }
+      }
+    },
+    "I have read and agree to the Terms of Use": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I have read and agree to the Terms of Use"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لقد قرأت وأوافق على شروط الاستخدام"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İstifadə Şərtlərini oxudum və razıyam"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прочетох и се съгласявам с Условията за ползване"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আমি ব্যবহারের শর্তাবলী পড়েছি এবং সম্মত"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "He llegit i accepto les Condicions d'ús"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Přečetl(a) jsem si Podmínky použití a souhlasím s nimi"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeg har læst og accepterer Brugsvilkårene"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ich habe die Nutzungsbedingungen gelesen und stimme ihnen zu"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Έχω διαβάσει και συμφωνώ με τους Όρους χρήσης"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi legis kaj konsentas pri la Uzokondiĉoj"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "He leído y acepto los Términos de uso"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olen lugenud ja nõustun Kasutustingimustega"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erabilera-baldintzak irakurri ditut eta onartzen ditut"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شرایط استفاده را خوانده‌ام و موافقم"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olen lukenut Käyttöehdot ja hyväksyn ne"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'ai lu et j'accepte les Conditions d'utilisation"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tá na Téarmaí Úsáide léite agam agus aontaím leo"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lin e acepto os Termos de uso"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amoñe'ẽ ha amoneĩ Jeporu ñe'ẽme'ẽ"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na karanta kuma na yarda da Sharuɗan Amfani"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "קראתי ואני מסכים/ה לתנאי השימוש"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैंने उपयोग की शर्तें पढ़ ली हैं और उनसे सहमत हूँ"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pročitao/la sam i slažem se s Uvjetima korištenja"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elolvastam és elfogadom a Felhasználási feltételeket"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Կարդացել եմ և համաձայն եմ Օգտագործման պայմաններին"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saya telah membaca dan menyetujui Ketentuan Penggunaan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ho letto e accetto i Termini di utilizzo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "利用規約を読み、同意します"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이용 약관을 읽었으며 이에 동의합니다"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Колдонуу шарттарын окуп, макулмун"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perskaičiau ir sutinku su Naudojimo sąlygomis"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esmu izlasījis/-usi un piekrītu Lietošanas noteikumiem"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saya telah membaca dan bersetuju dengan Syarat Penggunaan"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "အသုံးပြုမှု စည်းကမ်းများကို ဖတ်ပြီး သဘောတူပါသည်"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeg har lest og godtar Bruksvilkårene"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ik heb de Gebruiksvoorwaarden gelezen en ga ermee akkoord"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przeczytałem/am i akceptuję Warunki użytkowania"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Li e concordo com os Termos de Uso"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am citit și sunt de acord cu Termenii de utilizare"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Я прочитал(а) и соглашаюсь с Условиями использования"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prečítal(a) som si Podmienky používania a súhlasím s nimi"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prebral/a sem in se strinjam s Pogoji uporabe"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I kam lexuar dhe pranoj Kushtet e përdorimit"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jag har läst och godkänner Användarvillkoren"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ฉันได้อ่านและยอมรับข้อกำหนดการใช้งานแล้ว"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nabasa ko at sumasang-ayon ako sa Mga Tuntunin ng Paggamit"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kullanım Koşullarını okudum ve kabul ediyorum"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Я прочитав(ла) і погоджуюся з Умовами використання"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "میں نے استعمال کی شرائط پڑھ لی ہیں اور اتفاق کرتا/کرتی ہوں"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tôi đã đọc và đồng ý với Điều khoản sử dụng"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mo ti ka Àwọn Òfin Lílò, mo sì gbà"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "我已阅读并同意使用条款"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "我已閱讀並同意使用條款"
+          }
+        }
+      }
+    },
+    "I Agree": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I Agree"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أوافق"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Razıyam"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Съгласен/на съм"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "আমি সম্মত"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accepto"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Souhlasím"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeg accepterer"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ich stimme zu"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Συμφωνώ"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi konsentas"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acepto"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nõustun"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onartzen dut"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موافقم"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hyväksyn"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "J'accepte"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aontaím"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acepto"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amoneĩ"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na yarda"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אני מסכים/ה"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मैं सहमत हूँ"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slažem se"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elfogadom"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Համաձայն եմ"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saya Setuju"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accetto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "同意する"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "동의합니다"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Макулмун"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sutinku"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piekrītu"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saya Setuju"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "သဘောတူသည်"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeg godtar"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ik ga akkoord"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akceptuję"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Concordo"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunt de acord"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Я согласен(на)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Súhlasím"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strinjam se"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pranoj"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jag godkänner"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ฉันยอมรับ"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumasang-ayon ako"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kabul ediyorum"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Погоджуюся"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "میں اتفاق کرتا/کرتی ہوں"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tôi đồng ý"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mo gbà"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "我同意"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "我同意"
+          }
+        }
+      }
+    },
+    "Quit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروج"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çıxış"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изход"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "প্রস্থান"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Surt"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukončit"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afslut"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beenden"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Έξοδος"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forlasi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Välju"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Irten"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروج"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lopeta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scoir"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saír"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sẽ"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fita"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יציאה"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "बाहर निकलें"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izlaz"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilépés"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ելք"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keluar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esci"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "終了"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "종료"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чыгуу"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Išeiti"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iziet"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keluar"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ထွက်ရန်"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avslutt"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afsluiten"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyjdź"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sair"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ieșire"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выйти"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukončiť"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izhod"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dil"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avsluta"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ออก"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lumabas"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Çıkış"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вийти"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بند کریں"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thoát"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jáde"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結束"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
