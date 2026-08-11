@@ -19,13 +19,25 @@ Xcode resolves `MoneroWalletCoreFFI` from GitHub on branch `main` (prebuilt xcfr
 
 ## Screenshots
 
+### Light
+
 | Wallet | Receive |
 | --- | --- |
-| ![iOS wallet](docs/screenshots/ios1.png) | ![iOS receive](docs/screenshots/ios2.png) |
+| ![iOS wallet light](docs/screenshots/ios-wallet-light.png) | ![iOS receive light](docs/screenshots/ios-receive-light.png) |
 
 | Send | Settings |
 | --- | --- |
-| ![iOS send](docs/screenshots/ios3.png) | ![iOS settings](docs/screenshots/ios4.png) |
+| ![iOS send light](docs/screenshots/ios-send-light.png) | ![iOS settings light](docs/screenshots/ios-settings-light.png) |
+
+### Dark
+
+| Wallet | Receive |
+| --- | --- |
+| ![iOS wallet dark](docs/screenshots/ios-wallet-dark.png) | ![iOS receive dark](docs/screenshots/ios-receive-dark.png) |
+
+| Send | Settings |
+| --- | --- |
+| ![iOS send dark](docs/screenshots/ios-send-dark.png) | ![iOS settings dark](docs/screenshots/ios-settings-dark.png) |
 
 ## Features
 

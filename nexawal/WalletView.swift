@@ -333,6 +333,10 @@ struct WalletView: View {
                             classicStatusRow(label: L10n.neon("Node", classicUI: classicUI), value: MoneroConfig.daemonAddress)
                             classicStatusRow(label: L10n.neon("Scanned", classicUI: classicUI), value: "\(viewModel.lastScannedHeight)")
                             classicStatusRow(label: L10n.neon("Network Height", classicUI: classicUI), value: "\(viewModel.chainHeight)")
+                            classicStatusRow(
+                                label: L10n.neon("Progress", classicUI: classicUI),
+                                value: String(format: "%.1f%%", viewModel.syncProgress * 100.0)
+                            )
                             classicStatusRow(label: L10n.neon("Remaining", classicUI: classicUI), value: L10n.format("%lld blocks", Int64(viewModel.remainingBlocks)))
                             classicStatusRow(
                                 label: L10n.neon("Throughput", classicUI: classicUI),
@@ -978,8 +982,9 @@ struct SettingsView: View {
                     Text("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact api.kraken.com and api.frankfurter.dev.")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    Link("Privacy policy", destination: URL(string: "https://github.com/cacaosteve/nexawal/blob/main/docs/PRIVACY.md")!)
-                    Link("Source & license (MIT)", destination: URL(string: "https://github.com/cacaosteve/nexawal/blob/main/LICENSE")!)
+                    Link(L10n.t("Terms of Use"), destination: MoneroConfig.termsURL)
+                    Link(L10n.t("Privacy policy"), destination: URL(string: "https://nexatrode.com/privacy/nexawal/")!)
+                    Link(L10n.t("Source & license (MIT)"), destination: URL(string: "https://github.com/cacaosteve/nexawal/blob/main/LICENSE")!)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)

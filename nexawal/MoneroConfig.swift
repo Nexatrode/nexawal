@@ -67,6 +67,11 @@ struct MoneroConfig {
     nonisolated static let userDefaultsFiatRateFetchedAtKey = "fiat_rate_fetched_at_ms"
     nonisolated static let userDefaultsFiatRateSourceKey = "fiat_rate_source"
 
+    // Terms acceptance (bump currentTermsVersion when summary or full ToS changes).
+    nonisolated static let userDefaultsAcceptedTermsVersionKey = "nexawal_accepted_terms_version"
+    nonisolated static let currentTermsVersion: Int = 1
+    nonisolated static let termsURLString = "https://nexatrode.com/terms"
+
     enum WalletError: Error {
         case invalidAddress
         case invalidGapLimit
@@ -217,6 +222,23 @@ struct MoneroConfig {
         } else {
             UserDefaults.standard.removeObject(forKey: userDefaultsI2PProxyKey)
         }
+    }
+
+    // MARK: - Terms acceptance
+    nonisolated static var acceptedTermsVersion: Int {
+        UserDefaults.standard.integer(forKey: userDefaultsAcceptedTermsVersionKey)
+    }
+
+    nonisolated static var needsTermsAcceptance: Bool {
+        acceptedTermsVersion < currentTermsVersion
+    }
+
+    nonisolated static func acceptCurrentTerms() {
+        UserDefaults.standard.set(currentTermsVersion, forKey: userDefaultsAcceptedTermsVersionKey)
+    }
+
+    nonisolated static var termsURL: URL {
+        URL(string: termsURLString)!
     }
 
     // MARK: - Appearance
