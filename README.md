@@ -3,14 +3,15 @@
 `nexawal` is an iOS Monero wallet built on top of `monero-oxide` and the `MoneroWalletCoreFFI` layer.
 
 - iOS app: this repository
-- Android app: [nexawal-android](https://github.com/cacaosteve/nexawal-android)
+- Android app: [nexawal-android](https://github.com/Nexatrode/nexawal-android)
 - Shared wallet core (SPM): [MoneroWalletCoreFFI](https://github.com/cacaosteve/MoneroWalletCoreFFI) (`main`)
 - Monero library work: [monero-oxide](https://github.com/cacaosteve/monero-oxide) (fork pin used by the core)
+- Website: [nexatrode.com](https://nexatrode.com)
 
 ## Setup
 
 ```bash
-git clone https://github.com/cacaosteve/nexawal.git
+git clone https://github.com/Nexatrode/nexawal.git
 cd nexawal
 open nexawal.xcodeproj
 ```
@@ -56,7 +57,7 @@ Xcode resolves `MoneroWalletCoreFFI` from GitHub on branch `main` (prebuilt xcfr
 - Uses a native wallet core built from `monero-oxide` via `MoneroWalletCoreFFI`
 - Syncs against standard Monero nodes (local or remote), including the configured I2P RPC path when enabled
 - Default daemon is `https://rpc.nexatrode.com` (type a full `http://` or `https://` URL to override)
-- Feature parity target: [nexawal-android](https://github.com/cacaosteve/nexawal-android)
+- Feature parity target: [nexawal-android](https://github.com/Nexatrode/nexawal-android)
 - Unaudited software. You are responsible for backups and funds. A remote node can see your IP and sync queries.
 
 ## Privacy

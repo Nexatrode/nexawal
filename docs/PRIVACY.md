@@ -2,7 +2,7 @@
 
 Last updated: 5 August 2026
 
-NexaWal is a local Monero wallet. This policy covers the iOS app published from [cacaosteve/nexawal](https://github.com/cacaosteve/nexawal).
+NexaWal is a local Monero wallet. This policy covers the iOS app published from [Nexatrode/nexawal](https://github.com/Nexatrode/nexawal). Canonical web copy: [nexatrode.com/privacy/nexawal](https://nexatrode.com/privacy/nexawal/).
 
 ## What stays on your device
 

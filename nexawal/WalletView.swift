@@ -984,7 +984,7 @@ struct SettingsView: View {
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                     Link(L10n.t("Terms of Use"), destination: MoneroConfig.termsURL)
                     Link(L10n.t("Privacy policy"), destination: URL(string: "https://nexatrode.com/privacy/nexawal/")!)
-                    Link(L10n.t("Source & license (MIT)"), destination: URL(string: "https://github.com/cacaosteve/nexawal/blob/main/LICENSE")!)
+                    Link(L10n.t("Source & license (MIT)"), destination: URL(string: "https://github.com/Nexatrode/nexawal/blob/main/LICENSE")!)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
