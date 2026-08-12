@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "2620"
-   version = "1.7">
+   LastUpgradeVersion = "2660"
+   version = "1.8">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
@@ -53,38 +53,23 @@
             ReferencedContainer = "container:nexawal.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <!-- Local DEBUG-only: set NEXAWAL_TEST_MNEMONIC / NEXAWAL_TEST_RESTORE_HEIGHT
+           in your personal scheme or Xcode Scheme → Run → Arguments. Do not commit seeds. -->
       <EnvironmentVariables>
          <EnvironmentVariable
-            key = "WALLETCORE_FEE_PRIORITY"
-            value = "low"
-            isEnabled = "YES">
+            key = "NEXAWAL_TEST_RESTORE_HEIGHT"
+            value = ""
+            isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
-            key = "WALLETCORE_SWEEP_MIN_INPUT_PICONERO"
-            value = "50000000"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "WALLETCORE_DEBUG_INPUT_DUMP"
-            value = "1"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "WALLETCORE_DEBUG_SPEND_DETECT"
-            value = "1"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "WALLETCORE_DECOY_MODE"
-            value = "bin16"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "WALLETCORE_DECOY_PROBE"
-            value = "1"
-            isEnabled = "YES">
+            key = "NEXAWAL_TEST_MNEMONIC"
+            value = ""
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
+      <MetalAPIValidationSettings
+         isEnabled = "No">
+      </MetalAPIValidationSettings>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
