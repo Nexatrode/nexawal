@@ -734,6 +734,8 @@ struct SettingsView: View {
     @State private var biometricsEnrolled: Bool = false
     @State private var showAdvancedRecovery: Bool = false
     @State private var saveConfirmation: String?
+    @State private var showLegalTerms = false
+    @State private var showLegalPrivacy = false
     @AppStorage(MoneroConfig.userDefaultsTechnoThemeKey) private var technoThemeEnabled: Bool = MoneroConfig.defaultTechnoThemeEnabled
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
@@ -990,14 +992,24 @@ struct SettingsView: View {
                     Text("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact api.kraken.com and api.frankfurter.dev.")
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    Link(L10n.t("Terms of Use"), destination: MoneroConfig.termsURL)
-                    Link(L10n.t("Privacy policy"), destination: URL(string: "https://nexatrode.com/privacy/nexawal/")!)
+                    Button(L10n.t("Terms of Use")) { showLegalTerms = true }
+                    Button(L10n.t("Privacy policy")) { showLegalPrivacy = true }
                     Link(L10n.t("Source & license (MIT)"), destination: URL(string: "https://github.com/Nexatrode/nexawal/blob/main/LICENSE")!)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
             .neonFormChrome(classicUI: classicUI, palette: classicPalette)
             .tint(classicPalette?.accent ?? .accentColor)
+            .sheet(isPresented: $showLegalTerms) {
+                LegalDocumentView(kind: .terms)
+                    .environment(\.classicUI, classicUI)
+                    .environment(\.classicPalette, classicPalette)
+            }
+            .sheet(isPresented: $showLegalPrivacy) {
+                LegalDocumentView(kind: .privacy)
+                    .environment(\.classicUI, classicUI)
+                    .environment(\.classicPalette, classicPalette)
+            }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.neon("Settings", classicUI: classicUI))

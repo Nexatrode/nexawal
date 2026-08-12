@@ -2,9 +2,9 @@
 
 Last updated: 12 August 2026
 
-NexaWal is a local Monero wallet. This policy covers the iOS app published from [Nexatrode/nexawal](https://github.com/Nexatrode/nexawal).
+NexaWal is a local Monero wallet. This policy covers the iOS app published from https://github.com/Nexatrode/nexawal.
 
-This text is bundled in the app (`nexawal/Legal/privacy.md`) for offline reading. A copy may also be published at [nexatrode.com/privacy/nexawal](https://nexatrode.com/privacy/nexawal/).
+This text is bundled in the app for offline reading. A copy may also be published at https://nexatrode.com/privacy/nexawal/.
 
 ## What stays on your device
 
@@ -32,7 +32,7 @@ Optional fiat estimates are off by default. If you turn them on, the app contact
 
 ## In-app legal documents
 
-Terms of Use and this Privacy Policy are available offline inside the app. Opening those screens does not contact nexatrode.com.
+Terms of Use and this Privacy Policy are available offline inside the app. Opening those screens does not contact nexatrode.com. Store listings and the website may still publish the same documents over HTTPS for reviewers and users who are not in the app.
 
 ## What we do not collect
 
@@ -42,4 +42,4 @@ If you open external links (for example source on GitHub, or a block explorer), 
 
 ## Changes
 
-Material changes will be reflected in this file and in the app’s About section.
+Material changes will be reflected in this bundled file and in the app’s About section.

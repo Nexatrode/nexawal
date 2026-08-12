@@ -62,7 +62,11 @@ Xcode resolves `MoneroWalletCoreFFI` from GitHub on branch `main` (prebuilt xcfr
 
 ## Privacy
 
-See [docs/PRIVACY.md](docs/PRIVACY.md). App Store listings can use that GitHub URL as the privacy policy link.
+See [docs/PRIVACY.md](docs/PRIVACY.md) (bundled offline in the app under Settings → Privacy policy). App Store listings can still use the HTTPS URL on nexatrode.com if required by the store form.
+
+## Terms
+
+See [docs/TERMS.md](docs/TERMS.md) (bundled offline in the app).
 
 ## License
 

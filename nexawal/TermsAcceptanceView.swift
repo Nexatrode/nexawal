@@ -6,9 +6,9 @@ struct TermsAcceptanceView: View {
     var onAccepted: () -> Void
 
     @State private var hasCheckedAgree = false
+    @State private var showFullTerms = false
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
-    @Environment(\.openURL) private var openURL
 
     var body: some View {
         VStack(spacing: 0) {
@@ -34,7 +34,7 @@ struct TermsAcceptanceView: View {
                         .fixedSize(horizontal: false, vertical: true)
 
                     Button {
-                        openURL(MoneroConfig.termsURL)
+                        showFullTerms = true
                     } label: {
                         Text(L10n.t("Review full terms on the Nexatrode LLC website"))
                             .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body.weight(.semibold))
@@ -85,5 +85,10 @@ struct TermsAcceptanceView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
         .interactiveDismissDisabled(true)
+        .sheet(isPresented: $showFullTerms) {
+            LegalDocumentView(kind: .terms)
+                .environment(\.classicUI, classicUI)
+                .environment(\.classicPalette, classicPalette)
+        }
     }
 }
