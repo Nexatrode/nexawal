@@ -778,7 +778,7 @@ struct SettingsView: View {
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
                             .onSubmit { applyNetwork() }
-                        Text("Type the full URL, including http:// or https://.")
+                        Text(L10n.t("Type the full URL, including http:// or https://.\nDefault: https://rpc.nexatrode.com"))
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 

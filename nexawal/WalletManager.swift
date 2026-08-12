@@ -220,7 +220,7 @@ actor WalletManager {
                 - Network connectivity issue
                 - Node is not running or not accepting connections
                 - Check Settings to verify node address is correct
-                - If using simulator, ensure it can reach the network (192.168.x.x addresses may not work)
+                - If using simulator, ensure it can reach the network
                 """
                 throw WalletError.refreshFailed(detailedError)
             }
@@ -1223,7 +1223,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Preview fee retry: Cuprate fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            print("↩️ Preview fee retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             return try WalletCoreFFIClient.previewFee(
                 walletId: walletId,
                 destinations: destinations,
@@ -1254,7 +1254,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Preview fee (filtered) retry: Cuprate fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            print("↩️ Preview fee (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             return try WalletCoreFFIClient.previewFeeWithFilter(
                 walletId: walletId,
                 destinations: destinations,
@@ -1284,7 +1284,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Sweep preview retry: Cuprate fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            print("↩️ Sweep preview retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             return try WalletCoreFFIClient.previewSweep(
                 walletId: walletId,
                 toAddress: toAddress,
@@ -1315,7 +1315,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Sweep preview (filtered) retry: Cuprate fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            print("↩️ Sweep preview (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             return try WalletCoreFFIClient.previewSweepWithFilter(
                 walletId: walletId,
                 toAddress: toAddress,
@@ -1348,7 +1348,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Prepare send retry: Cuprate fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            print("↩️ Prepare send retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             let prepared = try WalletCoreFFIClient.prepareSend(
                 walletId: walletId,
                 toAddress: toAddress,
@@ -1382,7 +1382,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Prepare send (filtered) retry: Cuprate fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            print("↩️ Prepare send (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             let prepared = try WalletCoreFFIClient.prepareSendWithFilter(
                 walletId: walletId,
                 destinations: destinations,
@@ -1414,7 +1414,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Prepare sweep retry: Cuprate fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            print("↩️ Prepare sweep retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             let prepared = try WalletCoreFFIClient.prepareSweep(
                 walletId: walletId,
                 toAddress: toAddress,
@@ -1447,7 +1447,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Prepare sweep (filtered) retry: Cuprate fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            print("↩️ Prepare sweep (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             let prepared = try WalletCoreFFIClient.prepareSweepWithFilter(
                 walletId: walletId,
                 toAddress: toAddress,

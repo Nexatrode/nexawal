@@ -96,6 +96,14 @@ struct MoneroConfig {
         "http://rpc.nexatrode.com",
         "http://rpc.nexatrode.com:443",
         "https://rpc.nexatrode.com",
+        "cuprate.nexatrode.com",
+        "http://cuprate.nexatrode.com",
+        "https://cuprate.nexatrode.com",
+        "https://cuprate.nexatrode.com/",
+        "monero.nexatrode.com",
+        "http://monero.nexatrode.com",
+        "https://monero.nexatrode.com",
+        "https://monero.nexatrode.com/",
         "node.sethforprivacy.com:443",
         "https://node.sethforprivacy.com:443",
         "node.monerod.org:443",
@@ -103,6 +111,9 @@ struct MoneroConfig {
         "mini.nexatrode.com:18089",
         "http://mini.nexatrode.com:18089",
         "https://mini.nexatrode.com:18089",
+        "mini.nexatrode.com:18092",
+        "http://mini.nexatrode.com:18092",
+        "https://mini.nexatrode.com:18092",
     ]
 
     nonisolated static func isShippedDefaultAddress(_ address: String) -> Bool {

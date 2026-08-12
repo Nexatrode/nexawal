@@ -33,23 +33,11 @@ public enum SendSafety: Sendable {
         return markers.contains { normalized.contains($0) }
     }
 
-    /// Cuprate sibling Monero RPC fallback URL, or nil if not applicable.
-    ///
-    /// - LAN/dev: `*:18092` → same host on `18081`
-    /// - Public HTTPS: `rpc.nexatrode.com` / `cuprate.nexatrode.com` → `https://monero.nexatrode.com`
+    /// Historical sibling-daemon fee fallback. Always nil: the default public node is a
+    /// single endpoint (`https://rpc.nexatrode.com`) with no alternate host/port remap.
     public static func siblingMonerodURLIfNeeded(for endpoint: String) -> String? {
-        guard var components = URLComponents(string: endpoint) else {
-            return nil
-        }
-        let host = (components.host ?? "").lowercased()
-        if host == "rpc.nexatrode.com" || host == "cuprate.nexatrode.com" {
-            return "https://monero.nexatrode.com"
-        }
-        guard components.port == 18092 else {
-            return nil
-        }
-        components.port = 18081
-        return components.url?.absoluteString
+        _ = endpoint
+        return nil
     }
 
     /// Only retry on fee_rate failures that clearly happened before spend/broadcast signals.

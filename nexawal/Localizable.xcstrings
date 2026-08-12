@@ -101055,334 +101055,6 @@
         }
       }
     },
-    "Type the full URL, including http:// or https://.\nPublic: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gib die vollständige URL ein, einschließlich http:// oder https://.\nÖffentlich: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Type the full URL, including http:// or https://.\nPublic: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escribe la URL completa, incluyendo http:// o https://.\nPública: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saisis l'URL complète, y compris http:// ou https://.\nPublique : https://rpc.nexatrode.com\nLAN : http://192.168.4.137:18089"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "http:// または https:// を含む完全なURLを入力してください。\n公開ノード:https://rpc.nexatrode.com\nLAN:http://192.168.4.137:18089"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "http:// 또는 https://를 포함한 전체 URL을 입력하세요.\n공개: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Digite a URL completa, incluindo http:// ou https://.\nPública: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Введите полный URL, включая http:// или https://.\nПубличный: https://rpc.nexatrode.com\nЛокальный: http://192.168.4.137:18089"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请输入完整网址,包括 http:// 或 https://。\n公共节点:https://rpc.nexatrode.com\n局域网:http://192.168.4.137:18089"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Digita l'URL completo, incluso http:// o https://.\nPubblico: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voer de volledige URL in, inclusief http:// of https://.\nPubliek: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ketik URL lengkap, termasuk http:// atau https://.\nPublik: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "http:// veya https:// dahil olmak üzere tam URL'yi girin.\nGenel: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "पूरा URL टाइप करें, जिसमें http:// या https:// शामिल हो।\nसार्वजनिक: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "請輸入完整網址,包括 http:// 或 https://。\n公共節點:https://rpc.nexatrode.com\n局域網:http://192.168.4.137:18089"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wpisz pełny adres URL, w tym http:// lub https://.\nPubliczny: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Введіть повну URL-адресу, включно з http:// або https://.\nПублічний: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nhập đầy đủ URL, bao gồm http:// hoặc https://.\nCông khai: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "th": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "กรอก URL แบบเต็ม รวมถึง http:// หรือ https://\nสาธารณะ: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "fa": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نشانی کامل را وارد کنید، شامل http:// یا https://.\nعمومی: https://rpc.nexatrode.com\nشبکه محلی: http://192.168.4.137:18089"
-          }
-        },
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zadejte celou URL adresu, včetně http:// nebo https://.\nVeřejná: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "bg": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Въведете пълния URL адрес, включително http:// или https://.\nПубличен: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "sv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ange fullständig URL, inklusive http:// eller https://.\nOffentlig: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "ro": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Introdu URL-ul complet, inclusiv http:// sau https://.\nPublic: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "nb": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skriv inn hele URL-en, inkludert http:// eller https://.\nOffentlig: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "أدخل العنوان (URL) الكامل، بما في ذلك http:// أو https://.\nعام: https://rpc.nexatrode.com\nشبكة محلية: http://192.168.4.137:18089"
-          }
-        },
-        "he": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "הזן את כתובת ה-URL המלאה, כולל http:// או https://.\nציבורי: https://rpc.nexatrode.com\nרשת מקומית (LAN): http://192.168.4.137:18089"
-          }
-        },
-        "yo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kọ URL kíkún, pẹ̀lú http:// tàbí https://.\\nFún Gbogbo Ènìyàn: https://rpc.nexatrode.com\\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I-type ang buong URL, kasama ang http:// o https://.\\nPubliko: https://rpc.nexatrode.com\\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "my": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "http:// သို့မဟုတ် https:// အပါအဝင် URL အပြည့်အစုံကို ရိုက်ထည့်ပါ။\\nအများပြည်သူအတွက်: https://rpc.nexatrode.com\\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "ms": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Taip URL penuh, termasuk http:// atau https://.\\nUmum: https://rpc.nexatrode.com\\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tam URL-i daxil edin, http:// və ya https:// daxil olmaqla.\nİctimai: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "সম্পূর্ণ URL লিখুন, http:// বা https:// সহ।\nপাবলিক: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "sl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vnesi celoten URL, vključno s http:// ali https://.\nJavno: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Írd be a teljes URL-t, http:// vagy https:// előtaggal.\nNyilvános: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "lt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Įveskite pilną URL, įskaitant http:// arba https://.\nViešas: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "lv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ierakstiet pilnu URL, ieskaitot http:// vai https://.\nPubliskais: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مکمل URL درج کریں، بشمول http:// یا https://۔\nعوامی: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "fi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kirjoita täydellinen URL, mukaan lukien http:// tai https://.\nJulkinen: https://rpc.nexatrode.com\nLähiverkko: http://192.168.4.137:18089"
-          }
-        },
-        "ca": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escriu l'URL completa, inclòs http:// o https://.\nPública: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "hr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Upišite cijeli URL, uključujući http:// ili https://.\nJavni: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zadajte celú URL adresu, vrátane http:// alebo https://.\nVerejná: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indtast den fulde URL, inklusive http:// eller https://.\nOffentlig: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "el": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Πληκτρολογήστε την πλήρη διεύθυνση URL, συμπεριλαμβανομένου του http:// ή https://.\nΔημόσιος: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "et": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sisestage täielik URL, kaasa arvatud http:// või https://.\nAvalik: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "eu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Idatzi URL osoa, http:// edo https:// barne.\nPublikoa: https://rpc.nexatrode.com\nLANa: http://192.168.4.137:18089"
-          }
-        },
-        "ga": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cuir isteach an URL iomlán, lena n-áirítear http:// nó https://.\nPoiblí: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "gl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escribe o URL completo, incluíndo http:// ou https://.\nPública: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "gn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ehai pe URL tuichaháicha, oike hag̃ua http:// térã https://.\nPública: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shigar da cikakken URL, tare da http:// ko https://.\nNa Jama'a: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Մուտքագրեք ամբողջական URL-ը, ներառյալ http:// կամ https://։\nՀրապարակային՝ https://rpc.nexatrode.com\nՏեղական ցանց (LAN)՝ http://192.168.4.137:18089"
-          }
-        },
-        "ky": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "http:// же https:// менен кошо толук URL дарегин киргизиңиз.\nЖалпыга ачык: https://rpc.nexatrode.com\nЖергиликтүү тармак (LAN): http://192.168.4.137:18089"
-          }
-        },
-        "sq": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shkruaj URL-në e plotë, duke përfshirë http:// ose https://.\nPublik: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        },
-        "eo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tajpu la kompletan URL, inkluzive de http:// aŭ https://.\nPublika: https://rpc.nexatrode.com\nLAN: http://192.168.4.137:18089"
-          }
-        }
-      }
-    },
     "Unable to decode wallet metadata.": {
       "localizations": {
         "de": {
@@ -115158,6 +114830,334 @@
           "stringUnit": {
             "state": "translated",
             "value": "結束"
+          }
+        }
+      }
+    },
+    "Type the full URL, including http:// or https://.\nDefault: https://rpc.nexatrode.com": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gib die vollständige URL ein, einschließlich http:// oder https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type the full URL, including http:// or https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escribe la URL completa, incluyendo http:// o https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saisis l'URL complète, y compris http:// ou https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "http:// または https:// を含む完全なURLを入力してください。\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "http:// 또는 https://를 포함한 전체 URL을 입력하세요.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Digite a URL completa, incluindo http:// ou https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Введите полный URL, включая http:// или https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请输入完整网址,包括 http:// 或 https://。\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Digita l'URL completo, incluso http:// o https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voer de volledige URL in, inclusief http:// of https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ketik URL lengkap, termasuk http:// atau https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "http:// veya https:// dahil olmak üzere tam URL'yi girin.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "पूरा URL टाइप करें, जिसमें http:// या https:// शामिल हो।\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請輸入完整網址,包括 http:// 或 https://。\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wpisz pełny adres URL, w tym http:// lub https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Введіть повну URL-адресу, включно з http:// або https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nhập đầy đủ URL, bao gồm http:// hoặc https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "กรอก URL แบบเต็ม รวมถึง http:// หรือ https://\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نشانی کامل را وارد کنید، شامل http:// یا https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadejte celou URL adresu, včetně http:// nebo https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Въведете пълния URL адрес, включително http:// или https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ange fullständig URL, inklusive http:// eller https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introdu URL-ul complet, inclusiv http:// sau https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skriv inn hele URL-en, inkludert http:// eller https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أدخل العنوان (URL) الكامل، بما في ذلك http:// أو https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הזן את כתובת ה-URL המלאה, כולל http:// או https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kọ URL kíkún, pẹ̀lú http:// tàbí https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "tl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I-type ang buong URL, kasama ang http:// o https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "http:// သို့မဟုတ် https:// အပါအဝင် URL အပြည့်အစုံကို ရိုက်ထည့်ပါ။\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taip URL penuh, termasuk http:// atau https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tam URL-i daxil edin, http:// və ya https:// daxil olmaqla.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সম্পূর্ণ URL লিখুন, http:// বা https:// সহ।\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vnesi celoten URL, vključno s http:// ali https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Írd be a teljes URL-t, http:// vagy https:// előtaggal.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Įveskite pilną URL, įskaitant http:// arba https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ierakstiet pilnu URL, ieskaitot http:// vai https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مکمل URL درج کریں، بشمول http:// یا https://۔\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirjoita täydellinen URL, mukaan lukien http:// tai https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escriu l'URL completa, inclòs http:// o https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upišite cijeli URL, uključujući http:// ili https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadajte celú URL adresu, vrátane http:// alebo https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indtast den fulde URL, inklusive http:// eller https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Πληκτρολογήστε την πλήρη διεύθυνση URL, συμπεριλαμβανομένου του http:// ή https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sisestage täielik URL, kaasa arvatud http:// või https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idatzi URL osoa, http:// edo https:// barne.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuir isteach an URL iomlán, lena n-áirítear http:// nó https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escribe o URL completo, incluíndo http:// ou https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ehai pe URL tuichaháicha, oike hag̃ua http:// térã https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shigar da cikakken URL, tare da http:// ko https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Մուտքագրեք ամբողջական URL-ը, ներառյալ http:// կամ https://։\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "http:// же https:// менен кошо толук URL дарегин киргизиңиз.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shkruaj URL-në e plotë, duke përfshirë http:// ose https://.\nDefault: https://rpc.nexatrode.com"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tajpu la kompletan URL, inkluzive de http:// aŭ https://.\nDefault: https://rpc.nexatrode.com"
           }
         }
       }

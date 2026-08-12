@@ -4,7 +4,7 @@
 //
 //  Minimal Monero daemon client for node height discovery.
 //  Prefer JSON-RPC `get_info`, but fall back to `/get_height` for daemons
-//  such as Cuprate where `get_info` parity may be incomplete.
+//  where `get_info` parity may be incomplete.
 //
 //
 
@@ -55,7 +55,7 @@ enum MoneroDaemonClient {
     /// If the daemon does not provide a compatible `get_info` response,
     /// falls back to `/get_height` and uses that height as both
     /// `height` and `targetHeight`.
-    /// - Parameter baseURL: e.g. "http://192.168.4.137:18081"
+    /// - Parameter baseURL: e.g. "https://rpc.nexatrode.com"
     /// - Parameter proxyAddress: Optional HTTP proxy "host:port" (useful for I2P).
     /// - Returns: Parsed heights (height + target_height).
     static func getInfo(

@@ -49,37 +49,20 @@ final class SendSafetyTests: XCTestCase {
         XCTAssertFalse(SendSafety.hasUnlockedForExactSend(amountPiconero: UInt64.max, feePiconero: 1, unlockedPiconero: UInt64.max))
     }
 
-    func testSiblingRetryOnlyPreBroadcastFeeRate() {
-        let cuprate = "http://127.0.0.1:18092"
-        XCTAssertEqual(
-            SendSafety.shouldRetryViaSiblingMonerod(errorText: "fee_rate failed", coreMessage: "", endpoint: cuprate),
-            "http://127.0.0.1:18081"
-        )
+    func testSiblingRetryDisabledForSinglePublicEndpoint() {
         XCTAssertNil(
-            SendSafety.shouldRetryViaSiblingMonerod(
-                errorText: "fee_rate failed",
-                coreMessage: "key image already spent",
-                endpoint: cuprate
-            )
-        )
-        XCTAssertNil(
-            SendSafety.shouldRetryViaSiblingMonerod(errorText: "fee_rate failed", coreMessage: "", endpoint: "http://127.0.0.1:18081")
-        )
-        XCTAssertEqual(
             SendSafety.shouldRetryViaSiblingMonerod(
                 errorText: "fee_rate failed",
                 coreMessage: "",
                 endpoint: "https://rpc.nexatrode.com"
-            ),
-            "https://monero.nexatrode.com"
+            )
         )
-        XCTAssertEqual(
+        XCTAssertNil(
             SendSafety.shouldRetryViaSiblingMonerod(
                 errorText: "fee_rate failed",
                 coreMessage: "",
-                endpoint: "https://cuprate.nexatrode.com/"
-            ),
-            "https://monero.nexatrode.com"
+                endpoint: "http://127.0.0.1:18092"
+            )
         )
     }
 }
