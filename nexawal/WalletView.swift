@@ -340,7 +340,19 @@ struct WalletView: View {
                             classicStatusRow(label: L10n.neon("Remaining", classicUI: classicUI), value: L10n.format("%lld blocks", Int64(viewModel.remainingBlocks)))
                             classicStatusRow(
                                 label: L10n.neon("Throughput", classicUI: classicUI),
-                                value: String(format: "%.1f blk/s", viewModel.scanBlocksPerSecond)
+                                value: {
+                                    if viewModel.scanBlocksPerSecondRecent > 0 {
+                                        return String(
+                                            format: "%.1f avg · %.1f recent blk/s",
+                                            viewModel.scanBlocksPerSecond,
+                                            viewModel.scanBlocksPerSecondRecent
+                                        )
+                                    }
+                                    if viewModel.scanBlocksPerSecond > 0 {
+                                        return String(format: "%.1f avg blk/s", viewModel.scanBlocksPerSecond)
+                                    }
+                                    return "—"
+                                }()
                             )
                         }
                         .accessibilityAddTraits(.updatesFrequently)

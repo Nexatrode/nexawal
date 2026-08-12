@@ -50,6 +50,8 @@ class WalletViewModel: ObservableObject {
     @Published var chainHeight: UInt64 = 0
     @Published var chainTime: UInt64 = 0
     @Published var scanBlocksPerSecond: Double = 0.0
+    /// Trailing-window rate (~30s) so mid-sync stalls are visible alongside the session average.
+    @Published var scanBlocksPerSecondRecent: Double = 0.0
     @Published var balanceIsStaleWhileSyncing: Bool = false
 
     // MARK: - Dependencies
@@ -77,6 +79,12 @@ class WalletViewModel: ObservableObject {
     private var scanRateSessionStart: Date?
     private var scanRateSessionScanned: UInt64?
     private var lastScanProgressAt: Date?
+    private struct ScanRateSample {
+        let at: Date
+        let scanned: UInt64
+    }
+    private var scanRateRecentSamples: [ScanRateSample] = []
+    private let scanRateRecentWindow: TimeInterval = 30.0
     private var pendingSyncPollRestart: Bool = false
     private let pollingStagnationInterval: TimeInterval = 5.0
     private var needsRefreshRetryOnNextActive: Bool = false
@@ -794,7 +802,9 @@ class WalletViewModel: ObservableObject {
         scanRateSessionStart = nil
         scanRateSessionScanned = nil
         lastScanProgressAt = nil
+        scanRateRecentSamples.removeAll(keepingCapacity: true)
         scanBlocksPerSecond = 0.0
+        scanBlocksPerSecondRecent = 0.0
     }
 
     private func startSyncStatusPolling() {
@@ -841,6 +851,25 @@ class WalletViewModel: ObservableObject {
                                         // Overall session average (not per-batch burst).
                                         if sessionDb > 0, sessionDt >= 0.5 {
                                             self.scanBlocksPerSecond = Double(sessionDb) / sessionDt
+                                        }
+                                    }
+
+                                    // Trailing ~30s window for near-term health (stalls / save pauses).
+                                    self.scanRateRecentSamples.append(
+                                        ScanRateSample(at: now, scanned: status.lastScanned)
+                                    )
+                                    self.scanRateRecentSamples.removeAll {
+                                        now.timeIntervalSince($0.at) > self.scanRateRecentWindow
+                                    }
+                                    if let first = self.scanRateRecentSamples.first,
+                                       let last = self.scanRateRecentSamples.last,
+                                       self.scanRateRecentSamples.count >= 2 {
+                                        let recentDt = last.at.timeIntervalSince(first.at)
+                                        let recentDb = last.scanned >= first.scanned
+                                            ? (last.scanned - first.scanned)
+                                            : 0
+                                        if recentDb > 0, recentDt >= 0.5 {
+                                            self.scanBlocksPerSecondRecent = Double(recentDb) / recentDt
                                         }
                                     }
                                 }
@@ -975,7 +1004,9 @@ class WalletViewModel: ObservableObject {
         if clearThroughput {
             scanRateSessionStart = nil
             scanRateSessionScanned = nil
+            scanRateRecentSamples.removeAll(keepingCapacity: true)
             scanBlocksPerSecond = 0.0
+            scanBlocksPerSecondRecent = 0.0
         }
         pendingSyncPollRestart = false
     }
