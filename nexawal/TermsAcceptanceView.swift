@@ -18,7 +18,7 @@ struct TermsAcceptanceView: View {
                         .font(classicUI ? .system(.title2, design: .monospaced).weight(.bold) : .title2.bold())
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
 
-                    Text(L10n.t("NexaWal by Nexatrode LLC is a self-custodial interface for managing digital assets. You hold exclusive responsibility for your private keys and 25-word seed phrase."))
+                    Text(L10n.t("nexawal by Nexatrode LLC is a self-custodial interface for managing digital assets. You hold exclusive responsibility for your private keys and 25-word seed phrase."))
                         .font(classicUI ? .system(.body, design: .monospaced) : .body)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -36,7 +36,7 @@ struct TermsAcceptanceView: View {
                     Button {
                         showFullTerms = true
                     } label: {
-                        Text(L10n.t("Review full terms on the Nexatrode LLC website"))
+                        Text(L10n.t("Review full Terms of Use"))
                             .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body.weight(.semibold))
                             .multilineTextAlignment(.leading)
                     }

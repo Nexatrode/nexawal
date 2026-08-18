@@ -17,6 +17,8 @@ struct SendView: View {
     // State
     @State private var isEstimating: Bool = false
     @State private var isMaxMode: Bool = false
+    /// When true, the next amountXMR change is from Send Max fill and must not clear isMaxMode.
+    @State private var suppressAmountChangeClearingMaxMode: Bool = false
     @State private var isSending: Bool = false
     @State private var previewReady: Bool = false
     @State private var errorMessage: String?
@@ -33,6 +35,10 @@ struct SendView: View {
     @State private var estimatedFeePiconero: UInt64?
     @State private var sentTxid: String?
     @State private var sentFeePiconero: UInt64?
+
+    // In-flight task cancellation / debouncing for fee + sweep previews.
+    @State private var feePreviewTask: Task<Void, Never>?
+    @State private var sweepPreviewTask: Task<Void, Never>?
 
     private let walletManager = WalletManager.shared
 
@@ -65,237 +71,52 @@ struct SendView: View {
     }
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: NeonSectionHeader(title: L10n.t("Recipient"))) {
-                    TextField("Monero address", text: $toAddress)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .font(.system(.body, design: .monospaced))
-                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                        .accessibilityLabel(L10n.t("Recipient"))
-                }
-
-                Section(header: NeonSectionHeader(title: L10n.t("Amount"))) {
-                    AmountUnitField(
-                        text: $amountXMR,
-                        mode: $amountInputMode,
-                        rate: fiatPrices.displayRate,
-                        placeholder: "0.0",
-                        accessibilityLabel: L10n.t("Amount"),
-                        classicUI: classicUI,
-                        classicPalette: classicPalette
-                    )
-                    if let amount = parsedAmountPiconero(),
-                       let secondary = AmountUnitParsing.secondaryLine(
-                        piconero: amount,
-                        mode: amountInputMode,
-                        rate: fiatPrices.displayRate
-                       ) {
-                        Text(secondary)
-                            .font(.caption)
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    if availablePiconero() > 0 {
+                        Text("\(availableLabel()): \(viewModel.formatDisplayPiconero(availablePiconero()))")
+                            .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                     }
 
-                    HStack {
-                        NeonFormLabel(text: availableLabel())
-                        Spacer()
-                        Text(viewModel.formatDisplayPiconero(availablePiconero()))
-                            .font(.system(.caption, design: .monospaced))
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    }
-                }
+                    toAddressField
+                    amountField
 
-                if let fee = estimatedFeePiconero {
-                    Section(header: NeonSectionHeader(title: L10n.t("Confirm"))) {
-                        HStack {
-                            Text("Estimated fee")
-                            Spacer()
-                            Text(viewModel.formatExactPiconero(fee))
-                                .font(.system(.caption, design: .monospaced))
-                        }
-                        FiatApproxText(
-                            piconero: fee,
-                            rate: fiatPrices.displayRate,
-                            color: classicPalette?.secondaryText ?? .secondary
-                        )
-                        if let amt = parsedAmountPiconero() {
-                            HStack {
-                                Text("Total (amount + fee)")
-                                Spacer()
-                                let total = safeAdd(amt, fee)
-                                Text(viewModel.formatExactPiconero(total))
-                                    .font(.system(.caption, design: .monospaced))
-                            }
-                            FiatApproxText(
-                                piconero: safeAdd(amt, fee),
-                                rate: fiatPrices.displayRate,
-                                color: classicPalette?.secondaryText ?? .secondary
-                            )
-                        }
-
-                        HStack {
-                            Text("Destination")
-                            Spacer()
-                            Text(toAddress)
-                                .font(.system(.caption2, design: .monospaced))
-                                .lineLimit(1)
-                                .truncationMode(.middle)
-                        }
-                    }
-                }
-
-                if let txid = sentTxid, let fee = sentFeePiconero {
-                    Section(header: NeonSectionHeader(title: L10n.t("Sent"))) {
-                        HStack {
-                            Text("TXID")
-                            Spacer()
-                            Text(txid)
-                                .font(.system(.caption, design: .monospaced))
-                                .textSelection(.enabled)
-                        }
-                        HStack {
-                            Text("Fee")
-                            Spacer()
-                            Text(viewModel.formatExactPiconero(fee))
-                                .font(.system(.caption, design: .monospaced))
-                        }
-                    }
-                }
-
-                if let info = infoMessage {
-                    Section {
+                    if let info = infoMessage {
                         Text(info)
-                            .font(.caption)
-                    }
-                }
-
-                if let err = errorMessage {
-                    Section {
-                        Text(err)
-                            .foregroundColor(classicPalette?.danger ?? .red)
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                     }
-                }
 
-                Section(header: NeonSectionHeader(title: L10n.t("Actions"))) {
-                    if classicUI, let palette = classicPalette {
-                        HStack(spacing: 12) {
-                            Button {
-                                Task { await estimateFee() }
-                            } label: {
-                                HStack {
-                                    if isEstimating {
-                                        ProgressView().tint(palette.accent)
-                                    } else {
-                                        Image(systemName: "dollarsign.circle")
-                                    }
-                                    Text(isEstimating ? "Estimating..." : "Preview Fee")
-                                }
-                            }
-                            .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                            .disabled(isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
-
-                            Button {
-                                showSendConfirmation = true
-                            } label: {
-                                HStack {
-                                    if isSending {
-                                        ProgressView().tint(palette.ctaText)
-                                    } else {
-                                        Image(systemName: "paperplane.fill")
-                                    }
-                                    Text(isSending ? "Sending..." : "Send")
-                                }
-                                .neonCTAStyle(classicUI: true, palette: palette)
-                            }
-                            .buttonStyle(.plain)
-                            .disabled(isEstimating || isSending || !canSend())
-                        }
-                        .listRowBackground(Color.clear)
-
-                        Button {
-                            Task { await sendMax() }
-                        } label: {
-                            HStack {
-                                Image(systemName: "arrow.up.circle")
-                                Text("Send Max")
-                            }
-                        }
-                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                        .listRowBackground(Color.clear)
-                        .disabled(isEstimating || isSending)
-                    } else {
-                        HStack(spacing: 12) {
-                            Button {
-                                Task { await estimateFee() }
-                            } label: {
-                                HStack {
-                                    if isEstimating {
-                                        ProgressView()
-                                    } else {
-                                        Image(systemName: "dollarsign.circle")
-                                    }
-                                    Text(isEstimating ? "Estimating..." : "Preview Fee")
-                                }
-                                .frame(maxWidth: .infinity)
-                                .contentShape(Rectangle())
-                            }
-                            .buttonStyle(.bordered)
-                            .disabled(isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
-
-                            Button {
-                                showSendConfirmation = true
-                            } label: {
-                                HStack {
-                                    if isSending {
-                                        ProgressView()
-                                    } else {
-                                        Image(systemName: "paperplane.fill")
-                                    }
-                                    Text(isSending ? "Sending..." : "Send")
-                                }
-                                .frame(maxWidth: .infinity)
-                                .contentShape(Rectangle())
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .disabled(isEstimating || isSending || !canSend())
-                        }
-
-                        Button {
-                            Task { await sendMax() }
-                        } label: {
-                            HStack {
-                                Image(systemName: "arrow.up.circle")
-                                Text("Send Max")
-                            }
-                            .frame(maxWidth: .infinity)
-                            .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.bordered)
-                        .disabled(isEstimating || isSending)
+                    if let err = errorMessage {
+                        Text(err)
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundColor(classicPalette?.danger ?? .red)
                     }
+
+                    if let fee = estimatedFeePiconero {
+                        confirmSection(fee: fee)
+                    }
+
+                    if let txid = sentTxid, let fee = sentFeePiconero {
+                        sentSection(txid: txid, fee: fee)
+                    }
+
+                    actionButtons
                 }
+                .padding()
             }
             .navigationBarTitleDisplayMode(.inline)
+            .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
+            .scrollContentBackground(classicUI ? .hidden : .automatic)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(classicUI ? L10n.t("Send").uppercased() : L10n.t("Send XMR"))
+                    Text(classicUI ? L10n.t("Send XMR").uppercased() : L10n.t("Send XMR"))
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                 }
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        showScanner = true
-                    } label: {
-                        Image(systemName: "qrcode.viewfinder")
-                    }
-                    .foregroundStyle(classicPalette?.accent ?? .accentColor)
-                    .accessibilityLabel(L10n.t("Scan QR code"))
-                    .accessibilityAddTraits(.isButton)
-                }
             }
-            .neonFormChrome(classicUI: classicUI, palette: classicPalette)
             .tint(classicPalette?.accent ?? .accentColor)
             .sheet(isPresented: $showScanner) {
                 QRScannerView { code in
@@ -319,18 +140,45 @@ struct SendView: View {
                 await refreshSubaddressBalanceIfNeeded()
             }
         }
+        .onChange(of: amountXMR) { _, _ in
+            // Editing the amount exits sweep mode (programmatic fill sets a suppress flag).
+            guard !suppressAmountChangeClearingMaxMode else {
+                suppressAmountChangeClearingMaxMode = false
+                return
+            }
+            if isMaxMode {
+                isMaxMode = false
+            }
+        }
+        .onChange(of: toAddress) { _, _ in
+            if isMaxMode {
+                isMaxMode = false
+                estimatedFeePiconero = nil
+                previewReady = false
+            }
+        }
         .onChange(of: sendFromSubaddressEnabled) {
             Task { await refreshSubaddressBalanceIfNeeded() }
+            if isMaxMode {
+                isMaxMode = false
+                estimatedFeePiconero = nil
+                previewReady = false
+            }
         }
         .onChange(of: fromSubaddressMinor) {
             Task { await refreshSubaddressBalanceIfNeeded() }
+            if isMaxMode {
+                isMaxMode = false
+                estimatedFeePiconero = nil
+                previewReady = false
+            }
         }
         .confirmationDialog(
-            "Confirm Send",
+            isMaxMode ? L10n.t("Confirm Send Max") : "Confirm Send",
             isPresented: $showSendConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Confirm Send") {
+            Button(isMaxMode ? L10n.t("Confirm Send Max") : "Confirm Send") {
                 guard !isSending else { return }
                 // Disable immediately so dismiss+Task cannot race a second send.
                 isSending = true
@@ -348,12 +196,264 @@ struct SendView: View {
         }
     }
 
-    // MARK: - In-flight task cancellation / debouncing
-    //
-    // These are critical to avoid runaway repeated RPC calls when the user taps actions repeatedly
-    // or when SwiftUI triggers state updates while an async operation is still running.
-    @State private var feePreviewTask: Task<Void, Never>?
-    @State private var sweepPreviewTask: Task<Void, Never>?
+    private var fieldCorner: CGFloat { classicUI ? 4 : 8 }
+
+    private var toAddressField: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(L10n.t("To address"))
+                .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
+                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+
+            HStack(spacing: 8) {
+                TextField(L10n.t("To address"), text: $toAddress)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .font(.system(.body, design: .monospaced))
+                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                    .accessibilityLabel(L10n.t("To address"))
+
+                Button {
+                    showScanner = true
+                } label: {
+                    Image(systemName: "qrcode.viewfinder")
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(classicPalette?.accent ?? Color.accentColor)
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(L10n.t("Scan QR code"))
+            }
+            .padding(.leading, 12)
+            .padding(.trailing, 4)
+            .padding(.vertical, 4)
+            .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+            .overlay(
+                RoundedRectangle(cornerRadius: fieldCorner)
+                    .stroke(classicPalette?.border ?? Color(.separator), lineWidth: classicUI ? 1 : 1)
+            )
+            .cornerRadius(fieldCorner)
+        }
+    }
+
+    private var amountField: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(L10n.t("Amount"))
+                .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
+                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+
+            AmountUnitField(
+                text: $amountXMR,
+                mode: $amountInputMode,
+                rate: fiatPrices.displayRate,
+                placeholder: "0.0",
+                accessibilityLabel: L10n.t("Amount"),
+                classicUI: classicUI,
+                classicPalette: classicPalette
+            )
+            .padding(12)
+            .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+            .overlay(
+                RoundedRectangle(cornerRadius: fieldCorner)
+                    .stroke(classicPalette?.border ?? Color(.separator), lineWidth: classicUI ? 1 : 1)
+            )
+            .cornerRadius(fieldCorner)
+
+            if isMaxMode {
+                Text(L10n.t("Send Max mode: Confirm will sweep all unlocked after fee."))
+                    .font(.caption)
+                    .foregroundStyle(classicPalette?.accent ?? .secondary)
+            }
+            if let amount = parsedAmountPiconero(),
+               let secondary = AmountUnitParsing.secondaryLine(
+                piconero: amount,
+                mode: amountInputMode,
+                rate: fiatPrices.displayRate
+               ) {
+                Text(secondary)
+                    .font(.caption)
+                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func confirmSection(fee: UInt64) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(classicUI ? L10n.t("Confirm").uppercased() : L10n.t("Confirm"))
+                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+
+            if isMaxMode, let amt = parsedAmountPiconero() {
+                HStack {
+                    Text(L10n.t("Preview amount (max)"))
+                    Spacer()
+                    Text(viewModel.formatExactPiconero(amt))
+                        .font(.system(.caption, design: .monospaced))
+                }
+                FiatApproxText(
+                    piconero: amt,
+                    rate: fiatPrices.displayRate,
+                    color: classicPalette?.secondaryText ?? .secondary
+                )
+            }
+            HStack {
+                Text("Estimated fee")
+                Spacer()
+                Text(viewModel.formatExactPiconero(fee))
+                    .font(.system(.caption, design: .monospaced))
+            }
+            FiatApproxText(
+                piconero: fee,
+                rate: fiatPrices.displayRate,
+                color: classicPalette?.secondaryText ?? .secondary
+            )
+            if let amt = parsedAmountPiconero() {
+                HStack {
+                    Text(isMaxMode ? L10n.t("Wallet debit (amount + fee)") : "Total (amount + fee)")
+                    Spacer()
+                    let total = safeAdd(amt, fee)
+                    Text(viewModel.formatExactPiconero(total))
+                        .font(.system(.caption, design: .monospaced))
+                }
+                FiatApproxText(
+                    piconero: safeAdd(amt, fee),
+                    rate: fiatPrices.displayRate,
+                    color: classicPalette?.secondaryText ?? .secondary
+                )
+            }
+
+            Text(toAddress)
+                .font(.system(.caption2, design: .monospaced))
+                .lineLimit(1)
+                .truncationMode(.middle)
+                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+        .overlay(
+            RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
+                .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
+        )
+        .cornerRadius(classicUI ? 4 : 16)
+    }
+
+    @ViewBuilder
+    private func sentSection(txid: String, fee: UInt64) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(classicUI ? L10n.t("Sent").uppercased() : L10n.t("Sent"))
+                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+
+            HStack {
+                Text("TXID")
+                Spacer()
+                Text(txid)
+                    .font(.system(.caption, design: .monospaced))
+                    .textSelection(.enabled)
+            }
+            HStack {
+                Text("Fee")
+                Spacer()
+                Text(viewModel.formatExactPiconero(fee))
+                    .font(.system(.caption, design: .monospaced))
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+        .overlay(
+            RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
+                .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
+        )
+        .cornerRadius(classicUI ? 4 : 16)
+    }
+
+    private var actionButtons: some View {
+        VStack(spacing: 12) {
+            Text(classicUI ? L10n.t("Actions").uppercased() : L10n.t("Actions"))
+                .font(classicUI ? .system(.caption, design: .monospaced).weight(.semibold) : .caption)
+                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            if classicUI, let palette = classicPalette {
+                Button {
+                    Task { await estimateFee() }
+                } label: {
+                    Text(isEstimating && !isMaxMode ? "Estimating..." : "Preview Fee")
+                }
+                .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                .disabled(isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
+
+                Button {
+                    showSendConfirmation = true
+                } label: {
+                    Text(isSending && !isMaxMode ? "Sending..." : "Send")
+                        .neonCTAStyle(classicUI: true, palette: palette)
+                }
+                .buttonStyle(.plain)
+                .disabled(isEstimating || isSending || !canSendExact())
+
+                Button {
+                    Task { await sendMax() }
+                } label: {
+                    Text(isEstimating ? L10n.t("Estimating...") : L10n.t("Preview Send Max"))
+                }
+                .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                .disabled(isEstimating || isSending || !looksLikeAddress(toAddress))
+
+                Button {
+                    showSendConfirmation = true
+                } label: {
+                    Text(isSending && isMaxMode ? "Sending..." : L10n.t("Send Max"))
+                        .neonCTAStyle(classicUI: true, palette: palette)
+                }
+                .buttonStyle(.plain)
+                .disabled(isEstimating || isSending || !canSendMax())
+            } else {
+                Button {
+                    Task { await estimateFee() }
+                } label: {
+                    Text(isEstimating && !isMaxMode ? "Estimating..." : "Preview Fee")
+                        .frame(maxWidth: .infinity)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.bordered)
+                .disabled(isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
+
+                Button {
+                    showSendConfirmation = true
+                } label: {
+                    Text(isSending && !isMaxMode ? "Sending..." : "Send")
+                        .frame(maxWidth: .infinity)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(isEstimating || isSending || !canSendExact())
+
+                Button {
+                    Task { await sendMax() }
+                } label: {
+                    Text(isEstimating ? L10n.t("Estimating...") : L10n.t("Preview Send Max"))
+                        .frame(maxWidth: .infinity)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.bordered)
+                .disabled(isEstimating || isSending || !looksLikeAddress(toAddress))
+
+                Button {
+                    showSendConfirmation = true
+                } label: {
+                    Text(isSending && isMaxMode ? "Sending..." : L10n.t("Send Max"))
+                        .frame(maxWidth: .infinity)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(isEstimating || isSending || !canSendMax())
+            }
+        }
+    }
 
     // MARK: - Actions
 
@@ -363,6 +463,7 @@ struct SendView: View {
 
         // Cancel any previous fee preview and start a new one.
         feePreviewTask?.cancel()
+        sweepPreviewTask?.cancel()
 
         feePreviewTask = Task {
             // Small debounce to coalesce rapid taps / state changes.
@@ -474,7 +575,9 @@ struct SendView: View {
                 FiatPriceService.shared.recordSend(txid: result.txid)
 
                 // Keep UI honest: set the amount field to what was actually sent.
+                suppressAmountChangeClearingMaxMode = true
                 setAmountFieldToXmrPiconero(result.amount)
+                isMaxMode = false
             } else {
                 guard let amountPico = parsedAmountPiconero() else {
                     errorMessage = L10n.t("Enter a valid address and amount.")
@@ -563,6 +666,14 @@ struct SendView: View {
         return true
     }
 
+    private func canSendExact() -> Bool {
+        canSend() && !isMaxMode
+    }
+
+    private func canSendMax() -> Bool {
+        canSend() && isMaxMode
+    }
+
     private func looksLikeAddress(_ addr: String) -> Bool {
         // Basic heuristic: Monero addresses commonly start with '4' or '8' (stagenet/testnet), or '5' for integrated; I2P address not expected here.
         // Keep it lenient in UI; the core will strictly validate on send.
@@ -601,6 +712,7 @@ struct SendView: View {
 
         estimatedFeePiconero = nil
         previewReady = false
+        isMaxMode = false
     }
 
     /// Parse `monero:<address>?…` and `monero://<address>?…` without lowercasing Base58.
@@ -616,14 +728,32 @@ struct SendView: View {
 
         toAddress = parsed.address
         if let amount = parsed.amountXmr, let pico = XmrAmount.parsePiconero(amount) {
+            suppressAmountChangeClearingMaxMode = true
             setAmountFieldToXmrPiconero(pico)
         }
 
+        isMaxMode = false
         infoMessage = L10n.t("Payment details loaded from QR code.")
     }
 
     private func confirmationMessage() -> String {
         let destination = toAddress.isEmpty ? L10n.t("Unknown address") : toAddress
+        if isMaxMode, let fee = estimatedFeePiconero, let amount = parsedAmountPiconero() {
+            var message = L10n.format(
+                "Send maximum spendable after fee to %@.\nPreview amount: %@\nEstimated fee: %@\nFinal amount is recalculated at send time.",
+                destination,
+                viewModel.formatExactPiconero(amount),
+                viewModel.formatExactPiconero(fee)
+            )
+            let now = Int64(Date().timeIntervalSince1970 * 1000)
+            if let amountFiat = FiatEstimate.liveApproxText(piconero: amount, rate: fiatPrices.displayRate, nowMs: now) {
+                message += L10n.format("\nAmount %@", amountFiat)
+            }
+            if let feeFiat = FiatEstimate.liveApproxText(piconero: fee, rate: fiatPrices.displayRate, nowMs: now) {
+                message += L10n.format("\nFee %@", feeFiat)
+            }
+            return message
+        }
         if let fee = estimatedFeePiconero, let amount = parsedAmountPiconero() {
             let total = safeAdd(amount, fee)
             var message = L10n.format(
@@ -645,14 +775,14 @@ struct SendView: View {
         return L10n.format("Preview the fee before sending to %@.", destination)
     }
 
-    // One-shot "Send Max": ask the core to compute the maximum sendable amount (unlocked - fee),
-    // then fill the amount field so the confirmation dialog can use a previewed amount.
+    /// Preview maximum spendable amount, then keep sweep mode until Confirm runs `sweep()`.
     private func sendMax() async {
         let walletId = await walletManager.getCurrentWalletId() ?? "(none)"
         print("🧭 UI action: sendMax tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR_before=\(amountXMR) toAddress_prefix=\(String(toAddress.prefix(12)))")
 
         // Cancel any previous sweep preview and start a new one.
         sweepPreviewTask?.cancel()
+        feePreviewTask?.cancel()
 
         sweepPreviewTask = Task {
             // Small debounce to coalesce rapid taps / state changes.
@@ -662,6 +792,7 @@ struct SendView: View {
             await MainActor.run {
                 errorMessage = nil
                 infoMessage = nil
+                isEstimating = true
                 estimatedFeePiconero = nil
                 previewReady = false
             }
@@ -669,6 +800,8 @@ struct SendView: View {
             guard looksLikeAddress(toAddress) else {
                 await MainActor.run {
                     errorMessage = L10n.t("Enter a valid address.")
+                    isEstimating = false
+                    isMaxMode = false
                 }
                 return
             }
@@ -683,7 +816,10 @@ struct SendView: View {
                     res = try await walletManager.previewSweep(toAddress: toAddress, ringLen: ring)
                 }
 
-                if Task.isCancelled { return }
+                if Task.isCancelled {
+                    await MainActor.run { isEstimating = false }
+                    return
+                }
 
                 let amount = res.amount
                 let fee = res.fee
@@ -693,6 +829,7 @@ struct SendView: View {
                         errorMessage = L10n.t("No unlocked balance available to send after fee.")
                         isMaxMode = false
                         previewReady = false
+                        isEstimating = false
                     }
                     return
                 }
@@ -700,17 +837,21 @@ struct SendView: View {
                 await MainActor.run {
                     estimatedFeePiconero = fee
                     previewReady = true
-                    // One-shot behavior: do NOT set isMaxMode=true here.
-                    isMaxMode = false
-
+                    suppressAmountChangeClearingMaxMode = true
                     setAmountFieldToXmrPiconero(amount)
-                    infoMessage = L10n.t("Amount set to max spendable. Final fee may change slightly at send time.")
+                    isMaxMode = true
+                    infoMessage = L10n.t("Max preview ready. Confirm Send Max will sweep all unlocked after fee.")
+                    isEstimating = false
                 }
             } catch {
-                if Task.isCancelled { return }
+                if Task.isCancelled {
+                    await MainActor.run { isEstimating = false }
+                    return
+                }
                 await MainActor.run {
                     previewReady = false
                     isMaxMode = false
+                    isEstimating = false
                     errorMessage = L10n.format("Fee preview failed: %@", error.localizedDescription)
                 }
             }

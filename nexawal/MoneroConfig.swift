@@ -49,6 +49,11 @@ struct MoneroConfig {
     nonisolated static let userDefaultsBulkBinFetchKey = "walletcore_bulk_bin_fetch"
     nonisolated static let defaultBulkBinFetchEnabled: Bool = true
 
+    /// True while a refresh is in-flight (or was killed mid-scan). Forces resume even if lastScanned ≈ tip.
+    nonisolated static let userDefaultsScanInterruptedKey = "nexawal_scan_interrupted"
+    /// Last lastScanned from a *completed* refresh. Used to rewind a lying tip checkpoint.
+    nonisolated static let userDefaultsTrustedScannedHeightKey = "nexawal_trusted_scanned_height"
+
     // Wallet2 bulk lockout (kept as stubs to avoid crashes if called)
     nonisolated private static let userDefaultsWallet2LockoutsKey = "monero_wallet2_bulk_lockouts_v1"
     nonisolated private static let wallet2LockoutDefaultSeconds: TimeInterval = 60 * 30
@@ -57,6 +62,9 @@ struct MoneroConfig {
     nonisolated static let userDefaultsTechnoThemeKey = "ui_techno_theme"
     nonisolated static let userDefaultsClassicUIKeyLegacy = "ui_classic_mode"
     nonisolated static let defaultTechnoThemeEnabled: Bool = false
+
+    /// Wallet sync status card: whether Node/Scanned/… details are expanded.
+    nonisolated static let userDefaultsSyncDetailsExpandedKey = "ui_sync_details_expanded"
 
     nonisolated static let userDefaultsFiatEstimatesEnabledKey = "fiat_estimates_enabled"
     nonisolated static let userDefaultsFiatEstimatesEnabledAtKey = "fiat_estimates_enabled_at_ms"
@@ -91,6 +99,8 @@ struct MoneroConfig {
 
     // MARK: - Node address helpers
     /// Previous shipped defaults. Matching these (or the live default) means "no override".
+    /// Intentionally excludes hostnames that remain valid alternate endpoints (e.g. monero.nexatrode.com)
+    /// so an explicit user choice is not silently rewritten to the live default.
     private nonisolated static let legacyDefaultAddresses: Set<String> = [
         "rpc.nexatrode.com",
         "http://rpc.nexatrode.com",
@@ -100,10 +110,6 @@ struct MoneroConfig {
         "http://cuprate.nexatrode.com",
         "https://cuprate.nexatrode.com",
         "https://cuprate.nexatrode.com/",
-        "monero.nexatrode.com",
-        "http://monero.nexatrode.com",
-        "https://monero.nexatrode.com",
-        "https://monero.nexatrode.com/",
         "node.sethforprivacy.com:443",
         "https://node.sethforprivacy.com:443",
         "node.monerod.org:443",
@@ -276,6 +282,15 @@ struct MoneroConfig {
         UserDefaults.standard.removeObject(forKey: userDefaultsClassicUIKeyLegacy)
     }
 
+    nonisolated static var syncDetailsExpanded: Bool {
+        UserDefaults.standard.bool(forKey: userDefaultsSyncDetailsExpandedKey)
+    }
+
+    @MainActor
+    static func setSyncDetailsExpanded(_ expanded: Bool) {
+        UserDefaults.standard.set(expanded, forKey: userDefaultsSyncDetailsExpandedKey)
+    }
+
     // MARK: - Fiat estimates
     nonisolated static var fiatEstimatesEnabled: Bool {
         UserDefaults.standard.bool(forKey: userDefaultsFiatEstimatesEnabledKey)
@@ -422,6 +437,23 @@ struct MoneroConfig {
     @MainActor
     static func setBulkBinFetchEnabled(_ enabled: Bool) {
         UserDefaults.standard.set(enabled, forKey: userDefaultsBulkBinFetchKey)
+    }
+
+    nonisolated static var scanInterrupted: Bool {
+        UserDefaults.standard.bool(forKey: userDefaultsScanInterruptedKey)
+    }
+
+    nonisolated static func setScanInterrupted(_ value: Bool) {
+        UserDefaults.standard.set(value, forKey: userDefaultsScanInterruptedKey)
+    }
+
+    nonisolated static var trustedScannedHeight: UInt64 {
+        let v = UserDefaults.standard.object(forKey: userDefaultsTrustedScannedHeightKey) as? NSNumber
+        return v?.uint64Value ?? 0
+    }
+
+    nonisolated static func setTrustedScannedHeight(_ height: UInt64) {
+        UserDefaults.standard.set(NSNumber(value: height), forKey: userDefaultsTrustedScannedHeightKey)
     }
 
     // Feather-like baseline: just return current par/batch values

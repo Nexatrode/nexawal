@@ -455,7 +455,8 @@ actor WalletStorage {
         let base: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
-            kSecAttrAccount as String: mnemonicAccount
+            kSecAttrAccount as String: mnemonicAccount,
+            kSecUseDataProtectionKeychain as String: true
         ]
 
         // Attributes/value we want to set.
@@ -523,7 +524,8 @@ actor WalletStorage {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
             kSecAttrAccount as String: mnemonicAccount,
-            kSecMatchLimit as String: kSecMatchLimitOne
+            kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecUseDataProtectionKeychain as String: true
         ]
         query[kSecReturnData as String] = includeData
         return query

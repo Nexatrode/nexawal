@@ -85,7 +85,7 @@ struct WalletCreationView: View {
     @State private var nodeSaveStatus: String?
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: NeonSectionHeader(title: L10n.t("Wallet Setup"))) {
                     Text("Choose whether you're creating a brand new wallet (fast sync) or importing an existing wallet (full scan unless you set a restore height).")
@@ -298,7 +298,7 @@ struct WalletCreationView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(classicUI ? "NEXAWAL" : L10n.t("Create Wallet"))
+                    Text(classicUI ? "nexawal" : L10n.t("Create Wallet"))
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                         .tracking(classicUI ? 2 : 0)

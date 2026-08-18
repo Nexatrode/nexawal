@@ -92,7 +92,13 @@ actor WalletManager {
     }
 
     /// Open or create a wallet from a mnemonic phrase
-    func openWallet(mnemonic: String, walletId: String = "main_wallet", restoreHeight: UInt64 = 0, mainnet: Bool = true) throws {
+    func openWallet(
+        mnemonic: String,
+        walletId: String = "main_wallet",
+        restoreHeight: UInt64 = 0,
+        mainnet: Bool = true,
+        importCache: Bool = true
+    ) throws {
         let normalizedMnemonic = normalizedMnemonic(mnemonic)
         // Validate mnemonic (should be 25 words)
         let words = normalizedMnemonic.components(separatedBy: .whitespaces)
@@ -107,14 +113,17 @@ actor WalletManager {
                 restoreHeight: restoreHeight,
                 mainnet: mainnet
             )
+            currentNetworkMainnet = mainnet
+            currentWalletId = walletId
+            cachedBalance = nil // Clear cached balance
+            if importCache {
+                importCacheIfPresent(for: walletId)
+            }
+            // Re-apply after cache import so subaddress lookahead is registered on the restored scanner.
             try WalletCoreFFIClient.setGapLimit(
                 walletId: walletId,
                 gapLimit: MoneroConfig.gapLimit
             )
-            currentNetworkMainnet = mainnet
-            currentWalletId = walletId
-            cachedBalance = nil // Clear cached balance
-            importCacheIfPresent(for: walletId)
             recoverPendingPreparedSendBestEffort(for: walletId)
         } catch {
             throw WalletError.walletOpenFailed(error.localizedDescription)
@@ -171,11 +180,12 @@ actor WalletManager {
             exportCacheAndPersist(for: walletId)
 
             do {
-                // If the user requested cancel, treat it as a cancellation path (even if it isn't a CancellationError).
+                // Never treat cancel as a successful sync. Returning status here used to
+                // checkpoint a partial lastScanned height as trusted.
                 if refreshCancelRequested || (nodeError as? CancellationError) != nil {
-                    print("ℹ️ Refresh cancelled; returning latest status")
+                    print("ℹ️ Refresh cancelled")
                     cachedBalance = nil
-                    return try WalletCoreFFIClient.syncStatus(walletId: walletId)
+                    throw CancellationError()
                 }
                 print("⚠️ Refresh with nodeURL '\(nodeURL)' failed: \(nodeError.localizedDescription)")
 
@@ -208,6 +218,10 @@ actor WalletManager {
                 print("✅ Refresh succeeded using wallet core default node")
                 return fallbackStatus
             } catch let defaultError {
+                if defaultError is CancellationError || refreshCancelRequested {
+                    cachedBalance = nil
+                    throw CancellationError()
+                }
                 let detailedError = """
                 Failed to refresh wallet.
 
@@ -361,6 +375,22 @@ actor WalletManager {
                 lastCoreErrSampleAt = nowErr
                 if let coreErr = WalletCoreFFIClient.lastErrorMessage(), !coreErr.isEmpty {
                     print("⚠️ Core error sample during refresh: \(coreErr)")
+                    if !stallFallbackUsed, Self.isRecoverableBulkFetchError(coreErr) {
+                        stallFallbackUsed = true
+                        print("↩️ Recoverable fetch error; falling back to sequential scan (par=0, batch=150) and retrying… err=\(coreErr)")
+                        exportCacheAndPersist(for: walletId)
+                        refreshPar = 0
+                        refreshBatch = 150
+                        await MoneroConfig.setScanParallelism(0)
+                        await MoneroConfig.setScanBatchSize(150)
+                        applyBulkRangeBatchEnv(batch: refreshBatch)
+                        let effectiveURL = MoneroConfig.scanNodeURL()
+                        try WalletCoreFFIClient.refreshWalletAsync(walletId: walletId, nodeURL: effectiveURL)
+                        lastProgressAt = Date()
+                        lastPersistAt = Date.distantPast
+                        dynamicStallTimeout = max(60.0, dynamicStallTimeout)
+                        continue
+                    }
                 }
             }
 
@@ -447,6 +477,11 @@ actor WalletManager {
             let interval = max(pollInterval, 0.05)
             let nanoseconds = UInt64(interval * 1_000_000_000)
             try await Task.sleep(nanoseconds: nanoseconds)
+            if refreshCancelRequested || Task.isCancelled {
+                exportCacheAndPersist(for: walletId)
+                print("🗂️ Cache export reason: cancel walletId=\(walletId)")
+                throw CancellationError()
+            }
         }
     }
 
@@ -493,6 +528,17 @@ actor WalletManager {
         print("🗂️ Cache export reason: snapshot walletId=\(walletId)")
     }
 
+    /// Rewind the in-memory scan cursor without deleting the on-disk cache.
+    /// Used after an interrupted refresh whose checkpoint jumped to tip.
+    func rewindScanCursor(from height: UInt64) async throws {
+        guard let walletId = currentWalletId else {
+            throw WalletError.refreshFailed("No wallet is currently open")
+        }
+        try WalletCoreFFIClient.forceRescanFromHeight(walletId: walletId, fromHeight: height)
+        cachedBalance = nil
+        print("🧭 rewindScanCursor walletId=\(walletId) fromHeight=\(height)")
+    }
+
     /// Force rescan from a specific height. Resets core scan state, clears local cache, and refreshes.
     func rescan(from height: UInt64) async throws -> WalletCoreFFIClient.SyncStatus {
         guard let walletId = currentWalletId else {
@@ -510,6 +556,27 @@ actor WalletManager {
     private func isParallelWorkerStall(_ message: String) -> Bool {
         let msg = message.lowercased()
         return msg.contains("parallel worker stalled") || msg.contains("parallel worker channel closed unexpectedly")
+    }
+
+    /// Soft fetch failures (timeouts, 429, truncated bodies) that usually recover after shrinking the range batch.
+    private static func isRecoverableBulkFetchError(_ message: String) -> Bool {
+        let msg = message.lowercased()
+        return msg.contains("429")
+            || msg.contains("too many requests")
+            || msg.contains("rate limit")
+            || msg.contains("timeout")
+            || msg.contains("timed out")
+            || msg.contains("response body closed before all bytes were read")
+            || msg.contains("interface error")
+            || msg.contains("channelclosed")
+            || msg.contains("channel closed")
+            || msg.contains("connection reset")
+            || msg.contains("broken pipe")
+            || msg.contains("unexpected eof")
+            || msg.contains("http 4")
+            || msg.contains("http 5")
+            || msg.contains("status code 4")
+            || msg.contains("status code 5")
     }
 
     /// Import a previously exported core cache blob for this wallet, if present.
@@ -769,28 +836,38 @@ actor WalletManager {
     // NOTE: Removed the reason-tagging wrapper to avoid recursive overload confusion.
     // Call `exportCacheAndPersist(for:)` directly and print a reason at the call site instead.
 
+    /// Delete persisted scan cache for a wallet id without requiring an open wallet.
+    /// Used before create/replace so Occupied in-memory state cannot import another wallet's blob.
+    func deletePersistedScanCache(walletId: String) {
+        let fm = FileManager.default
+        let appSupport = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        for net in ["mainnet", "stagenet"] {
+            let fileURL = appSupport
+                .appendingPathComponent("WalletCaches", isDirectory: true)
+                .appendingPathComponent(net, isDirectory: true)
+                .appendingPathComponent("\(walletId).cache")
+            if fm.fileExists(atPath: fileURL.path) {
+                try? fm.removeItem(at: fileURL)
+                print("🗂️ Cleared wallet cache at \(fileURL.lastPathComponent) for \(walletId)")
+            }
+        }
+        let legacyKey = "wallet_cache_\(walletId)"
+        if UserDefaults.standard.object(forKey: legacyKey) != nil {
+            UserDefaults.standard.removeObject(forKey: legacyKey)
+            print("🗂️ Removed legacy cache blob for \(walletId)")
+        }
+    }
+
     // Clear on-disk scan cache for current wallet (per network).
     // Removes per-network cache file and any legacy cache stored in UserDefaults.
     func clearScanCache() throws {
         guard let walletId = currentWalletId else {
             throw WalletError.refreshFailed("No wallet is currently open")
         }
-        let fm = FileManager.default
+        deletePersistedScanCache(walletId: walletId)
         let fileURL = cacheFileURL(for: walletId)
-
-        // Remove cache file if present
-        if fm.fileExists(atPath: fileURL.path) {
-            try fm.removeItem(at: fileURL)
-            print("🗂️ Cleared wallet cache at \(fileURL.lastPathComponent) for \(walletId)")
-        } else {
+        if !FileManager.default.fileExists(atPath: fileURL.path) {
             print("🗂️ No cache file to clear for \(walletId)")
-        }
-
-        // Remove any legacy cache blob in UserDefaults
-        let legacyKey = "wallet_cache_\(walletId)"
-        if UserDefaults.standard.object(forKey: legacyKey) != nil {
-            UserDefaults.standard.removeObject(forKey: legacyKey)
-            print("🗂️ Removed legacy cache blob for \(walletId)")
         }
     }
 

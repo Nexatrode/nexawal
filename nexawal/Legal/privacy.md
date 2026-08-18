@@ -1,8 +1,8 @@
-# NexaWal privacy policy
+# nexawal privacy policy
 
 Last updated: 12 August 2026
 
-NexaWal is a local Monero wallet. This policy covers the iOS app published from https://github.com/Nexatrode/nexawal.
+nexawal is a local Monero wallet. This policy covers the iOS app published from https://github.com/Nexatrode/nexawal.
 
 This text is bundled in the app for offline reading. A copy may also be published at https://nexatrode.com/privacy/nexawal/.
 
@@ -36,7 +36,7 @@ Terms of Use and this Privacy Policy are available offline inside the app. Openi
 
 ## What we do not collect
 
-The NexaWal authors do not collect names, emails, contacts, seed phrases, balances, or transaction history from the app.
+The nexawal authors do not collect names, emails, contacts, seed phrases, balances, or transaction history from the app.
 
 If you open external links (for example source on GitHub, or a block explorer), those sites have their own policies.
 

@@ -19,8 +19,15 @@ struct WalletView: View {
     @State private var selectedTransfer: WalletCoreFFIClient.Transfer?
     @State private var showTransferDetails: Bool = false
 
+    /// Sync card disclosure (Node / Scanned / …). Default closed; persisted in UserDefaults.
+    @AppStorage(MoneroConfig.userDefaultsSyncDetailsExpandedKey) private var syncDetailsExpanded = false
+
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
+
+    private var showSyncProgress: Bool {
+        !viewModel.isSynced || viewModel.isRefreshing
+    }
 
     private func directionLabel(_ t: WalletCoreFFIClient.Transfer) -> String {
         switch t.direction.lowercased() {
@@ -152,8 +159,8 @@ struct WalletView: View {
             let bt = b.timestamp ?? 0
             if at != bt { return at > bt }
 
-            // Finally stable tiebreaker
-            return a.txid > b.txid
+            // Same-height tie-break: txid A→Z, matching Android (and Feather's same-height CSV).
+            return a.txid < b.txid
         }
     }
 
@@ -201,7 +208,7 @@ struct WalletView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
                     // Balance / actions
@@ -218,7 +225,7 @@ struct WalletView: View {
                         }
 
                         VStack(alignment: .leading, spacing: 16) {
-                            Text(classicUI ? "NEXAWAL" : L10n.t("Wallet"))
+                            Text(classicUI ? "nexawal" : L10n.t("Wallet"))
                                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                                 .foregroundColor(classicUI ? primaryText : .secondary)
                                 .tracking(classicUI ? 2 : 0)
@@ -301,13 +308,13 @@ struct WalletView: View {
                     .cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
 
-                    // Status
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(L10n.neon("Status", classicUI: classicUI))
-                            .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                            .foregroundColor(primaryText)
-
-                        VStack(alignment: .leading, spacing: 8) {
+                    // Sync details (no section title — matches Android card content)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.18)) {
+                                syncDetailsExpanded.toggle()
+                            }
+                        } label: {
                             HStack(spacing: 8) {
                                 Circle()
                                     .fill(
@@ -320,16 +327,32 @@ struct WalletView: View {
                                 Text(syncHeadline())
                                     .font(classicUI ? .system(.headline, design: .monospaced) : .headline)
                                     .foregroundColor(primaryText)
+                                    .multilineTextAlignment(.leading)
+                                Spacer(minLength: 8)
+                                Image(systemName: "chevron.forward")
+                                    .font(classicUI ? .system(size: 13, weight: .semibold, design: .monospaced) : .system(size: 13, weight: .semibold))
+                                    .foregroundColor(classicPalette?.accent ?? .secondary)
+                                    .rotationEffect(.degrees(syncDetailsExpanded ? 90 : 0))
                             }
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityHint(syncDetailsExpanded ? L10n.t("Hide sync details") : L10n.t("Show sync details"))
 
+                        if syncDetailsExpanded {
                             Text(syncDetail())
                                 .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
                                 .foregroundColor(secondaryText)
+                                .transition(.opacity.combined(with: .move(edge: .top)))
+                        }
 
+                        if showSyncProgress {
                             ProgressView(value: viewModel.syncProgress)
                                 .progressViewStyle(LinearProgressViewStyle(tint: classicPalette?.progress ?? .accentColor))
                                 .accessibilityValue(L10n.format("Sync progress %lld percent", Int64((viewModel.syncProgress * 100).rounded())))
+                        }
 
+                        if syncDetailsExpanded {
                             classicStatusRow(label: L10n.neon("Node", classicUI: classicUI), value: MoneroConfig.daemonAddress)
                             classicStatusRow(label: L10n.neon("Scanned", classicUI: classicUI), value: "\(viewModel.lastScannedHeight)")
                             classicStatusRow(label: L10n.neon("Network Height", classicUI: classicUI), value: "\(viewModel.chainHeight)")
@@ -337,7 +360,9 @@ struct WalletView: View {
                                 label: L10n.neon("Progress", classicUI: classicUI),
                                 value: String(format: "%.1f%%", viewModel.syncProgress * 100.0)
                             )
-                            classicStatusRow(label: L10n.neon("Remaining", classicUI: classicUI), value: L10n.format("%lld blocks", Int64(viewModel.remainingBlocks)))
+                            if !viewModel.isSynced {
+                                classicStatusRow(label: L10n.neon("Remaining", classicUI: classicUI), value: L10n.format("%lld blocks", Int64(viewModel.remainingBlocks)))
+                            }
                             if viewModel.scanBlocksPerSecond > 0 {
                                 classicStatusRow(
                                     label: L10n.neon("Avg throughput", classicUI: classicUI),
@@ -351,8 +376,8 @@ struct WalletView: View {
                                 )
                             }
                         }
-                        .accessibilityAddTraits(.updatesFrequently)
                     }
+                    .accessibilityAddTraits(.updatesFrequently)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(panelBackground)
@@ -451,7 +476,7 @@ struct WalletView: View {
                                 onDismiss: { selectedTransfer = nil }
                             ) {
                                 if let t = selectedTransfer {
-                                    NavigationView {
+                                    NavigationStack {
                                         List {
                                                 Section(header: Text("Summary")) {
                                                     HStack {
@@ -621,22 +646,28 @@ struct WalletView: View {
                                 await viewModel.refreshWallet()
                             }
                         }) {
-                            HStack {
+                            HStack(spacing: 8) {
                                 if viewModel.isRefreshing {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle(tint: classicUI ? (classicPalette?.accent ?? .accentColor) : .white))
+                                        .controlSize(.small)
+                                        .frame(width: 16, height: 16)
                                         .accessibilityHidden(true)
                                 } else {
                                     Image(systemName: "arrow.clockwise")
+                                        .font(.body.weight(.semibold))
+                                        .frame(width: 16, height: 16)
                                         .accessibilityHidden(true)
                                 }
                                 Text(viewModel.isRefreshing
                                      ? L10n.neon("Refreshing...", classicUI: classicUI)
                                      : L10n.neon("Refresh Wallet", classicUI: classicUI))
                                     .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.85)
                             }
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .frame(height: 52)
                             .background(classicUI ? Color.clear : Color.blue)
                             .foregroundColor(classicUI ? (classicPalette?.accent ?? .blue) : .white)
                             .overlay(
@@ -649,16 +680,20 @@ struct WalletView: View {
 
                         if viewModel.isRefreshing {
                             Button(action: {
-                                viewModel.cancelRefresh()
+                                viewModel.cancelRefresh(userInitiated: true)
                             }) {
-                                HStack {
+                                HStack(spacing: 8) {
                                     Image(systemName: "xmark.circle.fill")
+                                        .font(.body.weight(.semibold))
+                                        .frame(width: 16, height: 16)
                                         .accessibilityHidden(true)
                                     Text(L10n.neon("Cancel", classicUI: classicUI))
                                         .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.85)
                                 }
                                 .frame(maxWidth: .infinity)
-                                .padding()
+                                .frame(height: 52)
                                 .background(classicUI ? Color.clear : Color.red.opacity(0.9))
                                 .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : .white)
                                 .overlay(
@@ -719,6 +754,8 @@ struct WalletView: View {
 }
 
 struct SettingsView: View {
+    private static let sourceRepoURL = "https://github.com/nexatrode/nexawal"
+
     @ObservedObject var viewModel: WalletViewModel
     @State private var nodeAddress: String
     @State private var networkPolicy: MoneroConfig.NetworkPolicy
@@ -736,6 +773,7 @@ struct SettingsView: View {
     @State private var saveConfirmation: String?
     @State private var showLegalTerms = false
     @State private var showLegalPrivacy = false
+    @State private var showLegalLicense = false
     @AppStorage(MoneroConfig.userDefaultsTechnoThemeKey) private var technoThemeEnabled: Bool = MoneroConfig.defaultTechnoThemeEnabled
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
@@ -756,249 +794,222 @@ struct SettingsView: View {
     }
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: NeonSectionHeader(title: L10n.t("Appearance"))) {
-                    NeonToggle(title: L10n.t("Techno Theme"), isOn: $technoThemeEnabled)
-                    Text("Neon terminal look. Leave off for the standard theme (default).")
-                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                }
-
-                Section(header: NeonSectionHeader(title: L10n.t("How to connect"))) {
-                    Picker("How to connect", selection: $networkPolicy) {
-                        Text("Clearnet only").tag(MoneroConfig.NetworkPolicy.clearnet)
-                        Text("I2P only").tag(MoneroConfig.NetworkPolicy.i2p)
-                        Text("Both (scan clearnet, broadcast I2P)").tag(MoneroConfig.NetworkPolicy.hybrid)
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    settingsCard(title: L10n.t("Appearance")) {
+                        NeonToggle(title: L10n.t("Techno Theme"), isOn: $technoThemeEnabled)
                     }
-                    .tint(classicPalette?.accent ?? .accentColor)
-                    .onChange(of: networkPolicy) { _, newValue in
-                        applyNetwork(policy: newValue)
+
+                    settingsCard(title: L10n.t("How to connect")) {
+                        Picker("How to connect", selection: $networkPolicy) {
+                            Text("Clearnet only").tag(MoneroConfig.NetworkPolicy.clearnet)
+                            Text("I2P only").tag(MoneroConfig.NetworkPolicy.i2p)
+                            Text("Both (scan clearnet, broadcast I2P)").tag(MoneroConfig.NetworkPolicy.hybrid)
+                        }
+                        .pickerStyle(.menu)
+                        .tint(classicPalette?.accent ?? .accentColor)
+                        .onChange(of: networkPolicy) { _, newValue in
+                            applyNetwork(policy: newValue)
+                        }
                     }
-                    Text("Clearnet only uses a clearnet node. I2P only uses an I2P node and proxy. Both scans on clearnet and broadcasts over I2P.")
-                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                }
 
-                if networkPolicy != .i2p {
-                    Section(header: NeonSectionHeader(title: L10n.t("Clearnet node"))) {
-                        TextField("https://rpc.nexatrode.com", text: $nodeAddress)
-                            .font(.system(.body, design: .monospaced))
-                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .onSubmit { applyNetwork() }
-                        Text(L10n.t("Type the full URL, including http:// or https://.\nDefault: https://rpc.nexatrode.com"))
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-
-                        if classicUI, let palette = classicPalette {
-                            Button("Use this node") {
-                                applyNetwork()
+                    if networkPolicy != .i2p {
+                        settingsCard(title: L10n.t("Clearnet node")) {
+                            outlinedField {
+                                TextField("https://rpc.nexatrode.com", text: $nodeAddress)
+                                    .font(.system(.body, design: .monospaced))
+                                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
+                                    .onSubmit { applyNetwork() }
                             }
-                            .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                            .listRowBackground(Color.clear)
-                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 12, trailing: 16))
-                        } else {
-                            Button("Use this node") {
+
+                            secondaryButton("Use this node") {
                                 applyNetwork()
                             }
                         }
                     }
-                }
 
-                if networkPolicy != .clearnet {
-                    Section(header: NeonSectionHeader(title: L10n.t("I2P"))) {
-                        TextField("I2P node (host:port)", text: $i2pRPCAddress)
-                            .font(.system(.body, design: .monospaced))
-                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .onSubmit { applyNetwork() }
-
-                        TextField("I2P HTTP proxy (host:port)", text: $i2pProxyAddress)
-                            .font(.system(.body, design: .monospaced))
-                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.never)
-                            .onSubmit { applyNetwork() }
-
-                        Text("Proxy example: 127.0.0.1:4444. Leave blank if you want — sync will fail until a working I2P node and proxy are set.")
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-
-                        if classicUI, let palette = classicPalette {
-                            Button("Apply I2P settings") {
-                                applyNetwork()
+                    if networkPolicy != .clearnet {
+                        settingsCard(title: L10n.t("I2P")) {
+                            outlinedField {
+                                TextField("I2P node (host:port)", text: $i2pRPCAddress)
+                                    .font(.system(.body, design: .monospaced))
+                                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
+                                    .onSubmit { applyNetwork() }
                             }
-                            .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                            .listRowBackground(Color.clear)
-                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 12, trailing: 16))
-                        } else {
-                            Button("Apply I2P settings") {
+
+                            outlinedField {
+                                TextField("I2P HTTP proxy (host:port)", text: $i2pProxyAddress)
+                                    .font(.system(.body, design: .monospaced))
+                                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
+                                    .onSubmit { applyNetwork() }
+                            }
+
+                            secondaryButton("Apply I2P settings") {
                                 applyNetwork()
                             }
                         }
                     }
-                }
 
-                Section(header: NeonSectionHeader(title: L10n.t("Security"))) {
-                    NeonToggle(
-                        title: L10n.t("Require Face ID / Touch ID"),
-                        isOn: $requireBiometrics,
-                        disabled: !biometricsAvailable || !biometricsEnrolled
-                    )
-                    .onChange(of: requireBiometrics) { _, newValue in
-                        persistBiometrics(newValue)
-                    }
-
-                    if !biometricsAvailable {
-                        Text("Biometric or device authentication is not available on this device.")
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    } else if !biometricsEnrolled {
-                        Text("Biometric authentication is available, but no biometric data is enrolled.")
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    } else {
-                        Text("When enabled, opening the stored wallet and sending funds will require device authentication.")
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    }
-                }
-
-                Section(header: NeonSectionHeader(title: L10n.t("Recovery"))) {
-                    Text("Wrong node? Change how to connect or the node above — you do not need a rescan.\nMissing funds? Rescan from your restore height.\nLast resort: full rescan from block 0.")
-                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-
-                    TextField("Restore height", text: $rescanHeightInput)
-                        .keyboardType(.numberPad)
-                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-
-                    if classicUI, let palette = classicPalette {
-                        Button("Rescan from Height") {
-                            initiateRescan()
+                    settingsCard(title: L10n.t("Security")) {
+                        NeonToggle(
+                            title: L10n.t("Require Face ID / Touch ID"),
+                            isOn: $requireBiometrics,
+                            disabled: !biometricsAvailable || !biometricsEnrolled
+                        )
+                        .onChange(of: requireBiometrics) { _, newValue in
+                            persistBiometrics(newValue)
                         }
-                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                        .disabled(parsedRescanHeight() == nil)
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
 
-                        Button("Full Rescan (from block 0)") {
-                            rescanHeightInput = "0"
-                            initiateRescan()
-                        }
-                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 12, trailing: 16))
-                    } else {
-                        Button("Rescan from Height") {
-                            initiateRescan()
-                        }
-                        .disabled(parsedRescanHeight() == nil)
-
-                        Button("Full Rescan (from block 0)") {
-                            rescanHeightInput = "0"
-                            initiateRescan()
-                        }
-                    }
-                }
-
-                Section(header: NeonSectionHeader(title: L10n.t("Advanced Recovery"))) {
-                    NeonDisclosureGroup(
-                        title: L10n.t("Scan additional accounts or subaddresses"),
-                        isExpanded: $showAdvancedRecovery
-                    ) {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("Only change these values if a wallet import appears incomplete after using the correct restore height.")
+                        if !biometricsAvailable {
+                            Text("Biometric or device authentication is not available on this device.")
                                 .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                        } else if !biometricsEnrolled {
+                            Text("Biometric authentication is available, but no biometric data is enrolled.")
+                                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                        }
+                    }
 
-                            TextField("Gap limit (1-100000)", text: $gapLimitInput)
+                    settingsCard(title: L10n.t("Recovery")) {
+                        outlinedField {
+                            TextField("Restore height", text: $rescanHeightInput)
                                 .keyboardType(.numberPad)
                                 .foregroundStyle(classicPalette?.primaryText ?? .primary)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
-                            Text("Controls how many receive subaddresses are scanned for this wallet.")
-                                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                        }
 
-                            TextField("Account lookahead (1-1000)", text: $accountGapInput)
-                                .keyboardType(.numberPad)
-                                .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                                .autocorrectionDisabled()
-                                .textInputAutocapitalization(.never)
-                            Text("Controls how many Monero accounts are scanned starting at account 0.")
-                                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                        secondaryButton("Rescan from Height") {
+                            initiateRescan()
+                        }
+                        .disabled(parsedRescanHeight() == nil)
 
-                            Button {
-                                persistScanTuning()
-                                flashStatus(L10n.t("Saved scan lookahead"))
-                            } label: {
-                                Text("Save scan lookahead")
-                                    .frame(maxWidth: .infinity)
-                            }
+                        secondaryButton("Full Rescan (from block 0)") {
+                            rescanHeightInput = "0"
+                            initiateRescan()
+                        }
+                    }
 
-                            Button {
-                                Task {
-                                    do {
-                                        try await WalletManager.shared.clearScanCache()
-                                        flashStatus(L10n.t("Cleared scan cache"))
-                                    } catch {
-                                        flashStatus(L10n.format("Clear cache failed: %@", error.localizedDescription))
-                                    }
+                    settingsCard(title: L10n.t("Advanced Recovery")) {
+                        NeonDisclosureGroup(
+                            title: L10n.t("Scan additional accounts or subaddresses"),
+                            isExpanded: $showAdvancedRecovery
+                        ) {
+                            VStack(alignment: .leading, spacing: 12) {
+                                outlinedField {
+                                    TextField("Gap limit (1-100000)", text: $gapLimitInput)
+                                        .keyboardType(.numberPad)
+                                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                                        .autocorrectionDisabled()
+                                        .textInputAutocapitalization(.never)
                                 }
-                            } label: {
-                                Text("Clear scan cache (this network)")
-                                    .frame(maxWidth: .infinity)
+
+                                outlinedField {
+                                    TextField("Account lookahead (1-1000)", text: $accountGapInput)
+                                        .keyboardType(.numberPad)
+                                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                                        .autocorrectionDisabled()
+                                        .textInputAutocapitalization(.never)
+                                }
+
+                                secondaryButton("Save scan lookahead") {
+                                    persistScanTuning()
+                                    flashStatus(L10n.t("Saved scan lookahead"))
+                                }
+
+                                Button {
+                                    Task {
+                                        do {
+                                            try await WalletManager.shared.clearScanCache()
+                                            flashStatus(L10n.t("Cleared scan cache"))
+                                        } catch {
+                                            flashStatus(L10n.format("Clear cache failed: %@", error.localizedDescription))
+                                        }
+                                    }
+                                } label: {
+                                    Text("Clear scan cache (this network)")
+                                        .frame(maxWidth: .infinity)
+                                }
+                                .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : .red)
                             }
-                            .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : .red)
                         }
                     }
-                }
 
-                Section(header: NeonSectionHeader(title: L10n.t("Fiat estimates"))) {
-                    NeonToggle(title: L10n.t("Show fiat estimates"), isOn: $fiatEstimatesEnabled)
-                        .onChange(of: fiatEstimatesEnabled) { _, newValue in
-                            MoneroConfig.setFiatEstimatesEnabled(newValue)
-                            fiatCurrency = MoneroConfig.fiatCurrency
-                            FiatPriceService.shared.settingsDidChange()
-                        }
-                    Text("Optional. When on, NexaWal fetches a public XMR price from Kraken (api.kraken.com) and, if needed, fiat FX from Frankfurter (api.frankfurter.dev). Those servers see your IP. Amounts and addresses are not sent. Fiat lookups use clearnet HTTPS and are separate from node / I2P proxy settings. Estimates only — XMR is what you send and hold.")
-                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    if fiatEstimatesEnabled {
-                        Picker("Currency", selection: $fiatCurrency) {
-                            ForEach(FiatEstimate.supportedCurrencies, id: \.self) { code in
-                                Text("\(code) — \(FiatEstimate.currencyNames[code] ?? code)").tag(code)
+                    settingsCard(title: L10n.t("Fiat estimates")) {
+                        NeonToggle(title: L10n.t("Show fiat estimates"), isOn: $fiatEstimatesEnabled)
+                            .onChange(of: fiatEstimatesEnabled) { _, newValue in
+                                MoneroConfig.setFiatEstimatesEnabled(newValue)
+                                fiatCurrency = MoneroConfig.fiatCurrency
+                                FiatPriceService.shared.settingsDidChange()
+                            }
+                        Text("Optional. When on, nexawal fetches a public XMR price from Kraken (api.kraken.com) and, if needed, fiat FX from Frankfurter (api.frankfurter.dev). Those servers see your IP. Amounts and addresses are not sent. Fiat lookups use clearnet HTTPS and are separate from node / I2P proxy settings. Estimates only — XMR is what you send and hold.")
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                        if fiatEstimatesEnabled {
+                            Picker("Currency", selection: $fiatCurrency) {
+                                ForEach(FiatEstimate.supportedCurrencies, id: \.self) { code in
+                                    Text("\(code) — \(FiatEstimate.currencyNames[code] ?? code)").tag(code)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .tint(classicPalette?.accent ?? .accentColor)
+                            .onChange(of: fiatCurrency) { _, newValue in
+                                MoneroConfig.setFiatCurrency(newValue)
+                                FiatPriceService.shared.settingsDidChange()
                             }
                         }
-                        .onChange(of: fiatCurrency) { _, newValue in
-                            MoneroConfig.setFiatCurrency(newValue)
-                            FiatPriceService.shared.settingsDidChange()
+                    }
+
+                    settingsCard(title: L10n.t("About")) {
+                        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+                        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+                        Text(L10n.format("nexawal %@ (%@)", version, build))
+                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
+
+                        Text(L10n.t("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact api.kraken.com and api.frankfurter.dev."))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+                        Button(L10n.t("Terms of Use")) { showLegalTerms = true }
+                            .foregroundStyle(classicPalette?.accent ?? .accentColor)
+                        Button(L10n.t("Privacy policy")) { showLegalPrivacy = true }
+                            .foregroundStyle(classicPalette?.accent ?? .accentColor)
+                        Button(L10n.t("MIT License")) { showLegalLicense = true }
+                            .foregroundStyle(classicPalette?.accent ?? .accentColor)
+
+                        Text(L10n.t("Source on GitHub"))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+                        Button {
+                            UIPasteboard.general.string = Self.sourceRepoURL
+                            flashStatus(L10n.t("Link copied"))
+                        } label: {
+                            Text(verbatim: Self.sourceRepoURL)
+                                .font(classicUI ? .system(.body, design: .monospaced) : .body)
+                                .underline()
+                                .foregroundStyle(classicPalette?.accent ?? Color(red: 0.102, green: 0.451, blue: 0.909))
+                                .multilineTextAlignment(.leading)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
+                        .buttonStyle(.borderless)
+                        .accessibilityLabel(Self.sourceRepoURL)
+                        .accessibilityHint(L10n.t("Copies the source link"))
                     }
                 }
-
-                Section(header: NeonSectionHeader(title: L10n.t("About"))) {
-                    let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
-                    let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
-                    Text(L10n.format("NexaWal %@ (%@)", version, build))
-                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                    Text("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact api.kraken.com and api.frankfurter.dev.")
-                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    Button(L10n.t("Terms of Use")) { showLegalTerms = true }
-                    Button(L10n.t("Privacy policy")) { showLegalPrivacy = true }
-                    Link(L10n.t("Source & license (MIT)"), destination: URL(string: "https://github.com/Nexatrode/nexawal/blob/main/LICENSE")!)
-                }
+                .padding()
             }
             .navigationBarTitleDisplayMode(.inline)
-            .neonFormChrome(classicUI: classicUI, palette: classicPalette)
+            .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
+            .scrollContentBackground(classicUI ? .hidden : .automatic)
             .tint(classicPalette?.accent ?? .accentColor)
             .sheet(isPresented: $showLegalTerms) {
                 LegalDocumentView(kind: .terms)
@@ -1007,6 +1018,11 @@ struct SettingsView: View {
             }
             .sheet(isPresented: $showLegalPrivacy) {
                 LegalDocumentView(kind: .privacy)
+                    .environment(\.classicUI, classicUI)
+                    .environment(\.classicPalette, classicPalette)
+            }
+            .sheet(isPresented: $showLegalLicense) {
+                LegalDocumentView(kind: .license)
                     .environment(\.classicUI, classicUI)
                     .environment(\.classicPalette, classicPalette)
             }
@@ -1034,6 +1050,57 @@ struct SettingsView: View {
                 biometricsAvailable = availability.available
                 biometricsEnrolled = availability.enrolled
             }
+        }
+    }
+
+    private var settingsCorner: CGFloat { classicUI ? 4 : 16 }
+    private var fieldCorner: CGFloat { classicUI ? 4 : 8 }
+
+    @ViewBuilder
+    private func settingsCard<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(classicUI ? title.uppercased() : title)
+                .font(classicUI ? .system(.caption, design: .monospaced).weight(.semibold) : .caption)
+                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+            VStack(alignment: .leading, spacing: 12) {
+                content()
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+            .overlay(
+                RoundedRectangle(cornerRadius: settingsCorner)
+                    .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
+            )
+            .cornerRadius(settingsCorner)
+        }
+    }
+
+    @ViewBuilder
+    private func outlinedField<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+        content()
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(classicPalette?.background ?? Color(.systemBackground))
+            .overlay(
+                RoundedRectangle(cornerRadius: fieldCorner)
+                    .stroke(classicPalette?.border ?? Color(.separator), lineWidth: 1)
+            )
+            .cornerRadius(fieldCorner)
+    }
+
+    @ViewBuilder
+    private func secondaryButton(_ title: String, action: @escaping () -> Void) -> some View {
+        if classicUI, let palette = classicPalette {
+            Button(title, action: action)
+                .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+        } else {
+            Button(action: action) {
+                Text(title)
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
         }
     }
 

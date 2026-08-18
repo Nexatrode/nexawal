@@ -19,18 +19,63 @@ struct nexawalApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if termsAccepted {
-                // Own the ViewModel here so wallet open/sync cannot start before terms are accepted.
-                AppRootView()
-            } else {
-                TermsAcceptanceView {
-                    termsAccepted = true
+            Group {
+                if termsAccepted {
+                    // Own the ViewModel here so wallet open/sync cannot start before terms are accepted.
+                    AppRootView()
+                } else {
+                    TermsAcceptanceView {
+                        termsAccepted = true
+                    }
+                    .classicTheme(enabled: MoneroConfig.technoThemeEnabled, colorScheme: colorScheme)
                 }
-                .classicTheme(enabled: MoneroConfig.technoThemeEnabled, colorScheme: colorScheme)
             }
+            #if targetEnvironment(macCatalyst)
+            .background(CatalystWindowConfigurator())
+            .onReceive(NotificationCenter.default.publisher(for: UIScene.didActivateNotification)) { _ in
+                CatalystWindow.applySizeRestrictions()
+            }
+            #endif
+        }
+        #if targetEnvironment(macCatalyst)
+        .defaultSize(width: CatalystWindow.defaultSize.width, height: CatalystWindow.defaultSize.height)
+        .windowResizability(.automatic)
+        #endif
+    }
+}
+
+#if targetEnvironment(macCatalyst)
+private enum CatalystWindow {
+    static let defaultSize = CGSize(width: 1100, height: 760)
+    static let minimumSize = CGSize(width: 800, height: 560)
+
+    static func applySizeRestrictions() {
+        for scene in UIApplication.shared.connectedScenes {
+            guard let windowScene = scene as? UIWindowScene else { continue }
+            windowScene.sizeRestrictions?.minimumSize = minimumSize
+            windowScene.sizeRestrictions?.maximumSize = CGSize(width: 10_000, height: 10_000)
+            windowScene.sizeRestrictions?.allowsFullScreen = true
         }
     }
 }
+
+/// Catalyst defaults to a fixed window (min == max). Full screen still works; drag/zoom do not.
+private struct CatalystWindowConfigurator: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: .zero)
+        view.isUserInteractionEnabled = false
+        view.backgroundColor = .clear
+        DispatchQueue.main.async {
+            CatalystWindow.applySizeRestrictions()
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        CatalystWindow.applySizeRestrictions()
+    }
+}
+#endif
 
 /// App shell after terms acceptance: wallet lifecycle, background snapshot, foreground catch-up.
 private struct AppRootView: View {

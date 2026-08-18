@@ -1,14 +1,14 @@
-# NexaWal Terms of Use
+# nexawal Terms of Use
 
 Last updated: 12 August 2026
 
-These Terms of Use (“Terms”) apply to the NexaWal mobile applications published by Nexatrode LLC (“Nexatrode,” “we,” “us”). By using NexaWal you agree to these Terms. If you do not agree, do not use the app.
+These Terms of Use (“Terms”) apply to the nexawal mobile applications published by Nexatrode LLC (“Nexatrode,” “we,” “us”). By using nexawal you agree to these Terms. If you do not agree, do not use the app.
 
 This text is bundled in the app for offline reading. A copy may also be published at https://nexatrode.com/terms.
 
 ## Self-custody
 
-NexaWal is a self-custodial interface for managing Monero and related digital assets. You hold exclusive responsibility for your private keys, spend/view material, and recovery seed (including any 25-word mnemonic). Nexatrode never receives your seed and cannot recover lost wallets or funds.
+nexawal is a self-custodial interface for managing Monero and related digital assets. You hold exclusive responsibility for your private keys, spend/view material, and recovery seed (including any 25-word mnemonic). Nexatrode never receives your seed and cannot recover lost wallets or funds.
 
 ## No warranties
 
@@ -16,7 +16,7 @@ The app is provided “as is,” with no warranties express or implied, includin
 
 ## Limitation of liability
 
-To the maximum extent permitted by law, Nexatrode LLC is not liable for lost assets, user error, device failure, malware, network or node outages, third-party services, forks, protocol changes, or any indirect, incidental, special, or consequential damages arising from use of NexaWal.
+To the maximum extent permitted by law, Nexatrode LLC is not liable for lost assets, user error, device failure, malware, network or node outages, third-party services, forks, protocol changes, or any indirect, incidental, special, or consequential damages arising from use of nexawal.
 
 ## Nodes and network
 
@@ -32,7 +32,7 @@ Application source is offered under the MIT License as published in the project 
 
 ## Unaudited software
 
-NexaWal has not been presented here as formally audited. Cryptocurrency software carries risk. You are responsible for backups, verification, and funds.
+nexawal has not been presented here as formally audited. Cryptocurrency software carries risk. You are responsible for backups, verification, and funds.
 
 ## Changes
 

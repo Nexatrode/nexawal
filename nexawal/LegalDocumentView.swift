@@ -3,23 +3,26 @@ import SwiftUI
 enum LegalDocumentKind {
     case terms
     case privacy
+    case license
 
     var resourceName: String {
         switch self {
         case .terms: return "terms"
         case .privacy: return "privacy"
+        case .license: return "license"
         }
     }
 
-    var titleKey: String {
+    var titleKey: String.LocalizationValue {
         switch self {
         case .terms: return "Terms of Use"
         case .privacy: return "Privacy policy"
+        case .license: return "MIT License"
         }
     }
 }
 
-/// Offline Markdown reader for bundled Terms / Privacy (nexawal/Legal/*.md).
+/// Offline Markdown reader for bundled Terms / Privacy / MIT License (nexawal/Legal/*.md).
 struct LegalDocumentView: View {
     let kind: LegalDocumentKind
     var onClose: (() -> Void)? = nil

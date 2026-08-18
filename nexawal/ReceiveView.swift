@@ -19,33 +19,39 @@ struct ReceiveView: View {
 
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
+    @Environment(\.colorScheme) private var colorScheme
 
     private let addressFont = Font.system(.caption, design: .monospaced)
 
+    private var qrQuietZoneBackground: Color {
+        if classicUI {
+            return classicPalette?.background ?? .black
+        }
+        return colorScheme == .dark ? Color(.secondarySystemBackground) : .white
+    }
+
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    heroSection
                     qrSection
-                    addressSection
+                    amountSection
                     actionSection
                     subaddressSection
-                    amountSection
                     if showCopyConfirmation {
                         copyConfirmation
                     }
                 }
                 .padding()
             }
-            .navigationTitle(classicUI ? L10n.t("Receive").uppercased() : L10n.t("Receive XMR"))
+            .navigationTitle(classicUI ? L10n.t("Receive XMR").uppercased() : L10n.t("Receive XMR"))
             .navigationBarTitleDisplayMode(.inline)
             .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
             .tint(classicPalette?.accent ?? .accentColor)
             .scrollContentBackground(classicUI ? .hidden : .automatic)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(classicUI ? L10n.t("Receive").uppercased() : L10n.t("Receive XMR"))
+                    Text(classicUI ? L10n.t("Receive XMR").uppercased() : L10n.t("Receive XMR"))
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                 }
@@ -81,18 +87,6 @@ struct ReceiveView: View {
         } message: {
             Text("A new receive address (subaddress) will be generated for privacy.")
         }
-    }
-
-    private var heroSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(classicUI ? L10n.t("Receive XMR").uppercased() : L10n.t("Receive Monero"))
-                .font(classicUI ? .system(.title2, design: .monospaced).weight(.bold) : .title2.weight(.bold))
-                .foregroundColor(classicPalette?.primaryText ?? .primary)
-            Text("Show the QR code, copy the address, or create a fresh receive address for better privacy.")
-                .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
-                .foregroundColor(classicPalette?.secondaryText ?? .secondary)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var subaddressSection: some View {
@@ -140,47 +134,21 @@ struct ReceiveView: View {
 
     private var qrSection: some View {
         VStack(spacing: 16) {
-            Text(L10n.neon("Scan to Pay", classicUI: classicUI))
-                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                .foregroundColor(classicPalette?.primaryText ?? .primary)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
             QRCodeView(message: moneroURI)
-                .frame(maxWidth: .infinity)
-                .aspectRatio(1, contentMode: .fit)
-                .background(classicUI ? (classicPalette?.background ?? .black) : Color.white)
+                .background(qrQuietZoneBackground)
                 .cornerRadius(classicUI ? 4 : 12)
                 .overlay(
                     RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
                         .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
                 )
-                .shadow(color: classicUI ? .clear : Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
+                .shadow(color: (classicUI || colorScheme == .dark) ? .clear : Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
                 .accessibilityLabel(L10n.t("Monero receive QR"))
 
             Text(moneroURI)
-                .font(.footnote)
-                .multilineTextAlignment(.center)
-                .foregroundColor(classicPalette?.secondaryText ?? .secondary)
-                .textSelection(.enabled)
-        }
-        .padding()
-        .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-        .overlay(
-            RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-        )
-        .cornerRadius(classicUI ? 4 : 16)
-    }
-
-    private var addressSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(L10n.neon("Address", classicUI: classicUI))
-                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                .foregroundColor(classicPalette?.primaryText ?? .primary)
-            Text(viewModel.currentReceiveAddress())
                 .font(addressFont)
+                .multilineTextAlignment(.leading)
                 .foregroundColor(classicPalette?.primaryText ?? .primary)
-                .padding()
+                .padding(12)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
                 .overlay(
@@ -190,13 +158,6 @@ struct ReceiveView: View {
                 .cornerRadius(classicUI ? 4 : 8)
                 .textSelection(.enabled)
         }
-        .padding()
-        .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-        .overlay(
-            RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-        )
-        .cornerRadius(classicUI ? 4 : 16)
     }
 
     private var amountSection: some View {
@@ -270,28 +231,9 @@ struct ReceiveView: View {
         .cornerRadius(classicUI ? 4 : 16)
     }
 
-    private var hasPaymentAmount: Bool {
-        sanitizedAmountString != nil
-    }
-
     private var actionSection: some View {
         VStack(spacing: 12) {
             if classicUI, let palette = classicPalette {
-                Button(action: copyAddress) {
-                    Label("Copy Address", systemImage: "doc.on.doc")
-                        .neonCTAStyle(classicUI: true, palette: palette)
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(L10n.t("Copy Address"))
-
-                if hasPaymentAmount {
-                    Button(action: copyPaymentURI) {
-                        Label("Copy Payment URI", systemImage: "link")
-                    }
-                    .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                    .accessibilityLabel(L10n.t("Copy Payment URI"))
-                }
-
                 if #available(iOS 16.0, *) {
                     ShareLink(item: moneroURI) {
                         Label("Share Payment Link", systemImage: "square.and.arrow.up")
@@ -308,23 +250,14 @@ struct ReceiveView: View {
                     .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
                     .accessibilityLabel(L10n.t("Share Payment Link"))
                 }
-            } else {
+
                 Button(action: copyAddress) {
                     Label("Copy Address", systemImage: "doc.on.doc")
-                        .frame(maxWidth: .infinity)
+                        .neonCTAStyle(classicUI: true, palette: palette)
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.plain)
                 .accessibilityLabel(L10n.t("Copy Address"))
-
-                if hasPaymentAmount {
-                    Button(action: copyPaymentURI) {
-                        Label("Copy Payment URI", systemImage: "link")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.bordered)
-                    .accessibilityLabel(L10n.t("Copy Payment URI"))
-                }
-
+            } else {
                 if #available(iOS 16.0, *) {
                     ShareLink(item: moneroURI) {
                         Label("Share Payment Link", systemImage: "square.and.arrow.up")
@@ -342,6 +275,13 @@ struct ReceiveView: View {
                     .buttonStyle(.bordered)
                     .accessibilityLabel(L10n.t("Share Payment Link"))
                 }
+
+                Button(action: copyAddress) {
+                    Label("Copy Address", systemImage: "doc.on.doc")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .accessibilityLabel(L10n.t("Copy Address"))
             }
         }
     }
@@ -396,13 +336,6 @@ struct ReceiveView: View {
         )
     }
 
-    private func copyPaymentURI() {
-        flashCopyConfirmation(
-            text: moneroURI,
-            message: L10n.t("Payment URI copied to clipboard")
-        )
-    }
-
     private func flashCopyConfirmation(text: String, message: String) {
         UIPasteboard.general.string = text
         copyConfirmationText = message
@@ -421,34 +354,44 @@ struct ReceiveView: View {
 
 private struct QRCodeView: View {
     let message: String
+    var maxSide: CGFloat = 320
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
+    @Environment(\.colorScheme) private var colorScheme
 
     private static let context = CIContext()
     private static let filter = CIFilter.qrCodeGenerator()
 
     var body: some View {
         GeometryReader { proxy in
-            if let image = generateQRCode(for: message, targetSize: proxy.size) {
-                Image(uiImage: image)
-                    .interpolation(.none)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: proxy.size.width, height: proxy.size.width)
-            } else {
-                Color.secondary
-                    .overlay(
-                        Image(systemName: "xmark.octagon")
-                            .font(.largeTitle)
-                            .foregroundColor(.white)
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            let side = min(min(proxy.size.width, proxy.size.height), maxSide)
+            Group {
+                if let image = generateQRCode(for: message, side: max(side, 1)) {
+                    Image(uiImage: image)
+                        .interpolation(.none)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: side, height: side)
+                } else {
+                    Color.secondary
+                        .overlay(
+                            Image(systemName: "xmark.octagon")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .frame(width: side, height: side)
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .aspectRatio(1, contentMode: .fit)
+        .frame(maxWidth: maxSide, maxHeight: maxSide)
+        .frame(maxWidth: .infinity)
         .frame(minHeight: 200)
     }
 
-    private func generateQRCode(for string: String, targetSize: CGSize) -> UIImage? {
+    private func generateQRCode(for string: String, side: CGFloat) -> UIImage? {
         guard !string.isEmpty else { return nil }
         let data = Data(string.utf8)
         QRCodeView.filter.setValue(data, forKey: "inputMessage")
@@ -458,9 +401,9 @@ private struct QRCodeView: View {
             return nil
         }
 
-        let scaleX = targetSize.width / outputImage.extent.size.width
-        let scaleY = targetSize.height / outputImage.extent.size.height
-        let scaledImage = outputImage.transformed(by: CGAffineTransform(scaleX: max(scaleX, 10), y: max(scaleY, 10)))
+        let extent = max(outputImage.extent.size.width, 1)
+        let scale = max(side / extent, 10)
+        let scaledImage = outputImage.transformed(by: CGAffineTransform(scaleX: scale, y: scale))
 
         let colored: CIImage
         if classicUI, let palette = classicPalette {
@@ -469,6 +412,13 @@ private struct QRCodeView: View {
             falseColor.inputImage = scaledImage
             falseColor.color0 = CIColor(color: UIColor(palette.accent)) // QR modules (was black)
             falseColor.color1 = CIColor(color: UIColor(palette.background)) // quiet zone (was white)
+            colored = falseColor.outputImage ?? scaledImage
+        } else if colorScheme == .dark {
+            // Regular dark mode: light modules on dark quiet zone (not a white tile).
+            let falseColor = CIFilter.falseColor()
+            falseColor.inputImage = scaledImage
+            falseColor.color0 = CIColor(color: .label)
+            falseColor.color1 = CIColor(color: .secondarySystemBackground)
             colored = falseColor.outputImage ?? scaledImage
         } else {
             colored = scaledImage

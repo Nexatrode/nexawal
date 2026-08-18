@@ -45,6 +45,8 @@ struct ContentView: View {
         Group {
             if viewModel.isWalletOpen {
                 MainTabView(viewModel: viewModel, selectedTab: $selectedTab)
+            } else if viewModel.isRestoringSession {
+                UnlockingWalletView()
             } else {
                 WalletCreationView(viewModel: viewModel)
             }
@@ -65,40 +67,153 @@ struct ContentView: View {
     }
 }
 
-/// Bottom tabs matching Android: Wallet → Receive → Send → Settings.
-/// Uses a custom tab bar so neon green icons aren't overridden by UITabBar (which stays white).
+/// Shown while Keychain / Face ID unlock runs so Create/Import does not flash.
+private struct UnlockingWalletView: View {
+    @Environment(\.classicUI) private var classicUI
+    @Environment(\.classicPalette) private var classicPalette
+
+    var body: some View {
+        ZStack {
+            (classicPalette?.background ?? Color(.systemBackground))
+                .ignoresSafeArea()
+            VStack(spacing: 16) {
+                if classicUI {
+                    Text("nexawal")
+                        .font(.system(.title2, design: .monospaced).weight(.bold))
+                        .foregroundStyle(classicPalette?.accent ?? .primary)
+                }
+                ProgressView()
+                    .tint(classicPalette?.accent ?? .accentColor)
+                Text(L10n.t("Unlocking…"))
+                    .font(classicUI ? .system(.body, design: .monospaced) : .body)
+                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(L10n.t("Unlocking…"))
+    }
+}
+
+/// Phone: bottom tabs. iPad / Mac Catalyst (regular × regular): sidebar + detail.
 struct MainTabView: View {
     @ObservedObject var viewModel: WalletViewModel
     @Binding var selectedTab: MainTab
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     private let tabs: [MainTab] = [.wallet, .receive, .send, .settings]
 
+    private var usesSplitNavigation: Bool {
+        horizontalSizeClass == .regular && verticalSizeClass == .regular
+    }
+
+    /// iOS/Catalyst `List(selection:)` requires an optional; keep the parent tab non-optional.
+    private var splitTabSelection: Binding<MainTab?> {
+        Binding(
+            get: { selectedTab },
+            set: { if let tab = $0 { selectedTab = tab } }
+        )
+    }
+
     var body: some View {
-        VStack(spacing: 0) {
-            Group {
-                switch selectedTab {
-                case .wallet:
-                    WalletView(viewModel: viewModel, selectedTab: $selectedTab)
-                case .receive:
-                    ReceiveView(viewModel: viewModel)
-                case .send:
-                    SendView(viewModel: viewModel)
-                case .settings:
-                    SettingsView(viewModel: viewModel)
+        Group {
+            if usesSplitNavigation {
+                NavigationSplitView(columnVisibility: .constant(.all)) {
+                    Group {
+                        if classicUI {
+                            technoSidebar
+                        } else {
+                            List(selection: splitTabSelection) {
+                                ForEach(tabs, id: \.self) { tab in
+                                    Label(tab.title, systemImage: tab.systemImage)
+                                        .tag(tab)
+                                }
+                            }
+                            .navigationTitle("nexawal")
+                        }
+                    }
+                    .toolbar(removing: .sidebarToggle)
+                } detail: {
+                    tabRoot
+                        .toolbar(removing: .sidebarToggle)
+                }
+                .navigationSplitViewStyle(.balanced)
+                .tint(classicPalette?.accent ?? .accentColor)
+            } else {
+                VStack(spacing: 0) {
+                    tabRoot
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    NeonTabBar(
+                        tabs: tabs,
+                        selectedTab: $selectedTab,
+                        classicUI: classicUI,
+                        palette: classicPalette
+                    )
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            NeonTabBar(
-                tabs: tabs,
-                selectedTab: $selectedTab,
-                classicUI: classicUI,
-                palette: classicPalette
-            )
         }
         .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
+    }
+
+    /// Match iOS/Android techno tab colors: neon green on black, no solid green/white selection pill.
+    private var technoSidebar: some View {
+        let palette = classicPalette ?? ClassicPalette.resolve(colorScheme: .dark)
+        return VStack(alignment: .leading, spacing: 0) {
+            Text("nexawal")
+                .font(.system(.title3, design: .monospaced).weight(.bold))
+                .foregroundStyle(palette.accent)
+                .padding(.horizontal, 16)
+                .padding(.top, 18)
+                .padding(.bottom, 12)
+
+            ForEach(tabs, id: \.self) { tab in
+                let selected = selectedTab == tab
+                Button {
+                    selectedTab = tab
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: tab.systemImage)
+                            .font(.system(size: 17, weight: selected ? .semibold : .regular))
+                            .frame(width: 22, alignment: .center)
+                        Text(tab.neonTitle)
+                            .font(.system(.body, design: .monospaced).weight(selected ? .semibold : .regular))
+                        Spacer(minLength: 0)
+                    }
+                    .foregroundStyle(selected ? palette.accent : palette.secondaryText)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 11)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(selected ? palette.panel : Color.clear)
+                    )
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal, 8)
+                .accessibilityLabel(tab.title)
+                .accessibilityAddTraits(selected ? .isSelected : [])
+            }
+
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .background(palette.background.ignoresSafeArea())
+    }
+
+    @ViewBuilder
+    private var tabRoot: some View {
+        switch selectedTab {
+        case .wallet:
+            WalletView(viewModel: viewModel, selectedTab: $selectedTab)
+        case .receive:
+            ReceiveView(viewModel: viewModel)
+        case .send:
+            SendView(viewModel: viewModel)
+        case .settings:
+            SettingsView(viewModel: viewModel)
+        }
     }
 }
 
