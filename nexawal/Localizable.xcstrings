@@ -115903,6 +115903,76 @@
           }
         }
       }
+    },
+    "Open the existing wallet from {}, or restore a different seed." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the existing wallet from {}, or restore a different seed."
+          }
+        }
+      }
+    },
+    "Click the seed box, paste with ⌘V, set restore height, then Open & sync." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click the seed box, paste with ⌘V, set restore height, then Open & sync."
+          }
+        }
+      }
+    },
+    "Locked. Open the existing wallet from {}, or restore a different seed." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locked. Open the existing wallet from {}, or restore a different seed."
+          }
+        }
+      }
+    },
+    "Use Open existing wallet to try again, or restore from seed." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Open existing wallet to try again, or restore from seed."
+          }
+        }
+      }
+    },
+    "Opening the wallet from secure storage." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opening the wallet from secure storage."
+          }
+        }
+      }
+    },
+    "Paste here only to restore a different wallet." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste here only to restore a different wallet."
+          }
+        }
+      }
+    },
+    "Click this box, then ⌘V or Edit → Paste. Open is a separate button." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click this box, then ⌘V or Edit → Paste. Open is a separate button."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
