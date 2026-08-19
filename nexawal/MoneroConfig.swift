@@ -39,11 +39,11 @@ struct MoneroConfig {
         case manual
     }
 
-    // Scan tuning (UI compatibility; wallet2 baseline leaves these unused)
+    // Scan tuning (UI compatibility; WalletCore defaults are range/75/75)
     nonisolated static let userDefaultsScanParKey = "walletcore_scan_par"
     nonisolated static let userDefaultsScanBatchKey = "walletcore_scan_batch"
     nonisolated static let defaultScanPar: Int = 0
-    nonisolated static let defaultScanBatch: Int = 200
+    nonisolated static let defaultScanBatch: Int = 75
 
     // Bulk toggle (UI compatibility; core defaults take precedence)
     nonisolated static let userDefaultsBulkBinFetchKey = "walletcore_bulk_bin_fetch"

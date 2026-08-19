@@ -41,7 +41,6 @@ actor WalletManager {
     private var currentWalletId: String?
     private var cachedBalance: (total: UInt64, unlocked: UInt64)?
     private var refreshInProgress: Bool = false
-    private var refreshPar: Int = 0
     private var refreshBatch: Int = 0
     private var currentNetworkMainnet: Bool = true
 
@@ -179,65 +178,36 @@ actor WalletManager {
             // This helps resumes after backgrounding, network loss, or app termination.
             exportCacheAndPersist(for: walletId)
 
-            do {
-                // Never treat cancel as a successful sync. Returning status here used to
-                // checkpoint a partial lastScanned height as trusted.
-                if refreshCancelRequested || (nodeError as? CancellationError) != nil {
-                    print("ℹ️ Refresh cancelled")
-                    cachedBalance = nil
-                    throw CancellationError()
-                }
-                print("⚠️ Refresh with nodeURL '\(nodeURL)' failed: \(nodeError.localizedDescription)")
-
-                let coreLastErr = WalletCoreFFIClient.lastErrorMessage() ?? ""
-                let combinedErr = ([nodeError.localizedDescription, coreLastErr])
-                    .filter { !$0.isEmpty }
-                    .joined(separator: "\n")
-                if !combinedErr.isEmpty {
-                    print("⚠️ Refresh error detail: \(combinedErr)")
-                }
-                // If core reports a parallel stall/channel error, auto-fallback to sequential scan on the same node first
-                if isParallelWorkerStall(nodeError.localizedDescription) {
-                    await MainActor.run {
-                        MoneroConfig.setScanParallelism(0)
-                        MoneroConfig.setScanBatchSize(150)
-                    }
-                    refreshPar = 0
-                    refreshBatch = 150
-                    applyBulkRangeBatchEnv(batch: refreshBatch)
-                    print("↩️ Parallel stall detected; falling back to sequential scan (par=0, batch=150) and retrying on same node...")
-                    let seqStatus = try await performRefresh(walletId: walletId, nodeURL: nodeURL)
-                    exportCacheAndPersist(for: walletId)
-                    cachedBalance = nil
-                    return seqStatus
-                }
-                print("⚠️ Attempting refresh retry with explicit nodeURL again (core requires non-nil node URL to enable bulk modes)...")
-                let fallbackStatus = try await performRefresh(walletId: walletId, nodeURL: nodeURL)
-                exportCacheAndPersist(for: walletId)
+            // Never treat cancel as a successful sync. Returning status here used to
+            // checkpoint a partial lastScanned height as trusted.
+            if refreshCancelRequested || (nodeError as? CancellationError) != nil {
+                print("ℹ️ Refresh cancelled")
                 cachedBalance = nil
-                print("✅ Refresh succeeded using wallet core default node")
-                return fallbackStatus
-            } catch let defaultError {
-                if defaultError is CancellationError || refreshCancelRequested {
-                    cachedBalance = nil
-                    throw CancellationError()
-                }
-                let detailedError = """
-                Failed to refresh wallet.
-
-                Attempted node: \(nodeURL)
-                Error with configured node: \(nodeError.localizedDescription)
-                Error with default node: \(defaultError.localizedDescription)
-
-                Possible issues:
-                - Node at \(nodeURL) is not reachable from this device
-                - Network connectivity issue
-                - Node is not running or not accepting connections
-                - Check Settings to verify node address is correct
-                - If using simulator, ensure it can reach the network
-                """
-                throw WalletError.refreshFailed(detailedError)
+                throw CancellationError()
             }
+            print("⚠️ Refresh with nodeURL '\(nodeURL)' failed: \(nodeError.localizedDescription)")
+
+            let coreLastErr = WalletCoreFFIClient.lastErrorMessage() ?? ""
+            let combinedErr = ([nodeError.localizedDescription, coreLastErr])
+                .filter { !$0.isEmpty }
+                .joined(separator: "\n")
+            if !combinedErr.isEmpty {
+                print("⚠️ Refresh error detail: \(combinedErr)")
+            }
+            let detailedError = """
+            Failed to refresh wallet.
+
+            Attempted node: \(nodeURL)
+            Error: \(nodeError.localizedDescription)
+
+            Possible issues:
+            - Node at \(nodeURL) is not reachable from this device
+            - Network connectivity issue
+            - Node is not running or not accepting connections
+            - Check Settings to verify node address is correct
+            - If using simulator, ensure it can reach the network
+            """
+            throw WalletError.refreshFailed(detailedError)
         }
     }
 
@@ -330,25 +300,16 @@ actor WalletManager {
         let persistBlockDelta: UInt64 = 1000
 
         // Periodically sample core error state even if progress is happening.
-        // Rationale: wallet2 `/getblocks.bin` decode failures can trigger an internal core fallback
-        // (so lastScanned continues advancing), which means a "no progress" gate can miss the error.
         var lastCoreErrSampleAt = Date.distantPast
         let coreErrSampleInterval: TimeInterval = 1.0
 
-
-        // Scale stall timeout based on scan tuning
-        let par = refreshPar
-        let batch = refreshBatch
-        // Base on user-provided stallTimeout, but expand for larger batches and parallelism
+        // Base the watchdog on the shared WalletCore default. The actual request sizing
+        // remains controlled by WalletCore defaults or an explicit environment override.
+        let batch = MoneroConfig.defaultScanBatch
         var dynamicStallTimeout = max(
             stallTimeout,
-            min(300.0, max(60.0, (par > 0 ? Double(batch) * 0.15 : Double(batch) * 0.25)))
+            min(300.0, max(60.0, Double(batch) * 0.25))
         )
-
-        // Track whether we've already fallen back to the safe sequential path once.
-        // If we stall again after that fallback, surface a distinct "stalled" error to the UI
-        // (Android parity) instead of retrying forever in silence.
-        var stallFallbackUsed = false
 
         // If the UI requested cancel, exit early.
         if refreshCancelRequested || Task.isCancelled {
@@ -368,29 +329,11 @@ actor WalletManager {
             }
 
             // Continuously sample core error state (throttled) even if progress continues.
-            // If we detect a deterministic wallet2 decode failure, record an iOS-side lockout so
-            // subsequent refreshes can switch WALLETCORE_BULK_MODE to `range`.
             let nowErr = Date()
             if nowErr.timeIntervalSince(lastCoreErrSampleAt) >= coreErrSampleInterval {
                 lastCoreErrSampleAt = nowErr
                 if let coreErr = WalletCoreFFIClient.lastErrorMessage(), !coreErr.isEmpty {
                     print("⚠️ Core error sample during refresh: \(coreErr)")
-                    if !stallFallbackUsed, Self.isRecoverableBulkFetchError(coreErr) {
-                        stallFallbackUsed = true
-                        print("↩️ Recoverable fetch error; falling back to sequential scan (par=0, batch=150) and retrying… err=\(coreErr)")
-                        exportCacheAndPersist(for: walletId)
-                        refreshPar = 0
-                        refreshBatch = 150
-                        await MoneroConfig.setScanParallelism(0)
-                        await MoneroConfig.setScanBatchSize(150)
-                        applyBulkRangeBatchEnv(batch: refreshBatch)
-                        let effectiveURL = MoneroConfig.scanNodeURL()
-                        try WalletCoreFFIClient.refreshWalletAsync(walletId: walletId, nodeURL: effectiveURL)
-                        lastProgressAt = Date()
-                        lastPersistAt = Date.distantPast
-                        dynamicStallTimeout = max(60.0, dynamicStallTimeout)
-                        continue
-                    }
                 }
             }
 
@@ -432,11 +375,10 @@ actor WalletManager {
             // Early abort if core reported an error and no progress for a short window
             if Date().timeIntervalSince(lastProgressAt) > 2.0 {
                 if let coreErr = WalletCoreFFIClient.lastErrorMessage(), !coreErr.isEmpty {
-                    // If this is a deterministic wallet2 `/getblocks.bin` decode failure, lock out wallet2 bulk
-                    // for this node so subsequent refreshes use `range` bulk mode instead of looping.
+                    // Range mode is the WalletCore default. Surface deterministic decode failures
+                    // rather than changing scan profiles during a refresh.
                     if MoneroConfig.isDeterministicWallet2DecodeFailure(coreErr) {
-                        // wallet2 bulk lockout disabled (hardwired fast-sync mode); log only
-                        print("🧯 Detected deterministic wallet2 decode failure (no lockout applied); consider manual fallback. err=\(coreErr)")
+                        print("🧯 Detected deterministic bulk decode failure; surfacing error. err=\(coreErr)")
                     }
 
                     // Best-effort persistence before surfacing failure
@@ -445,33 +387,14 @@ actor WalletManager {
                 }
             }
 
-            // Stall-based handling: on first stall, fallback to reliable sequential scan and continue.
-            // On a second stall after that fallback, surface a distinct "stalled" error (Android parity)
-            // so the UI can show "Sync stalled" instead of silently retrying forever.
+            // Surface stalls without silently changing the scan profile. The user can retry
+            // manually, or provide an explicit WalletCore environment override.
             if Date().timeIntervalSince(lastProgressAt) > dynamicStallTimeout {
-                if stallFallbackUsed {
-                    print("🛑 Stall persisted (>\(Int(dynamicStallTimeout))s) after sequential fallback. Surfacing stall error.")
-                    exportCacheAndPersist(for: walletId)
-                    throw WalletError.refreshFailed(
-                        "Sync stalled: no scan progress for over \(Int(dynamicStallTimeout))s (lastScanned=\(lastScannedSnapshot), target=\(targetHeight ?? 0))"
-                    )
-                }
-                stallFallbackUsed = true
-                print("↩️ Stall detected (>\(Int(dynamicStallTimeout))s). Falling back to sequential scan (par=0, batch=150) and retrying…")
-                refreshPar = 0
-                refreshBatch = 150
-                await MoneroConfig.setScanParallelism(0)
-                await MoneroConfig.setScanBatchSize(150)
-                applyBulkRangeBatchEnv(batch: refreshBatch)
-                // Restart background refresh with safer tuning
-                let effectiveURL = MoneroConfig.scanNodeURL()
-                print("🌐 Stall fallback restart using nodeURL=\(effectiveURL)")
-                try WalletCoreFFIClient.refreshWalletAsync(walletId: walletId, nodeURL: effectiveURL)
-                // Reset stall clock and give the sequential path time
-                lastProgressAt = Date()
-                lastPersistAt = Date.distantPast
-                dynamicStallTimeout = max(60.0, dynamicStallTimeout)
-                continue
+                print("🛑 Stall detected (>\(Int(dynamicStallTimeout))s); surfacing error without changing scan profile.")
+                exportCacheAndPersist(for: walletId)
+                throw WalletError.refreshFailed(
+                    "Sync stalled: no scan progress for over \(Int(dynamicStallTimeout))s (lastScanned=\(lastScannedSnapshot), target=\(targetHeight ?? 0))"
+                )
             }
 
             let interval = max(pollInterval, 0.05)
@@ -550,33 +473,6 @@ actor WalletManager {
         try clearScanCache()
         // Trigger a refresh; this will also export a fresh cache on success
         return try await refreshWallet()
-    }
-
-    /// Detect if an error message indicates a parallel worker stall/collector channel issue
-    private func isParallelWorkerStall(_ message: String) -> Bool {
-        let msg = message.lowercased()
-        return msg.contains("parallel worker stalled") || msg.contains("parallel worker channel closed unexpectedly")
-    }
-
-    /// Soft fetch failures (timeouts, 429, truncated bodies) that usually recover after shrinking the range batch.
-    private static func isRecoverableBulkFetchError(_ message: String) -> Bool {
-        let msg = message.lowercased()
-        return msg.contains("429")
-            || msg.contains("too many requests")
-            || msg.contains("rate limit")
-            || msg.contains("timeout")
-            || msg.contains("timed out")
-            || msg.contains("response body closed before all bytes were read")
-            || msg.contains("interface error")
-            || msg.contains("channelclosed")
-            || msg.contains("channel closed")
-            || msg.contains("connection reset")
-            || msg.contains("broken pipe")
-            || msg.contains("unexpected eof")
-            || msg.contains("http 4")
-            || msg.contains("http 5")
-            || msg.contains("status code 4")
-            || msg.contains("status code 5")
     }
 
     /// Import a previously exported core cache blob for this wallet, if present.
@@ -803,19 +699,15 @@ actor WalletManager {
         unsetenv("all_proxy")
     }
 
-    /// Apply scan tuning (parallelism and batch) via environment variables
+    /// Keep scan tuning in WalletCore. The shared core defaults are range/75/75;
+    /// explicit WalletCore environment variables remain available for diagnostics.
     private func applyScanTuning() {
-        // Match the Android fast-sync path: force range-based bulk fetch with large
-        // batches to amortize per-RPC latency while keeping native scan logs enabled on iOS.
-        refreshPar = 0
-        refreshBatch = 500
+        refreshBatch = MoneroConfig.defaultScanBatch
 
         unsetenv("WALLETCORE_SCAN_PAR")
         unsetenv("WALLETCORE_SCAN_BATCH")
-        unsetenv("WALLETCORE_BULK_FETCH")
         unsetenv("WALLETCORE_WALLET2_FAST_FALLBACK")
         unsetenv("WALLETCORE_BULK_BIN_DEBUG")
-        applyBulkRangeBatchEnv(batch: refreshBatch)
         #if DEBUG
         setenv("WALLETCORE_SCAN_LOG", "1", 1)
         #else
@@ -823,14 +715,7 @@ actor WalletManager {
         #endif
 
         let node = MoneroConfig.scanNodeURL()
-        print("🧪 scan tuning fast-sync: node=\(node) bulk_mode=range bulk_fetch_batch=\(refreshBatch) upstream_block_batch=\(refreshBatch)")
-    }
-
-    private func applyBulkRangeBatchEnv(batch: Int) {
-        setenv("WALLETCORE_BULK_MODE", "range", 1)
-        setenv("WALLETCORE_BULK_FETCH_BATCH", "\(batch)", 1)
-        setenv("WALLETCORE_UPSTREAM_BLOCK_BATCH", "\(batch)", 1)
-        print("🧪 scan tuning batch env: bulk_mode=range bulk_fetch_batch=\(batch) upstream_block_batch=\(batch)")
+        print("🧪 scan tuning: WalletCore defaults (range/75/75) node=\(node)")
     }
 
     // NOTE: Removed the reason-tagging wrapper to avoid recursive overload confusion.
