@@ -22952,6 +22952,28 @@
         }
       }
     },
+    "Click the seed box, paste with ⌘V, set restore height, then Open & sync." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click the seed box, paste with ⌘V, set restore height, then Open & sync."
+          }
+        }
+      }
+    },
+    "Click this box, then ⌘V or Edit → Paste. Open is a separate button." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click this box, then ⌘V or Edit → Paste. Open is a separate button."
+          }
+        }
+      }
+    },
     "Close" : {
       "localizations" : {
         "ar" : {
@@ -52503,6 +52525,17 @@
         }
       }
     },
+    "Locked. Open the existing wallet from {}, or restore a different seed." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locked. Open the existing wallet from {}, or restore a different seed."
+          }
+        }
+      }
+    },
     "Mainnet" : {
       "localizations" : {
         "ar" : {
@@ -65315,6 +65348,28 @@
         }
       }
     },
+    "Open the existing wallet from {}, or restore a different seed." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the existing wallet from {}, or restore a different seed."
+          }
+        }
+      }
+    },
+    "Opening the wallet from secure storage." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opening the wallet from secure storage."
+          }
+        }
+      }
+    },
     "Optional label" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -66297,6 +66352,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "粘貼 25 個詞的助記詞…"
+          }
+        }
+      }
+    },
+    "Paste here only to restore a different wallet." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste here only to restore a different wallet."
           }
         }
       }
@@ -109667,6 +109733,17 @@
         }
       }
     },
+    "Use Open existing wallet to try again, or restore from seed." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Open existing wallet to try again, or restore from seed."
+          }
+        }
+      }
+    },
     "Use Send and Receive for payments and new addresses." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -115900,76 +115977,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "您的恢復種子:"
-          }
-        }
-      }
-    },
-    "Open the existing wallet from {}, or restore a different seed." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open the existing wallet from {}, or restore a different seed."
-          }
-        }
-      }
-    },
-    "Click the seed box, paste with ⌘V, set restore height, then Open & sync." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Click the seed box, paste with ⌘V, set restore height, then Open & sync."
-          }
-        }
-      }
-    },
-    "Locked. Open the existing wallet from {}, or restore a different seed." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Locked. Open the existing wallet from {}, or restore a different seed."
-          }
-        }
-      }
-    },
-    "Use Open existing wallet to try again, or restore from seed." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use Open existing wallet to try again, or restore from seed."
-          }
-        }
-      }
-    },
-    "Opening the wallet from secure storage." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opening the wallet from secure storage."
-          }
-        }
-      }
-    },
-    "Paste here only to restore a different wallet." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paste here only to restore a different wallet."
-          }
-        }
-      }
-    },
-    "Click this box, then ⌘V or Edit → Paste. Open is a separate button." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Click this box, then ⌘V or Edit → Paste. Open is a separate button."
           }
         }
       }

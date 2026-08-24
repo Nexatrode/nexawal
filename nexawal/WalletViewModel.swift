@@ -530,7 +530,7 @@ class WalletViewModel: ObservableObject {
         guard isWalletOpen else { return }
         if isRefreshing || refreshTask != nil {
             cancelRefresh()
-            try? await Task.sleep(nanoseconds: 400_000_000)
+            await walletManager.cancelRefresh()
         }
         await refreshWallet()
     }
@@ -712,8 +712,9 @@ class WalletViewModel: ObservableObject {
             needsRefreshRetryOnNextActive = false
             cancelRefresh()
             Task { [weak self] in
-                try? await Task.sleep(nanoseconds: 750_000_000)
-                await self?.resumeInterruptedScanIfNeeded()
+                guard let self else { return }
+                await self.walletManager.cancelRefresh()
+                await self.resumeInterruptedScanIfNeeded()
             }
             return
         } else {
@@ -753,8 +754,8 @@ class WalletViewModel: ObservableObject {
         await refreshWallet()
     }
 
-    /// Cancel an in-flight refresh (stops waiting/polling and returns control to UI).
-    /// Note: the core may continue scanning in the background; this is a UI-level cancel.
+    /// Cancel an in-flight refresh. WalletManager keeps the task active until the native
+    /// scanner reaches a terminal state and its final checkpoint is safe to persist.
     /// Always leave scanInterrupted=true so we never treat a partial cache as a clean sync.
     func cancelRefresh(userInitiated: Bool = false) {
         guard isRefreshing else { return }
@@ -768,12 +769,9 @@ class WalletViewModel: ObservableObject {
         print("🛑 VM cancelRefresh() invoked (callsite=\(callsite) userInitiated=\(userInitiated)) isRefreshing=\(isRefreshing) hasTask=\(refreshTask != nil)")
 
         refreshTask?.cancel()
-        refreshTask = nil
 
         Task { await walletManager.cancelRefresh() }
         stopSyncStatusPolling(clearThroughput: true)
-        isRefreshing = false
-        endBriefBackgroundSync(reason: "cancelled")
     }
 
     /// Pull transfer history from the open walletcore instance into UI state.
@@ -843,7 +841,7 @@ class WalletViewModel: ObservableObject {
 
         if isRefreshing || refreshTask != nil {
             cancelRefresh()
-            try? await Task.sleep(nanoseconds: 400_000_000)
+            await walletManager.cancelRefresh()
         }
 
         isManualRescanInProgress = true

@@ -298,24 +298,12 @@ struct ReceiveView: View {
     }
 
     private var moneroURI: String {
-        var base = "monero:\(viewModel.currentReceiveAddress())"
-        var components: [String] = []
-
-        if let amountString = sanitizedAmountString {
-            components.append("tx_amount=\(amountString)")
-        }
-
         let descriptor = descriptionInput.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !descriptor.isEmpty {
-            let encoded = descriptor.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? descriptor
-            components.append("tx_description=\(encoded)")
-        }
-
-        if !components.isEmpty {
-            base += "?" + components.joined(separator: "&")
-        }
-
-        return base
+        return MoneroPaymentURI.build(
+            address: viewModel.currentReceiveAddress(),
+            amountXmr: sanitizedAmountString,
+            description: descriptor.isEmpty ? nil : descriptor
+        )
     }
 
     private var sanitizedAmountString: String? {

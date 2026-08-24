@@ -43,12 +43,11 @@ actor WalletManager {
     private var refreshInProgress: Bool = false
     private var refreshBatch: Int = 0
     private var currentNetworkMainnet: Bool = true
+    private var cachePersistenceSuppressed: Bool = false
 
-    // Explicit cancellation support for refresh.
-    // We can't cancel the Rust-side sync directly, but we can:
-    //  - cancel the waiter/poller task
-    //  - persist best-effort cache progress
-    //  - mark refresh as no longer in progress so UI can recover
+    // Explicit cancellation support for refresh. WalletCore exposes an authoritative per-wallet
+    // job state, so cancellation does not complete locally until the native worker is actually
+    // idle (or has reported a terminal failure).
     private var refreshWaitTask: Task<WalletCoreFFIClient.SyncStatus, Error>?
     private var refreshCancelRequested: Bool = false
     /// Serializes send/sweep so double-tap Confirm cannot broadcast twice.
@@ -114,6 +113,7 @@ actor WalletManager {
             )
             currentNetworkMainnet = mainnet
             currentWalletId = walletId
+            cachePersistenceSuppressed = false
             cachedBalance = nil // Clear cached balance
             if importCache {
                 importCacheIfPresent(for: walletId)
@@ -247,8 +247,43 @@ actor WalletManager {
     private func performRefresh(walletId: String, nodeURL: String?) async throws -> WalletCoreFFIClient.SyncStatus {
         let effectiveURL = nodeURL ?? MoneroConfig.scanNodeURL()
         print("🌐 performRefresh(walletId=\(walletId)) using nodeURL=\(effectiveURL)")
+
+        // A previous UI task may have been cancelled before its native worker observed the cancel
+        // flag. Join that worker instead of racing wallet_refresh_async and receiving -31.
+        if try WalletCoreFFIClient.refreshJobStatus(walletId: walletId).state == .running {
+            print("⏳ Waiting for previous native refresh worker to stop walletId=\(walletId)")
+            _ = try await waitForNativeRefreshTerminal(using: walletId)
+        }
         try WalletCoreFFIClient.refreshWalletAsync(walletId: walletId, nodeURL: effectiveURL)
         return try await waitForRefreshCompletion(using: walletId)
+    }
+
+    @discardableResult
+    private func waitForNativeRefreshTerminal(
+        using walletId: String,
+        timeout: TimeInterval = 20,
+        pollInterval: TimeInterval = 0.05
+    ) async throws -> WalletCoreFFIClient.RefreshJobStatus {
+        let deadline = Date().addingTimeInterval(timeout)
+        while true {
+            let job = try WalletCoreFFIClient.refreshJobStatus(walletId: walletId)
+            switch job.state {
+            case .idle:
+                return job
+            case .failed:
+                return job
+            case .running:
+                break
+            }
+            guard Date() < deadline else {
+                throw WalletError.refreshFailed(
+                    "Timed out waiting for the native refresh worker to stop"
+                )
+            }
+            try await Task.sleep(
+                nanoseconds: UInt64(max(0.01, pollInterval) * 1_000_000_000)
+            )
+        }
     }
 
     /// Request cancellation of the in-flight refresh.
@@ -257,8 +292,14 @@ actor WalletManager {
     /// - ask the Rust core to cancel the active refresh loop (best-effort)
     /// - cancel the Swift wait/poll task
     /// - persist best-effort cache progress so a later refresh resumes faster
-    func cancelRefresh() {
-        guard refreshInProgress else { return }
+    func cancelRefresh() async {
+        let nativeRunning: Bool
+        if let walletId = currentWalletId {
+            nativeRunning = (try? WalletCoreFFIClient.refreshJobStatus(walletId: walletId))?.state == .running
+        } else {
+            nativeRunning = false
+        }
+        guard refreshInProgress || nativeRunning else { return }
         refreshCancelRequested = true
 
         // Ask the core to cancel the active refresh loop (best-effort).
@@ -273,10 +314,22 @@ actor WalletManager {
             print("⚠️ Core refresh cancel request failed: \(error.localizedDescription)")
         }
 
-        // Cancel the Swift wait/poll task so UI returns control immediately.
-        refreshWaitTask?.cancel()
-
+        // Let the Swift waiter observe refreshCancelRequested itself. Cancelling that task here
+        // would make its sleeps throw before it could join the native worker.
+        var nativeSettled = true
         if let walletId = currentWalletId {
+            do {
+                let terminal = try await waitForNativeRefreshTerminal(using: walletId)
+                if terminal.state == .failed, let error = terminal.error {
+                    print("ℹ️ Native refresh ended while cancelling: \(error)")
+                }
+            } catch {
+                nativeSettled = false
+                print("⚠️ Native refresh cancellation did not settle cleanly: \(error.localizedDescription)")
+            }
+        }
+
+        if nativeSettled, let walletId = currentWalletId {
             exportCacheAndPersist(for: walletId)
             print("🗂️ Cache export reason: cancel walletId=\(walletId)")
         }
@@ -299,26 +352,30 @@ actor WalletManager {
         let persistInterval: TimeInterval = 120.0
         let persistBlockDelta: UInt64 = 1000
 
-        // Periodically sample core error state even if progress is happening.
-        var lastCoreErrSampleAt = Date.distantPast
-        let coreErrSampleInterval: TimeInterval = 1.0
-
         // Base the watchdog on the shared WalletCore default. The actual request sizing
         // remains controlled by WalletCore defaults or an explicit environment override.
         let batch = MoneroConfig.defaultScanBatch
-        var dynamicStallTimeout = max(
+        let dynamicStallTimeout = max(
             stallTimeout,
             min(300.0, max(60.0, Double(batch) * 0.25))
         )
 
         // If the UI requested cancel, exit early.
         if refreshCancelRequested || Task.isCancelled {
+            _ = try await waitForNativeRefreshTerminal(using: walletId)
             exportCacheAndPersist(for: walletId)
             print("🗂️ Cache export reason: cancel walletId=\(walletId)")
             throw CancellationError()
         }
 
         while true {
+            let refreshJob = try WalletCoreFFIClient.refreshJobStatus(walletId: walletId)
+            if refreshJob.state == .failed {
+                exportCacheAndPersist(for: walletId)
+                throw WalletError.refreshFailed(
+                    refreshJob.error ?? "Native refresh failed without an error message"
+                )
+            }
             let status = try WalletCoreFFIClient.syncStatus(walletId: walletId)
 
             // Capture the initial target chain height once (so we don't chase a moving tip).
@@ -326,15 +383,6 @@ actor WalletManager {
             if targetHeight == nil, status.chainHeight > status.restoreHeight {
                 targetHeight = status.chainHeight
                 print("🧭 Refresh target height set to \(targetHeight!) (restoreHeight=\(status.restoreHeight))")
-            }
-
-            // Continuously sample core error state (throttled) even if progress continues.
-            let nowErr = Date()
-            if nowErr.timeIntervalSince(lastCoreErrSampleAt) >= coreErrSampleInterval {
-                lastCoreErrSampleAt = nowErr
-                if let coreErr = WalletCoreFFIClient.lastErrorMessage(), !coreErr.isEmpty {
-                    print("⚠️ Core error sample during refresh: \(coreErr)")
-                }
             }
 
             // Track progress and detect stalls
@@ -366,25 +414,22 @@ actor WalletManager {
                 // IMPORTANT:
                 // Do NOT return early "within tolerance" here. That can skip the last few blocks
                 // of the fixed target window and miss incoming transfers (exactly what we observed).
-                if effectiveTarget > 0, status.lastScanned >= effectiveTarget {
+                if effectiveTarget > 0,
+                   status.lastScanned >= effectiveTarget,
+                   refreshJob.state == .idle {
                     print("✅ Refresh reached target height \(effectiveTarget) (lastScanned=\(status.lastScanned))")
                     return status
                 }
             }
 
-            // Early abort if core reported an error and no progress for a short window
-            if Date().timeIntervalSince(lastProgressAt) > 2.0 {
-                if let coreErr = WalletCoreFFIClient.lastErrorMessage(), !coreErr.isEmpty {
-                    // Range mode is the WalletCore default. Surface deterministic decode failures
-                    // rather than changing scan profiles during a refresh.
-                    if MoneroConfig.isDeterministicWallet2DecodeFailure(coreErr) {
-                        print("🧯 Detected deterministic bulk decode failure; surfacing error. err=\(coreErr)")
-                    }
-
-                    // Best-effort persistence before surfacing failure
-                    exportCacheAndPersist(for: walletId)
-                    throw WalletError.refreshFailed("Core error: \(coreErr)")
-                }
+            if refreshJob.state == .idle,
+               let target = targetHeight,
+               status.lastScanned < max(target, status.restoreHeight) {
+                exportCacheAndPersist(for: walletId)
+                throw WalletError.refreshFailed(
+                    "Native refresh stopped before reaching its target " +
+                    "(lastScanned=\(status.lastScanned), target=\(target))"
+                )
             }
 
             // Surface stalls without silently changing the scan profile. The user can retry
@@ -401,6 +446,7 @@ actor WalletManager {
             let nanoseconds = UInt64(interval * 1_000_000_000)
             try await Task.sleep(nanoseconds: nanoseconds)
             if refreshCancelRequested || Task.isCancelled {
+                _ = try await waitForNativeRefreshTerminal(using: walletId)
                 exportCacheAndPersist(for: walletId)
                 print("🗂️ Cache export reason: cancel walletId=\(walletId)")
                 throw CancellationError()
@@ -470,7 +516,8 @@ actor WalletManager {
         // Reset core state to the requested height
         try WalletCoreFFIClient.forceRescanFromHeight(walletId: walletId, fromHeight: height)
         // Clear persisted cache so we don't restore old state on next launch
-        try clearScanCache()
+        deletePersistedScanCache(walletId: walletId)
+        cachePersistenceSuppressed = false
         // Trigger a refresh; this will also export a fresh cache on success
         return try await refreshWallet()
     }
@@ -484,7 +531,7 @@ actor WalletManager {
             do {
                 let fileURL = cacheFileURL(for: walletId)
                 try ensureCacheDirectory()
-                try legacyBlob.write(to: fileURL, options: .atomic)
+                try WalletCacheFileIO.writeAtomically(legacyBlob, to: fileURL)
                 try excludeFromBackup(url: fileURL)
                 UserDefaults.standard.removeObject(forKey: legacyKey)
                 print("🗂️ Migrated legacy cache to file (\(legacyBlob.count) bytes) at \(fileURL.lastPathComponent)")
@@ -501,33 +548,56 @@ actor WalletManager {
                 try WalletCoreFFIClient.importCache(walletId: walletId, cacheBlob: data)
                 print("🗂️ Imported wallet cache (\(data.count) bytes) for \(walletId) from file")
             } catch {
-                // If the core rejects the cache as incompatible, delete it and force a clean rebuild.
-                // This prevents "key_image_mismatch quarantine spiral" after internal derivation changes.
                 let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? ""
+                let reason = [error.localizedDescription, coreMsg]
+                    .filter { !$0.isEmpty }
+                    .joined(separator: " | ")
+                let quarantined = quarantineRejectedCache(
+                    at: fileURL,
+                    walletId: walletId,
+                    reason: reason
+                )
                 if coreMsg.lowercased().contains("incompatible cache version") {
-                    print("🧹 Cache incompatible for \(walletId); deleting cache file and resetting tracked outputs. core_err=\(coreMsg)")
-                    do {
-                        try clearScanCache()
-                    } catch {
-                        print("⚠️ Failed to clear incompatible cache file for \(walletId): \(error.localizedDescription)")
-                    }
                     // Best-effort: reset in-memory tracked outputs/quarantine in the core as well.
                     // (If the function isn't available in this build, ignore; refresh will rebuild anyway.)
                     try? WalletCoreFFIClient.resetTrackedOutputs(walletId: walletId)
-                    return
                 }
-                print("⚠️ Cache import (file) rejected for \(walletId): \(error.localizedDescription) core_err=\(coreMsg)")
+                print("⚠️ Cache import rejected for \(walletId); quarantined=\(quarantined?.lastPathComponent ?? "none") reason=\(reason)")
+                return
             }
         } catch {
             // File may not exist on first run; ignore not found, log others
             if (error as NSError).domain != NSCocoaErrorDomain || (error as NSError).code != NSFileReadNoSuchFileError {
-                print("⚠️ Cache import (file) failed for \(walletId): \(error.localizedDescription)")
+                let quarantined = quarantineRejectedCache(
+                    at: fileURL,
+                    walletId: walletId,
+                    reason: "read failed: \(error.localizedDescription)"
+                )
+                print("⚠️ Cache read failed for \(walletId); quarantined=\(quarantined?.lastPathComponent ?? "none") error=\(error.localizedDescription)")
             }
+        }
+    }
+
+    @discardableResult
+    private func quarantineRejectedCache(at fileURL: URL, walletId: String, reason: String) -> URL? {
+        do {
+            let quarantined = try WalletCacheFileIO.quarantineRejectedFile(at: fileURL)
+            if let quarantined {
+                print("🧹 Cache quarantined walletId=\(walletId) reason=\(reason) movedTo=\(quarantined.lastPathComponent)")
+            }
+            return quarantined
+        } catch {
+            print("⚠️ Cache quarantine failed walletId=\(walletId) reason=\(reason) error=\(error.localizedDescription)")
+            return nil
         }
     }
 
     /// Export the core cache blob and persist it to Application Support for fast resume across launches.
     private func exportCacheAndPersist(for walletId: String) {
+        guard !cachePersistenceSuppressed else {
+            print("🗂️ Cache export suppressed after explicit clear walletId=\(walletId)")
+            return
+        }
         do {
             guard let data = try WalletCoreFFIClient.exportCache(walletId: walletId) else {
                 print("🗂️ Exported wallet cache is empty for \(walletId)")
@@ -535,7 +605,7 @@ actor WalletManager {
             }
             try ensureCacheDirectory()
             let fileURL = cacheFileURL(for: walletId)
-            try data.write(to: fileURL, options: .atomic)
+            try WalletCacheFileIO.writeAtomically(data, to: fileURL)
             try excludeFromBackup(url: fileURL)
             print("🗂️ Exported wallet cache (\(data.count) bytes) to \(fileURL.lastPathComponent) for \(walletId)")
         } catch {
@@ -745,11 +815,13 @@ actor WalletManager {
 
     // Clear on-disk scan cache for current wallet (per network).
     // Removes per-network cache file and any legacy cache stored in UserDefaults.
-    func clearScanCache() throws {
+    func clearScanCache() async throws {
         guard let walletId = currentWalletId else {
             throw WalletError.refreshFailed("No wallet is currently open")
         }
+        await cancelRefresh()
         deletePersistedScanCache(walletId: walletId)
+        cachePersistenceSuppressed = true
         let fileURL = cacheFileURL(for: walletId)
         if !FileManager.default.fileExists(atPath: fileURL.path) {
             print("🗂️ No cache file to clear for \(walletId)")

@@ -13,6 +13,9 @@ struct SendView: View {
     @State private var toAddress: String = ""
     @State private var amountXMR: String = ""
     @State private var amountInputMode: AmountInputMode = .xmr
+    @State private var paymentDescription: String = ""
+    @State private var paymentRecipientName: String = ""
+    @State private var suppressDestinationChange: Bool = false
 
     // State
     @State private var isEstimating: Bool = false
@@ -82,6 +85,7 @@ struct SendView: View {
 
                     toAddressField
                     amountField
+                    paymentUriDetails
 
                     if let info = infoMessage {
                         Text(info)
@@ -150,11 +154,24 @@ struct SendView: View {
                 isMaxMode = false
             }
         }
-        .onChange(of: toAddress) { _, _ in
+        .onChange(of: toAddress) { _, newValue in
+            if suppressDestinationChange {
+                suppressDestinationChange = false
+                return
+            }
+
+            if let parsed = MoneroPaymentURI.parse(newValue),
+               MoneroPaymentURI.hasCompleteAddressShape(parsed.address) {
+                applyPaymentUri(parsed, successMessage: nil)
+                return
+            }
+
+            paymentDescription = ""
+            paymentRecipientName = ""
+            estimatedFeePiconero = nil
+            previewReady = false
             if isMaxMode {
                 isMaxMode = false
-                estimatedFeePiconero = nil
-                previewReady = false
             }
         }
         .onChange(of: sendFromSubaddressEnabled) {
@@ -278,6 +295,39 @@ struct SendView: View {
     }
 
     @ViewBuilder
+    private var paymentUriDetails: some View {
+        if !paymentRecipientName.isEmpty || !paymentDescription.isEmpty {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(L10n.t("Payment URI"))
+                    .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
+
+                if !paymentRecipientName.isEmpty {
+                    LabeledContent(L10n.t("Recipient"), value: paymentRecipientName)
+                }
+                if !paymentDescription.isEmpty {
+                    LabeledContent {
+                        Text(paymentDescription)
+                            .multilineTextAlignment(.trailing)
+                            .textSelection(.enabled)
+                    } label: {
+                        Text(L10n.t("Description"))
+                    }
+                }
+            }
+            .font(.subheadline)
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+            .overlay(
+                RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
+                    .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
+            )
+            .cornerRadius(classicUI ? 4 : 16)
+        }
+    }
+
+    @ViewBuilder
     private func confirmSection(fee: UInt64) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(classicUI ? L10n.t("Confirm").uppercased() : L10n.t("Confirm"))
@@ -384,7 +434,7 @@ struct SendView: View {
                     Text(isEstimating && !isMaxMode ? "Estimating..." : "Preview Fee")
                 }
                 .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                .disabled(isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
+                .disabled(viewModel.isRefreshing || isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
 
                 Button {
                     showSendConfirmation = true
@@ -401,7 +451,7 @@ struct SendView: View {
                     Text(isEstimating ? L10n.t("Estimating...") : L10n.t("Preview Send Max"))
                 }
                 .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                .disabled(isEstimating || isSending || !looksLikeAddress(toAddress))
+                .disabled(viewModel.isRefreshing || isEstimating || isSending || !looksLikeAddress(toAddress))
 
                 Button {
                     showSendConfirmation = true
@@ -420,7 +470,7 @@ struct SendView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.bordered)
-                .disabled(isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
+                .disabled(viewModel.isRefreshing || isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
 
                 Button {
                     showSendConfirmation = true
@@ -440,7 +490,7 @@ struct SendView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.bordered)
-                .disabled(isEstimating || isSending || !looksLikeAddress(toAddress))
+                .disabled(viewModel.isRefreshing || isEstimating || isSending || !looksLikeAddress(toAddress))
 
                 Button {
                     showSendConfirmation = true
@@ -458,6 +508,10 @@ struct SendView: View {
     // MARK: - Actions
 
     private func estimateFee() async {
+        guard !viewModel.isRefreshing else {
+            errorMessage = L10n.t("Wait for wallet sync to finish before preparing a send.")
+            return
+        }
         let walletId = await walletManager.getCurrentWalletId() ?? "(none)"
         print("🧭 UI action: estimateFee tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR=\(amountXMR) toAddress_prefix=\(String(toAddress.prefix(12)))")
 
@@ -534,6 +588,10 @@ struct SendView: View {
     }
 
     private func performSend() async {
+        guard !viewModel.isRefreshing else {
+            errorMessage = L10n.t("Wait for wallet sync to finish before sending.")
+            return
+        }
         let walletId = await walletManager.getCurrentWalletId() ?? "(none)"
         print("🧭 UI action: performSend tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR=\(amountXMR) previewReady=\(previewReady) feePiconero=\(estimatedFeePiconero.map(String.init) ?? "(nil)") toAddress_prefix=\(String(toAddress.prefix(12)))")
 
@@ -659,7 +717,7 @@ struct SendView: View {
     }
 
     private func canSend() -> Bool {
-        guard !isSending, !isEstimating else { return false }
+        guard !viewModel.isRefreshing, !isSending, !isEstimating else { return false }
         guard parsedAmountPiconero() != nil, parsedRingLen() != nil else { return false }
         guard looksLikeAddress(toAddress) else { return false }
         guard previewReady, estimatedFeePiconero != nil else { return false }
@@ -675,14 +733,7 @@ struct SendView: View {
     }
 
     private func looksLikeAddress(_ addr: String) -> Bool {
-        // Basic heuristic: Monero addresses commonly start with '4' or '8' (stagenet/testnet), or '5' for integrated; I2P address not expected here.
-        // Keep it lenient in UI; the core will strictly validate on send.
-        let s = addr.trimmingCharacters(in: .whitespacesAndNewlines)
-        if s.isEmpty { return false }
-        let first = s.first
-        if first == "4" || first == "8" || first == "5" { return true }
-        // If not typical but non-empty, let core validate
-        return true
+        MoneroPaymentURI.hasCompleteAddressShape(addr)
     }
 
     private func policyText() -> String {
@@ -704,6 +755,8 @@ struct SendView: View {
         if trimmed.lowercased().hasPrefix("monero:") {
             parseMoneroUri(trimmed)
         } else if looksLikeAddress(trimmed) {
+            paymentDescription = ""
+            paymentRecipientName = ""
             toAddress = trimmed
             infoMessage = L10n.t("Address loaded from QR code.")
         } else {
@@ -721,19 +774,33 @@ struct SendView: View {
             errorMessage = L10n.t("Invalid payment URI format.")
             return
         }
-        guard looksLikeAddress(parsed.address) else {
+        guard MoneroPaymentURI.hasCompleteAddressShape(parsed.address) else {
             errorMessage = L10n.t("No valid address in payment URI.")
             return
         }
 
-        toAddress = parsed.address
+        applyPaymentUri(parsed, successMessage: L10n.t("Payment details loaded from QR code."))
+    }
+
+    private func applyPaymentUri(_ parsed: MoneroPaymentURI, successMessage: String?) {
+        if toAddress != parsed.address {
+            suppressDestinationChange = true
+            toAddress = parsed.address
+        } else {
+            suppressDestinationChange = false
+        }
         if let amount = parsed.amountXmr, let pico = XmrAmount.parsePiconero(amount) {
             suppressAmountChangeClearingMaxMode = true
             setAmountFieldToXmrPiconero(pico)
         }
+        paymentDescription = parsed.txDescription ?? ""
+        paymentRecipientName = parsed.recipientName ?? ""
 
         isMaxMode = false
-        infoMessage = L10n.t("Payment details loaded from QR code.")
+        estimatedFeePiconero = nil
+        previewReady = false
+        errorMessage = nil
+        infoMessage = successMessage
     }
 
     private func confirmationMessage() -> String {
@@ -777,6 +844,10 @@ struct SendView: View {
 
     /// Preview maximum spendable amount, then keep sweep mode until Confirm runs `sweep()`.
     private func sendMax() async {
+        guard !viewModel.isRefreshing else {
+            errorMessage = L10n.t("Wait for wallet sync to finish before preparing a send.")
+            return
+        }
         let walletId = await walletManager.getCurrentWalletId() ?? "(none)"
         print("🧭 UI action: sendMax tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR_before=\(amountXMR) toAddress_prefix=\(String(toAddress.prefix(12)))")
 
