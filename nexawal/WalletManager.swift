@@ -16,6 +16,7 @@ enum WalletError: LocalizedError {
     case balanceFailed(String)
     case statusFailed(String)
     case addressDerivationFailed(String)
+    case pendingSendRecoveryFailed(String)
 
     var errorDescription: String? {
         switch self {
@@ -31,6 +32,8 @@ enum WalletError: LocalizedError {
             return "Failed to get sync status: \(message)"
         case .addressDerivationFailed(let message):
             return "Failed to derive address: \(message)"
+        case .pendingSendRecoveryFailed(let message):
+            return message
         }
     }
 }
@@ -194,19 +197,30 @@ actor WalletManager {
             if !combinedErr.isEmpty {
                 print("⚠️ Refresh error detail: \(combinedErr)")
             }
-            let detailedError = """
-            Failed to refresh wallet.
+            let errorDetail = combinedErr.isEmpty ? nodeError.localizedDescription : combinedErr
+            let detailedError: String
+            if SyncErrorPolicy.classify(message: errorDetail) == .nodeUnreachable {
+                detailedError = """
+                Failed to refresh wallet.
 
-            Attempted node: \(nodeURL)
-            Error: \(nodeError.localizedDescription)
+                Attempted node: \(nodeURL)
+                Error: \(errorDetail)
 
-            Possible issues:
-            - Node at \(nodeURL) is not reachable from this device
-            - Network connectivity issue
-            - Node is not running or not accepting connections
-            - Check Settings to verify node address is correct
-            - If using simulator, ensure it can reach the network
-            """
+                Possible issues:
+                - Node at \(nodeURL) is not reachable from this device
+                - Network connectivity issue
+                - Node is not running or not accepting connections
+                - Check Settings to verify node address is correct
+                - If using simulator, ensure it can reach the network
+                """
+            } else {
+                detailedError = """
+                Failed to refresh wallet.
+
+                Attempted node: \(nodeURL)
+                Error: \(errorDetail)
+                """
+            }
             throw WalletError.refreshFailed(detailedError)
         }
     }
@@ -662,15 +676,18 @@ actor WalletManager {
         print("🗂️ Cleared prepared send file \(fileURL.lastPathComponent)")
     }
 
-    private func loadPendingPrepared(for walletId: String) -> PendingPreparedEnvelope? {
+    private func loadPendingPrepared(for walletId: String) throws -> PendingPreparedEnvelope? {
         let fileURL = preparedFileURL(for: walletId)
-        guard FileManager.default.fileExists(atPath: fileURL.path) else { return nil }
         do {
-            let data = try Data(contentsOf: fileURL)
-            return try JSONDecoder().decode(PendingPreparedEnvelope.self, from: data)
+            return try WalletCacheFileIO.loadJSONIfPresent(
+                PendingPreparedEnvelope.self,
+                from: fileURL
+            )
         } catch {
             print("⚠️ Failed to decode prepared send file: \(error.localizedDescription)")
-            return nil
+            throw WalletError.pendingSendRecoveryFailed(
+                "Pending send recovery data exists but cannot be read. New sends are blocked until it is recovered or removed: \(error.localizedDescription)"
+            )
         }
     }
 
@@ -684,7 +701,7 @@ actor WalletManager {
     /// Callers must not construct a second transaction in the same user action.
     @discardableResult
     private func completePendingPreparedSend(for walletId: String, preferredNodeURL: String) throws -> RecoveredPreparedSend? {
-        guard let pending = loadPendingPrepared(for: walletId) else { return nil }
+        guard let pending = try loadPendingPrepared(for: walletId) else { return nil }
         applyBroadcastProxy()
         let endpoint = pending.nodeURL.isEmpty ? preferredNodeURL : pending.nodeURL
         print("↩️ Recovering pending prepared send txid=\(pending.prepared.txid) via \(endpoint)")

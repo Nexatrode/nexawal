@@ -164,16 +164,18 @@ struct WalletView: View {
         }
     }
 
-    private func isStallError(_ error: String) -> Bool {
-        // Prefer the typed flag set by WalletViewModel from WalletManager's stall throw.
-        // Narrow string fallback only for the explicit "Sync stalled:" payload.
-        viewModel.syncStalled || error.lowercased().contains("sync stalled")
+    private func syncErrorKind(_ error: String) -> SyncErrorKind {
+        SyncErrorPolicy.classify(message: error, stalled: viewModel.syncStalled)
     }
 
     private func syncHeadline() -> String {
         let key: String.LocalizationValue
         if let error = viewModel.errorMessage, !error.isEmpty, !viewModel.isRefreshing {
-            key = isStallError(error) ? "Sync stalled" : "Node unreachable"
+            switch syncErrorKind(error) {
+            case .stalled: key = "Sync stalled"
+            case .nodeUnreachable: key = "Node unreachable"
+            case .failed: key = "Sync failed"
+            }
         } else if viewModel.isSynced {
             key = "Wallet synced"
         } else if !viewModel.hasObservedNetworkTipForUI {
@@ -188,7 +190,7 @@ struct WalletView: View {
 
     private func syncDetail() -> String {
         if let error = viewModel.errorMessage, !error.isEmpty, !viewModel.isRefreshing {
-            if isStallError(error) {
+            if syncErrorKind(error) == .stalled {
                 return L10n.t("Tap Refresh Wallet to continue (or reopen the app).")
             }
             let trimmed = error.trimmingCharacters(in: .whitespacesAndNewlines)

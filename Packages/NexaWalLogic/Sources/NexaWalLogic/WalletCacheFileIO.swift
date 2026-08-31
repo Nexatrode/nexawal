@@ -2,6 +2,17 @@ import Foundation
 
 /// Crash-safe cache replacement and recoverable quarantine shared by iOS and Catalyst.
 public enum WalletCacheFileIO {
+    /// Returns `nil` only when the file is absent. Existing but unreadable or malformed
+    /// JSON is surfaced to the caller so safety-critical recovery state cannot vanish.
+    public static func loadJSONIfPresent<T: Decodable>(
+        _ type: T.Type,
+        from target: URL,
+        decoder: JSONDecoder = JSONDecoder()
+    ) throws -> T? {
+        guard FileManager.default.fileExists(atPath: target.path) else { return nil }
+        return try decoder.decode(type, from: Data(contentsOf: target))
+    }
+
     public static func writeAtomically(_ data: Data, to target: URL) throws {
         try FileManager.default.createDirectory(
             at: target.deletingLastPathComponent(),

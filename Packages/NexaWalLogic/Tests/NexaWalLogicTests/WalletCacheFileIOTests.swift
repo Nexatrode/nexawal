@@ -3,6 +3,29 @@ import XCTest
 @testable import NexaWalLogic
 
 final class WalletCacheFileIOTests: XCTestCase {
+    private struct Journal: Codable, Equatable {
+        let signed: Bool
+    }
+
+    func testJSONLoadDistinguishesMissingValidAndMalformedFiles() throws {
+        try withTemporaryDirectory { directory in
+            let journal = directory.appendingPathComponent("pending.json")
+            let missing = try WalletCacheFileIO.loadJSONIfPresent(Journal.self, from: journal)
+            XCTAssertNil(missing)
+
+            try Data(#"{"signed":true}"#.utf8).write(to: journal)
+            XCTAssertEqual(
+                try WalletCacheFileIO.loadJSONIfPresent(Journal.self, from: journal),
+                Journal(signed: true)
+            )
+
+            try Data("not json".utf8).write(to: journal)
+            XCTAssertThrowsError(
+                try WalletCacheFileIO.loadJSONIfPresent(Journal.self, from: journal)
+            )
+        }
+    }
+
     func testAtomicReplacementPublishesTheCompleteNewCache() throws {
         try withTemporaryDirectory { directory in
             let cache = directory.appendingPathComponent("main_wallet.cache")
