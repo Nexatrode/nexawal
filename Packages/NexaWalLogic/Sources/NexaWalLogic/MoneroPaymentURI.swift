@@ -34,6 +34,7 @@ public struct MoneroPaymentURI: Equatable, Sendable {
         guard !address.isEmpty else { return nil }
 
         var amountXmr: String?
+        var amountPiconero: UInt64?
         var txDescription: String?
         var recipientName: String?
         if let queryString, !queryString.isEmpty {
@@ -47,10 +48,11 @@ public struct MoneroPaymentURI: Equatable, Sendable {
                 }
                 if (name == "amount" || name == "tx_amount"), !rawValue.isEmpty {
                     let decoded = decode(rawValue, plusAsSpace: false)
-                    guard isValidAmount(decoded) else { return nil }
-                    if let existing = amountXmr {
-                        if existing != decoded { return nil }
+                    guard let pico = parseAmountPiconero(decoded) else { return nil }
+                    if let existing = amountPiconero {
+                        if existing != pico { return nil }
                     } else {
+                        amountPiconero = pico
                         amountXmr = decoded
                     }
                 } else if (name == "tx_description" || name == "message"),
@@ -79,24 +81,28 @@ public struct MoneroPaymentURI: Equatable, Sendable {
             && (address.first == "4" || address.first == "8")
     }
 
-    /// Plain decimal XMR only; rejects signs, scientific notation, and junk.
-    public static func isValidAmount(_ value: String) -> Bool {
+    /// Plain decimal XMR → piconero; max 12 fractional digits, checked UInt64 range.
+    public static func parseAmountPiconero(_ value: String) -> UInt64? {
         let s = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !s.isEmpty, !s.hasPrefix("+"), !s.hasPrefix("-") else { return false }
-        var seenDot = false
-        var digits = 0
-        for (i, ch) in s.enumerated() {
-            switch ch {
-            case "0"..."9":
-                digits += 1
-            case "." where !seenDot:
-                if i == 0 { return false }
-                seenDot = true
-            default:
-                return false
-            }
+        guard !s.isEmpty, !s.hasPrefix("+"), !s.hasPrefix("-") else { return nil }
+        let parts = s.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false)
+        let wholeS = String(parts[0])
+        let fracS = parts.count > 1 ? String(parts[1]) : ""
+        guard !wholeS.isEmpty, wholeS.allSatisfy(\.isNumber) else { return nil }
+        guard fracS.count <= 12, fracS.allSatisfy(\.isNumber) else { return nil }
+        guard let whole = UInt64(wholeS) else { return nil }
+        var frac: UInt64 = fracS.isEmpty ? 0 : (UInt64(fracS) ?? 0)
+        if !fracS.isEmpty, UInt64(fracS) == nil { return nil }
+        for _ in fracS.count..<12 {
+            let (next, overflow) = frac.multipliedReportingOverflow(by: 10)
+            if overflow { return nil }
+            frac = next
         }
-        return digits > 0
+        let (wholePico, overflowMul) = whole.multipliedReportingOverflow(by: 1_000_000_000_000)
+        if overflowMul { return nil }
+        let (total, overflowAdd) = wholePico.addingReportingOverflow(frac)
+        if overflowAdd { return nil }
+        return total
     }
 
     public static func build(

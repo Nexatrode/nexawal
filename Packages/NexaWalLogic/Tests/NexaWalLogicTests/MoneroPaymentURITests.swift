@@ -41,6 +41,20 @@ final class MoneroPaymentURITests: XCTestCase {
         XCTAssertEqual(parsed?.amountXmr, "1.5")
     }
 
+    func testEquivalentAmountAliasesNormalize() {
+        let parsed = MoneroPaymentURI.parse("monero:\(primary)?amount=1.5&tx_amount=1.500")
+        XCTAssertEqual(parsed?.amountXmr, "1.5")
+        XCTAssertEqual(
+            MoneroPaymentURI.parseAmountPiconero("1.5"),
+            MoneroPaymentURI.parseAmountPiconero("1.500")
+        )
+    }
+
+    func testMoreThanTwelveFractionalDigitsRejected() {
+        XCTAssertNil(MoneroPaymentURI.parseAmountPiconero("1.1234567890123"))
+        XCTAssertNil(MoneroPaymentURI.parse("monero:\(primary)?tx_amount=1.1234567890123"))
+    }
+
     func testSpendAndViewKeysIgnoredAsSendTargets() {
         let uri =
             "monero:\(primary)?spend_key=deadbeefdeadbeef&view_key=cafebabecafebabe&tx_amount=1.0"

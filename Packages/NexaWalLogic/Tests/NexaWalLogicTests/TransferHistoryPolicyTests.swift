@@ -46,9 +46,9 @@ final class TransferHistoryPolicyTests: XCTestCase {
         )
     }
 
-    func testAllowsAuthoritativeEmptyWhenCaughtUpWhileRefreshing() {
-        // End-of-refresh still has isRefreshing=true until defer runs.
-        XCTAssertTrue(
+    func testPreservesNonemptyWhenCaughtUpButStillRefreshing() {
+        // Cursor at tip while refresh is still marked active is not a clean checkpoint.
+        XCTAssertFalse(
             TransferHistoryPolicy.shouldReplaceTransfers(
                 existingCount: 2,
                 newCount: 0,
