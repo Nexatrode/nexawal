@@ -8,7 +8,10 @@ final class TransferHistoryPolicyTests: XCTestCase {
                 existingCount: 3,
                 newCount: 1,
                 refreshing: true,
-                caughtUpToTip: false
+                caughtUpToTip: false,
+                scanInterrupted: true,
+                lastScannedHeight: 10,
+                trustedScannedHeight: 0
             )
         )
     }
@@ -19,7 +22,10 @@ final class TransferHistoryPolicyTests: XCTestCase {
                 existingCount: 0,
                 newCount: 0,
                 refreshing: true,
-                caughtUpToTip: false
+                caughtUpToTip: false,
+                scanInterrupted: true,
+                lastScannedHeight: 10,
+                trustedScannedHeight: 0
             )
         )
     }
@@ -30,7 +36,10 @@ final class TransferHistoryPolicyTests: XCTestCase {
                 existingCount: 2,
                 newCount: 0,
                 refreshing: true,
-                caughtUpToTip: false
+                caughtUpToTip: false,
+                scanInterrupted: false,
+                lastScannedHeight: 100,
+                trustedScannedHeight: 100
             )
         )
     }
@@ -41,30 +50,69 @@ final class TransferHistoryPolicyTests: XCTestCase {
                 existingCount: 2,
                 newCount: 0,
                 refreshing: false,
-                caughtUpToTip: false
+                caughtUpToTip: false,
+                scanInterrupted: false,
+                lastScannedHeight: 90,
+                trustedScannedHeight: 90
             )
         )
     }
 
     func testPreservesNonemptyWhenCaughtUpButStillRefreshing() {
-        // Cursor at tip while refresh is still marked active is not a clean checkpoint.
         XCTAssertFalse(
             TransferHistoryPolicy.shouldReplaceTransfers(
                 existingCount: 2,
                 newCount: 0,
                 refreshing: true,
-                caughtUpToTip: true
+                caughtUpToTip: true,
+                scanInterrupted: false,
+                lastScannedHeight: 100,
+                trustedScannedHeight: 100
             )
         )
     }
 
-    func testAllowsAuthoritativeEmptyWhenCaughtUpAndIdle() {
+    func testPreservesNonemptyWhenIdleAtTipButScanInterrupted() {
+        // Interrupted cache can be idle and appear at tip without a clean checkpoint.
+        XCTAssertFalse(
+            TransferHistoryPolicy.shouldReplaceTransfers(
+                existingCount: 2,
+                newCount: 0,
+                refreshing: false,
+                caughtUpToTip: true,
+                scanInterrupted: true,
+                lastScannedHeight: 100,
+                trustedScannedHeight: 100
+            )
+        )
+    }
+
+    func testPreservesNonemptyWhenTrustedHeightLagsPastTolerance() {
+        XCTAssertFalse(
+            TransferHistoryPolicy.shouldReplaceTransfers(
+                existingCount: 2,
+                newCount: 0,
+                refreshing: false,
+                caughtUpToTip: true,
+                scanInterrupted: false,
+                lastScannedHeight: 100,
+                trustedScannedHeight: 90,
+                tipTolerance: 3
+            )
+        )
+    }
+
+    func testAllowsAuthoritativeEmptyAfterCleanCheckpoint() {
         XCTAssertTrue(
             TransferHistoryPolicy.shouldReplaceTransfers(
                 existingCount: 2,
                 newCount: 0,
                 refreshing: false,
-                caughtUpToTip: true
+                caughtUpToTip: true,
+                scanInterrupted: false,
+                lastScannedHeight: 100,
+                trustedScannedHeight: 98,
+                tipTolerance: 3
             )
         )
     }

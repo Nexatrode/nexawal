@@ -815,14 +815,18 @@ class WalletViewModel: ObservableObject {
 
     /// Apply a successful transfer list, preserving nonempty UI history during incomplete sync.
     private func applyTransfersIfAllowed(_ rows: [WalletCoreFFIClient.Transfer], context: String) {
+        let trusted = MoneroConfig.trustedScannedHeight
         let shouldReplace = TransferHistoryPolicy.shouldReplaceTransfers(
             existingCount: transfers.count,
             newCount: rows.count,
             refreshing: isRefreshing,
-            caughtUpToTip: isCaughtUpToTip
+            caughtUpToTip: isCaughtUpToTip,
+            scanInterrupted: MoneroConfig.scanInterrupted,
+            lastScannedHeight: lastScannedHeight,
+            trustedScannedHeight: trusted
         )
         guard shouldReplace else {
-            print("🧭 preserving nonempty transfer history (context=\(context) existing=\(transfers.count) new=\(rows.count) refreshing=\(isRefreshing) caughtUp=\(isCaughtUpToTip))")
+            print("🧭 preserving nonempty transfer history (context=\(context) existing=\(transfers.count) new=\(rows.count) refreshing=\(isRefreshing) caughtUp=\(isCaughtUpToTip) interrupted=\(MoneroConfig.scanInterrupted) lastScanned=\(lastScannedHeight) trusted=\(trusted))")
             return
         }
         transfers = rows
