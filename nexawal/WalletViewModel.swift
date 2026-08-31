@@ -4,6 +4,7 @@ import UIKit
 import MoneroWalletCoreFFI
 import Combine
 import CryptoKit
+import NexaWalLogic
 
 // Receive subaddresses (account 0)
 typealias ReceiveSubaddressEntry = StoredSubaddressEntry
@@ -29,6 +30,8 @@ class WalletViewModel: ObservableObject {
     @Published var isWalletOpen: Bool = false
     /// True while launch / unlock is probing Keychain (Face ID). Avoids flashing Create/Import.
     @Published var isRestoringSession: Bool
+    /// True when a stored wallet exists and unlock was cancelled/failed — prefer Unlock over Create/Import.
+    @Published var needsUnlock: Bool = false
     @Published var errorMessage: String?
     /// True when the most recent refresh failure was a sync stall (no scan progress for an
     /// extended period, even after falling back to a safer sequential scan) rather than a
@@ -217,6 +220,11 @@ class WalletViewModel: ObservableObject {
     func unlockStoredWallet() async {
         isRestoringSession = true
         await loadStoredWalletOnLaunch()
+    }
+
+    /// Leave the unlock-only surface so the user can explicitly Create / Import (or replace).
+    func preferWalletSetup() {
+        needsUnlock = false
     }
 
     func authenticateForSensitiveAction(prompt: String) async throws {
@@ -483,6 +491,7 @@ class WalletViewModel: ObservableObject {
             totalBalance = 0
             unlockedBalance = 0
             isWalletOpen = true
+            needsUnlock = false
 
             // Record the active wallet fingerprint for replacement detection/telemetry (non-destructive).
             lastOpenedMnemonicFingerprint = Self.mnemonicFingerprint(normalizedMnemonic)
@@ -784,10 +793,7 @@ class WalletViewModel: ObservableObject {
             print("🧾 transfers_json context=\(context) wallet_id=\(walletId) bytes=\(json.utf8.count) prefix=\(prefix)")
 
             let rows = try WalletCoreFFIClient.listTransfers(walletId: walletId)
-            transfers = rows
-            if !rows.isEmpty {
-                didRewindEmptyHistory = false
-            }
+            applyTransfersIfAllowed(rows, context: context)
             FiatPriceService.shared.recordSeenTransfers(rows.map { seenTransfer($0) })
 
             var inCount = 0
@@ -804,6 +810,24 @@ class WalletViewModel: ObservableObject {
             print("🧾 transfers_summary context=\(context) wallet_id=\(walletId) rows=\(rows.count) in=\(inCount) out=\(outCount) self=\(selfCount)")
         } catch {
             print("⚠️ transfers_refresh_failed context=\(context) wallet_id=\(walletId) error=\(error.localizedDescription)")
+        }
+    }
+
+    /// Apply a successful transfer list, preserving nonempty UI history during incomplete sync.
+    private func applyTransfersIfAllowed(_ rows: [WalletCoreFFIClient.Transfer], context: String) {
+        let shouldReplace = TransferHistoryPolicy.shouldReplaceTransfers(
+            existingCount: transfers.count,
+            newCount: rows.count,
+            refreshing: isRefreshing,
+            caughtUpToTip: isCaughtUpToTip
+        )
+        guard shouldReplace else {
+            print("🧭 preserving nonempty transfer history (context=\(context) existing=\(transfers.count) new=\(rows.count) refreshing=\(isRefreshing) caughtUp=\(isCaughtUpToTip))")
+            return
+        }
+        transfers = rows
+        if !rows.isEmpty {
+            didRewindEmptyHistory = false
         }
     }
 
@@ -1076,7 +1100,7 @@ class WalletViewModel: ObservableObject {
                         }
                         if let rows {
                             await MainActor.run {
-                                self.transfers = rows
+                                self.applyTransfersIfAllowed(rows, context: "poll")
                                 self.lastTransfersPollAt = Date()
                                 FiatPriceService.shared.recordSeenTransfers(rows.map { self.seenTransfer($0) })
                             }
@@ -1195,6 +1219,7 @@ class WalletViewModel: ObservableObject {
         defer { isRestoringSession = false }
         do {
             guard let metadata = try await storage.loadMetadata() else {
+                needsUnlock = false
                 return
             }
 
@@ -1242,6 +1267,7 @@ class WalletViewModel: ObservableObject {
             }
 
             isWalletOpen = true
+            needsUnlock = false
             startForegroundCatchUp()
 
             if let balance = try? await walletManager.getBalance() {
@@ -1266,12 +1292,15 @@ class WalletViewModel: ObservableObject {
             switch storageError {
             case .cancelled:
                 errorMessage = nil
+                needsUnlock = true
             default:
                 errorMessage = storageError.localizedDescription
+                needsUnlock = true
             }
         } catch {
             print("⚠️ Failed to load stored wallet: \(error)")
             errorMessage = error.localizedDescription
+            needsUnlock = true
         }
 
         isLoading = false

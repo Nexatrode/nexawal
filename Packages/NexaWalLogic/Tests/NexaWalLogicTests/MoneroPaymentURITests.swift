@@ -27,9 +27,18 @@ final class MoneroPaymentURITests: XCTestCase {
         XCTAssertEqual(parsed?.txDescription, "two drinks & tip")
     }
 
-    func testPlusIsNotRewrittenInAmount() {
-        let parsed = MoneroPaymentURI.parse("monero:\(primary)?tx_amount=%2B1.5")
-        XCTAssertEqual(parsed?.amountXmr, "+1.5")
+    func testPlusAmountIsRejected() {
+        XCTAssertNil(MoneroPaymentURI.parse("monero:\(primary)?tx_amount=%2B1.5"))
+        XCTAssertNil(MoneroPaymentURI.parse("monero:\(primary)?tx_amount=+1.5"))
+    }
+
+    func testConflictingAmountsAreRejected() {
+        XCTAssertNil(MoneroPaymentURI.parse("monero:\(primary)?amount=1.5&tx_amount=2.0"))
+    }
+
+    func testIdenticalAmountDuplicatesAreAccepted() {
+        let parsed = MoneroPaymentURI.parse("monero:\(primary)?amount=1.5&tx_amount=1.5")
+        XCTAssertEqual(parsed?.amountXmr, "1.5")
     }
 
     func testSpendAndViewKeysIgnoredAsSendTargets() {

@@ -47,6 +47,8 @@ struct ContentView: View {
                 MainTabView(viewModel: viewModel, selectedTab: $selectedTab)
             } else if viewModel.isRestoringSession {
                 UnlockingWalletView()
+            } else if viewModel.needsUnlock {
+                UnlockExistingWalletView(viewModel: viewModel)
             } else {
                 WalletCreationView(viewModel: viewModel)
             }
@@ -91,6 +93,73 @@ private struct UnlockingWalletView: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(L10n.t("Unlocking…"))
+    }
+}
+
+/// Unlock-only surface after Face ID cancel (or unlock failure) when a stored wallet exists.
+private struct UnlockExistingWalletView: View {
+    @ObservedObject var viewModel: WalletViewModel
+    @Environment(\.classicUI) private var classicUI
+    @Environment(\.classicPalette) private var classicPalette
+
+    var body: some View {
+        ZStack {
+            (classicPalette?.background ?? Color(.systemBackground))
+                .ignoresSafeArea()
+            VStack(spacing: 20) {
+                if classicUI {
+                    Text("nexawal")
+                        .font(.system(.title2, design: .monospaced).weight(.bold))
+                        .foregroundStyle(classicPalette?.accent ?? .primary)
+                } else {
+                    Text("nexawal")
+                        .font(.title2.weight(.bold))
+                }
+
+                Text(L10n.t("Unlock Existing Wallet"))
+                    .font(classicUI ? .system(.body, design: .monospaced) : .body)
+                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    .multilineTextAlignment(.center)
+
+                if let error = viewModel.errorMessage {
+                    Text(error)
+                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                        .foregroundStyle(classicPalette?.danger ?? .red)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                }
+
+                Button {
+                    Task { await viewModel.unlockStoredWallet() }
+                } label: {
+                    HStack(spacing: 10) {
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .tint(classicUI ? (classicPalette?.background ?? .black) : .white)
+                        }
+                        Text(viewModel.isLoading ? L10n.t("Unlocking Wallet...") : L10n.t("Unlock Existing Wallet"))
+                            .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body.weight(.semibold))
+                    }
+                    .frame(maxWidth: 320)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 16)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(classicPalette?.accent ?? .accentColor)
+                .disabled(viewModel.isLoading)
+
+                Button {
+                    viewModel.preferWalletSetup()
+                } label: {
+                    Text(L10n.t("Create or Import instead"))
+                        .font(classicUI ? .system(.footnote, design: .monospaced) : .footnote)
+                }
+                .disabled(viewModel.isLoading)
+                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+            }
+            .padding()
+        }
+        .accessibilityElement(children: .contain)
     }
 }
 

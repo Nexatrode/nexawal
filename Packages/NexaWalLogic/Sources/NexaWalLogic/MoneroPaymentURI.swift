@@ -45,8 +45,14 @@ public struct MoneroPaymentURI: Equatable, Sendable {
                 if name == "spend_key" || name == "view_key" || name == "spendkey" || name == "viewkey" {
                     continue
                 }
-                if (name == "amount" || name == "tx_amount"), !rawValue.isEmpty, amountXmr == nil {
-                    amountXmr = decode(rawValue, plusAsSpace: false)
+                if (name == "amount" || name == "tx_amount"), !rawValue.isEmpty {
+                    let decoded = decode(rawValue, plusAsSpace: false)
+                    guard isValidAmount(decoded) else { return nil }
+                    if let existing = amountXmr {
+                        if existing != decoded { return nil }
+                    } else {
+                        amountXmr = decoded
+                    }
                 } else if (name == "tx_description" || name == "message"),
                           !rawValue.isEmpty,
                           txDescription == nil {
@@ -71,6 +77,26 @@ public struct MoneroPaymentURI: Equatable, Sendable {
         let address = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         return (address.count == 95 || address.count == 106)
             && (address.first == "4" || address.first == "8")
+    }
+
+    /// Plain decimal XMR only; rejects signs, scientific notation, and junk.
+    public static func isValidAmount(_ value: String) -> Bool {
+        let s = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !s.isEmpty, !s.hasPrefix("+"), !s.hasPrefix("-") else { return false }
+        var seenDot = false
+        var digits = 0
+        for (i, ch) in s.enumerated() {
+            switch ch {
+            case "0"..."9":
+                digits += 1
+            case "." where !seenDot:
+                if i == 0 { return false }
+                seenDot = true
+            default:
+                return false
+            }
+        }
+        return digits > 0
     }
 
     public static func build(
