@@ -13,6 +13,6 @@ jobs:
       run:
         working-directory: Packages/NexaWalLogic
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run NexaWalLogic tests
         run: swift test
