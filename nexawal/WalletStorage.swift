@@ -472,7 +472,7 @@ actor WalletStorage {
                 throw WalletStorageError.keychain(errSecParam)
             }
             #if DEBUG
-            print("🔐 Saving mnemonic with user-presence protection (biometrics/passcode)")
+            WalletDiagnostics.log("🔐 Saving mnemonic with user-presence protection (biometrics/passcode)")
             #endif
             desiredAttributes = [
                 kSecAttrAccessControl as String: accessControl,
@@ -480,7 +480,7 @@ actor WalletStorage {
             ]
         } else {
             #if DEBUG
-            print("🔐 Saving mnemonic without biometrics using accessibility \(String(describing: kSecAttrAccessibleWhenUnlockedThisDeviceOnly))")
+            WalletDiagnostics.log("🔐 Saving mnemonic without biometrics using accessibility \(String(describing: kSecAttrAccessibleWhenUnlockedThisDeviceOnly))")
             #endif
             desiredAttributes = [
                 kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
@@ -501,7 +501,7 @@ actor WalletStorage {
         }
 
         guard status == errSecSuccess else {
-            print("🔐 Keychain save failed with status \(status) requireBiometrics=\(requireBiometrics)")
+            WalletDiagnostics.log("🔐 Keychain save failed with status \(status) requireBiometrics=\(requireBiometrics)")
             throw WalletStorageError.keychain(status)
         }
         #endif

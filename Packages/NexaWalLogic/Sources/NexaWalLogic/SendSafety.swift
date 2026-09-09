@@ -2,6 +2,25 @@ import Foundation
 
 /// Pure send preflight / retry classification helpers.
 public enum SendSafety: Sendable {
+    public enum FeeApprovalError: LocalizedError, Equatable {
+        case feeIncreased
+
+        public var errorDescription: String? {
+            "The network fee increased. Nothing was broadcast. Preview the fee and confirm again."
+        }
+    }
+
+    /// The action includes BOTH durable pending-send persistence and relay. An unapproved
+    /// signed transaction must never become recoverable on the next launch.
+    public static func withApprovedFee<T>(
+        preparedFee: UInt64,
+        approvedMaxFee: UInt64,
+        action: () throws -> T
+    ) throws -> T {
+        guard preparedFee <= approvedMaxFee else { throw FeeApprovalError.feeIncreased }
+        return try action()
+    }
+
     /// Overflow-safe check that amount + fee fits in unlocked balance.
     public static func hasUnlockedForExactSend(
         amountPiconero: UInt64,

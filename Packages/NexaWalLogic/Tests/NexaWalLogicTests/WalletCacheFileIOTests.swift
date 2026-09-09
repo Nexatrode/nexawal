@@ -3,6 +3,16 @@ import XCTest
 @testable import NexaWalLogic
 
 final class WalletCacheFileIOTests: XCTestCase {
+    func testBoundedReadsAcceptExactLimitAndRejectOversize() throws {
+        try withTemporaryDirectory { directory in
+            let file = directory.appendingPathComponent("bounded.cache")
+            try Data([1, 2, 3, 4]).write(to: file)
+            XCTAssertEqual(try WalletCacheFileIO.readBounded(from: file, limit: 4).count, 4)
+            XCTAssertThrowsError(try WalletCacheFileIO.readBounded(from: file, limit: 3))
+            XCTAssertThrowsError(try WalletCacheFileIO.readBounded(from: directory, limit: 4))
+        }
+    }
+
     private struct Journal: Codable, Equatable {
         let signed: Bool
     }

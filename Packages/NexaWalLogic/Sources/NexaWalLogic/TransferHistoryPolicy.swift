@@ -5,6 +5,8 @@ import Foundation
 /// Successful empty lists must not wipe nonempty history mid-sync. Authoritative empty is
 /// allowed only after a clean same-wallet scan checkpoint: refresh idle, caught up to tip,
 /// `scanInterrupted == false`, and trusted scanned height within tolerance of last scanned.
+/// The verified final native snapshot may explicitly authorize publication before the UI
+/// spinner and interruption marker are cleared.
 /// Explicit wallet reset / replacement / cache wipe may still clear immediately (callers
 /// already emptied the UI, so `existingCount == 0`).
 public enum TransferHistoryPolicy {
@@ -20,6 +22,7 @@ public enum TransferHistoryPolicy {
     ///   - lastScannedHeight: Wallet cursor height.
     ///   - trustedScannedHeight: Last clean refresh checkpoint height.
     ///   - tipTolerance: Allowed gap between last scanned and trusted checkpoint.
+    ///   - completedRefreshAuthoritative: Verified successful final native snapshot, not a polling hint.
     public static func shouldReplaceTransfers(
         existingCount: Int,
         newCount: Int,
@@ -28,8 +31,12 @@ public enum TransferHistoryPolicy {
         scanInterrupted: Bool,
         lastScannedHeight: UInt64,
         trustedScannedHeight: UInt64,
-        tipTolerance: UInt64 = defaultTipTolerance
+        tipTolerance: UInt64 = defaultTipTolerance,
+        completedRefreshAuthoritative: Bool = false
     ) -> Bool {
+        // Only the successful final native snapshot may bypass the still-active UI spinner
+        // and interruption marker. Ordinary polling/cache reads must retain the guards below.
+        if completedRefreshAuthoritative { return true }
         // Nonempty fetch always wins; empty→empty is a no-op assign.
         if newCount > 0 || existingCount == 0 {
             return true

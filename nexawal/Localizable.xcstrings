@@ -31840,6 +31840,9 @@
         }
       }
     },
+    "Create or Import instead" : {
+
+    },
     "Create Wallet" : {
       "localizations" : {
         "ar" : {
@@ -49897,6 +49900,7 @@
       }
     },
     "Insufficient unlocked balance." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -67353,7 +67357,6 @@
       }
     },
     "Payment URI" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -74917,7 +74920,6 @@
       }
     },
     "Recipient" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -97583,6 +97585,9 @@
         }
       }
     },
+    "Sync failed" : {
+
+    },
     "Sync progress %lld percent" : {
       "localizations" : {
         "ar" : {
@@ -110400,6 +110405,12 @@
           }
         }
       }
+    },
+    "Wait for wallet sync to finish before preparing a send." : {
+
+    },
+    "Wait for wallet sync to finish before sending." : {
+
     },
     "Waiting for network height" : {
       "localizations" : {

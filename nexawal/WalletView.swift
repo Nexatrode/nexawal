@@ -140,30 +140,6 @@ struct WalletView: View {
         return f.string(from: d)
     }
 
-    private func sortedTransfers(_ items: [WalletCoreFFIClient.Transfer]) -> [WalletCoreFFIClient
-        .Transfer]
-    {
-        items.sorted { a, b in
-            // Pending first
-            let aPending = a.isPending || a.confirmations == 0
-            let bPending = b.isPending || b.confirmations == 0
-            if aPending != bPending { return aPending && !bPending }
-
-            // Then by height desc (unknown height treated as 0)
-            let ah = a.height ?? 0
-            let bh = b.height ?? 0
-            if ah != bh { return ah > bh }
-
-            // Then by timestamp desc (unknown treated as 0)
-            let at = a.timestamp ?? 0
-            let bt = b.timestamp ?? 0
-            if at != bt { return at > bt }
-
-            // Same-height tie-break: txid A→Z, matching Android (and Feather's same-height CSV).
-            return a.txid < b.txid
-        }
-    }
-
     private func syncErrorKind(_ error: String) -> SyncErrorKind {
         SyncErrorPolicy.classify(message: error, stalled: viewModel.syncStalled)
     }
@@ -390,257 +366,52 @@ struct WalletView: View {
                     .cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
 
-                    // Recent transactions
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
-                            Text(L10n.neon("Recent Transactions", classicUI: classicUI))
-                                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                                .foregroundColor(primaryText)
+                            Text("Recent Transactions").font(.headline)
                             Spacer()
-                            if !viewModel.transfers.isEmpty {
-                                Text("\(viewModel.transfers.count)")
-                                    .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                                    .foregroundColor(secondaryText)
-                            }
+                            Text("\(viewModel.totalHistoryCount)").font(.caption).foregroundStyle(.secondary)
                         }
-
                         if viewModel.transfers.isEmpty {
-                            Text("No transactions yet.")
-                                .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
-                                .foregroundColor(secondaryText)
-                        } else {
-                            VStack(spacing: 0) {
-                                ForEach(sortedTransfers(viewModel.transfers), id: \.txid) { t in
-                                    Button {
-                                        selectedTransfer = t
-                                        showTransferDetails = true
-                                    } label: {
-                                        HStack(alignment: .top, spacing: 12) {
-                                            Image(systemName: t.direction.lowercased() == "in" ? "arrow.down.left.circle.fill" : "arrow.up.right.circle.fill")
-                                                .font(.title3)
-                                                .foregroundColor(amountColor(t))
-                                                .accessibilityHidden(true)
-
-                                            VStack(alignment: .leading, spacing: 4) {
-                                                Text(directionLabel(t))
-                                                    .font(classicUI ? .system(.subheadline, design: .monospaced).weight(.semibold) : .subheadline.weight(.semibold))
-                                                    .foregroundColor(primaryText)
-
-                                                HStack(spacing: 8) {
-                                                    if let ts = formatTransferTimestamp(t) {
-                                                        Text(ts)
-                                                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                                                            .foregroundColor(secondaryText)
-                                                            .accessibilityLabel(formatTransferTimestampAbsolute(t) ?? ts)
-                                                    }
-                                                    Text((t.isPending || t.confirmations == 0) ? L10n.neon("Pending", classicUI: classicUI) : L10n.format("%lld conf", Int64(t.confirmations)))
-                                                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                                                        .foregroundColor(secondaryText)
-                                                }
-
-                                                Text(t.txid)
-                                                    .font(.system(.caption2, design: .monospaced))
-                                                    .foregroundColor(secondaryText)
-                                                    .lineLimit(1)
-                                                    .truncationMode(.middle)
-                                            }
-
-                                            Spacer()
-
-                                            VStack(alignment: .trailing, spacing: 4) {
-                                                Text(signedAmountText(t))
-                                                    .font(.system(.subheadline, design: .monospaced))
-                                                    .fontWeight(.semibold)
-                                                    .foregroundColor(amountColor(t))
-
-                                                if let fee = t.fee {
-                                                    Text(L10n.format("Fee %@", viewModel.formatDisplayPiconero(fee)))
-                                                        .font(classicUI ? .system(.caption2, design: .monospaced) : .caption2)
-                                                        .foregroundColor(secondaryText)
-                                                }
-                                            }
-                                        }
-                                        .padding(.vertical, 12)
-                                        .accessibilityElement(children: .combine)
-                                        .accessibilityLabel(transferAccessibilityLabel(t))
-                                        .accessibilityAddTraits(.isButton)
-                                    }
-                                    .buttonStyle(.plain)
-
-                                    if t.txid != sortedTransfers(viewModel.transfers).last?.txid {
-                                        Divider()
-                                            .background(classicPalette?.border.opacity(0.4) ?? Color(.separator))
-                                    }
+                            Text(viewModel.isSynced ? "No transactions yet." : "No transactions found yet. Sync is not complete.")
+                                .font(.subheadline).foregroundStyle(.secondary)
+                        }
+                        ForEach(viewModel.transfers, id: \.txid) { row in
+                            Button {
+                                let session = viewModel.historySession
+                                let id = viewModel.historyWalletId
+                                Task {
+                                    do {
+                                        let detail = try await Task.detached { try WalletCoreFFIClient.transfer(walletId: id, txid: row.txid) }.value
+                                        guard viewModel.isWalletOpen, session == viewModel.historySession else { return }
+                                        if let detail { selectedTransfer = detail; showTransferDetails = true }
+                                    } catch { if session == viewModel.historySession { viewModel.errorMessage = "Transaction details could not be loaded." } }
                                 }
-                            }
-                            .sheet(
-                                isPresented: $showTransferDetails,
-                                onDismiss: { selectedTransfer = nil }
-                            ) {
-                                if let t = selectedTransfer {
-                                    NavigationStack {
-                                        List {
-                                                Section(header: Text("Summary")) {
-                                                    HStack {
-                                                        Text("Type")
-                                                        Spacer()
-                                                        Text(directionLabel(t))
-                                                            .font(
-                                                                .system(
-                                                                    .caption, design: .monospaced)
-                                                            )
-                                                            .foregroundColor(.secondary)
-                                                    }
-                                                    HStack {
-                                                        Text("Status")
-                                                        Spacer()
-                                                        Text((t.isPending || t.confirmations == 0) ? "Pending" : "Confirmed")
-                                                            .font(
-                                                                .system(
-                                                                    .caption, design: .monospaced)
-                                                            )
-                                                            .foregroundColor(.secondary)
-                                                    }
-                                                    HStack {
-                                                        Text("Amount")
-                                                        Spacer()
-                                                        Text(amountSign(t) + viewModel.formatExactPiconero(t.amount))
-                                                        .font(
-                                                            .system(.caption, design: .monospaced)
-                                                        )
-                                                        .foregroundColor(amountColor(t))
-                                                    }
-                                                    if let snap = FiatSnapshotStore.snapshot(for: t.txid),
-                                                       let perXmr = FiatEstimate.decimal(from: snap.fiatPerXmr) {
-                                                        HStack {
-                                                            Spacer()
-                                                            Text(FiatEstimate.recordedApproxText(
-                                                                piconero: t.amount,
-                                                                fiatPerXmr: perXmr,
-                                                                currency: snap.currency
-                                                            ))
-                                                            .font(.system(.caption, design: .monospaced))
-                                                            .foregroundColor(.secondary)
-                                                        }
-                                                    }
-                                                    if let fee = t.fee {
-                                                        HStack {
-                                                            Text("Fee")
-                                                            Spacer()
-                                                            Text(viewModel.formatExactPiconero(fee))
-                                                            .font(
-                                                                .system(
-                                                                    .caption, design: .monospaced)
-                                                            )
-                                                            .foregroundColor(.secondary)
-                                                        }
-                                                        if let snap = FiatSnapshotStore.snapshot(for: t.txid),
-                                                           let perXmr = FiatEstimate.decimal(from: snap.fiatPerXmr) {
-                                                            HStack {
-                                                                Spacer()
-                                                                Text(FiatEstimate.recordedApproxText(
-                                                                    piconero: fee,
-                                                                    fiatPerXmr: perXmr,
-                                                                    currency: snap.currency
-                                                                ))
-                                                                .font(.system(.caption, design: .monospaced))
-                                                                .foregroundColor(.secondary)
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                Section(header: Text("Chain")) {
-                                                    HStack {
-                                                        Text("Height")
-                                                        Spacer()
-                                                        Text(t.height.map(String.init) ?? "—")
-                                                            .font(
-                                                                .system(
-                                                                    .caption, design: .monospaced)
-                                                            )
-                                                            .foregroundColor(.secondary)
-                                                    }
-                                                    HStack {
-                                                        Text("Confirmations")
-                                                        Spacer()
-                                                        Text("\(t.confirmations)")
-                                                            .font(
-                                                                .system(
-                                                                    .caption, design: .monospaced)
-                                                            )
-                                                            .foregroundColor(.secondary)
-                                                    }
-                                                    HStack {
-                                                        Text("Time")
-                                                        Spacer()
-                                                        Text(
-                                                            formatTransferTimestampAbsolute(t)
-                                                                ?? "—"
-                                                        )
-                                                        .font(
-                                                            .system(.caption, design: .monospaced)
-                                                        )
-                                                        .foregroundColor(.secondary)
-                                                    }
-                                                }
-
-                                                Section(header: Text("Identifiers")) {
-                                                    HStack {
-                                                        Text("TXID")
-                                                        Spacer()
-                                                        Text(t.txid)
-                                                            .font(
-                                                                .system(
-                                                                    .caption2, design: .monospaced)
-                                                            )
-                                                            .foregroundColor(.secondary)
-                                                            .textSelection(.enabled)
-                                                    }
-
-                                                    Button {
-                                                        UIPasteboard.general.string = t.txid
-                                                    } label: {
-                                                        HStack {
-                                                            Text("Copy TXID")
-                                                            Spacer()
-                                                            Image(systemName: "doc.on.doc")
-                                                                .foregroundColor(.secondary)
-                                                        }
-                                                    }
-
-                                                    if let explorerURL = URL(string: "https://xmrchain.net/tx/\(t.txid)") {
-                                                        Link(destination: explorerURL) {
-                                                            HStack {
-                                                                Text("Open in Explorer")
-                                                                Spacer()
-                                                                Image(systemName: "safari")
-                                                                    .foregroundColor(.secondary)
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            .navigationTitle("Transaction")
-                                            .toolbar {
-                                                ToolbarItem(placement: .cancellationAction) {
-                                                    Button("Close") { showTransferDetails = false }
-                                                }
-                                            }
-                                    }
-                                }
+                            } label: {
+                                WalletTransferRow(transfer: row, viewModel: viewModel)
+                            }.buttonStyle(.plain)
+                            if row.txid != viewModel.transfers.last?.txid { Divider() }
+                        }
+                        NavigationLink {
+                            TransactionsView(viewModel: viewModel)
+                        } label: {
+                            Label("View all transactions (\(viewModel.totalHistoryCount))", systemImage: "list.bullet")
+                        }
+                        if viewModel.pendingHistoryCount > 0 {
+                            NavigationLink {
+                                TransactionsView(viewModel: viewModel, initialFilter: "pending")
+                            } label: {
+                                Text("\(viewModel.pendingHistoryCount) pending transactions")
                             }
                         }
                     }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(panelBackground)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                            .stroke(classicUI ? (classicPalette?.border ?? .clear) : Color.clear, lineWidth: 1)
-                    )
-                    .cornerRadius(classicUI ? 4 : 16)
+                    .padding().frame(maxWidth: .infinity)
+                    .background(panelBackground).cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
+                    .onChange(of: viewModel.historySession) { _, _ in showTransferDetails = false; selectedTransfer = nil }
+                    .sheet(isPresented: $showTransferDetails, onDismiss: { selectedTransfer = nil }) {
+                        if let row = selectedTransfer { WalletTransferDetails(transfer: row, viewModel: viewModel) }
+                    }
 
                     HStack(spacing: 12) {
                         Button(action: {

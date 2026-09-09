@@ -111,6 +111,7 @@ struct SendView: View {
                 }
                 .padding()
             }
+            .disabled(isSending || showSendConfirmation)
             .navigationBarTitleDisplayMode(.inline)
             .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
             .scrollContentBackground(classicUI ? .hidden : .automatic)
@@ -513,7 +514,7 @@ struct SendView: View {
             return
         }
         let walletId = await walletManager.getCurrentWalletId() ?? "(none)"
-        print("🧭 UI action: estimateFee tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR=\(amountXMR) toAddress_prefix=\(String(toAddress.prefix(12)))")
+        WalletDiagnostics.log("🧭 UI action: estimateFee tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR=\(amountXMR) toAddress_prefix=\(String(toAddress.prefix(12)))")
 
         // Cancel any previous fee preview and start a new one.
         feePreviewTask?.cancel()
@@ -588,25 +589,26 @@ struct SendView: View {
     }
 
     private func performSend() async {
+        // Freeze the approved intent before authentication or any other suspension point.
+        defer { isSending = false }
         guard !viewModel.isRefreshing else {
             errorMessage = L10n.t("Wait for wallet sync to finish before sending.")
             return
         }
-        let walletId = await walletManager.getCurrentWalletId() ?? "(none)"
-        print("🧭 UI action: performSend tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR=\(amountXMR) previewReady=\(previewReady) feePiconero=\(estimatedFeePiconero.map(String.init) ?? "(nil)") toAddress_prefix=\(String(toAddress.prefix(12)))")
-
-        // Confirm sets isSending before launching this task; always clear on exit.
-        defer { isSending = false }
-
         guard let ring = parsedRingLen(),
               looksLikeAddress(toAddress) else {
             errorMessage = L10n.t("Enter a valid address and amount.")
             return
         }
-        guard previewReady, estimatedFeePiconero != nil else {
+        guard previewReady, let approvedMaxFee = estimatedFeePiconero,
+              let approvedAmount = parsedAmountPiconero() else {
             errorMessage = L10n.t("Preview the fee before sending.")
             return
         }
+        let destination = toAddress
+        let sendMax = isMaxMode
+        let filtered = sendFromSubaddressEnabled
+        let minor = fromSubaddressMinor
 
         errorMessage = nil
         infoMessage = nil
@@ -616,14 +618,14 @@ struct SendView: View {
 
         do {
             try await viewModel.authenticateForSensitiveAction(prompt: L10n.t("Authenticate to send Monero"))
-            if isMaxMode {
-                // In max mode, always sweep at send time so fee changes are handled correctly.
+            if sendMax {
+                // Recalculate, but never relay a fee above the user's approved ceiling.
                 let result: (txid: String, amount: UInt64, fee: UInt64)
-                if sendFromSubaddressEnabled {
-                    result = try await walletManager.sweep(fromSubaddressMinor: fromSubaddressMinor, toAddress: toAddress, ringLen: ring)
+                if filtered {
+                    result = try await walletManager.sweep(fromSubaddressMinor: minor, toAddress: destination, approvedMaxFee: approvedMaxFee, ringLen: ring)
                     infoMessage = L10n.format("Swept max spendable from selected subaddress via %@.", policyText())
                 } else {
-                    result = try await walletManager.sweep(toAddress: toAddress, ringLen: ring)
+                    result = try await walletManager.sweep(toAddress: destination, approvedMaxFee: approvedMaxFee, ringLen: ring)
                     infoMessage = L10n.format("Swept max spendable via %@.", policyText())
                 }
 
@@ -637,39 +639,32 @@ struct SendView: View {
                 setAmountFieldToXmrPiconero(result.amount)
                 isMaxMode = false
             } else {
-                guard let amountPico = parsedAmountPiconero() else {
-                    errorMessage = L10n.t("Enter a valid address and amount.")
-                    return
-                }
+                let amountPico = approvedAmount
 
                 // Balance sanity check for exact-amount sends.
                 // If sending from a subaddress, validate against that subaddress's unlocked balance.
                 let available = availablePiconero()
-                if let fee = estimatedFeePiconero {
-                    if !SendSafety.hasUnlockedForExactSend(
-                        amountPiconero: amountPico,
-                        feePiconero: fee,
-                        unlockedPiconero: available
-                    ) {
-                        errorMessage = L10n.t("Insufficient unlocked balance for amount + fee.")
-                        return
-                    }
-                } else if amountPico > available {
-                    errorMessage = L10n.t("Insufficient unlocked balance.")
+                if !SendSafety.hasUnlockedForExactSend(
+                    amountPiconero: amountPico,
+                    feePiconero: approvedMaxFee,
+                    unlockedPiconero: available
+                ) {
+                    errorMessage = L10n.t("Insufficient unlocked balance for amount + fee.")
                     return
                 }
 
                 let result: (txid: String, fee: UInt64)
-                if sendFromSubaddressEnabled {
+                if filtered {
                     result = try await walletManager.send(
-                        fromSubaddressMinor: fromSubaddressMinor,
-                        toAddress: toAddress,
+                        fromSubaddressMinor: minor,
+                        toAddress: destination,
                         amountPiconero: amountPico,
+                        approvedMaxFee: approvedMaxFee,
                         ringLen: ring
                     )
                     infoMessage = L10n.format("Transaction broadcast from selected subaddress via %@.", policyText())
                 } else {
-                    result = try await walletManager.send(toAddress: toAddress, amountPiconero: amountPico, ringLen: ring)
+                    result = try await walletManager.send(toAddress: destination, amountPiconero: amountPico, approvedMaxFee: approvedMaxFee, ringLen: ring)
                     infoMessage = L10n.format("Transaction broadcast via %@.", policyText())
                 }
 
@@ -682,6 +677,10 @@ struct SendView: View {
             // Refresh balance after send
             await viewModel.updateBalance()
             await refreshSubaddressBalanceIfNeeded()
+        } catch let error as SendSafety.FeeApprovalError {
+            estimatedFeePiconero = nil
+            previewReady = false
+            errorMessage = error.localizedDescription
         } catch {
             errorMessage = authRetryMessage(for: error) ?? L10n.format("Send failed: %@", error.localizedDescription)
         }
@@ -849,7 +848,7 @@ struct SendView: View {
             return
         }
         let walletId = await walletManager.getCurrentWalletId() ?? "(none)"
-        print("🧭 UI action: sendMax tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR_before=\(amountXMR) toAddress_prefix=\(String(toAddress.prefix(12)))")
+        WalletDiagnostics.log("🧭 UI action: sendMax tapped wallet_id=\(walletId) isMaxMode=\(isMaxMode) sendFromSubaddressEnabled=\(sendFromSubaddressEnabled) fromSubaddressMinor=\(fromSubaddressMinor) amountXMR_before=\(amountXMR) toAddress_prefix=\(String(toAddress.prefix(12)))")
 
         // Cancel any previous sweep preview and start a new one.
         sweepPreviewTask?.cancel()

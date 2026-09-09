@@ -2,6 +2,15 @@ import XCTest
 @testable import NexaWalLogic
 
 final class TransferHistoryPolicyTests: XCTestCase {
+    func testOnlyVerifiedCompletionMayOverrideAnInterruptedEmptyRead() {
+        for completed in [false, true] {
+            XCTAssertEqual(TransferHistoryPolicy.shouldReplaceTransfers(
+                existingCount: 1, newCount: 0, refreshing: true, caughtUpToTip: true,
+                scanInterrupted: true, lastScannedHeight: 100_000,
+                trustedScannedHeight: 90_000,
+                completedRefreshAuthoritative: completed), completed)
+        }
+    }
     func testNonemptyFetchAlwaysReplaces() {
         XCTAssertTrue(
             TransferHistoryPolicy.shouldReplaceTransfers(

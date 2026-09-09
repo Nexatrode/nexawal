@@ -579,7 +579,7 @@ struct WalletCreationView: View {
             let proxy: String? = (MoneroConfig.networkPolicy == .i2p) ? MoneroConfig.i2pHTTPProxyAddress : nil
 
             #if DEBUG
-            print("🛰️ Suggested height: policy=\(MoneroConfig.networkPolicy), url=\(baseURL), proxy=\(proxy ?? "(none)")")
+            WalletDiagnostics.log("🛰️ Suggested height: policy=\(MoneroConfig.networkPolicy), url=\(baseURL), proxy=\(proxy ?? "(none)")")
             #endif
 
             let info = try await MoneroDaemonClient.getInfo(baseURL: baseURL, proxyAddress: proxy)
@@ -592,7 +592,7 @@ struct WalletCreationView: View {
             suggestedRestoreHeight = nil
             suggestedHeightError = L10n.t("Couldn't fetch a fast restore height from the node. Leaving restore height as 0.")
             #if DEBUG
-            print("🛰️ Suggested height failed: \(error.localizedDescription)")
+            WalletDiagnostics.log("🛰️ Suggested height failed: \(error.localizedDescription)")
             #endif
         }
 

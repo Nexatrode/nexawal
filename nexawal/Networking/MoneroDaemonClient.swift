@@ -69,7 +69,7 @@ enum MoneroDaemonClient {
 
         #if DEBUG
         let proxyDesc = proxyAddress ?? "(none)"
-        print("🛰️ get_info: url=\(url.absoluteString), proxy=\(proxyDesc)")
+        WalletDiagnostics.log("🛰️ get_info: url=\(url.absoluteString), proxy=\(proxyDesc)")
         #endif
 
         do {
@@ -111,24 +111,24 @@ enum MoneroDaemonClient {
                 let effectiveTargetHeight = result.target_height == 0 ? result.height : result.target_height
 
                 #if DEBUG
-                print("🛰️ get_info: height=\(result.height) target_height=\(effectiveTargetHeight)")
+                WalletDiagnostics.log("🛰️ get_info: height=\(result.height) target_height=\(effectiveTargetHeight)")
                 #endif
 
                 return MoneroDaemonInfo(height: result.height, targetHeight: effectiveTargetHeight)
             } catch {
                 #if DEBUG
-                print("🛰️ get_info failed, falling back to /get_height: \(error.localizedDescription)")
+                WalletDiagnostics.log("🛰️ get_info failed, falling back to /get_height: \(error.localizedDescription)")
                 #endif
                 return try await getHeight(baseURL: baseURL, proxyAddress: proxyAddress, timeout: timeout)
             }
         } catch let e as MoneroDaemonClientError {
             #if DEBUG
-            print("🛰️ get_info failed: \(e.localizedDescription)")
+            WalletDiagnostics.log("🛰️ get_info failed: \(e.localizedDescription)")
             #endif
             throw e
         } catch {
             #if DEBUG
-            print("🛰️ get_info transport failed: \(error.localizedDescription)")
+            WalletDiagnostics.log("🛰️ get_info transport failed: \(error.localizedDescription)")
             #endif
             throw MoneroDaemonClientError.transport(error)
         }
@@ -226,7 +226,7 @@ enum MoneroDaemonClient {
         }
 
         #if DEBUG
-        print("🛰️ get_height: height=\(decoded.height)")
+        WalletDiagnostics.log("🛰️ get_height: height=\(decoded.height)")
         #endif
 
         return MoneroDaemonInfo(height: decoded.height, targetHeight: decoded.height)

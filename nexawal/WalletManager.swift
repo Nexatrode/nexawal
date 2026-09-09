@@ -42,7 +42,6 @@ actor WalletManager {
     static let shared = WalletManager()
 
     private var currentWalletId: String?
-    private var cachedBalance: (total: UInt64, unlocked: UInt64)?
     private var refreshInProgress: Bool = false
     private var refreshBatch: Int = 0
     private var currentNetworkMainnet: Bool = true
@@ -77,7 +76,7 @@ actor WalletManager {
     }
 
     /// Get total/unlocked balance constrained to account 0, subaddress minor.
-    /// Note: this does NOT use the wallet-wide cached balance.
+    /// Reads the current in-memory core state without a daemon request.
     func getBalance(fromSubaddressMinor minor: UInt32) throws -> (total: UInt64, unlocked: UInt64) {
         guard let walletId = currentWalletId else {
             throw WalletError.balanceFailed("No wallet is currently open")
@@ -117,7 +116,6 @@ actor WalletManager {
             currentNetworkMainnet = mainnet
             currentWalletId = walletId
             cachePersistenceSuppressed = false
-            cachedBalance = nil // Clear cached balance
             if importCache {
                 importCacheIfPresent(for: walletId)
             }
@@ -155,7 +153,7 @@ actor WalletManager {
         // Always pass an explicit node URL into the core so bulk modes are eligible even when the app is using a "default" node.
         // Passing `nil` forces the core into per-block mode due to the clearnet gating check.
         let nodeURL = MoneroConfig.scanNodeURL()
-        print("🌐 Refresh starting with nodeURL=\(nodeURL)")
+        WalletDiagnostics.log("🌐 Refresh starting with nodeURL=\(nodeURL)")
         defer {
             refreshInProgress = false
             refreshCancelRequested = false
@@ -174,7 +172,6 @@ actor WalletManager {
 
             // Final export at end of refresh (authoritative)
             exportCacheAndPersist(for: walletId)
-            cachedBalance = nil
             return status
         } catch let nodeError {
             // Best-effort: persist any progress even on failure/cancellation.
@@ -184,18 +181,17 @@ actor WalletManager {
             // Never treat cancel as a successful sync. Returning status here used to
             // checkpoint a partial lastScanned height as trusted.
             if refreshCancelRequested || (nodeError as? CancellationError) != nil {
-                print("ℹ️ Refresh cancelled")
-                cachedBalance = nil
+                WalletDiagnostics.log("ℹ️ Refresh cancelled")
                 throw CancellationError()
             }
-            print("⚠️ Refresh with nodeURL '\(nodeURL)' failed: \(nodeError.localizedDescription)")
+            WalletDiagnostics.log("⚠️ Refresh with nodeURL '\(nodeURL)' failed: \(nodeError.localizedDescription)")
 
             let coreLastErr = WalletCoreFFIClient.lastErrorMessage() ?? ""
             let combinedErr = ([nodeError.localizedDescription, coreLastErr])
                 .filter { !$0.isEmpty }
                 .joined(separator: "\n")
             if !combinedErr.isEmpty {
-                print("⚠️ Refresh error detail: \(combinedErr)")
+                WalletDiagnostics.log("⚠️ Refresh error detail: \(combinedErr)")
             }
             let errorDetail = combinedErr.isEmpty ? nodeError.localizedDescription : combinedErr
             let detailedError: String
@@ -231,18 +227,37 @@ actor WalletManager {
             throw WalletError.balanceFailed("No wallet is currently open")
         }
 
-        // Return cached balance if available
-        if let cached = cachedBalance {
-            return cached
-        }
-
         do {
-            let balance = try WalletCoreFFIClient.getBalance(walletId: walletId)
-            cachedBalance = balance
-            return balance
+            // A local core read, not an RPC. Never memoize across scan batches: outputs can
+            // become spent while a cached positive balance would otherwise remain unchanged.
+            return try WalletCoreFFIClient.getBalance(walletId: walletId)
         } catch {
             throw WalletError.balanceFailed(error.localizedDescription)
         }
+    }
+
+    struct CompletedRefreshSnapshot {
+        let status: WalletCoreFFIClient.SyncStatus
+        let total: UInt64
+        let unlocked: UInt64
+        let history: WalletCoreFFIClient.HistoryPage
+    }
+
+    /// Read all final UI data only after the worker has stopped. No awaits between reads:
+    /// another manager operation cannot start a refresh/send halfway through this snapshot.
+    func completedRefreshSnapshot() throws -> CompletedRefreshSnapshot {
+        guard let walletId = currentWalletId, !refreshInProgress,
+              try WalletCoreFFIClient.refreshJobStatus(walletId: walletId).state == .idle else {
+            throw WalletError.statusFailed("Refresh has not completed successfully")
+        }
+        let status = try WalletCoreFFIClient.syncStatus(walletId: walletId)
+        let balance = try WalletCoreFFIClient.getBalance(walletId: walletId)
+        let page = try WalletCoreFFIClient.queryTransfers(walletId: walletId, query: .init(limit: 10))
+        guard try WalletCoreFFIClient.refreshJobStatus(walletId: walletId).state == .idle else {
+            throw WalletError.statusFailed("Refresh changed while reading its final snapshot")
+        }
+        return CompletedRefreshSnapshot(status: status, total: balance.total,
+            unlocked: balance.unlocked, history: page)
     }
 
     /// Retrieve the latest sync status values cached by the core
@@ -260,12 +275,12 @@ actor WalletManager {
 
     private func performRefresh(walletId: String, nodeURL: String?) async throws -> WalletCoreFFIClient.SyncStatus {
         let effectiveURL = nodeURL ?? MoneroConfig.scanNodeURL()
-        print("🌐 performRefresh(walletId=\(walletId)) using nodeURL=\(effectiveURL)")
+        WalletDiagnostics.log("🌐 performRefresh(walletId=\(walletId)) using nodeURL=\(effectiveURL)")
 
         // A previous UI task may have been cancelled before its native worker observed the cancel
         // flag. Join that worker instead of racing wallet_refresh_async and receiving -31.
         if try WalletCoreFFIClient.refreshJobStatus(walletId: walletId).state == .running {
-            print("⏳ Waiting for previous native refresh worker to stop walletId=\(walletId)")
+            WalletDiagnostics.log("⏳ Waiting for previous native refresh worker to stop walletId=\(walletId)")
             _ = try await waitForNativeRefreshTerminal(using: walletId)
         }
         try WalletCoreFFIClient.refreshWalletAsync(walletId: walletId, nodeURL: effectiveURL)
@@ -321,11 +336,11 @@ actor WalletManager {
             if let walletId = currentWalletId {
                 try WalletCoreFFIClient.refreshCancel(walletId: walletId)
             } else {
-                print("⚠️ Core refresh cancel requested, but no wallet is currently open")
+                WalletDiagnostics.log("⚠️ Core refresh cancel requested, but no wallet is currently open")
             }
         } catch {
             // Don't fail UI cancel if core cancel isn't available; still cancel waiting/polling.
-            print("⚠️ Core refresh cancel request failed: \(error.localizedDescription)")
+            WalletDiagnostics.log("⚠️ Core refresh cancel request failed: \(error.localizedDescription)")
         }
 
         // Let the Swift waiter observe refreshCancelRequested itself. Cancelling that task here
@@ -335,22 +350,21 @@ actor WalletManager {
             do {
                 let terminal = try await waitForNativeRefreshTerminal(using: walletId)
                 if terminal.state == .failed, let error = terminal.error {
-                    print("ℹ️ Native refresh ended while cancelling: \(error)")
+                    WalletDiagnostics.log("ℹ️ Native refresh ended while cancelling: \(error)")
                 }
             } catch {
                 nativeSettled = false
-                print("⚠️ Native refresh cancellation did not settle cleanly: \(error.localizedDescription)")
+                WalletDiagnostics.log("⚠️ Native refresh cancellation did not settle cleanly: \(error.localizedDescription)")
             }
         }
 
         if nativeSettled, let walletId = currentWalletId {
             exportCacheAndPersist(for: walletId)
-            print("🗂️ Cache export reason: cancel walletId=\(walletId)")
+            WalletDiagnostics.log("🗂️ Cache export reason: cancel walletId=\(walletId)")
         }
-        cachedBalance = nil
         refreshInProgress = false
         refreshWaitTask = nil
-        print("🛑 Cancel refresh requested")
+        WalletDiagnostics.log("🛑 Cancel refresh requested")
     }
 
     private func waitForRefreshCompletion(using walletId: String, stallTimeout: TimeInterval = 45, pollInterval: TimeInterval = 0.2) async throws -> WalletCoreFFIClient.SyncStatus {
@@ -378,7 +392,7 @@ actor WalletManager {
         if refreshCancelRequested || Task.isCancelled {
             _ = try await waitForNativeRefreshTerminal(using: walletId)
             exportCacheAndPersist(for: walletId)
-            print("🗂️ Cache export reason: cancel walletId=\(walletId)")
+            WalletDiagnostics.log("🗂️ Cache export reason: cancel walletId=\(walletId)")
             throw CancellationError()
         }
 
@@ -396,7 +410,7 @@ actor WalletManager {
             // Avoid locking onto restoreHeight as the target (which reads as chainHeight initially).
             if targetHeight == nil, status.chainHeight > status.restoreHeight {
                 targetHeight = status.chainHeight
-                print("🧭 Refresh target height set to \(targetHeight!) (restoreHeight=\(status.restoreHeight))")
+                WalletDiagnostics.log("🧭 Refresh target height set to \(targetHeight!) (restoreHeight=\(status.restoreHeight))")
             }
 
             // Track progress and detect stalls
@@ -404,7 +418,7 @@ actor WalletManager {
                 lastScannedSnapshot = status.lastScanned
                 lastProgressAt = Date()
                 // Periodic progress log
-                print("⏳ Refresh progress: scanned=\(status.lastScanned), target=\(targetHeight ?? status.chainHeight), tip=\(status.chainHeight)")
+                WalletDiagnostics.log("⏳ Refresh progress: scanned=\(status.lastScanned), target=\(targetHeight ?? status.chainHeight), tip=\(status.chainHeight)")
             }
 
             // Persist scan progress periodically while refresh is still running.
@@ -414,7 +428,7 @@ actor WalletManager {
                status.lastScanned > 0,
                status.lastScanned >= lastPersistedScannedHeight + persistBlockDelta {
                 exportCacheAndPersist(for: walletId)
-                print("🗂️ Cache export reason: periodic walletId=\(walletId)")
+                WalletDiagnostics.log("🗂️ Cache export reason: periodic walletId=\(walletId)")
                 lastPersistAt = now
                 lastPersistedScannedHeight = status.lastScanned
             }
@@ -431,7 +445,7 @@ actor WalletManager {
                 if effectiveTarget > 0,
                    status.lastScanned >= effectiveTarget,
                    refreshJob.state == .idle {
-                    print("✅ Refresh reached target height \(effectiveTarget) (lastScanned=\(status.lastScanned))")
+                    WalletDiagnostics.log("✅ Refresh reached target height \(effectiveTarget) (lastScanned=\(status.lastScanned))")
                     return status
                 }
             }
@@ -449,7 +463,7 @@ actor WalletManager {
             // Surface stalls without silently changing the scan profile. The user can retry
             // manually, or provide an explicit WalletCore environment override.
             if Date().timeIntervalSince(lastProgressAt) > dynamicStallTimeout {
-                print("🛑 Stall detected (>\(Int(dynamicStallTimeout))s); surfacing error without changing scan profile.")
+                WalletDiagnostics.log("🛑 Stall detected (>\(Int(dynamicStallTimeout))s); surfacing error without changing scan profile.")
                 exportCacheAndPersist(for: walletId)
                 throw WalletError.refreshFailed(
                     "Sync stalled: no scan progress for over \(Int(dynamicStallTimeout))s (lastScanned=\(lastScannedSnapshot), target=\(targetHeight ?? 0))"
@@ -462,7 +476,7 @@ actor WalletManager {
             if refreshCancelRequested || Task.isCancelled {
                 _ = try await waitForNativeRefreshTerminal(using: walletId)
                 exportCacheAndPersist(for: walletId)
-                print("🗂️ Cache export reason: cancel walletId=\(walletId)")
+                WalletDiagnostics.log("🗂️ Cache export reason: cancel walletId=\(walletId)")
                 throw CancellationError()
             }
         }
@@ -508,7 +522,7 @@ actor WalletManager {
         // IMPORTANT: A snapshot is not a cancel and must not interfere with an active refresh.
         // Export whatever state the core currently has and persist it.
         exportCacheAndPersist(for: walletId)
-        print("🗂️ Cache export reason: snapshot walletId=\(walletId)")
+        WalletDiagnostics.log("🗂️ Cache export reason: snapshot walletId=\(walletId)")
     }
 
     /// Rewind the in-memory scan cursor without deleting the on-disk cache.
@@ -518,8 +532,7 @@ actor WalletManager {
             throw WalletError.refreshFailed("No wallet is currently open")
         }
         try WalletCoreFFIClient.forceRescanFromHeight(walletId: walletId, fromHeight: height)
-        cachedBalance = nil
-        print("🧭 rewindScanCursor walletId=\(walletId) fromHeight=\(height)")
+        WalletDiagnostics.log("🧭 rewindScanCursor walletId=\(walletId) fromHeight=\(height)")
     }
 
     /// Force rescan from a specific height. Resets core scan state, clears local cache, and refreshes.
@@ -548,19 +561,19 @@ actor WalletManager {
                 try WalletCacheFileIO.writeAtomically(legacyBlob, to: fileURL)
                 try excludeFromBackup(url: fileURL)
                 UserDefaults.standard.removeObject(forKey: legacyKey)
-                print("🗂️ Migrated legacy cache to file (\(legacyBlob.count) bytes) at \(fileURL.lastPathComponent)")
+                WalletDiagnostics.log("🗂️ Migrated legacy cache to file (\(legacyBlob.count) bytes) at \(fileURL.lastPathComponent)")
             } catch {
-                print("⚠️ Legacy cache migration failed for \(walletId): \(error.localizedDescription)")
+                WalletDiagnostics.log("⚠️ Legacy cache migration failed for \(walletId): \(error.localizedDescription)")
             }
         }
 
         // 2) Import from file if present
         let fileURL = cacheFileURL(for: walletId)
         do {
-            let data = try Data(contentsOf: fileURL)
+            let data = try WalletCacheFileIO.readBounded(from: fileURL)
             do {
                 try WalletCoreFFIClient.importCache(walletId: walletId, cacheBlob: data)
-                print("🗂️ Imported wallet cache (\(data.count) bytes) for \(walletId) from file")
+                WalletDiagnostics.log("🗂️ Imported wallet cache (\(data.count) bytes) for \(walletId) from file")
             } catch {
                 let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? ""
                 let reason = [error.localizedDescription, coreMsg]
@@ -576,7 +589,7 @@ actor WalletManager {
                     // (If the function isn't available in this build, ignore; refresh will rebuild anyway.)
                     try? WalletCoreFFIClient.resetTrackedOutputs(walletId: walletId)
                 }
-                print("⚠️ Cache import rejected for \(walletId); quarantined=\(quarantined?.lastPathComponent ?? "none") reason=\(reason)")
+                WalletDiagnostics.log("⚠️ Cache import rejected for \(walletId); quarantined=\(quarantined?.lastPathComponent ?? "none") reason=\(reason)")
                 return
             }
         } catch {
@@ -587,7 +600,7 @@ actor WalletManager {
                     walletId: walletId,
                     reason: "read failed: \(error.localizedDescription)"
                 )
-                print("⚠️ Cache read failed for \(walletId); quarantined=\(quarantined?.lastPathComponent ?? "none") error=\(error.localizedDescription)")
+                WalletDiagnostics.log("⚠️ Cache read failed for \(walletId); quarantined=\(quarantined?.lastPathComponent ?? "none") error=\(error.localizedDescription)")
             }
         }
     }
@@ -597,11 +610,11 @@ actor WalletManager {
         do {
             let quarantined = try WalletCacheFileIO.quarantineRejectedFile(at: fileURL)
             if let quarantined {
-                print("🧹 Cache quarantined walletId=\(walletId) reason=\(reason) movedTo=\(quarantined.lastPathComponent)")
+                WalletDiagnostics.log("🧹 Cache quarantined walletId=\(walletId) reason=\(reason) movedTo=\(quarantined.lastPathComponent)")
             }
             return quarantined
         } catch {
-            print("⚠️ Cache quarantine failed walletId=\(walletId) reason=\(reason) error=\(error.localizedDescription)")
+            WalletDiagnostics.log("⚠️ Cache quarantine failed walletId=\(walletId) reason=\(reason) error=\(error.localizedDescription)")
             return nil
         }
     }
@@ -609,21 +622,21 @@ actor WalletManager {
     /// Export the core cache blob and persist it to Application Support for fast resume across launches.
     private func exportCacheAndPersist(for walletId: String) {
         guard !cachePersistenceSuppressed else {
-            print("🗂️ Cache export suppressed after explicit clear walletId=\(walletId)")
+            WalletDiagnostics.log("🗂️ Cache export suppressed after explicit clear walletId=\(walletId)")
             return
         }
         do {
             guard let data = try WalletCoreFFIClient.exportCache(walletId: walletId) else {
-                print("🗂️ Exported wallet cache is empty for \(walletId)")
+                WalletDiagnostics.log("🗂️ Exported wallet cache is empty for \(walletId)")
                 return
             }
             try ensureCacheDirectory()
             let fileURL = cacheFileURL(for: walletId)
             try WalletCacheFileIO.writeAtomically(data, to: fileURL)
             try excludeFromBackup(url: fileURL)
-            print("🗂️ Exported wallet cache (\(data.count) bytes) to \(fileURL.lastPathComponent) for \(walletId)")
+            WalletDiagnostics.log("🗂️ Exported wallet cache (\(data.count) bytes) to \(fileURL.lastPathComponent) for \(walletId)")
         } catch {
-            print("⚠️ Cache export failed for \(walletId): \(error.localizedDescription)")
+            WalletDiagnostics.log("⚠️ Cache export failed for \(walletId): \(error.localizedDescription)")
         }
     }
 
@@ -650,6 +663,16 @@ actor WalletManager {
         cacheDirectoryURL().appendingPathComponent("\(walletId).prepared.json")
     }
 
+    /// Explicit replacement retires active recovery files without destroying a signed transaction.
+    /// Do not call for ordinary refresh/rescan/reopen of the same wallet.
+    func archivePendingSendForReplacement(walletId: String) throws {
+        let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        for network in ["mainnet", "stagenet"] {
+            let file = appSupport.appendingPathComponent("WalletCaches/\(network)/\(walletId).prepared.json")
+            try WalletCacheFileIO.quarantineRejectedFile(at: file)
+        }
+    }
+
     private struct PendingPreparedEnvelope: Codable {
         let nodeURL: String
         let prepared: WalletCoreFFIClient.PreparedSend
@@ -667,13 +690,13 @@ actor WalletManager {
         let fileURL = preparedFileURL(for: walletId)
         try data.write(to: fileURL, options: .atomic)
         try excludeFromBackup(url: fileURL)
-        print("🗂️ Persisted prepared send txid=\(prepared.txid) to \(fileURL.lastPathComponent)")
+        WalletDiagnostics.log("🗂️ Persisted prepared send txid=\(prepared.txid) to \(fileURL.lastPathComponent)")
     }
 
     private func clearPendingPrepared(for walletId: String) {
         let fileURL = preparedFileURL(for: walletId)
         try? FileManager.default.removeItem(at: fileURL)
-        print("🗂️ Cleared prepared send file \(fileURL.lastPathComponent)")
+        WalletDiagnostics.log("🗂️ Cleared prepared send file \(fileURL.lastPathComponent)")
     }
 
     private func loadPendingPrepared(for walletId: String) throws -> PendingPreparedEnvelope? {
@@ -684,7 +707,7 @@ actor WalletManager {
                 from: fileURL
             )
         } catch {
-            print("⚠️ Failed to decode prepared send file: \(error.localizedDescription)")
+            WalletDiagnostics.log("⚠️ Failed to decode prepared send file: \(error.localizedDescription)")
             throw WalletError.pendingSendRecoveryFailed(
                 "Pending send recovery data exists but cannot be read. New sends are blocked until it is recovered or removed: \(error.localizedDescription)"
             )
@@ -704,7 +727,7 @@ actor WalletManager {
         guard let pending = try loadPendingPrepared(for: walletId) else { return nil }
         applyBroadcastProxy()
         let endpoint = pending.nodeURL.isEmpty ? preferredNodeURL : pending.nodeURL
-        print("↩️ Recovering pending prepared send txid=\(pending.prepared.txid) via \(endpoint)")
+        WalletDiagnostics.log("↩️ Recovering pending prepared send txid=\(pending.prepared.txid) via \(endpoint)")
         let relay = try WalletCoreFFIClient.relayPrepared(
             walletId: walletId,
             prepared: pending.prepared,
@@ -712,7 +735,7 @@ actor WalletManager {
         )
         clearPendingPrepared(for: walletId)
         exportCacheAndPersist(for: walletId)
-        print("✅ Recovered pending prepared send txid=\(relay.txid) status=\(relay.status)")
+        WalletDiagnostics.log("✅ Recovered pending prepared send txid=\(relay.txid) status=\(relay.status)")
         return RecoveredPreparedSend(
             txid: relay.txid,
             amount: pending.prepared.amount,
@@ -727,7 +750,7 @@ actor WalletManager {
                 preferredNodeURL: MoneroConfig.broadcastNodeURL()
             )
         } catch {
-            print("⚠️ Pending prepared send recovery deferred: \(error.localizedDescription)")
+            WalletDiagnostics.log("⚠️ Pending prepared send recovery deferred: \(error.localizedDescription)")
         }
     }
 
@@ -802,7 +825,7 @@ actor WalletManager {
         #endif
 
         let node = MoneroConfig.scanNodeURL()
-        print("🧪 scan tuning: WalletCore defaults (range/75/75) node=\(node)")
+        WalletDiagnostics.log("🧪 scan tuning: WalletCore defaults (range/75/75) node=\(node)")
     }
 
     // NOTE: Removed the reason-tagging wrapper to avoid recursive overload confusion.
@@ -820,13 +843,13 @@ actor WalletManager {
                 .appendingPathComponent("\(walletId).cache")
             if fm.fileExists(atPath: fileURL.path) {
                 try? fm.removeItem(at: fileURL)
-                print("🗂️ Cleared wallet cache at \(fileURL.lastPathComponent) for \(walletId)")
+                WalletDiagnostics.log("🗂️ Cleared wallet cache at \(fileURL.lastPathComponent) for \(walletId)")
             }
         }
         let legacyKey = "wallet_cache_\(walletId)"
         if UserDefaults.standard.object(forKey: legacyKey) != nil {
             UserDefaults.standard.removeObject(forKey: legacyKey)
-            print("🗂️ Removed legacy cache blob for \(walletId)")
+            WalletDiagnostics.log("🗂️ Removed legacy cache blob for \(walletId)")
         }
     }
 
@@ -841,7 +864,7 @@ actor WalletManager {
         cachePersistenceSuppressed = true
         let fileURL = cacheFileURL(for: walletId)
         if !FileManager.default.fileExists(atPath: fileURL.path) {
-            print("🗂️ No cache file to clear for \(walletId)")
+            WalletDiagnostics.log("🗂️ No cache file to clear for \(walletId)")
         }
     }
 
@@ -860,9 +883,9 @@ actor WalletManager {
         if let (total, unlocked) = try? getBalance() {
             let totalXMR = Double(total) / 1_000_000_000_000.0
             let unlockedXMR = Double(unlocked) / 1_000_000_000_000.0
-            print("🔎 Preview start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
+            WalletDiagnostics.log("🔎 Preview start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
         } else {
-            print("🔎 Preview start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+            WalletDiagnostics.log("🔎 Preview start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
         }
 
         let dest = WalletCoreFFIClient.Destination(address: toAddress, amount: amountPiconero)
@@ -876,12 +899,12 @@ actor WalletManager {
             )
         } catch {
             let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-            print("❌ Preview fee failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+            WalletDiagnostics.log("❌ Preview fee failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
             throw error
         }
 
         let feeXMR = Double(fee) / 1_000_000_000_000.0
-        print("📦 Estimated fee: \(fee) piconero (\(String(format: "%.12f", feeXMR)) XMR)")
+        WalletDiagnostics.log("📦 Estimated fee: \(fee) piconero (\(String(format: "%.12f", feeXMR)) XMR)")
 
         return fee
     }
@@ -902,7 +925,7 @@ actor WalletManager {
         let endpoint = MoneroConfig.broadcastNodeURL()
         let proxyDesc = MoneroConfig.i2pHTTPProxyAddress ?? "(none)"
         let amountXMR = Double(amountPiconero) / 1_000_000_000_000.0
-        print("🔎 Preview (subaddr \(fromSubaddressMinor)) start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+        WalletDiagnostics.log("🔎 Preview (subaddr \(fromSubaddressMinor)) start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
 
         let dest = WalletCoreFFIClient.Destination(address: toAddress, amount: amountPiconero)
         let fee: UInt64
@@ -916,12 +939,12 @@ actor WalletManager {
             )
         } catch {
             let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-            print("❌ Preview fee (subaddr \(fromSubaddressMinor)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+            WalletDiagnostics.log("❌ Preview fee (subaddr \(fromSubaddressMinor)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
             throw error
         }
 
         let feeXMR = Double(fee) / 1_000_000_000_000.0
-        print("📦 Estimated fee (subaddr \(fromSubaddressMinor)): \(fee) piconero (\(String(format: "%.12f", feeXMR)) XMR)")
+        WalletDiagnostics.log("📦 Estimated fee (subaddr \(fromSubaddressMinor)): \(fee) piconero (\(String(format: "%.12f", feeXMR)) XMR)")
 
         return fee
     }
@@ -949,7 +972,7 @@ actor WalletManager {
             return res
         } catch {
             let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-            print("❌ Sweep preview (subaddr \(fromSubaddressMinor)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+            WalletDiagnostics.log("❌ Sweep preview (subaddr \(fromSubaddressMinor)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
             throw error
         }
     }
@@ -958,6 +981,7 @@ actor WalletManager {
     func sweep(
         fromSubaddressMinor: UInt32,
         toAddress: String,
+        approvedMaxFee: UInt64,
         ringLen: UInt8 = 16
     ) throws -> (txid: String, amount: UInt64, fee: UInt64) {
         try withSendLock {
@@ -983,7 +1007,7 @@ actor WalletManager {
                 )
             } catch {
                 let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-                print("❌ Prepare sweep (subaddr \(fromSubaddressMinor)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+                WalletDiagnostics.log("❌ Prepare sweep (subaddr \(fromSubaddressMinor)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
                 throw error
             }
 
@@ -991,6 +1015,7 @@ actor WalletManager {
                 walletId: walletId,
                 usedEndpoint: usedEndpoint,
                 prepared: prepared,
+                approvedMaxFee: approvedMaxFee,
                 logLabel: "sweep subaddr \(fromSubaddressMinor)"
             )
         }
@@ -1001,6 +1026,7 @@ actor WalletManager {
         fromSubaddressMinor: UInt32,
         toAddress: String,
         amountPiconero: UInt64,
+        approvedMaxFee: UInt64,
         ringLen: UInt8 = 16
     ) throws -> (txid: String, fee: UInt64) {
         try withSendLock {
@@ -1027,7 +1053,7 @@ actor WalletManager {
                 )
             } catch {
                 let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-                print("❌ Prepare send (subaddr \(fromSubaddressMinor)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+                WalletDiagnostics.log("❌ Prepare send (subaddr \(fromSubaddressMinor)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
                 throw error
             }
 
@@ -1035,6 +1061,7 @@ actor WalletManager {
                 walletId: walletId,
                 usedEndpoint: usedEndpoint,
                 prepared: prepared,
+                approvedMaxFee: approvedMaxFee,
                 logLabel: "send subaddr \(fromSubaddressMinor)"
             )
             return (txid: result.txid, fee: result.fee)
@@ -1055,9 +1082,9 @@ actor WalletManager {
         if let (total, unlocked) = try? getBalance() {
             let totalXMR = Double(total) / 1_000_000_000_000.0
             let unlockedXMR = Double(unlocked) / 1_000_000_000_000.0
-            print("🔎 Sweep preview start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
+            WalletDiagnostics.log("🔎 Sweep preview start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
         } else {
-            print("🔎 Sweep preview start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+            WalletDiagnostics.log("🔎 Sweep preview start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
         }
 
         let res: (amount: UInt64, fee: UInt64)
@@ -1070,19 +1097,19 @@ actor WalletManager {
             )
         } catch {
             let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-            print("❌ Sweep preview failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+            WalletDiagnostics.log("❌ Sweep preview failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
             throw error
         }
 
         let amountXMR = Double(res.amount) / 1_000_000_000_000.0
         let feeXMR = Double(res.fee) / 1_000_000_000_000.0
-        print("📦 Sweep preview: amount=\(res.amount) piconero (\(String(format: "%.12f", amountXMR)) XMR), fee=\(res.fee) piconero (\(String(format: "%.12f", feeXMR)) XMR)")
+        WalletDiagnostics.log("📦 Sweep preview: amount=\(res.amount) piconero (\(String(format: "%.12f", amountXMR)) XMR), fee=\(res.fee) piconero (\(String(format: "%.12f", feeXMR)) XMR)")
 
         return res
     }
 
     /// Sweep ("Send Max") to a destination. Returns (txid, amount, fee).
-    func sweep(toAddress: String, ringLen: UInt8 = 16) throws -> (txid: String, amount: UInt64, fee: UInt64) {
+    func sweep(toAddress: String, approvedMaxFee: UInt64, ringLen: UInt8 = 16) throws -> (txid: String, amount: UInt64, fee: UInt64) {
         try withSendLock {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
@@ -1095,9 +1122,9 @@ actor WalletManager {
             if let (total, unlocked) = try? getBalance() {
                 let totalXMR = Double(total) / 1_000_000_000_000.0
                 let unlockedXMR = Double(unlocked) / 1_000_000_000_000.0
-                print("📤 Sweep start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
+                WalletDiagnostics.log("📤 Sweep start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
             } else {
-                print("📤 Sweep start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+                WalletDiagnostics.log("📤 Sweep start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
             }
 
             if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
@@ -1115,7 +1142,7 @@ actor WalletManager {
                 )
             } catch {
                 let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-                print("❌ Prepare sweep failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+                WalletDiagnostics.log("❌ Prepare sweep failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
                 throw error
             }
 
@@ -1123,9 +1150,10 @@ actor WalletManager {
                 walletId: walletId,
                 usedEndpoint: usedEndpoint,
                 prepared: prepared,
+                approvedMaxFee: approvedMaxFee,
                 logLabel: "sweep"
             )
-            print("✅ Swept txid=\(result.txid), amount=\(result.amount) piconero, fee=\(result.fee) piconero via \(policy) endpoint \(usedEndpoint)")
+            WalletDiagnostics.log("✅ Swept txid=\(result.txid), amount=\(result.amount) piconero, fee=\(result.fee) piconero via \(policy) endpoint \(usedEndpoint)")
             return result
         }
     }
@@ -1134,7 +1162,7 @@ actor WalletManager {
     ///
     /// Exact / filtered / sweep sends all use prepare → durable persist → relay so a crash
     /// between signing and broadcast can be retried idempotently.
-    func send(toAddress: String, amountPiconero: UInt64, ringLen: UInt8 = 16) throws -> (txid: String, fee: UInt64) {
+    func send(toAddress: String, amountPiconero: UInt64, approvedMaxFee: UInt64, ringLen: UInt8 = 16) throws -> (txid: String, fee: UInt64) {
         try withSendLock {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
@@ -1149,9 +1177,9 @@ actor WalletManager {
             if let (total, unlocked) = try? getBalance() {
                 let totalXMR = Double(total) / 1_000_000_000_000.0
                 let unlockedXMR = Double(unlocked) / 1_000_000_000_000.0
-                print("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
+                WalletDiagnostics.log("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
             } else {
-                print("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+                WalletDiagnostics.log("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
             }
 
             // Finish any prior prepared payload. Do not also construct a new tx in this tap.
@@ -1171,12 +1199,31 @@ actor WalletManager {
                 )
             } catch {
                 let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-                print("❌ Prepare send failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+                WalletDiagnostics.log("❌ Prepare send failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
                 throw error
             }
 
-            try persistPendingPrepared(for: walletId, nodeURL: usedEndpoint, prepared: prepared)
+            let result = try persistAndRelayPrepared(
+                walletId: walletId,
+                usedEndpoint: usedEndpoint,
+                prepared: prepared,
+                approvedMaxFee: approvedMaxFee,
+                logLabel: "send"
+            )
+            return (txid: result.txid, fee: result.fee)
+        }
+    }
 
+    /// Persist a prepared payload, relay it, clear the durable file, and export cache.
+    private func persistAndRelayPrepared(
+        walletId: String,
+        usedEndpoint: String,
+        prepared: WalletCoreFFIClient.PreparedSend,
+        approvedMaxFee: UInt64,
+        logLabel: String
+    ) throws -> (txid: String, amount: UInt64, fee: UInt64) {
+        try SendSafety.withApprovedFee(preparedFee: prepared.fee, approvedMaxFee: approvedMaxFee) {
+            try persistPendingPrepared(for: walletId, nodeURL: usedEndpoint, prepared: prepared)
             let relay: WalletCoreFFIClient.RelayResult
             do {
                 relay = try WalletCoreFFIClient.relayPrepared(
@@ -1186,47 +1233,15 @@ actor WalletManager {
                 )
             } catch {
                 let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-                print("❌ Relay prepared failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
+                WalletDiagnostics.log("❌ Relay prepared (\(logLabel)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
                 throw error
             }
-
             clearPendingPrepared(for: walletId)
-
-            let feeXMR = Double(prepared.fee) / 1_000_000_000_000.0
-            print("✅ Sent txid=\(relay.txid) status=\(relay.status), fee=\(prepared.fee) piconero (\(String(format: "%.12f", feeXMR)) XMR) via \(policy) endpoint \(usedEndpoint)")
-
+            WalletDiagnostics.log("✅ \(logLabel) relayed txid=\(relay.txid) status=\(relay.status) fee=\(prepared.fee)")
             exportCacheAndPersist(for: walletId)
-            print("🗂️ Cache export reason: send walletId=\(walletId)")
-
-            return (txid: relay.txid, fee: prepared.fee)
+            WalletDiagnostics.log("🗂️ Cache export reason: \(logLabel) walletId=\(walletId)")
+            return (txid: relay.txid, amount: prepared.amount, fee: prepared.fee)
         }
-    }
-
-    /// Persist a prepared payload, relay it, clear the durable file, and export cache.
-    private func persistAndRelayPrepared(
-        walletId: String,
-        usedEndpoint: String,
-        prepared: WalletCoreFFIClient.PreparedSend,
-        logLabel: String
-    ) throws -> (txid: String, amount: UInt64, fee: UInt64) {
-        try persistPendingPrepared(for: walletId, nodeURL: usedEndpoint, prepared: prepared)
-        let relay: WalletCoreFFIClient.RelayResult
-        do {
-            relay = try WalletCoreFFIClient.relayPrepared(
-                walletId: walletId,
-                prepared: prepared,
-                nodeURL: usedEndpoint
-            )
-        } catch {
-            let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"
-            print("❌ Relay prepared (\(logLabel)) failed: error=\(error.localizedDescription) walletcore_last_error=\(coreMsg)")
-            throw error
-        }
-        clearPendingPrepared(for: walletId)
-        print("✅ \(logLabel) relayed txid=\(relay.txid) status=\(relay.status) fee=\(prepared.fee)")
-        exportCacheAndPersist(for: walletId)
-        print("🗂️ Cache export reason: \(logLabel) walletId=\(walletId)")
-        return (txid: relay.txid, amount: prepared.amount, fee: prepared.fee)
     }
 
     private func siblingMonerodURLIfNeeded(for endpoint: String) -> String? {
@@ -1274,7 +1289,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Preview fee retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            WalletDiagnostics.log("↩️ Preview fee retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             return try WalletCoreFFIClient.previewFee(
                 walletId: walletId,
                 destinations: destinations,
@@ -1305,7 +1320,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Preview fee (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            WalletDiagnostics.log("↩️ Preview fee (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             return try WalletCoreFFIClient.previewFeeWithFilter(
                 walletId: walletId,
                 destinations: destinations,
@@ -1335,7 +1350,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Sweep preview retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            WalletDiagnostics.log("↩️ Sweep preview retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             return try WalletCoreFFIClient.previewSweep(
                 walletId: walletId,
                 toAddress: toAddress,
@@ -1366,7 +1381,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Sweep preview (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            WalletDiagnostics.log("↩️ Sweep preview (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             return try WalletCoreFFIClient.previewSweepWithFilter(
                 walletId: walletId,
                 toAddress: toAddress,
@@ -1399,7 +1414,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Prepare send retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            WalletDiagnostics.log("↩️ Prepare send retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             let prepared = try WalletCoreFFIClient.prepareSend(
                 walletId: walletId,
                 toAddress: toAddress,
@@ -1433,7 +1448,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Prepare send (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            WalletDiagnostics.log("↩️ Prepare send (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             let prepared = try WalletCoreFFIClient.prepareSendWithFilter(
                 walletId: walletId,
                 destinations: destinations,
@@ -1465,7 +1480,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Prepare sweep retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            WalletDiagnostics.log("↩️ Prepare sweep retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             let prepared = try WalletCoreFFIClient.prepareSweep(
                 walletId: walletId,
                 toAddress: toAddress,
@@ -1498,7 +1513,7 @@ actor WalletManager {
                 throw error
             }
 
-            print("↩️ Prepare sweep (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
+            WalletDiagnostics.log("↩️ Prepare sweep (filtered) retry: Fee RPC unavailable at \(nodeURL); retrying via sibling Monero RPC \(fallbackURL)")
             let prepared = try WalletCoreFFIClient.prepareSweepWithFilter(
                 walletId: walletId,
                 toAddress: toAddress,

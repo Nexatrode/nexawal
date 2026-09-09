@@ -20,6 +20,11 @@ class WalletViewModel: ObservableObject {
 
     // Transaction history (transfer-level)
     @Published var transfers: [WalletCoreFFIClient.Transfer] = []
+    @Published private(set) var totalHistoryCount = 0
+    @Published private(set) var pendingHistoryCount = 0
+    @Published private(set) var historyRevision: String?
+    var historyWalletId: String { walletId }
+    @Published private(set) var historySession = UUID()
 
     // Receive subaddresses (account 0)
     @Published var receiveSubaddresses: [ReceiveSubaddressEntry] = []
@@ -47,6 +52,7 @@ class WalletViewModel: ObservableObject {
 
     /// Periodic tip probe + auto-resume while the app is in the foreground.
     private var catchUpTask: Task<Void, Never>?
+    private var resumeInProgress = false
     private let catchUpIntervalNanoseconds: UInt64 = 60_000_000_000
 
     @Published var biometricsEnabled: Bool = false
@@ -76,6 +82,8 @@ class WalletViewModel: ObservableObject {
     private var storedMetadata: StoredWalletMetadata?
     private var isMainnet: Bool = true
     private var syncStatusPollTask: Task<Void, Never>?
+    private var syncPollGeneration = UUID()
+    private var balanceSnapshotEpoch = WalletSnapshotEpoch()
     private var isManualRescanInProgress: Bool = false
     private var lastPollingStatus: (chainHeight: UInt64, lastScanned: UInt64)?
     private var didRewindEmptyHistory = false
@@ -158,9 +166,6 @@ class WalletViewModel: ObservableObject {
         }
         let trusted = MoneroConfig.trustedScannedHeight
         guard lastScannedHeight <= trusted + tol else {
-            return false
-        }
-        if chainHeight > restoreHeight &+ 10_000 && transfers.isEmpty {
             return false
         }
         return true
@@ -346,13 +351,15 @@ class WalletViewModel: ObservableObject {
 
     /// Create/replace must not inherit the previous wallet's trusted scan checkpoint.
     private func resetScanTrustForNewWallet() {
+        balanceSnapshotEpoch.invalidate()
         MoneroConfig.setTrustedScannedHeight(0)
         MoneroConfig.setScanInterrupted(true)
         transfers = []
+        totalHistoryCount = 0; pendingHistoryCount = 0; historyRevision = nil; historySession = UUID()
         didRewindEmptyHistory = false
         lastScannedHeight = restoreHeight
         isWalletOpen = false
-        print("🧭 reset scan trust for new wallet")
+        WalletDiagnostics.log("🧭 reset scan trust for new wallet")
     }
 
     func formatXMR(_ amount: Double) -> String {
@@ -372,7 +379,7 @@ class WalletViewModel: ObservableObject {
                 try await walletManager.snapshotState()
             } catch {
                 // Best effort only
-                print("⚠️ Background snapshot failed: \(error.localizedDescription)")
+                WalletDiagnostics.log("⚠️ Background snapshot failed: \(error.localizedDescription)")
             }
         }
     }
@@ -395,7 +402,7 @@ class WalletViewModel: ObservableObject {
                 self?.endBriefBackgroundSync(reason: "expired")
             }
         }
-        print("⏳ brief background sync: began (refresh still running)")
+        WalletDiagnostics.log("⏳ brief background sync: began (refresh still running)")
     }
 
     /// End any outstanding background-sync task. Safe to call from foreground / refresh completion.
@@ -408,7 +415,7 @@ class WalletViewModel: ObservableObject {
         }
         syncBackgroundTaskID = .invalid
         UIApplication.shared.endBackgroundTask(id)
-        print("⏳ brief background sync: ended (\(reason))")
+        WalletDiagnostics.log("⏳ brief background sync: ended (\(reason))")
     }
 
     /// Replace the existing single wallet with a new mnemonic (destructive).
@@ -419,12 +426,18 @@ class WalletViewModel: ObservableObject {
         mainnet: Bool = true,
         requireBiometrics: Bool = false
     ) async {
+        do {
+            try await walletManager.archivePendingSendForReplacement(walletId: walletId)
+        } catch {
+            errorMessage = "Could not preserve pending-send recovery data. Wallet replacement was stopped."
+            return
+        }
         // Clear persisted metadata + mnemonic first
         do {
             try await storage.clearWallet()
         } catch {
             // Continue: we can still attempt to open, but stale state may require a full rescan.
-            print("⚠️ Failed to clear stored wallet data during replace: \(error.localizedDescription)")
+            WalletDiagnostics.log("⚠️ Failed to clear stored wallet data during replace: \(error.localizedDescription)")
         }
 
         await walletManager.deletePersistedScanCache(walletId: walletId)
@@ -518,7 +531,7 @@ class WalletViewModel: ObservableObject {
                 )
             } catch {
                 let message = L10n.format("Wallet persistence failed: %@", error.localizedDescription)
-                print("⚠️ \(message)")
+                WalletDiagnostics.log("⚠️ \(message)")
                 errorMessage = message
                 isWalletOpen = false
                 return
@@ -556,6 +569,8 @@ class WalletViewModel: ObservableObject {
         // If one is already running, don't start another.
         if refreshTask != nil { return }
 
+        balanceSnapshotEpoch.invalidate()
+        balanceIsStaleWhileSyncing = true
         isRefreshing = true
         MoneroConfig.setScanInterrupted(true)
         errorMessage = nil
@@ -567,49 +582,17 @@ class WalletViewModel: ObservableObject {
         refreshTask = Task { [weak self] in
             guard let self else { return }
             defer {
-                Task { @MainActor in
-                    // Keep the final session-average blk/s visible after sync completes.
-                    self.stopSyncStatusPolling(clearThroughput: false)
-                    self.isRefreshing = false
-                    self.refreshTask = nil
-                    self.endBriefBackgroundSync(reason: "refresh-done")
-                }
+                // This task already runs on the main actor. Do not enqueue delayed cleanup
+                // that could clear the handle/flags of a subsequent refresh.
+                self.stopSyncStatusPolling(clearThroughput: false)
+                self.isRefreshing = false
+                self.refreshTask = nil
+                self.endBriefBackgroundSync(reason: "refresh-done")
             }
 
             do {
                 let status = try await self.walletManager.refreshWallet()
-                await MainActor.run {
-                    self.applySyncStatus(status)
-                }
-
-                // Always do a final balance fetch at the end of refresh so totals are correct.
-                let balance = try await self.walletManager.getBalance()
-                await MainActor.run {
-                    self.applyBalanceSnapshot(
-                        total: balance.total,
-                        unlocked: balance.unlocked,
-                        allowAuthoritativeZero: self.isSynced
-                    )
-                }
-                self.logObservedOutputsSummary(context: "refresh_done")
-
-                // Refresh transfer history at end of refresh (authoritative)
-                await self.reloadTransfersFromCore(context: "refresh_done")
-
-                await self.persistMetadataUpdate()
-                let emptyHistoryAtTip =
-                    await MainActor.run {
-                        self.chainHeight > self.restoreHeight &+ 10_000 && self.transfers.isEmpty
-                    }
-                if emptyHistoryAtTip {
-                    MoneroConfig.setTrustedScannedHeight(self.restoreHeight)
-                    MoneroConfig.setScanInterrupted(true)
-                    print("🧭 scan complete but history empty; keeping interrupted and trusted=\(self.restoreHeight)")
-                } else {
-                    MoneroConfig.setTrustedScannedHeight(self.lastScannedHeight)
-                    MoneroConfig.setScanInterrupted(false)
-                    print("🧭 scan checkpoint trusted=\(self.lastScannedHeight) interrupted=false")
-                }
+                try await self.finishSuccessfulRefresh(status: status, context: "refresh_done")
             } catch is CancellationError {
                 // User-cancelled refresh: keep UI calm; polling teardown happens in defer.
                 await MainActor.run {
@@ -618,6 +601,7 @@ class WalletViewModel: ObservableObject {
                 }
             } catch {
                 MoneroConfig.setScanInterrupted(true)
+                self.balanceIsStaleWhileSyncing = true
                 let message = L10n.format("Refresh failed: %@", error.localizedDescription)
                 await MainActor.run {
                     self.errorMessage = message
@@ -625,6 +609,43 @@ class WalletViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    /// Publish one final native snapshot before dropping the UI spinner. Successful native
+    /// completion, not `isSynced` (which requires that spinner to be off), authorizes zero.
+    private func finishSuccessfulRefresh(status: WalletCoreFFIClient.SyncStatus, context: String) async throws {
+        balanceSnapshotEpoch.invalidate()
+        let epoch = balanceSnapshotEpoch.token
+        let polling = syncStatusPollTask
+        stopSyncStatusPolling(clearThroughput: false)
+        await polling?.value
+        try Task.checkCancellation()
+
+        let snapshot = try await walletManager.completedRefreshSnapshot()
+        try Task.checkCancellation()
+        guard balanceSnapshotEpoch.accepts(epoch) else { throw CancellationError() }
+        guard snapshot.status.lastScanned >= status.lastScanned else {
+            throw WalletError.statusFailed("Scan changed before its final snapshot was published")
+        }
+        let authoritative = BalanceSnapshotPolicy.completedRefreshIsAuthoritative(
+            nativeIdle: true,
+            chainHeight: snapshot.status.chainHeight,
+            lastScannedHeight: snapshot.status.lastScanned,
+            restoreHeight: snapshot.status.restoreHeight,
+            transferCount: snapshot.history.totalCount
+        )
+
+        // No suspension between publishing history, balance, and their checkpoint decision.
+        applySyncStatus(snapshot.status)
+        applyTransfersIfAllowed(snapshot.history, context: context,
+            completedRefreshAuthoritative: authoritative)
+        MoneroConfig.setTrustedScannedHeight(authoritative ? lastScannedHeight : restoreHeight)
+        MoneroConfig.setScanInterrupted(!authoritative)
+        applyBalanceSnapshot(total: snapshot.total, unlocked: snapshot.unlocked,
+            allowAuthoritativeZero: authoritative)
+        FiatPriceService.shared.recordSeenTransfers(snapshot.history.transfers.map { seenTransfer($0) })
+        await persistMetadataUpdate()
+        logObservedOutputsSummary(context: context)
     }
 
     func resumeOnForeground() {
@@ -679,24 +700,24 @@ class WalletViewModel: ObservableObject {
             let info = try await MoneroDaemonClient.getInfo(baseURL: baseURL, proxyAddress: proxy, timeout: 8.0)
             let tip = max(info.height, info.targetHeight)
             if tip > chainHeight {
-                print("🧭 Catch-up tip advanced: chainHeight \(chainHeight) -> \(tip)")
+                WalletDiagnostics.log("🧭 Catch-up tip advanced: chainHeight \(chainHeight) -> \(tip)")
                 chainHeight = tip
             }
         } catch {
             // Non-fatal: still try resume from last-known tip if we already know we are behind.
-            print("⚠️ Catch-up tip probe failed: \(error.localizedDescription)")
+            WalletDiagnostics.log("⚠️ Catch-up tip probe failed: \(error.localizedDescription)")
         }
 
         guard !isRefreshing else { return }
         // Cursor ahead of last clean checkpoint → same as interrupted tip (partial history).
         let trusted = MoneroConfig.trustedScannedHeight
         if lastScannedHeight > trusted + 3 {
-            print("🧭 Catch-up: lastScanned=\(lastScannedHeight) ahead of trusted=\(trusted); resuming")
+            WalletDiagnostics.log("🧭 Catch-up: lastScanned=\(lastScannedHeight) ahead of trusted=\(trusted); resuming")
             await resumeInterruptedScanIfNeeded()
             return
         }
         if MoneroConfig.scanInterrupted || !isSynced {
-            print("🧭 Catch-up starting refresh (lastScanned=\(lastScannedHeight) chainHeight=\(chainHeight) interrupted=\(MoneroConfig.scanInterrupted))")
+            WalletDiagnostics.log("🧭 Catch-up starting refresh (lastScanned=\(lastScannedHeight) chainHeight=\(chainHeight) interrupted=\(MoneroConfig.scanInterrupted))")
             await resumeInterruptedScanIfNeeded()
         }
     }
@@ -707,7 +728,7 @@ class WalletViewModel: ObservableObject {
 
         MoneroConfig.setScanInterrupted(true)
         needsRefreshRetryOnNextActive = true
-        print("🧭 markNeedsRefreshRetryIfInitialSyncInterrupted set retry flag (lastScanned=\(lastScannedHeight) restoreHeight=\(restoreHeight))")
+        WalletDiagnostics.log("🧭 markNeedsRefreshRetryIfInitialSyncInterrupted set retry flag (lastScanned=\(lastScannedHeight) restoreHeight=\(restoreHeight))")
     }
 
     func resumeOnDidBecomeActive() {
@@ -719,10 +740,12 @@ class WalletViewModel: ObservableObject {
         let shouldForceRetry = force || isRefreshing
         if shouldForceRetry {
             needsRefreshRetryOnNextActive = false
+            let refreshToJoin = refreshTask
             cancelRefresh()
             Task { [weak self] in
                 guard let self else { return }
                 await self.walletManager.cancelRefresh()
+                await refreshToJoin?.value
                 await self.resumeInterruptedScanIfNeeded()
             }
             return
@@ -741,23 +764,29 @@ class WalletViewModel: ObservableObject {
     /// last *completed* checkpoint (or restore height) before refreshing.
     private func resumeInterruptedScanIfNeeded() async {
         guard isWalletOpen else { return }
+        // Foreground notifications and the tip probe can both request resume. Never rewind
+        // under a new worker started by the other request while this one was awaiting cancel.
+        guard refreshTask == nil, !isRefreshing, !resumeInProgress else { return }
+        resumeInProgress = true
+        defer { resumeInProgress = false }
         let trusted = MoneroConfig.trustedScannedHeight
         let aheadOfCheckpoint = lastScannedHeight > trusted + 3
         let emptyHistoryAtTip =
             !didRewindEmptyHistory &&
+            (MoneroConfig.scanInterrupted || aheadOfCheckpoint) &&
             isCaughtUpToTip &&
             chainHeight > restoreHeight &+ 10_000 &&
-            transfers.isEmpty
+            totalHistoryCount == 0
         if isCaughtUpToTip && (MoneroConfig.scanInterrupted || aheadOfCheckpoint || emptyHistoryAtTip) {
             let rewind = emptyHistoryAtTip ? restoreHeight : max(restoreHeight, trusted)
             if emptyHistoryAtTip {
                 didRewindEmptyHistory = true
             }
-            print("🧭 incomplete scan looks at tip; rewinding cursor from \(rewind) (lastScanned=\(lastScannedHeight) tip=\(chainHeight) trusted=\(trusted) interrupted=\(MoneroConfig.scanInterrupted))")
+            WalletDiagnostics.log("🧭 incomplete scan looks at tip; rewinding cursor from \(rewind) (lastScanned=\(lastScannedHeight) tip=\(chainHeight) trusted=\(trusted) interrupted=\(MoneroConfig.scanInterrupted))")
             do {
                 try await walletManager.rewindScanCursor(from: rewind)
             } catch {
-                print("⚠️ rewindScanCursor failed: \(error.localizedDescription)")
+                WalletDiagnostics.log("⚠️ rewindScanCursor failed: \(error.localizedDescription)")
             }
         }
         await refreshWallet()
@@ -768,6 +797,8 @@ class WalletViewModel: ObservableObject {
     /// Always leave scanInterrupted=true so we never treat a partial cache as a clean sync.
     func cancelRefresh(userInitiated: Bool = false) {
         guard isRefreshing else { return }
+        balanceSnapshotEpoch.invalidate()
+        balanceIsStaleWhileSyncing = true
         MoneroConfig.setScanInterrupted(true)
         // userInitiated is retained for call-site diagnostics only.
         _ = userInitiated
@@ -775,7 +806,7 @@ class WalletViewModel: ObservableObject {
         // Diagnostic: help identify *who* is triggering cancel (button tap vs lifecycle vs preemption).
         // Swift doesn't provide a cheap full backtrace here, but call-site file/line is still useful.
         let callsite = "\(#fileID):\(#line) \(#function)"
-        print("🛑 VM cancelRefresh() invoked (callsite=\(callsite) userInitiated=\(userInitiated)) isRefreshing=\(isRefreshing) hasTask=\(refreshTask != nil)")
+        WalletDiagnostics.log("🛑 VM cancelRefresh() invoked (callsite=\(callsite) userInitiated=\(userInitiated)) isRefreshing=\(isRefreshing) hasTask=\(refreshTask != nil)")
 
         refreshTask?.cancel()
 
@@ -787,64 +818,52 @@ class WalletViewModel: ObservableObject {
     /// Safe to call anytime a wallet is open (after cache import, after refresh, on foreground).
     private func reloadTransfersFromCore(context: String) async {
         guard isWalletOpen else { return }
+        let epoch = balanceSnapshotEpoch.token
+        let id = walletId
         do {
-            let json = try WalletCoreFFIClient.exportTransfersJSON(walletId: walletId)
-            let prefix = String(json.prefix(1200))
-            print("🧾 transfers_json context=\(context) wallet_id=\(walletId) bytes=\(json.utf8.count) prefix=\(prefix)")
-
-            let rows = try WalletCoreFFIClient.listTransfers(walletId: walletId)
-            applyTransfersIfAllowed(rows, context: context)
-            FiatPriceService.shared.recordSeenTransfers(rows.map { seenTransfer($0) })
-
-            var inCount = 0
-            var outCount = 0
-            var selfCount = 0
-            for r in rows {
-                switch r.direction.lowercased() {
-                case "in": inCount += 1
-                case "out": outCount += 1
-                case "self": selfCount += 1
-                default: break
-                }
-            }
-            print("🧾 transfers_summary context=\(context) wallet_id=\(walletId) rows=\(rows.count) in=\(inCount) out=\(outCount) self=\(selfCount)")
+            let page = try await Task.detached(priority: .userInitiated) {
+                try WalletCoreFFIClient.queryTransfers(walletId: id, query: .init(limit: 10))
+            }.value
+            guard !Task.isCancelled, isWalletOpen, balanceSnapshotEpoch.accepts(epoch) else { return }
+            applyTransfersIfAllowed(page, context: context)
+            FiatPriceService.shared.recordSeenTransfers(page.transfers.map { seenTransfer($0) })
         } catch {
-            print("⚠️ transfers_refresh_failed context=\(context) wallet_id=\(walletId) error=\(error.localizedDescription)")
+            WalletDiagnostics.log("History preview unavailable: \(error.localizedDescription)")
         }
     }
 
-    /// Apply a successful transfer list, preserving nonempty UI history during incomplete sync.
-    private func applyTransfersIfAllowed(_ rows: [WalletCoreFFIClient.Transfer], context: String) {
-        let trusted = MoneroConfig.trustedScannedHeight
+    private func applyTransfersIfAllowed(_ page: WalletCoreFFIClient.HistoryPage, context: String,
+                                        completedRefreshAuthoritative: Bool = false) {
+        guard page.walletId == walletId else { return }
         let shouldReplace = TransferHistoryPolicy.shouldReplaceTransfers(
-            existingCount: transfers.count,
-            newCount: rows.count,
-            refreshing: isRefreshing,
-            caughtUpToTip: isCaughtUpToTip,
+            existingCount: totalHistoryCount, newCount: page.totalCount,
+            refreshing: isRefreshing, caughtUpToTip: isCaughtUpToTip,
             scanInterrupted: MoneroConfig.scanInterrupted,
             lastScannedHeight: lastScannedHeight,
-            trustedScannedHeight: trusted
+            trustedScannedHeight: MoneroConfig.trustedScannedHeight,
+            completedRefreshAuthoritative: completedRefreshAuthoritative
         )
-        guard shouldReplace else {
-            print("🧭 preserving nonempty transfer history (context=\(context) existing=\(transfers.count) new=\(rows.count) refreshing=\(isRefreshing) caughtUp=\(isCaughtUpToTip) interrupted=\(MoneroConfig.scanInterrupted) lastScanned=\(lastScannedHeight) trusted=\(trusted))")
-            return
-        }
-        transfers = rows
-        if !rows.isEmpty {
-            didRewindEmptyHistory = false
-        }
+        guard shouldReplace else { return }
+        transfers = page.transfers
+        totalHistoryCount = page.totalCount
+        pendingHistoryCount = page.pendingCount
+        historyRevision = page.revision
+        if page.totalCount > 0 { didRewindEmptyHistory = false }
     }
 
     /// Update balance without refreshing (quick check)
     func updateBalance() async {
         guard isWalletOpen else { return }
+        let epoch = balanceSnapshotEpoch.token
 
         do {
             if let status = try? await walletManager.getSyncStatus() {
+                guard !Task.isCancelled, balanceSnapshotEpoch.accepts(epoch) else { return }
                 applySyncStatus(status)
             }
 
             let balance = try await walletManager.getBalance()
+            guard !Task.isCancelled, balanceSnapshotEpoch.accepts(epoch) else { return }
             applyBalanceSnapshot(
                 total: balance.total,
                 unlocked: balance.unlocked,
@@ -856,6 +875,7 @@ class WalletViewModel: ObservableObject {
                 metadata.unlockedBalance = balance.unlocked
             }
         } catch {
+            guard !Task.isCancelled, balanceSnapshotEpoch.accepts(epoch) else { return }
             errorMessage = L10n.format("Failed to get balance: %@", error.localizedDescription)
         }
     }
@@ -868,10 +888,13 @@ class WalletViewModel: ObservableObject {
         }
 
         if isRefreshing || refreshTask != nil {
+            let refreshToJoin = refreshTask
             cancelRefresh()
             await walletManager.cancelRefresh()
+            await refreshToJoin?.value
         }
 
+        balanceSnapshotEpoch.invalidate()
         isManualRescanInProgress = true
         isRefreshing = true
         MoneroConfig.setScanInterrupted(true)
@@ -884,8 +907,9 @@ class WalletViewModel: ObservableObject {
         totalBalance = 0
         unlockedBalance = 0
         transfers = []
+        totalHistoryCount = 0; pendingHistoryCount = 0; historyRevision = nil; historySession = UUID()
         didRewindEmptyHistory = false
-        balanceIsStaleWhileSyncing = false
+        balanceIsStaleWhileSyncing = true
         resetScanRateSession()
         startSyncStatusPolling()
 
@@ -897,30 +921,7 @@ class WalletViewModel: ObservableObject {
 
         do {
             let status = try await walletManager.rescan(from: height)
-            applySyncStatus(status)
-
-            let balance = try await walletManager.getBalance()
-            applyBalanceSnapshot(
-                total: balance.total,
-                unlocked: balance.unlocked,
-                allowAuthoritativeZero: true
-            )
-
-            await persistMetadataUpdate { [self] metadata in
-                metadata.restoreHeight = self.restoreHeight
-                metadata.lastScannedHeight = self.lastScannedHeight
-                metadata.chainHeight = self.chainHeight
-                metadata.totalBalance = self.totalBalance
-                metadata.unlockedBalance = self.unlockedBalance
-            }
-            await reloadTransfersFromCore(context: "rescan_done")
-            if chainHeight > restoreHeight &+ 10_000 && transfers.isEmpty {
-                MoneroConfig.setTrustedScannedHeight(restoreHeight)
-                MoneroConfig.setScanInterrupted(true)
-            } else {
-                MoneroConfig.setTrustedScannedHeight(lastScannedHeight)
-                MoneroConfig.setScanInterrupted(false)
-            }
+            try await finishSuccessfulRefresh(status: status, context: "rescan_done")
         } catch {
             MoneroConfig.setScanInterrupted(true)
             let message = L10n.format("Rescan failed: %@", error.localizedDescription)
@@ -946,6 +947,9 @@ class WalletViewModel: ObservableObject {
 
     private func startSyncStatusPolling() {
         syncStatusPollTask?.cancel()
+        let generation = UUID()
+        syncPollGeneration = generation
+        let epoch = balanceSnapshotEpoch.token
         pendingSyncPollRestart = false
         lastPollingStatus = (chainHeight: chainHeight, lastScanned: lastScannedHeight)
         lastPollingUpdate = Date()
@@ -960,6 +964,7 @@ class WalletViewModel: ObservableObject {
 
                     // Update sync status (and compute scan rate) on the main actor.
                     let shouldRestart = await MainActor.run { () -> Bool in
+                        guard !Task.isCancelled, self.balanceSnapshotEpoch.accepts(epoch) else { return true }
                         self.applySyncStatus(status)
                         let now = Date()
                         let tuple = (chainHeight: status.chainHeight, lastScanned: status.lastScanned)
@@ -1045,6 +1050,7 @@ class WalletViewModel: ObservableObject {
                         do {
                             let balance = try await self.walletManager.getBalance()
                             await MainActor.run {
+                                guard !Task.isCancelled, self.balanceSnapshotEpoch.accepts(epoch) else { return }
                                 self.applyBalanceSnapshot(
                                     total: balance.total,
                                     unlocked: balance.unlocked,
@@ -1052,6 +1058,7 @@ class WalletViewModel: ObservableObject {
                                 )
                                 self.lastBalancePollAt = Date()
                             }
+                            guard !Task.isCancelled, self.balanceSnapshotEpoch.accepts(epoch) else { break }
                             await self.persistMetadataUpdate { metadata in
                                 metadata.totalBalance = balance.total
                                 metadata.unlockedBalance = balance.unlocked
@@ -1073,41 +1080,15 @@ class WalletViewModel: ObservableObject {
                     }
 
                     if shouldPollTransfers {
-                        let rows = await MainActor.run { () -> [WalletCoreFFIClient.Transfer]? in
-                            // WalletManager is an actor; avoid calling actor-isolated methods from this main-actor block.
-                            return try? WalletCoreFFIClient.listTransfers(walletId: self.walletId)
-                        }
-
-                        // Debug: periodically log the raw JSON and a direction summary while polling so we can
-                        // catch outgoing/spend rows appearing mid-sync.
-                        do {
-                            let json = try WalletCoreFFIClient.exportTransfersJSON(walletId: self.walletId)
-                            let prefix = String(json.prefix(600))
-                            print("🧾 transfers_json(poll) wallet_id=\(self.walletId) bytes=\(json.utf8.count) prefix=\(prefix)")
-
-                            if let rows {
-                                var inCount = 0
-                                var outCount = 0
-                                var selfCount = 0
-                                for r in rows {
-                                    switch r.direction.lowercased() {
-                                    case "in": inCount += 1
-                                    case "out": outCount += 1
-                                    case "self": selfCount += 1
-                                    default: break
-                                    }
-                                }
-                                print("🧾 transfers_summary(poll) wallet_id=\(self.walletId) rows=\(rows.count) in=\(inCount) out=\(outCount) self=\(selfCount)")
-                            }
-                        } catch {
-                            print("⚠️ transfers_poll_debug_failed wallet_id=\(self.walletId) error=\(error.localizedDescription)")
-                        }
-                        if let rows {
-                            await MainActor.run {
-                                self.applyTransfersIfAllowed(rows, context: "poll")
-                                self.lastTransfersPollAt = Date()
-                                FiatPriceService.shared.recordSeenTransfers(rows.map { self.seenTransfer($0) })
-                            }
+                        let id = self.walletId
+                        let page = try? await Task.detached(priority: .utility) {
+                            try WalletCoreFFIClient.queryTransfers(walletId: id, query: .init(limit: 10))
+                        }.value
+                        if let page {
+                            guard !Task.isCancelled, self.balanceSnapshotEpoch.accepts(epoch) else { break }
+                            self.applyTransfersIfAllowed(page, context: "poll")
+                            self.lastTransfersPollAt = Date()
+                            FiatPriceService.shared.recordSeenTransfers(page.transfers.map { self.seenTransfer($0) })
                         }
                     }
                 } catch {
@@ -1116,6 +1097,8 @@ class WalletViewModel: ObservableObject {
                 try? await Task.sleep(nanoseconds: 300_000_000)
             }
             await MainActor.run {
+                // A cancelled poll must not tear down or restart a newer polling task.
+                guard self.syncPollGeneration == generation else { return }
                 if self.pendingSyncPollRestart {
                     self.pendingSyncPollRestart = false
                     self.syncStatusPollTask = nil
@@ -1133,6 +1116,7 @@ class WalletViewModel: ObservableObject {
     }
 
     private func stopSyncStatusPolling(clearThroughput: Bool = true) {
+        syncPollGeneration = UUID()
         syncStatusPollTask?.cancel()
         syncStatusPollTask = nil
         lastPollingStatus = nil
@@ -1163,6 +1147,7 @@ class WalletViewModel: ObservableObject {
     }
 
     private func applyMetadataSnapshot(_ metadata: StoredWalletMetadata) async {
+        balanceSnapshotEpoch.invalidate()
         var snapshot = metadata
         let normalizedChainHeight = max(snapshot.chainHeight, snapshot.lastScannedHeight, snapshot.restoreHeight)
         let normalizedRestoreHeight = min(snapshot.restoreHeight, normalizedChainHeight)
@@ -1179,7 +1164,9 @@ class WalletViewModel: ObservableObject {
         lastScannedHeight = normalizedLastScanned
         totalBalance = snapshot.totalBalance
         unlockedBalance = snapshot.unlockedBalance
-        balanceIsStaleWhileSyncing = false
+        // Stored UI metadata is a last-known balance, not proof that the imported core cache
+        // or a resumed scan has caught up. This trust must be re-established on every launch.
+        balanceIsStaleWhileSyncing = true
         biometricsEnabled = snapshot.biometricsEnabled
         chainTime = 0
         isMainnet = snapshot.mainnet
@@ -1189,7 +1176,7 @@ class WalletViewModel: ObservableObject {
         } catch WalletStorageError.walletNotStored {
             // Ignore: nothing persisted yet.
         } catch {
-            print("⚠️ Failed to persist normalized metadata: \(error)")
+            WalletDiagnostics.log("⚠️ Failed to persist normalized metadata: \(error)")
         }
     }
 
@@ -1215,7 +1202,7 @@ class WalletViewModel: ObservableObject {
         } catch WalletStorageError.walletNotStored {
             // Nothing to persist yet.
         } catch {
-            print("⚠️ Metadata persistence failed: \(error)")
+            WalletDiagnostics.log("⚠️ Metadata persistence failed: \(error)")
         }
     }
 
@@ -1237,8 +1224,8 @@ class WalletViewModel: ObservableObject {
             let normalizedWords = mnemonic
                 .components(separatedBy: .whitespacesAndNewlines)
                 .filter { !$0.isEmpty }
-            print("🧭 loadStoredWalletOnLaunch metadata walletId=\(metadata.walletId) restoreHeight=\(metadata.restoreHeight) mainnet=\(metadata.mainnet) biometricsEnabled=\(metadata.biometricsEnabled)")
-            print("🧭 loadStoredWalletOnLaunch mnemonic fingerprint=\(lastOpenedMnemonicFingerprint ?? "(nil)") words=\(normalizedWords.count)")
+            WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch metadata walletId=\(metadata.walletId) restoreHeight=\(metadata.restoreHeight) mainnet=\(metadata.mainnet) biometricsEnabled=\(metadata.biometricsEnabled)")
+            WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch mnemonic fingerprint=\(lastOpenedMnemonicFingerprint ?? "(nil)") words=\(normalizedWords.count)")
 
             do {
                 let address = try await walletManager.derivePrimaryAddress(
@@ -1246,9 +1233,9 @@ class WalletViewModel: ObservableObject {
                     mainnet: metadata.mainnet
                 )
                 walletAddress = address
-                print("🧭 loadStoredWalletOnLaunch derived primary address prefix=\(String(address.prefix(12)))")
+                WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch derived primary address prefix=\(String(address.prefix(12)))")
             } catch {
-                print("⚠️ loadStoredWalletOnLaunch derivePrimaryAddress failed: \(error)")
+                WalletDiagnostics.log("⚠️ loadStoredWalletOnLaunch derivePrimaryAddress failed: \(error)")
                 throw error
             }
 
@@ -1264,9 +1251,9 @@ class WalletViewModel: ObservableObject {
                 restoreHeight: metadata.restoreHeight,
                 mainnet: metadata.mainnet
             )
-                print("🧭 loadStoredWalletOnLaunch openWallet succeeded walletId=\(walletId)")
+                WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch openWallet succeeded walletId=\(walletId)")
             } catch {
-                print("⚠️ loadStoredWalletOnLaunch openWallet failed: \(error)")
+                WalletDiagnostics.log("⚠️ loadStoredWalletOnLaunch openWallet failed: \(error)")
                 throw error
             }
 
@@ -1274,16 +1261,23 @@ class WalletViewModel: ObservableObject {
             needsUnlock = false
             startForegroundCatchUp()
 
-            if let balance = try? await walletManager.getBalance() {
+            let balanceEpoch = balanceSnapshotEpoch.token
+            // Cached UI heights must not authorize zero before we have inspected the actual
+            // imported core state (the cache could be missing, rejected, or behind metadata).
+            let coreStatus = try? await walletManager.getSyncStatus()
+            if let coreStatus, !Task.isCancelled, balanceSnapshotEpoch.accepts(balanceEpoch) {
+                applySyncStatus(coreStatus)
+            }
+            if let balance = try? await walletManager.getBalance(),
+               !Task.isCancelled, balanceSnapshotEpoch.accepts(balanceEpoch) {
                 applyBalanceSnapshot(
                     total: balance.total,
                     unlocked: balance.unlocked,
-                    allowAuthoritativeZero: isSynced
+                    allowAuthoritativeZero: coreStatus != nil && isSynced
                 )
             }
 
-            if let status = try? await walletManager.getSyncStatus() {
-                applySyncStatus(status)
+            if !Task.isCancelled, balanceSnapshotEpoch.accepts(balanceEpoch) {
                 await persistMetadataUpdate()
             }
 
@@ -1302,7 +1296,7 @@ class WalletViewModel: ObservableObject {
                 needsUnlock = true
             }
         } catch {
-            print("⚠️ Failed to load stored wallet: \(error)")
+            WalletDiagnostics.log("⚠️ Failed to load stored wallet: \(error)")
             errorMessage = error.localizedDescription
             needsUnlock = true
         }
@@ -1321,18 +1315,19 @@ class WalletViewModel: ObservableObject {
     private func applyBalanceSnapshot(total: UInt64, unlocked: UInt64, allowAuthoritativeZero: Bool) {
         let knownTotal = max(totalBalance, storedMetadata?.totalBalance ?? 0)
         let knownUnlocked = max(unlockedBalance, storedMetadata?.unlockedBalance ?? 0)
-        let hasKnownNonZero = knownTotal > 0 || knownUnlocked > 0
-        let proposedZero = total == 0 && unlocked == 0
-
-        if proposedZero && hasKnownNonZero && !allowAuthoritativeZero {
-            balanceIsStaleWhileSyncing = true
-            print("🧭 Preserving known nonzero balance while sync state is not authoritative (knownTotal=\(knownTotal) proposedTotal=0)")
+        let decision = BalanceSnapshotPolicy.decide(
+            knownTotal: knownTotal, knownUnlocked: knownUnlocked,
+            proposedTotal: total, proposedUnlocked: unlocked,
+            authoritative: allowAuthoritativeZero
+        )
+        balanceIsStaleWhileSyncing = decision.provisional
+        if !decision.apply {
+            WalletDiagnostics.log("🧭 Preserving known nonzero balance while sync state is not authoritative (knownTotal=\(knownTotal) proposedTotal=0)")
             return
         }
 
         totalBalance = total
         unlockedBalance = unlocked
-        balanceIsStaleWhileSyncing = false
     }
 
     private func seenTransfer(_ row: WalletCoreFFIClient.Transfer) -> (txid: String, timestampSeconds: Int64?) {
@@ -1349,9 +1344,9 @@ class WalletViewModel: ObservableObject {
             let unspent = envelope.outputs.filter { !$0.spent }
             let unspentTotal = unspent.reduce(UInt64(0)) { $0 &+ $1.amount }
             let unlockedUnspentTotal = unspent.filter(\.unlocked).reduce(UInt64(0)) { $0 &+ $1.amount }
-            print("🧾 outputs_summary context=\(context) wallet_id=\(walletId) rows=\(envelope.outputs.count) spent=\(spentCount) unspent=\(unspent.count) unspent_total=\(unspentTotal) unlocked_unspent_total=\(unlockedUnspentTotal)")
+            WalletDiagnostics.log("🧾 outputs_summary context=\(context) wallet_id=\(walletId) rows=\(envelope.outputs.count) spent=\(spentCount) unspent=\(unspent.count) unspent_total=\(unspentTotal) unlocked_unspent_total=\(unlockedUnspentTotal)")
         } catch {
-            print("⚠️ outputs_summary_failed context=\(context) wallet_id=\(walletId) error=\(error.localizedDescription)")
+            WalletDiagnostics.log("⚠️ outputs_summary_failed context=\(context) wallet_id=\(walletId) error=\(error.localizedDescription)")
         }
     }
 }
