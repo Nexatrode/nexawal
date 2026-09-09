@@ -5,7 +5,7 @@
 - iOS / Mac Catalyst app: this repository
 - Android app: [nexawal-android](https://github.com/Nexatrode/nexawal-android)
 - Desktop (macOS, Windows, Linux): [nexawal-gpui](https://github.com/Nexatrode/nexawal-gpui)
-- Shared wallet core (SPM): [MoneroWalletCoreFFI](https://github.com/cacaosteve/MoneroWalletCoreFFI) (`main`)
+- Shared wallet core (SPM): [MoneroWalletCoreFFI](https://github.com/cacaosteve/MoneroWalletCoreFFI) pinned to `c78e22d` (WalletCore 0.1.9)
 - Monero library work: [monero-oxide](https://github.com/cacaosteve/monero-oxide) (fork pin used by the core)
 - Website: [nexatrode.com](https://nexatrode.com)
 
@@ -17,7 +17,7 @@ cd nexawal
 open nexawal.xcodeproj
 ```
 
-Xcode resolves `MoneroWalletCoreFFI` from GitHub on branch `main` (prebuilt xcframework — no Rust required). Use **File → Packages → Update to Latest Package Versions** to move to the tip of that branch.
+Xcode resolves `MoneroWalletCoreFFI` at the release-candidate revision recorded in the project (prebuilt XCFramework — no Rust required). Update the revision deliberately when cutting a new release.
 
 ## Screenshots
 
