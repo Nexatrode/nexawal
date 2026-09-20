@@ -6,6 +6,13 @@ the UI clears the preview and requests another preview/confirmation. A lower fee
 The send intent is captured before the authentication suspension point, and editing is disabled
 while confirming/sending. Already-persisted signed transactions retain idempotent recovery.
 
+September 20 follow-up: a protected wallet now switches to the unlock surface when the app enters
+the background, clears the Swift-layer mnemonic reference, and requires a fresh Keychain
+user-presence check on return. WalletCore can finish its bounded background sync window, so unlock
+reuses that retained core session rather than racing a second open. Unlock completion is invalidated
+if the app backgrounds while authentication is in flight. A protected foreground session also locks
+after five minutes without touch/drag interaction.
+
 Wallet diagnostics use `WalletDiagnostics.log`: release builds never evaluate or print its
 message. Debug requires `NEXAWAL_DIAGNOSTICS=1`. Rust diagnostics have a separate, default-off
 compile-time feature; do not enable it in distributed libraries.
@@ -20,9 +27,11 @@ swift test --package-path Packages/NexaWalLogic
 `Tests/DiagnosticsProbe/main.swift`, compiled alongside `nexawal/WalletDiagnostics.swift` without
 `-D DEBUG`, verifies that even `NEXAWAL_DIAGNOSTICS=1` cannot enable release logging.
 
-Verified locally: all 50 Swift logic tests pass. Debug/Release simulator and unsigned Release
-device builds passed using the local package override. The shared core has 63 passing library
-tests (5 live/benchmark tests intentionally ignored); no real wallet was opened or transaction sent.
+Latest follow-up: all 66 Swift logic tests pass and the complete unsigned Debug simulator app target
+builds with the background-lock changes. Previously, Debug/Release simulator and unsigned Release
+device builds passed using the local package override. The shared core currently has 74 passing
+library tests (6 live/benchmark/scale tests intentionally ignored); no real wallet was opened or
+transaction sent.
 
 ## Release integration
 

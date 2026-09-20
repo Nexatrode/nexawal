@@ -102,6 +102,10 @@ class WalletViewModel: ObservableObject {
     private var pendingSyncPollRestart: Bool = false
     private let pollingStagnationInterval: TimeInterval = 5.0
     private var needsRefreshRetryOnNextActive: Bool = false
+    /// Invalidates an unlock that finishes after the protected app was backgrounded.
+    private var backgroundLockRequested = false
+    private var idleLockTask: Task<Void, Never>?
+    private let protectedIdleTimeoutNanoseconds: UInt64 = 5 * 60 * 1_000_000_000
 
     // Single-wallet behavior: track the seed we last opened to avoid accidental destructive operations.
     // NOTE: This is a privacy-preserving fingerprint (SHA256 of normalized mnemonic), not the mnemonic itself.
@@ -223,8 +227,40 @@ class WalletViewModel: ObservableObject {
     }
 
     func unlockStoredWallet() async {
+        backgroundLockRequested = false
         isRestoringSession = true
         await loadStoredWalletOnLaunch()
+    }
+
+    /// Hide a protected wallet in the app switcher and discard the app-layer seed reference.
+    /// WalletCore may finish its short background sync window; returning to the UI still requires
+    /// a new Keychain user-presence check before any wallet surface is shown.
+    func lockForBackground() {
+        guard biometricsEnabled, isWalletOpen || isRestoringSession else { return }
+        backgroundLockRequested = true
+        idleLockTask?.cancel()
+        idleLockTask = nil
+        snapshotForBackground()
+        stopForegroundCatchUp()
+        mnemonic = ""
+        lastOpenedMnemonicFingerprint = nil
+        isWalletOpen = false
+        isRestoringSession = false
+        needsUnlock = true
+        errorMessage = nil
+    }
+
+    /// Reset the inactivity timer from root-level touch/drag activity.
+    func noteUserInteraction() {
+        idleLockTask?.cancel()
+        idleLockTask = nil
+        guard biometricsEnabled, isWalletOpen else { return }
+        idleLockTask = Task { [weak self] in
+            guard let self else { return }
+            try? await Task.sleep(nanoseconds: self.protectedIdleTimeoutNanoseconds)
+            guard !Task.isCancelled else { return }
+            self.lockForBackground()
+        }
     }
 
     /// Leave the unlock-only surface so the user can explicitly Create / Import (or replace).
@@ -1219,6 +1255,11 @@ class WalletViewModel: ObservableObject {
             await applyMetadataSnapshot(metadata)
 
             let mnemonic = try await storage.loadMnemonic(prompt: L10n.t("Authenticate to unlock nexawal"))
+            guard !backgroundLockRequested else {
+                isLoading = false
+                needsUnlock = true
+                return
+            }
             self.mnemonic = mnemonic
             lastOpenedMnemonicFingerprint = Self.mnemonicFingerprint(mnemonic)
             let normalizedWords = mnemonic
@@ -1242,19 +1283,24 @@ class WalletViewModel: ObservableObject {
             // Load receive subaddresses for this wallet session.
             await loadReceiveSubaddresses()
 
-            // Open with the persisted restore height for this wallet.
-            // Create/replace delete cache and rewind before the first refresh.
-            do {
-            try await walletManager.openWallet(
-                mnemonic: mnemonic,
-                walletId: walletId,
-                restoreHeight: metadata.restoreHeight,
-                mainnet: metadata.mainnet
-            )
-                WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch openWallet succeeded walletId=\(walletId)")
-            } catch {
-                WalletDiagnostics.log("⚠️ loadStoredWalletOnLaunch openWallet failed: \(error)")
-                throw error
+            // A protected background lock hides UI and clears the Swift seed reference, while
+            // WalletCore may still own a short background refresh. Reuse that retained core
+            // session after authentication instead of racing a second open against it.
+            if await walletManager.isWalletOpen() {
+                WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch reused authenticated core session walletId=\(walletId)")
+            } else {
+                do {
+                    try await walletManager.openWallet(
+                        mnemonic: mnemonic,
+                        walletId: walletId,
+                        restoreHeight: metadata.restoreHeight,
+                        mainnet: metadata.mainnet
+                    )
+                    WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch openWallet succeeded walletId=\(walletId)")
+                } catch {
+                    WalletDiagnostics.log("⚠️ loadStoredWalletOnLaunch openWallet failed: \(error)")
+                    throw error
+                }
             }
 
             isWalletOpen = true

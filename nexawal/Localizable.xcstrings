@@ -3275,6 +3275,19 @@
         }
       }
     },
+    "%lld matching · %lld total" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld matching · %2$lld total"
+          }
+        }
+      }
+    },
+    "%lld pending transactions" : {
+
+    },
     "%lld." : {
       "localizations" : {
         "ar" : {
@@ -3918,6 +3931,9 @@
           }
         }
       }
+    },
+    "%llu confirmations" : {
+
     },
     "• %@" : {
 
@@ -9488,6 +9504,9 @@
         }
       }
     },
+    "All" : {
+
+    },
     "Amount" : {
       "localizations" : {
         "ar" : {
@@ -10144,6 +10163,9 @@
           }
         }
       }
+    },
+    "Amount is the total wallet debit, including the network fee." : {
+
     },
     "Amount set to max spendable. Final fee may change slightly at send time." : {
       "extractionState" : "stale",
@@ -19671,6 +19693,7 @@
       }
     },
     "Chain" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -33156,6 +33179,9 @@
         }
       }
     },
+    "Date range" : {
+
+    },
     "Description" : {
       "localizations" : {
         "ar" : {
@@ -39072,6 +39098,7 @@
       }
     },
     "Fee %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -39395,6 +39422,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "手續費 %@"
+          }
+        }
+      }
+    },
+    "Fee %@%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Fee %1$@%2$@"
           }
         }
       }
@@ -41696,6 +41733,12 @@
           }
         }
       }
+    },
+    "Filter" : {
+
+    },
+    "From" : {
+
     },
     "Full rescan (from block 0)" : {
       "extractionState" : "stale",
@@ -44981,6 +45024,12 @@
           }
         }
       }
+    },
+    "History changed · Reload transactions" : {
+
+    },
+    "History may be incomplete while syncing." : {
+
     },
     "How to connect" : {
       "localizations" : {
@@ -52528,6 +52577,12 @@
           }
         }
       }
+    },
+    "Loading transaction…" : {
+
+    },
+    "Loading transactions…" : {
+
     },
     "Locked. Open the existing wallet from {}, or restore a different seed." : {
       "extractionState" : "stale",
@@ -60756,6 +60811,12 @@
         }
       }
     },
+    "No transactions found yet. Sync is not complete." : {
+
+    },
+    "No transactions match these filters." : {
+
+    },
     "No transactions yet." : {
       "localizations" : {
         "ar" : {
@@ -66030,6 +66091,9 @@
           }
         }
       }
+    },
+    "Paid by the sender. Not deducted from the amount received." : {
+
     },
     "Paste 25-word mnemonic…" : {
       "extractionState" : "stale",
@@ -77217,6 +77281,9 @@
         }
       }
     },
+    "Reload history to continue." : {
+
+    },
     "Remaining" : {
       "localizations" : {
         "ar" : {
@@ -81483,6 +81550,9 @@
           }
         }
       }
+    },
+    "Retry loading history" : {
+
     },
     "Review full Terms of Use" : {
 
@@ -87064,6 +87134,9 @@
           }
         }
       }
+    },
+    "Search transaction ID" : {
+
     },
     "Security" : {
       "localizations" : {
@@ -100869,6 +100942,9 @@
         }
       }
     },
+    "Through" : {
+
+    },
     "Throughput" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -104810,6 +104886,9 @@
           }
         }
       }
+    },
+    "Transactions" : {
+
     },
     "TXID" : {
       "localizations" : {
@@ -110405,6 +110484,9 @@
           }
         }
       }
+    },
+    "View all transactions (%lld)" : {
+
     },
     "Wait for wallet sync to finish before preparing a send." : {
 

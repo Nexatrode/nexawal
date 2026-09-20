@@ -88,6 +88,13 @@ private struct AppRootView: View {
 
     var body: some View {
         ContentView(viewModel: viewModel)
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { _ in viewModel.noteUserInteraction() }
+            )
+            .onChange(of: viewModel.isWalletOpen) {
+                viewModel.noteUserInteraction()
+            }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                 viewModel.markNeedsRefreshRetryIfInitialSyncInterrupted()
             }
@@ -110,6 +117,7 @@ private struct AppRootView: View {
                 // immediately. On expiration we snapshot and let the process suspend.
                 if scenePhase == .background {
                     viewModel.beginBriefBackgroundSyncIfNeeded()
+                    viewModel.lockForBackground()
                     return
                 }
 
