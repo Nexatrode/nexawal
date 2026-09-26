@@ -46,6 +46,7 @@ actor WalletManager {
     private var refreshBatch: Int = 0
     private var currentNetworkMainnet: Bool = true
     private var cachePersistenceSuppressed: Bool = false
+    private var backgroundViewOnlyRefreshActive: Bool = false
 
     // Explicit cancellation support for refresh. WalletCore exposes an authoritative per-wallet
     // job state, so cancellation does not complete locally until the native worker is actually
@@ -501,6 +502,70 @@ actor WalletManager {
     /// Check if a wallet is currently open
     func isWalletOpen() -> Bool {
         return currentWalletId != nil
+    }
+
+    /// Replace private spend authority with view-only keys. When an app-visible refresh was
+    /// active, restart it after sealing so iOS's bounded background window can keep scanning.
+    func sealForBackground(continueRefresh: Bool) throws {
+        guard let walletId = currentWalletId else { return }
+        let nativeRunning = (try? WalletCoreFFIClient.refreshJobStatus(walletId: walletId).state) == .running
+        let shouldContinue = continueRefresh || refreshInProgress || nativeRunning
+
+        refreshCancelRequested = true
+        refreshWaitTask?.cancel()
+        try WalletCoreFFIClient.sealWallet(walletId: walletId)
+        refreshInProgress = false
+        refreshWaitTask = nil
+        exportCacheAndPersist(for: walletId)
+
+        backgroundViewOnlyRefreshActive = false
+        if shouldContinue {
+            applyNetworkProxy()
+            applyScanTuning()
+            try WalletCoreFFIClient.refreshWalletAsync(
+                walletId: walletId,
+                nodeURL: MoneroConfig.scanNodeURL()
+            )
+            backgroundViewOnlyRefreshActive = true
+            WalletDiagnostics.log("🔒 Continued refresh with view-only wallet walletId=\(walletId)")
+        }
+    }
+
+    /// Stop the bounded view-only worker and persist its last completed checkpoint. The wallet
+    /// remains sealed until platform authentication supplies the mnemonic again.
+    func pauseBackgroundViewOnlyRefresh() throws {
+        guard let walletId = currentWalletId else { return }
+        guard backgroundViewOnlyRefreshActive ||
+                (try? WalletCoreFFIClient.isWalletSealed(walletId: walletId)) == true else { return }
+        try WalletCoreFFIClient.sealWallet(walletId: walletId)
+        backgroundViewOnlyRefreshActive = false
+        exportCacheAndPersist(for: walletId)
+    }
+
+    /// Restore spend authority only after the caller has completed Keychain/user-presence auth.
+    func unsealWallet(mnemonic: String, walletId: String) throws {
+        guard currentWalletId == walletId else {
+            throw WalletError.walletOpenFailed("The authenticated wallet is not the open wallet")
+        }
+        try WalletCoreFFIClient.unsealWallet(walletId: walletId, mnemonic: mnemonic)
+        backgroundViewOnlyRefreshActive = false
+        refreshInProgress = false
+        refreshCancelRequested = false
+        refreshWaitTask = nil
+        exportCacheAndPersist(for: walletId)
+    }
+
+    /// Persist a stable checkpoint and remove both private view and spend material from memory.
+    func closeWalletSession() throws {
+        guard let walletId = currentWalletId else { return }
+        try WalletCoreFFIClient.sealWallet(walletId: walletId)
+        exportCacheAndPersist(for: walletId)
+        try WalletCoreFFIClient.closeWallet(walletId: walletId)
+        currentWalletId = nil
+        backgroundViewOnlyRefreshActive = false
+        refreshInProgress = false
+        refreshCancelRequested = false
+        refreshWaitTask = nil
     }
 
     /// Get the current wallet ID

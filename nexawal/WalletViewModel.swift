@@ -232,21 +232,45 @@ class WalletViewModel: ObservableObject {
         await loadStoredWalletOnLaunch()
     }
 
-    /// Hide a protected wallet in the app switcher and discard the app-layer seed reference.
-    /// WalletCore may finish its short background sync window; returning to the UI still requires
-    /// a new Keychain user-presence check before any wallet surface is shown.
-    func lockForBackground() {
-        guard biometricsEnabled, isWalletOpen || isRestoringSession else { return }
+    /// Hide the wallet, discard the Swift seed, and remove native spend authority. During iOS's
+    /// bounded background window an active refresh may continue with only the private view key.
+    /// The protected idle boundary goes further and drops the view key as well.
+    func lockForBackground(closeCore: Bool = false) {
+        guard isWalletOpen || isRestoringSession else { return }
+        // Continue only when iOS actually granted a bounded background task. If it did not,
+        // retaining the view key would buy no scan time and would extend privacy exposure.
+        let continueRefresh = isRefreshing && syncBackgroundTaskID != .invalid
         backgroundLockRequested = true
         idleLockTask?.cancel()
         idleLockTask = nil
         snapshotForBackground()
         stopForegroundCatchUp()
+        refreshTask?.cancel()
+        refreshTask = nil
+        isRefreshing = false
+        if continueRefresh {
+            MoneroConfig.setScanInterrupted(true)
+        }
+        // There is no privacy benefit to retaining the view key when no scan is active.
+        // Protected wallets keep it only for iOS's explicit short background task, then close.
+        let shouldCloseCore = closeCore || !continueRefresh
+        Task { [walletManager] in
+            do {
+                if shouldCloseCore {
+                    try await walletManager.closeWalletSession()
+                } else {
+                    try await walletManager.sealForBackground(continueRefresh: continueRefresh)
+                }
+            } catch {
+                WalletDiagnostics.log("⚠️ Wallet lifecycle lock failed: \(error.localizedDescription)")
+            }
+        }
         mnemonic = ""
         lastOpenedMnemonicFingerprint = nil
         isWalletOpen = false
         isRestoringSession = false
-        needsUnlock = true
+        // Unprotected wallets reload automatically; protected wallets present the unlock surface.
+        needsUnlock = biometricsEnabled
         errorMessage = nil
     }
 
@@ -259,7 +283,7 @@ class WalletViewModel: ObservableObject {
             guard let self else { return }
             try? await Task.sleep(nanoseconds: self.protectedIdleTimeoutNanoseconds)
             guard !Task.isCancelled else { return }
-            self.lockForBackground()
+            self.lockForBackground(closeCore: true)
         }
     }
 
@@ -448,6 +472,20 @@ class WalletViewModel: ObservableObject {
         if reason == "expired" {
             // Last chance to persist progress before iOS suspends the process.
             snapshotForBackground()
+        }
+        // Once the OS-granted window ends there is no remaining background work which
+        // justifies keeping even the private view key resident.
+        let shouldCloseCore = backgroundLockRequested
+        Task { [walletManager] in
+            do {
+                if shouldCloseCore {
+                    try await walletManager.closeWalletSession()
+                } else {
+                    try await walletManager.pauseBackgroundViewOnlyRefresh()
+                }
+            } catch {
+                WalletDiagnostics.log("⚠️ Background wallet lifecycle end failed: \(error.localizedDescription)")
+            }
         }
         syncBackgroundTaskID = .invalid
         UIApplication.shared.endBackgroundTask(id)
@@ -685,7 +723,16 @@ class WalletViewModel: ObservableObject {
     }
 
     func resumeOnForeground() {
-        guard isWalletOpen else { return }
+        guard isWalletOpen else {
+            if backgroundLockRequested, !biometricsEnabled, storedMetadata != nil {
+                backgroundLockRequested = false
+                isRestoringSession = true
+                Task { [weak self] in
+                    await self?.loadStoredWalletOnLaunch()
+                }
+            }
+            return
+        }
         startForegroundCatchUp()
         if MoneroConfig.scanInterrupted || needsRefreshRetryOnNextActive {
             resumeOnDidBecomeActive()
@@ -1283,11 +1330,12 @@ class WalletViewModel: ObservableObject {
             // Load receive subaddresses for this wallet session.
             await loadReceiveSubaddresses()
 
-            // A protected background lock hides UI and clears the Swift seed reference, while
-            // WalletCore may still own a short background refresh. Reuse that retained core
-            // session after authentication instead of racing a second open against it.
+            // A background lock retains at most view-only authority. After Keychain/user-presence
+            // authentication, restore spend authority to that exact wallet. A fully closed idle
+            // session follows the ordinary open + cache import path.
             if await walletManager.isWalletOpen() {
-                WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch reused authenticated core session walletId=\(walletId)")
+                try await walletManager.unsealWallet(mnemonic: mnemonic, walletId: walletId)
+                WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch unsealed authenticated core session walletId=\(walletId)")
             } else {
                 do {
                     try await walletManager.openWallet(
