@@ -1,14 +1,14 @@
 {
-  "originHash": "cb38ba6cc5477b94beeadd11e230da8afb659c8ee14b58579553e97636710864",
-  "pins": [
+  "originHash" : "cb38ba6cc5477b94beeadd11e230da8afb659c8ee14b58579553e97636710864",
+  "pins" : [
     {
-      "identity": "monerowalletcoreffi",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/cacaosteve/MoneroWalletCoreFFI.git",
-      "state": {
-        "revision": "c78e22d81084714a8c98855dcb8f65050dedbe4a"
+      "identity" : "monerowalletcoreffi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cacaosteve/MoneroWalletCoreFFI.git",
+      "state" : {
+        "revision" : "799669396ff02fbb565de2164cee83a3099cea26"
       }
     }
   ],
-  "version": 3
+  "version" : 3
 }
