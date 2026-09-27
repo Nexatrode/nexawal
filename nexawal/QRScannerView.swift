@@ -47,6 +47,12 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     
     private var captureSession: AVCaptureSession?
     private var previewLayer: AVCaptureVideoPreviewLayer?
+    private var overlayView: UIView?
+    private var overlayMaskLayer: CAShapeLayer?
+    private var scanBorderLayer: CAShapeLayer?
+    private var instructionLabel: UILabel?
+    private var closeButton: UIButton?
+    private var cancelButton: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +63,7 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewLayer?.frame = view.bounds
+        layoutScannerOverlay()
     }
     
     private func checkCameraPermission() {
@@ -144,45 +151,39 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
     }
     
     private func addOverlay() {
+        guard overlayView == nil else { return }
+
         let overlayView = UIView(frame: view.bounds)
         overlayView.backgroundColor = .clear
         view.addSubview(overlayView)
-        
-        let scanAreaSize: CGFloat = 250
-        let scanAreaOrigin = CGPoint(
-            x: (view.bounds.width - scanAreaSize) / 2,
-            y: (view.bounds.height - scanAreaSize) / 2
-        )
-        let scanArea = CGRect(origin: scanAreaOrigin, size: CGSize(width: scanAreaSize, height: scanAreaSize))
-        
-        let path = UIBezierPath(rect: view.bounds)
-        let scanPath = UIBezierPath(roundedRect: scanArea, cornerRadius: 12)
-        path.append(scanPath)
-        path.usesEvenOddFillRule = true
-        
+        self.overlayView = overlayView
+
         let fillLayer = CAShapeLayer()
-        fillLayer.path = path.cgPath
         fillLayer.fillRule = .evenOdd
         fillLayer.fillColor = UIColor.black.withAlphaComponent(0.5).cgColor
         overlayView.layer.addSublayer(fillLayer)
-        
+        overlayMaskLayer = fillLayer
+
         let borderLayer = CAShapeLayer()
-        borderLayer.path = scanPath.cgPath
         let neonGreen = UIColor(red: 0.224, green: 1.0, blue: 0.078, alpha: 1.0) // #39FF14
         borderLayer.strokeColor = (neonMode ? neonGreen : .white).cgColor
         borderLayer.fillColor = UIColor.clear.cgColor
         borderLayer.lineWidth = 3
         overlayView.layer.addSublayer(borderLayer)
-        
+        scanBorderLayer = borderLayer
+
         let instructionLabel = UILabel()
         instructionLabel.text = L10n.neon("Scan Monero QR code", classicUI: neonMode)
         instructionLabel.textColor = neonMode ? neonGreen : .white
-        instructionLabel.font = neonMode
+        let instructionBaseFont: UIFont = neonMode
             ? .monospacedSystemFont(ofSize: 17, weight: .bold)
             : .systemFont(ofSize: 17, weight: .medium)
+        instructionLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: instructionBaseFont)
         instructionLabel.textAlignment = .center
-        instructionLabel.frame = CGRect(x: 0, y: scanArea.maxY + 24, width: view.bounds.width, height: 24)
+        instructionLabel.numberOfLines = 0
+        instructionLabel.adjustsFontForContentSizeCategory = true
         overlayView.addSubview(instructionLabel)
+        self.instructionLabel = instructionLabel
 
         let closeButton = UIButton(type: .system)
         closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
@@ -192,22 +193,19 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         closeButton.layer.borderWidth = neonMode ? 1 : 0
         closeButton.layer.borderColor = neonMode ? neonGreen.cgColor : nil
         closeButton.clipsToBounds = true
-        closeButton.frame = CGRect(
-            x: view.bounds.width - 60,
-            y: view.safeAreaInsets.top + 12,
-            width: 44,
-            height: 44
-        )
         closeButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
         closeButton.accessibilityLabel = L10n.t("Cancel")
         overlayView.addSubview(closeButton)
-        
+        self.closeButton = closeButton
+
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle(L10n.neon("Cancel", classicUI: neonMode), for: .normal)
         cancelButton.setTitleColor(neonMode ? neonGreen : .white, for: .normal)
-        cancelButton.titleLabel?.font = neonMode
+        let cancelBaseFont: UIFont = neonMode
             ? .monospacedSystemFont(ofSize: 17, weight: .semibold)
             : .systemFont(ofSize: 17, weight: .semibold)
+        cancelButton.titleLabel?.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: cancelBaseFont)
+        cancelButton.titleLabel?.adjustsFontForContentSizeCategory = true
         cancelButton.backgroundColor = neonMode
             ? UIColor(red: 0.07, green: 0.09, blue: 0.07, alpha: 1.0)
             : UIColor.black.withAlphaComponent(0.35)
@@ -215,15 +213,60 @@ class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsD
         cancelButton.layer.borderWidth = neonMode ? 1 : 0
         cancelButton.layer.borderColor = neonMode ? neonGreen.cgColor : nil
         cancelButton.clipsToBounds = true
-        cancelButton.frame = CGRect(
-            x: (view.bounds.width - 120) / 2,
-            y: view.bounds.height - view.safeAreaInsets.bottom - 72,
-            width: 120,
-            height: 44
-        )
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
         cancelButton.accessibilityLabel = L10n.neon("Cancel", classicUI: neonMode)
         overlayView.addSubview(cancelButton)
+        self.cancelButton = cancelButton
+        layoutScannerOverlay()
+    }
+
+    private func layoutScannerOverlay() {
+        guard let overlayView, let overlayMaskLayer, let scanBorderLayer else { return }
+        overlayView.frame = view.bounds
+
+        let bounds = overlayView.bounds
+        let scanAreaSize = min(250, max(0, min(bounds.width - 48, bounds.height - 220)))
+        let scanArea = CGRect(
+            x: (bounds.width - scanAreaSize) / 2,
+            y: (bounds.height - scanAreaSize) / 2,
+            width: scanAreaSize,
+            height: scanAreaSize
+        )
+        let scanPath = UIBezierPath(roundedRect: scanArea, cornerRadius: 12)
+        let maskPath = UIBezierPath(rect: bounds)
+        maskPath.append(scanPath)
+        maskPath.usesEvenOddFillRule = true
+        overlayMaskLayer.path = maskPath.cgPath
+        scanBorderLayer.path = scanPath.cgPath
+
+        let labelWidth = max(0, bounds.width - 32)
+        let measuredLabelHeight = instructionLabel?.sizeThatFits(
+            CGSize(width: labelWidth, height: .greatestFiniteMagnitude)
+        ).height ?? 48
+        let labelHeight = min(80, max(36, ceil(measuredLabelHeight)))
+        let belowScanY = scanArea.maxY + 12
+        let cancelTop = bounds.height - view.safeAreaInsets.bottom - 72
+        let labelY = belowScanY + labelHeight <= cancelTop - 8
+            ? belowScanY
+            : max(view.safeAreaInsets.top + 56, scanArea.minY - labelHeight - 12)
+        instructionLabel?.frame = CGRect(
+            x: 16,
+            y: labelY,
+            width: labelWidth,
+            height: labelHeight
+        )
+        closeButton?.frame = CGRect(
+            x: bounds.width - 60,
+            y: view.safeAreaInsets.top + 12,
+            width: 44,
+            height: 44
+        )
+        cancelButton?.frame = CGRect(
+            x: (bounds.width - 120) / 2,
+            y: bounds.height - view.safeAreaInsets.bottom - 72,
+            width: 120,
+            height: 44
+        )
     }
     
     @objc private func cancelTapped() {

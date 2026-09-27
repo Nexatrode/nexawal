@@ -315,8 +315,8 @@ private struct NeonTabBar: View {
                             Text(classicUI ? tab.neonTitle : tab.title)
                                 .font(
                                     classicUI
-                                        ? .system(size: 10, weight: .semibold, design: .monospaced)
-                                        : .system(size: 10, weight: selected ? .semibold : .medium)
+                                        ? .system(.caption2, design: .monospaced).weight(.semibold)
+                                        : .caption2.weight(selected ? .semibold : .medium)
                                 )
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.8)

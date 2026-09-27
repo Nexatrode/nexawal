@@ -624,6 +624,12 @@ struct WalletView: View {
 struct SettingsView: View {
     private static let sourceRepoURL = "https://github.com/nexatrode/nexawal"
 
+    private enum RecoveryInput: Hashable {
+        case rescanHeight
+        case gapLimit
+        case accountGap
+    }
+
     @ObservedObject var viewModel: WalletViewModel
     @State private var nodeAddress: String
     @State private var networkPolicy: MoneroConfig.NetworkPolicy
@@ -638,10 +644,13 @@ struct SettingsView: View {
     @State private var biometricsAvailable: Bool = false
     @State private var biometricsEnrolled: Bool = false
     @State private var showAdvancedRecovery: Bool = false
+    @State private var showFullRescanConfirmation: Bool = false
+    @State private var showClearCacheConfirmation: Bool = false
     @State private var saveConfirmation: String?
     @State private var showLegalTerms = false
     @State private var showLegalPrivacy = false
     @State private var showLegalLicense = false
+    @FocusState private var focusedRecoveryInput: RecoveryInput?
     @AppStorage(MoneroConfig.userDefaultsTechnoThemeKey) private var technoThemeEnabled: Bool = MoneroConfig.defaultTechnoThemeEnabled
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
@@ -750,6 +759,7 @@ struct SettingsView: View {
                         outlinedField {
                             TextField("Restore height", text: $rescanHeightInput)
                                 .keyboardType(.numberPad)
+                                .focused($focusedRecoveryInput, equals: .rescanHeight)
                                 .foregroundStyle(classicPalette?.primaryText ?? .primary)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
@@ -761,8 +771,20 @@ struct SettingsView: View {
                         .disabled(parsedRescanHeight() == nil)
 
                         secondaryButton("Full Rescan (from block 0)") {
-                            rescanHeightInput = "0"
-                            initiateRescan()
+                            showFullRescanConfirmation = true
+                        }
+                        .confirmationDialog(
+                            "Start a full rescan?",
+                            isPresented: $showFullRescanConfirmation,
+                            titleVisibility: .visible
+                        ) {
+                            Button("Rescan from block 0", role: .destructive) {
+                                rescanHeightInput = "0"
+                                initiateRescan()
+                            }
+                            Button("Cancel", role: .cancel) {}
+                        } message: {
+                            Text("This rebuilds wallet scan history from block 0 and may take a long time. Your keys and funds are unchanged.")
                         }
                     }
 
@@ -775,6 +797,7 @@ struct SettingsView: View {
                                 outlinedField {
                                     TextField("Gap limit (1-100000)", text: $gapLimitInput)
                                         .keyboardType(.numberPad)
+                                        .focused($focusedRecoveryInput, equals: .gapLimit)
                                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                                         .autocorrectionDisabled()
                                         .textInputAutocapitalization(.never)
@@ -783,6 +806,7 @@ struct SettingsView: View {
                                 outlinedField {
                                     TextField("Account lookahead (1-1000)", text: $accountGapInput)
                                         .keyboardType(.numberPad)
+                                        .focused($focusedRecoveryInput, equals: .accountGap)
                                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                                         .autocorrectionDisabled()
                                         .textInputAutocapitalization(.never)
@@ -794,19 +818,31 @@ struct SettingsView: View {
                                 }
 
                                 Button {
-                                    Task {
-                                        do {
-                                            try await WalletManager.shared.clearScanCache()
-                                            flashStatus(L10n.t("Cleared scan cache"))
-                                        } catch {
-                                            flashStatus(L10n.format("Clear cache failed: %@", error.localizedDescription))
-                                        }
-                                    }
+                                    showClearCacheConfirmation = true
                                 } label: {
                                     Text("Clear scan cache (this network)")
                                         .frame(maxWidth: .infinity)
                                 }
                                 .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : .red)
+                                .confirmationDialog(
+                                    "Clear this network's scan cache?",
+                                    isPresented: $showClearCacheConfirmation,
+                                    titleVisibility: .visible
+                                ) {
+                                    Button("Clear scan cache", role: .destructive) {
+                                        Task {
+                                            do {
+                                                try await WalletManager.shared.clearScanCache()
+                                                flashStatus(L10n.t("Cleared scan cache"))
+                                            } catch {
+                                                flashStatus(L10n.format("Clear cache failed: %@", error.localizedDescription))
+                                            }
+                                        }
+                                    }
+                                    Button("Cancel", role: .cancel) {}
+                                } message: {
+                                    Text("This removes the local scan cache for this network. Your keys and funds are unchanged, but the wallet may need to rescan.")
+                                }
                             }
                         }
                     }
@@ -899,6 +935,12 @@ struct SettingsView: View {
                     Text(L10n.neon("Settings", classicUI: classicUI))
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button(L10n.t("Done")) {
+                        focusedRecoveryInput = nil
+                    }
                 }
             }
             .overlay(alignment: .bottom) {

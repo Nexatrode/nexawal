@@ -15,6 +15,7 @@ struct AmountUnitField: View {
     var accessibilityLabel: String = "Amount"
     var classicUI: Bool = false
     var classicPalette: ClassicPalette? = nil
+    @FocusState private var isAmountFocused: Bool
 
     private var swapAvailable: Bool { rate != nil }
 
@@ -31,6 +32,7 @@ struct AmountUnitField: View {
                 .keyboardType(.decimalPad)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
+                .focused($isAmountFocused)
                 .foregroundStyle(classicPalette?.primaryText ?? .primary)
                 .accessibilityLabel(accessibilityLabel)
 
@@ -50,6 +52,14 @@ struct AmountUnitField: View {
                 .accessibilityLabel(
                     L10n.format("Switch between XMR and %@", rate?.currency ?? "USD")
                 )
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button(L10n.t("Done")) {
+                    isAmountFocused = false
+                }
             }
         }
         .onChange(of: rate?.currency) { _, _ in

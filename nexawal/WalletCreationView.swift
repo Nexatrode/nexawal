@@ -15,6 +15,7 @@ struct WalletCreationView: View {
     @State private var restoreHeightInput: String = Self.debugTestRestoreHeight()
     @State private var isMainnet: Bool = true
     @FocusState private var isMnemonicFocused: Bool
+    @FocusState private var isRestoreHeightFocused: Bool
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
@@ -151,6 +152,7 @@ struct WalletCreationView: View {
                                     Text("Restore Height:")
                                     TextField("0", text: $restoreHeightInput)
                                         .keyboardType(.numberPad)
+                                        .focused($isRestoreHeightFocused)
                                         .accessibilityLabel(L10n.t("Restore Height:"))
                                 }
 
@@ -302,6 +304,14 @@ struct WalletCreationView: View {
                         .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                         .tracking(classicUI ? 2 : 0)
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button(L10n.t("Done")) {
+                        isMnemonicFocused = false
+                        isRestoreHeightFocused = false
+                        focusedChallengeIndex = nil
+                    }
                 }
             }
             .neonFormChrome(classicUI: classicUI, palette: classicPalette)

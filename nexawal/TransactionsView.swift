@@ -253,7 +253,13 @@ struct WalletTransferDetails: View {
                 Section("Identifiers") {
                     Text(transfer.txid).font(.system(.caption, design: .monospaced)).textSelection(.enabled)
                     Button("Copy TXID") { UIPasteboard.general.string = transfer.txid }
-                    if let url = URL(string: "https://xmrchain.net/tx/\(transfer.txid)") { Link("Open in Explorer", destination: url) }
+                    if let url = URL(string: "https://xmrchain.net/tx/\(transfer.txid)") {
+                        Text("Opening xmrchain.net shares this transaction ID with that third-party site.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Link("Open in Explorer", destination: url)
+                            .accessibilityHint(L10n.t("Opens xmrchain.net and shares this transaction ID."))
+                    }
                 }
             }
             .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))
