@@ -11,6 +11,7 @@ struct ReceiveView: View {
     @State private var descriptionInput: String = ""
     @State private var showCopyConfirmation: Bool = false
     @State private var copyConfirmationText: String = L10n.t("Address copied to clipboard")
+    @State private var copySuccessTrigger = 0
     @State private var showShareSheet: Bool = false
 
     // Subaddress UI
@@ -20,6 +21,7 @@ struct ReceiveView: View {
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let addressFont = Font.system(.caption, design: .monospaced)
 
@@ -70,6 +72,7 @@ struct ReceiveView: View {
                 ActivityView(activityItems: [moneroURI])
             }
         }
+        .sensoryFeedback(.success, trigger: copySuccessTrigger)
         .onAppear {
             Task { await viewModel.loadReceiveSubaddresses() }
         }
@@ -90,42 +93,45 @@ struct ReceiveView: View {
     }
 
     private var subaddressSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Receive Address")
-                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+        formCard {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Receive Address")
+                    .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
 
-            if viewModel.receiveSubaddresses.isEmpty {
-                Text("Loading addresses…")
-                    .font(.caption)
-                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-            } else {
-                VStack(alignment: .leading, spacing: 10) {
-                    Picker("Address", selection: $viewModel.selectedReceiveSubaddressIndex) {
-                        ForEach(viewModel.receiveSubaddresses, id: \.subaddressIndex) { e in
-                            let label = e.label.trimmingCharacters(in: .whitespacesAndNewlines)
-                            let title = label.isEmpty ? L10n.format("Subaddress %lld", Int64(e.subaddressIndex)) : label
-                            Text(title).tag(e.subaddressIndex)
+                if viewModel.receiveSubaddresses.isEmpty {
+                    Text("Loading addresses…")
+                        .font(.caption)
+                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                } else {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Picker("Address", selection: $viewModel.selectedReceiveSubaddressIndex) {
+                            ForEach(viewModel.receiveSubaddresses, id: \.subaddressIndex) { e in
+                                let label = e.label.trimmingCharacters(in: .whitespacesAndNewlines)
+                                let title =
+                                    label.isEmpty ? L10n.format("Subaddress %lld", Int64(e.subaddressIndex)) : label
+                                Text(title).tag(e.subaddressIndex)
+                            }
                         }
-                    }
-                    .pickerStyle(.menu)
-                    .tint(classicPalette?.accent ?? .accentColor)
+                        .pickerStyle(.menu)
+                        .tint(classicPalette?.accent ?? .accentColor)
 
-                    if classicUI, let palette = classicPalette {
-                        Button {
-                            showCreateSubaddressPrompt = true
-                        } label: {
-                            Label("New Address", systemImage: "plus.circle")
+                        if classicUI, let palette = classicPalette {
+                            Button {
+                                showCreateSubaddressPrompt = true
+                            } label: {
+                                Label("New Address", systemImage: "plus.circle")
+                            }
+                            .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
+                        } else {
+                            Button {
+                                showCreateSubaddressPrompt = true
+                            } label: {
+                                Label("New Address", systemImage: "plus.circle")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            .buttonStyle(.bordered)
                         }
-                        .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                    } else {
-                        Button {
-                            showCreateSubaddressPrompt = true
-                        } label: {
-                            Label("New Address", systemImage: "plus.circle")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                        .buttonStyle(.bordered)
                     }
                 }
             }
@@ -133,84 +139,68 @@ struct ReceiveView: View {
     }
 
     private var qrSection: some View {
-        VStack(spacing: 16) {
-            QRCodeView(message: moneroURI)
-                .background(qrQuietZoneBackground)
-                .cornerRadius(classicUI ? 4 : 12)
-                .overlay(
-                    RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
-                        .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-                )
-                .shadow(color: (classicUI || colorScheme == .dark) ? .clear : Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
-                .accessibilityLabel(L10n.t("Monero receive QR"))
-
-            Text(moneroURI)
-                .font(addressFont)
-                .multilineTextAlignment(.leading)
-                .foregroundColor(classicPalette?.primaryText ?? .primary)
-                .padding(12)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-                .overlay(
-                    RoundedRectangle(cornerRadius: classicUI ? 4 : 8)
-                        .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-                )
-                .cornerRadius(classicUI ? 4 : 8)
-                .textSelection(.enabled)
-        }
-    }
-
-    private var amountSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(L10n.neon("Payment Request (optional)", classicUI: classicUI))
-                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                .foregroundColor(classicPalette?.primaryText ?? .primary)
-
-            VStack(spacing: 12) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.t("Amount"))
-                        .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
-                        .foregroundColor(classicPalette?.secondaryText ?? .secondary)
-                    AmountUnitField(
-                        text: $amountInput,
-                        mode: $amountInputMode,
-                        rate: fiatPrices.displayRate,
-                        placeholder: "0.0000",
-                        accessibilityLabel: L10n.t("Amount"),
-                        classicUI: classicUI,
-                        classicPalette: classicPalette
+        formCard {
+            VStack(spacing: 16) {
+                Label("Scan to receive", systemImage: "qrcode")
+                    .font(
+                        classicUI
+                            ? .system(.subheadline, design: .monospaced).weight(.semibold)
+                            : .subheadline.weight(.semibold)
                     )
+                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                QRCodeView(message: moneroURI)
+                    .background(qrQuietZoneBackground)
+                    .cornerRadius(classicUI ? 4 : 12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
+                            .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
+                    )
+                    .shadow(
+                        color: (classicUI || colorScheme == .dark) ? .clear : Color.black.opacity(0.1),
+                        radius: 8, x: 0, y: 4
+                    )
+                    .accessibilityLabel(L10n.t("Monero receive QR"))
+
+                Text(moneroURI)
+                    .font(addressFont)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(classicPalette?.primaryText ?? .primary)
                     .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
                     .overlay(
                         RoundedRectangle(cornerRadius: classicUI ? 4 : 8)
                             .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
                     )
                     .cornerRadius(classicUI ? 4 : 8)
-                    if let piconero = AmountUnitParsing.piconero(
-                        text: amountInput,
-                        mode: amountInputMode,
-                        rate: fiatPrices.displayRate
-                    ),
-                       let secondary = AmountUnitParsing.secondaryLine(
-                        piconero: piconero,
-                        mode: amountInputMode,
-                        rate: fiatPrices.displayRate
-                       ) {
-                        Text(secondary)
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundColor(classicPalette?.secondaryText ?? .secondary)
-                    }
-                }
+                    .textSelection(.enabled)
+            }
+        }
+    }
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Description")
-                        .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
-                        .foregroundColor(classicPalette?.secondaryText ?? .secondary)
-                    TextField("Note for the payer", text: $descriptionInput)
-                        .textInputAutocapitalization(.sentences)
-                        .disableAutocorrection(true)
-                        .foregroundColor(classicPalette?.primaryText)
+    private var amountSection: some View {
+        formCard {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(L10n.neon("Payment Request (optional)", classicUI: classicUI))
+                    .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                    .foregroundColor(classicPalette?.primaryText ?? .primary)
+
+                VStack(spacing: 12) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(L10n.t("Amount"))
+                            .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
+                            .foregroundColor(classicPalette?.secondaryText ?? .secondary)
+                        AmountUnitField(
+                            text: $amountInput,
+                            mode: $amountInputMode,
+                            rate: fiatPrices.displayRate,
+                            placeholder: "0.0000",
+                            accessibilityLabel: L10n.t("Amount"),
+                            classicUI: classicUI,
+                            classicPalette: classicPalette
+                        )
                         .padding(12)
                         .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
                         .overlay(
@@ -218,29 +208,55 @@ struct ReceiveView: View {
                                 .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
                         )
                         .cornerRadius(classicUI ? 4 : 8)
-                        .accessibilityLabel(L10n.t("Description"))
+                        if let piconero = AmountUnitParsing.piconero(
+                            text: amountInput,
+                            mode: amountInputMode,
+                            rate: fiatPrices.displayRate
+                        ),
+                            let secondary = AmountUnitParsing.secondaryLine(
+                                piconero: piconero,
+                                mode: amountInputMode,
+                                rate: fiatPrices.displayRate
+                            )
+                        {
+                            Text(secondary)
+                                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                                .foregroundColor(classicPalette?.secondaryText ?? .secondary)
+                        }
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Description")
+                            .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
+                            .foregroundColor(classicPalette?.secondaryText ?? .secondary)
+                        TextField("Note for the payer", text: $descriptionInput)
+                            .textInputAutocapitalization(.sentences)
+                            .disableAutocorrection(true)
+                            .foregroundColor(classicPalette?.primaryText)
+                            .padding(12)
+                            .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: classicUI ? 4 : 8)
+                                    .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
+                            )
+                            .cornerRadius(classicUI ? 4 : 8)
+                            .accessibilityLabel(L10n.t("Description"))
+                    }
                 }
             }
         }
-        .padding()
-        .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-        .overlay(
-            RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-        )
-        .cornerRadius(classicUI ? 4 : 16)
     }
 
     private var actionSection: some View {
-        VStack(spacing: 12) {
-            if classicUI, let palette = classicPalette {
-                if #available(iOS 16.0, *) {
-                    ShareLink(item: moneroURI) {
-                        Label("Share Payment Link", systemImage: "square.and.arrow.up")
-                            .neonSecondaryButtonStyle(classicUI: true, palette: palette)
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(L10n.t("Share Payment Link"))
+    VStack(spacing: 12) {
+      if classicUI, let palette = classicPalette {
+        if #available(iOS 16.0, *) {
+          ShareLink(item: moneroURI) {
+            Label("Share Payment Link", systemImage: "square.and.arrow.up")
+              .neonSecondaryButtonStyle(classicUI: true, palette: palette)
+          }
+          .buttonStyle(.plain)
+          .accessibilityLabel(L10n.t("Share Payment Link"))
                 } else {
                     Button {
                         showShareSheet = true
@@ -294,7 +310,18 @@ struct ReceiveView: View {
             .background((classicPalette?.success ?? .green).opacity(0.15))
             .foregroundColor(classicPalette?.success ?? .green)
             .cornerRadius(8)
-            .transition(.opacity.combined(with: .move(edge: .top)))
+            .transition(reduceMotion ? .opacity : .opacity.combined(with: .move(edge: .top)))
+    }
+
+    private func formCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+        content()
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(classicPalette?.panel ?? Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: classicUI ? 4 : 20, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: classicUI ? 4 : 20, style: .continuous)
+                    .stroke(classicPalette?.border ?? Color(.separator).opacity(0.20), lineWidth: 1)
+            }
     }
 
     private var moneroURI: String {
@@ -327,11 +354,12 @@ struct ReceiveView: View {
     private func flashCopyConfirmation(text: String, message: String) {
         UIPasteboard.general.string = text
         copyConfirmationText = message
-        withAnimation {
+        copySuccessTrigger &+= 1
+        withAnimation(reduceMotion ? nil : .snappy(duration: 0.22)) {
             showCopyConfirmation = true
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            withAnimation {
+            withAnimation(reduceMotion ? nil : .snappy(duration: 0.22)) {
                 showCopyConfirmation = false
             }
         }

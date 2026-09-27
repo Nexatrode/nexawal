@@ -8,6 +8,7 @@ struct SendView: View {
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     // Inputs
     @State private var toAddress: String = ""
@@ -76,11 +77,9 @@ struct SendView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 14) {
                     if availablePiconero() > 0 {
-                        Text("\(availableLabel()): \(viewModel.formatDisplayPiconero(availablePiconero()))")
-                            .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                        availableBalanceSummary
                     }
 
                     toAddressField
@@ -88,28 +87,31 @@ struct SendView: View {
                     paymentUriDetails
 
                     if let info = infoMessage {
-                        Text(info)
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                        statusMessage(info, isError: false)
+                            .transition(.opacity.combined(with: .move(edge: .top)))
                     }
 
                     if let err = errorMessage {
-                        Text(err)
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundColor(classicPalette?.danger ?? .red)
+                        statusMessage(err, isError: true)
+                            .transition(.opacity.combined(with: .move(edge: .top)))
                     }
 
                     if let fee = estimatedFeePiconero {
                         confirmSection(fee: fee)
+                            .transition(.opacity.combined(with: .move(edge: .top)))
                     }
 
                     if let txid = sentTxid, let fee = sentFeePiconero {
                         sentSection(txid: txid, fee: fee)
+                            .transition(.opacity.combined(with: .move(edge: .top)))
                     }
 
                     actionButtons
                 }
                 .padding()
+                .animation(reduceMotion ? nil : .snappy(duration: 0.24), value: estimatedFeePiconero)
+                .animation(reduceMotion ? nil : .snappy(duration: 0.24), value: errorMessage)
+                .animation(reduceMotion ? nil : .snappy(duration: 0.24), value: sentTxid)
             }
             .disabled(isSending || showSendConfirmation)
             .navigationBarTitleDisplayMode(.inline)
@@ -216,81 +218,144 @@ struct SendView: View {
 
     private var fieldCorner: CGFloat { classicUI ? 4 : 8 }
 
-    private var toAddressField: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(L10n.t("To address"))
-                .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
-                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+    private var availableBalanceSummary: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "wallet.pass.fill")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(classicPalette?.accent ?? .accentColor)
+                .frame(width: 40, height: 40)
+                .background((classicPalette?.accent ?? .accentColor).opacity(0.12), in: Circle())
+                .accessibilityHidden(true)
 
-            HStack(spacing: 8) {
-                TextField(L10n.t("To address"), text: $toAddress)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .font(.system(.body, design: .monospaced))
+            VStack(alignment: .leading, spacing: 3) {
+                Text(availableLabel())
+                    .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                Text(viewModel.formatDisplayPiconero(availablePiconero()))
+                    .font(.system(.subheadline, design: .monospaced).weight(.semibold))
+                    .monospacedDigit()
                     .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                    .accessibilityLabel(L10n.t("To address"))
-
-                Button {
-                    showScanner = true
-                } label: {
-                    Image(systemName: "qrcode.viewfinder")
-                        .font(.body.weight(.semibold))
-                        .foregroundStyle(classicPalette?.accent ?? Color.accentColor)
-                        .frame(minWidth: 44, minHeight: 44)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(L10n.t("Scan QR code"))
             }
-            .padding(.leading, 12)
-            .padding(.trailing, 4)
-            .padding(.vertical, 4)
-            .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-            .overlay(
-                RoundedRectangle(cornerRadius: fieldCorner)
-                    .stroke(classicPalette?.border ?? Color(.separator), lineWidth: classicUI ? 1 : 1)
-            )
-            .cornerRadius(fieldCorner)
+            Spacer(minLength: 0)
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(classicPalette?.panel ?? Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: classicUI ? 4 : 16, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: classicUI ? 4 : 16, style: .continuous)
+                .stroke(classicPalette?.border ?? Color(.separator).opacity(0.20), lineWidth: 1)
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    private func statusMessage(_ text: String, isError: Bool) -> some View {
+        let tint = isError ? (classicPalette?.danger ?? .red) : (classicPalette?.accent ?? .accentColor)
+        return Label {
+            Text(text)
+                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                .fixedSize(horizontal: false, vertical: true)
+        } icon: {
+            Image(systemName: isError ? "exclamationmark.circle.fill" : "checkmark.circle.fill")
+                .accessibilityHidden(true)
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .foregroundStyle(tint)
+        .background(tint.opacity(0.10), in: RoundedRectangle(cornerRadius: classicUI ? 4 : 14, style: .continuous))
+        .accessibilityElement(children: .combine)
+    }
+
+    private func formCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+        content()
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(classicPalette?.panel ?? Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: classicUI ? 4 : 18, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: classicUI ? 4 : 18, style: .continuous)
+                    .stroke(classicPalette?.border ?? Color(.separator).opacity(0.20), lineWidth: 1)
+            }
+    }
+
+    private var toAddressField: some View {
+        formCard {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(L10n.t("To address"))
+                    .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
+                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
+
+                HStack(spacing: 8) {
+                    TextField(L10n.t("To address"), text: $toAddress)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .font(.system(.body, design: .monospaced))
+                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                        .accessibilityLabel(L10n.t("To address"))
+
+                    Button {
+                        showScanner = true
+                    } label: {
+                        Image(systemName: "qrcode.viewfinder")
+                            .font(.body.weight(.semibold))
+                            .foregroundStyle(classicPalette?.accent ?? Color.accentColor)
+                            .frame(minWidth: 44, minHeight: 44)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(L10n.t("Scan QR code"))
+                }
+                .padding(.leading, 12)
+                .padding(.trailing, 4)
+                .padding(.vertical, 4)
+                .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+                .overlay(
+                    RoundedRectangle(cornerRadius: fieldCorner)
+                        .stroke(classicPalette?.border ?? Color(.separator), lineWidth: classicUI ? 1 : 1)
+                )
+                .cornerRadius(fieldCorner)
+            }
         }
     }
 
     private var amountField: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(L10n.t("Amount"))
-                .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
-                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+        formCard {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(L10n.t("Amount"))
+                    .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
+                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
 
-            AmountUnitField(
-                text: $amountXMR,
-                mode: $amountInputMode,
-                rate: fiatPrices.displayRate,
-                placeholder: "0.0",
-                accessibilityLabel: L10n.t("Amount"),
-                classicUI: classicUI,
-                classicPalette: classicPalette
-            )
-            .padding(12)
-            .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-            .overlay(
-                RoundedRectangle(cornerRadius: fieldCorner)
-                    .stroke(classicPalette?.border ?? Color(.separator), lineWidth: classicUI ? 1 : 1)
-            )
-            .cornerRadius(fieldCorner)
+                AmountUnitField(
+                    text: $amountXMR,
+                    mode: $amountInputMode,
+                    rate: fiatPrices.displayRate,
+                    placeholder: "0.0",
+                    accessibilityLabel: L10n.t("Amount"),
+                    classicUI: classicUI,
+                    classicPalette: classicPalette
+                )
+                .padding(12)
+                .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+                .overlay(
+                    RoundedRectangle(cornerRadius: fieldCorner)
+                        .stroke(classicPalette?.border ?? Color(.separator), lineWidth: classicUI ? 1 : 1)
+                )
+                .cornerRadius(fieldCorner)
 
-            if isMaxMode {
-                Text(L10n.t("Send Max mode: Confirm will sweep all unlocked after fee."))
-                    .font(.caption)
-                    .foregroundStyle(classicPalette?.accent ?? .secondary)
-            }
-            if let amount = parsedAmountPiconero(),
-               let secondary = AmountUnitParsing.secondaryLine(
-                piconero: amount,
-                mode: amountInputMode,
-                rate: fiatPrices.displayRate
-               ) {
-                Text(secondary)
-                    .font(.caption)
-                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                if isMaxMode {
+                    Text(L10n.t("Send Max mode: Confirm will sweep all unlocked after fee."))
+                        .font(.caption)
+                        .foregroundStyle(classicPalette?.accent ?? .secondary)
+                }
+                if let amount = parsedAmountPiconero(),
+                    let secondary = AmountUnitParsing.secondaryLine(
+                        piconero: amount,
+                        mode: amountInputMode,
+                        rate: fiatPrices.displayRate
+                    )
+                {
+                    Text(secondary)
+                        .font(.caption)
+                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                }
             }
         }
     }
@@ -298,127 +363,109 @@ struct SendView: View {
     @ViewBuilder
     private var paymentUriDetails: some View {
         if !paymentRecipientName.isEmpty || !paymentDescription.isEmpty {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(L10n.t("Payment URI"))
-                    .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
+            formCard {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(L10n.t("Payment URI"))
+                        .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
 
-                if !paymentRecipientName.isEmpty {
-                    LabeledContent(L10n.t("Recipient"), value: paymentRecipientName)
-                }
-                if !paymentDescription.isEmpty {
-                    LabeledContent {
-                        Text(paymentDescription)
-                            .multilineTextAlignment(.trailing)
-                            .textSelection(.enabled)
-                    } label: {
-                        Text(L10n.t("Description"))
+                    if !paymentRecipientName.isEmpty {
+                        LabeledContent(L10n.t("Recipient"), value: paymentRecipientName)
+                    }
+                    if !paymentDescription.isEmpty {
+                        LabeledContent {
+                            Text(paymentDescription)
+                                .multilineTextAlignment(.trailing)
+                                .textSelection(.enabled)
+                        } label: {
+                            Text(L10n.t("Description"))
+                        }
                     }
                 }
+                .font(.subheadline)
             }
-            .font(.subheadline)
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-            .overlay(
-                RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                    .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-            )
-            .cornerRadius(classicUI ? 4 : 16)
         }
     }
 
     @ViewBuilder
     private func confirmSection(fee: UInt64) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(classicUI ? L10n.t("Confirm").uppercased() : L10n.t("Confirm"))
-                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+        formCard {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(classicUI ? L10n.t("Confirm").uppercased() : L10n.t("Confirm"))
+                    .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
 
-            if isMaxMode, let amt = parsedAmountPiconero() {
+                if isMaxMode, let amt = parsedAmountPiconero() {
+                    HStack {
+                        Text(L10n.t("Preview amount (max)"))
+                        Spacer()
+                        Text(viewModel.formatExactPiconero(amt))
+                            .font(.system(.caption, design: .monospaced))
+                    }
+                    FiatApproxText(
+                        piconero: amt,
+                        rate: fiatPrices.displayRate,
+                        color: classicPalette?.secondaryText ?? .secondary
+                    )
+                }
                 HStack {
-                    Text(L10n.t("Preview amount (max)"))
+                    Text("Estimated fee")
                     Spacer()
-                    Text(viewModel.formatExactPiconero(amt))
+                    Text(viewModel.formatExactPiconero(fee))
                         .font(.system(.caption, design: .monospaced))
                 }
                 FiatApproxText(
-                    piconero: amt,
+                    piconero: fee,
                     rate: fiatPrices.displayRate,
                     color: classicPalette?.secondaryText ?? .secondary
                 )
-            }
-            HStack {
-                Text("Estimated fee")
-                Spacer()
-                Text(viewModel.formatExactPiconero(fee))
-                    .font(.system(.caption, design: .monospaced))
-            }
-            FiatApproxText(
-                piconero: fee,
-                rate: fiatPrices.displayRate,
-                color: classicPalette?.secondaryText ?? .secondary
-            )
-            if let amt = parsedAmountPiconero() {
-                HStack {
-                    Text(isMaxMode ? L10n.t("Wallet debit (amount + fee)") : "Total (amount + fee)")
-                    Spacer()
-                    let total = safeAdd(amt, fee)
-                    Text(viewModel.formatExactPiconero(total))
-                        .font(.system(.caption, design: .monospaced))
+                if let amt = parsedAmountPiconero() {
+                    HStack {
+                        Text(isMaxMode ? L10n.t("Wallet debit (amount + fee)") : "Total (amount + fee)")
+                        Spacer()
+                        let total = safeAdd(amt, fee)
+                        Text(viewModel.formatExactPiconero(total))
+                            .font(.system(.caption, design: .monospaced))
+                    }
+                    FiatApproxText(
+                        piconero: safeAdd(amt, fee),
+                        rate: fiatPrices.displayRate,
+                        color: classicPalette?.secondaryText ?? .secondary
+                    )
                 }
-                FiatApproxText(
-                    piconero: safeAdd(amt, fee),
-                    rate: fiatPrices.displayRate,
-                    color: classicPalette?.secondaryText ?? .secondary
-                )
-            }
 
-            Text(toAddress)
-                .font(.system(.caption2, design: .monospaced))
-                .lineLimit(1)
-                .truncationMode(.middle)
-                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                Text(toAddress)
+                    .font(.system(.caption2, design: .monospaced))
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+            }
         }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-        .overlay(
-            RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-        )
-        .cornerRadius(classicUI ? 4 : 16)
     }
 
     @ViewBuilder
     private func sentSection(txid: String, fee: UInt64) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(classicUI ? L10n.t("Sent").uppercased() : L10n.t("Sent"))
-                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                .foregroundStyle(classicPalette?.primaryText ?? .primary)
+        formCard {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(classicUI ? L10n.t("Sent").uppercased() : L10n.t("Sent"))
+                    .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                    .foregroundStyle(classicPalette?.primaryText ?? .primary)
 
-            HStack {
-                Text("TXID")
-                Spacer()
-                Text(txid)
-                    .font(.system(.caption, design: .monospaced))
-                    .textSelection(.enabled)
-            }
-            HStack {
-                Text("Fee")
-                Spacer()
-                Text(viewModel.formatExactPiconero(fee))
-                    .font(.system(.caption, design: .monospaced))
+                HStack {
+                    Text("TXID")
+                    Spacer()
+                    Text(txid)
+                        .font(.system(.caption, design: .monospaced))
+                        .textSelection(.enabled)
+                }
+                HStack {
+                    Text("Fee")
+                    Spacer()
+                    Text(viewModel.formatExactPiconero(fee))
+                        .font(.system(.caption, design: .monospaced))
+                }
             }
         }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
-        .overlay(
-            RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
-        )
-        .cornerRadius(classicUI ? 4 : 16)
     }
 
     private var actionButtons: some View {
@@ -435,9 +482,11 @@ struct SendView: View {
                     Text(isEstimating && !isMaxMode ? "Estimating..." : "Preview Fee")
                 }
                 .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
-                .disabled(viewModel.isRefreshing || isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
+                .disabled(
+          viewModel.isRefreshing || isEstimating || isSending || parsedAmountPiconero() == nil
+            || !looksLikeAddress(toAddress))
 
-                Button {
+        Button {
                     showSendConfirmation = true
                 } label: {
                     Text(isSending && !isMaxMode ? "Sending..." : "Send")

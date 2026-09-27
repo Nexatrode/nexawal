@@ -19,6 +19,7 @@ struct TransactionsView: View {
     @State private var to = Date()
     @State private var selected: WalletCoreFFIClient.Transfer?
     @Environment(\.classicPalette) private var palette
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private var query: WalletCoreFFIClient.HistoryQuery {
         .init(filter: filter, search: search.trimmingCharacters(in: .whitespacesAndNewlines),
               fromTimestamp: dateFilter ? UInt64(max(0, Calendar.current.startOfDay(for: from).timeIntervalSince1970)) : nil,
@@ -32,6 +33,7 @@ struct TransactionsView: View {
                     Text("All").tag("all"); Text("Received").tag("received")
                     Text("Sent").tag("sent"); Text("Pending").tag("pending")
                 }
+                .pickerStyle(.segmented)
                 Toggle("Date range", isOn: $dateFilter)
                 if dateFilter {
                     DatePicker("From", selection: $from, displayedComponents: .date)
@@ -40,17 +42,40 @@ struct TransactionsView: View {
                 Text("\(model.count) matching · \(model.total) total").font(.caption).foregroundStyle(.secondary)
                 if !viewModel.isSynced { Text("History may be incomplete while syncing.").font(.caption).foregroundStyle(.secondary) }
                 if model.changed {
-                    Button("History changed · Reload transactions") { Task { await model.reload() } }
+                    Button {
+                        Task { await model.reload() }
+                    } label: {
+                        Label("History changed · Reload transactions", systemImage: "arrow.clockwise")
+                    }
                 }
                 if let error = model.error {
-                    Text(error).foregroundStyle(.red)
+                    Label(error, systemImage: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.red)
                     Button("Retry loading history") { Task { await model.retry() } }
                 }
-                if model.loading { ProgressView("Loading transactions…") }
+                if model.loading { ProgressView("Loading transactions…").controlSize(.small) }
             }
             if model.count == 0 && !model.loading && model.error == nil {
-                Text(model.total > 0 ? "No transactions match these filters." :
-                     (viewModel.isSynced ? "No transactions yet." : "No transactions found yet. Sync is not complete."))
+                VStack(spacing: 8) {
+                    Image(systemName: model.total > 0 ? "line.3.horizontal.decrease.circle" : "tray")
+                        .font(.system(size: 28, weight: .regular))
+                        .foregroundStyle(palette?.accent ?? .secondary)
+                        .accessibilityHidden(true)
+                    Text(model.total > 0 ? "No transactions match these filters." :
+                         (viewModel.isSynced ? "No transactions yet." : "No transactions found yet. Sync is not complete."))
+                        .font(.subheadline.weight(.semibold))
+                        .multilineTextAlignment(.center)
+                    if model.total == 0 && !viewModel.isSynced {
+                        Text("Transactions appear here as the wallet scan finds them.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 24)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
             }
             // List virtualizes row views. Only four pages of actual records are retained.
             ForEach(0..<model.count, id: \.self) { index in
@@ -84,9 +109,13 @@ struct TransactionsView: View {
                 .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))
             }
         }
+        .listStyle(.insetGrouped)
         .tint(palette?.accent ?? .accentColor)
         .scrollContentBackground(palette == nil ? .visible : .hidden)
         .background(palette?.background ?? Color(.systemGroupedBackground))
+        .scrollDismissesKeyboard(.interactively)
+        .animation(reduceMotion ? nil : .easeInOut(duration: 0.18), value: filter)
+        .animation(reduceMotion ? nil : .easeInOut(duration: 0.18), value: dateFilter)
         .navigationTitle("Transactions")
         .searchable(text: $search, prompt: "Search transaction ID")
         .onAppear { if !initialized { filter = initialFilter; initialized = true } }

@@ -979,6 +979,9 @@
         }
       }
     },
+    "·" : {
+
+    },
     "(unavailable)" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3285,7 +3288,10 @@
         }
       }
     },
-    "%lld pending transactions" : {
+    "%lld pending" : {
+
+    },
+    "%lld transactions" : {
 
     },
     "%lld." : {
@@ -3931,6 +3937,9 @@
           }
         }
       }
+    },
+    "%llu conf" : {
+
     },
     "%llu confirmations" : {
 
@@ -45028,6 +45037,9 @@
     "History changed · Reload transactions" : {
 
     },
+    "History is syncing" : {
+
+    },
     "History may be incomplete while syncing." : {
 
     },
@@ -55885,6 +55897,9 @@
         }
       }
     },
+    "Monero wallet" : {
+
+    },
     "Neon terminal look. Leave off for the standard theme (default)." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -58511,6 +58526,9 @@
           }
         }
       }
+    },
+    "NEXAWAL" : {
+
     },
     "nexawal %@ (%@)" : {
       "localizations" : {
@@ -63442,6 +63460,9 @@
         }
       }
     },
+    "Nothing here yet" : {
+
+    },
     "Nothing to share yet" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -65434,6 +65455,12 @@
           }
         }
       }
+    },
+    "Opens the %@ screen" : {
+
+    },
+    "Opens your full transaction history" : {
+
     },
     "Optional label" : {
       "extractionState" : "stale",
@@ -74652,10 +74679,14 @@
         }
       }
     },
+    "Recent activity" : {
+
+    },
     "Recent throughput" : {
 
     },
     "Recent Transactions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -87465,6 +87496,9 @@
           }
         }
       }
+    },
+    "See all" : {
+
     },
     "Self" : {
       "localizations" : {
@@ -103245,6 +103279,9 @@
         }
       }
     },
+    "Total balance" : {
+
+    },
     "Total Balance" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -103573,6 +103610,9 @@
           }
         }
       }
+    },
+    "Total balance %@ XMR" : {
+
     },
     "Transaction" : {
       "localizations" : {
@@ -104888,6 +104928,9 @@
       }
     },
     "Transactions" : {
+
+    },
+    "Transactions appear as the wallet scan finds them." : {
 
     },
     "TXID" : {
@@ -110485,9 +110528,6 @@
         }
       }
     },
-    "View all transactions (%lld)" : {
-
-    },
     "Wait for wallet sync to finish before preparing a send." : {
 
     },
@@ -116073,6 +116113,9 @@
           }
         }
       }
+    },
+    "Your transactions will appear here." : {
+
     }
   },
   "version" : "1.0"
