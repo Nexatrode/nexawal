@@ -114,32 +114,76 @@ extension WalletCoreFFIClient.Transfer: @retroactive Identifiable { public var i
 struct WalletTransferRow: View {
     let transfer: WalletCoreFFIClient.Transfer
     @ObservedObject var viewModel: WalletViewModel
+    var compact: Bool = false
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var palette
     private var incoming: Bool { transfer.direction == "in" }
     private var label: String { incoming ? "Received" : transfer.direction == "out" ? "Sent" : "Self" }
     private var color: Color { incoming ? (palette?.success ?? .green) : transfer.direction == "out" ? (palette?.danger ?? .red) : (palette?.accent ?? .primary) }
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            ViewThatFits(in: .horizontal) {
-                HStack { title; Spacer(); amount }
-                VStack(alignment: .leading) { title; amount }
-            }
-            if let timestamp = transfer.timestamp, timestamp > 0 {
-                Text(Date(timeIntervalSince1970: Double(timestamp)), format: .dateTime.year().month().day().hour().minute())
-                    .font(.caption).foregroundStyle(palette?.secondaryText ?? .secondary)
-            }
-            Text(transfer.isPending ? "Pending" : "\(HistoryConfirmations.count(height: transfer.height, pending: transfer.isPending, chainHeight: viewModel.chainHeight, cached: transfer.confirmations)) confirmations")
-                .font(.caption).foregroundStyle(palette?.secondaryText ?? .secondary)
-            Text(transfer.txid).font(.system(.caption2, design: .monospaced)).lineLimit(1).truncationMode(.middle)
-                .foregroundStyle(palette?.secondaryText ?? .secondary)
-            if let fee = transfer.fee {
-                Text("Fee \(viewModel.formatDisplayPiconero(fee))\(incoming ? " · paid by sender" : "")")
-                    .font(.caption2).foregroundStyle(palette?.secondaryText ?? .secondary)
+        Group {
+            if compact {
+                HStack(spacing: 12) {
+                    Image(systemName: incoming ? "arrow.down.left" : transfer.direction == "out" ? "arrow.up.right" : "arrow.left.arrow.right")
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(color)
+                        .frame(width: 40, height: 40)
+                        .background(color.opacity(0.12), in: Circle())
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(LocalizedStringKey(label))
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(palette?.primaryText ?? .primary)
+                        HStack(spacing: 6) {
+                            if let timestamp = transfer.timestamp, timestamp > 0 {
+                                Text(Date(timeIntervalSince1970: Double(timestamp)), format: .relative(presentation: .named))
+                            }
+                            Text("·")
+                            if transfer.isPending || transfer.confirmations == 0 {
+                                Text("Pending")
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(palette?.accent ?? .orange)
+                            } else {
+                                Text("\(HistoryConfirmations.count(height: transfer.height, pending: transfer.isPending, chainHeight: viewModel.chainHeight, cached: transfer.confirmations)) conf")
+                            }
+                        }
+                        .font(.caption)
+                        .foregroundStyle(palette?.secondaryText ?? .secondary)
+                        .lineLimit(1)
+                    }
+
+                    Spacer(minLength: 8)
+                    amount
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                }
+                .padding(.vertical, 7)
+                .contentShape(Rectangle())
+                .accessibilityElement(children: .combine)
+            } else {
+                VStack(alignment: .leading, spacing: 5) {
+                    ViewThatFits(in: .horizontal) {
+                        HStack { title; Spacer(); amount }
+                        VStack(alignment: .leading) { title; amount }
+                    }
+                    if let timestamp = transfer.timestamp, timestamp > 0 {
+                        Text(Date(timeIntervalSince1970: Double(timestamp)), format: .dateTime.year().month().day().hour().minute())
+                            .font(.caption).foregroundStyle(palette?.secondaryText ?? .secondary)
+                    }
+                    Text(transfer.isPending ? "Pending" : "\(HistoryConfirmations.count(height: transfer.height, pending: transfer.isPending, chainHeight: viewModel.chainHeight, cached: transfer.confirmations)) confirmations")
+                        .font(.caption).foregroundStyle(palette?.secondaryText ?? .secondary)
+                    Text(transfer.txid).font(.system(.caption2, design: .monospaced)).lineLimit(1).truncationMode(.middle)
+                        .foregroundStyle(palette?.secondaryText ?? .secondary)
+                    if let fee = transfer.fee {
+                        Text("Fee \(viewModel.formatDisplayPiconero(fee))\(incoming ? " · paid by sender" : "")")
+                            .font(.caption2).foregroundStyle(palette?.secondaryText ?? .secondary)
+                    }
+                }
+                .padding(.vertical, 8)
+                .contentShape(Rectangle())
+                .accessibilityElement(children: .combine)
             }
         }
-        .padding(.vertical, 8).contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
     }
     private var title: some View {
         Label(LocalizedStringKey(label), systemImage: incoming ? "arrow.down.left" : "arrow.up.right")

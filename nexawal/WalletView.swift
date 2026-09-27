@@ -24,6 +24,8 @@ struct WalletView: View {
 
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var showSyncProgress: Bool {
         !viewModel.isSynced || viewModel.isRefreshing
@@ -103,6 +105,154 @@ struct WalletView: View {
 
     private var secondaryText: Color {
         classicPalette?.secondaryText ?? .secondary
+    }
+
+    private var balanceCard: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("NEXAWAL")
+                        .font(classicUI ? .system(.caption, design: .monospaced).weight(.bold) : .caption.weight(.bold))
+                        .tracking(classicUI ? 2 : 1.6)
+                    Text("Monero wallet")
+                        .font(classicUI ? .system(.caption2, design: .monospaced) : .caption)
+                        .opacity(classicUI ? 0.8 : 0.72)
+                }
+                Spacer()
+                Image("NexawalMark")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 34, height: 34)
+                    .opacity(classicUI ? 0.9 : 0.82)
+                    .accessibilityHidden(true)
+            }
+
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Total balance")
+                    .font(classicUI ? .system(.caption, design: .monospaced) : .subheadline)
+                    .opacity(classicUI ? 0.8 : 0.76)
+
+                Text(viewModel.formatDisplayPiconero(viewModel.totalBalance))
+                    .font(classicUI
+                          ? .system(size: 34, weight: .bold, design: .monospaced)
+                          : .system(.largeTitle, design: .rounded).weight(.bold))
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.68)
+                    .contentTransition(.numericText())
+                    .accessibilityLabel(L10n.format("Total balance %@ XMR", viewModel.formatDisplayPiconero(viewModel.totalBalance)))
+
+                FiatApproxText(
+                    piconero: viewModel.totalBalance,
+                    rate: fiatPrices.displayRate,
+                    font: classicUI ? .system(.subheadline, design: .monospaced) : .subheadline,
+                    color: classicUI ? secondaryText : Color.white.opacity(0.76)
+                )
+            }
+
+            if viewModel.unlockedBalance != viewModel.totalBalance {
+                HStack(spacing: 12) {
+                    Image(systemName: "lock.open.fill")
+                        .font(.caption.weight(.semibold))
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(L10n.neon("Unlocked", classicUI: classicUI))
+                            .font(classicUI ? .system(.caption2, design: .monospaced) : .caption)
+                            .opacity(classicUI ? 0.8 : 0.76)
+                        Text(viewModel.formatDisplayPiconero(viewModel.unlockedBalance))
+                            .font(.system(.subheadline, design: .monospaced).weight(.semibold))
+                            .monospacedDigit()
+                            .contentTransition(.numericText())
+                    }
+                    Spacer(minLength: 0)
+                    FiatApproxText(
+                        piconero: viewModel.unlockedBalance,
+                        rate: fiatPrices.displayRate,
+                        font: classicUI ? .system(.caption2, design: .monospaced) : .caption,
+                        color: classicUI ? secondaryText : Color.white.opacity(0.76)
+                    )
+                }
+                .foregroundStyle(classicUI ? (classicPalette?.accent ?? .green) : .white)
+                .padding(12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(classicUI ? Color.clear : Color.white.opacity(0.10), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .overlay {
+                    if classicUI {
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(classicPalette?.border ?? .green, lineWidth: 1)
+                    }
+                }
+            }
+
+            if viewModel.balanceIsStaleWhileSyncing {
+                Label("Balance updating while sync catches up", systemImage: "clock.arrow.circlepath")
+                    .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                    .foregroundStyle(classicUI ? secondaryText : Color.white.opacity(0.78))
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+            }
+
+            HStack(spacing: 10) {
+                balanceAction(title: L10n.neon("Send", classicUI: classicUI), symbol: "paperplane.fill", tab: .send)
+                balanceAction(title: L10n.neon("Receive", classicUI: classicUI), symbol: "qrcode", tab: .receive)
+            }
+        }
+        .foregroundStyle(classicUI ? primaryText : .white)
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
+            if classicUI {
+                panelBackground
+            } else {
+                ZStack(alignment: .topTrailing) {
+                    LinearGradient(
+                        colors: colorScheme == .dark
+                            ? [Color(red: 0.05, green: 0.28, blue: 0.20), Color(red: 0.025, green: 0.13, blue: 0.12)]
+                            : [Color(red: 0.07, green: 0.39, blue: 0.27), Color(red: 0.035, green: 0.23, blue: 0.19)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    Circle()
+                        .fill(Color.white.opacity(0.07))
+                        .frame(width: 190, height: 190)
+                        .blur(radius: 1)
+                        .offset(x: 80, y: -95)
+                    Circle()
+                        .stroke(Color.white.opacity(0.08), lineWidth: 1)
+                        .frame(width: 220, height: 220)
+                        .offset(x: 62, y: -104)
+                }
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: classicUI ? 5 : 26, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: classicUI ? 5 : 26, style: .continuous)
+                .stroke(classicUI ? (classicPalette?.border ?? .clear) : Color.white.opacity(0.08), lineWidth: 1)
+        }
+        .shadow(color: classicUI ? .clear : Color.black.opacity(colorScheme == .dark ? 0.18 : 0.10), radius: 20, x: 0, y: 10)
+        .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: viewModel.totalBalance)
+        .animation(reduceMotion ? nil : .easeInOut(duration: 0.22), value: viewModel.balanceIsStaleWhileSyncing)
+        .padding(.horizontal)
+    }
+
+    private func balanceAction(title: String, symbol: String, tab: MainTab) -> some View {
+        Button {
+            withAnimation(reduceMotion ? nil : .spring(response: 0.34, dampingFraction: 0.86)) {
+                selectedTab = tab
+            }
+        } label: {
+            Label(title, systemImage: symbol)
+                .font(classicUI ? .system(.subheadline, design: .monospaced).weight(.semibold) : .subheadline.weight(.semibold))
+                .frame(maxWidth: .infinity)
+                .frame(minHeight: 48)
+                .background(classicUI ? Color.clear : Color.white.opacity(0.12), in: RoundedRectangle(cornerRadius: classicUI ? 4 : 15, style: .continuous))
+                .overlay {
+                    RoundedRectangle(cornerRadius: classicUI ? 4 : 15, style: .continuous)
+                        .stroke(classicUI ? (classicPalette?.border ?? .green) : Color.white.opacity(0.18), lineWidth: 1)
+                }
+                .contentShape(RoundedRectangle(cornerRadius: classicUI ? 4 : 15, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .accessibilityHint(L10n.format("Opens the %@ screen", title))
     }
 
     private func formatTransferTimestamp(_ t: WalletCoreFFIClient.Transfer) -> String? {
@@ -188,103 +338,8 @@ struct WalletView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 24) {
-                    // Balance / actions
-                    ZStack(alignment: .topLeading) {
-                        if classicUI {
-                            Image("NexawalMark")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 160, height: 160)
-                                .opacity(0.12)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-                                .padding(.trailing, 8)
-                                .allowsHitTesting(false)
-                        }
-
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text(classicUI ? "nexawal" : L10n.t("Wallet"))
-                                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
-                                .foregroundColor(classicUI ? primaryText : .secondary)
-                                .tracking(classicUI ? 2 : 0)
-
-                            Text(viewModel.formatDisplayPiconero(viewModel.totalBalance))
-                                .font(.system(size: 38, weight: .bold, design: .monospaced))
-                                .foregroundColor(primaryText)
-                            FiatApproxText(
-                                piconero: viewModel.totalBalance,
-                                rate: fiatPrices.displayRate,
-                                font: classicUI ? .system(.subheadline, design: .monospaced) : .subheadline,
-                                color: secondaryText
-                            )
-
-                            if viewModel.unlockedBalance != viewModel.totalBalance {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(L10n.neon("Unlocked", classicUI: classicUI))
-                                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                                        .foregroundColor(secondaryText)
-                                    Text(viewModel.formatDisplayPiconero(viewModel.unlockedBalance))
-                                        .font(.system(size: 20, weight: .semibold, design: .monospaced))
-                                        .foregroundColor(classicPalette?.accent ?? .blue)
-                                    FiatApproxText(
-                                        piconero: viewModel.unlockedBalance,
-                                        rate: fiatPrices.displayRate,
-                                        font: classicUI ? .system(.caption, design: .monospaced) : .caption,
-                                        color: secondaryText
-                                    )
-                                }
-                            }
-
-                            if viewModel.balanceIsStaleWhileSyncing {
-                                Label("Balance updating while sync catches up", systemImage: "clock.arrow.circlepath")
-                                    .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                                    .foregroundColor(secondaryText)
-                            }
-
-                            HStack(spacing: 12) {
-                                Button(action: {
-                                    selectedTab = .send
-                                }) {
-                                    Label(L10n.neon("Send", classicUI: classicUI), systemImage: "paperplane.fill")
-                                        .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
-                                        .frame(maxWidth: .infinity)
-                                        .padding()
-                                        .background(classicUI ? Color.clear : Color.orange.opacity(0.9))
-                                        .foregroundColor(classicUI ? (classicPalette?.accent ?? .green) : .white)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
-                                                .stroke(classicUI ? (classicPalette?.border ?? .green) : Color.clear, lineWidth: classicUI ? 2 : 0)
-                                        )
-                                        .cornerRadius(classicUI ? 4 : 12)
-                                }
-
-                                Button(action: {
-                                    selectedTab = .receive
-                                }) {
-                                    Label(L10n.neon("Receive", classicUI: classicUI), systemImage: "qrcode")
-                                        .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
-                                        .frame(maxWidth: .infinity)
-                                        .padding()
-                                        .background(classicUI ? Color.clear : Color.green.opacity(0.9))
-                                        .foregroundColor(classicUI ? (classicPalette?.accent ?? .green) : .white)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
-                                                .stroke(classicUI ? (classicPalette?.border ?? .green) : Color.clear, lineWidth: classicUI ? 2 : 0)
-                                        )
-                                        .cornerRadius(classicUI ? 4 : 12)
-                                }
-                            }
-                        }
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(panelBackground)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                            .stroke(classicUI ? (classicPalette?.border ?? .clear) : Color.clear, lineWidth: 1)
-                    )
-                    .cornerRadius(classicUI ? 4 : 16)
-                    .padding(.horizontal)
+                VStack(spacing: 18) {
+                    balanceCard
 
                     // Sync details (no section title — matches Android card content)
                     VStack(alignment: .leading, spacing: 8) {
@@ -366,17 +421,50 @@ struct WalletView: View {
                     .cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
 
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Text("Recent Transactions").font(.headline)
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack(alignment: .firstTextBaseline) {
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("Recent activity")
+                                    .font(.title3.weight(.bold))
+                                Text(L10n.format("%lld transactions", Int64(viewModel.totalHistoryCount)))
+                                    .font(.caption)
+                                    .foregroundStyle(secondaryText)
+                            }
                             Spacer()
-                            Text("\(viewModel.totalHistoryCount)").font(.caption).foregroundStyle(.secondary)
+                            NavigationLink {
+                                TransactionsView(viewModel: viewModel)
+                            } label: {
+                                HStack(spacing: 4) {
+                                    Text("See all")
+                                    Image(systemName: "arrow.up.right")
+                                        .font(.caption2.weight(.bold))
+                                }
+                                .font(.subheadline.weight(.semibold))
+                            }
+                            .accessibilityHint(L10n.t("Opens your full transaction history"))
                         }
+                        .padding(.bottom, 2)
+
                         if viewModel.transfers.isEmpty {
-                            Text(viewModel.isSynced ? "No transactions yet." : "No transactions found yet. Sync is not complete.")
-                                .font(.subheadline).foregroundStyle(.secondary)
+                            HStack(spacing: 12) {
+                                Image(systemName: viewModel.isSynced ? "tray" : "arrow.triangle.2.circlepath")
+                                    .font(.title3)
+                                    .foregroundStyle(classicPalette?.accent ?? .accentColor)
+                                    .frame(width: 42, height: 42)
+                                    .background((classicPalette?.accent ?? .accentColor).opacity(0.12), in: Circle())
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(viewModel.isSynced ? "Nothing here yet" : "History is syncing")
+                                        .font(.subheadline.weight(.semibold))
+                                    Text(viewModel.isSynced ? "Your transactions will appear here." : "Transactions appear as the wallet scan finds them.")
+                                        .font(.caption)
+                                        .foregroundStyle(secondaryText)
+                                }
+                            }
+                            .padding(.vertical, 10)
+                            .accessibilityElement(children: .combine)
                         }
-                        ForEach(viewModel.transfers, id: \.txid) { row in
+
+                        ForEach(Array(viewModel.transfers.prefix(3)), id: \.txid) { row in
                             Button {
                                 let session = viewModel.historySession
                                 let id = viewModel.historyWalletId
@@ -388,25 +476,32 @@ struct WalletView: View {
                                     } catch { if session == viewModel.historySession { viewModel.errorMessage = "Transaction details could not be loaded." } }
                                 }
                             } label: {
-                                WalletTransferRow(transfer: row, viewModel: viewModel)
+                                WalletTransferRow(transfer: row, viewModel: viewModel, compact: true)
                             }.buttonStyle(.plain)
-                            if row.txid != viewModel.transfers.last?.txid { Divider() }
-                        }
-                        NavigationLink {
-                            TransactionsView(viewModel: viewModel)
-                        } label: {
-                            Label("View all transactions (\(viewModel.totalHistoryCount))", systemImage: "list.bullet")
+                            if row.txid != viewModel.transfers.prefix(3).last?.txid {
+                                Divider().padding(.leading, 54)
+                            }
                         }
                         if viewModel.pendingHistoryCount > 0 {
                             NavigationLink {
                                 TransactionsView(viewModel: viewModel, initialFilter: "pending")
                             } label: {
-                                Text("\(viewModel.pendingHistoryCount) pending transactions")
+                                Label(L10n.format("%lld pending", Int64(viewModel.pendingHistoryCount)), systemImage: "clock")
+                                    .font(.caption.weight(.semibold))
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 7)
+                                    .background((classicPalette?.accent ?? .orange).opacity(0.12), in: Capsule())
                             }
+                            .buttonStyle(.plain)
                         }
                     }
-                    .padding().frame(maxWidth: .infinity)
-                    .background(panelBackground).cornerRadius(classicUI ? 4 : 16)
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(panelBackground, in: RoundedRectangle(cornerRadius: classicUI ? 4 : 22, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: classicUI ? 4 : 22, style: .continuous)
+                            .stroke(classicUI ? (classicPalette?.border ?? .clear) : Color(.separator).opacity(0.22), lineWidth: 1)
+                    }
                     .padding(.horizontal)
                     .onChange(of: viewModel.historySession) { _, _ in showTransferDetails = false; selectedTransfer = nil }
                     .sheet(isPresented: $showTransferDetails, onDismiss: { selectedTransfer = nil }) {

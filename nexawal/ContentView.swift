@@ -291,6 +291,8 @@ private struct NeonTabBar: View {
     @Binding var selectedTab: MainTab
     let classicUI: Bool
     let palette: ClassicPalette?
+    @Namespace private var selectionNamespace
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(spacing: 0) {
@@ -302,7 +304,9 @@ private struct NeonTabBar: View {
                 ForEach(tabs, id: \.self) { tab in
                     let selected = selectedTab == tab
                     Button {
-                        selectedTab = tab
+                        withAnimation(reduceMotion ? nil : .spring(response: 0.34, dampingFraction: 0.82)) {
+                            selectedTab = tab
+                        }
                     } label: {
                         VStack(spacing: 4) {
                             Image(systemName: tab.systemImage)
@@ -322,6 +326,15 @@ private struct NeonTabBar: View {
                         .padding(.top, 8)
                         .padding(.bottom, 6)
                         .contentShape(Rectangle())
+                        .background {
+                            if selected {
+                                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                    .fill(selectionTint)
+                                    .matchedGeometryEffect(id: "selected-tab", in: selectionNamespace)
+                                    .padding(.horizontal, 5)
+                                    .padding(.vertical, 1)
+                            }
+                        }
                         .accessibilityElement(children: .combine)
                     }
                     .buttonStyle(.plain)
@@ -330,8 +343,11 @@ private struct NeonTabBar: View {
                 }
             }
             .padding(.horizontal, 4)
+            .padding(.top, 3)
             .background(barBackground.ignoresSafeArea(edges: .bottom))
         }
+        .sensoryFeedback(.selection, trigger: selectedTab)
+        .animation(reduceMotion ? nil : .spring(response: 0.34, dampingFraction: 0.82), value: selectedTab)
     }
 
     private var barBackground: Color {
@@ -339,6 +355,13 @@ private struct NeonTabBar: View {
             return palette.panel
         }
         return Color(.secondarySystemBackground)
+    }
+
+    private var selectionTint: Color {
+        if classicUI, let palette {
+            return palette.accent.opacity(0.10)
+        }
+        return Color.accentColor.opacity(0.10)
     }
 
     private func itemColor(selected: Bool) -> Color {
