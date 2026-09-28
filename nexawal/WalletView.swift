@@ -729,7 +729,8 @@ struct SettingsView: View {
                         if fiatEstimatesEnabled {
                             Picker("Currency", selection: $fiatCurrency) {
                                 ForEach(FiatEstimate.supportedCurrencies, id: \.self) { code in
-                                    Text("\(code) — \(FiatEstimate.currencyNames[code] ?? code)").tag(code)
+                                    // verbatim: avoid extracting "%@ — %@" (invalid Swift symbol key)
+                                    Text(verbatim: "\(code) — \(FiatEstimate.currencyNames[code] ?? code)").tag(code)
                                 }
                             }
                             .pickerStyle(.menu)

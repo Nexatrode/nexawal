@@ -47,7 +47,8 @@ struct LegalDocumentView: View {
                                 .foregroundStyle(classicPalette?.primaryText ?? .primary)
                                 .padding(.top, level <= 2 ? 8 : 4)
                         case let .bullet(text):
-                            Text("• \(text)")
+                            // verbatim: avoid extracting "• %@" (invalid Swift symbol key)
+                            Text(verbatim: "• \(text)")
                                 .font(bodyFont)
                                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         case let .paragraph(text):

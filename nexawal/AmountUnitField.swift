@@ -27,7 +27,10 @@ struct AmountUnitField: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            TextField(placeholder, text: $text)
+            // verbatim prompt: numeric placeholders like "0.0" are not valid Swift symbol keys
+            TextField(text: $text, prompt: Text(verbatim: placeholder)) {
+                EmptyView()
+            }
                 .keyboardType(.decimalPad)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
