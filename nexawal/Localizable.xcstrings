@@ -1316,320 +1316,9 @@
       }
     },
     "%lld": {
+      "shouldTranslate": false,
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "bg": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ca": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "el": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
         "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "eo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "et": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "eu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "fa": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "fi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ga": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "gl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "gn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "he": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "hr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ky": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "lt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "lv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ms": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "my": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "nb": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ro": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "sl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "sq": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "sv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "th": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "yo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
-          }
-        },
-        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld"
@@ -2623,12 +2312,6 @@
     },
     "%lld matching · %lld total": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld matching · %lld total"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -2683,6 +2366,12 @@
             "value": "%lld αποτελέσματα · σύνολο %lld"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld matching · %lld total"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -2717,6 +2406,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld osumaa · yhteensä %lld"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld tugma · %lld sa kabuuan"
           }
         },
         "fr": {
@@ -2899,12 +2594,6 @@
             "value": "ตรงกัน %lld รายการ · ทั้งหมด %lld รายการ"
           }
         },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld tugma · %lld sa kabuuan"
-          }
-        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -2950,13 +2639,8 @@
       }
     },
     "%lld pending transactions": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld pending transactions"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -3006,6 +2690,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld pending transactions"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld pending transactions"
@@ -3274,659 +2964,24 @@
             "state": "translated",
             "value": "%lld 筆待處理交易"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld pending transactions"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld pending transactions"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "%lld.": {
+      "shouldTranslate": false,
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "bg": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ca": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "el": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld."
-          }
-        },
-        "eo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "et": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "eu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "fa": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "fi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ga": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "gl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "gn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "he": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "hr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ky": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "lt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "lv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ms": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "my": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "nb": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ro": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "sl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "sq": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "sv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "th": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld۔"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "yo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld。"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld。"
           }
         }
       }
     },
     "%llu": {
+      "shouldTranslate": false,
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "bg": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ca": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "el": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
         "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "eo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "et": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "eu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "fa": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "fi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ga": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "gl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "gn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "he": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "hr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ky": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "lt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "lv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ms": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "my": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "nb": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ro": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "sl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "sq": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "sv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "th": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "yo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu"
-          }
-        },
-        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "%llu"
@@ -3935,13 +2990,8 @@
       }
     },
     "%llu confirmations": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu confirmations"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -3991,6 +3041,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%llu confirmations"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%llu confirmations"
@@ -4259,21 +3315,8 @@
             "state": "translated",
             "value": "%llu 次確認"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu confirmations"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%llu confirmations"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "0.0 XMR": {
       "extractionState": "stale",
@@ -8875,12 +7918,6 @@
     },
     "All": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -8935,6 +7972,12 @@
             "value": "Όλες"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -8969,6 +8012,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kaikki"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lahat"
           }
         },
         "fr": {
@@ -9149,12 +8198,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ทั้งหมด"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lahat"
           }
         },
         "tr": {
@@ -9859,13 +8902,8 @@
       }
     },
     "Amount is the total wallet debit, including the network fee.": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amount is the total wallet debit, including the network fee."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -9915,6 +8953,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amount is the total wallet debit, including the network fee."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Amount is the total wallet debit, including the network fee."
@@ -10183,21 +9227,8 @@
             "state": "translated",
             "value": "此金額是包含網路手續費在內的錢包總支出。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amount is the total wallet debit, including the network fee."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amount is the total wallet debit, including the network fee."
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Amount set to max spendable. Final fee may change slightly at send time.": {
       "extractionState": "stale",
@@ -14797,12 +13828,6 @@
     },
     "Avg throughput": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avg throughput"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -14857,6 +13882,12 @@
             "value": "Μέσος ρυθμός διεκπεραίωσης"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avg throughput"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -14891,6 +13922,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Keskimääräinen läpimeno"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Karaniwang bilis ng pagproseso"
           }
         },
         "fr": {
@@ -15071,12 +14108,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "อัตราการประมวลผลเฉลี่ย"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Karaniwang bilis ng pagproseso"
           }
         },
         "tr": {
@@ -23335,12 +22366,6 @@
     "Click the seed box, paste with ⌘V, set restore height, then Open & sync.": {
       "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Click the seed box, paste with ⌘V, set restore height, then Open & sync."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -23390,6 +22415,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click the seed box, paste with ⌘V, set restore height, then Open & sync."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Click the seed box, paste with ⌘V, set restore height, then Open & sync."
@@ -23658,30 +22689,12 @@
             "state": "translated",
             "value": "點一下種子欄，用 ⌘V 貼上，設定還原高度，然後開啟並同步。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Click the seed box, paste with ⌘V, set restore height, then Open & sync."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Click the seed box, paste with ⌘V, set restore height, then Open & sync."
-          }
         }
       }
     },
     "Click this box, then ⌘V or Edit → Paste. Open is a separate button.": {
       "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Click this box, then ⌘V or Edit → Paste. Open is a separate button."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -23731,6 +22744,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click this box, then ⌘V or Edit → Paste. Open is a separate button."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Click this box, then ⌘V or Edit → Paste. Open is a separate button."
@@ -23998,18 +23017,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "點一下此欄，然後用 ⌘V 或編輯 → 貼上。「開啟」是另一個按鈕。"
-          }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Click this box, then ⌘V or Edit → Paste. Open is a separate button."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Click this box, then ⌘V or Edit → Paste. Open is a separate button."
           }
         }
       }
@@ -29269,13 +28276,8 @@
       }
     },
     "Copies the source link": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copies the source link"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -29325,6 +28327,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copies the source link"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Copies the source link"
@@ -29593,21 +28601,8 @@
             "state": "translated",
             "value": "複製來源連結"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copies the source link"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copies the source link"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Copy Address": {
       "localizations": {
@@ -33220,12 +32215,6 @@
     },
     "Create or Import instead": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Create or Import instead"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -33280,6 +32269,12 @@
             "value": "Δημιουργία"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create or Import instead"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -33314,6 +32309,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Luo"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gumawa"
           }
         },
         "fr": {
@@ -33494,12 +32495,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "สร้าง"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gumawa"
           }
         },
         "tr": {
@@ -34860,13 +33855,8 @@
       }
     },
     "Date range": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date range"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -34916,6 +33906,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date range"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Date range"
@@ -35184,21 +34180,8 @@
             "state": "translated",
             "value": "日期範圍"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date range"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Date range"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Description": {
       "localizations": {
@@ -41446,12 +40429,6 @@
     },
     "Fee %@%@": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fee %@%@"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -41506,6 +40483,12 @@
             "value": "Προμήθεια"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fee %@%@"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -41540,6 +40523,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maksu"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bayad"
           }
         },
         "fr": {
@@ -41720,12 +40709,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ค่าธรรมเนียม"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bayad"
           }
         },
         "tr": {
@@ -44071,13 +43054,8 @@
       }
     },
     "Filter": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filter"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -44127,6 +43105,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filter"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Filter"
@@ -44395,30 +43379,11 @@
             "state": "translated",
             "value": "篩選"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filter"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filter"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "From": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "From"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -44473,6 +43438,12 @@
             "value": "Από (YYYY-MM-DD)"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -44507,6 +43478,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alkaen (YYYY-MM-DD)"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mula (YYYY-MM-DD)"
           }
         },
         "fr": {
@@ -44687,12 +43664,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ตั้งแต่ (YYYY-MM-DD)"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mula (YYYY-MM-DD)"
           }
         },
         "tr": {
@@ -48026,12 +46997,6 @@
     },
     "History changed · Reload transactions": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "History changed · Reload transactions"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -48086,6 +47051,12 @@
             "value": "Το ιστορικό άλλαξε · επαναφόρτωση συναλλαγών"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History changed · Reload transactions"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -48120,6 +47091,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historia muuttui · lataa tapahtumat uudelleen"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nagbago ang history · i-reload ang mga transaksyon"
           }
         },
         "fr": {
@@ -48302,12 +47279,6 @@
             "value": "ประวัติมีการเปลี่ยนแปลง · โหลดธุรกรรมใหม่"
           }
         },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nagbago ang history · i-reload ang mga transaksyon"
-          }
-        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -48354,12 +47325,6 @@
     },
     "History may be incomplete while syncing.": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "History may be incomplete while syncing."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -48414,6 +47379,12 @@
             "value": "Το ιστορικό μπορεί να είναι ελλιπές κατά τον συγχρονισμό."
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "History may be incomplete while syncing."
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -48448,6 +47419,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historia voi olla puutteellinen synkronoinnin aikana."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maaaring hindi kumpleto ang history habang nagsi-sync."
           }
         },
         "fr": {
@@ -48628,12 +47605,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ประวัติอาจไม่ครบถ้วนขณะกำลังซิงค์"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Maaaring hindi kumpleto ang history habang nagsi-sync."
           }
         },
         "tr": {
@@ -49009,13 +47980,8 @@
       }
     },
     "https://github.com/nexatrode/nexawal": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://github.com/nexatrode/nexawal"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -49065,6 +48031,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "https://github.com/nexatrode/nexawal"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "https://github.com/nexatrode/nexawal"
@@ -49333,337 +48305,13 @@
             "state": "translated",
             "value": "https://github.com/nexatrode/nexawal"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://github.com/nexatrode/nexawal"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://github.com/nexatrode/nexawal"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "https://rpc.nexatrode.com": {
+      "shouldTranslate": false,
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "bg": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ca": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "el": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
         "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "eo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "et": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "eu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "fa": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "fi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ga": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "gl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "gn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "he": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "hr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ky": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "lt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "lv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ms": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "my": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "nb": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ro": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "sl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "sq": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "sv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "th": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "yo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://rpc.nexatrode.com"
-          }
-        },
-        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "https://rpc.nexatrode.com"
@@ -55907,12 +54555,6 @@
     },
     "Link copied": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Link copied"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -55967,6 +54609,12 @@
             "value": "Ο σύνδεσμος αντιγράφηκε"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link copied"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -56001,6 +54649,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Linkki kopioitu"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nakopya ang link"
           }
         },
         "fr": {
@@ -56181,12 +54835,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "คัดลอกลิงก์แล้ว"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nakopya ang link"
           }
         },
         "tr": {
@@ -56892,12 +55540,6 @@
     },
     "Loading transaction…": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Loading transaction…"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -56952,6 +55594,12 @@
             "value": "Φόρτωση συναλλαγής…"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading transaction…"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -56986,6 +55634,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ladataan tapahtumaa…"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nilo-load ang transaksyon…"
           }
         },
         "fr": {
@@ -57168,12 +55822,6 @@
             "value": "กำลังโหลดธุรกรรม…"
           }
         },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nilo-load ang transaksyon…"
-          }
-        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -57219,13 +55867,8 @@
       }
     },
     "Loading transactions…": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Loading transactions…"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -57275,6 +55918,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading transactions…"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Loading transactions…"
@@ -57543,31 +56192,12 @@
             "state": "translated",
             "value": "正在載入交易…"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Loading transactions…"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Loading transactions…"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Locked. Open the existing wallet from {}, or restore a different seed.": {
       "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Locked. Open the existing wallet from {}, or restore a different seed."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -57617,6 +56247,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locked. Open the existing wallet from {}, or restore a different seed."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Locked. Open the existing wallet from {}, or restore a different seed."
@@ -57884,18 +56520,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "已鎖定。從 {} 開啟既有錢包，或還原另一組種子。"
-          }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Locked. Open the existing wallet from {}, or restore a different seed."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Locked. Open the existing wallet from {}, or restore a different seed."
           }
         }
       }
@@ -58558,13 +57182,8 @@
       }
     },
     "Max preview ready. Confirm Send Max will sweep all unlocked after fee.": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Max preview ready. Confirm Send Max will sweep all unlocked after fee."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -58614,6 +57233,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max preview ready. Confirm Send Max will sweep all unlocked after fee."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Max preview ready. Confirm Send Max will sweep all unlocked after fee."
@@ -58882,21 +57507,8 @@
             "state": "translated",
             "value": "最大預覽已就緒。確認「最大發送」會在扣除手續費後送出全部已解鎖餘額。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Max preview ready. Confirm Send Max will sweep all unlocked after fee."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Max preview ready. Confirm Send Max will sweep all unlocked after fee."
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Maximum sendable amount estimated.": {
       "extractionState": "stale",
@@ -59558,12 +58170,6 @@
     },
     "MIT License": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MIT License"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -59618,6 +58224,12 @@
             "value": "MIT License"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MIT License"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -59649,6 +58261,12 @@
           }
         },
         "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MIT License"
+          }
+        },
+        "fil": {
           "stringUnit": {
             "state": "translated",
             "value": "MIT License"
@@ -59829,12 +58447,6 @@
           }
         },
         "th": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MIT License"
-          }
-        },
-        "fil": {
           "stringUnit": {
             "state": "translated",
             "value": "MIT License"
@@ -66780,13 +65392,8 @@
       }
     },
     "No transactions found yet. Sync is not complete.": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No transactions found yet. Sync is not complete."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -66836,6 +65443,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No transactions found yet. Sync is not complete."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "No transactions found yet. Sync is not complete."
@@ -67104,30 +65717,11 @@
             "state": "translated",
             "value": "尚未找到交易。同步未完成。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No transactions found yet. Sync is not complete."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No transactions found yet. Sync is not complete."
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "No transactions match these filters.": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No transactions match these filters."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -67182,6 +65776,12 @@
             "value": "Δεν υπάρχουν συναλλαγές που να ταιριάζουν με αυτά τα φίλτρα."
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No transactions match these filters."
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -67216,6 +65816,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Näitä suodattimia vastaavia tapahtumia ei ole."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walang transaksyong tugma sa mga filter na ito."
           }
         },
         "fr": {
@@ -67396,12 +66002,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ไม่มีธุรกรรมที่ตรงกับตัวกรองเหล่านี้"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Walang transaksyong tugma sa mga filter na ito."
           }
         },
         "tr": {
@@ -72047,12 +70647,6 @@
     "Open the existing wallet from {}, or restore a different seed.": {
       "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open the existing wallet from {}, or restore a different seed."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -72102,6 +70696,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the existing wallet from {}, or restore a different seed."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Open the existing wallet from {}, or restore a different seed."
@@ -72370,30 +70970,12 @@
             "state": "translated",
             "value": "從 {} 開啟既有錢包，或還原另一組種子。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open the existing wallet from {}, or restore a different seed."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open the existing wallet from {}, or restore a different seed."
-          }
         }
       }
     },
     "Opening the wallet from secure storage.": {
       "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opening the wallet from secure storage."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -72443,6 +71025,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opening the wallet from secure storage."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Opening the wallet from secure storage."
@@ -72710,18 +71298,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在從安全儲存開啟錢包。"
-          }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opening the wallet from secure storage."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opening the wallet from secure storage."
           }
         }
       }
@@ -73384,13 +71960,8 @@
       }
     },
     "Paid by the sender. Not deducted from the amount received.": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paid by the sender. Not deducted from the amount received."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -73440,6 +72011,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paid by the sender. Not deducted from the amount received."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Paid by the sender. Not deducted from the amount received."
@@ -73708,21 +72285,8 @@
             "state": "translated",
             "value": "由寄送方支付。不會從收款金額中扣除。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paid by the sender. Not deducted from the amount received."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paid by the sender. Not deducted from the amount received."
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Paste 25-word mnemonic…": {
       "extractionState": "stale",
@@ -74056,12 +72620,6 @@
     "Paste here only to restore a different wallet.": {
       "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paste here only to restore a different wallet."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -74111,6 +72669,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste here only to restore a different wallet."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Paste here only to restore a different wallet."
@@ -74378,18 +72942,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "僅在還原另一個錢包時貼到這裡。"
-          }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paste here only to restore a different wallet."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paste here only to restore a different wallet."
           }
         }
       }
@@ -76694,13 +75246,8 @@
       }
     },
     "Preview amount (max)": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preview amount (max)"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -76750,6 +75297,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preview amount (max)"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Preview amount (max)"
@@ -77018,21 +75571,8 @@
             "state": "translated",
             "value": "預覽金額（最大）"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preview amount (max)"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preview amount (max)"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Preview fee": {
       "extractionState": "stale",
@@ -78021,13 +76561,8 @@
       }
     },
     "Preview Send Max": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preview Send Max"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -78077,6 +76612,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preview Send Max"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Preview Send Max"
@@ -78345,21 +76886,8 @@
             "state": "translated",
             "value": "預覽最大發送"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preview Send Max"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Preview Send Max"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Preview the fee before sending to %@.": {
       "localizations": {
@@ -83289,12 +81817,6 @@
     },
     "Recent throughput": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recent throughput"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -83349,6 +81871,12 @@
             "value": "Πρόσφατος ρυθμός διεκπεραίωσης"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recent throughput"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -83383,6 +81911,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Viimeisin läpimeno"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamakailang bilis ng pagproseso"
           }
         },
         "fr": {
@@ -83563,12 +82097,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "อัตราการประมวลผลล่าสุด"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kamakailang bilis ng pagproseso"
           }
         },
         "tr": {
@@ -86243,12 +84771,6 @@
     },
     "Reload history to continue.": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reload history to continue."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -86303,6 +84825,12 @@
             "value": "Επαναφορτώστε το ιστορικό για να συνεχίσετε."
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reload history to continue."
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -86337,6 +84865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jatka lataamalla historia uudelleen."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I-reload ang history para magpatuloy."
           }
         },
         "fr": {
@@ -86517,12 +85051,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "โหลดประวัติใหม่เพื่อดำเนินการต่อ"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I-reload ang history para magpatuloy."
           }
         },
         "tr": {
@@ -90838,12 +89366,6 @@
     },
     "Retry loading history": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retry loading history"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -90898,6 +89420,12 @@
             "value": "Δοκιμάστε ξανά"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retry loading history"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -90932,6 +89460,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yritä uudelleen"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subukang muli"
           }
         },
         "fr": {
@@ -91114,12 +89648,6 @@
             "value": "ลองอีกครั้ง"
           }
         },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Subukang muli"
-          }
-        },
         "tr": {
           "stringUnit": {
             "state": "translated",
@@ -91165,13 +89693,8 @@
       }
     },
     "Review full Terms of Use": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Review full Terms of Use"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -91221,6 +89744,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review full Terms of Use"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Review full Terms of Use"
@@ -91489,21 +90018,8 @@
             "state": "translated",
             "value": "查看完整使用條款"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Review full Terms of Use"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Review full Terms of Use"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Review full terms on the Nexatrode LLC website": {
       "extractionState": "stale",
@@ -97085,12 +95601,6 @@
     },
     "Search transaction ID": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search transaction ID"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -97145,6 +95655,12 @@
             "value": "Αναζήτηση ID συναλλαγής"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search transaction ID"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -97179,6 +95695,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hae tapahtumatunnusta"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maghanap ng transaction ID"
           }
         },
         "fr": {
@@ -97359,12 +95881,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ค้นหา ID ธุรกรรม"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Maghanap ng transaction ID"
           }
         },
         "tr": {
@@ -99709,13 +98225,8 @@
       }
     },
     "Send Max mode: Confirm will sweep all unlocked after fee.": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send Max mode: Confirm will sweep all unlocked after fee."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -99765,6 +98276,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send Max mode: Confirm will sweep all unlocked after fee."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Send Max mode: Confirm will sweep all unlocked after fee."
@@ -100033,30 +98550,12 @@
             "state": "translated",
             "value": "最大發送模式：確認會在扣除手續費後送出全部已解鎖餘額。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send Max mode: Confirm will sweep all unlocked after fee."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send Max mode: Confirm will sweep all unlocked after fee."
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Send maximum spendable after fee to %@.\nPreview amount: %@\nEstimated fee: %@\nFinal amount is recalculated at send time.": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send maximum spendable after fee to %@.\nPreview amount: %@\nEstimated fee: %@\nFinal amount is recalculated at send time."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -100106,6 +98605,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send maximum spendable after fee to %@.\nPreview amount: %@\nEstimated fee: %@\nFinal amount is recalculated at send time."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Send maximum spendable after fee to %@.\nPreview amount: %@\nEstimated fee: %@\nFinal amount is recalculated at send time."
@@ -100374,21 +98879,8 @@
             "state": "translated",
             "value": "Send maximum spendable after fee to %@.\nPreview amount: %@\nEstimated fee: %@\nFinal amount is recalculated at send time."
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send maximum spendable after fee to %@.\nPreview amount: %@\nEstimated fee: %@\nFinal amount is recalculated at send time."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send maximum spendable after fee to %@.\nPreview amount: %@\nEstimated fee: %@\nFinal amount is recalculated at send time."
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Send XMR": {
       "localizations": {
@@ -104333,12 +102825,6 @@
     },
     "Source on GitHub": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Source on GitHub"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -104393,6 +102879,12 @@
             "value": "Πηγαίος κώδικας στο GitHub"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source on GitHub"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -104427,6 +102919,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lähdekoodi GitHubissa"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source code sa GitHub"
           }
         },
         "fr": {
@@ -104607,12 +103105,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ซอร์สโค้ดบน GitHub"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Source code sa GitHub"
           }
         },
         "tr": {
@@ -108926,13 +107418,8 @@
       }
     },
     "Sync failed": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sync failed"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -108982,6 +107469,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sync failed"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Sync failed"
@@ -109250,21 +107743,8 @@
             "state": "translated",
             "value": "同步失敗"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sync failed"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sync failed"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Sync progress %lld percent": {
       "localizations": {
@@ -112221,12 +110701,6 @@
     },
     "Through": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Through"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -112281,6 +110755,12 @@
             "value": "Έως (YYYY-MM-DD)"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Through"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -112315,6 +110795,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Päättyen (YYYY-MM-DD)"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanggang (YYYY-MM-DD)"
           }
         },
         "fr": {
@@ -112495,12 +110981,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ถึง (YYYY-MM-DD)"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hanggang (YYYY-MM-DD)"
           }
         },
         "tr": {
@@ -116491,12 +114971,6 @@
     },
     "Transactions": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Transactions"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -116551,6 +115025,12 @@
             "value": "Συναλλαγές"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transactions"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -116585,6 +115065,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tapahtumat"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mga Transaksyon"
           }
         },
         "fr": {
@@ -116765,12 +115251,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "ธุรกรรม"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mga Transaksyon"
           }
         },
         "tr": {
@@ -121413,13 +119893,8 @@
       }
     },
     "Unlocking…": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unlocking…"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -121469,6 +119944,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlocking…"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Unlocking…"
@@ -121737,21 +120218,8 @@
             "state": "translated",
             "value": "正在解鎖…"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unlocking…"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unlocking…"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Use biometrics or device credentials for wallet access and sending.": {
       "extractionState": "stale",
@@ -122085,12 +120553,6 @@
     "Use Open existing wallet to try again, or restore from seed.": {
       "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Use Open existing wallet to try again, or restore from seed."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -122140,6 +120602,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use Open existing wallet to try again, or restore from seed."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Use Open existing wallet to try again, or restore from seed."
@@ -122407,18 +120875,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "使用「開啟既有錢包」重試，或從種子還原。"
-          }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Use Open existing wallet to try again, or restore from seed."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Use Open existing wallet to try again, or restore from seed."
           }
         }
       }
@@ -123081,13 +121537,8 @@
       }
     },
     "View all transactions (%lld)": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "View all transactions (%lld)"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -123137,6 +121588,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View all transactions (%lld)"
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "View all transactions (%lld)"
@@ -123405,30 +121862,12 @@
             "state": "translated",
             "value": "查看全部交易 (%lld)"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "View all transactions (%lld)"
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "View all transactions (%lld)"
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Wait for wallet sync to finish before preparing a send.": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wait for wallet sync to finish before preparing a send."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -123478,6 +121917,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wait for wallet sync to finish before preparing a send."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Wait for wallet sync to finish before preparing a send."
@@ -123746,30 +122191,12 @@
             "state": "translated",
             "value": "請等待錢包同步完成後再準備發送。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wait for wallet sync to finish before preparing a send."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wait for wallet sync to finish before preparing a send."
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Wait for wallet sync to finish before sending.": {
+      "extractionState": "manual",
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wait for wallet sync to finish before sending."
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -123819,6 +122246,12 @@
           }
         },
         "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wait for wallet sync to finish before sending."
+          }
+        },
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Wait for wallet sync to finish before sending."
@@ -124087,21 +122520,8 @@
             "state": "translated",
             "value": "請等待錢包同步完成後再發送。"
           }
-        },
-        "tl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wait for wallet sync to finish before sending."
-          }
-        },
-        "in": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wait for wallet sync to finish before sending."
-          }
         }
-      },
-      "extractionState": "manual"
+      }
     },
     "Waiting for network height": {
       "localizations": {
@@ -124761,12 +123181,6 @@
     },
     "Wallet debit (amount + fee)": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wallet debit (amount + fee)"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -124821,6 +123235,12 @@
             "value": "Πορτοφόλι"
           }
         },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet debit (amount + fee)"
+          }
+        },
         "eo": {
           "stringUnit": {
             "state": "translated",
@@ -124855,6 +123275,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lompakko"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet"
           }
         },
         "fr": {
@@ -125035,12 +123461,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "กระเป๋าเงิน"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wallet"
           }
         },
         "tr": {
@@ -128369,6 +126789,335 @@
         }
       }
     },
+    "Write these words down in order and store them somewhere safe offline. You'll need them to restore the wallet if this phone is lost. NexaWal also keeps an encrypted copy on device for unlock — treat the backup like cash.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اكتب هذه الكلمات بالترتيب واحفظها بأمان دون اتصال. ستحتاج إليها لاستعادة المحفظة إذا فُقد هذا الهاتف. تحتفظ NexaWal أيضًا بنسخة مشفّرة على الجهاز لفتح القفل — عامل النسخة الاحتياطية مثل النقود."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu sözləri ardıcıllıqla yazın və onları oflayn təhlükəsiz yerdə saxlayın. Bu telefon itərsə, pulqabını bərpa etmək üçün onlara ehtiyacınız olacaq. NexaWal kilidi açmaq üçün cihazda şifrələnmiş nüsxə də saxlayır — ehtiyat nüsxəyə nağd pul kimi yanaşın."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запишете тези думи по ред и ги съхранявайте безопасно офлайн. Ще имате нужда от тях, за да възстановите портфейла, ако този телефон бъде загубен. NexaWal също пази шифровано копие на устройството за отключване — третирайте резервното копие като пари в брой."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই শব্দগুলো ক্রম অনুযায়ী লিখে অফলাইনে নিরাপদ জায়গায় সংরক্ষণ করুন। এই ফোন হারিয়ে গেলে ওয়ালেট পুনরুদ্ধার করতে এগুলো প্রয়োজন হবে। NexaWal আনলকের জন্য ডিভাইসে একটি এনক্রিপ্টেড কপিও রাখে — ব্যাকআপকে নগদের মতো গুরুত্ব দিন।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escriu aquestes paraules en ordre i guarda-les de forma segura fora de línia. Les necessitaràs per restaurar la cartera si perds aquest telèfon. NexaWal també conserva una còpia xifrada al dispositiu per al desbloqueig — tracta la còpia de seguretat com diners en efectiu."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapište si tato slova v pořadí a uložte je bezpečně offline. Budete je potřebovat k obnovení peněženky, pokud tento telefon ztratíte. NexaWal také uchovává šifrovanou kopii v zařízení pro odemknutí — zacházejte se zálohou jako s hotovostí."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skriv disse ord ned i rækkefølge, og opbevar dem sikkert offline. Du får brug for dem til at gendanne tegnebogen, hvis denne telefon bliver væk. NexaWal gemmer også en krypteret kopi på enheden til oplåsning — behandl sikkerhedskopien som kontanter."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schreibe diese Wörter in der richtigen Reihenfolge auf und bewahre sie offline an einem sicheren Ort auf. Du brauchst sie, um die Wallet wiederherzustellen, falls dieses Telefon verloren geht. NexaWal speichert zusätzlich eine verschlüsselte Kopie auf dem Gerät zum Entsperren — behandle das Backup wie Bargeld."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Γράψτε αυτές τις λέξεις με τη σειρά και αποθηκεύστε τις με ασφάλεια offline. Θα τις χρειαστείτε για να επαναφέρετε το πορτοφόλι αν χαθεί αυτό το τηλέφωνο. Το NexaWal κρατά επίσης ένα κρυπτογραφημένο αντίγραφο στη συσκευή για ξεκλείδωμα — αντιμετωπίστε το αντίγραφο ασφαλείας σαν μετρητά."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Write these words down in order and store them somewhere safe offline. You'll need them to restore the wallet if this phone is lost. NexaWal also keeps an encrypted copy on device for unlock — treat the backup like cash."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skribu ĉi tiujn vortojn en ordo kaj konservu ilin sekure eksterrete. Vi bezonos ilin por restaŭri la monujon se ĉi tiu telefono perdiĝas. NexaWal ankaŭ tenas ĉifritan kopion sur la aparato por malŝlosado — traktu la savkopion kiel kontantan monon."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anota estas palabras en orden y guárdalas en un lugar seguro fuera de línea. Las necesitarás para restaurar la cartera si pierdes este teléfono. NexaWal también guarda una copia cifrada en el dispositivo para el desbloqueo — trata la copia de seguridad como dinero en efectivo."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirjutage need sõnad järjekorras üles ja hoidke neid turvaliselt võrguühenduseta. Vajate neid rahakoti taastamiseks, kui see telefon kaob. NexaWal hoiab avamiseks ka krüpteeritud koopiat seadmes — kohtlege varukoopiat nagu sularaha."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idatzi hitz hauek ordenan eta gorde itzazu seguru lineaz kanpo. Telefono hau galtzen baduzu, zorroa leheneratzeko beharko dituzu. NexaWal-ek desblokeatzeko gailuan kopia enkriptatu bat ere gordetzen du — tratatu babeskopia eskudirutan bezala."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "این کلمات را به ترتیب یادداشت کنید و آن‌ها را به‌صورت آفلاین در جای امنی نگه دارید. اگر این گوشی گم شود، برای بازیابی کیف پول به آن‌ها نیاز خواهید داشت. NexaWal همچنین یک رونوشت رمزنگاری‌شده روی دستگاه برای باز کردن قفل نگه می‌دارد — از پشتیبان مثل پول نقد مراقبت کنید."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirjoita nämä sanat järjestyksessä ylös ja säilytä ne turvallisesti offline-tilassa. Tarvitset niitä lompakon palauttamiseen, jos tämä puhelin katoaa. NexaWal säilyttää myös salatun kopion laitteella lukituksen avaamista varten — käsittele varmuuskopiota kuin käteistä."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isulat ang mga salitang ito ayon sa pagkasunod-sunod at itago ang mga ito nang ligtas offline. Kakailanganin mo ito para i-restore ang wallet kung mawala ang teleponong ito. May encrypted na kopya rin ang NexaWal sa device para sa unlock — ituring ang backup na parang pera."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note ces mots dans l'ordre et conserve-les hors ligne en lieu sûr. Tu en auras besoin pour restaurer le portefeuille si ce téléphone est perdu. NexaWal conserve aussi une copie chiffrée sur l'appareil pour le déverrouillage — traite la sauvegarde comme de l'argent liquide."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scríobh na focail seo in ord agus stóráil iad go sábháilte as líne. Beidh siad de dhíth ort chun an sparán a aischur má chailltear an fón seo. Coinníonn NexaWal cóip chriptithe ar an ngléas freisin le haghaidh díghlasála — caith leis an gcúltaca mar airgead tirim."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anota estas palabras en orde e gárdaas de forma segura fóra de liña. Necesitarás delas para restaurar a carteira se perdas este teléfono. NexaWal tamén garda unha copia cifrada no dispositivo para o desbloqueo — trata a copia de seguridade como diñeiro en efectivo."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ehai ko'ã ñe'ẽ oĩháicha ha eñongatu chupekuéra segurohápe ñanduti'ỹre. Eikotevẽta hesekuéra ñongatuha ñemoĩ jey hag̃ua ko pumbyry ojeheja ramo. NexaWal oñongatu avei peteĩ kopia cifrada dispositivo-pe ijepe'a hag̃ua — eñangareko backup rehe viruicha."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rubuta waɗannan kalmomi bisa jeri kuma ajiye su a aminci a waje da yanar gizo. Za ka buƙace su don dawo da walati idan wannan wayar ta ɓace. NexaWal kuma yana ajiye kwafin da aka ɓoye a na'urar don buɗewa — ɗauki baya a matsayin kuɗi na hannu."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "כתוב מילים אלה לפי הסדר ושמור אותן בבטחה במצב לא מקוון. תזדקק להן כדי לשחזר את הארנק אם הטלפון הזה יאבד. NexaWal גם שומר עותק מוצפן במכשיר לצורך ביטול נעילה — התייחס לגיבוי כמו למזומן."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इन शब्दों को क्रम में लिख लें और इन्हें ऑफ़लाइन किसी सुरक्षित जगह रखें। अगर यह फ़ोन खो जाए तो वॉलेट रीस्टोर करने के लिए इनकी ज़रूरत होगी। NexaWal अनलॉक के लिए डिवाइस पर एक एन्क्रिप्टेड प्रति भी रखता है — बैकअप को नकदी की तरह समझें।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapišite ove riječi po redu i pohranite ih sigurno offline. Trebat će vam za obnovu novčanika ako ovaj telefon bude izgubljen. NexaWal također čuva šifriranu kopiju na uređaju za otključavanje — tretirajte sigurnosnu kopiju kao gotovinu."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Írd le ezeket a szavakat sorrendben, és tárold őket biztonságosan offline. Szükséged lesz rájuk a pénztárca visszaállításához, ha ez a telefon elveszik. A NexaWal a feloldáshoz titkosított másolatot is tart az eszközön — kezeld a biztonsági mentést készpénzként."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Գրի առեք այս բառերը հաջորդականությամբ և պահեք դրանք անվտանգ՝ առանց ցանցի։ Դրանք անհրաժեշտ կլինեն դրամապանակը վերականգնելու համար, եթե այս հեռախոսը կորի։ NexaWal-ը ապակողպման համար սարքում նաև պահում է գաղտնագրված պատճեն — պահուստը վերաբերվեք որպես կանխիկի։"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tulis kata-kata ini secara berurutan dan simpan secara offline di tempat yang aman. Anda akan membutuhkannya untuk memulihkan dompet jika ponsel ini hilang. NexaWal juga menyimpan salinan terenkripsi di perangkat untuk membuka kunci — perlakukan cadangan seperti uang tunai."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scrivi queste parole in ordine e conservale offline in un luogo sicuro. Ti serviranno per ripristinare il wallet se perdi questo telefono. NexaWal conserva anche una copia crittografata sul dispositivo per lo sblocco — tratta il backup come contanti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらの単語を順番に書き留め、オフラインの安全な場所に保管してください。このスマートフォンを紛失した場合、ウォレットの復元に必要です。NexaWalはロック解除のため端末にも暗号化コピーを保持します — バックアップは現金と同じように扱ってください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 단어들을 순서대로 적어서 오프라인의 안전한 곳에 보관하세요. 이 휴대폰을 잃어버리면 지갑을 복구할 때 필요합니다. NexaWal은 잠금 해제를 위해 기기에 암호화된 사본도 보관합니다 — 백업을 현금처럼 다루세요."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бул сөздөрдү тартип менен жазып, аларды оффлайн коопсуз жерде сактаңыз. Бул телефон жоголсо, капчыкты калыбына келтирүү үчүн алар керек болот. NexaWal кулпуну ачуу үчүн түзмөктө шифрленген көчүрмөнү да сактайт — камдык көчүрмөнү накталай акчадай мамиле кылыңыз."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Užsirašykite šiuos žodžius tokia tvarka ir laikykite juos saugiai neprisijungę. Jų reikės piniginei atkurti, jei šis telefonas bus prarastas. NexaWal taip pat saugo šifruotą kopiją įrenginyje atrakinimui — elkitės su atsargine kopija kaip su grynaisiais."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pierakstiet šos vārdus secībā un glabājiet tos droši bezsaistē. Tie būs nepieciešami, lai atjaunotu maku, ja šis tālrunis tiek pazaudēts. NexaWal arī glabā šifrētu kopiju ierīcē atbloķēšanai — izturieties pret dublējumu kā pret skaidru naudu."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tulis perkataan ini mengikut susunan dan simpan secara luar talian di tempat yang selamat. Anda akan memerlukannya untuk memulihkan dompet jika telefon ini hilang. NexaWal juga menyimpan salinan disulitkan pada peranti untuk membuka kunci — anggap sandaran seperti wang tunai."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ဤစကားလုံးများကို အစဉ်လိုက် ရေးမှတ်ပြီး အော့ဖ်လိုင်းတွင် လုံခြုံစွာ သိမ်းဆည်းထားပါ။ ဤဖုန်း ပျောက်ဆုံးပါက ပိုက်ဆံအိတ် ပြန်လည်ရယူရန် ၎င်းတို့ လိုအပ်မည်။ NexaWal သည် သော့ဖွင့်ရန် စက်ပေါ်တွင် စာဝှက်ထားသော မိတ္တူကိုလည်း သိမ်းဆည်းထားသည် — အရန်သိမ်းဆည်းမှုကို ငွေသားကဲ့သို့ ဆက်ဆံပါ။"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skriv ned disse ordene i riktig rekkefølge og oppbevar dem trygt offline. Du vil trenge dem for å gjenopprette lommeboken hvis denne telefonen blir borte. NexaWal beholder også en kryptert kopi på enheten for opplåsing — behandle sikkerhetskopien som kontanter."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schrijf deze woorden in volgorde op en bewaar ze offline op een veilige plek. Je hebt ze nodig om de portemonnee te herstellen als je deze telefoon kwijtraakt. NexaWal bewaart ook een versleutelde kopie op het apparaat om te ontgrendelen — behandel de back-up als contant geld."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisz te słowa w podanej kolejności i przechowuj je bezpiecznie offline. Będziesz ich potrzebować, aby przywrócić portfel, jeśli ten telefon zostanie utracony. NexaWal przechowuje także zaszyfrowaną kopię na urządzeniu do odblokowania — traktuj kopię zapasową jak gotówkę."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anote estas palavras em ordem e guarde-as offline em um lugar seguro. Você vai precisar delas para restaurar a carteira se este telefone for perdido. O NexaWal também mantém uma cópia criptografada no dispositivo para o desbloqueio — trate o backup como dinheiro vivo."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notează aceste cuvinte în ordine și păstrează-le în siguranță offline. Vei avea nevoie de ele pentru a restaura portofelul dacă acest telefon este pierdut. NexaWal păstrează și o copie criptată pe dispozitiv pentru deblocare — tratează backupul ca pe numerar."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запишите эти слова по порядку и храните их безопасно офлайн. Они понадобятся для восстановления кошелька, если этот телефон будет потерян. NexaWal также хранит зашифрованную копию на устройстве для разблокировки — относитесь к резервной копии как к наличным."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapíšte si tieto slová v poradí a uložte ich bezpečne offline. Budete ich potrebovať na obnovenie peňaženky, ak tento telefón stratíte. NexaWal tiež uchováva šifrovanú kópiu v zariadení na odomknutie — zaobchádzajte so zálohou ako s hotovosťou."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapiši te besede v pravem vrstnem redu in jih shrani varno offline. Potreboval jih boš za obnovitev denarnice, če ta telefon izgubiš. NexaWal hrani tudi šifrirano kopijo na napravi za odklepanje — varnostno kopijo obravnavaj kot gotovino."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shkruaji këto fjalë me radhë dhe ruaji ato të sigurta jashtë linje. Do t'i nevojiten për të rikuperuar portofolin nëse humbet ky telefon. NexaWal mban gjithashtu një kopje të enkriptuar në pajisje për shkyçje — trajtoje kopjen rezervë si para në dorë."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skriv ner dessa ord i ordning och förvara dem säkert offline. Du behöver dem för att återställa plånboken om den här telefonen förloras. NexaWal sparar också en krypterad kopia på enheten för upplåsning — behandla säkerhetskopian som kontanter."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "จดคำเหล่านี้ตามลำดับและเก็บไว้อย่างปลอดภัยแบบออฟไลน์ คุณจะต้องใช้คำเหล่านี้เพื่อกู้คืนกระเป๋าเงินหากโทรศัพท์เครื่องนี้สูญหาย NexaWal ยังเก็บสำเนาที่เข้ารหัสไว้บนอุปกรณ์สำหรับการปลดล็อกด้วย — ปฏิบัติต่อข้อมูลสำรองเหมือนเงินสด"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu kelimeleri sırasıyla yaz ve çevrimdışı güvenli bir yerde sakla. Bu telefon kaybolursa cüzdanı geri yüklemek için bunlara ihtiyacın olacak. NexaWal, kilit açma için cihazda şifreli bir kopya da tutar — yedeği nakit gibi koru."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запишіть ці слова по порядку і зберігайте їх безпечно офлайн. Вони знадобляться для відновлення гаманця, якщо цей телефон буде втрачено. NexaWal також зберігає зашифровану копію на пристрої для розблокування — ставтеся до резервної копії як до готівки."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یہ الفاظ ترتیب سے لکھ لیں اور انہیں آف لائن کسی محفوظ جگہ رکھیں۔ اگر یہ فون گم ہو جائے تو والٹ بحال کرنے کے لیے ان کی ضرورت ہو گی۔ NexaWal ان لاک کے لیے ڈیوائس پر ایک مرموز کاپی بھی رکھتا ہے — بیک اپ کو نقدی کی طرح سمجھیں۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ghi lại các từ này theo đúng thứ tự và lưu giữ chúng an toàn ngoại tuyến. Bạn sẽ cần chúng để khôi phục ví nếu chiếc điện thoại này bị mất. NexaWal cũng giữ một bản sao được mã hóa trên thiết bị để mở khóa — hãy coi bản sao lưu như tiền mặt."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kọ àwọn ọ̀rọ̀ yìí sílẹ̀ ní ìtòlẹ́sẹẹsẹ kí o sì fi wọ́n pamọ́ síbi àìsí-ayélujára tí ó dájú. O óò nílò wọn láti dá àpamọ́wọ́ padà tí fóònù yìí bá sọnù. NexaWal tún pa àdàkọ tí a fi ọ̀rọ̀-ìpamọ́ pamọ́ sórí ẹ̀rọ fún ṣíṣí — lo àdàkọ ìpamọ́ bí owó ọwọ́."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请按顺序写下这些词，并离线存放在安全的地方。如果这台手机丢失，恢复钱包时需要用到它们。NexaWal 还会在设备上保留一份加密副本用于解锁 — 请像对待现金一样对待备份。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請按順序寫下這些詞，並離線存放在安全的地方。如果這支手機遺失，恢復錢包時需要用到它們。NexaWal 也會在裝置上保留一份加密副本用於解鎖 — 請像對待現金一樣對待備份。"
+          }
+        }
+      }
+    },
     "Wrong node? Change how to connect or the node above — you do not need a rescan.\nMissing funds? Rescan from your restore height.\nLast resort: full rescan from block 0.": {
       "extractionState": "stale",
       "localizations": {
@@ -128699,321 +127448,9 @@
       }
     },
     "XMR": {
-      "extractionState": "stale",
+      "shouldTranslate": false,
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "bg": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ca": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "el": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
         "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "eo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "et": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "eu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "fa": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "fi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ga": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "gl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "gn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "he": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "hr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ky": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "lt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "lv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ms": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "my": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "nb": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ro": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "sl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "sq": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "sv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "th": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "yo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "XMR"
-          }
-        },
-        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "XMR"
@@ -129675,335 +128112,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "您的恢復種子:"
-          }
-        }
-      }
-    },
-    "Write these words down in order and store them somewhere safe offline. You'll need them to restore the wallet if this phone is lost. NexaWal also keeps an encrypted copy on device for unlock — treat the backup like cash.": {
-      "extractionState": "manual",
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اكتب هذه الكلمات بالترتيب واحفظها بأمان دون اتصال. ستحتاج إليها لاستعادة المحفظة إذا فُقد هذا الهاتف. تحتفظ NexaWal أيضًا بنسخة مشفّرة على الجهاز لفتح القفل — عامل النسخة الاحتياطية مثل النقود."
-          }
-        },
-        "az": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu sözləri ardıcıllıqla yazın və onları oflayn təhlükəsiz yerdə saxlayın. Bu telefon itərsə, pulqabını bərpa etmək üçün onlara ehtiyacınız olacaq. NexaWal kilidi açmaq üçün cihazda şifrələnmiş nüsxə də saxlayır — ehtiyat nüsxəyə nağd pul kimi yanaşın."
-          }
-        },
-        "bg": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Запишете тези думи по ред и ги съхранявайте безопасно офлайн. Ще имате нужда от тях, за да възстановите портфейла, ако този телефон бъде загубен. NexaWal също пази шифровано копие на устройството за отключване — третирайте резервното копие като пари в брой."
-          }
-        },
-        "bn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "এই শব্দগুলো ক্রম অনুযায়ী লিখে অফলাইনে নিরাপদ জায়গায় সংরক্ষণ করুন। এই ফোন হারিয়ে গেলে ওয়ালেট পুনরুদ্ধার করতে এগুলো প্রয়োজন হবে। NexaWal আনলকের জন্য ডিভাইসে একটি এনক্রিপ্টেড কপিও রাখে — ব্যাকআপকে নগদের মতো গুরুত্ব দিন।"
-          }
-        },
-        "ca": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escriu aquestes paraules en ordre i guarda-les de forma segura fora de línia. Les necessitaràs per restaurar la cartera si perds aquest telèfon. NexaWal també conserva una còpia xifrada al dispositiu per al desbloqueig — tracta la còpia de seguretat com diners en efectiu."
-          }
-        },
-        "cs": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zapište si tato slova v pořadí a uložte je bezpečně offline. Budete je potřebovat k obnovení peněženky, pokud tento telefon ztratíte. NexaWal také uchovává šifrovanou kopii v zařízení pro odemknutí — zacházejte se zálohou jako s hotovostí."
-          }
-        },
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skriv disse ord ned i rækkefølge, og opbevar dem sikkert offline. Du får brug for dem til at gendanne tegnebogen, hvis denne telefon bliver væk. NexaWal gemmer også en krypteret kopi på enheden til oplåsning — behandl sikkerhedskopien som kontanter."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schreibe diese Wörter in der richtigen Reihenfolge auf und bewahre sie offline an einem sicheren Ort auf. Du brauchst sie, um die Wallet wiederherzustellen, falls dieses Telefon verloren geht. NexaWal speichert zusätzlich eine verschlüsselte Kopie auf dem Gerät zum Entsperren — behandle das Backup wie Bargeld."
-          }
-        },
-        "el": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Γράψτε αυτές τις λέξεις με τη σειρά και αποθηκεύστε τις με ασφάλεια offline. Θα τις χρειαστείτε για να επαναφέρετε το πορτοφόλι αν χαθεί αυτό το τηλέφωνο. Το NexaWal κρατά επίσης ένα κρυπτογραφημένο αντίγραφο στη συσκευή για ξεκλείδωμα — αντιμετωπίστε το αντίγραφο ασφαλείας σαν μετρητά."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Write these words down in order and store them somewhere safe offline. You'll need them to restore the wallet if this phone is lost. NexaWal also keeps an encrypted copy on device for unlock — treat the backup like cash."
-          }
-        },
-        "eo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skribu ĉi tiujn vortojn en ordo kaj konservu ilin sekure eksterrete. Vi bezonos ilin por restaŭri la monujon se ĉi tiu telefono perdiĝas. NexaWal ankaŭ tenas ĉifritan kopion sur la aparato por malŝlosado — traktu la savkopion kiel kontantan monon."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anota estas palabras en orden y guárdalas en un lugar seguro fuera de línea. Las necesitarás para restaurar la cartera si pierdes este teléfono. NexaWal también guarda una copia cifrada en el dispositivo para el desbloqueo — trata la copia de seguridad como dinero en efectivo."
-          }
-        },
-        "et": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kirjutage need sõnad järjekorras üles ja hoidke neid turvaliselt võrguühenduseta. Vajate neid rahakoti taastamiseks, kui see telefon kaob. NexaWal hoiab avamiseks ka krüpteeritud koopiat seadmes — kohtlege varukoopiat nagu sularaha."
-          }
-        },
-        "eu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Idatzi hitz hauek ordenan eta gorde itzazu seguru lineaz kanpo. Telefono hau galtzen baduzu, zorroa leheneratzeko beharko dituzu. NexaWal-ek desblokeatzeko gailuan kopia enkriptatu bat ere gordetzen du — tratatu babeskopia eskudirutan bezala."
-          }
-        },
-        "fa": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "این کلمات را به ترتیب یادداشت کنید و آن‌ها را به‌صورت آفلاین در جای امنی نگه دارید. اگر این گوشی گم شود، برای بازیابی کیف پول به آن‌ها نیاز خواهید داشت. NexaWal همچنین یک رونوشت رمزنگاری‌شده روی دستگاه برای باز کردن قفل نگه می‌دارد — از پشتیبان مثل پول نقد مراقبت کنید."
-          }
-        },
-        "fi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kirjoita nämä sanat järjestyksessä ylös ja säilytä ne turvallisesti offline-tilassa. Tarvitset niitä lompakon palauttamiseen, jos tämä puhelin katoaa. NexaWal säilyttää myös salatun kopion laitteella lukituksen avaamista varten — käsittele varmuuskopiota kuin käteistä."
-          }
-        },
-        "fil": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Isulat ang mga salitang ito ayon sa pagkasunod-sunod at itago ang mga ito nang ligtas offline. Kakailanganin mo ito para i-restore ang wallet kung mawala ang teleponong ito. May encrypted na kopya rin ang NexaWal sa device para sa unlock — ituring ang backup na parang pera."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Note ces mots dans l'ordre et conserve-les hors ligne en lieu sûr. Tu en auras besoin pour restaurer le portefeuille si ce téléphone est perdu. NexaWal conserve aussi une copie chiffrée sur l'appareil pour le déverrouillage — traite la sauvegarde comme de l'argent liquide."
-          }
-        },
-        "ga": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scríobh na focail seo in ord agus stóráil iad go sábháilte as líne. Beidh siad de dhíth ort chun an sparán a aischur má chailltear an fón seo. Coinníonn NexaWal cóip chriptithe ar an ngléas freisin le haghaidh díghlasála — caith leis an gcúltaca mar airgead tirim."
-          }
-        },
-        "gl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anota estas palabras en orde e gárdaas de forma segura fóra de liña. Necesitarás delas para restaurar a carteira se perdas este teléfono. NexaWal tamén garda unha copia cifrada no dispositivo para o desbloqueo — trata a copia de seguridade como diñeiro en efectivo."
-          }
-        },
-        "gn": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ehai ko'ã ñe'ẽ oĩháicha ha eñongatu chupekuéra segurohápe ñanduti'ỹre. Eikotevẽta hesekuéra ñongatuha ñemoĩ jey hag̃ua ko pumbyry ojeheja ramo. NexaWal oñongatu avei peteĩ kopia cifrada dispositivo-pe ijepe'a hag̃ua — eñangareko backup rehe viruicha."
-          }
-        },
-        "ha": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rubuta waɗannan kalmomi bisa jeri kuma ajiye su a aminci a waje da yanar gizo. Za ka buƙace su don dawo da walati idan wannan wayar ta ɓace. NexaWal kuma yana ajiye kwafin da aka ɓoye a na'urar don buɗewa — ɗauki baya a matsayin kuɗi na hannu."
-          }
-        },
-        "he": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "כתוב מילים אלה לפי הסדר ושמור אותן בבטחה במצב לא מקוון. תזדקק להן כדי לשחזר את הארנק אם הטלפון הזה יאבד. NexaWal גם שומר עותק מוצפן במכשיר לצורך ביטול נעילה — התייחס לגיבוי כמו למזומן."
-          }
-        },
-        "hi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "इन शब्दों को क्रम में लिख लें और इन्हें ऑफ़लाइन किसी सुरक्षित जगह रखें। अगर यह फ़ोन खो जाए तो वॉलेट रीस्टोर करने के लिए इनकी ज़रूरत होगी। NexaWal अनलॉक के लिए डिवाइस पर एक एन्क्रिप्टेड प्रति भी रखता है — बैकअप को नकदी की तरह समझें।"
-          }
-        },
-        "hr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zapišite ove riječi po redu i pohranite ih sigurno offline. Trebat će vam za obnovu novčanika ako ovaj telefon bude izgubljen. NexaWal također čuva šifriranu kopiju na uređaju za otključavanje — tretirajte sigurnosnu kopiju kao gotovinu."
-          }
-        },
-        "hu": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Írd le ezeket a szavakat sorrendben, és tárold őket biztonságosan offline. Szükséged lesz rájuk a pénztárca visszaállításához, ha ez a telefon elveszik. A NexaWal a feloldáshoz titkosított másolatot is tart az eszközön — kezeld a biztonsági mentést készpénzként."
-          }
-        },
-        "hy": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Գրի առեք այս բառերը հաջորդականությամբ և պահեք դրանք անվտանգ՝ առանց ցանցի։ Դրանք անհրաժեշտ կլինեն դրամապանակը վերականգնելու համար, եթե այս հեռախոսը կորի։ NexaWal-ը ապակողպման համար սարքում նաև պահում է գաղտնագրված պատճեն — պահուստը վերաբերվեք որպես կանխիկի։"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tulis kata-kata ini secara berurutan dan simpan secara offline di tempat yang aman. Anda akan membutuhkannya untuk memulihkan dompet jika ponsel ini hilang. NexaWal juga menyimpan salinan terenkripsi di perangkat untuk membuka kunci — perlakukan cadangan seperti uang tunai."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scrivi queste parole in ordine e conservale offline in un luogo sicuro. Ti serviranno per ripristinare il wallet se perdi questo telefono. NexaWal conserva anche una copia crittografata sul dispositivo per lo sblocco — tratta il backup come contanti."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "これらの単語を順番に書き留め、オフラインの安全な場所に保管してください。このスマートフォンを紛失した場合、ウォレットの復元に必要です。NexaWalはロック解除のため端末にも暗号化コピーを保持します — バックアップは現金と同じように扱ってください。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 단어들을 순서대로 적어서 오프라인의 안전한 곳에 보관하세요. 이 휴대폰을 잃어버리면 지갑을 복구할 때 필요합니다. NexaWal은 잠금 해제를 위해 기기에 암호화된 사본도 보관합니다 — 백업을 현금처럼 다루세요."
-          }
-        },
-        "ky": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Бул сөздөрдү тартип менен жазып, аларды оффлайн коопсуз жерде сактаңыз. Бул телефон жоголсо, капчыкты калыбына келтирүү үчүн алар керек болот. NexaWal кулпуну ачуу үчүн түзмөктө шифрленген көчүрмөнү да сактайт — камдык көчүрмөнү накталай акчадай мамиле кылыңыз."
-          }
-        },
-        "lt": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Užsirašykite šiuos žodžius tokia tvarka ir laikykite juos saugiai neprisijungę. Jų reikės piniginei atkurti, jei šis telefonas bus prarastas. NexaWal taip pat saugo šifruotą kopiją įrenginyje atrakinimui — elkitės su atsargine kopija kaip su grynaisiais."
-          }
-        },
-        "lv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pierakstiet šos vārdus secībā un glabājiet tos droši bezsaistē. Tie būs nepieciešami, lai atjaunotu maku, ja šis tālrunis tiek pazaudēts. NexaWal arī glabā šifrētu kopiju ierīcē atbloķēšanai — izturieties pret dublējumu kā pret skaidru naudu."
-          }
-        },
-        "ms": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tulis perkataan ini mengikut susunan dan simpan secara luar talian di tempat yang selamat. Anda akan memerlukannya untuk memulihkan dompet jika telefon ini hilang. NexaWal juga menyimpan salinan disulitkan pada peranti untuk membuka kunci — anggap sandaran seperti wang tunai."
-          }
-        },
-        "my": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ဤစကားလုံးများကို အစဉ်လိုက် ရေးမှတ်ပြီး အော့ဖ်လိုင်းတွင် လုံခြုံစွာ သိမ်းဆည်းထားပါ။ ဤဖုန်း ပျောက်ဆုံးပါက ပိုက်ဆံအိတ် ပြန်လည်ရယူရန် ၎င်းတို့ လိုအပ်မည်။ NexaWal သည် သော့ဖွင့်ရန် စက်ပေါ်တွင် စာဝှက်ထားသော မိတ္တူကိုလည်း သိမ်းဆည်းထားသည် — အရန်သိမ်းဆည်းမှုကို ငွေသားကဲ့သို့ ဆက်ဆံပါ။"
-          }
-        },
-        "nb": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skriv ned disse ordene i riktig rekkefølge og oppbevar dem trygt offline. Du vil trenge dem for å gjenopprette lommeboken hvis denne telefonen blir borte. NexaWal beholder også en kryptert kopi på enheten for opplåsing — behandle sikkerhetskopien som kontanter."
-          }
-        },
-        "nl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schrijf deze woorden in volgorde op en bewaar ze offline op een veilige plek. Je hebt ze nodig om de portemonnee te herstellen als je deze telefoon kwijtraakt. NexaWal bewaart ook een versleutelde kopie op het apparaat om te ontgrendelen — behandel de back-up als contant geld."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zapisz te słowa w podanej kolejności i przechowuj je bezpiecznie offline. Będziesz ich potrzebować, aby przywrócić portfel, jeśli ten telefon zostanie utracony. NexaWal przechowuje także zaszyfrowaną kopię na urządzeniu do odblokowania — traktuj kopię zapasową jak gotówkę."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anote estas palavras em ordem e guarde-as offline em um lugar seguro. Você vai precisar delas para restaurar a carteira se este telefone for perdido. O NexaWal também mantém uma cópia criptografada no dispositivo para o desbloqueio — trate o backup como dinheiro vivo."
-          }
-        },
-        "ro": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notează aceste cuvinte în ordine și păstrează-le în siguranță offline. Vei avea nevoie de ele pentru a restaura portofelul dacă acest telefon este pierdut. NexaWal păstrează și o copie criptată pe dispozitiv pentru deblocare — tratează backupul ca pe numerar."
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Запишите эти слова по порядку и храните их безопасно офлайн. Они понадобятся для восстановления кошелька, если этот телефон будет потерян. NexaWal также хранит зашифрованную копию на устройстве для разблокировки — относитесь к резервной копии как к наличным."
-          }
-        },
-        "sk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zapíšte si tieto slová v poradí a uložte ich bezpečne offline. Budete ich potrebovať na obnovenie peňaženky, ak tento telefón stratíte. NexaWal tiež uchováva šifrovanú kópiu v zariadení na odomknutie — zaobchádzajte so zálohou ako s hotovosťou."
-          }
-        },
-        "sl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zapiši te besede v pravem vrstnem redu in jih shrani varno offline. Potreboval jih boš za obnovitev denarnice, če ta telefon izgubiš. NexaWal hrani tudi šifrirano kopijo na napravi za odklepanje — varnostno kopijo obravnavaj kot gotovino."
-          }
-        },
-        "sq": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shkruaji këto fjalë me radhë dhe ruaji ato të sigurta jashtë linje. Do t'i nevojiten për të rikuperuar portofolin nëse humbet ky telefon. NexaWal mban gjithashtu një kopje të enkriptuar në pajisje për shkyçje — trajtoje kopjen rezervë si para në dorë."
-          }
-        },
-        "sv": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skriv ner dessa ord i ordning och förvara dem säkert offline. Du behöver dem för att återställa plånboken om den här telefonen förloras. NexaWal sparar också en krypterad kopia på enheten för upplåsning — behandla säkerhetskopian som kontanter."
-          }
-        },
-        "th": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "จดคำเหล่านี้ตามลำดับและเก็บไว้อย่างปลอดภัยแบบออฟไลน์ คุณจะต้องใช้คำเหล่านี้เพื่อกู้คืนกระเป๋าเงินหากโทรศัพท์เครื่องนี้สูญหาย NexaWal ยังเก็บสำเนาที่เข้ารหัสไว้บนอุปกรณ์สำหรับการปลดล็อกด้วย — ปฏิบัติต่อข้อมูลสำรองเหมือนเงินสด"
-          }
-        },
-        "tr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bu kelimeleri sırasıyla yaz ve çevrimdışı güvenli bir yerde sakla. Bu telefon kaybolursa cüzdanı geri yüklemek için bunlara ihtiyacın olacak. NexaWal, kilit açma için cihazda şifreli bir kopya da tutar — yedeği nakit gibi koru."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Запишіть ці слова по порядку і зберігайте їх безпечно офлайн. Вони знадобляться для відновлення гаманця, якщо цей телефон буде втрачено. NexaWal також зберігає зашифровану копію на пристрої для розблокування — ставтеся до резервної копії як до готівки."
-          }
-        },
-        "ur": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "یہ الفاظ ترتیب سے لکھ لیں اور انہیں آف لائن کسی محفوظ جگہ رکھیں۔ اگر یہ فون گم ہو جائے تو والٹ بحال کرنے کے لیے ان کی ضرورت ہو گی۔ NexaWal ان لاک کے لیے ڈیوائس پر ایک مرموز کاپی بھی رکھتا ہے — بیک اپ کو نقدی کی طرح سمجھیں۔"
-          }
-        },
-        "vi": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ghi lại các từ này theo đúng thứ tự và lưu giữ chúng an toàn ngoại tuyến. Bạn sẽ cần chúng để khôi phục ví nếu chiếc điện thoại này bị mất. NexaWal cũng giữ một bản sao được mã hóa trên thiết bị để mở khóa — hãy coi bản sao lưu như tiền mặt."
-          }
-        },
-        "yo": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kọ àwọn ọ̀rọ̀ yìí sílẹ̀ ní ìtòlẹ́sẹẹsẹ kí o sì fi wọ́n pamọ́ síbi àìsí-ayélujára tí ó dájú. O óò nílò wọn láti dá àpamọ́wọ́ padà tí fóònù yìí bá sọnù. NexaWal tún pa àdàkọ tí a fi ọ̀rọ̀-ìpamọ́ pamọ́ sórí ẹ̀rọ fún ṣíṣí — lo àdàkọ ìpamọ́ bí owó ọwọ́."
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请按顺序写下这些词，并离线存放在安全的地方。如果这台手机丢失，恢复钱包时需要用到它们。NexaWal 还会在设备上保留一份加密副本用于解锁 — 请像对待现金一样对待备份。"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "請按順序寫下這些詞，並離線存放在安全的地方。如果這支手機遺失，恢復錢包時需要用到它們。NexaWal 也會在裝置上保留一份加密副本用於解鎖 — 請像對待現金一樣對待備份。"
           }
         }
       }

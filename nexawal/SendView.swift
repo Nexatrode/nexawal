@@ -78,7 +78,7 @@ struct SendView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if availablePiconero() > 0 {
-                        Text("\(availableLabel()): \(viewModel.formatDisplayPiconero(availablePiconero()))")
+                        Text(verbatim: "\(availableLabel()): \(viewModel.formatDisplayPiconero(availablePiconero()))")
                             .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                     }
