@@ -377,7 +377,7 @@ struct WalletCreationView: View {
     @ViewBuilder
     private var seedBackupGateView: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("This is your recovery seed. Write it down on paper and store it somewhere safe. Anyone with these words can access your funds — nexawal never uploads or backs it up for you.")
+            Text("Write these words down in order and store them somewhere safe offline. You'll need them to restore the wallet if this phone is lost. NexaWal also keeps an encrypted copy on device for unlock — treat the backup like cash.")
                 .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 
