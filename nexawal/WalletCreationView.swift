@@ -15,6 +15,7 @@ struct WalletCreationView: View {
     @State private var restoreHeightInput: String = Self.debugTestRestoreHeight()
     @State private var isMainnet: Bool = true
     @FocusState private var isMnemonicFocused: Bool
+    @FocusState private var isRestoreHeightFocused: Bool
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
@@ -150,9 +151,11 @@ struct WalletCreationView: View {
                                 HStack {
                                     Text("Restore Height:")
                                     TextField(text: $restoreHeightInput, prompt: Text(verbatim: "0")) {
-                                        EmptyView()
+                                        Text(verbatim: "Restore Height")
                                     }
+                                    .labelsHidden()
                                         .keyboardType(.numberPad)
+                                        .focused($isRestoreHeightFocused)
                                         .accessibilityLabel(L10n.t("Restore Height:"))
                                 }
 
@@ -206,24 +209,23 @@ struct WalletCreationView: View {
                     }
 
                     if setupMode == .import {
-                        VStack(spacing: 10) {
-                            Button(action: {
-                                if hasStoredWallet {
-                                    showReplaceConfirm = true
-                                } else {
-                                    Task { await createOrImport(isReplace: false) }
-                                }
-                            }) {
-                                HStack {
-                                    if viewModel.isLoading {
-                                        ProgressView()
-                                            .progressViewStyle(CircularProgressViewStyle())
-                                    }
-                                    Text(viewModel.isLoading ? "Importing Wallet..." : "Import Wallet")
-                                }
+                        Button(action: {
+                            dismissImportKeyboard()
+                            if hasStoredWallet {
+                                showReplaceConfirm = true
+                            } else {
+                                Task { await createOrImport(isReplace: false) }
                             }
-                            .disabled(viewModel.isLoading || mnemonicInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                        }) {
+                            HStack {
+                                if viewModel.isLoading {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                }
+                                Text(viewModel.isLoading ? "Importing Wallet..." : "Import Wallet")
+                            }
                         }
+                        .disabled(viewModel.isLoading || mnemonicInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     } else {
                         Button(action: {
                             // If we already have a persisted wallet, confirm before replacing it.
@@ -308,6 +310,15 @@ struct WalletCreationView: View {
             }
             .neonFormChrome(classicUI: classicUI, palette: classicPalette)
             .tint(classicPalette?.accent ?? .accentColor)
+            .scrollDismissesKeyboard(.interactively)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button(L10n.t("Done")) {
+                        dismissImportKeyboard()
+                    }
+                }
+            }
         }
         .task {
             // Authoritative: check persisted wallet presence (metadata) rather than in-memory UI state.
@@ -427,9 +438,10 @@ struct WalletCreationView: View {
                 HStack {
                     Text(L10n.format("Word #%lld:", Int64(wordIndex + 1)))
                         .font(.system(.body, design: .monospaced))
-                    TextField(text: challengeBinding(for: i), prompt: Text(verbatim: "")) {
-                        EmptyView()
+                    TextField(text: challengeBinding(for: i), prompt: Text(verbatim: " ")) {
+                        Text(verbatim: "Seed word")
                     }
+                    .labelsHidden()
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .font(.system(.body, design: .monospaced))
@@ -497,6 +509,12 @@ struct WalletCreationView: View {
 
     private func isSeedBackupGatePassed() -> Bool {
         !generatedMnemonic.isEmpty && wroteSeedDown && allChallengesMatch()
+    }
+
+    private func dismissImportKeyboard() {
+        isMnemonicFocused = false
+        isRestoreHeightFocused = false
+        focusedChallengeIndex = nil
     }
 
     private func createOrImport(isReplace: Bool) async {

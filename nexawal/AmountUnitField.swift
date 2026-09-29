@@ -27,10 +27,12 @@ struct AmountUnitField: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            // verbatim prompt: numeric placeholders like "0.0" are not valid Swift symbol keys
+            // Verbatim prompt avoids catalog keys like "0.0"; real label avoids EmptyView
+            // (EmptyView labels can yield Invalid frame dimension and break Form hit-testing).
             TextField(text: $text, prompt: Text(verbatim: placeholder)) {
-                EmptyView()
+                Text(verbatim: accessibilityLabel)
             }
+            .labelsHidden()
                 .keyboardType(.decimalPad)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
