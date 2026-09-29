@@ -27,12 +27,7 @@ struct AmountUnitField: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            // Verbatim prompt avoids catalog keys like "0.0"; real label avoids EmptyView
-            // (EmptyView labels can yield Invalid frame dimension and break Form hit-testing).
-            TextField(text: $text, prompt: Text(verbatim: placeholder)) {
-                Text(verbatim: accessibilityLabel)
-            }
-            .labelsHidden()
+            TextField(placeholder, text: $text)
                 .keyboardType(.decimalPad)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()

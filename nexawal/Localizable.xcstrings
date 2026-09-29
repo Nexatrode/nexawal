@@ -1,6 +1,18 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "": {
+      "shouldTranslate": false,
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ""
+          }
+        }
+      }
+    },
     "\nAmount %@": {
       "localizations": {
         "ar": {
@@ -986,7 +998,6 @@
       }
     },
     "%lld": {
-      "shouldTranslate": false,
       "localizations": {
         "en": {
           "stringUnit": {
@@ -994,7 +1005,8 @@
             "value": "%lld"
           }
         }
-      }
+      },
+      "shouldTranslate": false
     },
     "%lld blocks": {
       "localizations": {
@@ -2638,7 +2650,6 @@
       }
     },
     "%lld.": {
-      "shouldTranslate": false,
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2646,10 +2657,10 @@
             "value": "%lld."
           }
         }
-      }
+      },
+      "shouldTranslate": false
     },
     "%llu": {
-      "shouldTranslate": false,
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2657,7 +2668,8 @@
             "value": "%llu"
           }
         }
-      }
+      },
+      "shouldTranslate": false
     },
     "%llu confirmations": {
       "extractionState": "manual",
@@ -12174,6 +12186,7 @@
       }
     },
     "Camera not available on simulator": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -25627,12 +25640,6 @@
     },
     "Done": {
       "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Done"
-          }
-        },
         "ar": {
           "stringUnit": {
             "state": "translated",
@@ -25685,6 +25692,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Τέλος"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
           }
         },
         "eo": {
@@ -33500,7 +33513,6 @@
       }
     },
     "https://rpc.nexatrode.com": {
-      "shouldTranslate": false,
       "localizations": {
         "en": {
           "stringUnit": {
@@ -33508,7 +33520,8 @@
             "value": "https://rpc.nexatrode.com"
           }
         }
-      }
+      },
+      "shouldTranslate": false
     },
     "I Agree": {
       "localizations": {
@@ -93555,12 +93568,48 @@
       }
     },
     "XMR": {
-      "shouldTranslate": false,
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "XMR"
+          }
+        }
+      },
+      "shouldTranslate": false
+    },
+    "0": {
+      "shouldTranslate": false,
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0"
+          }
+        }
+      }
+    },
+    "0.0": {
+      "shouldTranslate": false,
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0"
+          }
+        }
+      }
+    },
+    "0.0000": {
+      "shouldTranslate": false,
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0.0000"
           }
         }
       }

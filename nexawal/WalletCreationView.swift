@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 import MoneroWalletCoreFFI
 import NexaWalLogic
 
@@ -15,7 +16,6 @@ struct WalletCreationView: View {
     @State private var restoreHeightInput: String = Self.debugTestRestoreHeight()
     @State private var isMainnet: Bool = true
     @FocusState private var isMnemonicFocused: Bool
-    @FocusState private var isRestoreHeightFocused: Bool
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
@@ -150,12 +150,8 @@ struct WalletCreationView: View {
                             VStack(alignment: .leading, spacing: 6) {
                                 HStack {
                                     Text("Restore Height:")
-                                    TextField(text: $restoreHeightInput, prompt: Text(verbatim: "0")) {
-                                        Text(verbatim: "Restore Height")
-                                    }
-                                    .labelsHidden()
+                                    TextField("0", text: $restoreHeightInput)
                                         .keyboardType(.numberPad)
-                                        .focused($isRestoreHeightFocused)
                                         .accessibilityLabel(L10n.t("Restore Height:"))
                                 }
 
@@ -209,40 +205,41 @@ struct WalletCreationView: View {
                     }
 
                     if setupMode == .import {
-                        Button(action: {
-                            dismissImportKeyboard()
+                        Button {
                             if hasStoredWallet {
                                 showReplaceConfirm = true
                             } else {
                                 Task { await createOrImport(isReplace: false) }
                             }
-                        }) {
+                        } label: {
                             HStack {
                                 if viewModel.isLoading {
                                     ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle())
                                 }
                                 Text(viewModel.isLoading ? "Importing Wallet..." : "Import Wallet")
+                                    .frame(maxWidth: .infinity)
                             }
                         }
+                        .buttonStyle(.borderedProminent)
                         .disabled(viewModel.isLoading || mnemonicInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     } else {
-                        Button(action: {
+                        Button {
                             // If we already have a persisted wallet, confirm before replacing it.
                             if hasStoredWallet {
                                 showReplaceConfirm = true
                             } else {
                                 Task { await createOrImport(isReplace: false) }
                             }
-                        }) {
+                        } label: {
                             HStack {
                                 if viewModel.isLoading {
                                     ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle())
                                 }
                                 Text(viewModel.isLoading ? "Creating Wallet..." : "Create Wallet")
+                                    .frame(maxWidth: .infinity)
                             }
                         }
+                        .buttonStyle(.borderedProminent)
                         .disabled(viewModel.isLoading || !isSeedBackupGatePassed())
                     }
                 }
@@ -300,6 +297,9 @@ struct WalletCreationView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
+            .neonFormChrome(classicUI: classicUI, palette: classicPalette)
+            .tint(classicPalette?.accent ?? .accentColor)
+            .scrollDismissesKeyboard(.interactively)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(classicUI ? "nexawal" : L10n.t("Create Wallet"))
@@ -307,15 +307,15 @@ struct WalletCreationView: View {
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                         .tracking(classicUI ? 2 : 0)
                 }
-            }
-            .neonFormChrome(classicUI: classicUI, palette: classicPalette)
-            .tint(classicPalette?.accent ?? .accentColor)
-            .scrollDismissesKeyboard(.interactively)
-            .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
                     Button(L10n.t("Done")) {
-                        dismissImportKeyboard()
+                        isMnemonicFocused = false
+                        focusedChallengeIndex = nil
+                        UIApplication.shared.sendAction(
+                            #selector(UIResponder.resignFirstResponder),
+                            to: nil, from: nil, for: nil
+                        )
                     }
                 }
             }
@@ -438,10 +438,7 @@ struct WalletCreationView: View {
                 HStack {
                     Text(L10n.format("Word #%lld:", Int64(wordIndex + 1)))
                         .font(.system(.body, design: .monospaced))
-                    TextField(text: challengeBinding(for: i), prompt: Text(verbatim: " ")) {
-                        Text(verbatim: "Seed word")
-                    }
-                    .labelsHidden()
+                    TextField("", text: challengeBinding(for: i))
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .font(.system(.body, design: .monospaced))
@@ -509,12 +506,6 @@ struct WalletCreationView: View {
 
     private func isSeedBackupGatePassed() -> Bool {
         !generatedMnemonic.isEmpty && wroteSeedDown && allChallengesMatch()
-    }
-
-    private func dismissImportKeyboard() {
-        isMnemonicFocused = false
-        isRestoreHeightFocused = false
-        focusedChallengeIndex = nil
     }
 
     private func createOrImport(isReplace: Bool) async {
