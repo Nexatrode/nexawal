@@ -27,7 +27,7 @@ struct AmountUnitField: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            TextField(placeholder, text: $text)
+            TextField("Amount", text: $text, prompt: Text(verbatim: placeholder))
                 .keyboardType(.decimalPad)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()

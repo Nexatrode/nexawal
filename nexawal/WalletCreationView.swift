@@ -150,7 +150,8 @@ struct WalletCreationView: View {
                             VStack(alignment: .leading, spacing: 6) {
                                 HStack {
                                     Text("Restore Height:")
-                                    TextField("0", text: $restoreHeightInput)
+                                    TextField("Restore height", text: $restoreHeightInput, prompt: Text(verbatim: "0"))
+                                        .labelsHidden()
                                         .keyboardType(.numberPad)
                                         .accessibilityLabel(L10n.t("Restore Height:"))
                                 }
@@ -438,7 +439,8 @@ struct WalletCreationView: View {
                 HStack {
                     Text(L10n.format("Word #%lld:", Int64(wordIndex + 1)))
                         .font(.system(.body, design: .monospaced))
-                    TextField("", text: challengeBinding(for: i))
+                    TextField("Seed word", text: challengeBinding(for: i))
+                        .labelsHidden()
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .font(.system(.body, design: .monospaced))

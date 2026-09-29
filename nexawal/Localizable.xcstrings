@@ -1,18 +1,6 @@
 {
   "sourceLanguage": "en",
   "strings": {
-    "": {
-      "shouldTranslate": false,
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": ""
-          }
-        }
-      }
-    },
     "\nAmount %@": {
       "localizations": {
         "ar": {
@@ -93578,38 +93566,12 @@
       },
       "shouldTranslate": false
     },
-    "0": {
-      "shouldTranslate": false,
-      "extractionState": "manual",
+    "Seed word": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "0"
-          }
-        }
-      }
-    },
-    "0.0": {
-      "shouldTranslate": false,
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "0.0"
-          }
-        }
-      }
-    },
-    "0.0000": {
-      "shouldTranslate": false,
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "0.0000"
+            "value": "Seed word"
           }
         }
       }
