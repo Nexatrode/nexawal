@@ -24,7 +24,7 @@ You choose which Monero daemon (and optional I2P proxy) the app contacts. Fresh 
 
 ## Optional features
 
-Optional features (for example fiat estimates) may contact third-party HTTPS endpoints when you enable them. Those services can see your IP address. Wallet amounts, addresses, and seeds are not sent for price lookups. See the in-app Privacy Policy for details.
+Optional fiat estimates contact `rates.nexatrode.com` over HTTPS when you enable them. Nexatrode can see your IP address and selected currency. Wallet amounts, addresses, and seeds are not sent for price lookups. See the in-app Privacy Policy for details.
 
 ## License and source
 

@@ -11,20 +11,29 @@ final class FiatPriceService: ObservableObject {
     private var loopTask: Task<Void, Never>?
     private var inFlight: Task<Void, Never>?
     private var staleTask: Task<Void, Never>?
+    private var foregroundActive = false
 
     private init() {
         republishFromCache()
     }
 
     func onForeground() {
+        foregroundActive = true
         republishFromCache()
         Task { await refreshIfNeeded(force: false) }
         startLoop()
     }
 
+    func onBackground() {
+        foregroundActive = false
+        inFlight?.cancel()
+        stopLoop()
+    }
+
     func settingsDidChange() {
         republishFromCache()
         if !canFetch {
+            inFlight?.cancel()
             publish(nil)
             stopLoop()
             return
@@ -35,7 +44,7 @@ final class FiatPriceService: ObservableObject {
     }
 
     var canFetch: Bool {
-        MoneroConfig.fiatEstimatesEnabled
+        MoneroConfig.fiatEstimatesEnabled && MoneroConfig.routingPolicy != .i2p
     }
 
     func recordSend(txid: String) {
@@ -58,6 +67,7 @@ final class FiatPriceService: ObservableObject {
         let now = nowMs()
         let currency = MoneroConfig.fiatCurrency
         guard let cached = MoneroConfig.cachedFiatRate(),
+              cached.source == "nexatrode",
               cached.currency == currency,
               FiatEstimate.isFresh(fetchedAtMs: cached.fetchedAtMs, nowMs: now)
         else {
@@ -69,7 +79,7 @@ final class FiatPriceService: ObservableObject {
 
     private func startLoop() {
         stopLoop()
-        guard canFetch else { return }
+        guard canFetch && foregroundActive else { return }
         loopTask = Task { [weak self] in
             while !Task.isCancelled {
                 let nanos = UInt64(FiatEstimate.refreshIntervalMs) * 1_000_000
@@ -88,6 +98,7 @@ final class FiatPriceService: ObservableObject {
     }
 
     func refreshIfNeeded(force: Bool) async {
+        guard foregroundActive else { return }
         guard canFetch else {
             publish(nil)
             return
@@ -96,7 +107,7 @@ final class FiatPriceService: ObservableObject {
 
         if let existing = inFlight {
             await existing.value
-            guard canFetch else {
+            guard canFetch && foregroundActive else {
                 publish(nil)
                 return
             }
@@ -108,6 +119,10 @@ final class FiatPriceService: ObservableObject {
             if shouldSkipFetch(force: force) { return }
         }
 
+        guard canFetch && foregroundActive else {
+            publish(nil)
+            return
+        }
         let currency = MoneroConfig.fiatCurrency
         let task = Task { await self.fetchAndPublish(currency: currency) }
         inFlight = task
@@ -132,7 +147,7 @@ final class FiatPriceService: ObservableObject {
         do {
             let rate = try await Self.fetchRate(currency: currency)
             MoneroConfig.setCachedFiatRate(rate)
-            if canFetch && MoneroConfig.fiatCurrency == currency {
+            if canFetch && foregroundActive && MoneroConfig.fiatCurrency == currency {
                 publish(FiatEstimate.liveRate(rate, nowMs: nowMs()))
             }
         } catch {
@@ -162,44 +177,26 @@ final class FiatPriceService: ObservableObject {
 
     private static func fetchRate(currency: String) async throws -> FiatRate {
         let session = makeSession()
-        let now = Int64(Date().timeIntervalSince1970 * 1000)
-        if currency == "EUR" {
-            let last = try await fetchKrakenLastTrade(session: session, pair: "XMREUR")
-            return FiatRate(currency: "EUR", fiatPerXmr: last, fetchedAtMs: now, source: "kraken")
-        }
-        let usd = try await fetchKrakenLastTrade(session: session, pair: "XMRUSD")
-        if currency == "USD" {
-            return FiatRate(currency: "USD", fiatPerXmr: usd, fetchedAtMs: now, source: "kraken")
-        }
-        let fx = try await fetchFrankfurter(session: session, symbol: currency)
-        return FiatRate(
-            currency: currency,
-            fiatPerXmr: FiatEstimate.combine(usdPerXmr: usd, usdToFiat: fx),
-            fetchedAtMs: now,
-            source: "kraken+frankfurter"
-        )
-    }
-
-    private static func fetchKrakenLastTrade(session: URLSession, pair: String) async throws -> Decimal {
-        let url = URL(string: "https://api.kraken.com/0/public/Ticker?pair=\(pair)")!
+        guard FiatEstimate.isSupported(currency) else { throw URLError(.unsupportedURL) }
+        let url = URL(string: "https://rates.nexatrode.com/v1/rates/XMR/\(currency)")!
         let (data, response) = try await session.data(from: url)
         try validate(response)
-        let json = String(decoding: data, as: UTF8.self)
-        guard let last = FiatEstimate.parseKrakenLastTrade(json: json) else {
+        guard data.count <= 16_384,
+              let quote = try? JSONDecoder().decode(NexatrodeRateResponse.self, from: data),
+              quote.base == "XMR", quote.quote == currency,
+              let value = FiatEstimate.decimal(from: quote.fiatPerXmr), value > 0
+        else {
             throw URLError(.cannotParseResponse)
         }
-        return last
-    }
-
-    private static func fetchFrankfurter(session: URLSession, symbol: String) async throws -> Decimal {
-        let url = URL(string: "https://api.frankfurter.dev/v1/latest?base=USD&symbols=\(symbol)")!
-        let (data, response) = try await session.data(from: url)
-        try validate(response)
-        let json = String(decoding: data, as: UTF8.self)
-        guard let fx = FiatEstimate.parseFrankfurterRate(json: json, symbol: symbol) else {
+        let now = Int64(Date().timeIntervalSince1970 * 1_000)
+        guard quote.checkedAtMs > 0, quote.checkedAtMs <= now,
+              quote.expiresAtMs > now,
+              quote.expiresAtMs - quote.checkedAtMs <= FiatEstimate.maxAgeMs,
+              FiatEstimate.isFresh(fetchedAtMs: quote.checkedAtMs, nowMs: now)
+        else {
             throw URLError(.cannotParseResponse)
         }
-        return fx
+        return FiatRate(currency: currency, fiatPerXmr: value, fetchedAtMs: quote.checkedAtMs, source: "nexatrode")
     }
 
     private static func validate(_ response: URLResponse) throws {
@@ -218,5 +215,20 @@ final class FiatPriceService: ObservableObject {
 
     private func nowMs() -> Int64 {
         Int64(Date().timeIntervalSince1970 * 1000)
+    }
+}
+
+private struct NexatrodeRateResponse: Decodable {
+    let base: String
+    let quote: String
+    let fiatPerXmr: String
+    let checkedAtMs: Int64
+    let expiresAtMs: Int64
+
+    enum CodingKeys: String, CodingKey {
+        case base, quote
+        case fiatPerXmr = "fiat_per_xmr"
+        case checkedAtMs = "checked_at_ms"
+        case expiresAtMs = "expires_at_ms"
     }
 }

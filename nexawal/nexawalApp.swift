@@ -111,6 +111,7 @@ private struct AppRootView: View {
 
                 // Stop periodic tip catch-up while not active; brief background sync may still run.
                 viewModel.stopForegroundCatchUp()
+                FiatPriceService.shared.onBackground()
 
                 // While refreshing, request iOS's short background window so a quick app-switch
                 // (Messages, Control Center → back) can keep scanning for ~30s instead of freezing

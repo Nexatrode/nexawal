@@ -16,7 +16,7 @@ public struct FiatRate: Sendable, Equatable {
 
 public enum FiatEstimate: Sendable {
     public static let maxAgeMs: Int64 = 30 * 60 * 1_000
-    public static let refreshIntervalMs: Int64 = 15 * 60 * 1_000
+    public static let refreshIntervalMs: Int64 = 5 * 60 * 1_000
 
     public static let supportedCurrencies: [String] = [
         "USD", "EUR", "GBP", "JPY", "CNY", "AUD", "CAD", "CHF", "HKD", "SGD",

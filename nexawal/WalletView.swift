@@ -723,7 +723,7 @@ struct SettingsView: View {
                                 fiatCurrency = MoneroConfig.fiatCurrency
                                 FiatPriceService.shared.settingsDidChange()
                             }
-                        Text("Optional. When on, nexawal fetches a public XMR price from Kraken (api.kraken.com) and, if needed, fiat FX from Frankfurter (api.frankfurter.dev). Those servers see your IP. Amounts and addresses are not sent. Fiat lookups use clearnet HTTPS and are separate from node / I2P proxy settings. Estimates only — XMR is what you send and hold.")
+                        Text("Optional. NexaWal requests an XMR rate for your chosen currency from rates.nexatrode.com over HTTPS. Nexatrode can see your IP address and chosen currency; wallet amounts and addresses are not sent. Rates are unavailable in I2P-only mode. Estimates only — XMR is what you send and hold.")
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         if fiatEstimatesEnabled {
@@ -748,7 +748,7 @@ struct SettingsView: View {
                         Text(L10n.format("nexawal %@ (%@)", version, build))
                             .foregroundStyle(classicPalette?.primaryText ?? .primary)
 
-                        Text(L10n.t("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact api.kraken.com and api.frankfurter.dev."))
+                        Text(L10n.t("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact rates.nexatrode.com for rates."))
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 
