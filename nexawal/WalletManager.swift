@@ -590,14 +590,33 @@ actor WalletManager {
         WalletDiagnostics.log("🗂️ Cache export reason: snapshot walletId=\(walletId)")
     }
 
-    /// Rewind the in-memory scan cursor without deleting the on-disk cache.
-    /// Used after an interrupted refresh whose checkpoint jumped to tip.
-    func rewindScanCursor(from height: UInt64) async throws {
+    /// Destructive reset: WalletCore also clears outputs/history and changes the restore height.
+    /// Use this for an explicit new-wallet scan, never for a partial-height resume.
+    func resetScanStateForNewWallet(from height: UInt64) throws {
         guard let walletId = currentWalletId else {
             throw WalletError.refreshFailed("No wallet is currently open")
         }
         try WalletCoreFFIClient.forceRescanFromHeight(walletId: walletId, fromHeight: height)
-        WalletDiagnostics.log("🧭 rewindScanCursor walletId=\(walletId) fromHeight=\(height)")
+        WalletDiagnostics.log("🧭 resetScanStateForNewWallet walletId=\(walletId) fromHeight=\(height)")
+    }
+
+    /// Rewind an interrupted scan without discarding outputs before the trusted checkpoint.
+    /// Verify the original restore height because stale UI metadata must not select a new range.
+    func rewindInterruptedScanPreservingHistory(
+        to targetHeight: UInt64,
+        expectedRestoreHeight: UInt64
+    ) throws {
+        guard let walletId = currentWalletId else {
+            throw WalletError.refreshFailed("No wallet is currently open")
+        }
+        let status = try WalletCoreFFIClient.syncStatus(walletId: walletId)
+        guard status.restoreHeight == expectedRestoreHeight else {
+            throw WalletError.refreshFailed("Wallet restore height changed during scan recovery")
+        }
+        let safeTarget = min(targetHeight, status.lastScanned)
+        try WalletCoreFFIClient.rewindScanCursorToHeight(
+            walletId: walletId, targetHeight: safeTarget)
+        WalletDiagnostics.log("🧭 Rewound interrupted scan to \(safeTarget); original restore height=\(status.restoreHeight)")
     }
 
     /// Force rescan from a specific height. Resets core scan state, clears local cache, and refreshes.

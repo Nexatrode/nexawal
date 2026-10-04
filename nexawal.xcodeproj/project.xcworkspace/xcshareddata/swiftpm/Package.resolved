@@ -6,7 +6,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/cacaosteve/MoneroWalletCoreFFI.git",
       "state" : {
-        "revision" : "799669396ff02fbb565de2164cee83a3099cea26"
+        "revision" : "b415445863eb49168a430ada19af244dd2e04eeb"
       }
     }
   ],

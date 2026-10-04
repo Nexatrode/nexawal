@@ -562,7 +562,7 @@ class WalletViewModel: ObservableObject {
                 mainnet: mainnet,
                 importCache: false
             )
-            try await walletManager.rewindScanCursor(from: restoreHeight)
+            try await walletManager.resetScanStateForNewWallet(from: restoreHeight)
 
             isMainnet = mainnet
             mnemonic = normalizedMnemonic
@@ -843,8 +843,8 @@ class WalletViewModel: ObservableObject {
         }
     }
 
-    /// If a prior refresh was killed mid-scan and the cache now looks like tip, rewind to the
-    /// last *completed* checkpoint (or restore height) before refreshing.
+    /// If a prior refresh was killed mid-scan and the cache now looks like tip, rewind
+    /// to the trusted checkpoint while preserving older outputs and ledger history.
     private func resumeInterruptedScanIfNeeded() async {
         guard isWalletOpen else { return }
         // Foreground notifications and the tip probe can both request resume. Never rewind
@@ -860,16 +860,27 @@ class WalletViewModel: ObservableObject {
             isCaughtUpToTip &&
             chainHeight > restoreHeight &+ 10_000 &&
             totalHistoryCount == 0
-        if isCaughtUpToTip && (MoneroConfig.scanInterrupted || aheadOfCheckpoint || emptyHistoryAtTip) {
-            let rewind = emptyHistoryAtTip ? restoreHeight : max(restoreHeight, trusted)
-            if emptyHistoryAtTip {
-                didRewindEmptyHistory = true
-            }
-            WalletDiagnostics.log("🧭 incomplete scan looks at tip; rewinding cursor from \(rewind) (lastScanned=\(lastScannedHeight) tip=\(chainHeight) trusted=\(trusted) interrupted=\(MoneroConfig.scanInterrupted))")
+        if let rewindHeight = ScanRecoveryPolicy.rewindHeight(
+            caughtUpToTip: isCaughtUpToTip,
+            scanInterrupted: MoneroConfig.scanInterrupted,
+            cursorAheadOfTrusted: aheadOfCheckpoint,
+            emptyHistoryAtTip: emptyHistoryAtTip,
+            originalRestoreHeight: restoreHeight,
+            trustedScannedHeight: trusted,
+            lastScannedHeight: lastScannedHeight
+        ) {
+            WalletDiagnostics.log("🧭 incomplete scan looks at tip; preserving rewind to \(rewindHeight) (originalRestore=\(restoreHeight) lastScanned=\(lastScannedHeight) tip=\(chainHeight) trusted=\(trusted) interrupted=\(MoneroConfig.scanInterrupted))")
             do {
-                try await walletManager.rewindScanCursor(from: rewind)
+                try await walletManager.rewindInterruptedScanPreservingHistory(
+                    to: rewindHeight, expectedRestoreHeight: restoreHeight)
+                if emptyHistoryAtTip {
+                    didRewindEmptyHistory = true
+                }
             } catch {
-                WalletDiagnostics.log("⚠️ rewindScanCursor failed: \(error.localizedDescription)")
+                MoneroConfig.setScanInterrupted(true)
+                errorMessage = L10n.format("Rescan failed: %@", error.localizedDescription)
+                WalletDiagnostics.log("⚠️ Interrupted-scan rewind failed: \(error.localizedDescription)")
+                return
             }
         }
         await refreshWallet()
