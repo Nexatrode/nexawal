@@ -17,7 +17,6 @@ struct WalletView: View {
 
     // Transaction details
     @State private var selectedTransfer: WalletCoreFFIClient.Transfer?
-    @State private var showTransferDetails: Bool = false
 
     /// Sync card disclosure (Node / Scanned / …). Default closed; persisted in UserDefaults.
     @AppStorage(MoneroConfig.userDefaultsSyncDetailsExpandedKey) private var syncDetailsExpanded = false
@@ -368,29 +367,31 @@ struct WalletView: View {
 
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
-                            Text("Recent Transactions").font(.headline)
+                            Text(L10n.neon("Recent Transactions", classicUI: classicUI))
+                                .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                                .foregroundStyle(classicPalette?.primaryText ?? .primary)
                             Spacer()
-                            Text("\(viewModel.totalHistoryCount)").font(.caption).foregroundStyle(.secondary)
+                            Text("\(viewModel.totalHistoryCount)")
+                                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         }
                         if viewModel.transfers.isEmpty {
                             Text(viewModel.isSynced ? "No transactions yet." : "No transactions found yet. Sync is not complete.")
-                                .font(.subheadline).foregroundStyle(.secondary)
+                                .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
+                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         }
                         ForEach(viewModel.transfers, id: \.txid) { row in
                             Button {
-                                let session = viewModel.historySession
-                                let id = viewModel.historyWalletId
-                                Task {
-                                    do {
-                                        let detail = try await Task.detached { try WalletCoreFFIClient.transfer(walletId: id, txid: row.txid) }.value
-                                        guard viewModel.isWalletOpen, session == viewModel.historySession else { return }
-                                        if let detail { selectedTransfer = detail; showTransferDetails = true }
-                                    } catch { if session == viewModel.historySession { viewModel.errorMessage = "Transaction details could not be loaded." } }
-                                }
+                                // The history row already contains the detail fields. Present it
+                                // directly so the first tap is immediate and cannot be lost while
+                                // an unnecessary second FFI lookup is in flight.
+                                selectedTransfer = row
                             } label: {
                                 WalletTransferRow(transfer: row, viewModel: viewModel)
                             }.buttonStyle(.plain)
-                            if row.txid != viewModel.transfers.last?.txid { Divider() }
+                            if row.txid != viewModel.transfers.last?.txid {
+                                Divider().overlay(classicPalette?.border.opacity(0.45) ?? Color.clear)
+                            }
                         }
                         NavigationLink {
                             TransactionsView(viewModel: viewModel)
@@ -406,11 +407,18 @@ struct WalletView: View {
                         }
                     }
                     .padding().frame(maxWidth: .infinity)
-                    .background(panelBackground).cornerRadius(classicUI ? 4 : 16)
+                    .background(panelBackground)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
+                            .stroke(classicUI ? (classicPalette?.border ?? .clear) : .clear, lineWidth: 1)
+                    )
+                    .cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
-                    .onChange(of: viewModel.historySession) { _, _ in showTransferDetails = false; selectedTransfer = nil }
-                    .sheet(isPresented: $showTransferDetails, onDismiss: { selectedTransfer = nil }) {
-                        if let row = selectedTransfer { WalletTransferDetails(transfer: row, viewModel: viewModel) }
+                    .onChange(of: viewModel.historySession) { _, _ in selectedTransfer = nil }
+                    .sheet(item: $selectedTransfer) { row in
+                        WalletTransferDetails(transfer: row, viewModel: viewModel)
+                            .environment(\.classicUI, classicUI)
+                            .environment(\.classicPalette, classicPalette)
                     }
 
                     HStack(spacing: 12) {

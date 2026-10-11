@@ -18,6 +18,7 @@ struct TransactionsView: View {
     @State private var from = Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date()
     @State private var to = Date()
     @State private var selected: WalletCoreFFIClient.Transfer?
+    @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var palette
     private var query: WalletCoreFFIClient.HistoryQuery {
         .init(filter: filter, search: search.trimmingCharacters(in: .whitespacesAndNewlines),
@@ -48,24 +49,22 @@ struct TransactionsView: View {
                 }
                 if model.loading { ProgressView("Loading transactions…") }
             }
+            .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))
             if model.count == 0 && !model.loading && model.error == nil {
                 Text(model.total > 0 ? "No transactions match these filters." :
                      (viewModel.isSynced ? "No transactions yet." : "No transactions found yet. Sync is not complete."))
+                    .foregroundStyle(palette?.secondaryText ?? .primary)
+                    .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))
             }
             // List virtualizes row views. Only four pages of actual records are retained.
             ForEach(0..<model.count, id: \.self) { index in
                 Group {
                     if let row = model.cache.row(at: index) {
                         Button {
-                            let id = viewModel.historyWalletId
-                            let session = viewModel.historySession
-                            Task {
-                                do {
-                                    let detail = try await Task.detached { try WalletCoreFFIClient.transfer(walletId: id, txid: row.txid) }.value
-                                    guard viewModel.isWalletOpen, session == viewModel.historySession else { return }
-                                    if let detail { selected = detail } else { model.changed = true }
-                                } catch { if session == viewModel.historySession { model.error = "Transaction details could not be loaded." } }
-                            }
+                            // The loaded history record already carries the fields displayed
+                            // on the detail screen. Avoid delaying presentation on another FFI
+                            // query, which made the first tap appear unresponsive.
+                            selected = row
                         } label: { WalletTransferRow(transfer: row, viewModel: viewModel) }
                             .buttonStyle(.plain)
                     } else {
@@ -85,9 +84,23 @@ struct TransactionsView: View {
             }
         }
         .tint(palette?.accent ?? .accentColor)
+        .foregroundStyle(palette?.primaryText ?? .primary)
         .scrollContentBackground(palette == nil ? .visible : .hidden)
         .background(palette?.background ?? Color(.systemGroupedBackground))
-        .navigationTitle("Transactions")
+        .navigationTitle(classicUI ? "" : L10n.t("Transactions"))
+        .navigationBarTitleDisplayMode(classicUI ? .inline : .large)
+        .toolbarBackground(palette?.background ?? Color(.systemBackground), for: .navigationBar)
+        .toolbarColorScheme(classicUI ? .dark : nil, for: .navigationBar)
+        .font(classicUI ? .system(.body, design: .monospaced) : .body)
+        .toolbar {
+            if classicUI {
+                ToolbarItem(placement: .principal) {
+                    Text(L10n.neon("Transactions", classicUI: true))
+                        .font(.system(.headline, design: .monospaced).weight(.bold))
+                        .foregroundStyle(palette?.accent ?? .green)
+                }
+            }
+        }
         .searchable(text: $search, prompt: "Search transaction ID")
         .onAppear { if !initialized { filter = initialFilter; initialized = true } }
         .onChange(of: model.scrollTarget) { _, target in if let target { proxy.scrollTo(target, anchor: .top) } }
@@ -104,7 +117,11 @@ struct TransactionsView: View {
             if let revision = model.revision, let new, revision != new { model.changed = true }
         }
         .onDisappear { model.cancel() }
-        .sheet(item: $selected) { row in WalletTransferDetails(transfer: row, viewModel: viewModel) }
+        .sheet(item: $selected) { row in
+            WalletTransferDetails(transfer: row, viewModel: viewModel)
+                .environment(\.classicUI, classicUI)
+                .environment(\.classicPalette, palette)
+        }
         }
     }
 }
@@ -155,40 +172,92 @@ struct WalletTransferDetails: View {
     let transfer: WalletCoreFFIClient.Transfer
     @ObservedObject var viewModel: WalletViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var palette
+
+    private func detailField(_ label: String.LocalizationValue, value: String) -> some View {
+        LabeledContent {
+            Text(value)
+                .font(classicUI ? .system(.body, design: .monospaced) : .body)
+                .foregroundStyle(palette?.primaryText ?? .secondary)
+                .multilineTextAlignment(.trailing)
+        } label: {
+            Text(L10n.neon(label, classicUI: classicUI))
+                .font(classicUI ? .system(.body, design: .monospaced) : .body)
+                .foregroundStyle(palette?.secondaryText ?? .primary)
+        }
+    }
+
     var body: some View {
         NavigationStack {
             List {
-                Section("Summary") {
-                    LabeledContent("Type", value: transfer.direction == "in" ? "Received" : transfer.direction == "out" ? "Sent" : "Self")
-                    LabeledContent("Status", value: transfer.isPending ? "Pending" : "Confirmed")
-                    LabeledContent("Amount", value: viewModel.formatExactPiconero(transfer.amount))
-                    if transfer.direction == "out" { Text("Amount is the total wallet debit, including the network fee.").font(.caption).foregroundStyle(.secondary) }
-                    if let fee = transfer.fee {
-                        LabeledContent("Fee", value: viewModel.formatExactPiconero(fee))
-                        if transfer.direction == "in" { Text("Paid by the sender. Not deducted from the amount received.").font(.caption).foregroundStyle(.secondary) }
+                Section {
+                    detailField("Type", value: transfer.direction == "in" ? "Received" : transfer.direction == "out" ? "Sent" : "Self")
+                    detailField("Status", value: transfer.isPending ? "Pending" : "Confirmed")
+                    detailField("Amount", value: viewModel.formatExactPiconero(transfer.amount))
+                    if transfer.direction == "out" {
+                        Text("Amount is the total wallet debit, including the network fee.")
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(palette?.secondaryText ?? .secondary)
                     }
-                    LabeledContent("Confirmations", value: "\(HistoryConfirmations.count(height: transfer.height, pending: transfer.isPending, chainHeight: viewModel.chainHeight, cached: transfer.confirmations))")
-                    if let height = transfer.height { LabeledContent("Height", value: "\(height)") }
+                    if let fee = transfer.fee {
+                        detailField("Fee", value: viewModel.formatExactPiconero(fee))
+                        if transfer.direction == "in" {
+                            Text("Paid by the sender. Not deducted from the amount received.")
+                                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                                .foregroundStyle(palette?.secondaryText ?? .secondary)
+                        }
+                    }
+                    detailField("Confirmations", value: "\(HistoryConfirmations.count(height: transfer.height, pending: transfer.isPending, chainHeight: viewModel.chainHeight, cached: transfer.confirmations))")
+                    if let height = transfer.height { detailField("Height", value: "\(height)") }
                     if let timestamp = transfer.timestamp, timestamp > 0 {
-                        LabeledContent("Time", value: Date(timeIntervalSince1970: Double(timestamp)).formatted(date: .abbreviated, time: .standard))
+                        detailField("Time", value: Date(timeIntervalSince1970: Double(timestamp)).formatted(date: .abbreviated, time: .standard))
                     }
                     if let snap = FiatSnapshotStore.snapshot(for: transfer.txid), let price = FiatEstimate.decimal(from: snap.fiatPerXmr) {
-                        Text(FiatEstimate.recordedApproxText(piconero: transfer.amount, fiatPerXmr: price, currency: snap.currency)).font(.caption)
+                        Text(FiatEstimate.recordedApproxText(piconero: transfer.amount, fiatPerXmr: price, currency: snap.currency))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(palette?.secondaryText ?? .secondary)
                     }
+                } header: {
+                    Text(L10n.neon("Summary", classicUI: classicUI))
+                        .font(classicUI ? .system(.subheadline, design: .monospaced).weight(.bold) : .subheadline)
+                        .foregroundStyle(palette?.accent ?? .secondary)
                 }
-                Section("Identifiers") {
-                    Text(transfer.txid).font(.system(.caption, design: .monospaced)).textSelection(.enabled)
+                Section {
+                    Text(transfer.txid)
+                        .font(.system(.caption, design: .monospaced))
+                        .foregroundStyle(palette?.secondaryText ?? .primary)
+                        .textSelection(.enabled)
                     Button("Copy TXID") { UIPasteboard.general.string = transfer.txid }
                     if let url = URL(string: "https://xmrchain.net/tx/\(transfer.txid)") { Link("Open in Explorer", destination: url) }
+                } header: {
+                    Text(L10n.neon("Identifiers", classicUI: classicUI))
+                        .font(classicUI ? .system(.subheadline, design: .monospaced).weight(.bold) : .subheadline)
+                        .foregroundStyle(palette?.accent ?? .secondary)
                 }
             }
             .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))
+            .listSectionSeparatorTint(palette?.border.opacity(0.5))
             .scrollContentBackground(palette == nil ? .visible : .hidden)
             .background(palette?.background ?? Color(.systemGroupedBackground))
             .tint(palette?.accent ?? .accentColor)
-            .navigationTitle("Transaction")
-            .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } } }
+            .navigationTitle(classicUI ? "" : L10n.t("Transaction"))
+            .navigationBarTitleDisplayMode(classicUI ? .inline : .large)
+            .toolbarBackground(palette?.background ?? Color(.systemBackground), for: .navigationBar)
+            .toolbarColorScheme(classicUI ? .dark : nil, for: .navigationBar)
+            .font(classicUI ? .system(.body, design: .monospaced) : .body)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
+                if classicUI {
+                    ToolbarItem(placement: .principal) {
+                        Text(L10n.neon("Transaction", classicUI: true))
+                            .font(.system(.headline, design: .monospaced).weight(.bold))
+                            .foregroundStyle(palette?.accent ?? .green)
+                    }
+                }
+            }
         }
+        .background(palette?.background ?? Color(.systemGroupedBackground))
+        .tint(palette?.accent ?? .accentColor)
     }
 }

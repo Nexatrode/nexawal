@@ -81,7 +81,11 @@ extension EnvironmentValues {
 extension View {
     func classicTheme(enabled: Bool, colorScheme: ColorScheme) -> some View {
         environment(\.classicUI, enabled)
-            .environment(\.classicPalette, enabled ? ClassicPalette.resolve(colorScheme: colorScheme) : nil)
+            // Techno mode is intentionally a dark neon-terminal theme even when the
+            // device itself is set to light appearance.
+            .environment(\.classicPalette, enabled ? ClassicPalette.resolve(colorScheme: .dark) : nil)
+            .tint(enabled ? ClassicPalette.resolve(colorScheme: .dark).accent : .accentColor)
+            .preferredColorScheme(enabled ? .dark : nil)
     }
 
     /// Apply neon Form chrome when classicUI (neon mode) is active.
