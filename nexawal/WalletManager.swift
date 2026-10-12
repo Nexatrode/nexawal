@@ -47,19 +47,25 @@ actor WalletManager {
     private var currentNetworkMainnet: Bool = true
     private var cachePersistenceSuppressed: Bool = false
     private var backgroundViewOnlyRefreshActive: Bool = false
+    private var cleanupTask: Task<Void, Error>?
+    private var cleanupPending = false
+    private var cleanupFailure: Error?
+    private var cleanupIntent = SessionCleanupIntent()
 
     // Explicit cancellation support for refresh. WalletCore exposes an authoritative per-wallet
     // job state, so cancellation does not complete locally until the native worker is actually
     // idle (or has reported a terminal failure).
     private var refreshWaitTask: Task<WalletCoreFFIClient.SyncStatus, Error>?
     private var refreshCancelRequested: Bool = false
+    private var refreshGeneration: UInt64 = 0
     /// Serializes send/sweep so double-tap Confirm cannot broadcast twice.
     private let sendGate = SendGate()
 
     private init() {}
 
     private func withSendLock<T>(_ body: () throws -> T) throws -> T {
-        try sendGate.withLock(body)
+        guard !cleanupPending else { throw WalletError.walletOpenFailed("Wallet session cleanup is still pending") }
+        return try sendGate.withLock(body)
     }
 
     private func normalizedMnemonic(_ mnemonic: String) -> String {
@@ -99,7 +105,8 @@ actor WalletManager {
         restoreHeight: UInt64 = 0,
         mainnet: Bool = true,
         importCache: Bool = true
-    ) throws {
+    ) async throws {
+        try await awaitSessionCleanup()
         let normalizedMnemonic = normalizedMnemonic(mnemonic)
         // Validate mnemonic (should be 25 words)
         let words = normalizedMnemonic.components(separatedBy: .whitespaces)
@@ -135,6 +142,7 @@ actor WalletManager {
 
     /// Refresh the wallet against the Monero node
     func refreshWallet() async throws -> WalletCoreFFIClient.SyncStatus {
+        guard !cleanupPending else { throw WalletError.refreshFailed("Wallet session cleanup is still pending") }
         guard let walletId = currentWalletId else {
             throw WalletError.refreshFailed("No wallet is currently open")
         }
@@ -148,6 +156,8 @@ actor WalletManager {
         }
         refreshInProgress = true
         refreshCancelRequested = false
+        refreshGeneration &+= 1
+        let generation = refreshGeneration
 
         applyNetworkProxy()
         applyScanTuning()
@@ -156,25 +166,29 @@ actor WalletManager {
         let nodeURL = MoneroConfig.scanNodeURL()
         WalletDiagnostics.log("🌐 Refresh starting with nodeURL=\(nodeURL)")
         defer {
-            refreshInProgress = false
-            refreshCancelRequested = false
-            refreshWaitTask = nil
+            if refreshGeneration == generation {
+                refreshInProgress = false
+                refreshCancelRequested = false
+                refreshWaitTask = nil
+            }
         }
 
         do {
             // Run the refresh in a dedicated task so UI can request cancellation explicitly.
             let waitTask = Task { () throws -> WalletCoreFFIClient.SyncStatus in
                 // performRefresh triggers refreshWalletAsync then waits/polls for completion
-                return try await performRefresh(walletId: walletId, nodeURL: nodeURL)
+                return try await performRefresh(walletId: walletId, nodeURL: nodeURL, generation: generation)
             }
             refreshWaitTask = waitTask
 
             let status = try await waitTask.value
+            guard refreshGeneration == generation, !cleanupPending else { throw CancellationError() }
 
             // Final export at end of refresh (authoritative)
             exportCacheAndPersist(for: walletId)
             return status
         } catch let nodeError {
+            guard refreshGeneration == generation else { throw CancellationError() }
             // Best-effort: persist any progress even on failure/cancellation.
             // This helps resumes after backgrounding, network loss, or app termination.
             exportCacheAndPersist(for: walletId)
@@ -274,7 +288,9 @@ actor WalletManager {
         }
     }
 
-    private func performRefresh(walletId: String, nodeURL: String?) async throws -> WalletCoreFFIClient.SyncStatus {
+    private func performRefresh(walletId: String, nodeURL: String?, generation: UInt64) async throws -> WalletCoreFFIClient.SyncStatus {
+        try Task.checkCancellation()
+        guard refreshGeneration == generation, !cleanupPending, !refreshCancelRequested else { throw CancellationError() }
         let effectiveURL = nodeURL ?? MoneroConfig.scanNodeURL()
         WalletDiagnostics.log("🌐 performRefresh(walletId=\(walletId)) using nodeURL=\(effectiveURL)")
 
@@ -284,6 +300,8 @@ actor WalletManager {
             WalletDiagnostics.log("⏳ Waiting for previous native refresh worker to stop walletId=\(walletId)")
             _ = try await waitForNativeRefreshTerminal(using: walletId)
         }
+        try Task.checkCancellation()
+        guard refreshGeneration == generation, !cleanupPending, !refreshCancelRequested else { throw CancellationError() }
         try WalletCoreFFIClient.refreshWalletAsync(walletId: walletId, nodeURL: effectiveURL)
         return try await waitForRefreshCompletion(using: walletId)
     }
@@ -500,50 +518,89 @@ actor WalletManager {
     }
 
     /// Check if a wallet is currently open
-    func isWalletOpen() -> Bool {
+    func isWalletOpen() async -> Bool {
+        // A failed cleanup still leaves the session locked; unseal/open will surface that error.
+        try? await awaitSessionCleanup()
         return currentWalletId != nil
+    }
+
+    private func awaitSessionCleanup() async throws {
+        while let task = cleanupTask { try await task.value }
+        if let failure = cleanupFailure { throw failure }
+        guard !cleanupPending else { throw WalletError.walletOpenFailed("Wallet session cleanup is still pending") }
+    }
+
+    private func requestSessionCleanup(close: Bool, continueRefresh: Bool) async throws {
+        guard let walletId = currentWalletId else { return }
+        cleanupIntent.request(close: close, continueRefresh: continueRefresh)
+        cleanupPending = true
+        refreshGeneration &+= 1
+        refreshCancelRequested = true
+        refreshWaitTask?.cancel()
+        if cleanupTask == nil {
+            cleanupFailure = nil
+            cleanupTask = Task { try await self.performSessionCleanup(walletId: walletId) }
+        }
+        try await awaitSessionCleanup()
+    }
+
+    private func performSessionCleanup(walletId: String) async throws {
+        let oldWaiter = refreshWaitTask
+        do {
+            try await SessionCleanupPolicy.complete(
+                isRetryable: { ($0 as? WalletCoreLifecycleError)?.isTimeout == true }
+            ) { try WalletCoreFFIClient.sealWallet(walletId: walletId, timeoutMilliseconds: 1_000) }
+            // Drain the cancelled Swift waiter before restarting a view-only worker. Its outer
+            // refresh completion is generation-fenced and cannot clear a newly opened session.
+            if let oldWaiter { _ = await oldWaiter.result }
+            refreshInProgress = false
+            refreshWaitTask = nil
+            backgroundViewOnlyRefreshActive = false
+            exportCacheAndPersist(for: walletId)
+            if cleanupIntent.close {
+                try await SessionCleanupPolicy.complete(
+                    isRetryable: { ($0 as? WalletCoreLifecycleError)?.isTimeout == true }
+                ) { try WalletCoreFFIClient.closeWallet(walletId: walletId, timeoutMilliseconds: 1_000) }
+                currentWalletId = nil
+            } else if cleanupIntent.continueRefresh {
+                applyNetworkProxy()
+                applyScanTuning()
+                try WalletCoreFFIClient.refreshWalletAsync(walletId: walletId, nodeURL: MoneroConfig.scanNodeURL())
+                backgroundViewOnlyRefreshActive = true
+            }
+            cleanupPending = false
+            cleanupIntent = SessionCleanupIntent()
+            cleanupTask = nil
+        } catch {
+            // Fail closed. A later lifecycle cleanup can retry, but unlock cannot bypass failure.
+            cleanupFailure = error
+            cleanupTask = nil
+            throw error
+        }
     }
 
     /// Replace private spend authority with view-only keys. When an app-visible refresh was
     /// active, restart it after sealing so iOS's bounded background window can keep scanning.
-    func sealForBackground(continueRefresh: Bool) throws {
+    func sealForBackground(continueRefresh: Bool) async throws {
         guard let walletId = currentWalletId else { return }
         let nativeRunning = (try? WalletCoreFFIClient.refreshJobStatus(walletId: walletId).state) == .running
         let shouldContinue = continueRefresh || refreshInProgress || nativeRunning
 
-        refreshCancelRequested = true
-        refreshWaitTask?.cancel()
-        try WalletCoreFFIClient.sealWallet(walletId: walletId)
-        refreshInProgress = false
-        refreshWaitTask = nil
-        exportCacheAndPersist(for: walletId)
-
-        backgroundViewOnlyRefreshActive = false
-        if shouldContinue {
-            applyNetworkProxy()
-            applyScanTuning()
-            try WalletCoreFFIClient.refreshWalletAsync(
-                walletId: walletId,
-                nodeURL: MoneroConfig.scanNodeURL()
-            )
-            backgroundViewOnlyRefreshActive = true
-            WalletDiagnostics.log("🔒 Continued refresh with view-only wallet walletId=\(walletId)")
-        }
+        try await requestSessionCleanup(close: false, continueRefresh: shouldContinue)
     }
 
     /// Stop the bounded view-only worker and persist its last completed checkpoint. The wallet
     /// remains sealed until platform authentication supplies the mnemonic again.
-    func pauseBackgroundViewOnlyRefresh() throws {
+    func pauseBackgroundViewOnlyRefresh() async throws {
         guard let walletId = currentWalletId else { return }
-        guard backgroundViewOnlyRefreshActive ||
+        guard cleanupPending || backgroundViewOnlyRefreshActive ||
                 (try? WalletCoreFFIClient.isWalletSealed(walletId: walletId)) == true else { return }
-        try WalletCoreFFIClient.sealWallet(walletId: walletId)
-        backgroundViewOnlyRefreshActive = false
-        exportCacheAndPersist(for: walletId)
+        try await requestSessionCleanup(close: false, continueRefresh: false)
     }
 
     /// Restore spend authority only after the caller has completed Keychain/user-presence auth.
-    func unsealWallet(mnemonic: String, walletId: String) throws {
+    func unsealWallet(mnemonic: String, walletId: String) async throws {
+        try await awaitSessionCleanup()
         guard currentWalletId == walletId else {
             throw WalletError.walletOpenFailed("The authenticated wallet is not the open wallet")
         }
@@ -556,16 +613,8 @@ actor WalletManager {
     }
 
     /// Persist a stable checkpoint and remove both private view and spend material from memory.
-    func closeWalletSession() throws {
-        guard let walletId = currentWalletId else { return }
-        try WalletCoreFFIClient.sealWallet(walletId: walletId)
-        exportCacheAndPersist(for: walletId)
-        try WalletCoreFFIClient.closeWallet(walletId: walletId)
-        currentWalletId = nil
-        backgroundViewOnlyRefreshActive = false
-        refreshInProgress = false
-        refreshCancelRequested = false
-        refreshWaitTask = nil
+    func closeWalletSession() async throws {
+        try await requestSessionCleanup(close: true, continueRefresh: false)
     }
 
     /// Get the current wallet ID
@@ -954,6 +1003,7 @@ actor WalletManager {
 
     /// Estimate fee for a single-destination transfer using current broadcast policy.
     func previewFee(toAddress: String, amountPiconero: UInt64, ringLen: UInt8 = 16) throws -> UInt64 {
+        guard !cleanupPending else { throw WalletError.walletOpenFailed("Wallet session cleanup is still pending") }
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
@@ -1000,6 +1050,7 @@ actor WalletManager {
         amountPiconero: UInt64,
         ringLen: UInt8 = 16
     ) throws -> UInt64 {
+        guard !cleanupPending else { throw WalletError.walletOpenFailed("Wallet session cleanup is still pending") }
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
@@ -1039,6 +1090,7 @@ actor WalletManager {
         toAddress: String,
         ringLen: UInt8 = 16
     ) throws -> (amount: UInt64, fee: UInt64) {
+        guard !cleanupPending else { throw WalletError.walletOpenFailed("Wallet session cleanup is still pending") }
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
@@ -1155,6 +1207,7 @@ actor WalletManager {
     /// Preview sweep ("Send Max") to a destination.
     /// - Returns: (amount, fee) in piconero where `amount` is computed by the core (roughly unlocked - fee).
     func previewSweep(toAddress: String, ringLen: UInt8 = 16) throws -> (amount: UInt64, fee: UInt64) {
+        guard !cleanupPending else { throw WalletError.walletOpenFailed("Wallet session cleanup is still pending") }
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
