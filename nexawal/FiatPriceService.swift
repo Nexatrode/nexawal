@@ -44,7 +44,7 @@ final class FiatPriceService: ObservableObject {
     }
 
     var canFetch: Bool {
-        MoneroConfig.fiatEstimatesEnabled && MoneroConfig.routingPolicy != .i2p
+        MoneroConfig.fiatEstimatesEnabled
     }
 
     func recordSend(txid: String) {

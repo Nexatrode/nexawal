@@ -29,6 +29,20 @@ private actor PageSource {
     }
 }
 
+private actor CsvPageSource {
+    var queries: [WalletCoreFFIClient.HistoryQuery] = []
+
+    func fetch(id: String, query: WalletCoreFFIClient.HistoryQuery) throws -> WalletCoreFFIClient.HistoryPage {
+        queries.append(query)
+        let offset = query.offset
+        let txid = String(repeating: offset == 0 ? "a" : "b", count: 64)
+        let nextOffset = offset == 0 ? "\"next_offset\":1," : ""
+        return try WalletCoreFFIClient.decodeHistoryPageJSON("""
+        {"schema_version":1,"wallet_id":"\(id)","revision":"r1","total_count":2,"matching_count":2,"pending_count":0,"offset":\(offset),\(nextOffset)"last_scanned_height":42,"chain_height":42,"chain_time":0,"transfers":[{"txid":"\(txid)","direction":"in","amount":1,"height":42,"timestamp":0,"confirmations":1,"is_pending":false}]}
+        """, expectedWalletId: id)
+    }
+}
+
 @MainActor
 final class TransactionsModelTests: XCTestCase {
     func testLateViewportResponsesDoNotEvictVisibleRows() async throws {
@@ -87,5 +101,40 @@ final class TransactionsModelTests: XCTestCase {
         let callsAfter = await source.calls
         XCTAssertEqual(callsBefore, callsAfter)
         XCTAssertEqual(model.revision, "replacement")
+    }
+
+    func testCsvUsesExactPiconeroAmountsAndUtcTimestamp() throws {
+        let page = try WalletCoreFFIClient.decodeHistoryPageJSON("""
+        {"schema_version":1,"wallet_id":"fixture","revision":"r1","total_count":1,"matching_count":1,"pending_count":0,"offset":0,"last_scanned_height":42,"chain_height":42,"chain_time":0,"transfers":[{"txid":"\(String(repeating: "a", count: 64))","direction":"out","amount":1234567890123,"fee":22,"height":42,"timestamp":0,"confirmations":3,"is_pending":false}]}
+        """, expectedWalletId: "fixture")
+
+        XCTAssertEqual(
+            TransferHistoryCSV.rows(page.transfers),
+            "out,1.234567890123,1234567890123,0.000000000022,22,42,1970-01-01 00:00:00 UTC,3,confirmed,\(String(repeating: "a", count: 64))\n"
+        )
+    }
+
+    func testCsvExportsAllFilteredPagesWithOneHistoryRevision() async throws {
+        let source = CsvPageSource()
+        let model = TransactionsModel(fetch: { try await source.fetch(id: $0, query: $1) })
+        await model.reset(walletId: "fixture", query: .init())
+        let url = try await model.exportCSV(
+            walletId: "fixture",
+            query: .init(filter: "received", search: "abc", fromTimestamp: 100, toTimestamp: 200)
+        )
+        defer { try? FileManager.default.removeItem(at: url) }
+
+        let csv = try String(contentsOf: url, encoding: .utf8)
+        XCTAssertEqual(csv.components(separatedBy: "\n").filter { !$0.isEmpty }.count, 3, "CSV: \(csv)")
+        XCTAssertTrue(csv.hasPrefix(TransferHistoryCSV.header))
+        let queries = await source.queries
+        let exportQueries = queries.dropFirst()
+        XCTAssertEqual(exportQueries.first?.limit, 200)
+        XCTAssertEqual(exportQueries.first?.filter, "received")
+        XCTAssertEqual(exportQueries.first?.search, "abc")
+        XCTAssertEqual(exportQueries.first?.fromTimestamp, 100)
+        XCTAssertEqual(exportQueries.first?.toTimestamp, 200)
+        XCTAssertEqual(exportQueries.last?.revision, "r1")
+        XCTAssertEqual(exportQueries.last?.offset, 1)
     }
 }

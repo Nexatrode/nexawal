@@ -28,7 +28,7 @@ It does not receive your seed. For stronger privacy, point the app at a node you
 
 I2P / hybrid mode, when enabled, routes the configured traffic through your local I2P HTTP proxy instead of (or in addition to) clearnet.
 
-Optional fiat estimates are off by default. If you turn them on, the app contacts `api.kraken.com` for an XMR price and, when needed, `api.frankfurter.dev` for ECB foreign-exchange rates. Those servers can see your IP address and that a price was requested. Wallet amounts, addresses, and transaction history are not sent. Fiat display is hidden if the rate is older than 30 minutes or the fetch fails. Price lookups use clearnet HTTPS even if the wallet node is set to I2P-only — node proxy settings do not apply to fiat estimates.
+Optional fiat estimates are off by default. If you turn them on, the app requests an XMR rate for your selected currency from `rates.nexatrode.com` over clearnet HTTPS, even when the wallet node is set to I2P-only. Nexatrode can see your IP address, when a rate was requested, and the selected currency. The rate server retrieves market data separately; your device does not contact those providers for price lookups. Wallet amounts, addresses, seeds, and transaction history are not sent. Fiat display is hidden when the rate is older than 30 minutes or unavailable.
 
 ## In-app legal documents
 

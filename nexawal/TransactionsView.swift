@@ -18,6 +18,10 @@ struct TransactionsView: View {
     @State private var from = Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date()
     @State private var to = Date()
     @State private var selected: WalletCoreFFIClient.Transfer?
+    @State private var isExporting = false
+    @State private var exportError: String?
+    @State private var exportURL: URL?
+    @State private var isSharePresented = false
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var palette
     private var query: WalletCoreFFIClient.HistoryQuery {
@@ -39,6 +43,29 @@ struct TransactionsView: View {
                     DatePicker("Through", selection: $to, in: from..., displayedComponents: .date)
                 }
                 Text("\(model.count) matching · \(model.total) total").font(.caption).foregroundStyle(.secondary)
+                Button {
+                    Task {
+                        isExporting = true
+                        exportError = nil
+                        do {
+                            exportURL = try await model.exportCSV(walletId: viewModel.historyWalletId, query: query)
+                            isSharePresented = exportURL != nil
+                        } catch is CancellationError {
+                            // A changed query, wallet, or history session invalidates this export.
+                        } catch {
+                            exportError = L10n.t("CSV export failed. Try again.")
+                        }
+                        isExporting = false
+                    }
+                } label: {
+                    if isExporting {
+                        Label(L10n.t("Loading transaction…"), systemImage: "arrow.down.doc")
+                    } else {
+                        Label(L10n.t("Export matching transactions (CSV)"), systemImage: "square.and.arrow.up")
+                    }
+                }
+                .disabled(model.count == 0 || model.loading || model.changed || isExporting)
+                if let exportError { Text(exportError).font(.caption).foregroundStyle(.red) }
                 if !viewModel.isSynced { Text("History may be incomplete while syncing.").font(.caption).foregroundStyle(.secondary) }
                 if model.changed {
                     Button("History changed · Reload transactions") { Task { await model.reload() } }
@@ -122,7 +149,18 @@ struct TransactionsView: View {
                 .environment(\.classicUI, classicUI)
                 .environment(\.classicPalette, palette)
         }
+        .sheet(isPresented: $isSharePresented, onDismiss: cleanupExportFile) {
+            if let exportURL {
+                ActivityView(activityItems: [exportURL], completion: { _, _, _, _ in cleanupExportFile() })
+            }
         }
+        }
+    }
+
+    private func cleanupExportFile() {
+        if let exportURL { try? FileManager.default.removeItem(at: exportURL) }
+        exportURL = nil
+        isSharePresented = false
     }
 }
 
@@ -229,7 +267,9 @@ struct WalletTransferDetails: View {
                         .foregroundStyle(palette?.secondaryText ?? .primary)
                         .textSelection(.enabled)
                     Button("Copy TXID") { UIPasteboard.general.string = transfer.txid }
-                    if let url = URL(string: "https://xmrchain.net/tx/\(transfer.txid)") { Link("Open in Explorer", destination: url) }
+                    if let url = URL(string: "https://xmrchain.net/tx/\(transfer.txid)") {
+                        Button("Copy Explorer Link") { UIPasteboard.general.string = url.absoluteString }
+                    }
                 } header: {
                     Text(L10n.neon("Identifiers", classicUI: classicUI))
                         .font(classicUI ? .system(.subheadline, design: .monospaced).weight(.bold) : .subheadline)

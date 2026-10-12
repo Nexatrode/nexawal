@@ -731,7 +731,7 @@ struct SettingsView: View {
                                 fiatCurrency = MoneroConfig.fiatCurrency
                                 FiatPriceService.shared.settingsDidChange()
                             }
-                        Text("Optional. NexaWal requests an XMR rate for your chosen currency from rates.nexatrode.com over HTTPS. Nexatrode can see your IP address and chosen currency; wallet amounts and addresses are not sent. Rates are unavailable in I2P-only mode. Estimates only — XMR is what you send and hold.")
+                        Text(L10n.t("Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexatrode.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold."))
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         if fiatEstimatesEnabled {

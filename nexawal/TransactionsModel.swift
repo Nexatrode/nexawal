@@ -74,4 +74,80 @@ final class TransactionsModel: ObservableObject {
         let offsets = failed.sorted(); failed.removeAll(); error = nil
         for offset in offsets { await load(index: offset) }
     }
+
+    func exportCSV(walletId: String, query: WalletCoreFFIClient.HistoryQuery) async throws -> URL {
+        guard walletId == self.walletId else { throw CancellationError() }
+        let token = generation
+        var request = query
+        request.limit = 200
+        request.offset = 0
+        request.revision = nil
+        request.anchorTxid = nil
+
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("nexawal-history-\(UUID().uuidString).csv")
+        guard FileManager.default.createFile(atPath: url.path, contents: Data(TransferHistoryCSV.header.utf8)) else {
+            throw CocoaError(.fileWriteUnknown)
+        }
+        do {
+            let handle = try FileHandle(forWritingTo: url)
+            defer { try? handle.close() }
+            try handle.seekToEnd()
+            var expectedRevision: String?
+            var writtenCount = 0
+            while true {
+                guard token == generation, walletId == self.walletId, !changed else { throw CancellationError() }
+                let page = try await fetch(walletId, request)
+                guard token == generation, walletId == self.walletId, !changed else { throw CancellationError() }
+                if let expectedRevision, expectedRevision != page.revision {
+                    throw NSError(domain: "NexaWalHistory", code: 1, userInfo: [NSLocalizedDescriptionKey: "History changed during export. Reload and try again."])
+                }
+                expectedRevision = page.revision
+                try handle.write(contentsOf: Data(TransferHistoryCSV.rows(page.transfers).utf8))
+                writtenCount += page.transfers.count
+                guard let nextOffset = page.nextOffset else { break }
+                request.offset = nextOffset
+                request.revision = page.revision
+            }
+            guard writtenCount > 0 else {
+                throw NSError(domain: "NexaWalHistory", code: 2, userInfo: [NSLocalizedDescriptionKey: "No matching transactions to export."])
+            }
+            try handle.synchronize()
+            return url
+        } catch {
+            try? FileManager.default.removeItem(at: url)
+            throw error
+        }
+    }
+}
+
+enum TransferHistoryCSV {
+    static let header = "direction,amount_xmr,amount_piconero,fee_xmr,fee_piconero,block,timestamp_utc,confirmations,status,txid\n"
+
+    nonisolated static func rows(_ rows: [WalletCoreFFIClient.Transfer]) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss 'UTC'"
+        return rows.map { row in
+            let feeXmr = row.fee.map { formatXMR($0) } ?? ""
+            let feePiconero = row.fee.map(String.init) ?? ""
+            let height = row.height.map(String.init) ?? ""
+            let timestamp = row.timestamp.map { formatter.string(from: Date(timeIntervalSince1970: TimeInterval($0))) } ?? ""
+            let status = row.isPending || row.confirmations == 0 ? "pending" : "confirmed"
+            return [row.direction, formatXMR(row.amount), String(row.amount), feeXmr, feePiconero,
+                    height, timestamp, String(row.confirmations), status, row.txid]
+                .map(escape)
+                .joined(separator: ",") + "\n"
+        }.joined()
+    }
+
+    private nonisolated static func formatXMR(_ piconero: UInt64) -> String {
+        "\(piconero / 1_000_000_000_000).\(String(format: "%012llu", piconero % 1_000_000_000_000))"
+    }
+
+    private nonisolated static func escape(_ value: String) -> String {
+        guard value.contains(where: { $0 == "," || $0 == "\"" || $0 == "\n" || $0 == "\r" }) else { return value }
+        return "\"\(value.replacingOccurrences(of: "\"", with: "\"\""))\""
+    }
 }
