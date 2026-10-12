@@ -41715,6 +41715,7 @@
       }
     },
     "MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact api.kraken.com and api.frankfurter.dev.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -50902,6 +50903,7 @@
       }
     },
     "Optional. When on, nexawal fetches a public XMR price from Kraken (api.kraken.com) and, if needed, fiat FX from Frankfurter (api.frankfurter.dev). Those servers see your IP. Amounts and addresses are not sent. Fiat lookups use clearnet HTTPS and are separate from node / I2P proxy settings. Estimates only — XMR is what you send and hold.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -93572,6 +93574,1319 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seed word"
+          }
+        }
+      }
+    },
+    "MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact rates.nexatrode.com for rates.": {},
+    "Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexatrode.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اختياري. عند التفعيل، يطلب NexaWal سعر XMR للعملة التي اخترتها من rates.nexatrode.com عبر HTTPS. يستخدم هذا الطلب الإنترنت العام (Clearnet) حتى عند استخدام عقدة المحفظة I2P. يمكن لـ Nexatrode رؤية عنوان IP والعملة المختارة، لكن لا تُرسل أرصدة المحفظة أو عناوينها أو عبارة الاسترداد أو سجل المعاملات. الأسعار تقديرية فقط — XMR هو ما ترسله وتحتفظ به."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "İstəyə bağlıdır. Aktiv olduqda NexaWal seçdiyiniz valyuta üçün XMR məzənnəsini HTTPS ilə rates.nexatrode.com saytından soruşur. Bu sorğu pul kisəsi qovşağı I2P istifadə etsə belə açıq internetdən (Clearnet) gedir. Nexatrode IP ünvanınızı və seçilmiş valyutanı görə bilər, lakin pul kisəsi məbləğləri, ünvanları, toxum ifadəsi və əməliyyat tarixçəsi göndərilmir. Məzənnələr yalnız təxminidir — saxladığınız və göndərdiyiniz aktiv XMR-dir."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "По избор. Когато е включено, NexaWal заявява курс на XMR за избраната от вас валута от rates.nexatrode.com чрез HTTPS. Заявката използва обикновения интернет (Clearnet), дори когато възелът на портфейла използва I2P. Nexatrode може да види IP адреса ви и избраната валута, но не получава суми, адреси, начална фраза или история на транзакциите от портфейла. Курсовете са само ориентировъчни — изпращате и съхранявате XMR."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ঐচ্ছিক। চালু থাকলে, NexaWal আপনার নির্বাচিত মুদ্রার XMR দর HTTPS-এর মাধ্যমে rates.nexatrode.com থেকে চায়। ওয়ালেট নোড I2P ব্যবহার করলেও এই অনুরোধ সাধারণ ইন্টারনেট (Clearnet) দিয়ে যায়। Nexatrode আপনার IP ঠিকানা ও নির্বাচিত মুদ্রা দেখতে পারে, তবে ওয়ালেটের পরিমাণ, ঠিকানা, সিড বা লেনদেনের ইতিহাস পাঠানো হয় না। দর কেবল আনুমানিক — আপনি XMR-ই পাঠান ও রাখেন।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opcional. Si està activat, NexaWal demana a rates.nexatrode.com, mitjançant HTTPS, la cotització d’XMR per a la moneda que has triat. Aquesta petició usa la Internet pública (Clearnet), encara que el node de la cartera faci servir I2P. Nexatrode pot veure la teva IP i la moneda triada, però no rep saldos, adreces, la frase de recuperació ni l’historial de transaccions. Les cotitzacions són només estimacions: el que tens i envies és XMR."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Volitelné. Je-li funkce zapnutá, NexaWal si přes HTTPS vyžádá kurz XMR pro zvolenou měnu ze serveru rates.nexatrode.com. Požadavek jde přes veřejný internet (Clearnet), i když peněženka používá uzel I2P. Nexatrode může vidět vaši IP adresu a zvolenou měnu, ale nedostává zůstatky, adresy, obnovovací frázi ani historii transakcí. Kurzy jsou pouze orientační — držíte a posíláte XMR."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Valgfrit. Når det er slået til, henter NexaWal en XMR-kurs for din valgte valuta fra rates.nexatrode.com via HTTPS. Anmodningen bruger det almindelige internet (clearnet), også når din wallet-node bruger I2P. Nexatrode kan se din IP-adresse og valgte valuta, men modtager ikke walletbeløb, adresser, seed eller transaktionshistorik. Kurserne er kun vejledende — det er XMR, du sender og opbevarer."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Optional. Wenn aktiviert, fragt NexaWal über HTTPS bei rates.nexatrode.com den XMR-Kurs für die ausgewählte Währung ab. Diese Anfrage nutzt das öffentliche Internet (Clearnet), auch wenn dein Wallet-Node I2P verwendet. Nexatrode kann deine IP-Adresse und die gewählte Währung sehen, erhält aber keine Wallet-Beträge, Adressen, Seed-Phrase oder Transaktionshistorie. Die Kurse sind nur Schätzwerte — du hältst und sendest XMR."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Προαιρετικό. Όταν είναι ενεργό, το NexaWal ζητά μέσω HTTPS από το rates.nexatrode.com την ισοτιμία XMR για το νόμισμα που επιλέξατε. Το αίτημα χρησιμοποιεί το δημόσιο διαδίκτυο (clearnet), ακόμη κι αν ο κόμβος του πορτοφολιού χρησιμοποιεί I2P. Η Nexatrode μπορεί να δει τη διεύθυνση IP και το επιλεγμένο νόμισμα, αλλά δεν λαμβάνει ποσά, διευθύνσεις, φράση ανάκτησης ή ιστορικό συναλλαγών. Οι ισοτιμίες είναι μόνο εκτιμήσεις — στέλνετε και κρατάτε XMR."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Laŭvola. Kiam ĝi estas ŝaltita, NexaWal petas per HTTPS de rates.nexatrode.com la XMR-kurzon por via elektita valuto. La peto uzas la publikan interreton (Clearnet), eĉ se via monujo-nodo uzas I2P. Nexatrode povas vidi vian IP-adreson kaj elektitan valuton, sed ne ricevas monujajn sumojn, adresojn, reakiraĵan frazon aŭ transakcian historion. Kurzoj estas nur taksoj — vi sendas kaj tenas XMR."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opcional. Al activarlo, NexaWal solicita por HTTPS a rates.nexatrode.com la cotización de XMR para la moneda elegida. La solicitud usa Internet público (Clearnet), aunque el nodo de la cartera use I2P. Nexatrode puede ver tu IP y la moneda elegida, pero no recibe saldos, direcciones, frase semilla ni historial de transacciones. Las cotizaciones son solo estimaciones: lo que tienes y envías es XMR."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Valikuline. Kui see on sisse lülitatud, küsib NexaWal HTTPS-i kaudu saidilt rates.nexatrode.com XMR-i kurssi valitud valuuta jaoks. Päring kasutab avalikku internetti (Clearnet) ka siis, kui rahakoti sõlm kasutab I2P-d. Nexatrode näeb sinu IP-aadressi ja valitud valuutat, kuid rahakoti summasid, aadresse, taastefraasi ega tehinguajalugu ei saadeta. Kursid on vaid hinnangud — hoiad ja saadad XMR-i."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Aukerakoa. Aktibatuta dagoenean, NexaWal-ek rates.nexatrode.com-i eskatzen dio, HTTPS bidez, aukeratutako monetaren XMR tasa. Eskaerak Internet publikoa (Clearnet) erabiltzen du, zorro-nodoak I2P erabiltzen badu ere. Nexatrode-k zure IP helbidea eta hautatutako moneta ikus ditzake, baina ez ditu jasotzen zorroko saldoak, helbideak, berreskuratze-esaldia edo transakzioen historia. Tasak estimazioak baino ez dira: XMR bidali eta gordetzen duzun aktiboa da."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اختیاری است. با فعال‌کردن آن، NexaWal نرخ XMR برای ارز انتخابی شما را از طریق HTTPS از rates.nexatrode.com می‌گیرد. این درخواست حتی هنگام استفادهٔ گره کیف پول از I2P از اینترنت عمومی (Clearnet) عبور می‌کند. Nexatrode می‌تواند نشانی IP و ارز انتخابی شما را ببیند، اما موجودی‌ها، نشانی‌ها، عبارت بازیابی یا سابقهٔ تراکنش‌های کیف پول ارسال نمی‌شوند. نرخ‌ها فقط تخمینی‌اند — دارایی‌ای که می‌فرستید و نگه می‌دارید XMR است."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Valinnainen. Kun toiminto on käytössä, NexaWal pyytää HTTPS-yhteydellä palvelusta rates.nexatrode.com XMR-kurssin valitsemallesi valuutalle. Pyyntö käyttää julkista internetiä (clearnet), vaikka lompakon solmu käyttäisi I2P:tä. Nexatrode näkee IP-osoitteesi ja valitun valuutan, mutta lompakon saldoja, osoitteita, palautussanoja tai tapahtumahistoriaa ei lähetetä. Kurssit ovat vain arvioita — lähetät ja säilytät XMR:ää."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opsyonal. Kapag naka-on, humihingi ang NexaWal sa rates.nexatrode.com ng XMR rate para sa pinili mong currency sa pamamagitan ng HTTPS. Dumadaan ito sa pampublikong internet (clearnet), kahit I2P ang gamit ng wallet node. Makikita ng Nexatrode ang IP address mo at piniling currency, pero hindi ipinapadala ang halaga, mga address, seed phrase, o history ng transaksyon ng wallet. Tantiya lamang ang mga rate — XMR ang ipinapadala at hawak mo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Facultatif. Si cette option est activée, NexaWal demande par HTTPS à rates.nexatrode.com le cours du XMR dans la devise choisie. Cette requête passe par l’Internet public (clearnet), même si le nœud du portefeuille utilise I2P. Nexatrode peut voir votre adresse IP et la devise choisie, mais ne reçoit ni soldes, ni adresses, ni phrase de récupération, ni historique des transactions. Les cours sont des estimations — vous détenez et envoyez du XMR."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Roghnach. Nuair atá sé cumasaithe, iarrann NexaWal ráta XMR don airgeadra roghnaithe ó rates.nexatrode.com trí HTTPS. Úsáideann an t-iarratas an tIdirlíon poiblí (Clearnet), fiú má úsáideann nóid an sparáin I2P. Is féidir le Nexatrode do sheoladh IP agus an t-airgeadra roghnaithe a fheiceáil, ach ní sheoltar iarmhéideanna, seoltaí, frása síl ná stair idirbheart an sparáin. Meastacháin amháin iad na rátaí — is é XMR a sheolann agus a choinníonn tú."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opcional. Se está activado, NexaWal solicita por HTTPS a rates.nexatrode.com a cotización de XMR para a moeda escollida. A solicitude usa a Internet pública (Clearnet), mesmo se o nodo do moedeiro usa I2P. Nexatrode pode ver o teu IP e a moeda escollida, pero non recibe saldos, enderezos, frase de recuperación nin historial de transaccións. As cotizacións son só estimacións: o que tes e envías é XMR."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ojeporavokuaa. Oĩramo hendýpe, NexaWal ojerure HTTPS rupive rates.nexatrode.com-pe XMR repy ne viru reiporavóva rehe. Ko jerure oipuru Internet público (Clearnet), ne monedero nodo oipuru ramo jepe I2P. Nexatrode ikatu ohecha nde IP ha viru reiporavóva, hákatu noñemondói monedero saldo, kundaharape, ñe’ẽñemi ñemoĩporã térã tembiasakue transacción rehegua. Repy kuéra ha’e estimaciónnte — XMR rehegua remondo ha reñongatu."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Na zaɓi ne. Idan an kunna shi, NexaWal yana neman farashin XMR na kuɗin da ka zaɓa daga rates.nexatrode.com ta HTTPS. Wannan buƙatar tana amfani da intanet na jama’a (Clearnet), ko da nodes ɗin walat yana amfani da I2P. Nexatrode na iya ganin adireshin IP ɗinka da kuɗin da ka zaɓa, amma ba a aika ma’aunin walat, adireshi, kalmomin dawo da walat, ko tarihin ma’amaloli ba. Ƙididdiga ce kawai — XMR ne kake aikawa da riƙewa."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "אופציונלי. כשהאפשרות מופעלת, NexaWal מבקשת מ־rates.nexatrode.com דרך HTTPS את שער ה־XMR למטבע שבחרת. הבקשה עוברת באינטרנט הציבורי (Clearnet), גם כשצומת הארנק משתמש ב־I2P. Nexatrode יכולה לראות את כתובת ה־IP שלך ואת המטבע שנבחר, אך לא נשלחים יתרות, כתובות, מילות השחזור או היסטוריית עסקאות של הארנק. השערים הם הערכות בלבד — מה שנשלח ונשמר הוא XMR."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "वैकल्पिक। चालू होने पर, NexaWal आपके चुने हुए मुद्रा के लिए XMR दर HTTPS के ज़रिए rates.nexatrode.com से मांगता है। वॉलेट नोड I2P का उपयोग करे तब भी यह अनुरोध सार्वजनिक इंटरनेट (Clearnet) से जाता है। Nexatrode आपका IP पता और चुनी हुई मुद्रा देख सकता है, लेकिन वॉलेट की राशि, पते, seed phrase या लेन-देन इतिहास नहीं भेजे जाते। दरें केवल अनुमान हैं — आप XMR ही भेजते और रखते हैं।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Neobavezno. Kada je uključeno, NexaWal putem HTTPS-a traži tečaj XMR-a za odabranu valutu od rates.nexatrode.com. Zahtjev koristi javni internet (Clearnet), čak i kada čvor novčanika koristi I2P. Nexatrode može vidjeti vašu IP adresu i odabranu valutu, ali ne prima iznose, adrese, početnu frazu ni povijest transakcija novčanika. Tečajevi su samo procjene — šaljete i čuvate XMR."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Nem kötelező. Bekapcsoláskor a NexaWal HTTPS-en keresztül lekéri a kiválasztott pénznem XMR-árfolyamát a rates.nexatrode.com címről. A kérés a nyilvános internetet (Clearnet) használja akkor is, ha a tárca csomópontja I2P-t használ. A Nexatrode láthatja az IP-címedet és a választott pénznemet, de nem kap tárcaegyenleget, címet, helyreállító kifejezést vagy tranzakciós előzményt. Az árfolyamok csak becslések — XMR-t küldesz és tartasz."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ընտրովի է։ Միացնելու դեպքում NexaWal-ը HTTPS-ով rates.nexatrode.com-ից հարցնում է ձեր ընտրած արժույթի XMR փոխարժեքը։ Հարցումն օգտագործում է հանրային ինտերնետը (Clearnet), նույնիսկ եթե դրամապանակի հանգույցն աշխատում է I2P-ով։ Nexatrode-ը կարող է տեսնել ձեր IP հասցեն և ընտրված արժույթը, սակայն դրամապանակի մնացորդները, հասցեները, վերականգնման արտահայտությունը կամ գործարքների պատմությունը չեն ուղարկվում։ Փոխարժեքները միայն մոտավոր են — ուղարկում և պահում եք XMR։"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opsional. Saat diaktifkan, NexaWal meminta kurs XMR untuk mata uang pilihan Anda dari rates.nexatrode.com melalui HTTPS. Permintaan ini memakai internet publik (Clearnet), meskipun node dompet menggunakan I2P. Nexatrode dapat melihat alamat IP dan mata uang pilihan Anda, tetapi saldo, alamat, seed, dan riwayat transaksi dompet tidak dikirim. Kurs hanya perkiraan — XMR-lah yang Anda kirim dan simpan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Facoltativo. Se attivato, NexaWal richiede via HTTPS a rates.nexatrode.com il tasso XMR per la valuta scelta. La richiesta usa Internet pubblico (clearnet), anche se il nodo del portafoglio usa I2P. Nexatrode può vedere il tuo IP e la valuta scelta, ma non riceve saldi, indirizzi, frase di recupero o cronologia delle transazioni. I tassi sono solo stime: invii e conservi XMR."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "任意です。有効にすると、NexaWalは選択した通貨のXMRレートをHTTPSでrates.nexatrode.comに問い合わせます。ウォレットのノードがI2Pを使っていても、この要求は通常のインターネット（クリアネット）を通ります。NexatrodeにはIPアドレスと選択した通貨が見えますが、ウォレットの金額、アドレス、シード、取引履歴は送信されません。レートは推定値です。送受信・保有する資産はXMRです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "선택 사항입니다. 켜면 NexaWal이 HTTPS를 통해 rates.nexatrode.com에 선택한 통화의 XMR 시세를 요청합니다. 지갑 노드가 I2P를 사용하더라도 이 요청은 일반 인터넷(Clearnet)을 사용합니다. Nexatrode는 IP 주소와 선택한 통화를 볼 수 있지만 지갑 잔액, 주소, 시드 문구, 거래 내역은 전송되지 않습니다. 시세는 참고용 추정치이며 실제로 보내고 보유하는 자산은 XMR입니다."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ыктыярдуу. Иштетилгенде NexaWal HTTPS аркылуу rates.nexatrode.com кызматынан сиз тандаган валютадагы XMR курсун сурайт. Капчыктын түйүнү I2P колдонсо да, суроо ачык интернет аркылуу (Clearnet) жөнөтүлөт. Nexatrode IP дарегиңизди жана тандалган валютаны көрө алат, бирок капчыктын суммалары, даректери, калыбына келтирүү сөздөрү же транзакциялар таржымалы жөнөтүлбөйт. Курстар болжолдуу гана — сиз XMR жөнөтүп, сактайсыз."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Pasirenkama. Įjungus „NexaWal“ HTTPS ryšiu iš „rates.nexatrode.com“ paprašo pasirinktos valiutos XMR kurso. Užklausa siunčiama viešuoju internetu („Clearnet“), net jei piniginės mazgas naudoja I2P. „Nexatrode“ mato jūsų IP adresą ir pasirinktą valiutą, tačiau piniginės sumos, adresai, atkūrimo frazė ir operacijų istorija nesiunčiami. Kursai yra tik apytiksliai — siunčiate ir laikote XMR."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Neobligāti. Ja funkcija ir ieslēgta, NexaWal, izmantojot HTTPS, pieprasa rates.nexatrode.com XMR kursu izvēlētajai valūtai. Pieprasījums izmanto publisko internetu (Clearnet) arī tad, ja maka mezgls izmanto I2P. Nexatrode var redzēt jūsu IP adresi un izvēlēto valūtu, taču maka atlikumi, adreses, atkopšanas frāze un darījumu vēsture netiek nosūtīti. Kursi ir tikai aptuveni — jūs sūtāt un glabājat XMR."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Pilihan. Apabila dihidupkan, NexaWal meminta kadar XMR bagi mata wang pilihan anda daripada rates.nexatrode.com melalui HTTPS. Permintaan ini menggunakan Internet awam (Clearnet), walaupun nod dompet menggunakan I2P. Nexatrode boleh melihat alamat IP dan mata wang pilihan anda, tetapi baki, alamat, frasa pemulihan dan sejarah transaksi dompet tidak dihantar. Kadar hanyalah anggaran — XMR ialah aset yang anda hantar dan simpan."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ရွေးချယ်နိုင်သည်။ ဖွင့်ထားပါက NexaWal သည် သင်ရွေးထားသော ငွေကြေးအတွက် XMR ဈေးနှုန်းကို HTTPS ဖြင့် rates.nexatrode.com မှ တောင်းယူသည်။ ပိုက်ဆံအိတ် node က I2P သုံးနေသော်လည်း ဤတောင်းဆိုမှုသည် အများသုံးအင်တာနက် (Clearnet) ကို အသုံးပြုသည်။ Nexatrode သည် သင့် IP လိပ်စာနှင့် ရွေးချယ်ထားသော ငွေကြေးကို မြင်နိုင်သော်လည်း ပိုက်ဆံအိတ်ပမာဏ၊ လိပ်စာများ၊ seed စကားစု သို့မဟုတ် ငွေလွှဲမှတ်တမ်းကို မပို့ပါ။ ဈေးနှုန်းများသည် ခန့်မှန်းချက်သာဖြစ်ပြီး သင်ပို့/သိမ်းဆည်းသည့် ပိုင်ဆိုင်မှုမှာ XMR ဖြစ်သည်။"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Valgfritt. Når det er slått på, ber NexaWal rates.nexatrode.com om XMR-kursen for valutaen du har valgt, via HTTPS. Forespørselen bruker det offentlige nettet (clearnet), selv om lommeboknoden bruker I2P. Nexatrode kan se IP-adressen din og valgt valuta, men mottar ikke lommebeløp, adresser, gjenopprettingsfrase eller transaksjonshistorikk. Kursene er kun anslag — du sender og oppbevarer XMR."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Optioneel. Als dit is ingeschakeld, vraagt NexaWal via HTTPS bij rates.nexatrode.com de XMR-koers voor de gekozen valuta op. Dit verzoek gebruikt het openbare internet (clearnet), ook als de walletnode I2P gebruikt. Nexatrode kan je IP-adres en gekozen valuta zien, maar ontvangt geen walletbedragen, adressen, herstelzin of transactiegeschiedenis. De koersen zijn slechts schattingen — je verstuurt en bewaart XMR."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opcjonalne. Po włączeniu NexaWal pobiera przez HTTPS z rates.nexatrode.com kurs XMR dla wybranej waluty. Żądanie korzysta z publicznego Internetu (Clearnet), nawet gdy węzeł portfela używa I2P. Nexatrode widzi Twój adres IP i wybraną walutę, ale nie otrzymuje sald, adresów, frazy odzyskiwania ani historii transakcji portfela. Kursy są tylko szacunkowe — wysyłasz i przechowujesz XMR."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opcional. Quando ativado, o NexaWal solicita por HTTPS a cotação do XMR na moeda escolhida em rates.nexatrode.com. Essa solicitação usa a internet pública (Clearnet), mesmo quando o nó da carteira usa I2P. A Nexatrode pode ver seu IP e a moeda escolhida, mas não recebe saldos, endereços, frase de recuperação nem histórico de transações da carteira. As cotações são apenas estimativas — você envia e mantém XMR."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opțional. Când este activată, NexaWal solicită prin HTTPS de la rates.nexatrode.com cursul XMR pentru moneda aleasă. Cererea folosește internetul public (Clearnet), chiar dacă nodul portofelului folosește I2P. Nexatrode poate vedea adresa IP și moneda aleasă, dar nu primește solduri, adrese, fraza de recuperare sau istoricul tranzacțiilor. Cursurile sunt doar estimări — trimiți și păstrezi XMR."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Необязательно. Если функция включена, NexaWal запрашивает по HTTPS у rates.nexatrode.com курс XMR для выбранной валюты. Запрос проходит через обычный интернет (Clearnet), даже если узел кошелька использует I2P. Nexatrode видит ваш IP-адрес и выбранную валюту, но не получает суммы, адреса, seed-фразу или историю транзакций кошелька. Курсы являются лишь оценкой — вы отправляете и храните XMR."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Voliteľné. Keď je zapnuté, NexaWal si cez HTTPS vyžiada kurz XMR pre zvolenú menu zo servera rates.nexatrode.com. Požiadavka používa verejný internet (Clearnet), aj keď uzol peňaženky používa I2P. Nexatrode môže vidieť vašu IP adresu a zvolenú menu, ale nedostáva zostatky, adresy, obnovovaciu frázu ani históriu transakcií. Kurzy sú iba odhad — posielate a držíte XMR."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Neobvezno. Ko je omogočeno, NexaWal prek HTTPS od rates.nexatrode.com zahteva tečaj XMR za izbrano valuto. Zahteva uporablja javni internet (Clearnet), tudi če vozlišče denarnice uporablja I2P. Nexatrode lahko vidi vaš naslov IP in izbrano valuto, ne prejme pa zneskov, naslovov, obnovitvene fraze ali zgodovine transakcij denarnice. Tečaji so le ocene — pošiljate in hranite XMR."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opsionale. Kur aktivizohet, NexaWal kërkon përmes HTTPS nga rates.nexatrode.com kursin e XMR-së për monedhën e zgjedhur. Kërkesa përdor internetin publik (Clearnet), edhe kur nyja e portofolit përdor I2P. Nexatrode mund të shohë adresën tuaj IP dhe monedhën e zgjedhur, por nuk merr gjendjen, adresat, frazën e rikuperimit ose historikun e transaksioneve të portofolit. Kurset janë vetëm vlerësime — dërgoni dhe mbani XMR."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Valfritt. När det är aktiverat hämtar NexaWal XMR-kursen för den valda valutan från rates.nexatrode.com via HTTPS. Begäran använder det öppna internet (clearnet), även när plånboksnoden använder I2P. Nexatrode kan se din IP-adress och valda valuta, men får inte plånbelopp, adresser, återställningsfras eller transaktionshistorik. Kurserna är endast uppskattningar — du skickar och förvarar XMR."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ไม่บังคับ เมื่อเปิดใช้ NexaWal จะขออัตรา XMR สำหรับสกุลเงินที่คุณเลือกจาก rates.nexatrode.com ผ่าน HTTPS คำขอนี้ใช้อินเทอร์เน็ตสาธารณะ (Clearnet) แม้โหนดกระเป๋าเงินจะใช้ I2P ก็ตาม Nexatrode อาจเห็นที่อยู่ IP และสกุลเงินที่เลือก แต่จะไม่ได้รับยอดเงิน ที่อยู่ วลีเมล็ดพันธุ์ หรือประวัติธุรกรรมของกระเป๋าเงิน อัตราเป็นเพียงค่าประมาณ — สินทรัพย์ที่คุณส่งและถือคือ XMR"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "İsteğe bağlıdır. Açıkken NexaWal, seçtiğiniz para birimi için XMR kurunu HTTPS üzerinden rates.nexatrode.com adresinden ister. Cüzdan düğümü I2P kullansa bile bu istek genel interneti (Clearnet) kullanır. Nexatrode IP adresinizi ve seçtiğiniz para birimini görebilir; ancak cüzdan bakiyeleri, adresler, kurtarma kelimeleri veya işlem geçmişi gönderilmez. Kurlar yalnızca tahmindir — gönderdiğiniz ve tuttuğunuz varlık XMR’dir."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Необов’язково. Якщо ввімкнено, NexaWal запитує через HTTPS на rates.nexatrode.com курс XMR для вибраної валюти. Запит використовує звичайний інтернет (Clearnet), навіть якщо вузол гаманця працює через I2P. Nexatrode може бачити вашу IP-адресу й вибрану валюту, але не отримує суми, адреси, фразу відновлення чи історію транзакцій гаманця. Курси є лише оцінкою — ви надсилаєте й зберігаєте XMR."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اختیاری ہے۔ فعال ہونے پر، NexaWal آپ کی منتخب کردہ کرنسی کے لیے XMR کی شرح HTTPS کے ذریعے rates.nexatrode.com سے طلب کرتا ہے۔ یہ درخواست عوامی انٹرنیٹ (Clearnet) استعمال کرتی ہے، چاہے والیٹ نوڈ I2P استعمال کرے۔ Nexatrode آپ کا IP پتہ اور منتخب کرنسی دیکھ سکتا ہے، لیکن والیٹ کی رقم، پتے، بحالی کے الفاظ یا لین دین کی تاریخ نہیں بھیجی جاتی۔ شرحیں صرف اندازے ہیں — آپ XMR ہی بھیجتے اور رکھتے ہیں۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tùy chọn. Khi bật, NexaWal yêu cầu rates.nexatrode.com cung cấp tỷ giá XMR cho loại tiền bạn chọn qua HTTPS. Yêu cầu này dùng Internet công cộng (Clearnet), ngay cả khi nút ví dùng I2P. Nexatrode có thể thấy địa chỉ IP và loại tiền đã chọn, nhưng không nhận số dư, địa chỉ, cụm từ khôi phục hay lịch sử giao dịch của ví. Tỷ giá chỉ là ước tính — tài sản bạn gửi và nắm giữ là XMR."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Aṣàyàn. Tí o bá ṣiṣẹ́, NexaWal máa béèrè fún iye XMR fún owó tí o yàn láti ọ̀dọ̀ rates.nexatrode.com nípasẹ̀ HTTPS. Ìbéèrè yìí ń lo Íńtánẹ́ẹ̀tì gbogbogbò (Clearnet), bó tilẹ̀ jẹ́ pé ẹ̀rọ ìsopọ̀ apamọwọ ń lo I2P. Nexatrode lè rí àdírẹ́sì IP rẹ àti owó tí o yàn, ṣùgbọ́n kò gba iye owó apamọwọ, àdírẹ́sì, ọ̀rọ̀ ìmúpadàbọ̀sípò tàbí ìtàn ìṣòwò. Ìṣírò iye owó jẹ́ àfojúsùn nìkan — XMR ni o ń fi ránṣẹ́ tí o sì ń tọ́jú."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "可选。启用后，NexaWal 会通过 HTTPS 向 rates.nexatrode.com 查询所选货币的 XMR 汇率。即使钱包节点使用 I2P，此请求仍通过公共互联网（Clearnet）发送。Nexatrode 可以看到你的 IP 地址和所选货币，但不会收到钱包金额、地址、助记词或交易记录。汇率仅供估算——你实际发送和持有的是 XMR。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "選用。啟用後，NexaWal 會透過 HTTPS 向 rates.nexatrode.com 查詢所選貨幣的 XMR 匯率。即使錢包節點使用 I2P，此請求仍會透過公共網際網路（Clearnet）傳送。Nexatrode 可以看到你的 IP 位址和所選貨幣，但不會收到錢包金額、地址、助記詞或交易紀錄。匯率僅供估算——你實際傳送和持有的是 XMR。"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexatrode.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold."
+          }
+        }
+      }
+    },
+    "Export matching transactions (CSV)": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصدير المعاملات المطابقة (CSV)"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uyğun əməliyyatları ixrac et (CSV)"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Експортирай съвпадащите трансакции (CSV)"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "মিলে যাওয়া লেনদেন রপ্তানি করুন (CSV)"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exporta les transaccions coincidents (CSV)"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportovat odpovídající transakce (CSV)"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksportér matchende transaktioner (CSV)"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passende Transaktionen exportieren (CSV)"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Εξαγωγή συναλλαγών που ταιριάζουν (CSV)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export matching transactions (CSV)"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksporti kongruajn transakciojn (CSV)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar las transacciones coincidentes (CSV)"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekspordi vastavad tehingud (CSV)"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esportatu bat datozen transakzioak (CSV)"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تراکنش‌های منطبق را صادر کنید (CSV)"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vie hakua vastaavat tapahtumat (CSV)"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I-export ang mga tumugmang transaksyon (CSV)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exporter les transactions correspondantes (CSV)"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Easpórtáil na hidirbhearta meaitseáilte (CSV)"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar as transaccións coincidentes (CSV)"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Egueru umi transacción okorrespondéva (CSV)"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fitar da ma'amaloli da suka dace (CSV)"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ייצוא העסקאות התואמות (CSV)"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "मिलते-जुलते लेन-देन निर्यात करें (CSV)"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izvezi odgovarajuće transakcije (CSV)"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Egyező tranzakciók exportálása (CSV)"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Արտահանել համապատասխան գործարքները (CSV)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekspor transaksi yang cocok (CSV)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esporta le transazioni corrispondenti (CSV)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "該当する取引をエクスポート (CSV)"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일치하는 거래 내보내기 (CSV)"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дал келген транзакцияларды экспорттоо (CSV)"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksportuoti atitinkančias operacijas (CSV)"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksportēt atbilstošos darījumus (CSV)"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksport transaksi yang sepadan (CSV)"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ကိုက်ညီသော ငွေလွှဲမှုများကို ထုတ်ယူရန် (CSV)"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksporter samsvarende transaksjoner (CSV)"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overeenkomende transacties exporteren (CSV)"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksportuj pasujące transakcje (CSV)"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportar transações correspondentes (CSV)"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportă tranzacțiile potrivite (CSV)"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Экспортировать подходящие транзакции (CSV)"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportovať zodpovedajúce transakcie (CSV)"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izvozi ujemajoče se transakcije (CSV)"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksporto transaksionet që përputhen (CSV)"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportera matchande transaktioner (CSV)"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ส่งออกธุรกรรมที่ตรงกัน (CSV)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eşleşen işlemleri dışa aktar (CSV)"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Експортувати відповідні транзакції (CSV)"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مماثل لین دین برآمد کریں (CSV)"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xuất các giao dịch phù hợp (CSV)"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gbe àwọn ìṣòwò tó bá mu jáde (CSV)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "导出匹配的交易记录 (CSV)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯出符合條件的交易記錄 (CSV)"
+          }
+        }
+      }
+    },
+    "CSV export failed. Try again.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فشل تصدير CSV. حاول مرة أخرى."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV ixracı alınmadı. Yenidən cəhd edin."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Експортирането на CSV не бе успешно. Опитайте отново."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV রপ্তানি করা যায়নি। আবার চেষ্টা করুন।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No s'ha pogut exportar el CSV. Torna-ho a provar."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export CSV se nezdařil. Zkuste to znovu."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV-eksport mislykkedes. Prøv igen."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV-Export fehlgeschlagen. Versuchen Sie es erneut."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Η εξαγωγή CSV απέτυχε. Δοκιμάστε ξανά."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV export failed. Try again."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksporto de CSV malsukcesis. Provu denove."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo exportar el CSV. Inténtalo de nuevo."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV eksportimine ebaõnnestus. Proovi uuesti."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ezin izan da CSV esportatu. Saiatu berriro."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خروجی CSV ناموفق بود. دوباره تلاش کنید."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV-vienti epäonnistui. Yritä uudelleen."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi na-export ang CSV. Subukan muli."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec de l’exportation CSV. Réessayez."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theip ar easpórtáil CSV. Bain triail eile as."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non se puido exportar o CSV. Téntao de novo."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ndoikói CSV ñeguenohẽ. Eha'ãjey."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fitar da CSV ta kasa. Sake gwadawa."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ייצוא ה־CSV נכשל. נסו שוב."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV निर्यात विफल हुआ। फिर से प्रयास करें।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izvoz CSV-a nije uspio. Pokušajte ponovno."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A CSV-exportálás nem sikerült. Próbálja újra."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV-ի արտահանումը չհաջողվեց։ Կրկին փորձեք։"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekspor CSV gagal. Coba lagi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esportazione CSV non riuscita. Riprova."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSVをエクスポートできませんでした。もう一度お試しください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV 내보내기에 실패했습니다. 다시 시도하세요."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV экспорттоо ишке ашкан жок. Кайра аракет кылыңыз."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV eksportuoti nepavyko. Bandykite dar kartą."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV eksportēšana neizdevās. Mēģiniet vēlreiz."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksport CSV gagal. Cuba lagi."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV ထုတ်ယူမှု မအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV-eksporten mislyktes. Prøv igjen."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV-export mislukt. Probeer het opnieuw."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksport CSV nie powiódł się. Spróbuj ponownie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falha ao exportar CSV. Tente novamente."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exportul CSV a eșuat. Încercați din nou."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удалось экспортировать CSV. Попробуйте ещё раз."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export CSV zlyhal. Skúste to znova."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izvoz CSV ni uspel. Poskusite znova."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksportimi i CSV-së dështoi. Provo përsëri."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV-exporten misslyckades. Försök igen."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ส่งออก CSV ไม่สำเร็จ ลองอีกครั้ง"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV dışa aktarılamadı. Yeniden deneyin."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вдалося експортувати CSV. Спробуйте ще раз."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV برآمد نہیں ہو سکی۔ دوبارہ کوشش کریں۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xuất CSV không thành công. Hãy thử lại."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gbigbe CSV jáde kuna. Gbìyànjú lẹ́ẹ̀kan síi."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV 导出失败，请重试。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CSV 匯出失敗，請再試一次。"
+          }
+        }
+      }
+    },
+    "Copy Explorer Link": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy Explorer Link"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسخ رابط مستكشف الكتل"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokçeyn kəşfiyyatçısının keçidini kopyala"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Копирай връзката към блокчейн експлоръра"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ব্লকচেইন এক্সপ্লোরার লিংক কপি করুন"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia l’enllaç de l’explorador de blockchain"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopírovat odkaz na blockchainový prohlížeč"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiér blockchain-udforskerens link"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blockchain-Explorer-Link kopieren"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Αντιγραφή συνδέσμου εξερευνητή blockchain"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopii la ligilon de la blokĉena esplorilo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar enlace del explorador de bloques"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopeeri plokiahela uurija link"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiatu bloke-katearen esploratzailearen esteka"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کپی پیوند مرورگر بلاک‌چین"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopioi lohkoketjuselaimen linkki"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopyahin ang link ng blockchain explorer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier le lien de l’explorateur de blockchain"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cóipeáil nasc an taiscéalaí blockchain"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar a ligazón do explorador da cadea de bloques"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopia blockchain explorador joajuha"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kwafi mahadar blockchain explorer"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "העתקת הקישור לסייר הבלוקצ׳יין"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ब्लॉकचेन एक्सप्लोरर लिंक कॉपी करें"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiraj poveznicu blockchain preglednika"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokklánc-böngésző hivatkozásának másolása"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Պատճենել բլոկչեյնի դիտարկիչի հղումը"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salin tautan penjelajah blockchain"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia il link dell’esploratore blockchain"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブロックチェーンエクスプローラーのリンクをコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "블록체인 탐색기 링크 복사"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокчейн обозревателинин шилтемесин көчүрүү"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopijuoti blokų grandinės naršyklės nuorodą"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopēt blokķēdes pārlūka saiti"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salin pautan penjelajah blockchain"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ဘလော့ခ်ချိန်း Explorer လင့်ခ်ကို ကူးယူပါ"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopier blokkjedeutforskerens lenke"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blockchainverkennerlink kopiëren"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiuj link do eksploratora blockchain"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar link do explorador de blockchain"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiază linkul exploratorului blockchain"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопировать ссылку на обозреватель блокчейна"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopírovať odkaz na blockchainový prehliadač"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiraj povezavo do raziskovalca verige blokov"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopjo lidhjen e eksploruesit të blockchain-it"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiera blockkedjeutforskarens länk"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "คัดลอกลิงก์ตัวสำรวจบล็อกเชน"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok zinciri gezgini bağlantısını kopyala"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопіювати посилання на оглядач блокчейну"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بلاک چین ایکسپلورر کا لنک کاپی کریں"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sao chép liên kết trình khám phá blockchain"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daakọ ọna asopọ aṣàwákiri blockchain"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "复制区块链浏览器链接"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "複製區塊鏈瀏覽器連結"
           }
         }
       }
