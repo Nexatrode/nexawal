@@ -1,10 +1,8 @@
 name: Unit tests
 
+# Run explicitly before releases; avoid automatic Actions usage on pushes/PRs.
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   nexa-wal-logic:
