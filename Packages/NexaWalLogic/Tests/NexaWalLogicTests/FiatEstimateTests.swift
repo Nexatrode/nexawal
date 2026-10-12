@@ -37,6 +37,31 @@ final class FiatEstimateTests: XCTestCase {
         XCTAssertFalse(FiatEstimate.isFresh(fetchedAtMs: fetched, nowMs: fetched - 1))
     }
 
+    func testServerDeadlineWinsAndLegacyServerQuoteMustRefetch() {
+        let fetched: Int64 = 1_000_000
+        let rate = FiatRate(currency: "USD", fiatPerXmr: 100, fetchedAtMs: fetched,
+                            source: "nexatrode", expiresAtMs: fetched + 1_000)
+        XCTAssertNotNil(FiatEstimate.liveRate(rate, nowMs: fetched + 999))
+        XCTAssertEqual(FiatEstimate.livePiconeroFromFiat(fiatText: "50", rate: rate, nowMs: fetched + 999), 500_000_000_000)
+        XCTAssertEqual(FiatEstimate.msUntilStale(rate: rate, nowMs: fetched + 999), 1)
+        XCTAssertNil(FiatEstimate.liveRate(rate, nowMs: fetched + 1_000))
+        XCTAssertNil(FiatEstimate.livePiconeroFromFiat(fiatText: "50", rate: rate, nowMs: fetched + 1_000))
+        XCTAssertEqual(FiatEstimate.msUntilStale(rate: rate, nowMs: fetched + 1_000), 0)
+        XCTAssertNil(FiatEstimate.liveApproxText(piconero: 1_000_000_000_000, rate: rate, nowMs: fetched + 1_000))
+        let legacy = FiatRate(currency: "USD", fiatPerXmr: 100, fetchedAtMs: fetched, source: "nexatrode")
+        XCTAssertNil(FiatEstimate.liveRate(legacy, nowMs: fetched))
+        // Historic recorded estimates remain visible; they are not live quotes.
+        XCTAssertEqual(FiatEstimate.recordedApproxText(piconero: 1_000_000_000_000,
+                                                       fiatPerXmr: 100, currency: "USD"), "≈ $100.00")
+    }
+
+    func testServerCannotExtendLocalAgeLimit() {
+        let rate = FiatRate(currency: "USD", fiatPerXmr: 100, fetchedAtMs: 1_000,
+                            source: "nexatrode", expiresAtMs: Int64.max)
+        XCTAssertEqual(FiatEstimate.msUntilStale(rate: rate, nowMs: 1_000), FiatEstimate.maxAgeMs)
+        XCTAssertNil(FiatEstimate.liveRate(rate, nowMs: 1_000 + FiatEstimate.maxAgeMs))
+    }
+
     func testConversionAndFormatting() {
         let usdRate = FiatRate(
             currency: "USD",

@@ -549,7 +549,6 @@ struct SettingsView: View {
     @State private var fiatEstimatesEnabled: Bool
     @State private var fiatCurrency: String
     @State private var biometricsAvailable: Bool = false
-    @State private var biometricsEnrolled: Bool = false
     @State private var showAdvancedRecovery: Bool = false
     @State private var saveConfirmation: String?
     @State private var showLegalTerms = false
@@ -640,9 +639,9 @@ struct SettingsView: View {
 
                     settingsCard(title: L10n.t("Security")) {
                         NeonToggle(
-                            title: L10n.t("Require Face ID / Touch ID"),
+                            title: L10n.t("Require device auth"),
                             isOn: $requireBiometrics,
-                            disabled: !biometricsAvailable || !biometricsEnrolled
+                            disabled: !biometricsAvailable
                         )
                         .onChange(of: requireBiometrics) { _, newValue in
                             persistBiometrics(newValue)
@@ -650,10 +649,6 @@ struct SettingsView: View {
 
                         if !biometricsAvailable {
                             Text("Biometric or device authentication is not available on this device.")
-                                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                        } else if !biometricsEnrolled {
-                            Text("Biometric authentication is available, but no biometric data is enrolled.")
                                 .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         }
@@ -828,9 +823,7 @@ struct SettingsView: View {
                 }
             }
             .task {
-                let availability = await viewModel.biometricAvailability()
-                biometricsAvailable = availability.available
-                biometricsEnrolled = availability.enrolled
+                biometricsAvailable = await viewModel.deviceAuthenticationAvailable()
             }
         }
     }

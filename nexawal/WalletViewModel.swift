@@ -222,8 +222,8 @@ class WalletViewModel: ObservableObject {
         formatPiconero(piconero, decimals: 12)
     }
 
-    func biometricAvailability() async -> (available: Bool, enrolled: Bool) {
-        await storage.biometricAvailability()
+    func deviceAuthenticationAvailable() async -> Bool {
+        await storage.deviceAuthenticationAvailable()
     }
 
     func unlockStoredWallet() async {

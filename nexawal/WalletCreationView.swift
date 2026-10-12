@@ -77,9 +77,9 @@ struct WalletCreationView: View {
     // Single-wallet UX: confirm before replacing any existing stored wallet on device.
     @State private var showReplaceConfirm: Bool = false
     @State private var hasStoredWallet: Bool = false
-    @State private var requireBiometrics: Bool = false
+    // Fail protected until the availability probe completes, never briefly default off.
+    @State private var requireBiometrics: Bool = true
     @State private var biometricsAvailable: Bool = false
-    @State private var biometricsEnrolled: Bool = false
 
     // Pre-wallet node config (same UserDefaults key as Settings).
     @State private var nodeAddress: String = MoneroConfig.daemonAddress
@@ -173,17 +173,13 @@ struct WalletCreationView: View {
                     NeonToggle(title: L10n.t("Mainnet"), isOn: $isMainnet)
 
                     NeonToggle(
-                        title: L10n.t("Require Face ID / Touch ID"),
+                        title: L10n.t("Require device auth"),
                         isOn: $requireBiometrics,
-                        disabled: !biometricsAvailable || !biometricsEnrolled
+                        disabled: !biometricsAvailable
                     )
 
                     if !biometricsAvailable {
                         Text("Biometric or device authentication is not available on this device.")
-                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                    } else if !biometricsEnrolled {
-                        Text("Biometric authentication is available, but no biometric data is enrolled.")
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                     }
@@ -324,10 +320,9 @@ struct WalletCreationView: View {
         .task {
             // Authoritative: check persisted wallet presence (metadata) rather than in-memory UI state.
             hasStoredWallet = await viewModel.hasStoredWallet()
-            let availability = await viewModel.biometricAvailability()
-            biometricsAvailable = availability.available
-            biometricsEnrolled = availability.enrolled
-            requireBiometrics = availability.available && availability.enrolled
+            let available = await viewModel.deviceAuthenticationAvailable()
+            biometricsAvailable = available
+            requireBiometrics = available
 
             // Best-effort: fetch suggested restore height for create mode.
             // This is UI-only guidance; actual application happens in createOrImport().

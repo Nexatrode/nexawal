@@ -69,7 +69,7 @@ final class FiatPriceService: ObservableObject {
         guard let cached = MoneroConfig.cachedFiatRate(),
               cached.source == "nexatrode",
               cached.currency == currency,
-              FiatEstimate.isFresh(fetchedAtMs: cached.fetchedAtMs, nowMs: now)
+              FiatEstimate.liveRate(cached, nowMs: now) != nil
         else {
             publish(nil)
             return
@@ -136,7 +136,7 @@ final class FiatPriceService: ObservableObject {
         guard !force,
               let current = displayRate,
               current.currency == currency,
-              FiatEstimate.isFresh(fetchedAtMs: current.fetchedAtMs, nowMs: now)
+              FiatEstimate.liveRate(current, nowMs: now) != nil
         else {
             return false
         }
@@ -163,7 +163,7 @@ final class FiatPriceService: ObservableObject {
     private func scheduleStaleHide() {
         staleTask?.cancel()
         guard let rate = displayRate else { return }
-        let remaining = FiatEstimate.msUntilStale(fetchedAtMs: rate.fetchedAtMs, nowMs: nowMs())
+        let remaining = FiatEstimate.msUntilStale(rate: rate, nowMs: nowMs())
         if remaining <= 0 {
             displayRate = nil
             return
@@ -196,7 +196,8 @@ final class FiatPriceService: ObservableObject {
         else {
             throw URLError(.cannotParseResponse)
         }
-        return FiatRate(currency: currency, fiatPerXmr: value, fetchedAtMs: quote.checkedAtMs, source: "nexatrode")
+        return FiatRate(currency: currency, fiatPerXmr: value, fetchedAtMs: quote.checkedAtMs,
+                        source: "nexatrode", expiresAtMs: quote.expiresAtMs)
     }
 
     private static func validate(_ response: URLResponse) throws {

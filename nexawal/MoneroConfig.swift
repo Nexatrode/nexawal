@@ -73,6 +73,7 @@ struct MoneroConfig {
     nonisolated static let userDefaultsFiatRateCurrencyKey = "fiat_rate_currency"
     nonisolated static let userDefaultsFiatRatePerXmrKey = "fiat_rate_per_xmr"
     nonisolated static let userDefaultsFiatRateFetchedAtKey = "fiat_rate_fetched_at_ms"
+    nonisolated static let userDefaultsFiatRateExpiresAtKey = "fiat_rate_expires_at_ms"
     nonisolated static let userDefaultsFiatRateSourceKey = "fiat_rate_source"
 
     // Terms acceptance (bump currentTermsVersion when summary or full ToS changes).
@@ -351,9 +352,12 @@ struct MoneroConfig {
         else {
             return nil
         }
-        let fetchedAt = Int64(UserDefaults.standard.double(forKey: userDefaultsFiatRateFetchedAtKey))
+        let fetchedAt = (UserDefaults.standard.object(forKey: userDefaultsFiatRateFetchedAtKey) as? NSNumber)?.int64Value ?? 0
+        let expiresAt = (UserDefaults.standard.object(forKey: userDefaultsFiatRateExpiresAtKey) as? NSNumber)?.int64Value ?? 0
+        guard expiresAt > fetchedAt else { return nil } // Old caches must refetch their deadline.
         let source = UserDefaults.standard.string(forKey: userDefaultsFiatRateSourceKey) ?? "kraken"
-        return FiatRate(currency: currency, fiatPerXmr: perXmr, fetchedAtMs: fetchedAt, source: source)
+        return FiatRate(currency: currency, fiatPerXmr: perXmr, fetchedAtMs: fetchedAt,
+                        source: source, expiresAtMs: expiresAt)
     }
 
     @MainActor
@@ -361,12 +365,14 @@ struct MoneroConfig {
         if let rate {
             UserDefaults.standard.set(rate.currency, forKey: userDefaultsFiatRateCurrencyKey)
             UserDefaults.standard.set(FiatEstimate.decimalString(rate.fiatPerXmr), forKey: userDefaultsFiatRatePerXmrKey)
-            UserDefaults.standard.set(Double(rate.fetchedAtMs), forKey: userDefaultsFiatRateFetchedAtKey)
+            UserDefaults.standard.set(rate.fetchedAtMs, forKey: userDefaultsFiatRateFetchedAtKey)
+            UserDefaults.standard.set(rate.expiresAtMs ?? 0, forKey: userDefaultsFiatRateExpiresAtKey)
             UserDefaults.standard.set(rate.source, forKey: userDefaultsFiatRateSourceKey)
         } else {
             UserDefaults.standard.removeObject(forKey: userDefaultsFiatRateCurrencyKey)
             UserDefaults.standard.removeObject(forKey: userDefaultsFiatRatePerXmrKey)
             UserDefaults.standard.removeObject(forKey: userDefaultsFiatRateFetchedAtKey)
+            UserDefaults.standard.removeObject(forKey: userDefaultsFiatRateExpiresAtKey)
             UserDefaults.standard.removeObject(forKey: userDefaultsFiatRateSourceKey)
         }
     }

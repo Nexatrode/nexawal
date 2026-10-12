@@ -356,28 +356,12 @@ actor WalletStorage {
         #endif
     }
 
-    /// Determine whether biometrics are available/enrolled on this device.
-    func biometricAvailability() -> (available: Bool, enrolled: Bool) {
+    /// Match the policy used to unlock and the Keychain's user-presence constraint.
+    /// A device passcode alone is sufficient; biometric enrollment is not required.
+    func deviceAuthenticationAvailable() -> Bool {
         let context = LAContext()
         var error: NSError?
-        let policy: LAPolicy = .deviceOwnerAuthenticationWithBiometrics
-
-        if context.canEvaluatePolicy(policy, error: &error) {
-            return (true, true)
-        }
-
-        if let laError = error as? LAError {
-            switch laError.code {
-            case .biometryNotEnrolled:
-                return (true, false)
-            case .biometryNotAvailable:
-                return (false, false)
-            default:
-                break
-            }
-        }
-
-        return (false, false)
+        return context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
     }
 
     // MARK: - Receive subaddresses (Account 0)

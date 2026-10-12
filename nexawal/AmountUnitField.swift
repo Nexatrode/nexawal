@@ -55,18 +55,18 @@ struct AmountUnitField: View {
         .onChange(of: rate?.currency) { _, _ in
             // If rate disappears while in fiat mode, fall back to XMR.
             if rate == nil, mode == .fiat {
-                forceXmrPreservingValue()
+                clearExpiredFiatAmount()
             }
         }
         .onChange(of: rate == nil) { _, isNil in
             if isNil, mode == .fiat {
-                forceXmrPreservingValue()
+                clearExpiredFiatAmount()
             }
         }
     }
 
     private func swapUnits() {
-        guard let rate else { return }
+        guard let rate = FiatEstimate.liveRate(rate, nowMs: Int64(Date().timeIntervalSince1970 * 1000)) else { return }
         let pico = resolvedPiconero(rate: rate)
         switch mode {
         case .xmr:
@@ -82,10 +82,9 @@ struct AmountUnitField: View {
         }
     }
 
-    private func forceXmrPreservingValue() {
-        if let rate, let pico = FiatEstimate.piconeroFromFiat(fiatText: text, rate: rate) {
-            text = FiatEstimate.formatXmrForInput(piconero: pico)
-        }
+    private func clearExpiredFiatAmount() {
+        // An unconverted fiat number must never become an XMR-denominated send/URI.
+        text = ""
         mode = .xmr
     }
 
@@ -105,8 +104,8 @@ enum AmountUnitParsing {
         case .xmr:
             return XmrAmount.parsePiconero(text)
         case .fiat:
-            guard let rate else { return nil }
-            return FiatEstimate.piconeroFromFiat(fiatText: text, rate: rate)
+            return FiatEstimate.livePiconeroFromFiat(fiatText: text, rate: rate,
+                nowMs: Int64(Date().timeIntervalSince1970 * 1000))
         }
     }
 

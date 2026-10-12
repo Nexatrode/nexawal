@@ -5,12 +5,14 @@ public struct FiatRate: Sendable, Equatable {
     public let fiatPerXmr: Decimal
     public let fetchedAtMs: Int64
     public let source: String
+    public let expiresAtMs: Int64?
 
-    public init(currency: String, fiatPerXmr: Decimal, fetchedAtMs: Int64, source: String) {
+    public init(currency: String, fiatPerXmr: Decimal, fetchedAtMs: Int64, source: String, expiresAtMs: Int64? = nil) {
         self.currency = currency.uppercased()
         self.fiatPerXmr = fiatPerXmr
         self.fetchedAtMs = fetchedAtMs
         self.source = source
+        self.expiresAtMs = expiresAtMs
     }
 }
 
@@ -98,14 +100,22 @@ public enum FiatEstimate: Sendable {
         nowMs: Int64,
         maxAgeMs: Int64 = maxAgeMs
     ) -> Bool {
-        nowMs >= fetchedAtMs && (nowMs - fetchedAtMs) < maxAgeMs
+        fetchedAtMs >= 0 && nowMs >= fetchedAtMs && (nowMs - fetchedAtMs) < maxAgeMs
     }
 
     public static func liveRate(_ rate: FiatRate?, nowMs: Int64) -> FiatRate? {
-        guard let rate, isFresh(fetchedAtMs: rate.fetchedAtMs, nowMs: nowMs) else {
+        guard let rate, isFresh(fetchedAtMs: rate.fetchedAtMs, nowMs: nowMs),
+              rate.source != "nexatrode" || rate.expiresAtMs != nil,
+              rate.expiresAtMs.map({ nowMs < $0 }) ?? true else {
             return nil
         }
         return rate
+    }
+
+    public static func msUntilStale(rate: FiatRate, nowMs: Int64) -> Int64 {
+        guard liveRate(rate, nowMs: nowMs) != nil else { return 0 }
+        let localRemaining = msUntilStale(fetchedAtMs: rate.fetchedAtMs, nowMs: nowMs)
+        return min(localRemaining, rate.expiresAtMs.map { $0 - nowMs } ?? localRemaining)
     }
 
     /// Remaining ms until a live rate must be hidden. `0` means hide now.
@@ -114,8 +124,8 @@ public enum FiatEstimate: Sendable {
         nowMs: Int64,
         maxAgeMs: Int64 = maxAgeMs
     ) -> Int64 {
-        let remaining = fetchedAtMs + maxAgeMs - nowMs
-        return remaining > 0 ? remaining : 0
+        guard isFresh(fetchedAtMs: fetchedAtMs, nowMs: nowMs, maxAgeMs: maxAgeMs) else { return 0 }
+        return maxAgeMs - (nowMs - fetchedAtMs)
     }
 
     /// First-seen snapshots are only for transfers timed at/after opt-in.
@@ -176,6 +186,11 @@ public enum FiatEstimate: Sendable {
 
     /// Convert a typed fiat amount to piconero using the live rate. Rounds **down** so send never
     /// exceeds the typed fiat value.
+    public static func livePiconeroFromFiat(fiatText: String, rate: FiatRate?, nowMs: Int64) -> UInt64? {
+        guard let rate = liveRate(rate, nowMs: nowMs) else { return nil }
+        return piconeroFromFiat(fiatText: fiatText, rate: rate)
+    }
+
     public static func piconeroFromFiat(fiatText: String, rate: FiatRate) -> UInt64? {
         guard rate.fiatPerXmr > 0 else { return nil }
         guard let fiat = decimal(from: fiatText.replacingOccurrences(of: ",", with: ".")), fiat >= 0 else {

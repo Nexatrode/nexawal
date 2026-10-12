@@ -23,7 +23,7 @@ enum FiatSnapshotStore {
         observed.insert(trimmed)
         saveObserved(observed)
 
-        guard let rate, FiatEstimate.isFresh(fetchedAtMs: rate.fetchedAtMs, nowMs: nowMs) else { return }
+        guard let rate = FiatEstimate.liveRate(rate, nowMs: nowMs) else { return }
         var map = loadSnapshots()
         if map[trimmed] != nil { return }
         map[trimmed] = FiatTxSnapshot(
@@ -58,7 +58,7 @@ enum FiatSnapshotStore {
                 optedInAtMs: optedInAtMs
             ) else { continue }
             guard snapshots[trimmed] == nil else { continue }
-            guard let rate, FiatEstimate.isFresh(fetchedAtMs: rate.fetchedAtMs, nowMs: nowMs) else { continue }
+            guard let rate = FiatEstimate.liveRate(rate, nowMs: nowMs) else { continue }
             snapshots[trimmed] = FiatTxSnapshot(
                 currency: rate.currency,
                 fiatPerXmr: FiatEstimate.decimalString(rate.fiatPerXmr),
