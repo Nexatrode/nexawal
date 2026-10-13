@@ -343,13 +343,13 @@ struct WalletView: View {
                             if viewModel.scanBlocksPerSecond > 0 {
                                 classicStatusRow(
                                     label: L10n.neon("Avg throughput", classicUI: classicUI),
-                                    value: String(format: "%.1f blk/s", viewModel.scanBlocksPerSecond)
+                                    value: L10n.format("%.1f blk/s", viewModel.scanBlocksPerSecond)
                                 )
                             }
                             if viewModel.scanBlocksPerSecondRecent > 0 {
                                 classicStatusRow(
                                     label: L10n.neon("Recent throughput", classicUI: classicUI),
-                                    value: String(format: "%.1f blk/s", viewModel.scanBlocksPerSecondRecent)
+                                    value: L10n.format("%.1f blk/s", viewModel.scanBlocksPerSecondRecent)
                                 )
                             }
                         }
@@ -376,7 +376,7 @@ struct WalletView: View {
                                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         }
                         if viewModel.transfers.isEmpty {
-                            Text(viewModel.isSynced ? "No transactions yet." : "No transactions found yet. Sync is not complete.")
+                            Text(viewModel.isSynced ? L10n.t("No transactions yet.") : L10n.t("No transactions found yet. Sync is not complete."))
                                 .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
                                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         }
@@ -733,7 +733,7 @@ struct SettingsView: View {
                             Picker("Currency", selection: $fiatCurrency) {
                                 ForEach(FiatEstimate.supportedCurrencies, id: \.self) { code in
                                     // verbatim: avoid extracting "%@ — %@" (invalid Swift symbol key)
-                                    Text(verbatim: "\(code) — \(FiatEstimate.currencyNames[code] ?? code)").tag(code)
+                                    Text(verbatim: "\(code) — \(FiatEstimate.localizedCurrencyName(code))").tag(code)
                                 }
                             }
                             .pickerStyle(.menu)

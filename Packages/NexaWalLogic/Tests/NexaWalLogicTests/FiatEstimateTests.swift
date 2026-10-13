@@ -2,6 +2,14 @@ import XCTest
 @testable import NexaWalLogic
 
 final class FiatEstimateTests: XCTestCase {
+    func testCurrencyNamesFollowTheRequestedLocale() {
+        let french = FiatEstimate.localizedCurrencyName("USD", locale: Locale(identifier: "fr"))
+        let japanese = FiatEstimate.localizedCurrencyName("JPY", locale: Locale(identifier: "ja"))
+        XCTAssertNotEqual(french, FiatEstimate.currencyNames["USD"])
+        XCTAssertNotEqual(japanese, FiatEstimate.currencyNames["JPY"])
+        XCTAssertFalse(french.isEmpty)
+        XCTAssertFalse(japanese.isEmpty)
+    }
     private let krakenUsd = """
     {"error":[],"result":{"XXMRZUSD":{"a":["356.73000000","9","9.000"],"b":["356.61000000","1","1.000"],"c":["356.85000000","0.02761000"],"v":["4487.01313992","6468.48583715"]}}}
     """

@@ -192,11 +192,11 @@ struct SendView: View {
             }
         }
         .confirmationDialog(
-            isMaxMode ? L10n.t("Confirm Send Max") : "Confirm Send",
+            isMaxMode ? L10n.t("Confirm Send Max") : L10n.t("Confirm Send"),
             isPresented: $showSendConfirmation,
             titleVisibility: .visible
         ) {
-            Button(isMaxMode ? L10n.t("Confirm Send Max") : "Confirm Send") {
+            Button(isMaxMode ? L10n.t("Confirm Send Max") : L10n.t("Confirm Send")) {
                 guard !isSending else { return }
                 // Disable immediately so dismiss+Task cannot race a second send.
                 isSending = true
@@ -361,7 +361,7 @@ struct SendView: View {
             )
             if let amt = parsedAmountPiconero() {
                 HStack {
-                    Text(isMaxMode ? L10n.t("Wallet debit (amount + fee)") : "Total (amount + fee)")
+                    Text(isMaxMode ? L10n.t("Wallet debit (amount + fee)") : L10n.t("Total (amount + fee)"))
                     Spacer()
                     let total = safeAdd(amt, fee)
                     Text(viewModel.formatExactPiconero(total))
@@ -432,7 +432,7 @@ struct SendView: View {
                 Button {
                     Task { await estimateFee() }
                 } label: {
-                    Text(isEstimating && !isMaxMode ? "Estimating..." : "Preview Fee")
+                    Text(isEstimating && !isMaxMode ? L10n.t("Estimating...") : L10n.t("Preview Fee"))
                 }
                 .buttonStyle(NeonSecondaryButtonStyle(palette: palette))
                 .disabled(viewModel.isRefreshing || isEstimating || isSending || parsedAmountPiconero() == nil || !looksLikeAddress(toAddress))
@@ -440,7 +440,7 @@ struct SendView: View {
                 Button {
                     showSendConfirmation = true
                 } label: {
-                    Text(isSending && !isMaxMode ? "Sending..." : "Send")
+                    Text(isSending && !isMaxMode ? L10n.t("Sending...") : L10n.t("Send"))
                         .neonCTAStyle(classicUI: true, palette: palette)
                 }
                 .buttonStyle(.plain)
@@ -457,7 +457,7 @@ struct SendView: View {
                 Button {
                     showSendConfirmation = true
                 } label: {
-                    Text(isSending && isMaxMode ? "Sending..." : L10n.t("Send Max"))
+                    Text(isSending && isMaxMode ? L10n.t("Sending...") : L10n.t("Send Max"))
                         .neonCTAStyle(classicUI: true, palette: palette)
                 }
                 .buttonStyle(.plain)
@@ -466,7 +466,7 @@ struct SendView: View {
                 Button {
                     Task { await estimateFee() }
                 } label: {
-                    Text(isEstimating && !isMaxMode ? "Estimating..." : "Preview Fee")
+                    Text(isEstimating && !isMaxMode ? L10n.t("Estimating...") : L10n.t("Preview Fee"))
                         .frame(maxWidth: .infinity)
                         .contentShape(Rectangle())
                 }
@@ -476,7 +476,7 @@ struct SendView: View {
                 Button {
                     showSendConfirmation = true
                 } label: {
-                    Text(isSending && !isMaxMode ? "Sending..." : "Send")
+                    Text(isSending && !isMaxMode ? L10n.t("Sending...") : L10n.t("Send"))
                         .frame(maxWidth: .infinity)
                         .contentShape(Rectangle())
                 }
@@ -496,7 +496,7 @@ struct SendView: View {
                 Button {
                     showSendConfirmation = true
                 } label: {
-                    Text(isSending && isMaxMode ? "Sending..." : L10n.t("Send Max"))
+                    Text(isSending && isMaxMode ? L10n.t("Sending...") : L10n.t("Send Max"))
                         .frame(maxWidth: .infinity)
                         .contentShape(Rectangle())
                 }

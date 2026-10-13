@@ -17,6 +17,10 @@ public struct FiatRate: Sendable, Equatable {
 }
 
 public enum FiatEstimate: Sendable {
+    public static func localizedCurrencyName(_ code: String, locale: Locale = .current) -> String {
+        locale.localizedString(forCurrencyCode: code) ?? currencyNames[code] ?? code
+    }
+
     public static let maxAgeMs: Int64 = 30 * 60 * 1_000
     public static let refreshIntervalMs: Int64 = 5 * 60 * 1_000
 

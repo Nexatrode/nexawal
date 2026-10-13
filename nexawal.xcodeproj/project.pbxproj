@@ -127,7 +127,7 @@
 				"zh-Hant",
 				yo,
 				hu,
-				tl,
+				fil,
 				sl,
 				my,
 				az,

@@ -195,7 +195,7 @@ struct WalletCreationView: View {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle())
                                 }
-                                Text(viewModel.isLoading ? "Unlocking Wallet..." : "Unlock Existing Wallet")
+                                Text(viewModel.isLoading ? L10n.t("Unlocking Wallet...") : L10n.t("Unlock Existing Wallet"))
                             }
                         }
                         .disabled(viewModel.isLoading)
@@ -213,7 +213,7 @@ struct WalletCreationView: View {
                                 if viewModel.isLoading {
                                     ProgressView()
                                 }
-                                Text(viewModel.isLoading ? "Importing Wallet..." : "Import Wallet")
+                                Text(viewModel.isLoading ? L10n.t("Importing Wallet...") : L10n.t("Import Wallet"))
                                     .frame(maxWidth: .infinity)
                             }
                         }
@@ -232,7 +232,7 @@ struct WalletCreationView: View {
                                 if viewModel.isLoading {
                                     ProgressView()
                                 }
-                                Text(viewModel.isLoading ? "Creating Wallet..." : "Create Wallet")
+                                Text(viewModel.isLoading ? L10n.t("Creating Wallet...") : L10n.t("Create Wallet"))
                                     .frame(maxWidth: .infinity)
                             }
                         }

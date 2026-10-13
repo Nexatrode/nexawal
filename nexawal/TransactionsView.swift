@@ -78,8 +78,8 @@ struct TransactionsView: View {
             }
             .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))
             if model.count == 0 && !model.loading && model.error == nil {
-                Text(model.total > 0 ? "No transactions match these filters." :
-                     (viewModel.isSynced ? "No transactions yet." : "No transactions found yet. Sync is not complete."))
+                Text(model.total > 0 ? L10n.t("No transactions match these filters.") :
+                     (viewModel.isSynced ? L10n.t("No transactions yet.") : L10n.t("No transactions found yet. Sync is not complete.")))
                     .foregroundStyle(palette?.secondaryText ?? .primary)
                     .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))
             }
@@ -95,7 +95,7 @@ struct TransactionsView: View {
                         } label: { WalletTransferRow(transfer: row, viewModel: viewModel) }
                             .buttonStyle(.plain)
                     } else {
-                        Text(model.changed ? "Reload history to continue." : "Loading transaction…")
+                        Text(model.changed ? L10n.t("Reload history to continue.") : L10n.t("Loading transaction…"))
                             .foregroundStyle(.secondary).frame(minHeight: 74)
                     }
                 }
@@ -184,13 +184,17 @@ struct WalletTransferRow: View {
                 Text(Date(timeIntervalSince1970: Double(timestamp)), format: .dateTime.year().month().day().hour().minute())
                     .font(.caption).foregroundStyle(palette?.secondaryText ?? .secondary)
             }
-            Text(transfer.isPending ? "Pending" : "\(HistoryConfirmations.count(height: transfer.height, pending: transfer.isPending, chainHeight: viewModel.chainHeight, cached: transfer.confirmations)) confirmations")
+            Text(transfer.isPending ? L10n.t("Pending") : L10n.format("%lld conf", Int64(HistoryConfirmations.count(height: transfer.height, pending: transfer.isPending, chainHeight: viewModel.chainHeight, cached: transfer.confirmations))))
                 .font(.caption).foregroundStyle(palette?.secondaryText ?? .secondary)
             Text(transfer.txid).font(.system(.caption2, design: .monospaced)).lineLimit(1).truncationMode(.middle)
                 .foregroundStyle(palette?.secondaryText ?? .secondary)
             if let fee = transfer.fee {
-                Text("Fee \(viewModel.formatDisplayPiconero(fee))\(incoming ? " · paid by sender" : "")")
+                Text(L10n.format("Fee %@%@", viewModel.formatDisplayPiconero(fee), ""))
                     .font(.caption2).foregroundStyle(palette?.secondaryText ?? .secondary)
+                if incoming {
+                    Text("Paid by the sender. Not deducted from the amount received.")
+                        .font(.caption2).foregroundStyle(palette?.secondaryText ?? .secondary)
+                }
             }
         }
         .padding(.vertical, 8).contentShape(Rectangle())
@@ -230,8 +234,8 @@ struct WalletTransferDetails: View {
         NavigationStack {
             List {
                 Section {
-                    detailField("Type", value: transfer.direction == "in" ? "Received" : transfer.direction == "out" ? "Sent" : "Self")
-                    detailField("Status", value: transfer.isPending ? "Pending" : "Confirmed")
+                    detailField("Type", value: transfer.direction == "in" ? L10n.t("Received") : transfer.direction == "out" ? L10n.t("Sent") : L10n.t("Self"))
+                    detailField("Status", value: transfer.isPending ? L10n.t("Pending") : L10n.t("Confirmed"))
                     detailField("Amount", value: viewModel.formatExactPiconero(transfer.amount))
                     if transfer.direction == "out" {
                         Text("Amount is the total wallet debit, including the network fee.")
