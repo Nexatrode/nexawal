@@ -1,6 +1,6 @@
 # Focused security fixes — September 2026
 
-## Local follow-up: session authority and seed buffers
+## WalletCore v0.1.15 rollout: session authority and seed buffers
 
 - UI and WalletManager share a synchronous authority epoch. Background locking invalidates
   pending opens/unseals; asynchronous unlock stages check it before publication.
@@ -10,11 +10,11 @@
 - Owned Swift FFI/storage byte buffers are wiped. Swift strings and framework/register copies
   cannot be guaranteed erased; do not advertise complete RAM wiping.
 - Epoch/wiping tests and unsigned builds do not replace signed-device authentication, lifecycle,
-  storage migration, network interruption and send QA. The new native code needs a fresh release/pin.
+  storage migration, network interruption and send QA. The rollout pins the v0.1.15 native release.
 
-Local verification: 82 logic tests and 13 Swift wrapper/native tests pass; unsigned Release
-simulator, device and Catalyst apps build against the new local XCFramework. The remote package pin and
-Xcode scheme are unchanged. Keychain save uses a mutable reference buffer to avoid wiping only
+Release verification: 82 logic tests and 13 Swift wrapper/native tests pass; unsigned Release
+simulator, device and Catalyst apps build against the v0.1.15 XCFramework. The Xcode scheme is
+unchanged. Keychain save uses a mutable reference buffer to avoid wiping only
 a copy-on-write clone. Security-framework output and Swift strings remain outside erasure guarantees.
 
 Additional device QA: background at each first-unlock stage, cancel/retry authentication, check
@@ -56,11 +56,11 @@ transaction sent.
 
 ## Release integration
 
-The regular SwiftPM resolution is intentionally unchanged. Its published XCFramework does NOT
-contain the local WalletCore HTTP-limit/native-logging fixes yet. The app has also been built using
-a temporary workspace that overrides the package with the newly source-built XCFramework.
-Publish the next WalletCore release, update the asset URL/checksum and app revision pin, and rebuild
-before distributing. Do not replace a published asset under its old version/checksum.
+The regular SwiftPM resolution pins WalletCore v0.1.15 at
+`7f7153ecc902380130c8c9461c3310f1bfddab83`, with the matching published XCFramework checksum.
+This includes the earlier HTTP-limit/native-logging fixes and the owned-buffer follow-up.
+Release verification uses this normal remote pin, not a local package override.
+Do not replace a published asset under its old version/checksum.
 
 ## Device checks still required
 
