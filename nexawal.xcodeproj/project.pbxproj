@@ -421,7 +421,7 @@
 			repositoryURL = "https://github.com/cacaosteve/MoneroWalletCoreFFI.git";
 			requirement = {
 				kind = revision;
-				revision = 8b01cc3e321a5aa62a80797ef75d33052be583b2;
+				revision = 79c8ceb3ba8629bce72738c52e360c9c4fd8bed5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
