@@ -1,5 +1,26 @@
 # Focused security fixes — September 2026
 
+## Local follow-up: session authority and seed buffers
+
+- UI and WalletManager share a synchronous authority epoch. Background locking invalidates
+  pending opens/unseals; asynchronous unlock stages check it before publication.
+- Failed unlock/create paths discard the Swift seed reference and request native teardown.
+- Inactive/background UI is concealed before app-switcher snapshots. Setup drops seed/challenge
+  references on background/disappearance. This is not general screenshot prevention.
+- Owned Swift FFI/storage byte buffers are wiped. Swift strings and framework/register copies
+  cannot be guaranteed erased; do not advertise complete RAM wiping.
+- Epoch/wiping tests and unsigned builds do not replace signed-device authentication, lifecycle,
+  storage migration, network interruption and send QA. The new native code needs a fresh release/pin.
+
+Local verification: 82 logic tests and 13 Swift wrapper/native tests pass; unsigned Release
+simulator, device and Catalyst apps build against the new local XCFramework. The remote package pin and
+Xcode scheme are unchanged. Keychain save uses a mutable reference buffer to avoid wiping only
+a copy-on-write clone. Security-framework output and Swift strings remain outside erasure guarantees.
+
+Additional device QA: background at each first-unlock stage, cancel/retry authentication, check
+seed setup/app-switcher concealment and idle lock, then verify successful persistence/reopen with
+a disposable wallet. No installed wallet was inspected or modified during this follow-up.
+
 Exact, filtered, and sweep sends now carry the user's approved maximum fee into WalletManager.
 The prepared fee is checked before saving a recoverable pending send or relaying it. If it increased,
 the UI clears the preview and requests another preview/confirmation. A lower fee is allowed.

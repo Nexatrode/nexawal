@@ -227,6 +227,8 @@ class WalletViewModel: ObservableObject {
     }
 
     func unlockStoredWallet() async {
+        guard !isRestoringSession else { return }
+        walletManager.sessionAuthority.invalidate()
         backgroundLockRequested = false
         isRestoringSession = true
         await loadStoredWalletOnLaunch()
@@ -236,11 +238,12 @@ class WalletViewModel: ObservableObject {
     /// bounded background window an active refresh may continue with only the private view key.
     /// The protected idle boundary goes further and drops the view key as well.
     func lockForBackground(closeCore: Bool = false) {
+        walletManager.sessionAuthority.invalidate()
+        backgroundLockRequested = true
         guard isWalletOpen || isRestoringSession else { return }
         // Continue only when iOS actually granted a bounded background task. If it did not,
         // retaining the view key would buy no scan time and would extend privacy exposure.
         let continueRefresh = isRefreshing && syncBackgroundTaskID != .invalid
-        backgroundLockRequested = true
         idleLockTask?.cancel()
         idleLockTask = nil
         snapshotForBackground()
@@ -266,6 +269,7 @@ class WalletViewModel: ObservableObject {
             }
         }
         mnemonic = ""
+        isLoading = false
         lastOpenedMnemonicFingerprint = nil
         isWalletOpen = false
         isRestoringSession = false
@@ -534,6 +538,12 @@ class WalletViewModel: ObservableObject {
         mainnet: Bool = true,
         requireBiometrics: Bool = false
     ) async {
+        let authority = walletManager.sessionAuthority
+        authority.invalidate()
+        let token = authority.token()
+        backgroundLockRequested = false
+        isRestoringSession = true
+        defer { if authority.accepts(token) { isRestoringSession = false; isLoading = false } }
         let normalizedMnemonic = rawMnemonic
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: "\n", with: " ")
@@ -551,6 +561,7 @@ class WalletViewModel: ObservableObject {
                 mnemonic: normalizedMnemonic,
                 mainnet: mainnet
             )
+            try authority.check(token)
 
             await walletManager.deletePersistedScanCache(walletId: walletId)
             resetScanTrustForNewWallet()
@@ -560,9 +571,12 @@ class WalletViewModel: ObservableObject {
                 walletId: walletId,
                 restoreHeight: restoreHeight,
                 mainnet: mainnet,
-                importCache: false
+                importCache: false,
+                sessionToken: token
             )
+            try authority.check(token)
             try await walletManager.resetScanStateForNewWallet(from: restoreHeight)
+            try authority.check(token)
 
             isMainnet = mainnet
             mnemonic = normalizedMnemonic
@@ -572,6 +586,7 @@ class WalletViewModel: ObservableObject {
 
             // Load receive subaddresses for this wallet session.
             await loadReceiveSubaddresses()
+            try authority.check(token)
             lastScannedHeight = restoreHeight
             chainHeight = restoreHeight
             chainTime = 0
@@ -603,18 +618,25 @@ class WalletViewModel: ObservableObject {
                     metadata: metadata,
                     requireBiometrics: requireBiometrics
                 )
+                try authority.check(token)
             } catch {
+                guard authority.accepts(token) else { return }
                 let message = L10n.format("Wallet persistence failed: %@", error.localizedDescription)
                 WalletDiagnostics.log("⚠️ \(message)")
                 errorMessage = message
                 isWalletOpen = false
+                mnemonic = ""
+                try? await walletManager.closeWalletSession()
                 return
             }
 
             await refreshWallet()
         } catch {
+            guard authority.accepts(token) else { return }
             errorMessage = error.localizedDescription
             isWalletOpen = false
+            mnemonic = ""
+            try? await walletManager.closeWalletSession()
         }
 
         isLoading = false
@@ -1301,7 +1323,9 @@ class WalletViewModel: ObservableObject {
     }
 
     private func loadStoredWalletOnLaunch() async {
-        defer { isRestoringSession = false }
+        let authority = walletManager.sessionAuthority
+        let token = authority.token()
+        defer { if authority.accepts(token) { isRestoringSession = false; isLoading = false } }
         do {
             guard let metadata = try await storage.loadMetadata() else {
                 needsUnlock = false
@@ -1311,6 +1335,7 @@ class WalletViewModel: ObservableObject {
             isLoading = true
             errorMessage = nil
             await applyMetadataSnapshot(metadata)
+            try authority.check(token)
 
             let mnemonic = try await storage.loadMnemonic(prompt: L10n.t("Authenticate to unlock nexawal"))
             guard !backgroundLockRequested else {
@@ -1318,6 +1343,7 @@ class WalletViewModel: ObservableObject {
                 needsUnlock = true
                 return
             }
+            try authority.check(token)
             self.mnemonic = mnemonic
             lastOpenedMnemonicFingerprint = Self.mnemonicFingerprint(mnemonic)
             let normalizedWords = mnemonic
@@ -1331,6 +1357,7 @@ class WalletViewModel: ObservableObject {
                     mnemonic: mnemonic,
                     mainnet: metadata.mainnet
                 )
+                try authority.check(token)
                 walletAddress = address
                 WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch derived primary address prefix=\(String(address.prefix(12)))")
             } catch {
@@ -1340,12 +1367,13 @@ class WalletViewModel: ObservableObject {
 
             // Load receive subaddresses for this wallet session.
             await loadReceiveSubaddresses()
+            try authority.check(token)
 
             // A background lock retains at most view-only authority. After Keychain/user-presence
             // authentication, restore spend authority to that exact wallet. A fully closed idle
             // session follows the ordinary open + cache import path.
             if await walletManager.isWalletOpen() {
-                try await walletManager.unsealWallet(mnemonic: mnemonic, walletId: walletId)
+                try await walletManager.unsealWallet(mnemonic: mnemonic, walletId: walletId, sessionToken: token)
                 WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch unsealed authenticated core session walletId=\(walletId)")
             } else {
                 do {
@@ -1353,7 +1381,8 @@ class WalletViewModel: ObservableObject {
                         mnemonic: mnemonic,
                         walletId: walletId,
                         restoreHeight: metadata.restoreHeight,
-                        mainnet: metadata.mainnet
+                        mainnet: metadata.mainnet,
+                        sessionToken: token
                     )
                     WalletDiagnostics.log("🧭 loadStoredWalletOnLaunch openWallet succeeded walletId=\(walletId)")
                 } catch {
@@ -1362,6 +1391,7 @@ class WalletViewModel: ObservableObject {
                 }
             }
 
+            try authority.check(token)
             isWalletOpen = true
             needsUnlock = false
             startForegroundCatchUp()
@@ -1391,7 +1421,11 @@ class WalletViewModel: ObservableObject {
             await reloadTransfersFromCore(context: "launch_after_open")
 
             await resumeInterruptedScanIfNeeded()
+        } catch is CancellationError {
+            // Background cleanup owns native teardown. Never publish or clear a newer unlock.
+            return
         } catch let storageError as WalletStorageError {
+            guard authority.accepts(token) else { return }
             switch storageError {
             case .cancelled:
                 errorMessage = nil
@@ -1401,12 +1435,19 @@ class WalletViewModel: ObservableObject {
                 needsUnlock = true
             }
         } catch {
+            guard authority.accepts(token) else { return }
             WalletDiagnostics.log("⚠️ Failed to load stored wallet: \(error)")
             errorMessage = error.localizedDescription
             needsUnlock = true
         }
 
-        isLoading = false
+        if authority.accepts(token), needsUnlock {
+            mnemonic = ""
+            lastOpenedMnemonicFingerprint = nil
+            isWalletOpen = false
+            try? await walletManager.closeWalletSession()
+        }
+        if authority.accepts(token) { isLoading = false }
     }
 
     private static func mnemonicFingerprint(_ mnemonic: String) -> String {

@@ -11,6 +11,7 @@ import MoneroWalletCoreFFI
 import NexaWalLogic
 
 struct WalletCreationView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @ObservedObject var viewModel: WalletViewModel
     @State private var mnemonicInput: String = Self.debugTestMnemonic()
     @State private var restoreHeightInput: String = Self.debugTestRestoreHeight()
@@ -317,6 +318,19 @@ struct WalletCreationView: View {
                 }
             }
         }
+        .onChange(of: scenePhase) {
+            if scenePhase == .background {
+                mnemonicInput = ""
+                generatedMnemonic = ""
+                seedChallengeAnswers = ["", "", ""]
+                wroteSeedDown = false
+            }
+        }
+        .onDisappear {
+            mnemonicInput = ""
+            generatedMnemonic = ""
+            seedChallengeAnswers = ["", "", ""]
+        }
         .task {
             // Authoritative: check persisted wallet presence (metadata) rather than in-memory UI state.
             hasStoredWallet = await viewModel.hasStoredWallet()
@@ -328,7 +342,7 @@ struct WalletCreationView: View {
             // This is UI-only guidance; actual application happens in createOrImport().
             await refreshSuggestedRestoreHeightIfNeeded()
 
-            if setupMode == .create {
+            if setupMode == .create, scenePhase == .active {
                 generateNewSeed()
             }
         }
@@ -463,6 +477,7 @@ struct WalletCreationView: View {
     }
 
     private func generateNewSeed() {
+        guard scenePhase == .active else { return }
         seedGenerationError = nil
         do {
             generatedMnemonic = try WalletCoreFFIClient.generateMnemonicEnglish()

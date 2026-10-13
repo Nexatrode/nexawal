@@ -40,6 +40,7 @@ enum WalletError: LocalizedError {
 
 actor WalletManager {
     static let shared = WalletManager()
+    nonisolated let sessionAuthority = WalletSessionAuthority()
 
     private var currentWalletId: String?
     private var refreshInProgress: Bool = false
@@ -104,9 +105,12 @@ actor WalletManager {
         walletId: String = "main_wallet",
         restoreHeight: UInt64 = 0,
         mainnet: Bool = true,
-        importCache: Bool = true
+        importCache: Bool = true,
+        sessionToken: UInt64? = nil
     ) async throws {
+        let token = sessionToken ?? sessionAuthority.token()
         try await awaitSessionCleanup()
+        try sessionAuthority.check(token)
         let normalizedMnemonic = normalizedMnemonic(mnemonic)
         // Validate mnemonic (should be 25 words)
         let words = normalizedMnemonic.components(separatedBy: .whitespaces)
@@ -115,14 +119,16 @@ actor WalletManager {
         }
 
         do {
-            try WalletCoreFFIClient.openWalletFromMnemonic(
-                walletId: walletId,
-                mnemonic: normalizedMnemonic,
-                restoreHeight: restoreHeight,
-                mainnet: mainnet
-            )
-            currentNetworkMainnet = mainnet
-            currentWalletId = walletId
+            try sessionAuthority.withCurrent(token) {
+                try WalletCoreFFIClient.openWalletFromMnemonic(
+                    walletId: walletId,
+                    mnemonic: normalizedMnemonic,
+                    restoreHeight: restoreHeight,
+                    mainnet: mainnet
+                )
+                currentNetworkMainnet = mainnet
+                currentWalletId = walletId
+            }
             cachePersistenceSuppressed = false
             if importCache {
                 importCacheIfPresent(for: walletId)
@@ -134,6 +140,7 @@ actor WalletManager {
             )
             recoverPendingPreparedSendBestEffort(for: walletId)
         } catch {
+            if error is CancellationError { throw error }
             throw WalletError.walletOpenFailed(error.localizedDescription)
         }
     }
@@ -599,12 +606,15 @@ actor WalletManager {
     }
 
     /// Restore spend authority only after the caller has completed Keychain/user-presence auth.
-    func unsealWallet(mnemonic: String, walletId: String) async throws {
+    func unsealWallet(mnemonic: String, walletId: String, sessionToken: UInt64? = nil) async throws {
+        let token = sessionToken ?? sessionAuthority.token()
         try await awaitSessionCleanup()
         guard currentWalletId == walletId else {
             throw WalletError.walletOpenFailed("The authenticated wallet is not the open wallet")
         }
-        try WalletCoreFFIClient.unsealWallet(walletId: walletId, mnemonic: mnemonic)
+        try sessionAuthority.withCurrent(token) {
+            try WalletCoreFFIClient.unsealWallet(walletId: walletId, mnemonic: mnemonic)
+        }
         backgroundViewOnlyRefreshActive = false
         refreshInProgress = false
         refreshCancelRequested = false

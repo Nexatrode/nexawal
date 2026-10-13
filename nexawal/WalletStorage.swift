@@ -1,6 +1,7 @@
 import Foundation
 import LocalAuthentication
 import Security
+import Darwin
 
 // MARK: - Receive Subaddresses (Account 0)
 //
@@ -267,11 +268,17 @@ actor WalletStorage {
         switch status {
         case errSecSuccess:
             guard
-                let data = result as? Data,
-                let mnemonic = String(data: data, encoding: .utf8)
+                var bytes = (result as? Data).map({ Array($0) })
             else {
                 throw WalletStorageError.missingMnemonic
             }
+            // The Security framework's returned CFData is not ours to mutate. Release that
+            // reference promptly and wipe the separate byte buffer we explicitly own.
+            result = nil
+            defer { bytes.withUnsafeMutableBytes { raw in
+                if let base = raw.baseAddress { _ = memset_s(base, raw.count, 0, raw.count) }
+            } }
+            guard let mnemonic = String(bytes: bytes, encoding: .utf8) else { throw WalletStorageError.missingMnemonic }
             return mnemonic
         case errSecItemNotFound:
             throw WalletStorageError.missingMnemonic
@@ -433,7 +440,14 @@ actor WalletStorage {
         defaults.set(mnemonic, forKey: simulatorMnemonicKey)
         return
         #else
-        let mnemonicData = Data(mnemonic.utf8)
+        guard let mnemonicData = NSMutableData(length: mnemonic.utf8.count) else {
+            throw WalletStorageError.missingMnemonic
+        }
+        let seedBytes = mnemonicData.mutableBytes.assumingMemoryBound(to: UInt8.self)
+        for (index, byte) in mnemonic.utf8.enumerated() { seedBytes[index] = byte }
+        // A mutable reference buffer remains the same allocation when retained by a query
+        // dictionary. Swift Data's copy-on-write mutation could instead wipe a fresh copy.
+        defer { _ = memset_s(mnemonicData.mutableBytes, mnemonicData.length, 0, mnemonicData.length) }
 
         // Base identity of the keychain item (no data).
         let base: [String: Any] = [

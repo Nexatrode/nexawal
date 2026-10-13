@@ -88,6 +88,11 @@ private struct AppRootView: View {
 
     var body: some View {
         ContentView(viewModel: viewModel)
+            // Keep the hierarchy alive (including auth prompts), but conceal it before snapshots.
+            .opacity(scenePhase == .active ? 1 : 0)
+            .overlay {
+                if scenePhase != .active { Color.black.ignoresSafeArea() }
+            }
             .simultaneousGesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { _ in viewModel.noteUserInteraction() }
