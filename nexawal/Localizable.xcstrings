@@ -95211,6 +95211,1322 @@
           }
         }
       }
+    },
+    "Previous payment recovered. The new payment was not sent. Preview it again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous payment recovered. The new payment was not sent. Preview it again."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تم استرداد الدفعة السابقة. لم تُرسل الدفعة الجديدة. عاينها مجددًا."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Əvvəlki ödəniş bərpa edildi. Yeni ödəniş göndərilmədi. Yenidən önizləyin."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Предишното плащане е възстановено. Новото плащане не е изпратено. Прегледайте го отново."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "আগের পেমেন্ট পুনরুদ্ধার হয়েছে। নতুন পেমেন্ট পাঠানো হয়নি। আবার পূর্বরূপ দেখুন।"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "S'ha recuperat el pagament anterior. El nou pagament no s'ha enviat. Torneu a previsualitzar-lo."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Předchozí platba byla obnovena. Nová platba nebyla odeslána. Znovu zobrazte náhled."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Den tidligere betaling er gendannet. Den nye betaling blev ikke sendt. Se forhåndsvisningen igen."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Die vorherige Zahlung wurde wiederhergestellt. Die neue Zahlung wurde nicht gesendet. Öffne die Vorschau erneut."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Η προηγούμενη πληρωμή ανακτήθηκε. Η νέα πληρωμή δεν στάλθηκε. Δείτε ξανά την προεπισκόπηση."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "La antaŭa pago estis reakirita. La nova pago ne estis sendita. Antaŭrigardu ĝin denove."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Se recuperó el pago anterior. El nuevo pago no se envió. Vuelve a previsualizarlo."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Eelmine makse taastati. Uut makset ei saadetud. Vaadake eelvaadet uuesti."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Aurreko ordainketa berreskuratu da. Ordainketa berria ez da bidali. Ikusi aurrebista berriro."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "پرداخت قبلی بازیابی شد. پرداخت جدید ارسال نشد. دوباره پیش‌نمایش را ببینید."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Aiempi maksu palautettiin. Uutta maksua ei lähetetty. Avaa esikatselu uudelleen."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Na-recover ang nakaraang bayad. Hindi naipadala ang bagong bayad. I-preview itong muli."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Le paiement précédent a été récupéré. Le nouveau paiement n'a pas été envoyé. Affichez à nouveau l'aperçu."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Aisghabhadh an íocaíocht roimhe seo. Níor seoladh an íocaíocht nua. Réamhamharc uirthi arís."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Recuperouse o pagamento anterior. O novo pagamento non se enviou. Previsualízao de novo."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ojerekupera pe jehepyme’ẽ ymaguare. Ndoñemondói pe jehepyme’ẽ pyahu. Ehecha jey henonderã."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "An dawo da biyan kuɗin da ya gabata. Ba a aika sabon biyan kuɗin ba. Duba samfoti kuma."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "התשלום הקודם שוחזר. התשלום החדש לא נשלח. הצג שוב תצוגה מקדימה."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "पिछला भुगतान पुनर्प्राप्त हो गया। नया भुगतान नहीं भेजा गया। उसका पूर्वावलोकन फिर देखें।"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Prethodno plaćanje je obnovljeno. Novo plaćanje nije poslano. Ponovno pogledajte pretpregled."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "A korábbi fizetés helyreállt. Az új fizetés nem lett elküldve. Tekintsd meg újra az előnézetet."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Նախորդ վճարումը վերականգնվել է։ Նոր վճարումը չի ուղարկվել։ Կրկին դիտեք նախադիտումը։"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Pembayaran sebelumnya dipulihkan. Pembayaran baru tidak dikirim. Lihat pratinjaunya lagi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Il pagamento precedente è stato recuperato. Il nuovo pagamento non è stato inviato. Visualizza di nuovo l'anteprima."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "前の支払いを復旧しました。新しい支払いは送信されていません。もう一度プレビューしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "이전 결제가 복구되었습니다. 새 결제는 전송되지 않았습니다. 다시 미리 보기를 확인하세요."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Мурунку төлөм калыбына келтирилди. Жаңы төлөм жөнөтүлгөн жок. Алдын ала көрүнүшүн кайра текшериңиз."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ankstesnis mokėjimas atkurtas. Naujas mokėjimas neišsiųstas. Dar kartą peržiūrėkite jį."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Iepriekšējais maksājums atjaunots. Jaunais maksājums netika nosūtīts. Apskatiet priekšskatījumu vēlreiz."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Pembayaran terdahulu dipulihkan. Pembayaran baharu tidak dihantar. Lihat pratonton sekali lagi."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ယခင်ငွေပေးချေမှုကို ပြန်လည်ရယူပြီးပါပြီ။ ငွေပေးချေမှုအသစ်ကို မပို့ရသေးပါ။ အကြိုကြည့်ရှုမှုကို ထပ်ကြည့်ပါ။"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Den tidligere betalingen er gjenopprettet. Den nye betalingen ble ikke sendt. Se forhåndsvisningen igjen."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "De vorige betaling is hersteld. De nieuwe betaling is niet verzonden. Bekijk het voorbeeld opnieuw."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Poprzednia płatność została odzyskana. Nowa płatność nie została wysłana. Ponownie wyświetl podgląd."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "O pagamento anterior foi recuperado. O novo pagamento não foi enviado. Veja a prévia novamente."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Plata anterioară a fost recuperată. Noua plată nu a fost trimisă. Previzualizați-o din nou."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Предыдущий платёж восстановлен. Новый платёж не отправлен. Повторите предварительный просмотр."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Predchádzajúca platba bola obnovená. Nová platba nebola odoslaná. Znovu zobrazte náhľad."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Prejšnje plačilo je obnovljeno. Novo plačilo ni bilo poslano. Ponovno si oglejte predogled."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Pagesa e mëparshme u rikuperua. Pagesa e re nuk u dërgua. Shikojeni paraprakisht përsëri."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Den tidigare betalningen återställdes. Den nya betalningen skickades inte. Förhandsgranska den igen."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "กู้คืนการชำระเงินก่อนหน้าแล้ว ยังไม่ได้ส่งการชำระเงินใหม่ โปรดดูตัวอย่างอีกครั้ง"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Önceki ödeme kurtarıldı. Yeni ödeme gönderilmedi. Yeniden önizleyin."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Попередній платіж відновлено. Новий платіж не надіслано. Повторіть попередній перегляд."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "پچھلی ادائیگی بازیافت ہو گئی۔ نئی ادائیگی نہیں بھیجی گئی۔ دوبارہ پیش منظر دیکھیں۔"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Đã khôi phục khoản thanh toán trước. Khoản thanh toán mới chưa được gửi. Hãy xem trước lại."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "A ti mú ìsanwó iṣaaju padà. A kò fi ìsanwó tuntun ránṣẹ́. Wo àwòkọ rẹ̀ lẹ́ẹ̀kan sí i."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "已恢复上一笔付款。新的付款尚未发送。请重新预览。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "已恢復上一筆付款。新的付款尚未傳送。請重新預覽。"
+          }
+        }
+      }
+    },
+    "Address failed: %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "فشل العنوان: %@"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ünvan uğursuz oldu: %@"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Неуспешен адрес: %@"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ঠিকানা ব্যর্থ হয়েছে: %@"
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "L'adreça ha fallat: %@"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresa selhala: %@"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresse mislykkedes: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresse fehlgeschlagen: %@"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Η διεύθυνση απέτυχε: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Address failed: %@"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adreso malsukcesis: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Error en la dirección: %@"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Aadress nurjus: %@"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Helbidea huts egin du: %@"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "آدرس ناموفق: %@"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Osoite epäonnistui: %@"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Nabigo ang address: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Échec de l'adresse : %@"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Theip ar an seoladh: %@"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Erro no enderezo: %@"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Dirección ndoikói: %@"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "An kasa adireshin: %@"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "כתובת נכשלה: %@"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "पता विफल: %@"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresa nije uspjela: %@"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Sikertelen cím: %@"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Հասցեն ձախողվեց՝ %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Alamat gagal: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "indirizzo non riuscito: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "アドレスが失敗しました: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "주소 실패: %@"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Дарек ишке ашкан жок: %@"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresas nepavyko: %@"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adrese neizdevās: %@"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Alamat gagal: %@"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "- လိပ်စာ မအောင်မြင်ပါ- %@"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresse mislyktes: %@"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adres mislukt: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adres nie powiódł się: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Falha no endereço: %@"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresă eșuată: %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ошибка адреса: %@."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresa zlyhala: %@"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "naslov ni uspel: %@"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adresa dështoi: %@"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adress misslyckades: %@"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ที่อยู่ล้มเหลว: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adres başarısız oldu: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Помилка адреси: %@"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "پتہ ناکام ہو گیا: %@"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Địa chỉ không thành công: %@"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Adirẹsi kuna: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "地址失败：%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "位址失敗：%@"
+          }
+        }
+      }
+    },
+    "Could not load this part of history. You can retry.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Această parte a istoricului nu a putut fi încărcată. Încearcă din nou."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Не удалось загрузить эту часть истории. Попробуйте ещё раз."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Hindi ma-load ang bahaging ito ng history. Subukang muli."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "無法載入這部分歷史記錄。請重試。"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Impossibile caricare questa parte della cronologia. Riprova."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "No s’ha pogut carregar aquesta part de l’historial. Torna-ho a provar."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tuto část historie se nepodařilo načíst. Zkuste to znovu."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "无法加载这部分历史记录。请重试。"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Bagian riwayat ini tidak dapat dimuat. Coba lagi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "履歴のこの部分を読み込めませんでした。再試行できます。"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Δεν ήταν δυνατή η φόρτωση αυτού του τμήματος του ιστορικού. Δοκιμάστε ξανά."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Neizdevās ielādēt šo vēstures daļu. Mēģiniet vēlreiz."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Denne del af historikken kunne ikke indlæses. Prøv igen."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ndaikatúi oñemyanyhẽ ko ñemuhakue pehẽ. Eha'ã jey."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Тарыхтын бул бөлүгүн жүктөө мүмкүн болгон жок. Кайра аракет кылыңыз."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Níorbh fhéidir an chuid seo den stair a luchtú. Bain triail eile as."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "לא ניתן לטעון את החלק הזה של ההיסטוריה. אפשר לנסות שוב."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Bahagian sejarah ini tidak dapat dimuatkan. Cuba lagi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Não foi possível carregar esta parte do histórico. Tente novamente."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Չհաջողվեց բեռնել պատմության այս մասը։ Կրկին փորձեք։"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not load this part of history. You can retry."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Nie udało się wczytać tej części historii. Spróbuj ponownie."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Không thể tải phần lịch sử này. Hãy thử lại."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Nuk mund të ngarkohej kjo pjesë e historikut. Provo përsëri."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Den här delen av historiken kunde inte läsas in. Försök igen."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tega dela zgodovine ni bilo mogoče naložiti. Poskusite znova."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Túto časť histórie sa nepodarilo načítať. Skúste to znova."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تاریخچے کا یہ حصہ لوڈ نہیں ہو سکا۔ دوبارہ کوشش کریں۔"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Geçmişin bu bölümü yüklenemedi. Yeniden deneyebilirsiniz."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "โหลดประวัติส่วนนี้ไม่ได้ ลองอีกครั้ง"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "بارگیری این بخش از تاریخچه ممکن نشد. دوباره تلاش کنید."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Nepavyko įkelti šios istorijos dalies. Bandykite dar kartą."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ezin izan da historiaren zati hau kargatu. Saiatu berriro."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tämän historiaosan lataaminen epäonnistui. Yritä uudelleen."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ne eblis ŝargi ĉi tiun parton de la historio. Provu denove."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Impossible de charger cette partie de l’historique. Réessayez."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "No se pudo cargar esta parte del historial. Puedes volver a intentarlo."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Selle ajaloo osa laadimine ebaõnnestus. Proovi uuesti."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ovaj dio povijesti nije moguće učitati. Pokušajte ponovno."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Az előzmények ezen része nem tölthető be. Próbálja újra."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Dit deel van de geschiedenis kon niet worden geladen. Probeer het opnieuw."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Тази част от историята не можа да се зареди. Опитайте отново."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ইতিহাসের এই অংশ লোড করা যায়নি। আবার চেষ্টা করুন।"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Denne delen av historikken kunne ikke lastes inn. Prøv igjen."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "इतिहास का यह हिस्सा लोड नहीं हो सका। फिर से कोशिश करें।"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Dieser Teil des Verlaufs konnte nicht geladen werden. Bitte erneut versuchen."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tarixçənin bu hissəsini yükləmək olmadı. Yenidən cəhd edin."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "내역의 이 부분을 불러오지 못했습니다. 다시 시도할 수 있습니다."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ba a iya loda wannan ɓangaren tarihin ba. Gwada kuma."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "မှတ်တမ်း၏ ဤအပိုင်းကို ဖွင့်၍မရပါ။ ထပ်ကြိုးစားပါ။"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تعذّر تحميل هذا الجزء من السجل. يمكنك إعادة المحاولة."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Non se puido cargar esta parte do historial. Téntao de novo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Не вдалося завантажити цю частину історії. Спробуйте ще раз."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "A kò lè gbé apá ìtàn yìí wọlé. Gbìyànjú lẹ́ẹ̀kansi."
+          }
+        }
+      }
+    },
+    "The network fee increased. Nothing was broadcast. Preview the fee and confirm again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ro": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Comisionul rețelei a crescut. Nu s-a transmis nimic. Verifică comisionul și confirmă din nou."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Сетевая комиссия выросла. Ничего не отправлено. Проверьте комиссию и подтвердите снова."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tumaas ang network fee. Walang na-broadcast. Suriin ang fee at kumpirmahin muli."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "網路手續費已增加。沒有廣播任何交易。請檢查手續費並再次確認。"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "La commissione di rete è aumentata. Non è stato trasmesso nulla. Controlla la commissione e conferma di nuovo."
+          }
+        },
+        "ca": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "La tarifa de la xarxa ha augmentat. No s’ha enviat res. Revisa-la i torna a confirmar."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Síťový poplatek se zvýšil. Nic nebylo odesláno. Zkontrolujte poplatek a znovu potvrďte."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "网络手续费已增加。没有广播任何交易。请检查手续费并再次确认。"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Biaya jaringan meningkat. Tidak ada transaksi yang disiarkan. Tinjau biaya lalu konfirmasi lagi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ネットワーク手数料が増加しました。送信は行われていません。手数料を確認してもう一度承認してください。"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Η χρέωση δικτύου αυξήθηκε. Δεν μεταδόθηκε τίποτα. Ελέγξτε τη χρέωση και επιβεβαιώστε ξανά."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tīkla maksa palielinājās. Nekas netika pārraidīts. Pārskatiet maksu un apstipriniet vēlreiz."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Netværksgebyret steg. Intet blev udsendt. Gennemgå gebyret, og bekræft igen."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Oñembohetave pe tarifa red rehegua. Ndojekuaaukái mba'eve. Ehecha jey tarifa ha emoneĩ jey."
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Тармак акысы көбөйдү. Эч нерсе таратылган жок. Акыны карап чыгып, кайра ырастаңыз."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tháinig méadú ar tháille an líonra. Níor craoladh aon rud. Seiceáil an táille agus deimhnigh arís."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "עמלת הרשת עלתה. שום דבר לא שודר. יש לבדוק את העמלה ולאשר שוב."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Yuran rangkaian meningkat. Tiada apa-apa disiarkan. Semak yuran dan sahkan sekali lagi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "A taxa da rede aumentou. Nada foi transmitido. Confira a taxa e confirme novamente."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ցանցի վճարը բարձրացել է։ Ոչինչ չի հեռարձակվել։ Ստուգեք վճարը և կրկին հաստատեք։"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The network fee increased. Nothing was broadcast. Preview the fee and confirm again."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Opłata sieciowa wzrosła. Nic nie zostało wysłane. Sprawdź opłatę i potwierdź ponownie."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Phí mạng đã tăng. Chưa có giao dịch nào được phát đi. Kiểm tra phí và xác nhận lại."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tarifa e rrjetit u rrit. Nuk u transmetua asgjë. Kontrolloni tarifën dhe konfirmoni përsëri."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Nätverksavgiften ökade. Inget skickades. Granska avgiften och bekräfta igen."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Omrežna provizija se je zvišala. Nič ni bilo oddano. Preverite provizijo in znova potrdite."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Sieťový poplatok sa zvýšil. Nič sa nevyslalo. Skontrolujte poplatok a znova potvrďte."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "نیٹ ورک فیس بڑھ گئی۔ کچھ بھی نشر نہیں ہوا۔ فیس کا جائزہ لے کر دوبارہ تصدیق کریں۔"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Ağ ücreti arttı. Hiçbir şey yayınlanmadı. Ücreti inceleyip yeniden onaylayın."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ค่าธรรมเนียมเครือข่ายเพิ่มขึ้น ไม่มีการเผยแพร่ธุรกรรม ตรวจสอบค่าธรรมเนียมและยืนยันอีกครั้ง"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "کارمزد شبکه افزایش یافت. چیزی پخش نشد. کارمزد را بررسی و دوباره تأیید کنید."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Tinklo mokestis padidėjo. Nieko neišsiųsta. Peržiūrėkite mokestį ir patvirtinkite dar kartą."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Sareko komisioa igo da. Ez da ezer bidali. Berrikusi komisioa eta berretsi berriro."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Verkkomaksu nousi. Mitään ei lähetetty. Tarkista maksu ja vahvista uudelleen."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "La reta kotizo plialtiĝis. Nenio estis elsendita. Kontrolu la kotizon kaj konfirmu denove."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Les frais réseau ont augmenté. Rien n’a été diffusé. Vérifiez les frais et confirmez à nouveau."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "La comisión de red aumentó. No se envió nada. Revisa la comisión y vuelve a confirmar."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Võrgutasu suurenes. Midagi ei edastatud. Vaata tasu üle ja kinnita uuesti."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Mrežna naknada se povećala. Ništa nije emitirano. Pregledajte naknadu i ponovno potvrdite."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "A hálózati díj megemelkedett. Nem történt közvetítés. Ellenőrizze a díjat, majd erősítse meg újra."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "De netwerkkosten zijn gestegen. Er is niets uitgezonden. Controleer de kosten en bevestig opnieuw."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Таксата на мрежата се увеличи. Нищо не е излъчено. Проверете таксата и потвърдете отново."
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "নেটওয়ার্ক ফি বেড়েছে। কিছুই সম্প্রচার করা হয়নি। ফি পর্যালোচনা করে আবার নিশ্চিত করুন।"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Nettverksgebyret økte. Ingenting ble kringkastet. Se over gebyret og bekreft på nytt."
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "नेटवर्क शुल्क बढ़ गया। कुछ भी प्रसारित नहीं हुआ। शुल्क देखें और फिर से पुष्टि करें।"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Die Netzwerkgebühr ist gestiegen. Es wurde nichts übertragen. Prüfe die Gebühr und bestätige erneut."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Şəbəkə komissiyası artdı. Heç nə yayımlanmadı. Komissiyanı yoxlayıb yenidən təsdiqləyin."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "네트워크 수수료가 증가했습니다. 전송된 내용이 없습니다. 수수료를 확인하고 다시 승인하세요."
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Kudin cibiyar sadarwa ya ƙaru. Ba a aika komai ba. Duba kuɗin sannan ka sake tabbatarwa."
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ကွန်ရက်ကြေး တိုးလာသည်။ မည်သည့်အရာမျှ ထုတ်လွှင့်ခြင်း မရှိပါ။ ကြေးကိုစစ်ဆေးပြီး ထပ်မံအတည်ပြုပါ။"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "زادت رسوم الشبكة. لم تُبث أي معاملة. راجع الرسوم وأكّد مرة أخرى."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "A comisión da rede aumentou. Non se emitiu nada. Revisa a comisión e confirma de novo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Мережева комісія зросла. Нічого не передано. Перевірте комісію та підтвердьте ще раз."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "Owó iṣẹ́ nẹ́tíwọ́ọ̀kì ti pọ̀ sí i. A kò tan ohunkóhun ká. Ṣàyẹ̀wò owó náà kí o sì fọwọ́ sí i lẹ́ẹ̀kansi."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

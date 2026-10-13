@@ -2,6 +2,12 @@ import Foundation
 
 /// Pure send preflight / retry classification helpers.
 public enum SendSafety: Sendable {
+    public struct PreviousPaymentRecovered: Error, Sendable {
+        public let txid: String
+    }
+    public static func requireNewPayment(recoveredTxid: String?) throws {
+        if let txid = recoveredTxid { throw PreviousPaymentRecovered(txid: txid) }
+    }
     public enum FeeApprovalError: LocalizedError, Equatable {
         case feeIncreased
 

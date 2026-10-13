@@ -134,9 +134,11 @@ actor WalletManager {
                 importCacheIfPresent(for: walletId)
             }
             // Re-apply after cache import so subaddress lookahead is registered on the restored scanner.
+            let book = try await WalletStorage.shared.loadSubaddressBook()
+            try sessionAuthority.check(token)
             try WalletCoreFFIClient.setGapLimit(
                 walletId: walletId,
-                gapLimit: MoneroConfig.gapLimit
+                gapLimit: max(MoneroConfig.gapLimit, book.entries.map(\.subaddressIndex).max() ?? 0)
             )
             recoverPendingPreparedSendBestEffort(for: walletId)
         } catch {
@@ -146,6 +148,14 @@ actor WalletManager {
     }
 
 
+
+    /// Call before persisting or displaying a newly issued address. The core refuses
+    /// mutation during a scan, and expanding coverage schedules a history-preserving rescan.
+    func ensureReceiveCoverage(_ index: UInt32) throws {
+        guard let id = currentWalletId, !cleanupPending else { throw WalletError.statusFailed("No wallet is currently open") }
+        try WalletCoreFFIClient.setGapLimit(walletId: id, gapLimit: max(MoneroConfig.gapLimit, index))
+        exportCacheAndPersist(for: id)
+    }
 
     /// Refresh the wallet against the Monero node
     func refreshWallet() async throws -> WalletCoreFFIClient.SyncStatus {
@@ -1137,9 +1147,7 @@ actor WalletManager {
             applyBroadcastProxy()
 
             let endpoint = MoneroConfig.broadcastNodeURL()
-            if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
-                return (txid: recovered.txid, amount: recovered.amount, fee: recovered.fee)
-            }
+            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String
@@ -1182,9 +1190,7 @@ actor WalletManager {
             applyBroadcastProxy()
 
             let endpoint = MoneroConfig.broadcastNodeURL()
-            if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
-                return (txid: recovered.txid, fee: recovered.fee)
-            }
+            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
 
             let dest = WalletCoreFFIClient.Destination(address: toAddress, amount: amountPiconero)
             let prepared: WalletCoreFFIClient.PreparedSend
@@ -1274,9 +1280,7 @@ actor WalletManager {
                 WalletDiagnostics.log("📤 Sweep start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
             }
 
-            if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
-                return (txid: recovered.txid, amount: recovered.amount, fee: recovered.fee)
-            }
+            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String
@@ -1330,9 +1334,7 @@ actor WalletManager {
             }
 
             // Finish any prior prepared payload. Do not also construct a new tx in this tap.
-            if let recovered = try completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint) {
-                return (txid: recovered.txid, fee: recovered.fee)
-            }
+            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String

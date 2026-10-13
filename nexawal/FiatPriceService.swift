@@ -177,14 +177,22 @@ final class FiatPriceService: ObservableObject {
 
     private static func fetchRate(currency: String) async throws -> FiatRate {
         let session = makeSession()
+        defer { session.invalidateAndCancel() }
         guard FiatEstimate.isSupported(currency) else { throw URLError(.unsupportedURL) }
         let url = URL(string: "https://rates.nexatrode.com/v1/rates/XMR/\(currency)")!
-        let (data, response) = try await session.data(from: url)
+        let (bytes, response) = try await session.bytes(from: url)
         try validate(response)
-        guard data.count <= 16_384,
+        guard response.expectedContentLength <= 16_384 else { throw URLError(.dataLengthExceedsMaximum) }
+        var data = Data()
+        for try await byte in bytes {
+            try Task.checkCancellation()
+            guard data.count < 16_384 else { throw URLError(.dataLengthExceedsMaximum) }
+            data.append(byte)
+        }
+        guard
               let quote = try? JSONDecoder().decode(NexatrodeRateResponse.self, from: data),
               quote.base == "XMR", quote.quote == currency,
-              let value = FiatEstimate.decimal(from: quote.fiatPerXmr), value > 0
+              let value = FiatEstimate.serverRate(quote.fiatPerXmr)
         else {
             throw URLError(.cannotParseResponse)
         }

@@ -63,7 +63,7 @@ final class TransactionsModel: ObservableObject {
             if onlyIfVisible && !visibleIndices.contains(where: { $0 / 50 * 50 == offset }) { return }
             failed.insert(offset)
             if error.localizedDescription.contains("stale_history_cursor") { changed = true }
-            else { self.error = "Could not load this part of history. You can retry." }
+            else { self.error = L10n.t("Could not load this part of history. You can retry.") }
         }
     }
     func reload() async {

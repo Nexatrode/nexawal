@@ -1,4 +1,5 @@
 import Foundation
+import NexaWalLogic
 import LocalAuthentication
 import Security
 import Darwin
@@ -190,6 +191,7 @@ nonisolated struct StoredSubaddressBook: Codable, Equatable, Sendable {
 }
 
 actor WalletStorage {
+    private var allocatingReceiveAddress = false
     static let shared = WalletStorage()
 
     private let keychainService = "com.nexawal.wallet"
@@ -401,8 +403,16 @@ actor WalletStorage {
 
     /// Create a new receive subaddress entry (account 0), persist it, and return it.
     /// This does NOT derive the address string; derive it later from the mnemonic using WalletCoreFFI.
-    func createNewReceiveSubaddress(label: String = "") throws -> StoredSubaddressEntry {
+    func createNewReceiveSubaddress(label: String = "") async throws -> StoredSubaddressEntry {
+        guard !allocatingReceiveAddress else { throw CancellationError() }
+        allocatingReceiveAddress = true
+        defer { allocatingReceiveAddress = false }
+        let authority = WalletManager.shared.sessionAuthority
+        let token = authority.token()
         var book = try loadSubaddressBook()
+        try await WalletManager.shared.ensureReceiveCoverage(book.nextSubaddressIndex)
+        try authority.check(token)
+        guard try loadSubaddressBook() == book else { throw CancellationError() }
         let entry = book.allocateNew(label: label)
         try saveSubaddressBook(book)
         return entry

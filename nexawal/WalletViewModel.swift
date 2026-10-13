@@ -389,7 +389,7 @@ class WalletViewModel: ObservableObject {
             await loadReceiveSubaddresses()
             selectedReceiveSubaddressIndex = entry.subaddressIndex
         } catch {
-            // Best effort; keep existing list
+            errorMessage = L10n.format("Address failed: %@", error.localizedDescription)
         }
     }
 

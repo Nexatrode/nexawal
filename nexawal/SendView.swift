@@ -24,6 +24,9 @@ struct SendView: View {
     @State private var suppressAmountChangeClearingMaxMode: Bool = false
     @State private var isSending: Bool = false
     @State private var previewReady: Bool = false
+    @State private var approvedIntent: SendPreviewIntent?
+    @State private var pendingIntent: SendPreviewIntent?
+    @State private var previewEpoch: UInt64 = 0
     @State private var errorMessage: String?
     @State private var infoMessage: String?
     @State private var showSendConfirmation: Bool = false
@@ -145,6 +148,10 @@ struct SendView: View {
                 await refreshSubaddressBalanceIfNeeded()
             }
         }
+        .onChange(of: currentPreviewIntent()) { _, intent in
+            if approvedIntent != intent && pendingIntent != intent { invalidatePreview() }
+        }
+        .onDisappear { invalidatePreview() }
         .onChange(of: amountXMR) { _, _ in
             // Editing the amount exits sweep mode (programmatic fill sets a suppress flag).
             guard !suppressAmountChangeClearingMaxMode else {
@@ -508,6 +515,21 @@ struct SendView: View {
 
     // MARK: - Actions
 
+    private func currentPreviewIntent(maximum: Bool? = nil) -> SendPreviewIntent {
+        let maxMode = maximum ?? isMaxMode
+        return SendPreviewIntent(destination: toAddress.trimmingCharacters(in: .whitespacesAndNewlines),
+            amount: maxMode ? nil : parsedAmountPiconero(), session: viewModel.historySession.uuidString,
+            node: MoneroConfig.broadcastNodeURL() + "|" + MoneroConfig.networkPolicy.rawValue + "|" + (MoneroConfig.i2pHTTPProxyAddress ?? ""),
+            source: sendFromSubaddressEnabled ? fromSubaddressMinor : nil, maximum: maxMode)
+    }
+
+    private func invalidatePreview() {
+        previewEpoch &+= 1
+        feePreviewTask?.cancel(); sweepPreviewTask?.cancel()
+        estimatedFeePiconero = nil; approvedIntent = nil; pendingIntent = nil; previewReady = false
+        isEstimating = false; showSendConfirmation = false
+    }
+
     private func estimateFee() async {
         guard !viewModel.isRefreshing else {
             errorMessage = L10n.t("Wait for wallet sync to finish before preparing a send.")
@@ -520,17 +542,25 @@ struct SendView: View {
         feePreviewTask?.cancel()
         sweepPreviewTask?.cancel()
 
+        invalidatePreview()
+        isMaxMode = false
+        let intent = currentPreviewIntent(maximum: false)
+        pendingIntent = intent
+        let epoch = previewEpoch
+        isEstimating = true
         feePreviewTask = Task {
             // Small debounce to coalesce rapid taps / state changes.
             try? await Task.sleep(nanoseconds: 250_000_000)
             if Task.isCancelled { return }
 
-            guard let amountPico = parsedAmountPiconero(),
+            guard let amountPico = intent.amount,
                   let ring = parsedRingLen(),
-                  looksLikeAddress(toAddress) else {
+                  looksLikeAddress(intent.destination) else {
                 await MainActor.run {
+                    guard previewEpoch == epoch, currentPreviewIntent() == intent else { return }
                     errorMessage = L10n.t("Enter a valid address and amount.")
                     previewReady = false
+                    isEstimating = false
                 }
                 return
             }
@@ -547,39 +577,45 @@ struct SendView: View {
 
             do {
                 let fee: UInt64
-                if sendFromSubaddressEnabled {
+                if intent.source != nil {
                     fee = try await walletManager.previewFee(
-                        fromSubaddressMinor: fromSubaddressMinor,
-                        toAddress: toAddress,
+                        fromSubaddressMinor: intent.source ?? 0,
+                        toAddress: intent.destination,
                         amountPiconero: amountPico,
                         ringLen: ring
                     )
                     if Task.isCancelled { return }
                     await MainActor.run {
+                        guard previewEpoch == epoch, currentPreviewIntent() == intent else { return }
                         infoMessage = L10n.t("Fee estimated (inputs constrained to selected subaddress).")
                     }
                 } else {
-                    fee = try await walletManager.previewFee(toAddress: toAddress, amountPiconero: amountPico, ringLen: ring)
+                    fee = try await walletManager.previewFee(toAddress: intent.destination, amountPiconero: amountPico, ringLen: ring)
                     if Task.isCancelled { return }
                     await MainActor.run {
+                        guard previewEpoch == epoch, currentPreviewIntent() == intent else { return }
                         infoMessage = L10n.t("Fee estimated using broadcast policy.")
                     }
                 }
 
                 if Task.isCancelled { return }
                 await MainActor.run {
+                    guard previewEpoch == epoch, currentPreviewIntent() == intent else { return }
+                    approvedIntent = intent
                     estimatedFeePiconero = fee
                     previewReady = true
                 }
             } catch {
                 if Task.isCancelled { return }
                 await MainActor.run {
+                    guard previewEpoch == epoch, currentPreviewIntent() == intent else { return }
                     previewReady = false
                     errorMessage = L10n.format("Fee preview failed: %@", error.localizedDescription)
                 }
             }
 
             await MainActor.run {
+                guard previewEpoch == epoch else { return }
                 isEstimating = false
             }
         }
@@ -600,7 +636,7 @@ struct SendView: View {
             errorMessage = L10n.t("Enter a valid address and amount.")
             return
         }
-        guard previewReady, let approvedMaxFee = estimatedFeePiconero,
+        guard previewReady, approvedIntent == currentPreviewIntent(), let approvedMaxFee = estimatedFeePiconero,
               let approvedAmount = parsedAmountPiconero() else {
             errorMessage = L10n.t("Preview the fee before sending.")
             return
@@ -618,6 +654,10 @@ struct SendView: View {
 
         do {
             try await viewModel.authenticateForSensitiveAction(prompt: L10n.t("Authenticate to send Monero"))
+            guard approvedIntent == currentPreviewIntent() else {
+                errorMessage = L10n.t("Preview the fee before sending.")
+                return
+            }
             if sendMax {
                 // Recalculate, but never relay a fee above the user's approved ceiling.
                 let result: (txid: String, amount: UInt64, fee: UInt64)
@@ -677,10 +717,16 @@ struct SendView: View {
             // Refresh balance after send
             await viewModel.updateBalance()
             await refreshSubaddressBalanceIfNeeded()
-        } catch let error as SendSafety.FeeApprovalError {
+        } catch let recovered as SendSafety.PreviousPaymentRecovered {
+            let txid = recovered.txid
             estimatedFeePiconero = nil
             previewReady = false
-            errorMessage = error.localizedDescription
+            infoMessage = L10n.t("Previous payment recovered. The new payment was not sent. Preview it again.") + "\nTXID: \(txid)"
+            await viewModel.updateBalance()
+        } catch is SendSafety.FeeApprovalError {
+            estimatedFeePiconero = nil
+            previewReady = false
+            errorMessage = L10n.t("The network fee increased. Nothing was broadcast. Preview the fee and confirm again.")
         } catch {
             errorMessage = authRetryMessage(for: error) ?? L10n.format("Send failed: %@", error.localizedDescription)
         }
@@ -719,7 +765,7 @@ struct SendView: View {
         guard !viewModel.isRefreshing, !isSending, !isEstimating else { return false }
         guard parsedAmountPiconero() != nil, parsedRingLen() != nil else { return false }
         guard looksLikeAddress(toAddress) else { return false }
-        guard previewReady, estimatedFeePiconero != nil else { return false }
+        guard previewReady, approvedIntent == currentPreviewIntent(), estimatedFeePiconero != nil else { return false }
         return true
     }
 
@@ -854,6 +900,12 @@ struct SendView: View {
         sweepPreviewTask?.cancel()
         feePreviewTask?.cancel()
 
+        invalidatePreview()
+        isMaxMode = true
+        let intent = currentPreviewIntent(maximum: true)
+        pendingIntent = intent
+        let epoch = previewEpoch
+        isEstimating = true
         sweepPreviewTask = Task {
             // Small debounce to coalesce rapid taps / state changes.
             try? await Task.sleep(nanoseconds: 300_000_000)
@@ -867,8 +919,9 @@ struct SendView: View {
                 previewReady = false
             }
 
-            guard looksLikeAddress(toAddress) else {
+            guard looksLikeAddress(intent.destination) else {
                 await MainActor.run {
+                    guard previewEpoch == epoch, currentPreviewIntent() == intent else { return }
                     errorMessage = L10n.t("Enter a valid address.")
                     isEstimating = false
                     isMaxMode = false
@@ -880,14 +933,14 @@ struct SendView: View {
 
             do {
                 let res: (amount: UInt64, fee: UInt64)
-                if sendFromSubaddressEnabled {
-                    res = try await walletManager.previewSweep(fromSubaddressMinor: fromSubaddressMinor, toAddress: toAddress, ringLen: ring)
+                if intent.source != nil {
+                    res = try await walletManager.previewSweep(fromSubaddressMinor: intent.source ?? 0, toAddress: intent.destination, ringLen: ring)
                 } else {
-                    res = try await walletManager.previewSweep(toAddress: toAddress, ringLen: ring)
+                    res = try await walletManager.previewSweep(toAddress: intent.destination, ringLen: ring)
                 }
 
                 if Task.isCancelled {
-                    await MainActor.run { isEstimating = false }
+                    await MainActor.run { if previewEpoch == epoch { isEstimating = false } }
                     return
                 }
 
@@ -896,6 +949,7 @@ struct SendView: View {
 
                 guard amount > 0 else {
                     await MainActor.run {
+                        guard previewEpoch == epoch, currentPreviewIntent(maximum: true) == intent else { return }
                         errorMessage = L10n.t("No unlocked balance available to send after fee.")
                         isMaxMode = false
                         previewReady = false
@@ -905,6 +959,8 @@ struct SendView: View {
                 }
 
                 await MainActor.run {
+                    guard previewEpoch == epoch, currentPreviewIntent(maximum: true) == intent else { return }
+                    approvedIntent = intent
                     estimatedFeePiconero = fee
                     previewReady = true
                     suppressAmountChangeClearingMaxMode = true
@@ -915,10 +971,11 @@ struct SendView: View {
                 }
             } catch {
                 if Task.isCancelled {
-                    await MainActor.run { isEstimating = false }
+                    await MainActor.run { if previewEpoch == epoch { isEstimating = false } }
                     return
                 }
                 await MainActor.run {
+                    guard previewEpoch == epoch, currentPreviewIntent() == intent else { return }
                     previewReady = false
                     isMaxMode = false
                     isEstimating = false

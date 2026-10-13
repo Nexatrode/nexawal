@@ -17,6 +17,14 @@ public struct FiatRate: Sendable, Equatable {
 }
 
 public enum FiatEstimate: Sendable {
+    /// Bound precision before parsing; exponents from an untrusted server must not
+    /// cause huge allocations or overflow when amounts are subsequently formatted.
+    public static func serverRate(_ text: String) -> Decimal? {
+        guard text.utf8.count <= 37,
+              text.range(of: "^[0-9]{1,12}(\\.[0-9]{1,24})?$", options: .regularExpression) != nil,
+              let value = Decimal(string: text, locale: Locale(identifier: "en_US_POSIX")), value > 0 else { return nil }
+        return value
+    }
     public static func localizedCurrencyName(_ code: String, locale: Locale = .current) -> String {
         locale.localizedString(forCurrencyCode: code) ?? currencyNames[code] ?? code
     }
