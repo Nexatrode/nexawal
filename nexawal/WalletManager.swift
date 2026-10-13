@@ -689,17 +689,21 @@ actor WalletManager {
     }
 
     /// Force rescan from a specific height. Resets core scan state, clears local cache, and refreshes.
-    func rescan(from height: UInt64) async throws -> WalletCoreFFIClient.SyncStatus {
+    func rescan(from height: UInt64, sessionToken: UInt64) async throws -> WalletCoreFFIClient.SyncStatus {
+        try await awaitSessionCleanup()
         guard let walletId = currentWalletId else {
             throw WalletError.refreshFailed("No wallet is currently open")
         }
-        // Reset core state to the requested height
-        try WalletCoreFFIClient.forceRescanFromHeight(walletId: walletId, fromHeight: height)
-        // Clear persisted cache so we don't restore old state on next launch
-        deletePersistedScanCache(walletId: walletId)
-        cachePersistenceSuppressed = false
+        // Lock/replacement invalidation and the synchronous native reset are linearized.
+        try sessionAuthority.withCurrent(sessionToken) {
+            try WalletCoreFFIClient.forceRescanFromHeight(walletId: walletId, fromHeight: height)
+            deletePersistedScanCache(walletId: walletId)
+            cachePersistenceSuppressed = false
+        }
         // Trigger a refresh; this will also export a fresh cache on success
-        return try await refreshWallet()
+        let status = try await refreshWallet()
+        try sessionAuthority.check(sessionToken)
+        return status
     }
 
     /// Import a previously exported core cache blob for this wallet, if present.

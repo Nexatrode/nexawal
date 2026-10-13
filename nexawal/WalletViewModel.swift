@@ -251,6 +251,7 @@ class WalletViewModel: ObservableObject {
         refreshTask?.cancel()
         refreshTask = nil
         isRefreshing = false
+        isManualRescanInProgress = false
         if continueRefresh {
             MoneroConfig.setScanInterrupted(true)
         }
@@ -660,10 +661,12 @@ class WalletViewModel: ObservableObject {
     }
 
     func refreshWallet() async {
-        guard isWalletOpen else { return }
+        guard isWalletOpen, !isManualRescanInProgress else { return }
 
         // If one is already running, don't start another.
         if refreshTask != nil { return }
+        let authority = walletManager.sessionAuthority
+        let token = authority.token()
 
         balanceSnapshotEpoch.invalidate()
         balanceIsStaleWhileSyncing = true
@@ -680,45 +683,49 @@ class WalletViewModel: ObservableObject {
             defer {
                 // This task already runs on the main actor. Do not enqueue delayed cleanup
                 // that could clear the handle/flags of a subsequent refresh.
-                self.stopSyncStatusPolling(clearThroughput: false)
-                self.isRefreshing = false
-                self.refreshTask = nil
-                self.endBriefBackgroundSync(reason: "refresh-done")
+                if authority.accepts(token) {
+                    self.stopSyncStatusPolling(clearThroughput: false)
+                    self.isRefreshing = false
+                    self.refreshTask = nil
+                    self.endBriefBackgroundSync(reason: "refresh-done")
+                }
             }
 
             do {
                 let status = try await self.walletManager.refreshWallet()
-                try await self.finishSuccessfulRefresh(status: status, context: "refresh_done")
+                try await self.finishSuccessfulRefresh(status: status, context: "refresh_done", sessionToken: token)
             } catch is CancellationError {
+                guard authority.accepts(token) else { return }
                 // User-cancelled refresh: keep UI calm; polling teardown happens in defer.
-                await MainActor.run {
-                    self.errorMessage = nil
-                    self.syncStalled = false
-                }
+                self.errorMessage = nil
+                self.syncStalled = false
             } catch {
+                guard authority.accepts(token), !Task.isCancelled else { return }
                 MoneroConfig.setScanInterrupted(true)
                 self.balanceIsStaleWhileSyncing = true
                 let message = L10n.format("Refresh failed: %@", error.localizedDescription)
-                await MainActor.run {
-                    self.errorMessage = message
-                    self.syncStalled = Self.isStallMessage(message)
-                }
+                self.errorMessage = message
+                self.syncStalled = Self.isStallMessage(message)
             }
         }
     }
 
     /// Publish one final native snapshot before dropping the UI spinner. Successful native
     /// completion, not `isSynced` (which requires that spinner to be off), authorizes zero.
-    private func finishSuccessfulRefresh(status: WalletCoreFFIClient.SyncStatus, context: String) async throws {
+    private func finishSuccessfulRefresh(status: WalletCoreFFIClient.SyncStatus, context: String,
+        sessionToken: UInt64) async throws {
+        let authority = walletManager.sessionAuthority
+        let token = sessionToken
+        try authority.check(token)
         balanceSnapshotEpoch.invalidate()
         let epoch = balanceSnapshotEpoch.token
         let polling = syncStatusPollTask
         stopSyncStatusPolling(clearThroughput: false)
         await polling?.value
-        try Task.checkCancellation()
+        try authority.check(token)
 
         let snapshot = try await walletManager.completedRefreshSnapshot()
-        try Task.checkCancellation()
+        try authority.check(token)
         guard balanceSnapshotEpoch.accepts(epoch) else { throw CancellationError() }
         guard snapshot.status.lastScanned >= status.lastScanned else {
             throw WalletError.statusFailed("Scan changed before its final snapshot was published")
@@ -740,7 +747,8 @@ class WalletViewModel: ObservableObject {
         applyBalanceSnapshot(total: snapshot.total, unlocked: snapshot.unlocked,
             allowAuthoritativeZero: authoritative)
         FiatPriceService.shared.recordSeenTransfers(snapshot.history.transfers.map { seenTransfer($0) })
-        await persistMetadataUpdate()
+        await persistMetadataUpdate(sessionToken: token)
+        try authority.check(token)
         logObservedOutputsSummary(context: context)
     }
 
@@ -997,53 +1005,55 @@ class WalletViewModel: ObservableObject {
     }
 
     func rescan(from height: UInt64) async {
-        let trimmedMnemonic = mnemonic.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmedMnemonic.isEmpty else {
+        guard isWalletOpen, !isManualRescanInProgress else { return }
+        guard !mnemonic.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             errorMessage = L10n.t("Rescan failed: mnemonic is unavailable.")
             return
         }
+        let authority = walletManager.sessionAuthority
+        let token = authority.token()
+        // Claim the manual operation before the first await, so repeated taps cannot
+        // start overlapping resets while the old refresh is draining.
+        isManualRescanInProgress = true
+        defer { if authority.accepts(token) { isManualRescanInProgress = false } }
 
-        if isRefreshing || refreshTask != nil {
+        await WalletRescanLifecycle.run(authority: authority, token: token, cancelRefresh: {
+            guard self.isRefreshing || self.refreshTask != nil else { return }
             let refreshToJoin = refreshTask
             cancelRefresh()
             await walletManager.cancelRefresh()
             await refreshToJoin?.value
-        }
-
-        balanceSnapshotEpoch.invalidate()
-        isManualRescanInProgress = true
-        isRefreshing = true
-        MoneroConfig.setScanInterrupted(true)
-        errorMessage = nil
-        syncStalled = false
-        mnemonic = trimmedMnemonic
-        restoreHeight = height
-        lastScannedHeight = height
-        chainHeight = max(chainHeight, height)
-        totalBalance = 0
-        unlockedBalance = 0
-        transfers = []
-        totalHistoryCount = 0; pendingHistoryCount = 0; historyRevision = nil; historySession = UUID()
-        didRewindEmptyHistory = false
-        balanceIsStaleWhileSyncing = true
-        resetScanRateSession()
-        startSyncStatusPolling()
-
-        defer {
-            isManualRescanInProgress = false
+        }, begin: {
+            balanceSnapshotEpoch.invalidate()
+            isRefreshing = true
+            MoneroConfig.setScanInterrupted(true)
+            errorMessage = nil
+            syncStalled = false
+            // No seed copy or assignment is needed: the manager resets the existing core.
+            restoreHeight = height
+            lastScannedHeight = height
+            chainHeight = max(chainHeight, height)
+            totalBalance = 0
+            unlockedBalance = 0
+            transfers = []
+            totalHistoryCount = 0; pendingHistoryCount = 0; historyRevision = nil; historySession = UUID()
+            didRewindEmptyHistory = false
+            balanceIsStaleWhileSyncing = true
+            resetScanRateSession()
+            startSyncStatusPolling()
+        }, scan: {
+            try await walletManager.rescan(from: height, sessionToken: token)
+        }, finish: { status in
+            try await finishSuccessfulRefresh(status: status, context: "rescan_done", sessionToken: token)
+        }, cleanup: {
             stopSyncStatusPolling(clearThroughput: false)
             isRefreshing = false
-        }
-
-        do {
-            let status = try await walletManager.rescan(from: height)
-            try await finishSuccessfulRefresh(status: status, context: "rescan_done")
-        } catch {
+        }, failure: { error in
             MoneroConfig.setScanInterrupted(true)
             let message = L10n.format("Rescan failed: %@", error.localizedDescription)
             errorMessage = message
             syncStalled = Self.isStallMessage(message)
-        }
+        })
     }
 
     func getVersion() -> String {
@@ -1296,11 +1306,15 @@ class WalletViewModel: ObservableObject {
         }
     }
 
-    private func persistMetadataUpdate(_ mutate: ((inout StoredWalletMetadata) -> Void)? = nil) async {
+    private func persistMetadataUpdate(sessionToken: UInt64? = nil,
+        _ mutate: ((inout StoredWalletMetadata) -> Void)? = nil) async {
         do {
             if storedMetadata == nil {
-                storedMetadata = try await storage.loadMetadata()
+                let metadata = try await storage.loadMetadata()
+                if let sessionToken { try walletManager.sessionAuthority.check(sessionToken) }
+                storedMetadata = metadata
             }
+            if let sessionToken { try walletManager.sessionAuthority.check(sessionToken) }
             guard var metadata = storedMetadata else { return }
 
             mutate?(&metadata)
