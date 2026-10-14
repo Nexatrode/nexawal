@@ -1,5 +1,19 @@
 # Focused security fixes — September 2026
 
+## WalletCore v0.1.18 rollout
+
+The project and SwiftPM resolution pin `c3cc89519ff88e68322fcddbcc6227669b943a34`, the final
+v0.1.18 package/checksum commit. Native quarantine now consistently controls available inputs
+for previews, sends and sweeps without erasing canonical history. Dropped-pool quarantines require
+caught-up unspent revalidation. Unwinding native panics return sanitized errors; poisoned state
+requires an app restart, not automatic recovery or retry. Allocation aborts, signals and invalid
+caller pointers are outside that boundary.
+
+Local logic tests (92), history-model tests (8), and Swift wrapper/native tests pass. All seven
+Apple native targets build and the matching CI-built framework is used by normal remote resolution.
+The Xcode scheme is unchanged. No device wallet was opened, installed, rescanned or sent from.
+Unsigned builds and unit tests do not replace signed-device auth/send/recovery/interruption QA.
+
 ## WalletCore v0.1.15 rollout: session authority and seed buffers
 
 - UI and WalletManager share a synchronous authority epoch. Background locking invalidates
