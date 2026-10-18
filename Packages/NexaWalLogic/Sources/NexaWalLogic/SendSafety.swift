@@ -59,7 +59,7 @@ public enum SendSafety: Sendable {
     }
 
     /// Historical sibling-daemon fee fallback. Always nil: the default public node is a
-    /// single endpoint (`https://rpc.nexatrode.com`) with no alternate host/port remap.
+    /// single endpoint (`https://rpc.nexawal.com`) with no alternate host/port remap.
     public static func siblingMonerodURLIfNeeded(for endpoint: String) -> String? {
         _ = endpoint
         return nil

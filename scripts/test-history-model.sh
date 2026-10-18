@@ -12,4 +12,5 @@ ln -s "$repo_dir/nexawal/MoneroConfig.swift" "$test_dir/Sources/HistoryModelHarn
 ln -s "$repo_dir/nexawal/FiatSnapshotStore.swift" "$test_dir/Sources/HistoryModelHarness/FiatSnapshotStore.swift"
 ln -s "$repo_dir/Tests/HistoryPagingTests/TransactionsModelTests.swift" "$test_dir/Tests/HistoryModelTests/TransactionsModelTests.swift"
 ln -s "$repo_dir/Tests/HistoryPagingTests/FiatCacheTests.swift" "$test_dir/Tests/HistoryModelTests/FiatCacheTests.swift"
+ln -s "$repo_dir/Tests/HistoryPagingTests/WalletNodeConfigurationTests.swift" "$test_dir/Tests/HistoryModelTests/WalletNodeConfigurationTests.swift"
 NEXAWAL_TEST_ROOT="$repo_dir" NEXAWAL_TEST_WALLETCORE_PACKAGE="$core_package" swift test --package-path "$test_dir"

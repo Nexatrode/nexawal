@@ -55,7 +55,7 @@ enum MoneroDaemonClient {
     /// If the daemon does not provide a compatible `get_info` response,
     /// falls back to `/get_height` and uses that height as both
     /// `height` and `targetHeight`.
-    /// - Parameter baseURL: e.g. "https://rpc.nexatrode.com"
+    /// - Parameter baseURL: e.g. "https://rpc.nexawal.com"
     /// - Parameter proxyAddress: Optional HTTP proxy "host:port" (useful for I2P).
     /// - Returns: Parsed heights (height + target_height).
     static func getInfo(

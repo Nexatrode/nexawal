@@ -179,7 +179,7 @@ final class FiatPriceService: ObservableObject {
         let session = makeSession()
         defer { session.invalidateAndCancel() }
         guard FiatEstimate.isSupported(currency) else { throw URLError(.unsupportedURL) }
-        let url = URL(string: "https://rates.nexatrode.com/v1/rates/XMR/\(currency)")!
+        let url = URL(string: "https://rates.nexawal.com/v1/rates/XMR/\(currency)")!
         let (bytes, response) = try await session.bytes(from: url)
         try validate(response)
         guard response.expectedContentLength <= 16_384 else { throw URLError(.dataLengthExceedsMaximum) }

@@ -25,11 +25,11 @@ final class NetworkRoutingTests: XCTestCase {
     }
 
     func testNormalizeURLKeepsExplicitSchemesAndDefaultsLegacyHostPortToHTTP() {
-        XCTAssertEqual(NetworkRouting.normalizeURL("https://rpc.nexatrode.com"), "https://rpc.nexatrode.com")
+        XCTAssertEqual(NetworkRouting.normalizeURL("https://rpc.nexawal.com"), "https://rpc.nexawal.com")
         XCTAssertEqual(NetworkRouting.normalizeURL("http://host:18081"), "http://host:18081")
         XCTAssertEqual(NetworkRouting.normalizeURL("host:18081"), "http://host:18081")
-        XCTAssertNil(NetworkRouting.explicitNodeURL("rpc.nexatrode.com"))
-        XCTAssertEqual(NetworkRouting.explicitNodeURL("https://rpc.nexatrode.com"), "https://rpc.nexatrode.com")
+        XCTAssertNil(NetworkRouting.explicitNodeURL("rpc.nexawal.com"))
+        XCTAssertEqual(NetworkRouting.explicitNodeURL("https://rpc.nexawal.com"), "https://rpc.nexawal.com")
     }
 
     func testProxyRequiredAndPolicyAware() {
@@ -54,7 +54,7 @@ final class SendSafetyTests: XCTestCase {
             SendSafety.shouldRetryViaSiblingMonerod(
                 errorText: "fee_rate failed",
                 coreMessage: "",
-                endpoint: "https://rpc.nexatrode.com"
+                endpoint: "https://rpc.nexawal.com"
             )
         )
         XCTAssertNil(

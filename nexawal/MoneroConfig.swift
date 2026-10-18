@@ -8,7 +8,7 @@ import NexaWalLogic
 struct MoneroConfig {
 
     // MARK: - Constants / Defaults
-    nonisolated static let defaultAddress = "https://rpc.nexatrode.com"
+    nonisolated static let defaultAddress = "https://rpc.nexawal.com"
     nonisolated static let userDefaultsKey = "monero_daemon_address"
 
     // I2P keys (no shipped I2P node — user fills this in)
@@ -107,6 +107,8 @@ struct MoneroConfig {
         "http://rpc.nexatrode.com",
         "http://rpc.nexatrode.com:443",
         "https://rpc.nexatrode.com",
+        "https://rpc.nexatrode.com:443",
+        "http://rpc.nexatrode.com:80",
         "cuprate.nexatrode.com",
         "http://cuprate.nexatrode.com",
         "https://cuprate.nexatrode.com",
@@ -129,7 +131,9 @@ struct MoneroConfig {
         let folded = trimmed.lowercased().trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         let live = defaultAddress.lowercased().trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         if folded == live { return true }
-        return legacyDefaultAddresses.contains(trimmed)
+        return legacyDefaultAddresses.contains {
+            $0.lowercased().trimmingCharacters(in: CharacterSet(charactersIn: "/")) == folded
+        }
     }
 
     nonisolated static var daemonAddress: String {

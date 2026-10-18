@@ -271,7 +271,7 @@ struct WalletTransferDetails: View {
                         .foregroundStyle(palette?.secondaryText ?? .primary)
                         .textSelection(.enabled)
                     Button("Copy TXID") { UIPasteboard.general.string = transfer.txid }
-                    if let url = URL(string: "https://xmrchain.net/tx/\(transfer.txid)") {
+                    if let url = URL(string: "https://explorer.nexawal.com/tx/\(transfer.txid)") {
                         Button("Copy Explorer Link") { UIPasteboard.general.string = url.absoluteString }
                     }
                 } header: {

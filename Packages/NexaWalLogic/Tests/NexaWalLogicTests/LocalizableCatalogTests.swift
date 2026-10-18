@@ -56,7 +56,7 @@ final class LocalizableCatalogTests: XCTestCase {
         "Show sync details",
         "Hide sync details",
         "Copy Explorer Link",
-        "Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexatrode.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold.",
+        "Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexawal.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold.",
     ]
 
     func testSyncDetailHintsExistInEveryCatalogLocale() throws {

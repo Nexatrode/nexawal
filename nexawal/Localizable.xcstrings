@@ -33501,12 +33501,12 @@
       },
       "shouldTranslate": false
     },
-    "https://rpc.nexatrode.com": {
+    "https://rpc.nexawal.com": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "https://rpc.nexatrode.com"
+            "value": "https://rpc.nexawal.com"
           }
         }
       },
@@ -84370,330 +84370,330 @@
         }
       }
     },
-    "Type the full URL, including http:// or https://.\nDefault: https://rpc.nexatrode.com": {
+    "Type the full URL, including http:// or https://.\nDefault: https://rpc.nexawal.com": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "أدخل العنوان (URL) الكامل، بما في ذلك http:// أو https://.\nالعقدة الافتراضية: https://rpc.nexatrode.com"
+            "value": "أدخل العنوان (URL) الكامل، بما في ذلك http:// أو https://.\nالعقدة الافتراضية: https://rpc.nexawal.com"
           }
         },
         "az": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Tam URL-i daxil edin, http:// və ya https:// daxil olmaqla.\nDefolt node: https://rpc.nexatrode.com"
+            "value": "Tam URL-i daxil edin, http:// və ya https:// daxil olmaqla.\nDefolt node: https://rpc.nexawal.com"
           }
         },
         "bg": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Въведете пълния URL адрес, включително http:// или https://.\nВъзел по подразбиране: https://rpc.nexatrode.com"
+            "value": "Въведете пълния URL адрес, включително http:// или https://.\nВъзел по подразбиране: https://rpc.nexawal.com"
           }
         },
         "bn": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "সম্পূর্ণ URL লিখুন, http:// বা https:// সহ।\nডিফল্ট নোড: https://rpc.nexatrode.com"
+            "value": "সম্পূর্ণ URL লিখুন, http:// বা https:// সহ।\nডিফল্ট নোড: https://rpc.nexawal.com"
           }
         },
         "ca": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Escriu l'URL completa, inclòs http:// o https://.\nNode per defecte: https://rpc.nexatrode.com"
+            "value": "Escriu l'URL completa, inclòs http:// o https://.\nNode per defecte: https://rpc.nexawal.com"
           }
         },
         "cs": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Zadejte celou URL adresu, včetně http:// nebo https://.\nVýchozí uzel: https://rpc.nexatrode.com"
+            "value": "Zadejte celou URL adresu, včetně http:// nebo https://.\nVýchozí uzel: https://rpc.nexawal.com"
           }
         },
         "da": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Indtast den fulde URL, inklusive http:// eller https://.\nStandard node: https://rpc.nexatrode.com"
+            "value": "Indtast den fulde URL, inklusive http:// eller https://.\nStandard node: https://rpc.nexawal.com"
           }
         },
         "de": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Gib die vollständige URL ein, einschließlich http:// oder https://.\nStandardknoten: https://rpc.nexatrode.com"
+            "value": "Gib die vollständige URL ein, einschließlich http:// oder https://.\nStandardknoten: https://rpc.nexawal.com"
           }
         },
         "el": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Πληκτρολογήστε την πλήρη διεύθυνση URL, συμπεριλαμβανομένου του http:// ή https://.\nΠροεπιλεγμένος κόμβος: https://rpc.nexatrode.com"
+            "value": "Πληκτρολογήστε την πλήρη διεύθυνση URL, συμπεριλαμβανομένου του http:// ή https://.\nΠροεπιλεγμένος κόμβος: https://rpc.nexawal.com"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Type the full URL, including http:// or https://.\nDefault: https://rpc.nexatrode.com"
+            "value": "Type the full URL, including http:// or https://.\nDefault: https://rpc.nexawal.com"
           }
         },
         "eo": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Tajpu la kompletan URL, inkluzive de http:// aŭ https://.\nDefaŭlta nodo: https://rpc.nexatrode.com"
+            "value": "Tajpu la kompletan URL, inkluzive de http:// aŭ https://.\nDefaŭlta nodo: https://rpc.nexawal.com"
           }
         },
         "es": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Escribe la URL completa, incluyendo http:// o https://.\nNodo predeterminado: https://rpc.nexatrode.com"
+            "value": "Escribe la URL completa, incluyendo http:// o https://.\nNodo predeterminado: https://rpc.nexawal.com"
           }
         },
         "et": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Sisestage täielik URL, kaasa arvatud http:// või https://.\nVaikimisi sõlm: https://rpc.nexatrode.com"
+            "value": "Sisestage täielik URL, kaasa arvatud http:// või https://.\nVaikimisi sõlm: https://rpc.nexawal.com"
           }
         },
         "eu": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Idatzi URL osoa, http:// edo https:// barne.\nNodo lehenetsia: https://rpc.nexatrode.com"
+            "value": "Idatzi URL osoa, http:// edo https:// barne.\nNodo lehenetsia: https://rpc.nexawal.com"
           }
         },
         "fa": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "نشانی کامل را وارد کنید، شامل http:// یا https://.\nگره پیش فرض: https://rpc.nexatrode.com"
+            "value": "نشانی کامل را وارد کنید، شامل http:// یا https://.\nگره پیش فرض: https://rpc.nexawal.com"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Kirjoita täydellinen URL, mukaan lukien http:// tai https://.\nOletussolmu: https://rpc.nexatrode.com"
+            "value": "Kirjoita täydellinen URL, mukaan lukien http:// tai https://.\nOletussolmu: https://rpc.nexawal.com"
           }
         },
         "fil": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "I-type ang buong URL, kasama ang http:// o https://.\nDefault na node: https://rpc.nexatrode.com"
+            "value": "I-type ang buong URL, kasama ang http:// o https://.\nDefault na node: https://rpc.nexawal.com"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Saisis l'URL complète, y compris http:// ou https://.\nNœud par défaut : https://rpc.nexatrode.com"
+            "value": "Saisis l'URL complète, y compris http:// ou https://.\nNœud par défaut : https://rpc.nexawal.com"
           }
         },
         "ga": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Cuir isteach an URL iomlán, lena n-áirítear http:// nó https://.\nnód réamhshocraithe: https://rpc.nexatrode.com"
+            "value": "Cuir isteach an URL iomlán, lena n-áirítear http:// nó https://.\nnód réamhshocraithe: https://rpc.nexawal.com"
           }
         },
         "gl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Escribe o URL completo, incluíndo http:// ou https://.\nNodo predeterminado: https://rpc.nexatrode.com"
+            "value": "Escribe o URL completo, incluíndo http:// ou https://.\nNodo predeterminado: https://rpc.nexawal.com"
           }
         },
         "gn": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Ehai pe URL tuichaháicha, oike hag̃ua http:// térã https://.\nNodo ñepyrũrã: https://rpc.nexatrode.com"
+            "value": "Ehai pe URL tuichaháicha, oike hag̃ua http:// térã https://.\nNodo ñepyrũrã: https://rpc.nexawal.com"
           }
         },
         "ha": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Shigar da cikakken URL, tare da http:// ko https://.\nLambar asali: https://rpc.nexatrode.com"
+            "value": "Shigar da cikakken URL, tare da http:// ko https://.\nLambar asali: https://rpc.nexawal.com"
           }
         },
         "he": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "הזן את כתובת ה-URL המלאה, כולל http:// או https://.\nצומת ברירת מחדל: https://rpc.nexatrode.com"
+            "value": "הזן את כתובת ה-URL המלאה, כולל http:// או https://.\nצומת ברירת מחדל: https://rpc.nexawal.com"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "पूरा URL टाइप करें, जिसमें http:// या https:// शामिल हो।\nडिफ़ॉल्ट नोड: https://rpc.nexatrode.com"
+            "value": "पूरा URL टाइप करें, जिसमें http:// या https:// शामिल हो।\nडिफ़ॉल्ट नोड: https://rpc.nexawal.com"
           }
         },
         "hr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Upišite cijeli URL, uključujući http:// ili https://.\nZadani čvor: https://rpc.nexatrode.com"
+            "value": "Upišite cijeli URL, uključujući http:// ili https://.\nZadani čvor: https://rpc.nexawal.com"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Írd be a teljes URL-t, http:// vagy https:// előtaggal.\nAlapértelmezett csomópont: https://rpc.nexatrode.com"
+            "value": "Írd be a teljes URL-t, http:// vagy https:// előtaggal.\nAlapértelmezett csomópont: https://rpc.nexawal.com"
           }
         },
         "hy": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Մուտքագրեք ամբողջական URL-ը, ներառյալ http:// կամ https://։\nԿանխադրված հանգույց՝ https://rpc.nexatrode.com"
+            "value": "Մուտքագրեք ամբողջական URL-ը, ներառյալ http:// կամ https://։\nԿանխադրված հանգույց՝ https://rpc.nexawal.com"
           }
         },
         "id": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Ketik URL lengkap, termasuk http:// atau https://.\nNode bawaan: https://rpc.nexatrode.com"
+            "value": "Ketik URL lengkap, termasuk http:// atau https://.\nNode bawaan: https://rpc.nexawal.com"
           }
         },
         "it": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Digita l'URL completo, incluso http:// o https://.\nNodo predefinito: https://rpc.nexatrode.com"
+            "value": "Digita l'URL completo, incluso http:// o https://.\nNodo predefinito: https://rpc.nexawal.com"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "http:// または https:// を含む完全なURLを入力してください。\nデフォルトノード: https://rpc.nexatrode.com"
+            "value": "http:// または https:// を含む完全なURLを入力してください。\nデフォルトノード: https://rpc.nexawal.com"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "http:// 또는 https://를 포함한 전체 URL을 입력하세요.\n기본 노드: https://rpc.nexatrode.com"
+            "value": "http:// 또는 https://를 포함한 전체 URL을 입력하세요.\n기본 노드: https://rpc.nexawal.com"
           }
         },
         "ky": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "http:// же https:// менен кошо толук URL дарегин киргизиңиз.\nДемейки түйүн: https://rpc.nexatrode.com"
+            "value": "http:// же https:// менен кошо толук URL дарегин киргизиңиз.\nДемейки түйүн: https://rpc.nexawal.com"
           }
         },
         "lt": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Įveskite pilną URL, įskaitant http:// arba https://.\nNumatytasis mazgas: https://rpc.nexatrode.com"
+            "value": "Įveskite pilną URL, įskaitant http:// arba https://.\nNumatytasis mazgas: https://rpc.nexawal.com"
           }
         },
         "lv": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Ierakstiet pilnu URL, ieskaitot http:// vai https://.\nNoklusējuma mezgls: https://rpc.nexatrode.com"
+            "value": "Ierakstiet pilnu URL, ieskaitot http:// vai https://.\nNoklusējuma mezgls: https://rpc.nexawal.com"
           }
         },
         "ms": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Taip URL penuh, termasuk http:// atau https://.\nNod lalai: https://rpc.nexatrode.com"
+            "value": "Taip URL penuh, termasuk http:// atau https://.\nNod lalai: https://rpc.nexawal.com"
           }
         },
         "my": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "http:// သို့မဟုတ် https:// အပါအဝင် URL အပြည့်အစုံကို ရိုက်ထည့်ပါ။\nမူရင်း node- https://rpc.nexatrode.com"
+            "value": "http:// သို့မဟုတ် https:// အပါအဝင် URL အပြည့်အစုံကို ရိုက်ထည့်ပါ။\nမူရင်း node- https://rpc.nexawal.com"
           }
         },
         "nb": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Skriv inn hele URL-en, inkludert http:// eller https://.\nStandard node: https://rpc.nexatrode.com"
+            "value": "Skriv inn hele URL-en, inkludert http:// eller https://.\nStandard node: https://rpc.nexawal.com"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Voer de volledige URL in, inclusief http:// of https://.\nStandaardknooppunt: https://rpc.nexatrode.com"
+            "value": "Voer de volledige URL in, inclusief http:// of https://.\nStandaardknooppunt: https://rpc.nexawal.com"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Wpisz pełny adres URL, w tym http:// lub https://.\nWęzeł domyślny: https://rpc.nexatrode.com"
+            "value": "Wpisz pełny adres URL, w tym http:// lub https://.\nWęzeł domyślny: https://rpc.nexawal.com"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Digite a URL completa, incluindo http:// ou https://.\nNó padrão: https://rpc.nexatrode.com"
+            "value": "Digite a URL completa, incluindo http:// ou https://.\nNó padrão: https://rpc.nexawal.com"
           }
         },
         "ro": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Introdu URL-ul complet, inclusiv http:// sau https://.\nNod implicit: https://rpc.nexatrode.com"
+            "value": "Introdu URL-ul complet, inclusiv http:// sau https://.\nNod implicit: https://rpc.nexawal.com"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Введите полный URL, включая http:// или https://.\nУзел по умолчанию: https://rpc.nexatrode.com."
+            "value": "Введите полный URL, включая http:// или https://.\nУзел по умолчанию: https://rpc.nexawal.com."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Zadajte celú URL adresu, vrátane http:// alebo https://.\nPredvolený uzol: https://rpc.nexatrode.com"
+            "value": "Zadajte celú URL adresu, vrátane http:// alebo https://.\nPredvolený uzol: https://rpc.nexawal.com"
           }
         },
         "sl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Vnesi celoten URL, vključno s http:// ali https://.\nPrivzeto vozlišče: https://rpc.nexatrode.com"
+            "value": "Vnesi celoten URL, vključno s http:// ali https://.\nPrivzeto vozlišče: https://rpc.nexawal.com"
           }
         },
         "sq": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Shkruaj URL-në e plotë, duke përfshirë http:// ose https://.\nNyja e parazgjedhur: https://rpc.nexatrode.com"
+            "value": "Shkruaj URL-në e plotë, duke përfshirë http:// ose https://.\nNyja e parazgjedhur: https://rpc.nexawal.com"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Ange fullständig URL, inklusive http:// eller https://.\nStandardnod: https://rpc.nexatrode.com"
+            "value": "Ange fullständig URL, inklusive http:// eller https://.\nStandardnod: https://rpc.nexawal.com"
           }
         },
         "th": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "กรอก URL แบบเต็ม รวมถึง http:// หรือ https://\nโหนดเริ่มต้น: https://rpc.nexatrode.com"
+            "value": "กรอก URL แบบเต็ม รวมถึง http:// หรือ https://\nโหนดเริ่มต้น: https://rpc.nexawal.com"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "http:// veya https:// dahil olmak üzere tam URL'yi girin.\nVarsayılan düğüm: https://rpc.nexatrode.com"
+            "value": "http:// veya https:// dahil olmak üzere tam URL'yi girin.\nVarsayılan düğüm: https://rpc.nexawal.com"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Введіть повну URL-адресу, включно з http:// або https://.\nВузол за замовчуванням: https://rpc.nexatrode.com"
+            "value": "Введіть повну URL-адресу, включно з http:// або https://.\nВузол за замовчуванням: https://rpc.nexawal.com"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "مکمل URL درج کریں، بشمول http:// یا https://۔\nڈیفالٹ نوڈ: https://rpc.nexatrode.com"
+            "value": "مکمل URL درج کریں، بشمول http:// یا https://۔\nڈیفالٹ نوڈ: https://rpc.nexawal.com"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Nhập đầy đủ URL, bao gồm http:// hoặc https://.\nNút mặc định: https://rpc.nexatrode.com"
+            "value": "Nhập đầy đủ URL, bao gồm http:// hoặc https://.\nNút mặc định: https://rpc.nexawal.com"
           }
         },
         "yo": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Kọ URL kíkún, pẹ̀lú http:// tàbí https://.\nIyipada aiyipada: https://rpc.nexatrode.com"
+            "value": "Kọ URL kíkún, pẹ̀lú http:// tàbí https://.\nIyipada aiyipada: https://rpc.nexawal.com"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "请输入完整网址,包括 http:// 或 https://。\n默认节点：https://rpc.nexatrode.com"
+            "value": "请输入完整网址,包括 http:// 或 https://。\n默认节点：https://rpc.nexawal.com"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "請輸入完整網址,包括 http:// 或 https://。\n預設節點：https://rpc.nexatrode.com"
+            "value": "請輸入完整網址,包括 http:// 或 https://。\n預設節點：https://rpc.nexawal.com"
           }
         }
       }
@@ -93571,659 +93571,659 @@
         }
       }
     },
-    "MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact rates.nexatrode.com for rates.": {
+    "MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact rates.nexawal.com for rates.": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact rates.nexatrode.com for rates."
+            "value": "MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact rates.nexawal.com for rates."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "logiciel non audité sous licence MIT. Vous êtes responsable de votre phrase de récupération et de vos fonds. Le nœud distant par défaut peut voir vos requêtes de synchronisation IP et de portefeuille – exécutez votre propre nœud pour une meilleure confidentialité. Estimations fiat facultatives, si activées, contactez rates.nexatrode.com pour connaître les tarifs."
+            "value": "logiciel non audité sous licence MIT. Vous êtes responsable de votre phrase de récupération et de vos fonds. Le nœud distant par défaut peut voir vos requêtes de synchronisation IP et de portefeuille – exécutez votre propre nœud pour une meilleure confidentialité. Estimations fiat facultatives, si activées, contactez rates.nexawal.com pour connaître les tarifs."
           }
         },
         "ar": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "برنامج مرخص من معهد ماساتشوستس للتكنولوجيا وغير مدقق. أنت مسؤول عن عبارة الاسترداد والأموال الخاصة بك. يمكن للعقدة البعيدة الافتراضية رؤية استعلامات IP ومزامنة المحفظة الخاصة بك - قم بتشغيل العقدة الخاصة بك للحصول على خصوصية أقوى. التقديرات الورقية الاختيارية، إذا تم تمكينها، اتصل بـ rates.nexatrode.com لمعرفة الأسعار."
+            "value": "برنامج مرخص من معهد ماساتشوستس للتكنولوجيا وغير مدقق. أنت مسؤول عن عبارة الاسترداد والأموال الخاصة بك. يمكن للعقدة البعيدة الافتراضية رؤية استعلامات IP ومزامنة المحفظة الخاصة بك - قم بتشغيل العقدة الخاصة بك للحصول على خصوصية أقوى. التقديرات الورقية الاختيارية، إذا تم تمكينها، اتصل بـ rates.nexawal.com لمعرفة الأسعار."
           }
         },
         "az": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-lisenziyalı, yoxlanılmamış proqram təminatı. Bərpa ifadəniz və vəsaitlərinizə görə məsuliyyət daşıyırsınız. Defolt uzaq qovşaq IP və pul kisəsi sinxronizasiya sorğularınızı görə bilər – daha güclü məxfilik üçün öz nodeunuzu idarə edin. Könüllü fiat təxminləri, əgər aktivdirsə, tariflər üçün rates.nexatrode.com ilə əlaqə saxlayın."
+            "value": "MIT-lisenziyalı, yoxlanılmamış proqram təminatı. Bərpa ifadəniz və vəsaitlərinizə görə məsuliyyət daşıyırsınız. Defolt uzaq qovşaq IP və pul kisəsi sinxronizasiya sorğularınızı görə bilər – daha güclü məxfilik üçün öz nodeunuzu idarə edin. Könüllü fiat təxminləri, əgər aktivdirsə, tariflər üçün rates.nexawal.com ilə əlaqə saxlayın."
           }
         },
         "bg": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Лицензиран от MIT, неодитиран софтуер. Вие носите отговорност за вашата фраза за възстановяване и средства. Отдалеченият възел по подразбиране може да вижда вашите заявки за синхронизиране на IP и портфейл — стартирайте свой собствен възел за по-голяма поверителност. Незадължителни фиатни оценки, ако са активирани, свържете се с rates.nexatrode.com за цени."
+            "value": "Лицензиран от MIT, неодитиран софтуер. Вие носите отговорност за вашата фраза за възстановяване и средства. Отдалеченият възел по подразбиране може да вижда вашите заявки за синхронизиране на IP и портфейл — стартирайте свой собствен възел за по-голяма поверителност. Незадължителни фиатни оценки, ако са активирани, свържете се с rates.nexawal.com за цени."
           }
         },
         "bn": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT- লাইসেন্সপ্রাপ্ত, অনিরীক্ষিত সফ্টওয়্যার। আপনি আপনার পুনরুদ্ধার শব্দগুচ্ছ এবং তহবিল জন্য দায়ী. ডিফল্ট রিমোট নোড আপনার আইপি এবং ওয়ালেট সিঙ্ক প্রশ্নগুলি দেখতে পারে — শক্তিশালী গোপনীয়তার জন্য আপনার নিজস্ব নোড চালান৷ ঐচ্ছিক ফিয়াট অনুমান, যদি সক্ষম করা থাকে, তাহলে হারের জন্য rates.nexatrode.com-এর সাথে যোগাযোগ করুন।"
+            "value": "MIT- লাইসেন্সপ্রাপ্ত, অনিরীক্ষিত সফ্টওয়্যার। আপনি আপনার পুনরুদ্ধার শব্দগুচ্ছ এবং তহবিল জন্য দায়ী. ডিফল্ট রিমোট নোড আপনার আইপি এবং ওয়ালেট সিঙ্ক প্রশ্নগুলি দেখতে পারে — শক্তিশালী গোপনীয়তার জন্য আপনার নিজস্ব নোড চালান৷ ঐচ্ছিক ফিয়াট অনুমান, যদি সক্ষম করা থাকে, তাহলে হারের জন্য rates.nexawal.com-এর সাথে যোগাযোগ করুন।"
           }
         },
         "ca": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "programari no auditat amb llicència MIT. Sou responsable de la vostra frase de recuperació i dels vostres fons. El node remot predeterminat pot veure les consultes de sincronització d'IP i cartera: executeu el vostre propi node per obtenir una privadesa més forta. Estimacions de fiat opcionals, si estan habilitades, poseu-vos en contacte amb rates.nexatrode.com per obtenir les tarifes."
+            "value": "programari no auditat amb llicència MIT. Sou responsable de la vostra frase de recuperació i dels vostres fons. El node remot predeterminat pot veure les consultes de sincronització d'IP i cartera: executeu el vostre propi node per obtenir una privadesa més forta. Estimacions de fiat opcionals, si estan habilitades, poseu-vos en contacte amb rates.nexawal.com per obtenir les tarifes."
           }
         },
         "cs": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Neauditovaný software s licencí MIT. Jste odpovědní za svou frázi pro obnovení a finanční prostředky. Výchozí vzdálený uzel vidí vaši IP adresu a dotazy na synchronizaci peněženky – spusťte svůj vlastní uzel pro větší soukromí. Volitelné odhady fiat, pokud jsou povoleny, kontaktujte rates.nexatrode.com pro sazby."
+            "value": "Neauditovaný software s licencí MIT. Jste odpovědní za svou frázi pro obnovení a finanční prostředky. Výchozí vzdálený uzel vidí vaši IP adresu a dotazy na synchronizaci peněženky – spusťte svůj vlastní uzel pro větší soukromí. Volitelné odhady fiat, pokud jsou povoleny, kontaktujte rates.nexawal.com pro sazby."
           }
         },
         "da": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-licenseret, ikke-revideret software. Du er ansvarlig for din genopretningssætning og midler. Standard-fjernknuden kan se dine IP- og tegnebogssynkroniseringsforespørgsler - kør din egen node for stærkere privatliv. Valgfri fiat-estimat, hvis aktiveret, kontakt rates.nexatrode.com for priser."
+            "value": "MIT-licenseret, ikke-revideret software. Du er ansvarlig for din genopretningssætning og midler. Standard-fjernknuden kan se dine IP- og tegnebogssynkroniseringsforespørgsler - kør din egen node for stærkere privatliv. Valgfri fiat-estimat, hvis aktiveret, kontakt rates.nexawal.com for priser."
           }
         },
         "de": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-lizenzierte, ungeprüfte Software. Sie sind für Ihren Wiederherstellungssatz und Ihre Mittel verantwortlich. Der standardmäßige Remote-Knoten kann Ihre IP- und Wallet-Synchronisierungsanfragen sehen – führen Sie Ihren eigenen Knoten aus, um den Datenschutz zu verbessern. Optionale Fiat-Schätzungen, falls aktiviert, kontaktieren Sie rates.nexatrode.com für Preise."
+            "value": "MIT-lizenzierte, ungeprüfte Software. Sie sind für Ihren Wiederherstellungssatz und Ihre Mittel verantwortlich. Der standardmäßige Remote-Knoten kann Ihre IP- und Wallet-Synchronisierungsanfragen sehen – führen Sie Ihren eigenen Knoten aus, um den Datenschutz zu verbessern. Optionale Fiat-Schätzungen, falls aktiviert, kontaktieren Sie rates.nexawal.com für Preise."
           }
         },
         "el": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Λογισμικό με άδεια MIT, μη ελεγμένο. Είστε υπεύθυνοι για τη φράση και τα χρήματά σας ανάκτησης. Ο προεπιλεγμένος απομακρυσμένος κόμβος μπορεί να δει τα ερωτήματα συγχρονισμού IP και πορτοφολιού — εκτελέστε τον δικό σας κόμβο για ισχυρότερο απόρρητο. Προαιρετικές εκτιμήσεις fiat, εάν είναι ενεργοποιημένες, επικοινωνήστε με το rates.nexatrode.com για τιμές."
+            "value": "Λογισμικό με άδεια MIT, μη ελεγμένο. Είστε υπεύθυνοι για τη φράση και τα χρήματά σας ανάκτησης. Ο προεπιλεγμένος απομακρυσμένος κόμβος μπορεί να δει τα ερωτήματα συγχρονισμού IP και πορτοφολιού — εκτελέστε τον δικό σας κόμβο για ισχυρότερο απόρρητο. Προαιρετικές εκτιμήσεις fiat, εάν είναι ενεργοποιημένες, επικοινωνήστε με το rates.nexawal.com για τιμές."
           }
         },
         "eo": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-licencita, nekontrolita programaro. Vi respondecas pri via reakira frazo kaj financoj. La defaŭlta fora nodo povas vidi viajn IP- kaj monujo-sinkronigajn demandojn — rulu vian propran nodon por pli forta privateco. Laŭvolaj fiattaksoj, se ebligitaj, kontaktu rates.nexatrode.com por tarifoj."
+            "value": "MIT-licencita, nekontrolita programaro. Vi respondecas pri via reakira frazo kaj financoj. La defaŭlta fora nodo povas vidi viajn IP- kaj monujo-sinkronigajn demandojn — rulu vian propran nodon por pli forta privateco. Laŭvolaj fiattaksoj, se ebligitaj, kontaktu rates.nexawal.com por tarifoj."
           }
         },
         "es": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "software no auditado con licencia del MIT. Usted es responsable de su frase de recuperación y de sus fondos. El nodo remoto predeterminado puede ver sus consultas de sincronización de IP y billetera; ejecute su propio nodo para mayor privacidad. Estimaciones fiduciarias opcionales, si están habilitadas, comuníquese con rates.nexatrode.com para conocer las tarifas."
+            "value": "software no auditado con licencia del MIT. Usted es responsable de su frase de recuperación y de sus fondos. El nodo remoto predeterminado puede ver sus consultas de sincronización de IP y billetera; ejecute su propio nodo para mayor privacidad. Estimaciones fiduciarias opcionales, si están habilitadas, comuníquese con rates.nexawal.com para conocer las tarifas."
           }
         },
         "et": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-litsentsiga, auditeerimata tarkvara. Vastutate oma taastamisfraasi ja raha eest. Vaikimisi kaugsõlm näeb teie IP ja rahakoti sünkroonimise päringuid – tugevama privaatsuse tagamiseks käivitage oma sõlm. Valikulised fiati hinnangud, kui see on lubatud, võtke hindade saamiseks ühendust rates.nexatrode.com-ga."
+            "value": "MIT-litsentsiga, auditeerimata tarkvara. Vastutate oma taastamisfraasi ja raha eest. Vaikimisi kaugsõlm näeb teie IP ja rahakoti sünkroonimise päringuid – tugevama privaatsuse tagamiseks käivitage oma sõlm. Valikulised fiati hinnangud, kui see on lubatud, võtke hindade saamiseks ühendust rates.nexawal.com-ga."
           }
         },
         "eu": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT lizentziadun, ikuskatu gabeko softwarea. Zure berreskurapen esaldiaren eta funtsen arduraduna zara. Urruneko nodo lehenetsiak zure IP eta zorroaren sinkronizazio-kontsultak ikus ditzake; exekutatu zure nodoa pribatutasun sendoagoa izateko. Aukerako fiat estimazioak, gaituta badago, jarri harremanetan rates.nexatrode.com tarifak lortzeko."
+            "value": "MIT lizentziadun, ikuskatu gabeko softwarea. Zure berreskurapen esaldiaren eta funtsen arduraduna zara. Urruneko nodo lehenetsiak zure IP eta zorroaren sinkronizazio-kontsultak ikus ditzake; exekutatu zure nodoa pribatutasun sendoagoa izateko. Aukerako fiat estimazioak, gaituta badago, jarri harremanetan rates.nexawal.com tarifak lortzeko."
           }
         },
         "fa": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "نرم افزار دارای مجوز MIT و حسابرسی نشده. شما مسئول عبارت و وجوه بازیابی خود هستید. گره راه دور پیش‌فرض می‌تواند جستارهای همگام‌سازی IP و کیف پول شما را ببیند - برای حفظ حریم خصوصی قوی‌تر، گره خود را اجرا کنید. تخمین‌های فیات اختیاری، در صورت فعال بودن، برای اطلاع از نرخ‌ها با rates.nexatrode.com تماس بگیرید."
+            "value": "نرم افزار دارای مجوز MIT و حسابرسی نشده. شما مسئول عبارت و وجوه بازیابی خود هستید. گره راه دور پیش‌فرض می‌تواند جستارهای همگام‌سازی IP و کیف پول شما را ببیند - برای حفظ حریم خصوصی قوی‌تر، گره خود را اجرا کنید. تخمین‌های فیات اختیاری، در صورت فعال بودن، برای اطلاع از نرخ‌ها با rates.nexawal.com تماس بگیرید."
           }
         },
         "fi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-lisensoitu, auditoimaton ohjelmisto. Olet vastuussa palautuslausekkeestasi ja varoistasi. Oletusetäsolmu voi nähdä IP- ja lompakkosynkronointikyselysi – käytä omaa solmuasi parantaaksesi yksityisyyttä. Valinnaiset fiat-arviot, jos ne ovat käytössä, ota yhteyttä rates.nexatrode.com:iin saadaksesi hinnat."
+            "value": "MIT-lisensoitu, auditoimaton ohjelmisto. Olet vastuussa palautuslausekkeestasi ja varoistasi. Oletusetäsolmu voi nähdä IP- ja lompakkosynkronointikyselysi – käytä omaa solmuasi parantaaksesi yksityisyyttä. Valinnaiset fiat-arviot, jos ne ovat käytössä, ota yhteyttä rates.nexawal.com:iin saadaksesi hinnat."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Lisensyado ng MIT, hindi na-audited na software. Responsable ka para sa iyong parirala sa pagbawi at mga pondo. Makikita ng default na remote node ang iyong mga query sa pag-sync ng IP at wallet — patakbuhin ang sarili mong node para sa mas malakas na privacy. Mga opsyonal na pagtatantya ng fiat, kung naka-enable, makipag-ugnayan sa rates.nexatrode.com para sa mga rate."
+            "value": "Lisensyado ng MIT, hindi na-audited na software. Responsable ka para sa iyong parirala sa pagbawi at mga pondo. Makikita ng default na remote node ang iyong mga query sa pag-sync ng IP at wallet — patakbuhin ang sarili mong node para sa mas malakas na privacy. Mga opsyonal na pagtatantya ng fiat, kung naka-enable, makipag-ugnayan sa rates.nexawal.com para sa mga rate."
           }
         },
         "ga": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Bogearraí MIT-cheadúnaithe, neamhiniúchta. Tá tú freagrach as do frása athshlánaithe agus cistí. Is féidir leis an gciannód réamhshocraithe do cheisteanna maidir le sioncrónú IP agus sparán a fheiceáil - do nód féin a rith le haghaidh príobháideachta níos láidre. Meastacháin fiat roghnach, má tá sé cumasaithe, téigh i dteagmháil le rates.nexatrode.com le haghaidh rátaí."
+            "value": "Bogearraí MIT-cheadúnaithe, neamhiniúchta. Tá tú freagrach as do frása athshlánaithe agus cistí. Is féidir leis an gciannód réamhshocraithe do cheisteanna maidir le sioncrónú IP agus sparán a fheiceáil - do nód féin a rith le haghaidh príobháideachta níos láidre. Meastacháin fiat roghnach, má tá sé cumasaithe, téigh i dteagmháil le rates.nexawal.com le haghaidh rátaí."
           }
         },
         "gl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "software con licenza MIT non auditado. Vostede é o responsable da súa frase de recuperación e dos fondos. O nodo remoto predeterminado pode ver as túas consultas de sincronización de IP e carteira: executa o teu propio nodo para aumentar a privacidade. Estimacións fiat opcionais, se están habilitadas, póñase en contacto con rates.nexatrode.com para obter tarifas."
+            "value": "software con licenza MIT non auditado. Vostede é o responsable da súa frase de recuperación e dos fondos. O nodo remoto predeterminado pode ver as túas consultas de sincronización de IP e carteira: executa o teu propio nodo para aumentar a privacidade. Estimacións fiat opcionais, se están habilitadas, póñase en contacto con rates.nexawal.com para obter tarifas."
           }
         },
         "gn": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Software oguerekóva licencia MIT-pe, ndojejapóiva auditada. Nde ha’e responsable nde frase de recuperación ha fondo-kuéra rehe. Pe nodo mombyrygua ñepyrũrã ikatu ohecha ne IP ha billetera ñemboheko porandu — emongu’e nde nodo tee ñeñangareko imbaretevévape g̃uarã. Umi estimación fiat opcional, oñembohapéramo, eñe’ẽ rates.nexatrode.com ndive umi tasa rehegua."
+            "value": "Software oguerekóva licencia MIT-pe, ndojejapóiva auditada. Nde ha’e responsable nde frase de recuperación ha fondo-kuéra rehe. Pe nodo mombyrygua ñepyrũrã ikatu ohecha ne IP ha billetera ñemboheko porandu — emongu’e nde nodo tee ñeñangareko imbaretevévape g̃uarã. Umi estimación fiat opcional, oñembohapéramo, eñe’ẽ rates.nexawal.com ndive umi tasa rehegua."
           }
         },
         "ha": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-lasisi, software mara tantancewa. Kuna da alhakin dawo da kalmar ku da kuɗi. Kullin nesa na tsoho yana iya ganin tambayoyin daidaitawa na IP da walat ɗinku - gudanar da kumburin ku don ƙarin sirrin sirri. Ƙididdiga na fiat na zaɓi, idan an kunna, tuntuɓi rates.nexatrode.com don ƙimar kuɗi."
+            "value": "MIT-lasisi, software mara tantancewa. Kuna da alhakin dawo da kalmar ku da kuɗi. Kullin nesa na tsoho yana iya ganin tambayoyin daidaitawa na IP da walat ɗinku - gudanar da kumburin ku don ƙarin sirrin sirri. Ƙididdiga na fiat na zaɓi, idan an kunna, tuntuɓi rates.nexawal.com don ƙimar kuɗi."
           }
         },
         "he": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "תוכנה לא מבוקרה ברישיון MIT. אתה אחראי על ביטוי השחזור והכספים שלך. צומת ברירת המחדל יכול לראות את שאילתות סנכרון ה-IP והארנק שלך - הפעל צומת משלך לפרטיות חזקה יותר. הערכות פיאט אופציונליות, אם מופעלות, צור קשר עם rates.nexatrode.com לקבלת תעריפים."
+            "value": "תוכנה לא מבוקרה ברישיון MIT. אתה אחראי על ביטוי השחזור והכספים שלך. צומת ברירת המחדל יכול לראות את שאילתות סנכרון ה-IP והארנק שלך - הפעל צומת משלך לפרטיות חזקה יותר. הערכות פיאט אופציונליות, אם מופעלות, צור קשר עם rates.nexawal.com לקבלת תעריפים."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "एमआईटी-लाइसेंस प्राप्त, अनऑडिटेड सॉफ़्टवेयर। आप अपने पुनर्प्राप्ति वाक्यांश और धन के लिए जिम्मेदार हैं। डिफ़ॉल्ट रिमोट नोड आपके आईपी और वॉलेट सिंक क्वेरी को देख सकता है - मजबूत गोपनीयता के लिए अपना स्वयं का नोड चलाएं। वैकल्पिक फिएट अनुमान, यदि सक्षम है, तो दरों के लिए rates.nexatrode.com से संपर्क करें।"
+            "value": "एमआईटी-लाइसेंस प्राप्त, अनऑडिटेड सॉफ़्टवेयर। आप अपने पुनर्प्राप्ति वाक्यांश और धन के लिए जिम्मेदार हैं। डिफ़ॉल्ट रिमोट नोड आपके आईपी और वॉलेट सिंक क्वेरी को देख सकता है - मजबूत गोपनीयता के लिए अपना स्वयं का नोड चलाएं। वैकल्पिक फिएट अनुमान, यदि सक्षम है, तो दरों के लिए rates.nexawal.com से संपर्क करें।"
           }
         },
         "hr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT licencirani, nerevidirani softver. Vi ste odgovorni za svoju frazu i sredstva za oporavak. Zadani udaljeni čvor može vidjeti vaše IP i upite za sinkronizaciju novčanika — pokrenite vlastiti čvor za veću privatnost. Neobavezne procjene fiat-a, ako je omogućeno, kontaktirajte rates.nexatrode.com za cijene."
+            "value": "MIT licencirani, nerevidirani softver. Vi ste odgovorni za svoju frazu i sredstva za oporavak. Zadani udaljeni čvor može vidjeti vaše IP i upite za sinkronizaciju novčanika — pokrenite vlastiti čvor za veću privatnost. Neobavezne procjene fiat-a, ako je omogućeno, kontaktirajte rates.nexawal.com za cijene."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-licenc, nem auditált szoftver. Ön felelős a helyreállítási kifejezésért és az alapokért. Az alapértelmezett távoli csomópont láthatja az Ön IP-címét és a pénztárca szinkronizálási lekérdezéseit – futtassa saját csomópontját az erősebb adatvédelem érdekében. Opcionális fiat becslések, ha engedélyezve van, forduljon a rates.nexatrode.com-hez az árakért."
+            "value": "MIT-licenc, nem auditált szoftver. Ön felelős a helyreállítási kifejezésért és az alapokért. Az alapértelmezett távoli csomópont láthatja az Ön IP-címét és a pénztárca szinkronizálási lekérdezéseit – futtassa saját csomópontját az erősebb adatvédelem érdekében. Opcionális fiat becslések, ha engedélyezve van, forduljon a rates.nexawal.com-hez az árakért."
           }
         },
         "id": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Perangkat lunak berlisensi MIT dan tidak diaudit. Anda bertanggung jawab atas frase dan dana pemulihan Anda. Node jarak jauh default dapat melihat permintaan sinkronisasi IP dan dompet Anda — jalankan node Anda sendiri untuk privasi yang lebih kuat. Perkiraan fiat opsional, jika diaktifkan, hubungi rates.nexatrode.com untuk mengetahui tarif."
+            "value": "Perangkat lunak berlisensi MIT dan tidak diaudit. Anda bertanggung jawab atas frase dan dana pemulihan Anda. Node jarak jauh default dapat melihat permintaan sinkronisasi IP dan dompet Anda — jalankan node Anda sendiri untuk privasi yang lebih kuat. Perkiraan fiat opsional, jika diaktifkan, hubungi rates.nexawal.com untuk mengetahui tarif."
           }
         },
         "it": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "software non certificato con licenza MIT. Sei responsabile della tua frase di recupero e dei tuoi fondi. Il nodo remoto predefinito può vedere il tuo IP e le query di sincronizzazione del portafoglio: esegui il tuo nodo per una maggiore privacy. Stime fiat opzionali, se abilitate, contattare rates.nexatrode.com per le tariffe."
+            "value": "software non certificato con licenza MIT. Sei responsabile della tua frase di recupero e dei tuoi fondi. Il nodo remoto predefinito può vedere il tuo IP e le query di sincronizzazione del portafoglio: esegui il tuo nodo per una maggiore privacy. Stime fiat opzionali, se abilitate, contattare rates.nexawal.com per le tariffe."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT ライセンスの未監査ソフトウェア。回復フレーズと資金についてはあなたが責任を負います。デフォルトのリモート ノードは、IP とウォレットの同期クエリを参照できます。プライバシーを強化するために独自のノードを実行します。オプションの法定通貨見積りが有効になっている場合、料金については rates.nexatrode.com にお問い合わせください。"
+            "value": "MIT ライセンスの未監査ソフトウェア。回復フレーズと資金についてはあなたが責任を負います。デフォルトのリモート ノードは、IP とウォレットの同期クエリを参照できます。プライバシーを強化するために独自のノードを実行します。オプションの法定通貨見積りが有効になっている場合、料金については rates.nexawal.com にお問い合わせください。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT 라이선스, 감사되지 않은 소프트웨어. 복구 문구와 자금에 대한 책임은 귀하에게 있습니다. 기본 원격 노드는 귀하의 IP 및 지갑 동기화 쿼리를 볼 수 있습니다. 더 강력한 개인정보 보호를 위해 자체 노드를 실행하세요. 선택적 법정화폐 추정이 활성화된 경우 요율은 rates.nexatrode.com에 문의하세요."
+            "value": "MIT 라이선스, 감사되지 않은 소프트웨어. 복구 문구와 자금에 대한 책임은 귀하에게 있습니다. 기본 원격 노드는 귀하의 IP 및 지갑 동기화 쿼리를 볼 수 있습니다. 더 강력한 개인정보 보호를 위해 자체 노드를 실행하세요. 선택적 법정화폐 추정이 활성화된 경우 요율은 rates.nexawal.com에 문의하세요."
           }
         },
         "ky": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT лицензиясы бар, текшерилбеген программалык камсыздоо. Сиз калыбына келтирүү фразасы жана каражаттарыңыз үчүн жооптуусуз. Демейки алыскы түйүн сиздин IP жана капчыкты синхрондоштуруу сурамдарын көрө алат — купуялуулукту бекемдөө үчүн өз түйүнүңүздү иштетиңиз. Кошумча fiat баалоолору, эгер иштетилген болсо, тарифтер үчүн rates.nexatrode.com менен байланышыңыз."
+            "value": "MIT лицензиясы бар, текшерилбеген программалык камсыздоо. Сиз калыбына келтирүү фразасы жана каражаттарыңыз үчүн жооптуусуз. Демейки алыскы түйүн сиздин IP жана капчыкты синхрондоштуруу сурамдарын көрө алат — купуялуулукту бекемдөө үчүн өз түйүнүңүздү иштетиңиз. Кошумча fiat баалоолору, эгер иштетилген болсо, тарифтер үчүн rates.nexawal.com менен байланышыңыз."
           }
         },
         "lt": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT licencijuota, neaudituota programinė įranga. Jūs esate atsakingi už atkūrimo frazę ir lėšas. Numatytasis nuotolinis mazgas gali matyti jūsų IP ir piniginės sinchronizavimo užklausas – paleiskite savo mazgą, kad užtikrintumėte didesnį privatumą. Pasirenkami „fiat“ įvertinimai, jei įjungta, dėl tarifų susisiekite su rates.nexatrode.com."
+            "value": "MIT licencijuota, neaudituota programinė įranga. Jūs esate atsakingi už atkūrimo frazę ir lėšas. Numatytasis nuotolinis mazgas gali matyti jūsų IP ir piniginės sinchronizavimo užklausas – paleiskite savo mazgą, kad užtikrintumėte didesnį privatumą. Pasirenkami „fiat“ įvertinimai, jei įjungta, dėl tarifų susisiekite su rates.nexawal.com."
           }
         },
         "lv": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT licencēta, neauditēta programmatūra. Jūs esat atbildīgs par savu atgūšanas frāzi un līdzekļiem. Noklusējuma attālais mezgls var redzēt jūsu IP un maka sinhronizācijas vaicājumus — palaidiet savu mezglu, lai nodrošinātu lielāku privātumu. Izvēles fiat aprēķini, ja tie ir iespējoti, sazinieties ar rates.nexatrode.com, lai uzzinātu cenas."
+            "value": "MIT licencēta, neauditēta programmatūra. Jūs esat atbildīgs par savu atgūšanas frāzi un līdzekļiem. Noklusējuma attālais mezgls var redzēt jūsu IP un maka sinhronizācijas vaicājumus — palaidiet savu mezglu, lai nodrošinātu lielāku privātumu. Izvēles fiat aprēķini, ja tie ir iespējoti, sazinieties ar rates.nexawal.com, lai uzzinātu cenas."
           }
         },
         "ms": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Berlesen MIT, perisian tidak diaudit. Anda bertanggungjawab untuk frasa pemulihan dan dana anda. Nod jauh lalai boleh melihat pertanyaan penyegerakan IP dan dompet anda — jalankan nod anda sendiri untuk privasi yang lebih kukuh. Anggaran fiat pilihan, jika didayakan, hubungi rates.nexatrode.com untuk mendapatkan kadar."
+            "value": "Berlesen MIT, perisian tidak diaudit. Anda bertanggungjawab untuk frasa pemulihan dan dana anda. Nod jauh lalai boleh melihat pertanyaan penyegerakan IP dan dompet anda — jalankan nod anda sendiri untuk privasi yang lebih kukuh. Anggaran fiat pilihan, jika didayakan, hubungi rates.nexawal.com untuk mendapatkan kadar."
           }
         },
         "nb": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-lisensiert, urevidert programvare. Du er ansvarlig for gjenopprettingsfrasen og midler. Standard ekstern node kan se IP- og lommeboksynkroniseringsspørsmålene dine - kjør din egen node for sterkere personvern. Valgfrie fiat-anslag, hvis aktivert, kontakt rates.nexatrode.com for priser."
+            "value": "MIT-lisensiert, urevidert programvare. Du er ansvarlig for gjenopprettingsfrasen og midler. Standard ekstern node kan se IP- og lommeboksynkroniseringsspørsmålene dine - kjør din egen node for sterkere personvern. Valgfrie fiat-anslag, hvis aktivert, kontakt rates.nexawal.com for priser."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-gelicentieerde, niet-gecontroleerde software. U bent verantwoordelijk voor uw herstelzin en fondsen. Het standaard externe knooppunt kan uw IP- en portemonneesynchronisatieverzoeken zien. Voer uw eigen knooppunt uit voor een betere privacy. Optionele fiatschattingen, indien ingeschakeld, neem contact op met rates.nexatrode.com voor tarieven."
+            "value": "MIT-gelicentieerde, niet-gecontroleerde software. U bent verantwoordelijk voor uw herstelzin en fondsen. Het standaard externe knooppunt kan uw IP- en portemonneesynchronisatieverzoeken zien. Voer uw eigen knooppunt uit voor een betere privacy. Optionele fiatschattingen, indien ingeschakeld, neem contact op met rates.nexawal.com voor tarieven."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Niesprawdzone oprogramowanie na licencji MIT. Jesteś odpowiedzialny za zwrot środków i środki. Domyślny węzeł zdalny może zobaczyć Twoje zapytania dotyczące synchronizacji adresu IP i portfela — uruchom własny węzeł, aby zapewnić większą prywatność. Opcjonalne szacunki fiat, jeśli są włączone, skontaktuj się z rates.nexatrode.com w celu uzyskania stawek."
+            "value": "Niesprawdzone oprogramowanie na licencji MIT. Jesteś odpowiedzialny za zwrot środków i środki. Domyślny węzeł zdalny może zobaczyć Twoje zapytania dotyczące synchronizacji adresu IP i portfela — uruchom własny węzeł, aby zapewnić większą prywatność. Opcjonalne szacunki fiat, jeśli są włączone, skontaktuj się z rates.nexawal.com w celu uzyskania stawek."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Software não auditado e licenciado pelo MIT. Você é responsável por seu período de recuperação e fundos. O nó remoto padrão pode ver suas consultas de sincronização de IP e carteira – execute seu próprio nó para maior privacidade. Estimativas fiduciárias opcionais, se habilitadas, entre em contato com rates.nexatrode.com para obter taxas."
+            "value": "Software não auditado e licenciado pelo MIT. Você é responsável por seu período de recuperação e fundos. O nó remoto padrão pode ver suas consultas de sincronização de IP e carteira – execute seu próprio nó para maior privacidade. Estimativas fiduciárias opcionais, se habilitadas, entre em contato com rates.nexawal.com para obter taxas."
           }
         },
         "ro": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "software cu licență MIT, neauditat. Sunteți responsabil pentru fraza și fondurile dvs. de recuperare. Nodul la distanță implicit poate vedea interogările dvs. de sincronizare IP și portofel - rulați propriul nod pentru o confidențialitate mai puternică. Estimări fiat opționale, dacă sunt activate, contactați rates.nexatrode.com pentru tarife."
+            "value": "software cu licență MIT, neauditat. Sunteți responsabil pentru fraza și fondurile dvs. de recuperare. Nodul la distanță implicit poate vedea interogările dvs. de sincronizare IP și portofel - rulați propriul nod pentru o confidențialitate mai puternică. Estimări fiat opționale, dacă sunt activate, contactați rates.nexawal.com pentru tarife."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "непроверенное программное обеспечение, лицензированное MIT. Вы несете ответственность за свою фразу восстановления и средства. Удаленный узел по умолчанию может видеть ваш IP-адрес и запросы синхронизации кошелька — запустите собственный узел для большей конфиденциальности. Дополнительные оценки, если они включены, позвоните по номеру rates.nexatrode.com, чтобы узнать тарифы."
+            "value": "непроверенное программное обеспечение, лицензированное MIT. Вы несете ответственность за свою фразу восстановления и средства. Удаленный узел по умолчанию может видеть ваш IP-адрес и запросы синхронизации кошелька — запустите собственный узел для большей конфиденциальности. Дополнительные оценки, если они включены, позвоните по номеру rates.nexawal.com, чтобы узнать тарифы."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Neauditovaný softvér s licenciou MIT. Zodpovedáte za svoju frázu na obnovenie a finančné prostriedky. Predvolený vzdialený uzol môže vidieť vaše dotazy na synchronizáciu IP a peňaženky – spustite svoj vlastný uzol pre väčšie súkromie. Voliteľné odhady fiat, ak sú aktivované, kontaktujte rates.nexatrode.com pre sadzby."
+            "value": "Neauditovaný softvér s licenciou MIT. Zodpovedáte za svoju frázu na obnovenie a finančné prostriedky. Predvolený vzdialený uzol môže vidieť vaše dotazy na synchronizáciu IP a peňaženky – spustite svoj vlastný uzol pre väčšie súkromie. Voliteľné odhady fiat, ak sú aktivované, kontaktujte rates.nexawal.com pre sadzby."
           }
         },
         "sl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "nerevidirana programska oprema z licenco MIT. Odgovorni ste za vašo frazo za obnovitev in sredstva. Privzeto oddaljeno vozlišče lahko vidi vaše poizvedbe za sinhronizacijo IP in denarnice – za večjo zasebnost zaženite svoje vozlišče. Izbirne ocene fiat, če so omogočene, se za cene obrnite na rates.nexatrode.com."
+            "value": "nerevidirana programska oprema z licenco MIT. Odgovorni ste za vašo frazo za obnovitev in sredstva. Privzeto oddaljeno vozlišče lahko vidi vaše poizvedbe za sinhronizacijo IP in denarnice – za večjo zasebnost zaženite svoje vozlišče. Izbirne ocene fiat, če so omogočene, se za cene obrnite na rates.nexawal.com."
           }
         },
         "sq": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Softuer i paaudituar i licencuar nga MIT. Ju jeni përgjegjës për frazën dhe fondet tuaja të rikuperimit. Nyja e largët e parazgjedhur mund të shohë pyetjet tuaja të sinkronizimit të IP-së dhe portofolit - drejtoni nyjen tuaj për privatësi më të fortë. Vlerësimet opsionale të fiat-it, nëse janë të aktivizuara, kontaktoni rates.nexatrode.com për tarifat."
+            "value": "Softuer i paaudituar i licencuar nga MIT. Ju jeni përgjegjës për frazën dhe fondet tuaja të rikuperimit. Nyja e largët e parazgjedhur mund të shohë pyetjet tuaja të sinkronizimit të IP-së dhe portofolit - drejtoni nyjen tuaj për privatësi më të fortë. Vlerësimet opsionale të fiat-it, nëse janë të aktivizuara, kontaktoni rates.nexawal.com për tarifat."
           }
         },
         "sv": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT-licensierad, oreviderad programvara. Du är ansvarig för din återställningsfras och pengar. Standardfjärrnoden kan se dina IP- och plånbokssynkroniseringsfrågor – kör din egen nod för bättre integritet. Valfria fiat-uppskattningar, om de är aktiverade, kontakta rates.nexatrode.com för priser."
+            "value": "MIT-licensierad, oreviderad programvara. Du är ansvarig för din återställningsfras och pengar. Standardfjärrnoden kan se dina IP- och plånbokssynkroniseringsfrågor – kör din egen nod för bättre integritet. Valfria fiat-uppskattningar, om de är aktiverade, kontakta rates.nexawal.com för priser."
           }
         },
         "th": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "ซอฟต์แวร์ที่ได้รับอนุญาตจาก MIT และยังไม่ได้รับการตรวจสอบ คุณต้องรับผิดชอบต่อวลีกู้คืนและเงินทุนของคุณ โหนดระยะไกลเริ่มต้นสามารถดู IP และคำขอซิงค์กระเป๋าเงินของคุณ — เรียกใช้โหนดของคุณเองเพื่อความเป็นส่วนตัวที่แข็งแกร่งยิ่งขึ้น การประมาณการคำสั่งเพิ่มเติม หากเปิดใช้งาน โปรดติดต่อ rates.nexatrode.com เพื่อสอบถามอัตรา"
+            "value": "ซอฟต์แวร์ที่ได้รับอนุญาตจาก MIT และยังไม่ได้รับการตรวจสอบ คุณต้องรับผิดชอบต่อวลีกู้คืนและเงินทุนของคุณ โหนดระยะไกลเริ่มต้นสามารถดู IP และคำขอซิงค์กระเป๋าเงินของคุณ — เรียกใช้โหนดของคุณเองเพื่อความเป็นส่วนตัวที่แข็งแกร่งยิ่งขึ้น การประมาณการคำสั่งเพิ่มเติม หากเปิดใช้งาน โปรดติดต่อ rates.nexawal.com เพื่อสอบถามอัตรา"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT lisanslı, denetlenmemiş yazılım. Kurtarma ifadenizden ve fonlarınızdan siz sorumlusunuz. Varsayılan uzak düğüm, IP ve cüzdan senkronizasyonu sorgularınızı görebilir; daha güçlü gizlilik için kendi düğümünüzü çalıştırın. İsteğe bağlı fiat tahminleri, eğer etkinleştirilirse, oranlar için rates.nexatrode.com ile iletişime geçin."
+            "value": "MIT lisanslı, denetlenmemiş yazılım. Kurtarma ifadenizden ve fonlarınızdan siz sorumlusunuz. Varsayılan uzak düğüm, IP ve cüzdan senkronizasyonu sorgularınızı görebilir; daha güçlü gizlilik için kendi düğümünüzü çalıştırın. İsteğe bağlı fiat tahminleri, eğer etkinleştirilirse, oranlar için rates.nexawal.com ile iletişime geçin."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "програмне забезпечення, що не перевірялося, ліцензоване MIT. Ви несете відповідальність за свою фразу відновлення та кошти. Віддалений вузол за замовчуванням може бачити вашу IP-адресу та запити синхронізації гаманця — запустіть власний вузол для кращої конфіденційності. Необов’язкова оцінка фіат, якщо ввімкнено, зв’яжіться з rates.nexatrode.com, щоб дізнатися ціни."
+            "value": "програмне забезпечення, що не перевірялося, ліцензоване MIT. Ви несете відповідальність за свою фразу відновлення та кошти. Віддалений вузол за замовчуванням може бачити вашу IP-адресу та запити синхронізації гаманця — запустіть власний вузол для кращої конфіденційності. Необов’язкова оцінка фіат, якщо ввімкнено, зв’яжіться з rates.nexawal.com, щоб дізнатися ціни."
           }
         },
         "ur": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT لائسنس یافتہ، غیر آڈیٹ سافٹ ویئر۔ آپ اپنے ریکوری کے جملے اور فنڈز کے ذمہ دار ہیں۔ ڈیفالٹ ریموٹ نوڈ آپ کے IP اور والیٹ کی مطابقت پذیری کے سوالات دیکھ سکتا ہے — مضبوط رازداری کے لیے اپنا نوڈ چلائیں۔ اختیاری تخمینہ جات، اگر فعال ہو، تو قیمتوں کے لیے rates.nexatrode.com سے رابطہ کریں۔"
+            "value": "MIT لائسنس یافتہ، غیر آڈیٹ سافٹ ویئر۔ آپ اپنے ریکوری کے جملے اور فنڈز کے ذمہ دار ہیں۔ ڈیفالٹ ریموٹ نوڈ آپ کے IP اور والیٹ کی مطابقت پذیری کے سوالات دیکھ سکتا ہے — مضبوط رازداری کے لیے اپنا نوڈ چلائیں۔ اختیاری تخمینہ جات، اگر فعال ہو، تو قیمتوں کے لیے rates.nexawal.com سے رابطہ کریں۔"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Phần mềm chưa được kiểm tra, được MIT cấp phép. Bạn chịu trách nhiệm về thời hạn khôi phục và số tiền của mình. Nút từ xa mặc định có thể xem các truy vấn đồng bộ hóa IP và ví của bạn — hãy chạy nút của riêng bạn để có được sự bảo mật mạnh mẽ hơn. Ước tính tiền pháp định tùy chọn, nếu được bật, hãy liên hệ với rates.nexatrode.com để biết mức giá."
+            "value": "Phần mềm chưa được kiểm tra, được MIT cấp phép. Bạn chịu trách nhiệm về thời hạn khôi phục và số tiền của mình. Nút từ xa mặc định có thể xem các truy vấn đồng bộ hóa IP và ví của bạn — hãy chạy nút của riêng bạn để có được sự bảo mật mạnh mẽ hơn. Ước tính tiền pháp định tùy chọn, nếu được bật, hãy liên hệ với rates.nexawal.com để biết mức giá."
           }
         },
         "yo": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Iwe-aṣẹ MIT, sọfitiwia ti a ko ṣe ayẹwo. O ni iduro fun gbolohun imularada rẹ ati awọn owo. Node isakoṣo latọna jijin le rii IP rẹ ati awọn ibeere amuṣiṣẹpọ apamọwọ - ṣiṣe ipade tirẹ fun ikọkọ ti o lagbara. Awọn iṣiro fiat iyan, ti o ba ṣiṣẹ, kan si rates.nexatrode.com fun awọn oṣuwọn."
+            "value": "Iwe-aṣẹ MIT, sọfitiwia ti a ko ṣe ayẹwo. O ni iduro fun gbolohun imularada rẹ ati awọn owo. Node isakoṣo latọna jijin le rii IP rẹ ati awọn ibeere amuṣiṣẹpọ apamọwọ - ṣiṣe ipade tirẹ fun ikọkọ ti o lagbara. Awọn iṣiro fiat iyan, ti o ba ṣiṣẹ, kan si rates.nexawal.com fun awọn oṣuwọn."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "麻省理工学院许可、未经审核的软件。您应对您的恢复短语和资金负责。默认远程节点可以查看您的 IP 和钱包同步查询 - 运行您自己的节点以获得更强的隐私。可选的法定估算（如果启用）请联系 rates.nexatrode.com 了解费率。"
+            "value": "麻省理工学院许可、未经审核的软件。您应对您的恢复短语和资金负责。默认远程节点可以查看您的 IP 和钱包同步查询 - 运行您自己的节点以获得更强的隐私。可选的法定估算（如果启用）请联系 rates.nexawal.com 了解费率。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "麻省理工學院許可、未經審核的軟體。您應對您的恢復短語和資金負責。預設遠端節點可以查看您的 IP 和錢包同步查詢 - 運行您自己的節點以獲得更強的隱私。可選的法定估算（如果啟用）請聯絡 rates.nexatrode.com 以了解費率。"
+            "value": "麻省理工學院許可、未經審核的軟體。您應對您的恢復短語和資金負責。預設遠端節點可以查看您的 IP 和錢包同步查詢 - 運行您自己的節點以獲得更強的隱私。可選的法定估算（如果啟用）請聯絡 rates.nexawal.com 以了解費率。"
           }
         },
         "my": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "- MIT လိုင်စင်ရ၊ စစ်ဆေးမထားသော ဆော့ဖ်ဝဲ။ သင်၏ ပြန်လည်ရယူရေး စကားစုနှင့် ရန်ပုံငွေများအတွက် သင်သည် တာဝန်ရှိပါသည်။ မူရင်းအဝေးမှ node သည် သင်၏ IP နှင့် wallet sync queries များကို မြင်နိုင်သည် — ပိုမိုခိုင်မာသောကိုယ်ရေးကိုယ်တာအတွက် သင့်ကိုယ်ပိုင် node ကိုဖွင့်ပါ။ ရွေးချယ်နိုင်သော fiat ခန့်မှန်းချက်များကို ဖွင့်ထားပါက နှုန်းထားများအတွက် rates.nexatrode.com သို့ ဆက်သွယ်ပါ။"
+            "value": "- MIT လိုင်စင်ရ၊ စစ်ဆေးမထားသော ဆော့ဖ်ဝဲ။ သင်၏ ပြန်လည်ရယူရေး စကားစုနှင့် ရန်ပုံငွေများအတွက် သင်သည် တာဝန်ရှိပါသည်။ မူရင်းအဝေးမှ node သည် သင်၏ IP နှင့် wallet sync queries များကို မြင်နိုင်သည် — ပိုမိုခိုင်မာသောကိုယ်ရေးကိုယ်တာအတွက် သင့်ကိုယ်ပိုင် node ကိုဖွင့်ပါ။ ရွေးချယ်နိုင်သော fiat ခန့်မှန်းချက်များကို ဖွင့်ထားပါက နှုန်းထားများအတွက် rates.nexawal.com သို့ ဆက်သွယ်ပါ။"
           }
         },
         "hy": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "MIT լիցենզավորված, չաուդիտի ենթարկված ծրագրակազմ: Դուք պատասխանատու եք ձեր վերականգնման արտահայտության և միջոցների համար: Կանխադրված հեռավոր հանգույցը կարող է տեսնել ձեր IP-ի և դրամապանակի համաժամացման հարցումները. գործարկել ձեր սեփական հանգույցը՝ ավելի ուժեղ գաղտնիության համար: Ֆիատի կամընտիր գնահատականները, եթե միացված են, կապվեք rates.nexatrode.com համարով գների համար:"
+            "value": "MIT լիցենզավորված, չաուդիտի ենթարկված ծրագրակազմ: Դուք պատասխանատու եք ձեր վերականգնման արտահայտության և միջոցների համար: Կանխադրված հեռավոր հանգույցը կարող է տեսնել ձեր IP-ի և դրամապանակի համաժամացման հարցումները. գործարկել ձեր սեփական հանգույցը՝ ավելի ուժեղ գաղտնիության համար: Ֆիատի կամընտիր գնահատականները, եթե միացված են, կապվեք rates.nexawal.com համարով գների համար:"
           }
         }
       }
     },
-    "Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexatrode.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold.": {
+    "Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexawal.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "اختياري. عند التفعيل، يطلب NexaWal سعر XMR للعملة التي اخترتها من rates.nexatrode.com عبر HTTPS. يستخدم هذا الطلب الإنترنت العام (Clearnet) حتى عند استخدام عقدة المحفظة I2P. يمكن لـ Nexatrode رؤية عنوان IP والعملة المختارة، لكن لا تُرسل أرصدة المحفظة أو عناوينها أو عبارة الاسترداد أو سجل المعاملات. الأسعار تقديرية فقط — XMR هو ما ترسله وتحتفظ به."
+            "value": "اختياري. عند التفعيل، يطلب NexaWal سعر XMR للعملة التي اخترتها من rates.nexawal.com عبر HTTPS. يستخدم هذا الطلب الإنترنت العام (Clearnet) حتى عند استخدام عقدة المحفظة I2P. يمكن لـ Nexatrode رؤية عنوان IP والعملة المختارة، لكن لا تُرسل أرصدة المحفظة أو عناوينها أو عبارة الاسترداد أو سجل المعاملات. الأسعار تقديرية فقط — XMR هو ما ترسله وتحتفظ به."
           }
         },
         "az": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "İstəyə bağlıdır. Aktiv olduqda NexaWal seçdiyiniz valyuta üçün XMR məzənnəsini HTTPS ilə rates.nexatrode.com saytından soruşur. Bu sorğu pul kisəsi qovşağı I2P istifadə etsə belə açıq internetdən (Clearnet) gedir. Nexatrode IP ünvanınızı və seçilmiş valyutanı görə bilər, lakin pul kisəsi məbləğləri, ünvanları, toxum ifadəsi və əməliyyat tarixçəsi göndərilmir. Məzənnələr yalnız təxminidir — saxladığınız və göndərdiyiniz aktiv XMR-dir."
+            "value": "İstəyə bağlıdır. Aktiv olduqda NexaWal seçdiyiniz valyuta üçün XMR məzənnəsini HTTPS ilə rates.nexawal.com saytından soruşur. Bu sorğu pul kisəsi qovşağı I2P istifadə etsə belə açıq internetdən (Clearnet) gedir. Nexatrode IP ünvanınızı və seçilmiş valyutanı görə bilər, lakin pul kisəsi məbləğləri, ünvanları, toxum ifadəsi və əməliyyat tarixçəsi göndərilmir. Məzənnələr yalnız təxminidir — saxladığınız və göndərdiyiniz aktiv XMR-dir."
           }
         },
         "bg": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "По избор. Когато е включено, NexaWal заявява курс на XMR за избраната от вас валута от rates.nexatrode.com чрез HTTPS. Заявката използва обикновения интернет (Clearnet), дори когато възелът на портфейла използва I2P. Nexatrode може да види IP адреса ви и избраната валута, но не получава суми, адреси, начална фраза или история на транзакциите от портфейла. Курсовете са само ориентировъчни — изпращате и съхранявате XMR."
+            "value": "По избор. Когато е включено, NexaWal заявява курс на XMR за избраната от вас валута от rates.nexawal.com чрез HTTPS. Заявката използва обикновения интернет (Clearnet), дори когато възелът на портфейла използва I2P. Nexatrode може да види IP адреса ви и избраната валута, но не получава суми, адреси, начална фраза или история на транзакциите от портфейла. Курсовете са само ориентировъчни — изпращате и съхранявате XMR."
           }
         },
         "bn": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "ঐচ্ছিক। চালু থাকলে, NexaWal আপনার নির্বাচিত মুদ্রার XMR দর HTTPS-এর মাধ্যমে rates.nexatrode.com থেকে চায়। ওয়ালেট নোড I2P ব্যবহার করলেও এই অনুরোধ সাধারণ ইন্টারনেট (Clearnet) দিয়ে যায়। Nexatrode আপনার IP ঠিকানা ও নির্বাচিত মুদ্রা দেখতে পারে, তবে ওয়ালেটের পরিমাণ, ঠিকানা, সিড বা লেনদেনের ইতিহাস পাঠানো হয় না। দর কেবল আনুমানিক — আপনি XMR-ই পাঠান ও রাখেন।"
+            "value": "ঐচ্ছিক। চালু থাকলে, NexaWal আপনার নির্বাচিত মুদ্রার XMR দর HTTPS-এর মাধ্যমে rates.nexawal.com থেকে চায়। ওয়ালেট নোড I2P ব্যবহার করলেও এই অনুরোধ সাধারণ ইন্টারনেট (Clearnet) দিয়ে যায়। Nexatrode আপনার IP ঠিকানা ও নির্বাচিত মুদ্রা দেখতে পারে, তবে ওয়ালেটের পরিমাণ, ঠিকানা, সিড বা লেনদেনের ইতিহাস পাঠানো হয় না। দর কেবল আনুমানিক — আপনি XMR-ই পাঠান ও রাখেন।"
           }
         },
         "ca": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opcional. Si està activat, NexaWal demana a rates.nexatrode.com, mitjançant HTTPS, la cotització d’XMR per a la moneda que has triat. Aquesta petició usa la Internet pública (Clearnet), encara que el node de la cartera faci servir I2P. Nexatrode pot veure la teva IP i la moneda triada, però no rep saldos, adreces, la frase de recuperació ni l’historial de transaccions. Les cotitzacions són només estimacions: el que tens i envies és XMR."
+            "value": "Opcional. Si està activat, NexaWal demana a rates.nexawal.com, mitjançant HTTPS, la cotització d’XMR per a la moneda que has triat. Aquesta petició usa la Internet pública (Clearnet), encara que el node de la cartera faci servir I2P. Nexatrode pot veure la teva IP i la moneda triada, però no rep saldos, adreces, la frase de recuperació ni l’historial de transaccions. Les cotitzacions són només estimacions: el que tens i envies és XMR."
           }
         },
         "cs": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Volitelné. Je-li funkce zapnutá, NexaWal si přes HTTPS vyžádá kurz XMR pro zvolenou měnu ze serveru rates.nexatrode.com. Požadavek jde přes veřejný internet (Clearnet), i když peněženka používá uzel I2P. Nexatrode může vidět vaši IP adresu a zvolenou měnu, ale nedostává zůstatky, adresy, obnovovací frázi ani historii transakcí. Kurzy jsou pouze orientační — držíte a posíláte XMR."
+            "value": "Volitelné. Je-li funkce zapnutá, NexaWal si přes HTTPS vyžádá kurz XMR pro zvolenou měnu ze serveru rates.nexawal.com. Požadavek jde přes veřejný internet (Clearnet), i když peněženka používá uzel I2P. Nexatrode může vidět vaši IP adresu a zvolenou měnu, ale nedostává zůstatky, adresy, obnovovací frázi ani historii transakcí. Kurzy jsou pouze orientační — držíte a posíláte XMR."
           }
         },
         "da": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Valgfrit. Når det er slået til, henter NexaWal en XMR-kurs for din valgte valuta fra rates.nexatrode.com via HTTPS. Anmodningen bruger det almindelige internet (clearnet), også når din wallet-node bruger I2P. Nexatrode kan se din IP-adresse og valgte valuta, men modtager ikke walletbeløb, adresser, seed eller transaktionshistorik. Kurserne er kun vejledende — det er XMR, du sender og opbevarer."
+            "value": "Valgfrit. Når det er slået til, henter NexaWal en XMR-kurs for din valgte valuta fra rates.nexawal.com via HTTPS. Anmodningen bruger det almindelige internet (clearnet), også når din wallet-node bruger I2P. Nexatrode kan se din IP-adresse og valgte valuta, men modtager ikke walletbeløb, adresser, seed eller transaktionshistorik. Kurserne er kun vejledende — det er XMR, du sender og opbevarer."
           }
         },
         "de": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Optional. Wenn aktiviert, fragt NexaWal über HTTPS bei rates.nexatrode.com den XMR-Kurs für die ausgewählte Währung ab. Diese Anfrage nutzt das öffentliche Internet (Clearnet), auch wenn dein Wallet-Node I2P verwendet. Nexatrode kann deine IP-Adresse und die gewählte Währung sehen, erhält aber keine Wallet-Beträge, Adressen, Seed-Phrase oder Transaktionshistorie. Die Kurse sind nur Schätzwerte — du hältst und sendest XMR."
+            "value": "Optional. Wenn aktiviert, fragt NexaWal über HTTPS bei rates.nexawal.com den XMR-Kurs für die ausgewählte Währung ab. Diese Anfrage nutzt das öffentliche Internet (Clearnet), auch wenn dein Wallet-Node I2P verwendet. Nexatrode kann deine IP-Adresse und die gewählte Währung sehen, erhält aber keine Wallet-Beträge, Adressen, Seed-Phrase oder Transaktionshistorie. Die Kurse sind nur Schätzwerte — du hältst und sendest XMR."
           }
         },
         "el": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Προαιρετικό. Όταν είναι ενεργό, το NexaWal ζητά μέσω HTTPS από το rates.nexatrode.com την ισοτιμία XMR για το νόμισμα που επιλέξατε. Το αίτημα χρησιμοποιεί το δημόσιο διαδίκτυο (clearnet), ακόμη κι αν ο κόμβος του πορτοφολιού χρησιμοποιεί I2P. Η Nexatrode μπορεί να δει τη διεύθυνση IP και το επιλεγμένο νόμισμα, αλλά δεν λαμβάνει ποσά, διευθύνσεις, φράση ανάκτησης ή ιστορικό συναλλαγών. Οι ισοτιμίες είναι μόνο εκτιμήσεις — στέλνετε και κρατάτε XMR."
+            "value": "Προαιρετικό. Όταν είναι ενεργό, το NexaWal ζητά μέσω HTTPS από το rates.nexawal.com την ισοτιμία XMR για το νόμισμα που επιλέξατε. Το αίτημα χρησιμοποιεί το δημόσιο διαδίκτυο (clearnet), ακόμη κι αν ο κόμβος του πορτοφολιού χρησιμοποιεί I2P. Η Nexatrode μπορεί να δει τη διεύθυνση IP και το επιλεγμένο νόμισμα, αλλά δεν λαμβάνει ποσά, διευθύνσεις, φράση ανάκτησης ή ιστορικό συναλλαγών. Οι ισοτιμίες είναι μόνο εκτιμήσεις — στέλνετε και κρατάτε XMR."
           }
         },
         "eo": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Laŭvola. Kiam ĝi estas ŝaltita, NexaWal petas per HTTPS de rates.nexatrode.com la XMR-kurzon por via elektita valuto. La peto uzas la publikan interreton (Clearnet), eĉ se via monujo-nodo uzas I2P. Nexatrode povas vidi vian IP-adreson kaj elektitan valuton, sed ne ricevas monujajn sumojn, adresojn, reakiraĵan frazon aŭ transakcian historion. Kurzoj estas nur taksoj — vi sendas kaj tenas XMR."
+            "value": "Laŭvola. Kiam ĝi estas ŝaltita, NexaWal petas per HTTPS de rates.nexawal.com la XMR-kurzon por via elektita valuto. La peto uzas la publikan interreton (Clearnet), eĉ se via monujo-nodo uzas I2P. Nexatrode povas vidi vian IP-adreson kaj elektitan valuton, sed ne ricevas monujajn sumojn, adresojn, reakiraĵan frazon aŭ transakcian historion. Kurzoj estas nur taksoj — vi sendas kaj tenas XMR."
           }
         },
         "es": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opcional. Al activarlo, NexaWal solicita por HTTPS a rates.nexatrode.com la cotización de XMR para la moneda elegida. La solicitud usa Internet público (Clearnet), aunque el nodo de la cartera use I2P. Nexatrode puede ver tu IP y la moneda elegida, pero no recibe saldos, direcciones, frase semilla ni historial de transacciones. Las cotizaciones son solo estimaciones: lo que tienes y envías es XMR."
+            "value": "Opcional. Al activarlo, NexaWal solicita por HTTPS a rates.nexawal.com la cotización de XMR para la moneda elegida. La solicitud usa Internet público (Clearnet), aunque el nodo de la cartera use I2P. Nexatrode puede ver tu IP y la moneda elegida, pero no recibe saldos, direcciones, frase semilla ni historial de transacciones. Las cotizaciones son solo estimaciones: lo que tienes y envías es XMR."
           }
         },
         "et": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Valikuline. Kui see on sisse lülitatud, küsib NexaWal HTTPS-i kaudu saidilt rates.nexatrode.com XMR-i kurssi valitud valuuta jaoks. Päring kasutab avalikku internetti (Clearnet) ka siis, kui rahakoti sõlm kasutab I2P-d. Nexatrode näeb sinu IP-aadressi ja valitud valuutat, kuid rahakoti summasid, aadresse, taastefraasi ega tehinguajalugu ei saadeta. Kursid on vaid hinnangud — hoiad ja saadad XMR-i."
+            "value": "Valikuline. Kui see on sisse lülitatud, küsib NexaWal HTTPS-i kaudu saidilt rates.nexawal.com XMR-i kurssi valitud valuuta jaoks. Päring kasutab avalikku internetti (Clearnet) ka siis, kui rahakoti sõlm kasutab I2P-d. Nexatrode näeb sinu IP-aadressi ja valitud valuutat, kuid rahakoti summasid, aadresse, taastefraasi ega tehinguajalugu ei saadeta. Kursid on vaid hinnangud — hoiad ja saadad XMR-i."
           }
         },
         "eu": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Aukerakoa. Aktibatuta dagoenean, NexaWal-ek rates.nexatrode.com-i eskatzen dio, HTTPS bidez, aukeratutako monetaren XMR tasa. Eskaerak Internet publikoa (Clearnet) erabiltzen du, zorro-nodoak I2P erabiltzen badu ere. Nexatrode-k zure IP helbidea eta hautatutako moneta ikus ditzake, baina ez ditu jasotzen zorroko saldoak, helbideak, berreskuratze-esaldia edo transakzioen historia. Tasak estimazioak baino ez dira: XMR bidali eta gordetzen duzun aktiboa da."
+            "value": "Aukerakoa. Aktibatuta dagoenean, NexaWal-ek rates.nexawal.com-i eskatzen dio, HTTPS bidez, aukeratutako monetaren XMR tasa. Eskaerak Internet publikoa (Clearnet) erabiltzen du, zorro-nodoak I2P erabiltzen badu ere. Nexatrode-k zure IP helbidea eta hautatutako moneta ikus ditzake, baina ez ditu jasotzen zorroko saldoak, helbideak, berreskuratze-esaldia edo transakzioen historia. Tasak estimazioak baino ez dira: XMR bidali eta gordetzen duzun aktiboa da."
           }
         },
         "fa": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "اختیاری است. با فعال‌کردن آن، NexaWal نرخ XMR برای ارز انتخابی شما را از طریق HTTPS از rates.nexatrode.com می‌گیرد. این درخواست حتی هنگام استفادهٔ گره کیف پول از I2P از اینترنت عمومی (Clearnet) عبور می‌کند. Nexatrode می‌تواند نشانی IP و ارز انتخابی شما را ببیند، اما موجودی‌ها، نشانی‌ها، عبارت بازیابی یا سابقهٔ تراکنش‌های کیف پول ارسال نمی‌شوند. نرخ‌ها فقط تخمینی‌اند — دارایی‌ای که می‌فرستید و نگه می‌دارید XMR است."
+            "value": "اختیاری است. با فعال‌کردن آن، NexaWal نرخ XMR برای ارز انتخابی شما را از طریق HTTPS از rates.nexawal.com می‌گیرد. این درخواست حتی هنگام استفادهٔ گره کیف پول از I2P از اینترنت عمومی (Clearnet) عبور می‌کند. Nexatrode می‌تواند نشانی IP و ارز انتخابی شما را ببیند، اما موجودی‌ها، نشانی‌ها، عبارت بازیابی یا سابقهٔ تراکنش‌های کیف پول ارسال نمی‌شوند. نرخ‌ها فقط تخمینی‌اند — دارایی‌ای که می‌فرستید و نگه می‌دارید XMR است."
           }
         },
         "fi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Valinnainen. Kun toiminto on käytössä, NexaWal pyytää HTTPS-yhteydellä palvelusta rates.nexatrode.com XMR-kurssin valitsemallesi valuutalle. Pyyntö käyttää julkista internetiä (clearnet), vaikka lompakon solmu käyttäisi I2P:tä. Nexatrode näkee IP-osoitteesi ja valitun valuutan, mutta lompakon saldoja, osoitteita, palautussanoja tai tapahtumahistoriaa ei lähetetä. Kurssit ovat vain arvioita — lähetät ja säilytät XMR:ää."
+            "value": "Valinnainen. Kun toiminto on käytössä, NexaWal pyytää HTTPS-yhteydellä palvelusta rates.nexawal.com XMR-kurssin valitsemallesi valuutalle. Pyyntö käyttää julkista internetiä (clearnet), vaikka lompakon solmu käyttäisi I2P:tä. Nexatrode näkee IP-osoitteesi ja valitun valuutan, mutta lompakon saldoja, osoitteita, palautussanoja tai tapahtumahistoriaa ei lähetetä. Kurssit ovat vain arvioita — lähetät ja säilytät XMR:ää."
           }
         },
         "fil": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opsyonal. Kapag naka-on, humihingi ang NexaWal sa rates.nexatrode.com ng XMR rate para sa pinili mong currency sa pamamagitan ng HTTPS. Dumadaan ito sa pampublikong internet (clearnet), kahit I2P ang gamit ng wallet node. Makikita ng Nexatrode ang IP address mo at piniling currency, pero hindi ipinapadala ang halaga, mga address, seed phrase, o history ng transaksyon ng wallet. Tantiya lamang ang mga rate — XMR ang ipinapadala at hawak mo."
+            "value": "Opsyonal. Kapag naka-on, humihingi ang NexaWal sa rates.nexawal.com ng XMR rate para sa pinili mong currency sa pamamagitan ng HTTPS. Dumadaan ito sa pampublikong internet (clearnet), kahit I2P ang gamit ng wallet node. Makikita ng Nexatrode ang IP address mo at piniling currency, pero hindi ipinapadala ang halaga, mga address, seed phrase, o history ng transaksyon ng wallet. Tantiya lamang ang mga rate — XMR ang ipinapadala at hawak mo."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Facultatif. Si cette option est activée, NexaWal demande par HTTPS à rates.nexatrode.com le cours du XMR dans la devise choisie. Cette requête passe par l’Internet public (clearnet), même si le nœud du portefeuille utilise I2P. Nexatrode peut voir votre adresse IP et la devise choisie, mais ne reçoit ni soldes, ni adresses, ni phrase de récupération, ni historique des transactions. Les cours sont des estimations — vous détenez et envoyez du XMR."
+            "value": "Facultatif. Si cette option est activée, NexaWal demande par HTTPS à rates.nexawal.com le cours du XMR dans la devise choisie. Cette requête passe par l’Internet public (clearnet), même si le nœud du portefeuille utilise I2P. Nexatrode peut voir votre adresse IP et la devise choisie, mais ne reçoit ni soldes, ni adresses, ni phrase de récupération, ni historique des transactions. Les cours sont des estimations — vous détenez et envoyez du XMR."
           }
         },
         "ga": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Roghnach. Nuair atá sé cumasaithe, iarrann NexaWal ráta XMR don airgeadra roghnaithe ó rates.nexatrode.com trí HTTPS. Úsáideann an t-iarratas an tIdirlíon poiblí (Clearnet), fiú má úsáideann nóid an sparáin I2P. Is féidir le Nexatrode do sheoladh IP agus an t-airgeadra roghnaithe a fheiceáil, ach ní sheoltar iarmhéideanna, seoltaí, frása síl ná stair idirbheart an sparáin. Meastacháin amháin iad na rátaí — is é XMR a sheolann agus a choinníonn tú."
+            "value": "Roghnach. Nuair atá sé cumasaithe, iarrann NexaWal ráta XMR don airgeadra roghnaithe ó rates.nexawal.com trí HTTPS. Úsáideann an t-iarratas an tIdirlíon poiblí (Clearnet), fiú má úsáideann nóid an sparáin I2P. Is féidir le Nexatrode do sheoladh IP agus an t-airgeadra roghnaithe a fheiceáil, ach ní sheoltar iarmhéideanna, seoltaí, frása síl ná stair idirbheart an sparáin. Meastacháin amháin iad na rátaí — is é XMR a sheolann agus a choinníonn tú."
           }
         },
         "gl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opcional. Se está activado, NexaWal solicita por HTTPS a rates.nexatrode.com a cotización de XMR para a moeda escollida. A solicitude usa a Internet pública (Clearnet), mesmo se o nodo do moedeiro usa I2P. Nexatrode pode ver o teu IP e a moeda escollida, pero non recibe saldos, enderezos, frase de recuperación nin historial de transaccións. As cotizacións son só estimacións: o que tes e envías é XMR."
+            "value": "Opcional. Se está activado, NexaWal solicita por HTTPS a rates.nexawal.com a cotización de XMR para a moeda escollida. A solicitude usa a Internet pública (Clearnet), mesmo se o nodo do moedeiro usa I2P. Nexatrode pode ver o teu IP e a moeda escollida, pero non recibe saldos, enderezos, frase de recuperación nin historial de transaccións. As cotizacións son só estimacións: o que tes e envías é XMR."
           }
         },
         "gn": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Ojeporavokuaa. Oĩramo hendýpe, NexaWal ojerure HTTPS rupive rates.nexatrode.com-pe XMR repy ne viru reiporavóva rehe. Ko jerure oipuru Internet público (Clearnet), ne monedero nodo oipuru ramo jepe I2P. Nexatrode ikatu ohecha nde IP ha viru reiporavóva, hákatu noñemondói monedero saldo, kundaharape, ñe’ẽñemi ñemoĩporã térã tembiasakue transacción rehegua. Repy kuéra ha’e estimaciónnte — XMR rehegua remondo ha reñongatu."
+            "value": "Ojeporavokuaa. Oĩramo hendýpe, NexaWal ojerure HTTPS rupive rates.nexawal.com-pe XMR repy ne viru reiporavóva rehe. Ko jerure oipuru Internet público (Clearnet), ne monedero nodo oipuru ramo jepe I2P. Nexatrode ikatu ohecha nde IP ha viru reiporavóva, hákatu noñemondói monedero saldo, kundaharape, ñe’ẽñemi ñemoĩporã térã tembiasakue transacción rehegua. Repy kuéra ha’e estimaciónnte — XMR rehegua remondo ha reñongatu."
           }
         },
         "ha": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Na zaɓi ne. Idan an kunna shi, NexaWal yana neman farashin XMR na kuɗin da ka zaɓa daga rates.nexatrode.com ta HTTPS. Wannan buƙatar tana amfani da intanet na jama’a (Clearnet), ko da nodes ɗin walat yana amfani da I2P. Nexatrode na iya ganin adireshin IP ɗinka da kuɗin da ka zaɓa, amma ba a aika ma’aunin walat, adireshi, kalmomin dawo da walat, ko tarihin ma’amaloli ba. Ƙididdiga ce kawai — XMR ne kake aikawa da riƙewa."
+            "value": "Na zaɓi ne. Idan an kunna shi, NexaWal yana neman farashin XMR na kuɗin da ka zaɓa daga rates.nexawal.com ta HTTPS. Wannan buƙatar tana amfani da intanet na jama’a (Clearnet), ko da nodes ɗin walat yana amfani da I2P. Nexatrode na iya ganin adireshin IP ɗinka da kuɗin da ka zaɓa, amma ba a aika ma’aunin walat, adireshi, kalmomin dawo da walat, ko tarihin ma’amaloli ba. Ƙididdiga ce kawai — XMR ne kake aikawa da riƙewa."
           }
         },
         "he": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "אופציונלי. כשהאפשרות מופעלת, NexaWal מבקשת מ־rates.nexatrode.com דרך HTTPS את שער ה־XMR למטבע שבחרת. הבקשה עוברת באינטרנט הציבורי (Clearnet), גם כשצומת הארנק משתמש ב־I2P. Nexatrode יכולה לראות את כתובת ה־IP שלך ואת המטבע שנבחר, אך לא נשלחים יתרות, כתובות, מילות השחזור או היסטוריית עסקאות של הארנק. השערים הם הערכות בלבד — מה שנשלח ונשמר הוא XMR."
+            "value": "אופציונלי. כשהאפשרות מופעלת, NexaWal מבקשת מ־rates.nexawal.com דרך HTTPS את שער ה־XMR למטבע שבחרת. הבקשה עוברת באינטרנט הציבורי (Clearnet), גם כשצומת הארנק משתמש ב־I2P. Nexatrode יכולה לראות את כתובת ה־IP שלך ואת המטבע שנבחר, אך לא נשלחים יתרות, כתובות, מילות השחזור או היסטוריית עסקאות של הארנק. השערים הם הערכות בלבד — מה שנשלח ונשמר הוא XMR."
           }
         },
         "hi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "वैकल्पिक। चालू होने पर, NexaWal आपके चुने हुए मुद्रा के लिए XMR दर HTTPS के ज़रिए rates.nexatrode.com से मांगता है। वॉलेट नोड I2P का उपयोग करे तब भी यह अनुरोध सार्वजनिक इंटरनेट (Clearnet) से जाता है। Nexatrode आपका IP पता और चुनी हुई मुद्रा देख सकता है, लेकिन वॉलेट की राशि, पते, seed phrase या लेन-देन इतिहास नहीं भेजे जाते। दरें केवल अनुमान हैं — आप XMR ही भेजते और रखते हैं।"
+            "value": "वैकल्पिक। चालू होने पर, NexaWal आपके चुने हुए मुद्रा के लिए XMR दर HTTPS के ज़रिए rates.nexawal.com से मांगता है। वॉलेट नोड I2P का उपयोग करे तब भी यह अनुरोध सार्वजनिक इंटरनेट (Clearnet) से जाता है। Nexatrode आपका IP पता और चुनी हुई मुद्रा देख सकता है, लेकिन वॉलेट की राशि, पते, seed phrase या लेन-देन इतिहास नहीं भेजे जाते। दरें केवल अनुमान हैं — आप XMR ही भेजते और रखते हैं।"
           }
         },
         "hr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Neobavezno. Kada je uključeno, NexaWal putem HTTPS-a traži tečaj XMR-a za odabranu valutu od rates.nexatrode.com. Zahtjev koristi javni internet (Clearnet), čak i kada čvor novčanika koristi I2P. Nexatrode može vidjeti vašu IP adresu i odabranu valutu, ali ne prima iznose, adrese, početnu frazu ni povijest transakcija novčanika. Tečajevi su samo procjene — šaljete i čuvate XMR."
+            "value": "Neobavezno. Kada je uključeno, NexaWal putem HTTPS-a traži tečaj XMR-a za odabranu valutu od rates.nexawal.com. Zahtjev koristi javni internet (Clearnet), čak i kada čvor novčanika koristi I2P. Nexatrode može vidjeti vašu IP adresu i odabranu valutu, ali ne prima iznose, adrese, početnu frazu ni povijest transakcija novčanika. Tečajevi su samo procjene — šaljete i čuvate XMR."
           }
         },
         "hu": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Nem kötelező. Bekapcsoláskor a NexaWal HTTPS-en keresztül lekéri a kiválasztott pénznem XMR-árfolyamát a rates.nexatrode.com címről. A kérés a nyilvános internetet (Clearnet) használja akkor is, ha a tárca csomópontja I2P-t használ. A Nexatrode láthatja az IP-címedet és a választott pénznemet, de nem kap tárcaegyenleget, címet, helyreállító kifejezést vagy tranzakciós előzményt. Az árfolyamok csak becslések — XMR-t küldesz és tartasz."
+            "value": "Nem kötelező. Bekapcsoláskor a NexaWal HTTPS-en keresztül lekéri a kiválasztott pénznem XMR-árfolyamát a rates.nexawal.com címről. A kérés a nyilvános internetet (Clearnet) használja akkor is, ha a tárca csomópontja I2P-t használ. A Nexatrode láthatja az IP-címedet és a választott pénznemet, de nem kap tárcaegyenleget, címet, helyreállító kifejezést vagy tranzakciós előzményt. Az árfolyamok csak becslések — XMR-t küldesz és tartasz."
           }
         },
         "hy": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Ընտրովի է։ Միացնելու դեպքում NexaWal-ը HTTPS-ով rates.nexatrode.com-ից հարցնում է ձեր ընտրած արժույթի XMR փոխարժեքը։ Հարցումն օգտագործում է հանրային ինտերնետը (Clearnet), նույնիսկ եթե դրամապանակի հանգույցն աշխատում է I2P-ով։ Nexatrode-ը կարող է տեսնել ձեր IP հասցեն և ընտրված արժույթը, սակայն դրամապանակի մնացորդները, հասցեները, վերականգնման արտահայտությունը կամ գործարքների պատմությունը չեն ուղարկվում։ Փոխարժեքները միայն մոտավոր են — ուղարկում և պահում եք XMR։"
+            "value": "Ընտրովի է։ Միացնելու դեպքում NexaWal-ը HTTPS-ով rates.nexawal.com-ից հարցնում է ձեր ընտրած արժույթի XMR փոխարժեքը։ Հարցումն օգտագործում է հանրային ինտերնետը (Clearnet), նույնիսկ եթե դրամապանակի հանգույցն աշխատում է I2P-ով։ Nexatrode-ը կարող է տեսնել ձեր IP հասցեն և ընտրված արժույթը, սակայն դրամապանակի մնացորդները, հասցեները, վերականգնման արտահայտությունը կամ գործարքների պատմությունը չեն ուղարկվում։ Փոխարժեքները միայն մոտավոր են — ուղարկում և պահում եք XMR։"
           }
         },
         "id": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opsional. Saat diaktifkan, NexaWal meminta kurs XMR untuk mata uang pilihan Anda dari rates.nexatrode.com melalui HTTPS. Permintaan ini memakai internet publik (Clearnet), meskipun node dompet menggunakan I2P. Nexatrode dapat melihat alamat IP dan mata uang pilihan Anda, tetapi saldo, alamat, seed, dan riwayat transaksi dompet tidak dikirim. Kurs hanya perkiraan — XMR-lah yang Anda kirim dan simpan."
+            "value": "Opsional. Saat diaktifkan, NexaWal meminta kurs XMR untuk mata uang pilihan Anda dari rates.nexawal.com melalui HTTPS. Permintaan ini memakai internet publik (Clearnet), meskipun node dompet menggunakan I2P. Nexatrode dapat melihat alamat IP dan mata uang pilihan Anda, tetapi saldo, alamat, seed, dan riwayat transaksi dompet tidak dikirim. Kurs hanya perkiraan — XMR-lah yang Anda kirim dan simpan."
           }
         },
         "it": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Facoltativo. Se attivato, NexaWal richiede via HTTPS a rates.nexatrode.com il tasso XMR per la valuta scelta. La richiesta usa Internet pubblico (clearnet), anche se il nodo del portafoglio usa I2P. Nexatrode può vedere il tuo IP e la valuta scelta, ma non riceve saldi, indirizzi, frase di recupero o cronologia delle transazioni. I tassi sono solo stime: invii e conservi XMR."
+            "value": "Facoltativo. Se attivato, NexaWal richiede via HTTPS a rates.nexawal.com il tasso XMR per la valuta scelta. La richiesta usa Internet pubblico (clearnet), anche se il nodo del portafoglio usa I2P. Nexatrode può vedere il tuo IP e la valuta scelta, ma non riceve saldi, indirizzi, frase di recupero o cronologia delle transazioni. I tassi sono solo stime: invii e conservi XMR."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "任意です。有効にすると、NexaWalは選択した通貨のXMRレートをHTTPSでrates.nexatrode.comに問い合わせます。ウォレットのノードがI2Pを使っていても、この要求は通常のインターネット（クリアネット）を通ります。NexatrodeにはIPアドレスと選択した通貨が見えますが、ウォレットの金額、アドレス、シード、取引履歴は送信されません。レートは推定値です。送受信・保有する資産はXMRです。"
+            "value": "任意です。有効にすると、NexaWalは選択した通貨のXMRレートをHTTPSでrates.nexawal.comに問い合わせます。ウォレットのノードがI2Pを使っていても、この要求は通常のインターネット（クリアネット）を通ります。NexatrodeにはIPアドレスと選択した通貨が見えますが、ウォレットの金額、アドレス、シード、取引履歴は送信されません。レートは推定値です。送受信・保有する資産はXMRです。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "선택 사항입니다. 켜면 NexaWal이 HTTPS를 통해 rates.nexatrode.com에 선택한 통화의 XMR 시세를 요청합니다. 지갑 노드가 I2P를 사용하더라도 이 요청은 일반 인터넷(Clearnet)을 사용합니다. Nexatrode는 IP 주소와 선택한 통화를 볼 수 있지만 지갑 잔액, 주소, 시드 문구, 거래 내역은 전송되지 않습니다. 시세는 참고용 추정치이며 실제로 보내고 보유하는 자산은 XMR입니다."
+            "value": "선택 사항입니다. 켜면 NexaWal이 HTTPS를 통해 rates.nexawal.com에 선택한 통화의 XMR 시세를 요청합니다. 지갑 노드가 I2P를 사용하더라도 이 요청은 일반 인터넷(Clearnet)을 사용합니다. Nexatrode는 IP 주소와 선택한 통화를 볼 수 있지만 지갑 잔액, 주소, 시드 문구, 거래 내역은 전송되지 않습니다. 시세는 참고용 추정치이며 실제로 보내고 보유하는 자산은 XMR입니다."
           }
         },
         "ky": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Ыктыярдуу. Иштетилгенде NexaWal HTTPS аркылуу rates.nexatrode.com кызматынан сиз тандаган валютадагы XMR курсун сурайт. Капчыктын түйүнү I2P колдонсо да, суроо ачык интернет аркылуу (Clearnet) жөнөтүлөт. Nexatrode IP дарегиңизди жана тандалган валютаны көрө алат, бирок капчыктын суммалары, даректери, калыбына келтирүү сөздөрү же транзакциялар таржымалы жөнөтүлбөйт. Курстар болжолдуу гана — сиз XMR жөнөтүп, сактайсыз."
+            "value": "Ыктыярдуу. Иштетилгенде NexaWal HTTPS аркылуу rates.nexawal.com кызматынан сиз тандаган валютадагы XMR курсун сурайт. Капчыктын түйүнү I2P колдонсо да, суроо ачык интернет аркылуу (Clearnet) жөнөтүлөт. Nexatrode IP дарегиңизди жана тандалган валютаны көрө алат, бирок капчыктын суммалары, даректери, калыбына келтирүү сөздөрү же транзакциялар таржымалы жөнөтүлбөйт. Курстар болжолдуу гана — сиз XMR жөнөтүп, сактайсыз."
           }
         },
         "lt": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Pasirenkama. Įjungus „NexaWal“ HTTPS ryšiu iš „rates.nexatrode.com“ paprašo pasirinktos valiutos XMR kurso. Užklausa siunčiama viešuoju internetu („Clearnet“), net jei piniginės mazgas naudoja I2P. „Nexatrode“ mato jūsų IP adresą ir pasirinktą valiutą, tačiau piniginės sumos, adresai, atkūrimo frazė ir operacijų istorija nesiunčiami. Kursai yra tik apytiksliai — siunčiate ir laikote XMR."
+            "value": "Pasirenkama. Įjungus „NexaWal“ HTTPS ryšiu iš „rates.nexawal.com“ paprašo pasirinktos valiutos XMR kurso. Užklausa siunčiama viešuoju internetu („Clearnet“), net jei piniginės mazgas naudoja I2P. „Nexatrode“ mato jūsų IP adresą ir pasirinktą valiutą, tačiau piniginės sumos, adresai, atkūrimo frazė ir operacijų istorija nesiunčiami. Kursai yra tik apytiksliai — siunčiate ir laikote XMR."
           }
         },
         "lv": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Neobligāti. Ja funkcija ir ieslēgta, NexaWal, izmantojot HTTPS, pieprasa rates.nexatrode.com XMR kursu izvēlētajai valūtai. Pieprasījums izmanto publisko internetu (Clearnet) arī tad, ja maka mezgls izmanto I2P. Nexatrode var redzēt jūsu IP adresi un izvēlēto valūtu, taču maka atlikumi, adreses, atkopšanas frāze un darījumu vēsture netiek nosūtīti. Kursi ir tikai aptuveni — jūs sūtāt un glabājat XMR."
+            "value": "Neobligāti. Ja funkcija ir ieslēgta, NexaWal, izmantojot HTTPS, pieprasa rates.nexawal.com XMR kursu izvēlētajai valūtai. Pieprasījums izmanto publisko internetu (Clearnet) arī tad, ja maka mezgls izmanto I2P. Nexatrode var redzēt jūsu IP adresi un izvēlēto valūtu, taču maka atlikumi, adreses, atkopšanas frāze un darījumu vēsture netiek nosūtīti. Kursi ir tikai aptuveni — jūs sūtāt un glabājat XMR."
           }
         },
         "ms": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Pilihan. Apabila dihidupkan, NexaWal meminta kadar XMR bagi mata wang pilihan anda daripada rates.nexatrode.com melalui HTTPS. Permintaan ini menggunakan Internet awam (Clearnet), walaupun nod dompet menggunakan I2P. Nexatrode boleh melihat alamat IP dan mata wang pilihan anda, tetapi baki, alamat, frasa pemulihan dan sejarah transaksi dompet tidak dihantar. Kadar hanyalah anggaran — XMR ialah aset yang anda hantar dan simpan."
+            "value": "Pilihan. Apabila dihidupkan, NexaWal meminta kadar XMR bagi mata wang pilihan anda daripada rates.nexawal.com melalui HTTPS. Permintaan ini menggunakan Internet awam (Clearnet), walaupun nod dompet menggunakan I2P. Nexatrode boleh melihat alamat IP dan mata wang pilihan anda, tetapi baki, alamat, frasa pemulihan dan sejarah transaksi dompet tidak dihantar. Kadar hanyalah anggaran — XMR ialah aset yang anda hantar dan simpan."
           }
         },
         "my": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "ရွေးချယ်နိုင်သည်။ ဖွင့်ထားပါက NexaWal သည် သင်ရွေးထားသော ငွေကြေးအတွက် XMR ဈေးနှုန်းကို HTTPS ဖြင့် rates.nexatrode.com မှ တောင်းယူသည်။ ပိုက်ဆံအိတ် node က I2P သုံးနေသော်လည်း ဤတောင်းဆိုမှုသည် အများသုံးအင်တာနက် (Clearnet) ကို အသုံးပြုသည်။ Nexatrode သည် သင့် IP လိပ်စာနှင့် ရွေးချယ်ထားသော ငွေကြေးကို မြင်နိုင်သော်လည်း ပိုက်ဆံအိတ်ပမာဏ၊ လိပ်စာများ၊ seed စကားစု သို့မဟုတ် ငွေလွှဲမှတ်တမ်းကို မပို့ပါ။ ဈေးနှုန်းများသည် ခန့်မှန်းချက်သာဖြစ်ပြီး သင်ပို့/သိမ်းဆည်းသည့် ပိုင်ဆိုင်မှုမှာ XMR ဖြစ်သည်။"
+            "value": "ရွေးချယ်နိုင်သည်။ ဖွင့်ထားပါက NexaWal သည် သင်ရွေးထားသော ငွေကြေးအတွက် XMR ဈေးနှုန်းကို HTTPS ဖြင့် rates.nexawal.com မှ တောင်းယူသည်။ ပိုက်ဆံအိတ် node က I2P သုံးနေသော်လည်း ဤတောင်းဆိုမှုသည် အများသုံးအင်တာနက် (Clearnet) ကို အသုံးပြုသည်။ Nexatrode သည် သင့် IP လိပ်စာနှင့် ရွေးချယ်ထားသော ငွေကြေးကို မြင်နိုင်သော်လည်း ပိုက်ဆံအိတ်ပမာဏ၊ လိပ်စာများ၊ seed စကားစု သို့မဟုတ် ငွေလွှဲမှတ်တမ်းကို မပို့ပါ။ ဈေးနှုန်းများသည် ခန့်မှန်းချက်သာဖြစ်ပြီး သင်ပို့/သိမ်းဆည်းသည့် ပိုင်ဆိုင်မှုမှာ XMR ဖြစ်သည်။"
           }
         },
         "nb": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Valgfritt. Når det er slått på, ber NexaWal rates.nexatrode.com om XMR-kursen for valutaen du har valgt, via HTTPS. Forespørselen bruker det offentlige nettet (clearnet), selv om lommeboknoden bruker I2P. Nexatrode kan se IP-adressen din og valgt valuta, men mottar ikke lommebeløp, adresser, gjenopprettingsfrase eller transaksjonshistorikk. Kursene er kun anslag — du sender og oppbevarer XMR."
+            "value": "Valgfritt. Når det er slått på, ber NexaWal rates.nexawal.com om XMR-kursen for valutaen du har valgt, via HTTPS. Forespørselen bruker det offentlige nettet (clearnet), selv om lommeboknoden bruker I2P. Nexatrode kan se IP-adressen din og valgt valuta, men mottar ikke lommebeløp, adresser, gjenopprettingsfrase eller transaksjonshistorikk. Kursene er kun anslag — du sender og oppbevarer XMR."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Optioneel. Als dit is ingeschakeld, vraagt NexaWal via HTTPS bij rates.nexatrode.com de XMR-koers voor de gekozen valuta op. Dit verzoek gebruikt het openbare internet (clearnet), ook als de walletnode I2P gebruikt. Nexatrode kan je IP-adres en gekozen valuta zien, maar ontvangt geen walletbedragen, adressen, herstelzin of transactiegeschiedenis. De koersen zijn slechts schattingen — je verstuurt en bewaart XMR."
+            "value": "Optioneel. Als dit is ingeschakeld, vraagt NexaWal via HTTPS bij rates.nexawal.com de XMR-koers voor de gekozen valuta op. Dit verzoek gebruikt het openbare internet (clearnet), ook als de walletnode I2P gebruikt. Nexatrode kan je IP-adres en gekozen valuta zien, maar ontvangt geen walletbedragen, adressen, herstelzin of transactiegeschiedenis. De koersen zijn slechts schattingen — je verstuurt en bewaart XMR."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opcjonalne. Po włączeniu NexaWal pobiera przez HTTPS z rates.nexatrode.com kurs XMR dla wybranej waluty. Żądanie korzysta z publicznego Internetu (Clearnet), nawet gdy węzeł portfela używa I2P. Nexatrode widzi Twój adres IP i wybraną walutę, ale nie otrzymuje sald, adresów, frazy odzyskiwania ani historii transakcji portfela. Kursy są tylko szacunkowe — wysyłasz i przechowujesz XMR."
+            "value": "Opcjonalne. Po włączeniu NexaWal pobiera przez HTTPS z rates.nexawal.com kurs XMR dla wybranej waluty. Żądanie korzysta z publicznego Internetu (Clearnet), nawet gdy węzeł portfela używa I2P. Nexatrode widzi Twój adres IP i wybraną walutę, ale nie otrzymuje sald, adresów, frazy odzyskiwania ani historii transakcji portfela. Kursy są tylko szacunkowe — wysyłasz i przechowujesz XMR."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opcional. Quando ativado, o NexaWal solicita por HTTPS a cotação do XMR na moeda escolhida em rates.nexatrode.com. Essa solicitação usa a internet pública (Clearnet), mesmo quando o nó da carteira usa I2P. A Nexatrode pode ver seu IP e a moeda escolhida, mas não recebe saldos, endereços, frase de recuperação nem histórico de transações da carteira. As cotações são apenas estimativas — você envia e mantém XMR."
+            "value": "Opcional. Quando ativado, o NexaWal solicita por HTTPS a cotação do XMR na moeda escolhida em rates.nexawal.com. Essa solicitação usa a internet pública (Clearnet), mesmo quando o nó da carteira usa I2P. A Nexatrode pode ver seu IP e a moeda escolhida, mas não recebe saldos, endereços, frase de recuperação nem histórico de transações da carteira. As cotações são apenas estimativas — você envia e mantém XMR."
           }
         },
         "ro": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opțional. Când este activată, NexaWal solicită prin HTTPS de la rates.nexatrode.com cursul XMR pentru moneda aleasă. Cererea folosește internetul public (Clearnet), chiar dacă nodul portofelului folosește I2P. Nexatrode poate vedea adresa IP și moneda aleasă, dar nu primește solduri, adrese, fraza de recuperare sau istoricul tranzacțiilor. Cursurile sunt doar estimări — trimiți și păstrezi XMR."
+            "value": "Opțional. Când este activată, NexaWal solicită prin HTTPS de la rates.nexawal.com cursul XMR pentru moneda aleasă. Cererea folosește internetul public (Clearnet), chiar dacă nodul portofelului folosește I2P. Nexatrode poate vedea adresa IP și moneda aleasă, dar nu primește solduri, adrese, fraza de recuperare sau istoricul tranzacțiilor. Cursurile sunt doar estimări — trimiți și păstrezi XMR."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Необязательно. Если функция включена, NexaWal запрашивает по HTTPS у rates.nexatrode.com курс XMR для выбранной валюты. Запрос проходит через обычный интернет (Clearnet), даже если узел кошелька использует I2P. Nexatrode видит ваш IP-адрес и выбранную валюту, но не получает суммы, адреса, seed-фразу или историю транзакций кошелька. Курсы являются лишь оценкой — вы отправляете и храните XMR."
+            "value": "Необязательно. Если функция включена, NexaWal запрашивает по HTTPS у rates.nexawal.com курс XMR для выбранной валюты. Запрос проходит через обычный интернет (Clearnet), даже если узел кошелька использует I2P. Nexatrode видит ваш IP-адрес и выбранную валюту, но не получает суммы, адреса, seed-фразу или историю транзакций кошелька. Курсы являются лишь оценкой — вы отправляете и храните XMR."
           }
         },
         "sk": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Voliteľné. Keď je zapnuté, NexaWal si cez HTTPS vyžiada kurz XMR pre zvolenú menu zo servera rates.nexatrode.com. Požiadavka používa verejný internet (Clearnet), aj keď uzol peňaženky používa I2P. Nexatrode môže vidieť vašu IP adresu a zvolenú menu, ale nedostáva zostatky, adresy, obnovovaciu frázu ani históriu transakcií. Kurzy sú iba odhad — posielate a držíte XMR."
+            "value": "Voliteľné. Keď je zapnuté, NexaWal si cez HTTPS vyžiada kurz XMR pre zvolenú menu zo servera rates.nexawal.com. Požiadavka používa verejný internet (Clearnet), aj keď uzol peňaženky používa I2P. Nexatrode môže vidieť vašu IP adresu a zvolenú menu, ale nedostáva zostatky, adresy, obnovovaciu frázu ani históriu transakcií. Kurzy sú iba odhad — posielate a držíte XMR."
           }
         },
         "sl": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Neobvezno. Ko je omogočeno, NexaWal prek HTTPS od rates.nexatrode.com zahteva tečaj XMR za izbrano valuto. Zahteva uporablja javni internet (Clearnet), tudi če vozlišče denarnice uporablja I2P. Nexatrode lahko vidi vaš naslov IP in izbrano valuto, ne prejme pa zneskov, naslovov, obnovitvene fraze ali zgodovine transakcij denarnice. Tečaji so le ocene — pošiljate in hranite XMR."
+            "value": "Neobvezno. Ko je omogočeno, NexaWal prek HTTPS od rates.nexawal.com zahteva tečaj XMR za izbrano valuto. Zahteva uporablja javni internet (Clearnet), tudi če vozlišče denarnice uporablja I2P. Nexatrode lahko vidi vaš naslov IP in izbrano valuto, ne prejme pa zneskov, naslovov, obnovitvene fraze ali zgodovine transakcij denarnice. Tečaji so le ocene — pošiljate in hranite XMR."
           }
         },
         "sq": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Opsionale. Kur aktivizohet, NexaWal kërkon përmes HTTPS nga rates.nexatrode.com kursin e XMR-së për monedhën e zgjedhur. Kërkesa përdor internetin publik (Clearnet), edhe kur nyja e portofolit përdor I2P. Nexatrode mund të shohë adresën tuaj IP dhe monedhën e zgjedhur, por nuk merr gjendjen, adresat, frazën e rikuperimit ose historikun e transaksioneve të portofolit. Kurset janë vetëm vlerësime — dërgoni dhe mbani XMR."
+            "value": "Opsionale. Kur aktivizohet, NexaWal kërkon përmes HTTPS nga rates.nexawal.com kursin e XMR-së për monedhën e zgjedhur. Kërkesa përdor internetin publik (Clearnet), edhe kur nyja e portofolit përdor I2P. Nexatrode mund të shohë adresën tuaj IP dhe monedhën e zgjedhur, por nuk merr gjendjen, adresat, frazën e rikuperimit ose historikun e transaksioneve të portofolit. Kurset janë vetëm vlerësime — dërgoni dhe mbani XMR."
           }
         },
         "sv": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Valfritt. När det är aktiverat hämtar NexaWal XMR-kursen för den valda valutan från rates.nexatrode.com via HTTPS. Begäran använder det öppna internet (clearnet), även när plånboksnoden använder I2P. Nexatrode kan se din IP-adress och valda valuta, men får inte plånbelopp, adresser, återställningsfras eller transaktionshistorik. Kurserna är endast uppskattningar — du skickar och förvarar XMR."
+            "value": "Valfritt. När det är aktiverat hämtar NexaWal XMR-kursen för den valda valutan från rates.nexawal.com via HTTPS. Begäran använder det öppna internet (clearnet), även när plånboksnoden använder I2P. Nexatrode kan se din IP-adress och valda valuta, men får inte plånbelopp, adresser, återställningsfras eller transaktionshistorik. Kurserna är endast uppskattningar — du skickar och förvarar XMR."
           }
         },
         "th": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "ไม่บังคับ เมื่อเปิดใช้ NexaWal จะขออัตรา XMR สำหรับสกุลเงินที่คุณเลือกจาก rates.nexatrode.com ผ่าน HTTPS คำขอนี้ใช้อินเทอร์เน็ตสาธารณะ (Clearnet) แม้โหนดกระเป๋าเงินจะใช้ I2P ก็ตาม Nexatrode อาจเห็นที่อยู่ IP และสกุลเงินที่เลือก แต่จะไม่ได้รับยอดเงิน ที่อยู่ วลีเมล็ดพันธุ์ หรือประวัติธุรกรรมของกระเป๋าเงิน อัตราเป็นเพียงค่าประมาณ — สินทรัพย์ที่คุณส่งและถือคือ XMR"
+            "value": "ไม่บังคับ เมื่อเปิดใช้ NexaWal จะขออัตรา XMR สำหรับสกุลเงินที่คุณเลือกจาก rates.nexawal.com ผ่าน HTTPS คำขอนี้ใช้อินเทอร์เน็ตสาธารณะ (Clearnet) แม้โหนดกระเป๋าเงินจะใช้ I2P ก็ตาม Nexatrode อาจเห็นที่อยู่ IP และสกุลเงินที่เลือก แต่จะไม่ได้รับยอดเงิน ที่อยู่ วลีเมล็ดพันธุ์ หรือประวัติธุรกรรมของกระเป๋าเงิน อัตราเป็นเพียงค่าประมาณ — สินทรัพย์ที่คุณส่งและถือคือ XMR"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "İsteğe bağlıdır. Açıkken NexaWal, seçtiğiniz para birimi için XMR kurunu HTTPS üzerinden rates.nexatrode.com adresinden ister. Cüzdan düğümü I2P kullansa bile bu istek genel interneti (Clearnet) kullanır. Nexatrode IP adresinizi ve seçtiğiniz para birimini görebilir; ancak cüzdan bakiyeleri, adresler, kurtarma kelimeleri veya işlem geçmişi gönderilmez. Kurlar yalnızca tahmindir — gönderdiğiniz ve tuttuğunuz varlık XMR’dir."
+            "value": "İsteğe bağlıdır. Açıkken NexaWal, seçtiğiniz para birimi için XMR kurunu HTTPS üzerinden rates.nexawal.com adresinden ister. Cüzdan düğümü I2P kullansa bile bu istek genel interneti (Clearnet) kullanır. Nexatrode IP adresinizi ve seçtiğiniz para birimini görebilir; ancak cüzdan bakiyeleri, adresler, kurtarma kelimeleri veya işlem geçmişi gönderilmez. Kurlar yalnızca tahmindir — gönderdiğiniz ve tuttuğunuz varlık XMR’dir."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Необов’язково. Якщо ввімкнено, NexaWal запитує через HTTPS на rates.nexatrode.com курс XMR для вибраної валюти. Запит використовує звичайний інтернет (Clearnet), навіть якщо вузол гаманця працює через I2P. Nexatrode може бачити вашу IP-адресу й вибрану валюту, але не отримує суми, адреси, фразу відновлення чи історію транзакцій гаманця. Курси є лише оцінкою — ви надсилаєте й зберігаєте XMR."
+            "value": "Необов’язково. Якщо ввімкнено, NexaWal запитує через HTTPS на rates.nexawal.com курс XMR для вибраної валюти. Запит використовує звичайний інтернет (Clearnet), навіть якщо вузол гаманця працює через I2P. Nexatrode може бачити вашу IP-адресу й вибрану валюту, але не отримує суми, адреси, фразу відновлення чи історію транзакцій гаманця. Курси є лише оцінкою — ви надсилаєте й зберігаєте XMR."
           }
         },
         "ur": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "اختیاری ہے۔ فعال ہونے پر، NexaWal آپ کی منتخب کردہ کرنسی کے لیے XMR کی شرح HTTPS کے ذریعے rates.nexatrode.com سے طلب کرتا ہے۔ یہ درخواست عوامی انٹرنیٹ (Clearnet) استعمال کرتی ہے، چاہے والیٹ نوڈ I2P استعمال کرے۔ Nexatrode آپ کا IP پتہ اور منتخب کرنسی دیکھ سکتا ہے، لیکن والیٹ کی رقم، پتے، بحالی کے الفاظ یا لین دین کی تاریخ نہیں بھیجی جاتی۔ شرحیں صرف اندازے ہیں — آپ XMR ہی بھیجتے اور رکھتے ہیں۔"
+            "value": "اختیاری ہے۔ فعال ہونے پر، NexaWal آپ کی منتخب کردہ کرنسی کے لیے XMR کی شرح HTTPS کے ذریعے rates.nexawal.com سے طلب کرتا ہے۔ یہ درخواست عوامی انٹرنیٹ (Clearnet) استعمال کرتی ہے، چاہے والیٹ نوڈ I2P استعمال کرے۔ Nexatrode آپ کا IP پتہ اور منتخب کرنسی دیکھ سکتا ہے، لیکن والیٹ کی رقم، پتے، بحالی کے الفاظ یا لین دین کی تاریخ نہیں بھیجی جاتی۔ شرحیں صرف اندازے ہیں — آپ XMR ہی بھیجتے اور رکھتے ہیں۔"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Tùy chọn. Khi bật, NexaWal yêu cầu rates.nexatrode.com cung cấp tỷ giá XMR cho loại tiền bạn chọn qua HTTPS. Yêu cầu này dùng Internet công cộng (Clearnet), ngay cả khi nút ví dùng I2P. Nexatrode có thể thấy địa chỉ IP và loại tiền đã chọn, nhưng không nhận số dư, địa chỉ, cụm từ khôi phục hay lịch sử giao dịch của ví. Tỷ giá chỉ là ước tính — tài sản bạn gửi và nắm giữ là XMR."
+            "value": "Tùy chọn. Khi bật, NexaWal yêu cầu rates.nexawal.com cung cấp tỷ giá XMR cho loại tiền bạn chọn qua HTTPS. Yêu cầu này dùng Internet công cộng (Clearnet), ngay cả khi nút ví dùng I2P. Nexatrode có thể thấy địa chỉ IP và loại tiền đã chọn, nhưng không nhận số dư, địa chỉ, cụm từ khôi phục hay lịch sử giao dịch của ví. Tỷ giá chỉ là ước tính — tài sản bạn gửi và nắm giữ là XMR."
           }
         },
         "yo": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Aṣàyàn. Tí o bá ṣiṣẹ́, NexaWal máa béèrè fún iye XMR fún owó tí o yàn láti ọ̀dọ̀ rates.nexatrode.com nípasẹ̀ HTTPS. Ìbéèrè yìí ń lo Íńtánẹ́ẹ̀tì gbogbogbò (Clearnet), bó tilẹ̀ jẹ́ pé ẹ̀rọ ìsopọ̀ apamọwọ ń lo I2P. Nexatrode lè rí àdírẹ́sì IP rẹ àti owó tí o yàn, ṣùgbọ́n kò gba iye owó apamọwọ, àdírẹ́sì, ọ̀rọ̀ ìmúpadàbọ̀sípò tàbí ìtàn ìṣòwò. Ìṣírò iye owó jẹ́ àfojúsùn nìkan — XMR ni o ń fi ránṣẹ́ tí o sì ń tọ́jú."
+            "value": "Aṣàyàn. Tí o bá ṣiṣẹ́, NexaWal máa béèrè fún iye XMR fún owó tí o yàn láti ọ̀dọ̀ rates.nexawal.com nípasẹ̀ HTTPS. Ìbéèrè yìí ń lo Íńtánẹ́ẹ̀tì gbogbogbò (Clearnet), bó tilẹ̀ jẹ́ pé ẹ̀rọ ìsopọ̀ apamọwọ ń lo I2P. Nexatrode lè rí àdírẹ́sì IP rẹ àti owó tí o yàn, ṣùgbọ́n kò gba iye owó apamọwọ, àdírẹ́sì, ọ̀rọ̀ ìmúpadàbọ̀sípò tàbí ìtàn ìṣòwò. Ìṣírò iye owó jẹ́ àfojúsùn nìkan — XMR ni o ń fi ránṣẹ́ tí o sì ń tọ́jú."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "可选。启用后，NexaWal 会通过 HTTPS 向 rates.nexatrode.com 查询所选货币的 XMR 汇率。即使钱包节点使用 I2P，此请求仍通过公共互联网（Clearnet）发送。Nexatrode 可以看到你的 IP 地址和所选货币，但不会收到钱包金额、地址、助记词或交易记录。汇率仅供估算——你实际发送和持有的是 XMR。"
+            "value": "可选。启用后，NexaWal 会通过 HTTPS 向 rates.nexawal.com 查询所选货币的 XMR 汇率。即使钱包节点使用 I2P，此请求仍通过公共互联网（Clearnet）发送。Nexatrode 可以看到你的 IP 地址和所选货币，但不会收到钱包金额、地址、助记词或交易记录。汇率仅供估算——你实际发送和持有的是 XMR。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "選用。啟用後，NexaWal 會透過 HTTPS 向 rates.nexatrode.com 查詢所選貨幣的 XMR 匯率。即使錢包節點使用 I2P，此請求仍會透過公共網際網路（Clearnet）傳送。Nexatrode 可以看到你的 IP 位址和所選貨幣，但不會收到錢包金額、地址、助記詞或交易紀錄。匯率僅供估算——你實際傳送和持有的是 XMR。"
+            "value": "選用。啟用後，NexaWal 會透過 HTTPS 向 rates.nexawal.com 查詢所選貨幣的 XMR 匯率。即使錢包節點使用 I2P，此請求仍會透過公共網際網路（Clearnet）傳送。Nexatrode 可以看到你的 IP 位址和所選貨幣，但不會收到錢包金額、地址、助記詞或交易紀錄。匯率僅供估算——你實際傳送和持有的是 XMR。"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexatrode.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold."
+            "value": "Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexawal.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold."
           }
         }
       }

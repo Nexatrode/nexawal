@@ -597,7 +597,7 @@ struct SettingsView: View {
                     if networkPolicy != .i2p {
                         settingsCard(title: L10n.t("Clearnet node")) {
                             outlinedField {
-                                TextField("https://rpc.nexatrode.com", text: $nodeAddress)
+                                TextField("https://rpc.nexawal.com", text: $nodeAddress)
                                     .font(.system(.body, design: .monospaced))
                                     .foregroundStyle(classicPalette?.primaryText ?? .primary)
                                     .autocorrectionDisabled()
@@ -726,7 +726,7 @@ struct SettingsView: View {
                                 fiatCurrency = MoneroConfig.fiatCurrency
                                 FiatPriceService.shared.settingsDidChange()
                             }
-                        Text(L10n.t("Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexatrode.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold."))
+                        Text(L10n.t("Optional. When enabled, NexaWal requests an XMR rate for your selected currency from rates.nexawal.com over HTTPS. This request uses clearnet even when the wallet node uses I2P. Nexatrode can see your IP address and selected currency; wallet amounts, addresses, seeds, and transaction history are not sent. Estimates only — XMR is what you send and hold."))
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         if fiatEstimatesEnabled {
@@ -751,7 +751,7 @@ struct SettingsView: View {
                         Text(L10n.format("nexawal %@ (%@)", version, build))
                             .foregroundStyle(classicPalette?.primaryText ?? .primary)
 
-                        Text(L10n.t("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact rates.nexatrode.com for rates."))
+                        Text(L10n.t("MIT-licensed, unaudited software. You are responsible for your seed and funds. The default remote node can see your IP and wallet sync queries — run your own node for stronger privacy. Optional fiat estimates, if enabled, contact rates.nexawal.com for rates."))
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 

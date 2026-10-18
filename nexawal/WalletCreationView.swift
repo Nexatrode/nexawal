@@ -259,13 +259,13 @@ struct WalletCreationView: View {
                 }
 
                 Section(header: NeonSectionHeader(title: L10n.t("Network & Node"))) {
-                    TextField("https://rpc.nexatrode.com", text: $nodeAddress)
+                    TextField("https://rpc.nexawal.com", text: $nodeAddress)
                         .font(.system(.body, design: .monospaced))
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .accessibilityLabel(L10n.t("Clearnet node URL"))
-                    Text(L10n.t("Type the full URL, including http:// or https://.\nDefault: https://rpc.nexatrode.com"))
+                    Text(L10n.t("Type the full URL, including http:// or https://.\nDefault: https://rpc.nexawal.com"))
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 
