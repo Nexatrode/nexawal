@@ -547,6 +547,7 @@ struct SettingsView: View {
     @State private var accountGapInput: String
     @State private var requireBiometrics: Bool
     @State private var fiatEstimatesEnabled: Bool
+    @AppStorage(ExplorerPrivacy.setting) private var explorerDetailsEnabled = false
     @State private var fiatCurrency: String
     @State private var biometricsAvailable: Bool = false
     @State private var showAdvancedRecovery: Bool = false
@@ -717,6 +718,13 @@ struct SettingsView: View {
                                 .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : .red)
                             }
                         }
+                    }
+
+                    settingsCard(title: L10n.t("Explorer details")) {
+                        NeonToggle(title: L10n.t("Enable explorer details"), isOn: $explorerDetailsEnabled)
+                        Text(L10n.t(ExplorerPrivacy.help))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                     }
 
                     settingsCard(title: L10n.t("Fiat estimates")) {

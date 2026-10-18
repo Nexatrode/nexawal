@@ -271,6 +271,9 @@ struct WalletTransferDetails: View {
                         .foregroundStyle(palette?.secondaryText ?? .primary)
                         .textSelection(.enabled)
                     Button("Copy TXID") { UIPasteboard.general.string = transfer.txid }
+                    NavigationLink {
+                        ExplorerDetailsView(txid: transfer.txid, walletSession: viewModel.historySession, viewModel: viewModel)
+                    } label: { Text("Explorer details") }
                     if let url = URL(string: "https://explorer.nexawal.com/tx/\(transfer.txid)") {
                         Button("Copy Explorer Link") { UIPasteboard.general.string = url.absoluteString }
                     }

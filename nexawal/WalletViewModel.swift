@@ -81,6 +81,7 @@ class WalletViewModel: ObservableObject {
 
     private var storedMetadata: StoredWalletMetadata?
     private var isMainnet: Bool = true
+    var explorerMainnet: Bool { isMainnet }
     private var syncStatusPollTask: Task<Void, Never>?
     private var syncPollGeneration = UUID()
     private var balanceSnapshotEpoch = WalletSnapshotEpoch()

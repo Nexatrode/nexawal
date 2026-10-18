@@ -96527,6 +96527,3954 @@
           }
         }
       }
+    },
+    "Explorer details": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detalls de l’explorador"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detalles do explorador"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esploratzailearen xehetasunak"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detaloj de esplorilo"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonraí an taiscéalaí"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hollësitë e eksploruesit"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İcmalçı təfərrüatları"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Դիտարկիչի մանրամասներ"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изилдегичтин чоо-жайы"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جزئیات کاوشگر"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "פרטי הסייר"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ایکسپلورر کی تفصیلات"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक्सप्लोरर विवरण"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এক্সপ্লোরারের বিবরণ"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detail penjelajah"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Butiran peneroka"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mga detalye ng explorer"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chi tiết trình khám phá"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "รายละเอียดตัวสำรวจ"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer အသေးစိတ်"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bayanan mai bincike"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Àlàyé aṣàwákiri"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jehechaha marandu"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer details"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Détails de l’explorateur"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer-Details"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detalles del explorador"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detalhes do explorador"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dettagli dell’esploratore"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エクスプローラーの詳細"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "탐색기 상세 정보"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浏览器详情"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "瀏覽器詳細資訊"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تفاصيل المستكشف"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Данные обозревателя"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дані оглядача"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorergegevens"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dane eksploratora"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gezgin ayrıntıları"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utforskardetaljer"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer-oplysninger"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utforskerdetaljer"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selaimen tiedot"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podrobnosti průzkumníka"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podrobnosti prieskumníka"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Böngésző részletei"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detalii explorator"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Данни от изследователя"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Στοιχεία εξερευνητή"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podaci preglednika"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podatki raziskovalca"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naršyklės duomenys"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pārlūka informācija"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plokiahela sirvija andmed"
+          }
+        }
+      }
+    },
+    "Enable explorer details": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa els detalls de l’explorador"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar detalles do explorador"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gaitu esploratzailearen xehetasunak"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ŝalti detalojn de esplorilo"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumasaigh sonraí an taiscéalaí"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivizo hollësitë e eksploruesit"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İcmalçı təfərrüatlarını aktivləşdir"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Միացնել դիտարկիչի մանրամասները"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изилдегичтин чоо-жайын иштетүү"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فعال‌کردن جزئیات کاوشگر"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הפעלת פרטי הסייר"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ایکسپلورر کی تفصیلات فعال کریں"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक्सप्लोरर विवरण चालू करें"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এক্সপ্লোরারের বিবরণ চালু করুন"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan detail penjelajah"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dayakan butiran peneroka"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paganahin ang mga detalye ng explorer"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bật chi tiết trình khám phá"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เปิดใช้รายละเอียดตัวสำรวจ"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer အသေးစိတ်ကို ဖွင့်ရန်"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunna bayanan mai bincike"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tan àlàyé aṣàwákiri"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emyandy jehechaha marandu"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable explorer details"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer les détails de l’explorateur"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer-Details aktivieren"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar detalles del explorador"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar detalhes do explorador"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abilita dettagli dell’esploratore"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エクスプローラーの詳細を有効にする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "탐색기 상세 정보 사용"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "启用浏览器详情"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "啟用瀏覽器詳細資訊"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تفعيل تفاصيل المستكشف"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Включить данные обозревателя"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути дані оглядача"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorergegevens inschakelen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz dane eksploratora"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gezgin ayrıntılarını etkinleştir"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivera utforskardetaljer"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivér explorer-oplysninger"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktiver utforskerdetaljer"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ota selaimen tiedot käyttöön"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Povolit podrobnosti průzkumníka"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Povoliť podrobnosti prieskumníka"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Böngésző részleteinek engedélyezése"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activează detaliile exploratorului"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Включване на данните от изследователя"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ενεργοποίηση στοιχείων εξερευνητή"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omogući podatke preglednika"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omogoči podatke raziskovalca"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Įjungti naršyklės duomenis"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iespējot pārlūka informāciju"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luba sirvija andmed"
+          }
+        }
+      }
+    },
+    "Optional. Each lookup shares your IP address and this transaction ID with explorer.nexawal.com over clearnet HTTPS, even in I2P mode. No background requests. Wallet data is unchanged.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional. Cada consulta comparteix la vostra adreça IP i aquest ID de transacció amb explorer.nexawal.com mitjançant HTTPS a la xarxa pública, també en mode I2P. Sense peticions en segon pla. Les dades del moneder no canvien."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional. Cada consulta comparte o seu enderezo IP e este ID de transacción con explorer.nexawal.com mediante HTTPS na internet pública, mesmo no modo I2P. Sen solicitudes en segundo plano. Os datos da carteira non cambian."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aukerakoa. Kontsulta bakoitzak zure IP helbidea eta transakzio honen IDa explorer.nexawal.com zerbitzuarekin partekatzen ditu, Internet publikoko HTTPS bidez, baita I2P moduan ere. Ez dago atzeko planoko eskaerarik. Diru-zorroaren datuak ez dira aldatzen."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nedeviga. Ĉiu serĉo dividas vian IP-adreson kaj ĉi tiun transakcian ID kun explorer.nexawal.com per HTTPS sur la publika interreto, eĉ en I2P-reĝimo. Neniuj fonaj petoj. Monujaj datumoj ne ŝanĝiĝas."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roghnach. Roinneann gach cuardach do sheoladh IP agus aitheantas an idirbhirt seo le explorer.nexawal.com trí HTTPS ar an idirlíon poiblí, fiú i mód I2P. Gan iarratais chúlra. Ní athraítear sonraí an sparáin."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opsionale. Çdo kërkim ndan adresën tuaj IP dhe ID-në e këtij transaksioni me explorer.nexawal.com përmes HTTPS në internetin publik, edhe në modalitetin I2P. Pa kërkesa në sfond. Të dhënat e portofolit nuk ndryshojnë."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İstəyə bağlıdır. Hər sorğu IP ünvanınızı və bu əməliyyatın ID-sini I2P rejimində də açıq internet üzərindən HTTPS ilə explorer.nexawal.com-a ötürür. Arxa plan sorğuları yoxdur. Pulqabı məlumatları dəyişmir."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ընտրովի։ Յուրաքանչյուր հարցում ձեր IP հասցեն և այս գործարքի ID-ն փոխանցում է explorer.nexawal.com-ին՝ հանրային ինտերնետի HTTPS կապով, նույնիսկ I2P ռեժիմում։ Ֆոնային հարցումներ չկան։ Դրամապանակի տվյալները չեն փոխվում։"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Милдеттүү эмес. Ар бир суроо IP дарегиңизди жана бул транзакциянын ID-син explorer.nexawal.com сайтына ачык интернеттеги HTTPS аркылуу жөнөтөт, I2P режиминде да. Фондук сурамдар жок. Капчыктын маалыматтары өзгөрбөйт."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختیاری است. هر جست‌وجو نشانی IP و شناسهٔ این تراکنش را از طریق HTTPS در اینترنت عمومی با explorer.nexawal.com به اشتراک می‌گذارد، حتی در حالت I2P. درخواستی در پس‌زمینه انجام نمی‌شود. داده‌های کیف پول تغییر نمی‌کنند."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "אופציונלי. כל חיפוש משתף את כתובת ה-IP שלך ואת מזהה העסקה הזו עם explorer.nexawal.com באמצעות HTTPS באינטרנט הציבורי, גם במצב I2P. אין בקשות ברקע. נתוני הארנק אינם משתנים."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختیاری۔ ہر تلاش آپ کا IP پتہ اور اس لین دین کی ID عام انٹرنیٹ پر HTTPS کے ذریعے explorer.nexawal.com کے ساتھ شیئر کرتی ہے، I2P موڈ میں بھی۔ پس منظر میں کوئی درخواست نہیں ہوتی۔ بٹوے کا ڈیٹا تبدیل نہیں ہوتا۔"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "वैकल्पिक। हर खोज आपका IP पता और इस लेनदेन की ID सार्वजनिक इंटरनेट पर HTTPS के ज़रिए explorer.nexawal.com के साथ साझा करती है, I2P मोड में भी। पृष्ठभूमि में कोई अनुरोध नहीं होता। वॉलेट का डेटा नहीं बदलता।"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ঐচ্ছিক। প্রতিটি অনুসন্ধান আপনার IP ঠিকানা ও এই লেনদেনের ID সাধারণ ইন্টারনেটে HTTPS-এর মাধ্যমে explorer.nexawal.com-এর সঙ্গে শেয়ার করে, I2P মোডেও। পটভূমিতে কোনো অনুরোধ হয় না। ওয়ালেটের তথ্য পরিবর্তিত হয় না।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opsional. Setiap pencarian membagikan alamat IP dan ID transaksi ini ke explorer.nexawal.com melalui HTTPS di internet publik, bahkan dalam mode I2P. Tidak ada permintaan latar belakang. Data dompet tidak berubah."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilihan. Setiap carian berkongsi alamat IP dan ID transaksi ini dengan explorer.nexawal.com melalui HTTPS di internet awam, walaupun dalam mod I2P. Tiada permintaan latar belakang. Data dompet tidak berubah."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opsyonal. Ibinabahagi ng bawat paghahanap ang iyong IP address at ID ng transaksyong ito sa explorer.nexawal.com gamit ang HTTPS sa pampublikong internet, kahit sa I2P mode. Walang mga kahilingan sa background. Hindi binabago ang datos ng wallet."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tùy chọn. Mỗi lần tra cứu chia sẻ địa chỉ IP và ID giao dịch này với explorer.nexawal.com qua HTTPS trên internet công cộng, kể cả ở chế độ I2P. Không có yêu cầu chạy nền. Dữ liệu ví không thay đổi."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ไม่บังคับ การค้นหาแต่ละครั้งจะแชร์ที่อยู่ IP และ ID ธุรกรรมนี้กับ explorer.nexawal.com ผ่าน HTTPS บนอินเทอร์เน็ตสาธารณะ แม้อยู่ในโหมด I2P ไม่มีคำขอเบื้องหลัง ข้อมูลกระเป๋าเงินจะไม่เปลี่ยนแปลง"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "မဖြစ်မနေ မဟုတ်ပါ။ ရှာဖွေမှုတိုင်းတွင် သင့် IP လိပ်စာနှင့် ဤငွေလွှဲ ID ကို အများသုံးအင်တာနက် HTTPS မှတစ်ဆင့် explorer.nexawal.com သို့ ပို့သည်။ I2P မုဒ်တွင်လည်း အတူတူဖြစ်သည်။ နောက်ခံတောင်းဆိုမှု မရှိပါ။ ပိုက်ဆံအိတ်ဒေတာ မပြောင်းလဲပါ။"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na zaɓi ne. Kowane bincike yana raba adireshin IP naka da ID na wannan ciniki da explorer.nexawal.com ta HTTPS a intanet na jama'a, har a yanayin I2P. Babu buƙatu a bayan fage. Bayanan walat ba sa canzawa."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Àṣàyàn ni. Ìwádìí kọ̀ọ̀kan ń pín àdírẹ́sì IP rẹ àti ID ìdúnàádúrà yìí pẹ̀lú explorer.nexawal.com nípasẹ̀ HTTPS lórí ìkànnì gbangba, kódà ní ipò I2P. Kò sí ìbéèrè abẹ́lẹ̀. Dátà àpamọ́wọ́ kò yí padà."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eiporavokuaa. Peteĩteĩ jeheka ombohasa ne IP ha ko tembiapo ID explorer.nexawal.com-pe HTTPS rupive internet opavavépe guarãme, I2P-pe jepe. Ndaipóri mba’ejerure tapykuépe. Viru ryru marandu noñemoambuéi."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional. Each lookup shares your IP address and this transaction ID with explorer.nexawal.com over clearnet HTTPS, even in I2P mode. No background requests. Wallet data is unchanged."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facultatif. Chaque recherche transmet votre adresse IP et cet identifiant de transaction à explorer.nexawal.com en HTTPS sur le réseau public, même en mode I2P. Aucune requête en arrière-plan. Les données du portefeuille restent inchangées."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional. Jede Abfrage übermittelt Ihre IP-Adresse und diese Transaktions-ID über Clearnet-HTTPS an explorer.nexawal.com, auch im I2P-Modus. Keine Hintergrundabfragen. Wallet-Daten bleiben unverändert."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional. Cada consulta comparte su dirección IP y este ID de transacción con explorer.nexawal.com mediante HTTPS por la red pública, incluso en modo I2P. Sin solicitudes en segundo plano. Los datos de la cartera no cambian."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional. Cada consulta compartilha seu endereço IP e este ID de transação com explorer.nexawal.com por HTTPS na rede pública, mesmo no modo I2P. Sem solicitações em segundo plano. Os dados da carteira não são alterados."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facoltativo. Ogni ricerca condivide il tuo indirizzo IP e questo ID transazione con explorer.nexawal.com tramite HTTPS sulla rete pubblica, anche in modalità I2P. Nessuna richiesta in background. I dati del portafoglio non cambiano."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任意の機能です。検索のたびに、IPアドレスとこのトランザクションIDが explorer.nexawal.com に通常のインターネット経由のHTTPSで送信されます。I2Pモードでも同様です。バックグラウンドでの通信は行いません。ウォレットのデータは変更されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 기능입니다. 조회할 때마다 IP 주소와 이 거래 ID를 일반 인터넷의 HTTPS를 통해 explorer.nexawal.com으로 전송합니다. I2P 모드에서도 동일합니다. 백그라운드 요청은 없습니다. 지갑 데이터는 변경되지 않습니다."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可选功能。每次查询都会通过公网 HTTPS 向 explorer.nexawal.com 发送您的 IP 地址和此交易 ID，即使在 I2P 模式下也一样。不会在后台发起请求。钱包数据不会更改。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選用功能。每次查詢都會透過公網 HTTPS 向 explorer.nexawal.com 傳送您的 IP 位址和此交易 ID，即使在 I2P 模式下也一樣。不會在背景發出請求。錢包資料不會變更。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختياري. يشارك كل استعلام عنوان IP ومعرّف هذه المعاملة مع explorer.nexawal.com عبر HTTPS على الإنترنت العام، حتى في وضع I2P. لا توجد طلبات في الخلفية. لا تتغير بيانات المحفظة."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Необязательно. Каждый запрос передаёт ваш IP-адрес и ID этой транзакции на explorer.nexawal.com по HTTPS через обычный интернет, даже в режиме I2P. Фоновых запросов нет. Данные кошелька не меняются."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Необов’язково. Кожен запит передає вашу IP-адресу та ID цієї транзакції на explorer.nexawal.com через HTTPS у звичайному інтернеті, навіть у режимі I2P. Фонових запитів немає. Дані гаманця не змінюються."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optioneel. Elke zoekopdracht deelt uw IP-adres en deze transactie-ID met explorer.nexawal.com via HTTPS over het openbare internet, ook in I2P-modus. Geen achtergrondverzoeken. Walletgegevens blijven ongewijzigd."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcjonalne. Każde zapytanie udostępnia Twój adres IP i identyfikator tej transakcji witrynie explorer.nexawal.com przez HTTPS w publicznym internecie, także w trybie I2P. Brak zapytań w tle. Dane portfela nie ulegają zmianie."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İsteğe bağlıdır. Her sorgu, IP adresinizi ve bu işlem kimliğini I2P modunda bile açık internet üzerinden HTTPS ile explorer.nexawal.com ile paylaşır. Arka plan isteği yoktur. Cüzdan verileri değişmez."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valfritt. Varje uppslagning delar din IP-adress och detta transaktions-ID med explorer.nexawal.com via HTTPS på det öppna internet, även i I2P-läge. Inga bakgrundsanrop. Plånbokens data ändras inte."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valgfrit. Hvert opslag deler din IP-adresse og dette transaktions-id med explorer.nexawal.com via HTTPS på det åbne internet, også i I2P-tilstand. Ingen baggrundsforespørgsler. Tegnebogens data ændres ikke."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valgfritt. Hvert oppslag deler IP-adressen din og denne transaksjons-ID-en med explorer.nexawal.com via HTTPS på det åpne internettet, også i I2P-modus. Ingen bakgrunnsforespørsler. Lommebokdata endres ikke."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valinnainen. Jokainen haku lähettää IP-osoitteesi ja tämän tapahtumatunnisteen explorer.nexawal.com-palveluun julkisen internetin HTTPS-yhteydellä myös I2P-tilassa. Ei taustapyyntöjä. Lompakon tiedot eivät muutu."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volitelné. Každý dotaz sdílí vaši IP adresu a ID této transakce s explorer.nexawal.com přes HTTPS ve veřejném internetu, i v režimu I2P. Žádné požadavky na pozadí. Data peněženky se nemění."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voliteľné. Každý dopyt zdieľa vašu IP adresu a ID tejto transakcie s explorer.nexawal.com cez HTTPS vo verejnom internete, aj v režime I2P. Žiadne požiadavky na pozadí. Údaje peňaženky sa nemenia."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Választható. Minden lekérdezés megosztja az IP-címét és ennek a tranzakciónak az azonosítóját az explorer.nexawal.com oldallal, nyílt internetes HTTPS-en, I2P módban is. Nincsenek háttérkérések. A tárca adatai nem változnak."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opțional. Fiecare căutare trimite adresa IP și ID-ul acestei tranzacții către explorer.nexawal.com prin HTTPS pe internetul public, chiar și în modul I2P. Fără cereri în fundal. Datele portofelului nu se modifică."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "По избор. Всяка справка споделя IP адреса ви и идентификатора на тази транзакция с explorer.nexawal.com чрез HTTPS в публичния интернет, дори в режим I2P. Няма заявки във фонов режим. Данните на портфейла не се променят."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Προαιρετικό. Κάθε αναζήτηση κοινοποιεί τη διεύθυνση IP σας και το ID αυτής της συναλλαγής στο explorer.nexawal.com μέσω HTTPS στο δημόσιο διαδίκτυο, ακόμη και σε λειτουργία I2P. Χωρίς αιτήματα παρασκηνίου. Τα δεδομένα του πορτοφολιού δεν αλλάζουν."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neobavezno. Svaki upit dijeli vašu IP adresu i ID ove transakcije s explorer.nexawal.com putem HTTPS-a na javnom internetu, čak i u načinu I2P. Nema pozadinskih zahtjeva. Podaci novčanika ostaju nepromijenjeni."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izbirno. Vsaka poizvedba deli vaš naslov IP in ID te transakcije z explorer.nexawal.com prek HTTPS v javnem internetu, tudi v načinu I2P. Brez zahtev v ozadju. Podatki denarnice se ne spreminjajo."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasirinktinai. Kiekviena užklausa perduoda jūsų IP adresą ir šios operacijos ID svetainei explorer.nexawal.com per HTTPS viešajame internete, net I2P režimu. Foninių užklausų nėra. Piniginės duomenys nekeičiami."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neobligāti. Katrs vaicājums nosūta jūsu IP adresi un šī darījuma ID vietnei explorer.nexawal.com, izmantojot HTTPS publiskajā internetā, arī I2P režīmā. Nav fona pieprasījumu. Maka dati netiek mainīti."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valikuline. Iga päring jagab teie IP-aadressi ja selle tehingu ID-d saidiga explorer.nexawal.com avaliku interneti HTTPS-i kaudu, ka I2P-režiimis. Taustapäringuid ei tehta. Rahakoti andmed ei muutu."
+          }
+        }
+      }
+    },
+    "Public explorer data only; your wallet verifies payments.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Només dades públiques de l’explorador; el moneder verifica els pagaments."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só datos públicos do explorador; a súa carteira verifica os pagamentos."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esploratzailearen datu publikoak soilik; zure diru-zorroak egiaztatzen ditu ordainketak."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur publikaj datumoj de esplorilo; via monujo kontrolas pagojn."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonraí poiblí an taiscéalaí amháin; fíoraíonn do sparán íocaíochtaí."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vetëm të dhëna publike të eksploruesit; portofoli juaj verifikon pagesat."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnız icmalçının açıq məlumatlarıdır; ödənişləri pulqabınız yoxlayır."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Միայն դիտարկիչի հանրային տվյալներն են․ վճարումները ստուգում է ձեր դրամապանակը։"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изилдегичтин ачык маалыматтары гана; төлөмдөрдү капчыгыңыз текшерет."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فقط داده‌های عمومی کاوشگر است؛ کیف پول شما پرداخت‌ها را تأیید می‌کند."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נתונים ציבוריים מהסייר בלבד; הארנק שלך מאמת תשלומים."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صرف ایکسپلورر کا عوامی ڈیٹا؛ ادائیگیوں کی تصدیق آپ کا بٹوہ کرتا ہے۔"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "केवल एक्सप्लोरर का सार्वजनिक डेटा; भुगतान की पुष्टि आपका वॉलेट करता है।"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "শুধু এক্সপ্লোরারের সর্বজনীন তথ্য; পেমেন্ট যাচাই করে আপনার ওয়ালেট।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya data publik penjelajah; dompet Anda memverifikasi pembayaran."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data awam peneroka sahaja; dompet anda mengesahkan pembayaran."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pampublikong datos lamang ng explorer; ang wallet mo ang nagpapatunay ng mga bayad."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chỉ là dữ liệu công khai từ trình khám phá; ví của bạn xác minh thanh toán."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เป็นเพียงข้อมูลสาธารณะจากตัวสำรวจ กระเป๋าเงินของคุณเป็นผู้ตรวจสอบการชำระเงิน"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer ၏ အများမြင်ဒေတာသာ ဖြစ်သည်။ ငွေပေးချေမှုများကို သင့်ပိုက်ဆံအိတ်က စစ်ဆေးသည်။"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bayanan jama'a na mai bincike kawai; walat ɗinka yana tabbatar da biyan kuɗi."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dátà gbangba aṣàwákiri nìkan; àpamọ́wọ́ rẹ ló ń jẹ́rìí àwọn ìsanwó."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jehechaha marandu opavavépe guarãnte; ne viru ryru ohechajey umi ñeme’ẽ."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Public explorer data only; your wallet verifies payments."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Données publiques de l’explorateur uniquement ; votre portefeuille vérifie les paiements."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur öffentliche Explorer-Daten; Ihre Wallet prüft Zahlungen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo datos públicos del explorador; su cartera verifica los pagos."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apenas dados públicos do explorador; sua carteira verifica os pagamentos."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo dati pubblici dell’esploratore; il portafoglio verifica i pagamenti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エクスプローラーの公開データのみです。支払いの確認はウォレットが行います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "탐색기의 공개 데이터일 뿐입니다. 결제 확인은 지갑이 수행합니다."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仅为浏览器提供的公开数据；付款由您的钱包验证。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "僅為瀏覽器提供的公開資料；付款由您的錢包驗證。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بيانات عامة من المستكشف فقط؛ محفظتك تتحقق من المدفوعات."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Только открытые данные обозревателя; платежи проверяет ваш кошелёк."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише відкриті дані оглядача; платежі перевіряє ваш гаманець."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alleen openbare explorergegevens; uw wallet controleert betalingen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To tylko publiczne dane eksploratora; płatności weryfikuje portfel."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yalnızca gezginin herkese açık verileridir; ödemeleri cüzdanınız doğrular."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Endast offentliga utforskardata; din plånbok verifierar betalningar."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kun offentlige explorer-data; din tegnebog bekræfter betalinger."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bare offentlige utforskerdata; lommeboken din verifiserer betalinger."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vain selaimen julkisia tietoja; lompakkosi tarkistaa maksut."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pouze veřejná data průzkumníka; platby ověřuje vaše peněženka."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Len verejné údaje prieskumníka; platby overuje vaša peňaženka."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Csak a böngésző nyilvános adatai; a fizetéseket a tárcája ellenőrzi."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doar date publice ale exploratorului; portofelul verifică plățile."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Само публични данни от изследователя; портфейлът ви проверява плащанията."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Μόνο δημόσια δεδομένα εξερευνητή· το πορτοφόλι σας επαληθεύει τις πληρωμές."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Samo javni podaci preglednika; vaš novčanik provjerava plaćanja."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Samo javni podatki raziskovalca; vaša denarnica preverja plačila."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tik vieši naršyklės duomenys; mokėjimus tikrina jūsų piniginė."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tikai publiski pārlūka dati; maks pārbauda maksājumus."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ainult sirvija avalikud andmed; makseid kontrollib teie rahakott."
+          }
+        }
+      }
+    },
+    "Enable Explorer details in Settings to use this feature.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activeu els detalls de l’explorador a Configuració per usar aquesta funció."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active os detalles do explorador na Configuración para usar esta función."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eginbide hau erabiltzeko, gaitu esploratzailearen xehetasunak Ezarpenetan."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ŝaltu detalojn de esplorilo en Agordoj por uzi ĉi tiun funkcion."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cumasaigh sonraí an taiscéalaí sna Socruithe chun an ghné seo a úsáid."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivizoni hollësitë e eksploruesit te Cilësimet për këtë veçori."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu funksiyadan istifadə üçün Ayarlarda icmalçı təfərrüatlarını aktivləşdirin."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Այս գործառույթն օգտագործելու համար Կարգավորումներում միացրեք դիտարկիչի մանրամասները։"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бул мүмкүнчүлүктү колдонуу үчүн Жөндөөлөрдөн изилдегичтин чоо-жайын иштетиңиз."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "برای استفاده از این قابلیت، جزئیات کاوشگر را در تنظیمات فعال کنید."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "יש להפעיל את פרטי הסייר בהגדרות כדי להשתמש בתכונה זו."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "یہ خصوصیت استعمال کرنے کے لیے ترتیبات میں ایکسپلورر کی تفصیلات فعال کریں۔"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "यह सुविधा इस्तेमाल करने के लिए सेटिंग्स में एक्सप्लोरर विवरण चालू करें।"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই সুবিধা ব্যবহার করতে সেটিংসে এক্সপ্লোরারের বিবরণ চালু করুন।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan detail penjelajah di Pengaturan untuk menggunakan fitur ini."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dayakan butiran peneroka dalam Tetapan untuk menggunakan ciri ini."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paganahin ang mga detalye ng explorer sa Mga Setting para gamitin ito."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bật chi tiết trình khám phá trong Cài đặt để dùng tính năng này."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เปิดใช้รายละเอียดตัวสำรวจในการตั้งค่าเพื่อใช้ฟีเจอร์นี้"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ဤလုပ်ဆောင်ချက်ကို သုံးရန် ဆက်တင်တွင် Explorer အသေးစိတ်ကို ဖွင့်ပါ။"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunna bayanan mai bincike a Saituna don amfani da wannan fasalin."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tan àlàyé aṣàwákiri nínú Ètò láti lo iṣẹ́ yìí."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emyandy jehechaha marandu Ñembohekópe eiporu hag̃ua ko tembiapo."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enable Explorer details in Settings to use this feature."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez les détails de l’explorateur dans les réglages pour utiliser cette fonction."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivieren Sie Explorer-Details in den Einstellungen, um diese Funktion zu nutzen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active los detalles del explorador en Ajustes para usar esta función."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ative os detalhes do explorador nas Configurações para usar este recurso."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abilita i dettagli dell’esploratore nelle Impostazioni per usare questa funzione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この機能を使うには、設定でエクスプローラーの詳細を有効にしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 기능을 사용하려면 설정에서 탐색기 상세 정보를 켜세요."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请在设置中启用浏览器详情以使用此功能。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請在設定中啟用瀏覽器詳細資訊以使用此功能。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فعّل تفاصيل المستكشف في الإعدادات لاستخدام هذه الميزة."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Для этой функции включите данные обозревателя в настройках."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Щоб користуватися цією функцією, увімкніть дані оглядача в налаштуваннях."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schakel explorergegevens in bij Instellingen om deze functie te gebruiken."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz dane eksploratora w ustawieniach, aby użyć tej funkcji."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu özelliği kullanmak için Ayarlar’dan gezgin ayrıntılarını etkinleştirin."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivera utforskardetaljer i Inställningar för att använda funktionen."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivér explorer-oplysninger i Indstillinger for at bruge funktionen."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktiver utforskerdetaljer i Innstillinger for å bruke funksjonen."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ota selaimen tiedot käyttöön asetuksissa käyttääksesi toimintoa."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pro použití této funkce povolte podrobnosti průzkumníka v Nastavení."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na použitie tejto funkcie povoľte podrobnosti prieskumníka v Nastaveniach."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A funkcióhoz engedélyezze a böngésző részleteit a Beállításokban."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activează detaliile exploratorului în Setări pentru a folosi funcția."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Включете данните от изследователя в Настройки, за да използвате функцията."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ενεργοποιήστε τα στοιχεία εξερευνητή στις Ρυθμίσεις για αυτήν τη λειτουργία."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Omogućite podatke preglednika u Postavkama za ovu značajku."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Za to funkcijo omogočite podatke raziskovalca v Nastavitvah."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Norėdami naudoti šią funkciją, nustatymuose įjunkite naršyklės duomenis."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lai izmantotu šo funkciju, iestatījumos iespējojiet pārlūka informāciju."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selle funktsiooni kasutamiseks lubage seadetes sirvija andmed."
+          }
+        }
+      }
+    },
+    "Not found on this node. This does not prove a payment is missing.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No s’ha trobat en aquest node. Això no demostra que falti un pagament."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non se atopou neste nodo. Isto non demostra que falte un pagamento."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ez da nodo honetan aurkitu. Horrek ez du frogatzen ordainketa bat falta denik."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne trovita ĉe ĉi tiu nodo. Tio ne pruvas, ke pago mankas."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Níor aimsíodh ar an nód seo é. Ní cruthúnas é seo go bhfuil íocaíocht ar iarraidh."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuk u gjet në këtë nyjë. Kjo nuk provon se mungon një pagesë."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu qovşaqda tapılmadı. Bu, ödənişin olmamasını sübut etmir."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Այս հանգույցում չի գտնվել։ Սա չի ապացուցում, որ վճարում չկա։"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бул түйүндөн табылган жок. Бул төлөм жок экенин далилдебейт."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "در این گره یافت نشد. این به معنی اثبات نبودن پرداخت نیست."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לא נמצא בצומת זה. זו אינה הוכחה שתשלום חסר."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اس نوڈ پر نہیں ملا۔ اس سے یہ ثابت نہیں ہوتا کہ ادائیگی موجود نہیں۔"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "इस नोड पर नहीं मिला। इससे यह साबित नहीं होता कि भुगतान गायब है।"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এই নোডে পাওয়া যায়নি। এতে পেমেন্ট নেই বলে প্রমাণ হয় না।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ditemukan pada node ini. Ini tidak membuktikan bahwa pembayaran hilang."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ditemui pada nod ini. Ini tidak membuktikan bahawa pembayaran tiada."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi nakita sa node na ito. Hindi nito pinatutunayang may nawawalang bayad."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không tìm thấy trên nút này. Điều này không chứng minh rằng khoản thanh toán bị thiếu."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ไม่พบในโหนดนี้ แต่ไม่ได้พิสูจน์ว่าการชำระเงินหายไป"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ဤ node တွင် မတွေ့ပါ။ ငွေပေးချေမှု ပျောက်နေကြောင်း သက်သေမဟုတ်ပါ။"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ba a samu a wannan kumburin ba. Wannan ba ya tabbatar da cewa biyan kuɗi ya ɓace."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A kò rí i lórí nóòdù yìí. Èyí kò jẹ́ ẹ̀rí pé ìsanwó kan sọnù."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ndojejuhúi ko nódope. Kóva ndohechaukái peteĩ ñeme’ẽ okañy hague."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not found on this node. This does not prove a payment is missing."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Introuvable sur ce nœud. Cela ne prouve pas qu’un paiement manque."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf diesem Node nicht gefunden. Das beweist nicht, dass eine Zahlung fehlt."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encuentra en este nodo. Esto no demuestra que falte un pago."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não encontrado neste nó. Isso não prova que um pagamento esteja faltando."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non trovato su questo nodo. Ciò non dimostra che manchi un pagamento."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このノードでは見つかりません。支払いが存在しないことの証明ではありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 노드에서 찾을 수 없습니다. 결제가 없다는 증거는 아닙니다."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此节点未找到该交易。这并不能证明付款不存在。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此節點未找到該交易。這並不能證明付款不存在。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُعثر عليها في هذه العقدة. هذا لا يثبت أن دفعة ما مفقودة."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не найдено на этом узле. Это не доказывает отсутствие платежа."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не знайдено на цьому вузлі. Це не доводить відсутності платежу."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niet gevonden op deze node. Dit bewijst niet dat een betaling ontbreekt."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie znaleziono w tym węźle. Nie dowodzi to braku płatności."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu düğümde bulunamadı. Bu, bir ödemenin eksik olduğunu kanıtlamaz."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hittades inte på denna nod. Det bevisar inte att en betalning saknas."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikke fundet på denne node. Det beviser ikke, at en betaling mangler."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikke funnet på denne noden. Det beviser ikke at en betaling mangler."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ei löytynyt tältä solmulta. Tämä ei todista maksun puuttumista."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na tomto uzlu nenalezeno. To nedokazuje, že platba chybí."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na tomto uzle sa nenašlo. To nedokazuje, že platba chýba."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ezen a csomóponton nem található. Ez nem bizonyítja egy fizetés hiányát."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nu a fost găsită pe acest nod. Aceasta nu dovedește că lipsește o plată."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не е намерена на този възел. Това не доказва, че липсва плащане."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Δεν βρέθηκε σε αυτόν τον κόμβο. Αυτό δεν αποδεικνύει ότι λείπει πληρωμή."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nije pronađeno na ovom čvoru. To ne dokazuje da plaćanje nedostaje."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na tem vozlišču ni najdeno. To ne dokazuje, da plačilo manjka."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Šiame mazge nerasta. Tai neįrodo, kad mokėjimo nėra."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Šajā mezglā nav atrasts. Tas nepierāda, ka maksājums nav veikts."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sellest sõlmest ei leitud. See ei tõesta makse puudumist."
+          }
+        }
+      }
+    },
+    "Explorer unavailable. Your wallet is unaffected. Try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorador no disponible. El moneder no es veu afectat. Torneu-ho a provar."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorador non dispoñible. A súa carteira non se ve afectada. Ténteo de novo."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esploratzailea ez dago erabilgarri. Zure diru-zorroari ez dio eragiten. Saiatu berriro."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esplorilo ne disponeblas. Via monujo ne estas tuŝita. Provu denove."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Níl an taiscéalaí ar fáil. Níl aon tionchar ar do sparán. Bain triail eile as."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksploruesi nuk është i disponueshëm. Portofoli juaj nuk preket. Provoni përsëri."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İcmalçı əlçatan deyil. Pulqabınıza təsir etmir. Yenidən cəhd edin."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Դիտարկիչն անհասանելի է։ Ձեր դրամապանակը չի տուժում։ Փորձեք կրկին։"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изилдегич жеткиликсиз. Капчыгыңызга таасир этпейт. Кайра аракет кылыңыз."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کاوشگر در دسترس نیست. کیف پول شما تحت تأثیر نیست. دوباره تلاش کنید."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הסייר אינו זמין. הארנק שלך אינו מושפע. נסו שוב."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ایکسپلورر دستیاب نہیں۔ آپ کا بٹوہ متاثر نہیں ہوتا۔ دوبارہ کوشش کریں۔"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "एक्सप्लोरर उपलब्ध नहीं है। आपका वॉलेट प्रभावित नहीं होता। फिर कोशिश करें।"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "এক্সপ্লোরার অনুপলব্ধ। আপনার ওয়ালেট প্রভাবিত হয় না। আবার চেষ্টা করুন।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penjelajah tidak tersedia. Dompet Anda tidak terpengaruh. Coba lagi."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peneroka tidak tersedia. Dompet anda tidak terjejas. Cuba lagi."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi available ang explorer. Hindi apektado ang wallet mo. Subukang muli."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trình khám phá không khả dụng. Ví của bạn không bị ảnh hưởng. Hãy thử lại."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ตัวสำรวจไม่พร้อมใช้งาน กระเป๋าเงินของคุณไม่ได้รับผลกระทบ ลองอีกครั้ง"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer ကို မသုံးနိုင်ပါ။ သင့်ပိုက်ဆံအိတ်ကို မထိခိုက်ပါ။ ပြန်ကြိုးစားပါ။"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mai bincike ba ya samuwa. Walat ɗinka bai samu matsala ba. Sake gwadawa."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aṣàwákiri kò sí lárọ̀ọ́wọ́tó. Àpamọ́wọ́ rẹ kò ní ìpalára. Gbìyànjú lẹ́ẹ̀kan sí i."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jehechaha ndojeporukuaái. Ne viru ryru noñembyaíri. Eha’ãjey."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer unavailable. Your wallet is unaffected. Try again."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorateur indisponible. Votre portefeuille n’est pas affecté. Réessayez."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer nicht verfügbar. Ihre Wallet ist nicht betroffen. Erneut versuchen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorador no disponible. Su cartera no se ve afectada. Inténtelo de nuevo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorador indisponível. Sua carteira não é afetada. Tente novamente."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esploratore non disponibile. Il portafoglio non è interessato. Riprova."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エクスプローラーを利用できません。ウォレットへの影響はありません。もう一度お試しください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "탐색기를 사용할 수 없습니다. 지갑에는 영향이 없습니다. 다시 시도하세요."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浏览器不可用。您的钱包不受影响。请重试。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "瀏覽器無法使用。您的錢包不受影響。請重試。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المستكشف غير متاح. محفظتك غير متأثرة. حاول مجددًا."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обозреватель недоступен. Это не влияет на кошелёк. Повторите попытку."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оглядач недоступний. На гаманець це не впливає. Спробуйте ще раз."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer niet beschikbaar. Uw wallet blijft werken. Probeer opnieuw."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksplorator niedostępny. Nie wpływa to na portfel. Spróbuj ponownie."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gezgin kullanılamıyor. Cüzdanınız etkilenmez. Tekrar deneyin."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utforskaren är inte tillgänglig. Din plånbok påverkas inte. Försök igen."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorer er utilgængelig. Din tegnebog påvirkes ikke. Prøv igen."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utforskeren er utilgjengelig. Lommeboken din påvirkes ikke. Prøv igjen."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selain ei ole käytettävissä. Tämä ei vaikuta lompakkoosi. Yritä uudelleen."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Průzkumník není dostupný. Vaše peněženka není ovlivněna. Zkuste to znovu."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prieskumník nie je dostupný. Vaša peňaženka nie je ovplyvnená. Skúste znova."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A böngésző nem érhető el. Ez nem érinti a tárcáját. Próbálja újra."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorator indisponibil. Portofelul nu este afectat. Încearcă din nou."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изследователят е недостъпен. Портфейлът ви не е засегнат. Опитайте отново."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ο εξερευνητής δεν είναι διαθέσιμος. Το πορτοφόλι σας δεν επηρεάζεται. Δοκιμάστε ξανά."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preglednik nije dostupan. To ne utječe na novčanik. Pokušajte ponovno."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raziskovalec ni na voljo. Vaša denarnica ni prizadeta. Poskusite znova."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naršyklė nepasiekiama. Piniginė nepaveikta. Bandykite dar kartą."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pārlūks nav pieejams. Jūsu maks netiek ietekmēts. Mēģiniet vēlreiz."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sirvija pole saadaval. Rahakotti see ei mõjuta. Proovige uuesti."
+          }
+        }
+      }
+    },
+    "Node data may be stale or incomplete.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les dades del node poden ser antigues o incompletes."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os datos do nodo poden estar desactualizados ou incompletos."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nodoaren datuak zaharkituta edo osatu gabe egon daitezke."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La datumoj de la nodo povas esti malnovaj aŭ nekompletaj."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D’fhéadfadh sonraí an nóid a bheith sean nó neamhiomlán."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Të dhënat e nyjës mund të jenë të vjetra ose të paplota."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qovşaq məlumatları köhnə və ya natamam ola bilər."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Հանգույցի տվյալները կարող են լինել հնացած կամ թերի։"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Түйүндүн маалыматтары эски же толук эмес болушу мүмкүн."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "داده‌های گره ممکن است قدیمی یا ناقص باشند."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "נתוני הצומת עשויים להיות מיושנים או חלקיים."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نوڈ کا ڈیٹا پرانا یا نامکمل ہو سکتا ہے۔"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "नोड का डेटा पुराना या अधूरा हो सकता है।"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "নোডের তথ্য পুরোনো বা অসম্পূর্ণ হতে পারে।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data node mungkin kedaluwarsa atau tidak lengkap."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data nod mungkin lapuk atau tidak lengkap."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maaaring luma o kulang ang datos ng node."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dữ liệu nút có thể đã cũ hoặc chưa đầy đủ."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ข้อมูลโหนดอาจเก่าหรือไม่ครบถ้วน"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node ဒေတာသည် ဟောင်းနွမ်းနေခြင်း သို့မဟုတ် မပြည့်စုံခြင်း ဖြစ်နိုင်သည်။"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bayanan kumburin na iya tsufa ko rashin cika."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dátà nóòdù lè ti pẹ́ tàbí kí ó má pé."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nodo marandu ikatu itujáma térã noĩmbái."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node data may be stale or incomplete."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les données du nœud peuvent être anciennes ou incomplètes."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Node-Daten können veraltet oder unvollständig sein."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los datos del nodo pueden estar desactualizados o incompletos."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os dados do nó podem estar desatualizados ou incompletos."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I dati del nodo potrebbero essere obsoleti o incompleti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノードのデータが古いか、不完全な可能性があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노드 데이터가 오래되었거나 불완전할 수 있습니다."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "节点数据可能已过时或不完整。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "節點資料可能已過時或不完整。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قد تكون بيانات العقدة قديمة أو غير مكتملة."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Данные узла могут быть устаревшими или неполными."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дані вузла можуть бути застарілими або неповними."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nodegegevens kunnen verouderd of onvolledig zijn."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dane węzła mogą być nieaktualne lub niepełne."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Düğüm verileri eski veya eksik olabilir."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nodens data kan vara gamla eller ofullständiga."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nodens data kan være forældede eller ufuldstændige."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nodedata kan være utdaterte eller ufullstendige."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solmun tiedot voivat olla vanhentuneita tai puutteellisia."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data uzlu mohou být zastaralá nebo neúplná."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Údaje uzla môžu byť zastarané alebo neúplné."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A csomópont adatai elavultak vagy hiányosak lehetnek."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datele nodului pot fi vechi sau incomplete."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Данните на възела може да са остарели или непълни."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Τα δεδομένα του κόμβου μπορεί να είναι παλιά ή ελλιπή."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podaci čvora mogu biti zastarjeli ili nepotpuni."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podatki vozlišča so lahko zastareli ali nepopolni."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mazgo duomenys gali būti pasenę arba neišsamūs."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mezgla dati var būt novecojuši vai nepilnīgi."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sõlme andmed võivad olla aegunud või puudulikud."
+          }
+        }
+      }
+    },
+    "Observed at": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observat el"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observado o"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behaketa-unea"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observita je"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am breathnaithe"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Koha e vëzhgimit"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Müşahidə vaxtı"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Դիտարկման պահը"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Байкалган убакыт"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زمان مشاهده"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "זמן התצפית"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مشاہدے کا وقت"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "अवलोकन का समय"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "পর্যবেক্ষণের সময়"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waktu pengamatan"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masa pemerhatian"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oras ng pagmamasid"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thời điểm quan sát"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "เวลาที่สังเกต"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "တွေ့ရှိချိန်"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lokacin da aka lura"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Àkókò àkíyèsí"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aravo ojehechahague"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observed at"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observé le"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beobachtet am"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observado el"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observado em"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osservato il"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "観測日時"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "관측 시각"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "观测时间"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "觀測時間"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وقت الرصد"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Время наблюдения"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Час спостереження"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waargenomen op"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Czas obserwacji"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gözlem zamanı"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observerad vid"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observeret den"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observert"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Havaittu"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čas pozorování"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čas pozorovania"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Megfigyelés ideje"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Observat la"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Наблюдавано на"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Χρόνος παρατήρησης"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vrijeme opažanja"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Čas opažanja"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stebėjimo laikas"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novērošanas laiks"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaatluse aeg"
+          }
+        }
+      }
+    },
+    "Public explorer supports mainnet only.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’explorador públic només admet la xarxa principal."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O explorador público só admite a rede principal."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esploratzaile publikoak sare nagusia soilik onartzen du."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La publika esplorilo subtenas nur la ĉefan reton."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ní thacaíonn an taiscéalaí poiblí ach leis an bpríomhlíonra."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eksploruesi publik mbështet vetëm rrjetin kryesor."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Açıq icmalçı yalnız əsas şəbəkəni dəstəkləyir."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Հանրային դիտարկիչն աջակցում է միայն հիմնական ցանցին։"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ачык изилдегич негизги тармакты гана колдойт."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "کاوشگر عمومی فقط از شبکهٔ اصلی پشتیبانی می‌کند."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "הסייר הציבורי תומך ברשת הראשית בלבד."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عوامی ایکسپلورر صرف مین نیٹ کی حمایت کرتا ہے۔"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सार्वजनिक एक्सप्लोरर केवल मेननेट का समर्थन करता है।"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সর্বজনীন এক্সপ্লোরার শুধু মেইননেট সমর্থন করে।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penjelajah publik hanya mendukung mainnet."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peneroka awam hanya menyokong rangkaian utama."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mainnet lamang ang sinusuportahan ng pampublikong explorer."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trình khám phá công khai chỉ hỗ trợ mạng chính."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ตัวสำรวจสาธารณะรองรับเฉพาะเครือข่ายหลัก"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "အများသုံး Explorer သည် mainnet ကိုသာ ပံ့ပိုးသည်။"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mai bincike na jama'a yana goyon bayan babban hanyar sadarwa kawai."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aṣàwákiri gbangba ń ṣe àtìlẹ́yìn fún nẹ́tíwọ́ọ̀kì àkọ́kọ́ nìkan."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jehechaha opavavépe guarã omba’apo red tenondeguápe año."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Public explorer supports mainnet only."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’explorateur public ne prend en charge que le réseau principal."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der öffentliche Explorer unterstützt nur das Mainnet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El explorador público solo admite la red principal."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O explorador público oferece suporte apenas à rede principal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’esploratore pubblico supporta solo la rete principale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公開エクスプローラーはメインネットのみ対応しています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공개 탐색기는 메인넷만 지원합니다."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公共浏览器仅支持主网。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公共瀏覽器僅支援主網。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يدعم المستكشف العام الشبكة الرئيسية فقط."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Публичный обозреватель поддерживает только основную сеть."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Публічний оглядач підтримує лише основну мережу."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De openbare explorer ondersteunt alleen het mainnet."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publiczny eksplorator obsługuje tylko sieć główną."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herkese açık gezgin yalnızca ana ağı destekler."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Den offentliga utforskaren stöder bara huvudnätet."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Den offentlige explorer understøtter kun hovednettet."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Den offentlige utforskeren støtter bare hovednettet."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Julkinen selain tukee vain pääverkkoa."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veřejný průzkumník podporuje jen hlavní síť."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verejný prieskumník podporuje iba hlavnú sieť."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A nyilvános böngésző csak a főhálózatot támogatja."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exploratorul public acceptă doar rețeaua principală."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Публичният изследовател поддържа само основната мрежа."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ο δημόσιος εξερευνητής υποστηρίζει μόνο το κύριο δίκτυο."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Javni preglednik podržava samo glavnu mrežu."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Javni raziskovalec podpira samo glavno omrežje."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vieša naršyklė palaiko tik pagrindinį tinklą."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publiskais pārlūks atbalsta tikai galveno tīklu."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avalik sirvija toetab ainult põhivõrku."
+          }
+        }
+      }
+    },
+    "Refresh": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualitza"
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar"
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Freskatu"
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktualigi"
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Athnuaigh"
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rifresko"
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenilə"
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Թարմացնել"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жаңылоо"
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تازه‌سازی"
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "רענון"
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تازہ کریں"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "रीफ़्रेश करें"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "রিফ্রেশ করুন"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segarkan"
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muat semula"
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I-refresh"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Làm mới"
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "รีเฟรช"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ပြန်လည်ရယူရန်"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sabunta"
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tún un ṣe"
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mbopyahu"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualiser"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktualisieren"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiorna"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새로고침"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刷新"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新整理"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحديث"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обновить"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновити"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vernieuwen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odśwież"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenile"
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uppdatera"
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opdatér"
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oppdater"
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Päivitä"
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obnovit"
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obnoviť"
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frissítés"
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reîmprospătează"
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обновяване"
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ανανέωση"
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osvježi"
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osveži"
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atnaujinti"
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atsvaidzināt"
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Värskenda"
+          }
+        }
+      }
+    },
+    "Could not save settings.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ca": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No s’ha pogut desar la configuració."
+          }
+        },
+        "gl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non se puido gardar a configuración."
+          }
+        },
+        "eu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ezin izan dira ezarpenak gorde."
+          }
+        },
+        "eo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne eblis konservi agordojn."
+          }
+        },
+        "ga": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Níorbh fhéidir na socruithe a shábháil."
+          }
+        },
+        "sq": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cilësimet nuk u ruajtën."
+          }
+        },
+        "az": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarları saxlamaq mümkün olmadı."
+          }
+        },
+        "hy": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Չհաջողվեց պահպանել կարգավորումները։"
+          }
+        },
+        "ky": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Жөндөөлөрдү сактоо мүмкүн болгон жок."
+          }
+        },
+        "fa": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ذخیرهٔ تنظیمات ممکن نشد."
+          }
+        },
+        "he": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "לא ניתן לשמור את ההגדרות."
+          }
+        },
+        "ur": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترتیبات محفوظ نہیں ہو سکیں۔"
+          }
+        },
+        "hi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "सेटिंग्स सहेजी नहीं जा सकीं।"
+          }
+        },
+        "bn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "সেটিংস সংরক্ষণ করা যায়নি।"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat menyimpan pengaturan."
+          }
+        },
+        "ms": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tetapan tidak dapat disimpan."
+          }
+        },
+        "fil": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hindi mai-save ang mga setting."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không thể lưu cài đặt."
+          }
+        },
+        "th": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "บันทึกการตั้งค่าไม่ได้"
+          }
+        },
+        "my": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ဆက်တင်များကို မသိမ်းနိုင်ပါ။"
+          }
+        },
+        "ha": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An kasa adana saituna."
+          }
+        },
+        "yo": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A kò lè fi àwọn ètò pamọ́."
+          }
+        },
+        "gn": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ndaikatúi oñeñongatu ñemboheko."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not save settings."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d’enregistrer les réglages."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen konnten nicht gespeichert werden."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudieron guardar los ajustes."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível salvar as configurações."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile salvare le impostazioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定を保存できませんでした。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정을 저장하지 못했습니다."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法保存设置。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法儲存設定。"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذر حفظ الإعدادات."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удалось сохранить настройки."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вдалося зберегти налаштування."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instellingen konden niet worden opgeslagen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się zapisać ustawień."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarlar kaydedilemedi."
+          }
+        },
+        "sv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Det gick inte att spara inställningarna."
+          }
+        },
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indstillingerne kunne ikke gemmes."
+          }
+        },
+        "nb": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunne ikke lagre innstillingene."
+          }
+        },
+        "fi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Asetuksia ei voitu tallentaa."
+          }
+        },
+        "cs": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nastavení se nepodařilo uložit."
+          }
+        },
+        "sk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nastavenia sa nepodarilo uložiť."
+          }
+        },
+        "hu": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A beállításokat nem sikerült menteni."
+          }
+        },
+        "ro": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setările nu au putut fi salvate."
+          }
+        },
+        "bg": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Настройките не можаха да бъдат запазени."
+          }
+        },
+        "el": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Δεν ήταν δυνατή η αποθήκευση των ρυθμίσεων."
+          }
+        },
+        "hr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Postavke nije moguće spremiti."
+          }
+        },
+        "sl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nastavitev ni bilo mogoče shraniti."
+          }
+        },
+        "lt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nepavyko išsaugoti nustatymų."
+          }
+        },
+        "lv": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neizdevās saglabāt iestatījumus."
+          }
+        },
+        "et": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seadete salvestamine ebaõnnestus."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
