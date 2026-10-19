@@ -556,6 +556,8 @@ struct SettingsView: View {
     @State private var showLegalPrivacy = false
     @State private var showLegalLicense = false
     @AppStorage(MoneroConfig.userDefaultsTechnoThemeKey) private var technoThemeEnabled: Bool = MoneroConfig.defaultTechnoThemeEnabled
+    @AppStorage(AppHaptics.setting) private var hapticFeedbackEnabled: Bool = MoneroConfig.defaultHapticFeedbackEnabled
+    @AppStorage(SendSounds.setting) private var sendSoundsEnabled: Bool = MoneroConfig.defaultSendSoundsEnabled
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
@@ -580,6 +582,8 @@ struct SettingsView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     settingsCard(title: L10n.t("Appearance")) {
                         NeonToggle(title: L10n.t("Techno Theme"), isOn: $technoThemeEnabled)
+                        NeonToggle(title: L10n.t("Haptic feedback"), isOn: $hapticFeedbackEnabled)
+                        NeonToggle(title: L10n.t("Send sounds"), isOn: $sendSoundsEnabled)
                     }
 
                     settingsCard(title: L10n.t("How to connect")) {
@@ -698,8 +702,10 @@ struct SettingsView: View {
                                 }
 
                                 secondaryButton("Save scan lookahead") {
-                                    persistScanTuning()
-                                    flashStatus(L10n.t("Saved scan lookahead"))
+                                    if persistScanTuning() {
+                                        AppHaptics.light()
+                                        flashStatus(L10n.t("Saved scan lookahead"))
+                                    }
                                 }
 
                                 Button {
@@ -776,6 +782,7 @@ struct SettingsView: View {
 
                         Button {
                             UIPasteboard.general.string = Self.sourceRepoURL
+                            AppHaptics.light()
                             flashStatus(L10n.t("Link copied"))
                         } label: {
                             Text(verbatim: Self.sourceRepoURL)
@@ -947,9 +954,12 @@ struct SettingsView: View {
         }
     }
 
-    private func persistScanTuning() {
+    @discardableResult
+    private func persistScanTuning() -> Bool {
+        var didSave = false
         if let gap = parsedGapLimit() {
             MoneroConfig.setGapLimit(gap)
+            didSave = true
             Task {
                 if let id = await WalletManager.shared.getCurrentWalletId() {
                     try? WalletCoreFFIClient.setGapLimit(walletId: id, gapLimit: gap)
@@ -958,7 +968,9 @@ struct SettingsView: View {
         }
         if let acc = Int(accountGapInput.trimmingCharacters(in: .whitespacesAndNewlines)) {
             MoneroConfig.setAccountGap(max(1, min(acc, 1000)))
+            didSave = true
         }
+        return didSave
     }
 
     private func flashStatus(_ message: String) {

@@ -22,6 +22,7 @@ struct TransactionsView: View {
     @State private var exportError: String?
     @State private var exportURL: URL?
     @State private var isSharePresented = false
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var palette
     private var query: WalletCoreFFIClient.HistoryQuery {
@@ -33,14 +34,51 @@ struct TransactionsView: View {
         ScrollViewReader { proxy in
         List {
             Section {
-                Picker("Filter", selection: $filter) {
-                    Text("All").tag("all"); Text("Received").tag("received")
-                    Text("Sent").tag("sent"); Text("Pending").tag("pending")
+                if classicUI, let palette {
+                    NeonTransactionFilter(selection: $filter, palette: palette)
+                } else {
+                    Picker("Filter", selection: $filter) {
+                        Text("All").tag("all"); Text("Received").tag("received")
+                        Text("Sent").tag("sent"); Text("Pending").tag("pending")
+                    }
                 }
-                Toggle("Date range", isOn: $dateFilter)
+                if classicUI, let palette {
+                    Toggle(L10n.neon("Date range", classicUI: true), isOn: $dateFilter)
+                        .toggleStyle(NeonDateRangeToggleStyle(palette: palette))
+                } else {
+                    Toggle("Date range", isOn: $dateFilter)
+                }
                 if dateFilter {
                     DatePicker("From", selection: $from, displayedComponents: .date)
                     DatePicker("Through", selection: $to, in: from..., displayedComponents: .date)
+                }
+                if classicUI, let palette {
+                    HStack(spacing: 9) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(palette.accent)
+                        TextField(L10n.neon("Search transaction ID", classicUI: true), text: $search)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundStyle(palette.primaryText)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                            .submitLabel(.search)
+                            .accessibilityLabel(L10n.t("Search transaction ID"))
+                        if !search.isEmpty {
+                            Button { search = "" } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundStyle(palette.secondaryText)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(L10n.t("Clear"))
+                        }
+                    }
+                    .padding(.horizontal, 12)
+                    .frame(minHeight: 44)
+                    .background(palette.background)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(palette.border.opacity(0.8), lineWidth: 1)
+                    }
                 }
                 Text("\(model.count) matching · \(model.total) total").font(.caption).foregroundStyle(.secondary)
                 Button {
@@ -116,11 +154,21 @@ struct TransactionsView: View {
         .background(palette?.background ?? Color(.systemGroupedBackground))
         .navigationTitle(classicUI ? "" : L10n.t("Transactions"))
         .navigationBarTitleDisplayMode(classicUI ? .inline : .large)
+        .navigationBarBackButtonHidden(classicUI)
         .toolbarBackground(palette?.background ?? Color(.systemBackground), for: .navigationBar)
         .toolbarColorScheme(classicUI ? .dark : nil, for: .navigationBar)
         .font(classicUI ? .system(.body, design: .monospaced) : .body)
         .toolbar {
             if classicUI {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button { dismiss() } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 16, weight: .semibold, design: .monospaced))
+                    }
+                    .buttonStyle(.plain)
+                    .tint(palette?.accent ?? .green)
+                    .accessibilityLabel(L10n.t("Wallet"))
+                }
                 ToolbarItem(placement: .principal) {
                     Text(L10n.neon("Transactions", classicUI: true))
                         .font(.system(.headline, design: .monospaced).weight(.bold))
@@ -128,7 +176,7 @@ struct TransactionsView: View {
                 }
             }
         }
-        .searchable(text: $search, prompt: "Search transaction ID")
+        .modifier(NativeTransactionSearch(enabled: !classicUI, text: $search))
         .onAppear { if !initialized { filter = initialFilter; initialized = true } }
         .onChange(of: model.scrollTarget) { _, target in if let target { proxy.scrollTo(target, anchor: .top) } }
         .task(id: query) {
@@ -156,6 +204,92 @@ struct TransactionsView: View {
         }
         }
     }
+
+private struct NativeTransactionSearch: ViewModifier {
+    let enabled: Bool
+    @Binding var text: String
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if enabled {
+            content.searchable(text: $text, prompt: "Search transaction ID")
+        } else {
+            content
+        }
+    }
+}
+
+private struct NeonDateRangeToggleStyle: ToggleStyle {
+    let palette: ClassicPalette
+
+    func makeBody(configuration: Configuration) -> some View {
+        Button {
+            withAnimation(.easeInOut(duration: 0.16)) {
+                configuration.isOn.toggle()
+            }
+        } label: {
+            HStack {
+                configuration.label
+                    .font(.system(.body, design: .monospaced))
+                    .foregroundStyle(palette.primaryText)
+                Spacer(minLength: 8)
+                ZStack {
+                    Capsule()
+                        .fill(palette.panel)
+                        .overlay {
+                            Capsule().stroke(
+                                configuration.isOn ? palette.accent : palette.secondaryText,
+                                lineWidth: 1.5
+                            )
+                        }
+                        .frame(width: 52, height: 30)
+                    Circle()
+                        .fill(configuration.isOn ? palette.accent : palette.secondaryText)
+                        .frame(width: 22, height: 22)
+                        .offset(x: configuration.isOn ? 10 : -10)
+                }
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityValue(configuration.isOn ? "On" : "Off")
+        .accessibilityAddTraits(.isButton)
+        .accessibilityAction { configuration.isOn.toggle() }
+    }
+}
+
+private struct NeonTransactionFilter: View {
+    @Binding var selection: String
+    let palette: ClassicPalette
+    private let options: [(value: String, title: LocalizedStringKey)] = [
+        ("all", "All"), ("received", "Received"), ("sent", "Sent"), ("pending", "Pending")
+    ]
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(options, id: \.value) { option in
+                Button { selection = option.value } label: {
+                    Text(option.title)
+                        .textCase(.uppercase)
+                        .font(.system(.caption, design: .monospaced).weight(.semibold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .foregroundStyle(selection == option.value ? palette.background : palette.primaryText)
+                        .frame(maxWidth: .infinity, minHeight: 40)
+                        .background(selection == option.value ? palette.accent : palette.panel)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(option.title))
+                .accessibilityValue(selection == option.value ? "Selected" : "")
+            }
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 4)
+                .stroke(palette.border.opacity(0.8), lineWidth: 1)
+        }
+    }
+}
 
     private func cleanupExportFile() {
         if let exportURL { try? FileManager.default.removeItem(at: exportURL) }
@@ -270,12 +404,38 @@ struct WalletTransferDetails: View {
                         .font(.system(.caption, design: .monospaced))
                         .foregroundStyle(palette?.secondaryText ?? .primary)
                         .textSelection(.enabled)
-                    Button("Copy TXID") { UIPasteboard.general.string = transfer.txid }
+                    Button("Copy TXID") {
+                        UIPasteboard.general.string = transfer.txid
+                        AppHaptics.light()
+                    }
                     NavigationLink {
                         ExplorerDetailsView(txid: transfer.txid, walletSession: viewModel.historySession, viewModel: viewModel)
-                    } label: { Text("Explorer details") }
+                    } label: {
+                        Label(
+                            L10n.neon("Explorer details", classicUI: classicUI),
+                            systemImage: "arrow.up.right.square"
+                        )
+                    }
+                    .tint(palette?.accent ?? .accentColor)
+                    .foregroundColor(palette?.accent ?? .accentColor)
                     if let url = URL(string: "https://explorer.nexawal.com/tx/\(transfer.txid)") {
-                        Button("Copy Explorer Link") { UIPasteboard.general.string = url.absoluteString }
+                        Text(L10n.neon("Copy Explorer Link", classicUI: classicUI))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(palette?.secondaryText ?? .secondary)
+                        Button {
+                            UIPasteboard.general.string = url.absoluteString
+                            AppHaptics.light()
+                        } label: {
+                            Text(verbatim: url.absoluteString)
+                                .font(classicUI ? .system(.caption, design: .monospaced) : .caption.monospaced())
+                                .underline()
+                                .multilineTextAlignment(.leading)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .buttonStyle(.borderless)
+                        .tint(palette?.accent ?? .accentColor)
+                        .foregroundColor(palette?.accent ?? .accentColor)
+                        .accessibilityLabel(L10n.t("Copy Explorer Link"))
                     }
                 } header: {
                     Text(L10n.neon("Identifiers", classicUI: classicUI))

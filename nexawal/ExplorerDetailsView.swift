@@ -15,6 +15,7 @@ struct ExplorerDetailsView: View {
     @ObservedObject var viewModel: WalletViewModel
     @AppStorage(ExplorerPrivacy.setting) private var enabled = false
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.classicPalette) private var palette
     @Environment(\.classicUI) private var classicUI
     @StateObject private var lookup = ExplorerLookup()
@@ -74,7 +75,24 @@ struct ExplorerDetailsView: View {
             }
             Section {
                 Text(txid).font(.system(.caption, design: .monospaced)).textSelection(.enabled)
-                Button("Copy Explorer Link") { UIPasteboard.general.string = "https://explorer.nexawal.com/tx/\(txid)" }
+                let explorerURL = "https://explorer.nexawal.com/tx/\(txid)"
+                Text(L10n.neon("Copy Explorer Link", classicUI: classicUI))
+                    .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                    .foregroundStyle(palette?.secondaryText ?? .secondary)
+                Button {
+                    UIPasteboard.general.string = explorerURL
+                    AppHaptics.light()
+                } label: {
+                    Text(verbatim: explorerURL)
+                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption.monospaced())
+                        .underline()
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .buttonStyle(.borderless)
+                .tint(palette?.accent ?? .accentColor)
+                .foregroundColor(palette?.accent ?? .accentColor)
+                .accessibilityLabel(L10n.t("Copy Explorer Link"))
             }
             }
             .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))
@@ -85,9 +103,24 @@ struct ExplorerDetailsView: View {
         .foregroundStyle(palette?.primaryText ?? .primary)
         .font(classicUI ? .system(.body, design: .monospaced) : .body)
         .tint(palette?.accent ?? .accentColor)
-        .navigationTitle(L10n.t("Explorer details"))
+        .navigationBarBackButtonHidden(classicUI)
+        .navigationTitle(L10n.neon("Explorer details", classicUI: classicUI))
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(palette?.background ?? Color(.systemBackground), for: .navigationBar)
+        .toolbarColorScheme(classicUI ? .dark : nil, for: .navigationBar)
+        .toolbar {
+            if classicUI {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button { dismiss() } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 16, weight: .semibold, design: .monospaced))
+                    }
+                    .buttonStyle(.plain)
+                    .tint(palette?.accent ?? .green)
+                    .accessibilityLabel(L10n.t("Transaction"))
+                }
+            }
+        }
         .onAppear { lookup.open(txid: txid, context: context) }
         .onChange(of: context) { _, value in lookup.update(value) }
         .onChange(of: txid) { _, _ in lookup.close() }

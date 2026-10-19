@@ -326,6 +326,7 @@ struct ReceiveView: View {
 
     private func flashCopyConfirmation(text: String, message: String) {
         UIPasteboard.general.string = text
+        AppHaptics.light()
         copyConfirmationText = message
         withAnimation {
             showCopyConfirmation = true

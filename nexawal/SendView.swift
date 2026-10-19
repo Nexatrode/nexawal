@@ -651,6 +651,7 @@ struct SendView: View {
         isSending = true
         sentTxid = nil
         sentFeePiconero = nil
+        var sendAttempted = false
 
         do {
             try await viewModel.authenticateForSensitiveAction(prompt: L10n.t("Authenticate to send Monero"))
@@ -662,15 +663,19 @@ struct SendView: View {
                 // Recalculate, but never relay a fee above the user's approved ceiling.
                 let result: (txid: String, amount: UInt64, fee: UInt64)
                 if filtered {
+                    sendAttempted = true
                     result = try await walletManager.sweep(fromSubaddressMinor: minor, toAddress: destination, approvedMaxFee: approvedMaxFee, ringLen: ring)
                     infoMessage = L10n.format("Swept max spendable from selected subaddress via %@.", policyText())
                 } else {
+                    sendAttempted = true
                     result = try await walletManager.sweep(toAddress: destination, approvedMaxFee: approvedMaxFee, ringLen: ring)
                     infoMessage = L10n.format("Swept max spendable via %@.", policyText())
                 }
 
                 sentTxid = result.txid
                 sentFeePiconero = result.fee
+                AppHaptics.success()
+                SendSounds.success()
                 estimatedFeePiconero = result.fee
                 FiatPriceService.shared.recordSend(txid: result.txid)
 
@@ -695,6 +700,7 @@ struct SendView: View {
 
                 let result: (txid: String, fee: UInt64)
                 if filtered {
+                    sendAttempted = true
                     result = try await walletManager.send(
                         fromSubaddressMinor: minor,
                         toAddress: destination,
@@ -704,12 +710,15 @@ struct SendView: View {
                     )
                     infoMessage = L10n.format("Transaction broadcast from selected subaddress via %@.", policyText())
                 } else {
+                    sendAttempted = true
                     result = try await walletManager.send(toAddress: destination, amountPiconero: amountPico, approvedMaxFee: approvedMaxFee, ringLen: ring)
                     infoMessage = L10n.format("Transaction broadcast via %@.", policyText())
                 }
 
                 sentTxid = result.txid
                 sentFeePiconero = result.fee
+                AppHaptics.success()
+                SendSounds.success()
                 estimatedFeePiconero = result.fee
                 FiatPriceService.shared.recordSend(txid: result.txid)
             }
@@ -724,11 +733,20 @@ struct SendView: View {
             infoMessage = L10n.t("Previous payment recovered. The new payment was not sent. Preview it again.") + "\nTXID: \(txid)"
             await viewModel.updateBalance()
         } catch is SendSafety.FeeApprovalError {
+            if sendAttempted {
+                AppHaptics.failure()
+                SendSounds.failure()
+            }
             estimatedFeePiconero = nil
             previewReady = false
             errorMessage = L10n.t("The network fee increased. Nothing was broadcast. Preview the fee and confirm again.")
         } catch {
-            errorMessage = authRetryMessage(for: error) ?? L10n.format("Send failed: %@", error.localizedDescription)
+            let authMessage = authRetryMessage(for: error)
+            if sendAttempted && authMessage == nil {
+                AppHaptics.failure()
+                SendSounds.failure()
+            }
+            errorMessage = authMessage ?? L10n.format("Send failed: %@", error.localizedDescription)
         }
     }
 

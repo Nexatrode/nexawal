@@ -62,6 +62,10 @@ struct MoneroConfig {
     nonisolated static let userDefaultsTechnoThemeKey = "ui_techno_theme"
     nonisolated static let userDefaultsClassicUIKeyLegacy = "ui_classic_mode"
     nonisolated static let defaultTechnoThemeEnabled: Bool = false
+    nonisolated static let userDefaultsHapticFeedbackKey = "ui_haptic_feedback_enabled"
+    nonisolated static let defaultHapticFeedbackEnabled: Bool = true
+    nonisolated static let userDefaultsSendSoundsKey = "ui_send_sounds_enabled"
+    nonisolated static let defaultSendSoundsEnabled: Bool = false
 
     /// Wallet sync status card: whether Node/Scanned/… details are expanded.
     nonisolated static let userDefaultsSyncDetailsExpandedKey = "ui_sync_details_expanded"
