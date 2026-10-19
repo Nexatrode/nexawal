@@ -14,7 +14,8 @@ let package = Package(
         .target(name: "NexaWalLogic"),
         .testTarget(
             name: "NexaWalLogicTests",
-            dependencies: ["NexaWalLogic"]
+            dependencies: ["NexaWalLogic"],
+            resources: [.copy("Fixtures")]
         ),
     ]
 )

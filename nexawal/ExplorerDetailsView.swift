@@ -8,12 +8,6 @@ enum ExplorerPrivacy {
     static let help: String.LocalizationValue = "Optional. Each lookup shares your IP address and this transaction ID with explorer.nexawal.com over clearnet HTTPS, even in I2P mode. No background requests. Wallet data is unchanged."
 }
 
-private final class ExplorerRedirectBlocker: NSObject, URLSessionTaskDelegate, @unchecked Sendable {
-    nonisolated func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
-        completionHandler(nil)
-    }
-}
-
 /// Deliberately owns no timer, persistent cache, wallet client, or signing material.
 struct ExplorerDetailsView: View {
     let txid: String
@@ -23,12 +17,13 @@ struct ExplorerDetailsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.classicPalette) private var palette
     @Environment(\.classicUI) private var classicUI
-    @State private var refreshID = UUID()
-    @State private var observation: ExplorerObservation?
-    @State private var message: String?
-    @State private var loading = false
-    @State private var visible = false
-    @State private var requested = false
+    @StateObject private var lookup = ExplorerLookup()
+
+    private var context: ExplorerLookup.Context {
+        .init(enabled: enabled, active: scenePhase == .active,
+              walletOpen: viewModel.isWalletOpen && walletSession == viewModel.historySession,
+              mainnet: viewModel.explorerMainnet, walletSession: viewModel.historySession)
+    }
 
     var body: some View {
         List {
@@ -41,7 +36,7 @@ struct ExplorerDetailsView: View {
                 Text("Enable Explorer details in Settings to use this feature.")
             } else if !viewModel.explorerMainnet {
                 Text("Public explorer supports mainnet only.")
-            } else if let data = observation {
+            } else if let data = lookup.observation {
                 Section {
                     LabeledContent("Status", value: data.status == "pending" ? L10n.t("Pending") : L10n.t("Confirmed"))
                     LabeledContent("Confirmations", value: String(data.confirmations))
@@ -51,12 +46,31 @@ struct ExplorerDetailsView: View {
                     if let time = data.block_timestamp { LabeledContent("Time", value: Date(timeIntervalSince1970: Double(time)).formatted()) }
                     LabeledContent("Observed at", value: Date(timeIntervalSince1970: Double(data.observed_at)).formatted())
                     if !data.node_ready { Text("Node data may be stale or incomplete.").foregroundStyle(palette?.accent ?? .orange) }
+                    if data.double_spend_seen == true {
+                        Text("The node reports a conflicting spend. Do not treat this as a confirmed payment.").foregroundStyle(.red)
+                    }
                 }
             }
-            if loading { ProgressView() }
-            if let message { Text(message).foregroundStyle(palette?.secondaryText ?? .secondary) }
             if enabled && viewModel.explorerMainnet {
-                Button("Refresh") { requested = true; refreshID = UUID() }.disabled(loading)
+                Section {
+                    DisclosureGroup(isExpanded: Binding(get: { lookup.advancedExpanded }, set: { expanded in
+                        if expanded { lookup.loadPage(0) } else { lookup.collapseAdvanced() }
+                    })) {
+                        if let details = lookup.observation?.details, !lookup.loading {
+                            advanced(details)
+                        }
+                    } label: { Text("Advanced details") }
+                }
+            }
+            if lookup.loading { ProgressView() }
+            if let failure = lookup.failure {
+                Text(failure == .missing
+                     ? L10n.t("Not found on this node. This does not prove a payment is missing.")
+                     : L10n.t("Explorer unavailable. Your wallet is unaffected. Try again."))
+                    .foregroundStyle(palette?.secondaryText ?? .secondary)
+            }
+            if enabled && viewModel.explorerMainnet {
+                Button("Refresh") { lookup.update(context); lookup.refresh() }.disabled(lookup.loading)
             }
             Section {
                 Text(txid).font(.system(.caption, design: .monospaced)).textSelection(.enabled)
@@ -74,63 +88,53 @@ struct ExplorerDetailsView: View {
         .navigationTitle(L10n.t("Explorer details"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(palette?.background ?? Color(.systemBackground), for: .navigationBar)
-        .task(id: refreshID) { await load() }
-        .onAppear { visible = true; requested = true; refreshID = UUID() }
-        .onChange(of: enabled) { _, _ in requested = false; clear() }
-        .onChange(of: viewModel.historySession) { _, _ in requested = false; clear() }
-        .onChange(of: scenePhase) { _, phase in if phase != .active { requested = false; clear() } }
-        .onDisappear { visible = false; requested = false; clear() }
+        .onAppear { lookup.open(txid: txid, context: context) }
+        .onChange(of: context) { _, value in lookup.update(value) }
+        .onChange(of: txid) { _, _ in lookup.close() }
+        .onDisappear { lookup.close() }
     }
 
-    private func clear() {
-        observation = nil; message = nil; refreshID = UUID()
-    }
-
-    private func load() async {
-        observation = nil; message = nil
-        guard enabled, visible, requested, scenePhase == .active, viewModel.isWalletOpen,
-              walletSession == viewModel.historySession, viewModel.explorerMainnet,
-              ExplorerObservation.validID(txid) else { return }
-        loading = true
-        defer { loading = false }
-        let config = URLSessionConfiguration.ephemeral
-        config.urlCache = nil; config.httpCookieStorage = nil
-        config.httpShouldSetCookies = false
-        config.timeoutIntervalForRequest = 12; config.timeoutIntervalForResource = 12
-        config.waitsForConnectivity = false
-        // A separate HTTPS request, not the wallet's configured I2P proxy.
-        config.connectionProxyDictionary = [:]
-        let session = URLSession(configuration: config, delegate: ExplorerRedirectBlocker(), delegateQueue: nil)
-        defer { session.invalidateAndCancel() }
-        do {
-            var request = URLRequest(url: URL(string: "https://explorer.nexawal.com/api/v1/transactions/\(txid)")!)
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-            let (bytes, response) = try await session.bytes(for: request)
-            guard let http = response as? HTTPURLResponse else { throw URLError(.badServerResponse) }
-            guard [200, 404].contains(http.statusCode), response.mimeType == "application/json", response.expectedContentLength <= 16_384 else { throw URLError(.badServerResponse) }
-            var data = Data()
-            for try await byte in bytes {
-                try Task.checkCancellation()
-                guard data.count < 16_384 else { throw URLError(.dataLengthExceedsMaximum) }
-                data.append(byte)
-            }
-            if http.statusCode == 404 {
-                struct Missing: Decodable { struct Detail: Decodable { let code: String }; let api_version: Int; let error: Detail }
-                let missing = try JSONDecoder().decode(Missing.self, from: data)
-                guard missing.api_version == 1 && missing.error.code == "not_found" else { throw URLError(.cannotParseResponse) }
-                try Task.checkCancellation()
-                guard enabled, visible, requested, scenePhase == .active, walletSession == viewModel.historySession, viewModel.isWalletOpen else { return }
-                message = L10n.t("Not found on this node. This does not prove a payment is missing.")
-                return
-            }
-            let value = try ExplorerObservation.parse(data, txid: txid, now: UInt64(Date().timeIntervalSince1970))
-            try Task.checkCancellation()
-            guard enabled, visible, requested, scenePhase == .active, walletSession == viewModel.historySession, viewModel.isWalletOpen else { return }
-            observation = value
-        } catch {
-            if !Task.isCancelled && enabled && visible && requested && scenePhase == .active && walletSession == viewModel.historySession {
-                message = L10n.t("Explorer unavailable. Your wallet is unaffected. Try again.")
+    @ViewBuilder private func advanced(_ d: ExplorerAdvanced) -> some View {
+        LabeledContent("Type", value: d.coinbase ? localized("Miner transaction") : localized("Transfer"))
+        LabeledContent("Version", value: String(d.version))
+        LabeledContent("Serialized size", value: d.serialized_size_bytes.map { "\($0) B" } ?? L10n.t("Not available"))
+        LabeledContent("Downloaded size", value: "\(d.downloaded_size_bytes) B")
+        LabeledContent("Weight", value: d.weight.map { "\($0) B" } ?? L10n.t("Not available"))
+        LabeledContent("Additional unlock condition", value: d.unlock_kind == "none" ? "—" : "\(localized(d.unlock_kind == "height" ? "Height" : "Time")): \(d.unlock_value)")
+        LabeledContent("Inputs", value: String(d.input_count))
+        LabeledContent("Outputs", value: String(d.output_count))
+        if let time = d.received_timestamp { LabeledContent("Observed by node", value: Date(timeIntervalSince1970: Double(time)).formatted()) }
+        if d.coinbase { Text("Miner transaction") }
+        Text("Ring members are possible inputs, not proof of which output was spent.").font(.caption)
+        ForEach(d.inputs, id: \.index) { row in
+            DisclosureGroup("\(localized("Inputs")) #\(row.index)") {
+                technical("Key image", row.key_image)
+                LabeledContent("Ring size", value: String(row.ring_size))
+                technical("Absolute output indices", row.absolute_indices.joined(separator: ", "))
+                if row.indices_truncated { Text("Preview truncated.") }
             }
         }
+        ForEach(d.outputs, id: \.index) { row in
+            DisclosureGroup("\(localized("Outputs")) #\(row.index)") {
+                technical("One-time output key", row.key)
+                LabeledContent("Amount", value: row.public_amount_piconero.flatMap(UInt64.init).map { viewModel.formatExactPiconero($0) } ?? localized("Hidden (RingCT)"))
+                LabeledContent("View tag", value: row.view_tag.map { String(format: "%02x", $0) } ?? "—")
+                LabeledContent("Global output index", value: row.global_index ?? "—")
+            }
+        }
+        Text("\(localized("Page")) \(d.page + 1)/\(d.page_count)")
+        HStack {
+            Button { lookup.loadPage(d.page - 1) } label: { Text("Previous") }.disabled(d.page == 0)
+            Spacer()
+            Button { lookup.loadPage(d.page + 1) } label: { Text("Next") }.disabled(d.page + 1 >= d.page_count)
+        }
+        DisclosureGroup { Text(d.extra_hex.isEmpty ? "—" : d.extra_hex).font(.system(.caption, design: .monospaced)).textSelection(.enabled)
+            if d.extra_truncated { Text("Preview truncated.") }
+        } label: { Text("Transaction extra (hex)") }
+    }
+
+    private func localized(_ key: String) -> String { NSLocalizedString(key, comment: "") }
+    private func technical(_ label: LocalizedStringKey, _ value: String) -> some View {
+        VStack(alignment: .leading) { Text(label); Text(value).font(.system(.caption, design: .monospaced)).textSelection(.enabled) }
     }
 }
