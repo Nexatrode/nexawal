@@ -1,5 +1,11 @@
 # Focused security fixes — September 2026
 
+## WalletCore v0.1.19 dependency update
+
+The project and SwiftPM resolution pin `c5430e9ba86ca962aae07e6744f8eaa78abff905`. This is a
+dependency-only WalletCore update to Rustls 0.23.46, which resolves the current Rustls advisories.
+WalletCore tests pass (108 passed, 6 ignored); signed-device auth/send/recovery QA remains required.
+
 ## WalletCore v0.1.18 rollout
 
 The project and SwiftPM resolution pin `c3cc89519ff88e68322fcddbcc6227669b943a34`, the final
