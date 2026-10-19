@@ -583,7 +583,7 @@ struct SettingsView: View {
                     settingsCard(title: L10n.t("Appearance")) {
                         NeonToggle(title: L10n.t("Techno Theme"), isOn: $technoThemeEnabled)
                         NeonToggle(title: L10n.t("Haptic feedback"), isOn: $hapticFeedbackEnabled)
-                        NeonToggle(title: L10n.t("Send sounds"), isOn: $sendSoundsEnabled)
+                        NeonToggle(title: L10n.t("Sound On"), isOn: $sendSoundsEnabled)
                     }
 
                     settingsCard(title: L10n.t("How to connect")) {

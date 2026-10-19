@@ -109052,330 +109052,330 @@
         }
       }
     },
-    "Send sounds": {
+    "Sound On": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "أصوات الإرسال"
+            "value": "الصوت مفعّل"
           }
         },
         "az": {
           "stringUnit": {
             "state": "translated",
-            "value": "Göndərmə səsləri"
+            "value": "Səs aktivdir"
           }
         },
         "bg": {
           "stringUnit": {
             "state": "translated",
-            "value": "Звуци при изпращане"
+            "value": "Звукът е включен"
           }
         },
         "bn": {
           "stringUnit": {
             "state": "translated",
-            "value": "পাঠানোর শব্দ"
+            "value": "শব্দ চালু আছে"
           }
         },
         "ca": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sons d’enviament"
+            "value": "So activat"
           }
         },
         "cs": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zvuky odesílání"
+            "value": "Zvuk zapnutý"
           }
         },
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sendelyde"
+            "value": "Lyd slået til"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sendetöne"
+            "value": "Ton an"
           }
         },
         "el": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ήχοι αποστολής"
+            "value": "Ήχος ενεργός"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Send sounds"
+            "value": "Sound On"
           }
         },
         "eo": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sendaj sonoj"
+            "value": "Sono ŝaltita"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sonidos de envío"
+            "value": "Sonido activado"
           }
         },
         "et": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saatmishelid"
+            "value": "Heli sees"
           }
         },
         "eu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bidaltze-soinuak"
+            "value": "Soinua aktibatuta"
           }
         },
         "fa": {
           "stringUnit": {
             "state": "translated",
-            "value": "صداهای ارسال"
+            "value": "صدا روشن است"
           }
         },
         "fi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lähetysäänet"
+            "value": "Ääni päällä"
           }
         },
         "fil": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mga tunog sa pagpapadala"
+            "value": "Naka-on ang tunog"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sons d’envoi"
+            "value": "Son activé"
           }
         },
         "ga": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fuaimeanna seolta"
+            "value": "Fuaim ar siúl"
           }
         },
         "gl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sons de envío"
+            "value": "Son activado"
           }
         },
         "gn": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pura ryrýi"
+            "value": "Pu hendýma"
           }
         },
         "ha": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sautin aikawa"
+            "value": "An kunna sauti"
           }
         },
         "he": {
           "stringUnit": {
             "state": "translated",
-            "value": "צלילי שליחה"
+            "value": "הצליל מופעל"
           }
         },
         "hi": {
           "stringUnit": {
             "state": "translated",
-            "value": "भेजने की ध्वनियाँ"
+            "value": "ध्वनि चालू है"
           }
         },
         "hr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zvukovi slanja"
+            "value": "Zvuk je uključen"
           }
         },
         "hu": {
           "stringUnit": {
             "state": "translated",
-            "value": "Küldési hangok"
+            "value": "Hang bekapcsolva"
           }
         },
         "hy": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ուղարկման ձայներ"
+            "value": "Ձայնը միացված է"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suara pengiriman"
+            "value": "Suara aktif"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suoni di invio"
+            "value": "Suono attivo"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "送信音"
+            "value": "サウンドオン"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "전송 소리"
+            "value": "소리 켜짐"
           }
         },
         "ky": {
           "stringUnit": {
             "state": "translated",
-            "value": "Жөнөтүү үндөрү"
+            "value": "Үн күйгүзүлгөн"
           }
         },
         "lt": {
           "stringUnit": {
             "state": "translated",
-            "value": "Siuntimo garsai"
+            "value": "Garsas įjungtas"
           }
         },
         "lv": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sūtīšanas skaņas"
+            "value": "Skaņa ieslēgta"
           }
         },
         "ms": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bunyi penghantaran"
+            "value": "Bunyi dihidupkan"
           }
         },
         "my": {
           "stringUnit": {
             "state": "translated",
-            "value": "ပို့သည့်အသံများ"
+            "value": "အသံဖွင့်ထားသည်"
           }
         },
         "nb": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sendelyder"
+            "value": "Lyd på"
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verzendgeluiden"
+            "value": "Geluid aan"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dźwięki wysyłania"
+            "value": "Dźwięk włączony"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sons de envio"
+            "value": "Som ativado"
           }
         },
         "ro": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sunete de trimitere"
+            "value": "Sunet activat"
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Звуки отправки"
+            "value": "Звук включён"
           }
         },
         "sk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zvuky odosielania"
+            "value": "Zvuk zapnutý"
           }
         },
         "sl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zvoki pošiljanja"
+            "value": "Zvok vklopljen"
           }
         },
         "sq": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tingujt e dërgimit"
+            "value": "Tingulli është aktiv"
           }
         },
         "sv": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sändningsljud"
+            "value": "Ljud på"
           }
         },
         "th": {
           "stringUnit": {
             "state": "translated",
-            "value": "เสียงการส่ง"
+            "value": "เปิดเสียงแล้ว"
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gönderim sesleri"
+            "value": "Ses açık"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Звуки надсилання"
+            "value": "Звук увімкнено"
           }
         },
         "ur": {
           "stringUnit": {
             "state": "translated",
-            "value": "بھیجنے کی آوازیں"
+            "value": "آواز آن ہے"
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Âm thanh gửi"
+            "value": "Đã bật âm thanh"
           }
         },
         "yo": {
           "stringUnit": {
             "state": "translated",
-            "value": "Àwọn ohùn fífi ránṣẹ́"
+            "value": "Ohùn ti tan"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "发送提示音"
+            "value": "声音已开启"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "傳送提示音"
+            "value": "聲音已開啟"
           }
         }
       }
