@@ -2,8 +2,7 @@
 //  ClassicTheme.swift
 //  nexawal
 //
-//  Neon terminal palette (used when Techno Theme is ON).
-//  Techno Theme OFF (default) uses the standard non-neon system look.
+//  Brand palettes for the standard appearance and the optional neon terminal theme.
 //
 
 import SwiftUI
@@ -21,6 +20,41 @@ struct ClassicPalette {
     let cta: Color
     let ctaText: Color
     let isLight: Bool
+
+    /// Default NexaWal appearance: cool paper in light mode, midnight blue in dark mode.
+    static func standard(colorScheme: ColorScheme) -> ClassicPalette {
+        if colorScheme == .dark {
+            return ClassicPalette(
+                background: Color(red: 8.0 / 255, green: 21.0 / 255, blue: 34.0 / 255), // #081522
+                panel: Color(red: 16.0 / 255, green: 36.0 / 255, blue: 51.0 / 255), // #102433
+                border: Color(red: 51.0 / 255, green: 83.0 / 255, blue: 100.0 / 255), // #335364
+                accent: Color(red: 54.0 / 255, green: 199.0 / 255, blue: 214.0 / 255), // #36C7D6
+                primaryText: Color(red: 230.0 / 255, green: 242.0 / 255, blue: 247.0 / 255), // #E6F2F7
+                secondaryText: Color(red: 160.0 / 255, green: 180.0 / 255, blue: 192.0 / 255), // #A0B4C0
+                success: Color(red: 36.0 / 255, green: 184.0 / 255, blue: 138.0 / 255), // #24B88A
+                danger: Color(red: 240.0 / 255, green: 95.0 / 255, blue: 109.0 / 255), // #F05F6D
+                progress: Color(red: 54.0 / 255, green: 199.0 / 255, blue: 214.0 / 255),
+                cta: Color(red: 54.0 / 255, green: 199.0 / 255, blue: 214.0 / 255),
+                ctaText: Color(red: 4.0 / 255, green: 21.0 / 255, blue: 28.0 / 255), // #04151C
+                isLight: false
+            )
+        }
+
+        return ClassicPalette(
+            background: Color(red: 242.0 / 255, green: 246.0 / 255, blue: 248.0 / 255), // #F2F6F8
+            panel: .white,
+            border: Color(red: 198.0 / 255, green: 213.0 / 255, blue: 220.0 / 255), // #C6D5DC
+            accent: Color(red: 0, green: 111.0 / 255, blue: 128.0 / 255), // #006F80
+            primaryText: Color(red: 21.0 / 255, green: 43.0 / 255, blue: 55.0 / 255), // #152B37
+            secondaryText: Color(red: 81.0 / 255, green: 105.0 / 255, blue: 119.0 / 255), // #516977
+            success: Color(red: 0, green: 111.0 / 255, blue: 88.0 / 255), // #006F58
+            danger: Color(red: 179.0 / 255, green: 38.0 / 255, blue: 54.0 / 255), // #B32636
+            progress: Color(red: 0, green: 111.0 / 255, blue: 128.0 / 255),
+            cta: Color(red: 0, green: 111.0 / 255, blue: 128.0 / 255),
+            ctaText: .white,
+            isLight: true
+        )
+    }
 
     static func resolve(colorScheme: ColorScheme) -> ClassicPalette {
         switch colorScheme {
@@ -81,24 +115,28 @@ extension EnvironmentValues {
 extension View {
     func classicTheme(enabled: Bool, colorScheme: ColorScheme) -> some View {
         environment(\.classicUI, enabled)
-            // Techno mode is intentionally a dark neon-terminal theme even when the
-            // device itself is set to light appearance.
-            .environment(\.classicPalette, enabled ? ClassicPalette.resolve(colorScheme: .dark) : nil)
-            .tint(enabled ? ClassicPalette.resolve(colorScheme: .dark).accent : .accentColor)
+            // Techno mode stays a dark neon terminal; standard mode follows the system
+            // appearance while keeping NexaWal's own navy/teal visual identity.
+            .environment(\.classicPalette, enabled
+                ? ClassicPalette.resolve(colorScheme: .dark)
+                : ClassicPalette.standard(colorScheme: colorScheme))
+            .tint(enabled
+                ? ClassicPalette.resolve(colorScheme: .dark).accent
+                : ClassicPalette.standard(colorScheme: colorScheme).accent)
             .preferredColorScheme(enabled ? .dark : nil)
     }
 
-    /// Apply neon Form chrome when classicUI (neon mode) is active.
+    /// Apply NexaWal Form chrome in both standard and neon appearances.
     @ViewBuilder
     func neonFormChrome(classicUI: Bool, palette: ClassicPalette?) -> some View {
-        if classicUI, let palette {
+        if let palette {
             self
                 .scrollContentBackground(.hidden)
                 .background(palette.background.ignoresSafeArea())
                 .tint(palette.accent)
                 .accentColor(palette.accent)
                 .foregroundStyle(palette.primaryText)
-                .listRowSeparatorTint(palette.border.opacity(0.45))
+                .listRowSeparatorTint(palette.border.opacity(classicUI ? 0.45 : 0.7))
                 .toolbarBackground(palette.background, for: .navigationBar)
         } else {
             self

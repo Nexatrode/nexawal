@@ -103,13 +103,13 @@ struct TransactionsView: View {
                     }
                 }
                 .disabled(model.count == 0 || model.loading || model.changed || isExporting)
-                if let exportError { Text(exportError).font(.caption).foregroundStyle(.red) }
+                if let exportError { Text(exportError).font(.caption).foregroundStyle(palette?.danger ?? .red) }
                 if !viewModel.isSynced { Text("History may be incomplete while syncing.").font(.caption).foregroundStyle(.secondary) }
                 if model.changed {
                     Button("History changed · Reload transactions") { Task { await model.reload() } }
                 }
                 if let error = model.error {
-                    Text(error).foregroundStyle(.red)
+                    Text(error).foregroundStyle(palette?.danger ?? .red)
                     Button("Retry loading history") { Task { await model.retry() } }
                 }
                 if model.loading { ProgressView("Loading transactions…") }

@@ -335,17 +335,12 @@ private struct NeonTabBar: View {
     }
 
     private var barBackground: Color {
-        if classicUI, let palette {
-            return palette.panel
-        }
-        return Color(.secondarySystemBackground)
+        palette?.panel ?? Color(.secondarySystemBackground)
     }
 
     private func itemColor(selected: Bool) -> Color {
-        if classicUI, let palette {
-            return selected ? palette.accent : palette.secondaryText
-        }
-        return selected ? Color.accentColor : Color.secondary
+        guard let palette else { return selected ? Color.accentColor : Color.secondary }
+        return selected ? palette.accent : palette.secondaryText
     }
 }
 

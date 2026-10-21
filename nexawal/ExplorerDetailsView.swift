@@ -48,7 +48,7 @@ struct ExplorerDetailsView: View {
                     LabeledContent("Observed at", value: Date(timeIntervalSince1970: Double(data.observed_at)).formatted())
                     if !data.node_ready { Text("Node data may be stale or incomplete.").foregroundStyle(palette?.accent ?? .orange) }
                     if data.double_spend_seen == true {
-                        Text("The node reports a conflicting spend. Do not treat this as a confirmed payment.").foregroundStyle(.red)
+                        Text("The node reports a conflicting spend. Do not treat this as a confirmed payment.").foregroundStyle(palette?.danger ?? .red)
                     }
                 }
             }

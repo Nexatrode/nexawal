@@ -248,8 +248,8 @@ struct WalletView: View {
                                         .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
                                         .frame(maxWidth: .infinity)
                                         .padding()
-                                        .background(classicUI ? Color.clear : Color.orange.opacity(0.9))
-                                        .foregroundColor(classicUI ? (classicPalette?.accent ?? .green) : .white)
+                                        .background(classicUI ? Color.clear : (classicPalette?.cta ?? .orange))
+                                        .foregroundColor(classicUI ? (classicPalette?.accent ?? .green) : (classicPalette?.ctaText ?? .white))
                                         .overlay(
                                             RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
                                                 .stroke(classicUI ? (classicPalette?.border ?? .green) : Color.clear, lineWidth: classicUI ? 2 : 0)
@@ -264,8 +264,8 @@ struct WalletView: View {
                                         .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body)
                                         .frame(maxWidth: .infinity)
                                         .padding()
-                                        .background(classicUI ? Color.clear : Color.green.opacity(0.9))
-                                        .foregroundColor(classicUI ? (classicPalette?.accent ?? .green) : .white)
+                                        .background(classicUI ? Color.clear : (classicPalette?.success ?? .green))
+                                        .foregroundColor(classicUI ? (classicPalette?.accent ?? .green) : (classicPalette?.ctaText ?? .white))
                                         .overlay(
                                             RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
                                                 .stroke(classicUI ? (classicPalette?.border ?? .green) : Color.clear, lineWidth: classicUI ? 2 : 0)
@@ -280,7 +280,10 @@ struct WalletView: View {
                     .background(panelBackground)
                     .overlay(
                         RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                            .stroke(classicUI ? (classicPalette?.border ?? .clear) : Color.clear, lineWidth: 1)
+                            .stroke(
+                                classicUI ? (classicPalette?.border ?? .clear) : (classicPalette?.border.opacity(0.7) ?? .clear),
+                                lineWidth: 1
+                            )
                     )
                     .cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
@@ -360,7 +363,10 @@ struct WalletView: View {
                     .background(panelBackground)
                     .overlay(
                         RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                            .stroke(classicUI ? (classicPalette?.border ?? .clear) : Color.clear, lineWidth: 1)
+                            .stroke(
+                                classicUI ? (classicPalette?.border ?? .clear) : (classicPalette?.border.opacity(0.7) ?? .clear),
+                                lineWidth: 1
+                            )
                     )
                     .cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
@@ -410,7 +416,10 @@ struct WalletView: View {
                     .background(panelBackground)
                     .overlay(
                         RoundedRectangle(cornerRadius: classicUI ? 4 : 16)
-                            .stroke(classicUI ? (classicPalette?.border ?? .clear) : .clear, lineWidth: 1)
+                            .stroke(
+                                classicUI ? (classicPalette?.border ?? .clear) : (classicPalette?.border.opacity(0.7) ?? .clear),
+                                lineWidth: 1
+                            )
                     )
                     .cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
@@ -430,7 +439,7 @@ struct WalletView: View {
                             HStack(spacing: 8) {
                                 if viewModel.isRefreshing {
                                     ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: classicUI ? (classicPalette?.accent ?? .accentColor) : .white))
+                                        .progressViewStyle(CircularProgressViewStyle(tint: classicUI ? (classicPalette?.accent ?? .accentColor) : (classicPalette?.ctaText ?? .white)))
                                         .controlSize(.small)
                                         .frame(width: 16, height: 16)
                                         .accessibilityHidden(true)
@@ -449,8 +458,8 @@ struct WalletView: View {
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
-                            .background(classicUI ? Color.clear : Color.blue)
-                            .foregroundColor(classicUI ? (classicPalette?.accent ?? .blue) : .white)
+                            .background(classicUI ? Color.clear : (classicPalette?.cta ?? .blue))
+                            .foregroundColor(classicUI ? (classicPalette?.accent ?? .blue) : (classicPalette?.ctaText ?? .white))
                             .overlay(
                                 RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
                                     .stroke(classicUI ? (classicPalette?.border ?? .clear) : Color.clear, lineWidth: classicUI ? 2 : 0)
@@ -475,8 +484,8 @@ struct WalletView: View {
                                 }
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 52)
-                                .background(classicUI ? Color.clear : Color.red.opacity(0.9))
-                                .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : .white)
+                                .background(classicUI ? Color.clear : (classicPalette?.danger ?? .red))
+                                .foregroundColor(classicUI ? (classicPalette?.danger ?? .red) : (classicPalette?.ctaText ?? .white))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: classicUI ? 4 : 12)
                                         .stroke(classicUI ? (classicPalette?.danger ?? .red) : Color.clear, lineWidth: classicUI ? 2 : 0)
@@ -861,7 +870,7 @@ struct SettingsView: View {
             .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
             .overlay(
                 RoundedRectangle(cornerRadius: settingsCorner)
-                    .stroke(classicPalette?.border ?? Color.clear, lineWidth: classicUI ? 1 : 0)
+                    .stroke(classicPalette?.border.opacity(classicUI ? 1 : 0.7) ?? .clear, lineWidth: 1)
             )
             .cornerRadius(settingsCorner)
         }

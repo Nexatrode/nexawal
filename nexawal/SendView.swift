@@ -368,7 +368,7 @@ struct SendView: View {
             )
             if let amt = parsedAmountPiconero() {
                 HStack {
-                    Text(isMaxMode ? L10n.t("Wallet debit (amount + fee)") : L10n.t("Total (amount + fee)"))
+                    Text(L10n.t("Total (amount + fee)"))
                     Spacer()
                     let total = safeAdd(amt, fee)
                     Text(viewModel.formatExactPiconero(total))
