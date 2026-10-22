@@ -38,28 +38,9 @@ struct LegalDocumentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 10) {
-                    ForEach(Array(SimpleMarkdown.parse(markdown).enumerated()), id: \.offset) { _, block in
-                        switch block {
-                        case let .heading(level, text):
-                            Text(text)
-                                .font(headingFont(level))
-                                .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                                .padding(.top, level <= 2 ? 8 : 4)
-                        case let .bullet(text):
-                            // verbatim: avoid extracting "• %@" (invalid Swift symbol key)
-                            Text(verbatim: "• \(text)")
-                                .font(bodyFont)
-                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                        case let .paragraph(text):
-                            Text(text)
-                                .font(bodyFont)
-                                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(20)
+                LegalMarkdownContent(markdown: markdown)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
             }
             .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
             .navigationBarTitleDisplayMode(.inline)
@@ -83,18 +64,7 @@ struct LegalDocumentView: View {
         }
     }
 
-    private var bodyFont: Font {
-        classicUI ? .system(.body, design: .monospaced) : .body
-    }
-
-    private func headingFont(_ level: Int) -> Font {
-        let size: Font.TextStyle = level == 1 ? .title2 : (level == 2 ? .title3 : .headline)
-        return classicUI
-            ? .system(size, design: .monospaced).weight(.bold)
-            : .system(size).weight(.bold)
-    }
-
-    private static func loadMarkdown(named name: String) -> String {
+    static func loadMarkdown(named name: String) -> String {
         if let url = Bundle.main.url(forResource: name, withExtension: "md", subdirectory: "Legal"),
            let text = try? String(contentsOf: url, encoding: .utf8)
         {
@@ -107,6 +77,48 @@ struct LegalDocumentView: View {
             return text
         }
         return ""
+    }
+}
+
+/// Shared, offline Markdown renderer used both in the legal reader and the first-run agreement.
+struct LegalMarkdownContent: View {
+    let markdown: String
+
+    @Environment(\.classicUI) private var classicUI
+    @Environment(\.classicPalette) private var classicPalette
+
+    var body: some View {
+        LazyVStack(alignment: .leading, spacing: 10) {
+            ForEach(Array(SimpleMarkdown.parse(markdown).enumerated()), id: \.offset) { _, block in
+                switch block {
+                case let .heading(level, text):
+                    Text(text)
+                        .font(headingFont(level))
+                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                        .padding(.top, level <= 2 ? 8 : 4)
+                case let .bullet(text):
+                    // verbatim: avoid extracting "• %@" (invalid Swift symbol key)
+                    Text(verbatim: "• \(text)")
+                        .font(bodyFont)
+                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                case let .paragraph(text):
+                    Text(text)
+                        .font(bodyFont)
+                        .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                }
+            }
+        }
+    }
+
+    private var bodyFont: Font {
+        classicUI ? .system(.body, design: .monospaced) : .body
+    }
+
+    private func headingFont(_ level: Int) -> Font {
+        let size: Font.TextStyle = level == 1 ? .title2 : (level == 2 ? .title3 : .headline)
+        return classicUI
+            ? .system(size, design: .monospaced).weight(.bold)
+            : .system(size).weight(.bold)
     }
 }
 

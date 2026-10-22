@@ -10,7 +10,6 @@ import UIKit
 
 @main
 struct nexawalApp: App {
-    @Environment(\.colorScheme) private var colorScheme
     @State private var termsAccepted = !MoneroConfig.needsTermsAcceptance
 
     init() {
@@ -24,10 +23,9 @@ struct nexawalApp: App {
                     // Own the ViewModel here so wallet open/sync cannot start before terms are accepted.
                     AppRootView()
                 } else {
-                    TermsAcceptanceView {
+                    TermsAcceptanceRootView {
                         termsAccepted = true
                     }
-                    .classicTheme(enabled: MoneroConfig.technoThemeEnabled, colorScheme: colorScheme)
                 }
             }
             #if targetEnvironment(macCatalyst)
@@ -41,6 +39,22 @@ struct nexawalApp: App {
         .defaultSize(width: CatalystWindow.defaultSize.width, height: CatalystWindow.defaultSize.height)
         .windowResizability(.automatic)
         #endif
+    }
+}
+
+/// Resolves the system appearance from inside the window's SwiftUI environment.
+/// Reading `colorScheme` on the `App` value can yield the default light scheme,
+/// which made the first-run terms gate render with the wrong palette in dark mode.
+private struct TermsAcceptanceRootView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @AppStorage(MoneroConfig.userDefaultsTechnoThemeKey)
+    private var technoThemeEnabled = MoneroConfig.defaultTechnoThemeEnabled
+
+    var onAccepted: () -> Void
+
+    var body: some View {
+        TermsAcceptanceView(onAccepted: onAccepted)
+            .classicTheme(enabled: technoThemeEnabled, colorScheme: colorScheme)
     }
 }
 

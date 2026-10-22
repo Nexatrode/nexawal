@@ -61,8 +61,8 @@ Xcode resolves `MoneroWalletCoreFFI` at the release-candidate revision recorded 
 - Feature parity targets: [nexawal-android](https://github.com/Nexatrode/nexawal-android) and [nexawal-gpui](https://github.com/Nexatrode/nexawal-gpui)
 - Unaudited software. You are responsible for backups and funds. A remote node can see your IP and sync queries.
 
-The previous built-in `rpc.nexatrode.com` preference migrates to the current
-default. Custom nodes and I2P settings remain unchanged. Optional rates use
+The previous built-in RPC preference migrates to the current default. Custom
+nodes and I2P settings remain unchanged. Optional rates use
 `https://rates.nexawal.com` over clearnet HTTPS.
 
 ## Privacy

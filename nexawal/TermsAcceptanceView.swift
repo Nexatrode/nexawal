@@ -6,7 +6,7 @@ struct TermsAcceptanceView: View {
     var onAccepted: () -> Void
 
     @State private var hasCheckedAgree = false
-    @State private var showFullTerms = false
+    @State private var termsMarkdown = LegalDocumentView.loadMarkdown(named: "terms")
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
@@ -33,21 +33,14 @@ struct TermsAcceptanceView: View {
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                         .fixedSize(horizontal: false, vertical: true)
 
-                    Button {
-                        showFullTerms = true
-                    } label: {
-                        Text(L10n.t("Review full Terms of Use"))
-                            .font(classicUI ? .system(.body, design: .monospaced).weight(.semibold) : .body.weight(.semibold))
-                            .multilineTextAlignment(.leading)
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(classicPalette?.accent ?? Color.accentColor)
+                    LegalMarkdownContent(markdown: termsMarkdown)
 
                     Toggle(isOn: $hasCheckedAgree) {
                         Text(L10n.t("I have read and agree to the Terms of Use"))
                             .font(classicUI ? .system(.body, design: .monospaced) : .body)
                             .foregroundStyle(classicPalette?.primaryText ?? .primary)
                     }
+                    .disabled(termsMarkdown.isEmpty)
                     .toggleStyle(.switch)
                     .tint(classicPalette?.accent ?? Color.accentColor)
                     .padding(.top, 8)
@@ -65,7 +58,7 @@ struct TermsAcceptanceView: View {
                         .padding(.vertical, 14)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(!hasCheckedAgree)
+                .disabled(!hasCheckedAgree || termsMarkdown.isEmpty)
                 .opacity(hasCheckedAgree ? 1 : 0.45)
 
                 Button(role: .destructive) {
@@ -85,10 +78,5 @@ struct TermsAcceptanceView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
         .interactiveDismissDisabled(true)
-        .sheet(isPresented: $showFullTerms) {
-            LegalDocumentView(kind: .terms)
-                .environment(\.classicUI, classicUI)
-                .environment(\.classicPalette, classicPalette)
-        }
     }
 }

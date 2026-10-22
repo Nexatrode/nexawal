@@ -107,12 +107,11 @@ struct MoneroConfig {
     /// Intentionally excludes hostnames that remain valid alternate endpoints (e.g. monero.nexatrode.com)
     /// so an explicit user choice is not silently rewritten to the live default.
     private nonisolated static let legacyDefaultAddresses: Set<String> = [
-        "rpc.nexatrode.com",
-        "http://rpc.nexatrode.com",
-        "http://rpc.nexatrode.com:443",
-        "https://rpc.nexatrode.com",
-        "https://rpc.nexatrode.com:443",
-        "http://rpc.nexatrode.com:80",
+        "rpc.nexawal.com",
+        "http://rpc.nexawal.com",
+        "http://rpc.nexawal.com:443",
+        "https://rpc.nexawal.com:443",
+        "http://rpc.nexawal.com:80",
         "cuprate.nexatrode.com",
         "http://cuprate.nexatrode.com",
         "https://cuprate.nexatrode.com",
