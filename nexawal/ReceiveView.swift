@@ -6,22 +6,30 @@ struct ReceiveView: View {
     @ObservedObject var viewModel: WalletViewModel
     @ObservedObject private var fiatPrices = FiatPriceService.shared
 
-    @State private var amountInput: String = ""
-    @State private var amountInputMode: AmountInputMode = .xmr
-    @State private var descriptionInput: String = ""
+    @Binding private var amountInput: String
+    @Binding private var amountInputMode: AmountInputMode
+    @Binding private var descriptionInput: String
     @State private var showCopyConfirmation: Bool = false
     @State private var copyConfirmationText: String = L10n.t("Address copied to clipboard")
     @State private var showShareSheet: Bool = false
 
     // Subaddress UI
     @State private var showCreateSubaddressPrompt: Bool = false
-    @State private var newSubaddressLabel: String = ""
+    @Binding private var newSubaddressLabel: String
 
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
     @Environment(\.colorScheme) private var colorScheme
 
     private let addressFont = Font.system(.caption, design: .monospaced)
+
+    init(viewModel: WalletViewModel, draft: Binding<ReceiveFormDraft>) {
+        self.viewModel = viewModel
+        _amountInput = draft.amount
+        _amountInputMode = draft.amountMode
+        _descriptionInput = draft.description
+        _newSubaddressLabel = draft.newSubaddressLabel
+    }
 
     private var qrQuietZoneBackground: Color {
         if classicUI {
@@ -32,7 +40,7 @@ struct ReceiveView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
+            AdaptiveFormScrollView {
                 VStack(spacing: 24) {
                     qrSection
                     amountSection
