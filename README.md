@@ -53,6 +53,25 @@ Xcode resolves `MoneroWalletCoreFFI` at the release-candidate revision recorded 
 - Send / send-max with fee preview; prepare → durable persist → relay under the hood
 - Transaction details with copy txid and optional explorer link
 
+## Adaptive layout testing
+
+- Send/Receive drafts are memory-only and belong to the unlocked session, not to
+  the current tab/sidebar layout. Locking, replacing the wallet, or resetting its
+  history session discards them. Fee approvals and in-flight sends are not drafts.
+- On iOS 27.1+, one native adaptive tab container remains attached while resizing.
+  Forms and the QR scanner avoid active division regions, including hinge margins.
+  Earlier iPhone/iPad layouts keep their existing tab/sidebar presentation.
+- Run `swift test --package-path Packages/NexaWalLogic` for geometry/input regressions.
+- For visual QA, launch a **Debug simulator** build with `--ui-layout-regression`.
+  This fixture renders the real forms without loading a stored wallet or accepting
+  terms. Its Test controls menu switches tabs/themes and starts a fresh test session.
+  The fixture is excluded from Release and physical-device builds.
+- Enter harmless, invalid destination text and separate Send/Receive amounts/notes.
+  Switch tabs, fold/unfold, rotate, and cancel an open scanner; verify the drafts
+  survive. Verify New test session clears both drafts. Repeat on ordinary iPhone and
+  iPad layouts, including keyboard-visible and large-text states. Simulator camera
+  placeholders use the real scanner overlay; live QR capture still needs a device.
+
 ## Notes
 
 - Uses a native wallet core built from `monero-oxide` via `MoneroWalletCoreFFI`

@@ -10,11 +10,11 @@ struct SendView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     // Inputs
-    @State private var toAddress: String = ""
-    @State private var amountXMR: String = ""
-    @State private var amountInputMode: AmountInputMode = .xmr
-    @State private var paymentDescription: String = ""
-    @State private var paymentRecipientName: String = ""
+    @Binding private var toAddress: String
+    @Binding private var amountXMR: String
+    @Binding private var amountInputMode: AmountInputMode
+    @Binding private var paymentDescription: String
+    @Binding private var paymentRecipientName: String
     @State private var suppressDestinationChange: Bool = false
 
     // State
@@ -33,8 +33,8 @@ struct SendView: View {
     @State private var showScanner: Bool = false
 
     // Subaddress send selection (account 0 only for MVP)
-    @State private var fromSubaddressMinor: UInt32 = 0
-    @State private var sendFromSubaddressEnabled: Bool = false
+    @Binding private var fromSubaddressMinor: UInt32
+    @Binding private var sendFromSubaddressEnabled: Bool
     @State private var subaddressUnlockedOverride: UInt64?
 
     // Outputs
@@ -47,6 +47,17 @@ struct SendView: View {
     @State private var sweepPreviewTask: Task<Void, Never>?
 
     private let walletManager = WalletManager.shared
+
+    init(viewModel: WalletViewModel, draft: Binding<SendFormDraft>) {
+        self.viewModel = viewModel
+        _toAddress = draft.toAddress
+        _amountXMR = draft.amount
+        _amountInputMode = draft.amountMode
+        _paymentDescription = draft.paymentDescription
+        _paymentRecipientName = draft.recipientName
+        _fromSubaddressMinor = draft.fromSubaddressMinor
+        _sendFromSubaddressEnabled = draft.sendFromSubaddressEnabled
+    }
 
     private func availablePiconero() -> UInt64 {
         if sendFromSubaddressEnabled, let v = subaddressUnlockedOverride {
@@ -78,7 +89,7 @@ struct SendView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
+            AdaptiveFormScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if availablePiconero() > 0 {
                         Text(verbatim: "\(availableLabel()): \(viewModel.formatDisplayPiconero(availablePiconero()))")
@@ -1011,5 +1022,5 @@ struct SendView: View {
 #Preview {
     // Minimal mock ViewModel for preview
     let vm = WalletViewModel()
-    return SendView(viewModel: vm)
+    return SendView(viewModel: vm, draft: .constant(SendFormDraft()))
 }

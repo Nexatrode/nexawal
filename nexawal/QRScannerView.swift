@@ -1,35 +1,34 @@
 import SwiftUI
 import AVFoundation
+import NexaWalLogic
 
 struct QRScannerView: UIViewControllerRepresentable {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.classicUI) private var classicUI
     let onScan: (String) -> Void
-    
+
     func makeUIViewController(context: Context) -> QRScannerViewController {
         let controller = QRScannerViewController()
         controller.delegate = context.coordinator
         controller.neonMode = classicUI
         return controller
     }
-    
-    func updateUIViewController(_ uiViewController: QRScannerViewController, context: Context) {
-        uiViewController.neonMode = classicUI
+
+    func updateUIViewController(_ controller: QRScannerViewController, context: Context) {
+        controller.neonMode = classicUI
     }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(onScan: onScan, dismiss: dismiss)
-    }
-    
+
+    func makeCoordinator() -> Coordinator { Coordinator(onScan: onScan, dismiss: dismiss) }
+
     class Coordinator: NSObject, QRScannerViewControllerDelegate {
         let onScan: (String) -> Void
         let dismiss: DismissAction
-        
+
         init(onScan: @escaping (String) -> Void, dismiss: DismissAction) {
             self.onScan = onScan
             self.dismiss = dismiss
         }
-        
+
         func didFindCode(_ code: String) {
             dismiss()
             onScan(code)
@@ -43,216 +42,200 @@ protocol QRScannerViewControllerDelegate: AnyObject {
 
 class QRScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     weak var delegate: QRScannerViewControllerDelegate?
-    var neonMode: Bool = false
-    
+    var neonMode = false {
+        didSet { if isViewLoaded { updateAppearance() } }
+    }
+
     private var captureSession: AVCaptureSession?
     private var previewLayer: AVCaptureVideoPreviewLayer?
-    
+    private let cameraQueue = DispatchQueue(label: "com.nexawal.qr-camera")
+    private let overlayView = UIView()
+    private let fillLayer = CAShapeLayer()
+    private let borderLayer = CAShapeLayer()
+    private let targetAccessibilityView = UIView()
+    private let instructionLabel = UILabel()
+    private let unavailableLabel = UILabel()
+    private let closeButton = UIButton(type: .system)
+    private let cancelButton = UIButton(type: .system)
+    private var unavailableMessage: String?
+    private var didScan = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        configureOverlay()
         checkCameraPermission()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         previewLayer?.frame = view.bounds
+        overlayView.frame = view.bounds
+        var divisions: [CGRect] = []
+        if #available(iOS 27.1, *) {
+            // UIKit frames already include the reserved region's interaction margins.
+            divisions = view.reservedRegions(kind: .division).map(\.frame)
+        }
+        let safeBounds = view.bounds.inset(by: view.safeAreaInsets)
+        let proposal = QRScannerLayout.resolve(safeBounds: safeBounds, divisions: divisions)
+        let labelHeight = instructionLabel.sizeThatFits(
+            CGSize(width: max(1, proposal.instruction.width), height: .greatestFiniteMagnitude)
+        ).height
+        let layout = QRScannerLayout.resolve(safeBounds: safeBounds, divisions: divisions,
+                                             instructionHeight: labelHeight)
+        let path = UIBezierPath(rect: view.bounds)
+        let scanPath = UIBezierPath(roundedRect: layout.scanArea, cornerRadius: 12)
+        path.append(scanPath)
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        fillLayer.frame = overlayView.bounds
+        fillLayer.path = path.cgPath
+        borderLayer.frame = overlayView.bounds
+        borderLayer.path = scanPath.cgPath
+        CATransaction.commit()
+        targetAccessibilityView.frame = layout.scanArea
+        instructionLabel.frame = layout.instruction
+        unavailableLabel.frame = layout.scanArea.insetBy(dx: 8, dy: 8)
+        closeButton.frame = layout.close
+        cancelButton.frame = layout.cancel
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let session = captureSession, !didScan {
+            cameraQueue.async { session.startRunning() }
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let session = captureSession { cameraQueue.async { session.stopRunning() } }
+    }
+
     private func checkCameraPermission() {
+#if targetEnvironment(simulator)
+        // The exact production overlay remains visible for resize/accessibility QA.
+        showCameraUnavailable(L10n.t("Camera not available on simulator"))
+#else
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            setupCamera()
+        case .authorized: setupCamera()
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 DispatchQueue.main.async {
-                    if granted {
-                        self?.setupCamera()
-                    } else {
-                        self?.showCameraUnavailable(L10n.t("Camera permission denied"))
-                    }
+                    guard let self, self.viewIfLoaded?.window != nil else { return }
+                    if granted { self.setupCamera() }
+                    else { self.showCameraUnavailable(L10n.t("Camera permission denied")) }
                 }
             }
-        case .denied, .restricted:
-            showCameraUnavailable(L10n.t("Camera access denied"))
-        @unknown default:
-            showCameraUnavailable(L10n.t("Unknown camera permission status"))
+        case .denied, .restricted: showCameraUnavailable(L10n.t("Camera access denied"))
+        @unknown default: showCameraUnavailable(L10n.t("Unknown camera permission status"))
         }
+#endif
     }
-    
-    private func setupCamera() {
-        #if targetEnvironment(simulator)
-        showCameraUnavailable(L10n.t("Camera not available on simulator"))
-        return
-        #else
-        let session = AVCaptureSession()
-        
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            showCameraUnavailable(L10n.t("No camera found"))
-            return
-        }
-        
-        let videoInput: AVCaptureDeviceInput
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            showCameraUnavailable(L10n.format("Could not access camera: %@", error.localizedDescription))
-            return
-        }
-        
-        if session.canAddInput(videoInput) {
-            session.addInput(videoInput)
-        } else {
-            showCameraUnavailable(L10n.t("Could not add camera input"))
-            return
-        }
-        
-        let metadataOutput = AVCaptureMetadataOutput()
-        
-        if session.canAddOutput(metadataOutput) {
-            session.addOutput(metadataOutput)
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-            showCameraUnavailable(L10n.t("Could not add metadata output"))
-            return
-        }
-        
-        let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.frame = view.bounds
-        previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
-        
-        self.previewLayer = previewLayer
-        self.captureSession = session
 
-        // The preview itself is rendered via a CALayer (not a UIView), so VoiceOver
-        // needs an explicit accessible view describing what the camera is showing.
-        let previewAccessibilityView = UIView(frame: view.bounds)
-        previewAccessibilityView.isUserInteractionEnabled = false
-        previewAccessibilityView.isAccessibilityElement = true
-        previewAccessibilityView.accessibilityLabel = L10n.t("Camera preview for scanning Monero QR codes")
-        previewAccessibilityView.accessibilityTraits = .image
-        view.addSubview(previewAccessibilityView)
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            session.startRunning()
+    private func setupCamera() {
+        let session = AVCaptureSession()
+        guard let device = AVCaptureDevice.default(for: .video) else {
+            showCameraUnavailable(L10n.t("No camera found")); return
         }
-        
-        addOverlay()
-        #endif
+        let input: AVCaptureDeviceInput
+        do { input = try AVCaptureDeviceInput(device: device) }
+        catch { showCameraUnavailable(L10n.format("Could not access camera: %@", error.localizedDescription)); return }
+        guard session.canAddInput(input) else {
+            showCameraUnavailable(L10n.t("Could not add camera input")); return
+        }
+        session.addInput(input)
+        let output = AVCaptureMetadataOutput()
+        guard session.canAddOutput(output) else {
+            showCameraUnavailable(L10n.t("Could not add metadata output")); return
+        }
+        session.addOutput(output)
+        output.setMetadataObjectsDelegate(self, queue: .main)
+        output.metadataObjectTypes = [.qr]
+        let preview = AVCaptureVideoPreviewLayer(session: session)
+        preview.videoGravity = .resizeAspectFill
+        view.layer.insertSublayer(preview, at: 0)
+        previewLayer = preview
+        captureSession = session
+        view.setNeedsLayout()
+        cameraQueue.async { session.startRunning() }
     }
-    
-    private func addOverlay() {
-        let overlayView = UIView(frame: view.bounds)
-        overlayView.backgroundColor = .clear
+
+    private func configureOverlay() {
         view.addSubview(overlayView)
-        
-        let scanAreaSize: CGFloat = 250
-        let scanAreaOrigin = CGPoint(
-            x: (view.bounds.width - scanAreaSize) / 2,
-            y: (view.bounds.height - scanAreaSize) / 2
-        )
-        let scanArea = CGRect(origin: scanAreaOrigin, size: CGSize(width: scanAreaSize, height: scanAreaSize))
-        
-        let path = UIBezierPath(rect: view.bounds)
-        let scanPath = UIBezierPath(roundedRect: scanArea, cornerRadius: 12)
-        path.append(scanPath)
-        path.usesEvenOddFillRule = true
-        
-        let fillLayer = CAShapeLayer()
-        fillLayer.path = path.cgPath
         fillLayer.fillRule = .evenOdd
         fillLayer.fillColor = UIColor.black.withAlphaComponent(0.5).cgColor
         overlayView.layer.addSublayer(fillLayer)
-        
-        let borderLayer = CAShapeLayer()
-        borderLayer.path = scanPath.cgPath
-        let neonGreen = UIColor(red: 0.224, green: 1.0, blue: 0.078, alpha: 1.0) // #39FF14
-        borderLayer.strokeColor = (neonMode ? neonGreen : .white).cgColor
         borderLayer.fillColor = UIColor.clear.cgColor
         borderLayer.lineWidth = 3
         overlayView.layer.addSublayer(borderLayer)
-        
-        let instructionLabel = UILabel()
-        instructionLabel.text = L10n.neon("Scan Monero QR code", classicUI: neonMode)
-        instructionLabel.textColor = neonMode ? neonGreen : .white
-        instructionLabel.font = neonMode
-            ? .monospacedSystemFont(ofSize: 17, weight: .bold)
-            : .systemFont(ofSize: 17, weight: .medium)
-        instructionLabel.textAlignment = .center
-        instructionLabel.frame = CGRect(x: 0, y: scanArea.maxY + 24, width: view.bounds.width, height: 24)
-        overlayView.addSubview(instructionLabel)
-
-        let closeButton = UIButton(type: .system)
+        targetAccessibilityView.isUserInteractionEnabled = false
+        targetAccessibilityView.isAccessibilityElement = true
+        targetAccessibilityView.accessibilityTraits = .image
+        targetAccessibilityView.accessibilityLabel = L10n.t("Camera preview for scanning Monero QR codes")
+        targetAccessibilityView.accessibilityIdentifier = "scanner-target"
+        overlayView.addSubview(targetAccessibilityView)
+        for label in [instructionLabel, unavailableLabel] {
+            label.numberOfLines = 0
+            label.textAlignment = .center
+            label.adjustsFontForContentSizeCategory = true
+            overlayView.addSubview(label)
+        }
+        for button in [closeButton, cancelButton] {
+            button.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+            button.accessibilityLabel = L10n.t("Cancel")
+            button.clipsToBounds = true
+            overlayView.addSubview(button)
+        }
         closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        closeButton.tintColor = neonMode ? neonGreen : .white
-        closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.35)
-        closeButton.layer.cornerRadius = 22
-        closeButton.layer.borderWidth = neonMode ? 1 : 0
-        closeButton.layer.borderColor = neonMode ? neonGreen.cgColor : nil
-        closeButton.clipsToBounds = true
-        closeButton.frame = CGRect(
-            x: view.bounds.width - 60,
-            y: view.safeAreaInsets.top + 12,
-            width: 44,
-            height: 44
-        )
-        closeButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
-        closeButton.accessibilityLabel = L10n.t("Cancel")
-        overlayView.addSubview(closeButton)
-        
-        let cancelButton = UIButton(type: .system)
-        cancelButton.setTitle(L10n.neon("Cancel", classicUI: neonMode), for: .normal)
-        cancelButton.setTitleColor(neonMode ? neonGreen : .white, for: .normal)
-        cancelButton.titleLabel?.font = neonMode
-            ? .monospacedSystemFont(ofSize: 17, weight: .semibold)
-            : .systemFont(ofSize: 17, weight: .semibold)
-        cancelButton.backgroundColor = neonMode
-            ? UIColor(red: 0.07, green: 0.09, blue: 0.07, alpha: 1.0)
-            : UIColor.black.withAlphaComponent(0.35)
-        cancelButton.layer.cornerRadius = neonMode ? 22 : 12
-        cancelButton.layer.borderWidth = neonMode ? 1 : 0
-        cancelButton.layer.borderColor = neonMode ? neonGreen.cgColor : nil
-        cancelButton.clipsToBounds = true
-        cancelButton.frame = CGRect(
-            x: (view.bounds.width - 120) / 2,
-            y: view.bounds.height - view.safeAreaInsets.bottom - 72,
-            width: 120,
-            height: 44
-        )
-        cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
-        cancelButton.accessibilityLabel = L10n.neon("Cancel", classicUI: neonMode)
-        overlayView.addSubview(cancelButton)
+        closeButton.accessibilityIdentifier = "scanner-close"
+        cancelButton.accessibilityIdentifier = "scanner-cancel"
+        updateAppearance()
     }
-    
+
+    private func updateAppearance() {
+        let green = UIColor(red: 0.224, green: 1, blue: 0.078, alpha: 1)
+        let tint: UIColor = neonMode ? green : .white
+        borderLayer.strokeColor = tint.cgColor
+        instructionLabel.text = L10n.neon("Scan Monero QR code", classicUI: neonMode)
+        instructionLabel.textColor = tint
+        instructionLabel.font = neonMode
+            ? UIFontMetrics(forTextStyle: .headline).scaledFont(for: .monospacedSystemFont(ofSize: 17, weight: .bold))
+            : .preferredFont(forTextStyle: .headline)
+        unavailableLabel.text = unavailableMessage
+        unavailableLabel.textColor = tint
+        unavailableLabel.font = .preferredFont(forTextStyle: .body)
+        cancelButton.setTitle(L10n.neon("Cancel", classicUI: neonMode), for: .normal)
+        cancelButton.titleLabel?.font = neonMode
+            ? UIFontMetrics(forTextStyle: .headline).scaledFont(for: .monospacedSystemFont(ofSize: 17, weight: .semibold))
+            : .preferredFont(forTextStyle: .headline)
+        cancelButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        for button in [closeButton, cancelButton] {
+            button.tintColor = tint
+            button.setTitleColor(tint, for: .normal)
+            button.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+            button.layer.cornerRadius = 12
+            button.layer.borderWidth = neonMode ? 1 : 0
+            button.layer.borderColor = tint.cgColor
+        }
+        view.setNeedsLayout()
+    }
+
     @objc private func cancelTapped() {
+        if let session = captureSession { cameraQueue.async { session.stopRunning() } }
         dismiss(animated: true)
     }
-    
+
     private func showCameraUnavailable(_ message: String) {
-        let label = UILabel()
-        label.text = message
-        label.textColor = .white
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.frame = CGRect(x: 20, y: (view.bounds.height - 100) / 2, width: view.bounds.width - 40, height: 100)
-        view.addSubview(label)
-        
-        let cancelButton = UIButton(type: .system)
-        cancelButton.setTitle(L10n.t("Cancel"), for: .normal)
-        cancelButton.setTitleColor(.white, for: .normal)
-        cancelButton.frame = CGRect(x: (view.bounds.width - 80) / 2, y: view.bounds.height - 100, width: 80, height: 44)
-        cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
-        view.addSubview(cancelButton)
+        unavailableMessage = message
+        updateAppearance()
     }
-    
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        if let metadataObject = metadataObjects.first,
-           let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject,
-           let stringValue = readableObject.stringValue {
-            captureSession?.stopRunning()
-            delegate?.didFindCode(stringValue)
-        }
+
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput objects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        guard !didScan, let object = objects.first as? AVMetadataMachineReadableCodeObject,
+              let code = object.stringValue else { return }
+        didScan = true
+        if let session = captureSession { cameraQueue.async { session.stopRunning() } }
+        delegate?.didFindCode(code)
     }
 }

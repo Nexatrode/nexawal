@@ -185,6 +185,12 @@ class WalletViewModel: ObservableObject {
     // MARK: - Init
 
     init() {
+#if DEBUG && targetEnvironment(simulator)
+        if LayoutRegressionMode.enabled {
+            isRestoringSession = false
+            return
+        }
+#endif
         // Sync probe so the first frame can show an unlock splash instead of Create/Import.
         isRestoringSession = UserDefaults.standard.object(forKey: "wallet.metadata") != nil
         Task { [weak self] in
@@ -364,6 +370,9 @@ class WalletViewModel: ObservableObject {
 
     /// Reload the persisted subaddress book and publish it.
     func loadReceiveSubaddresses() async {
+#if DEBUG && targetEnvironment(simulator)
+        if LayoutRegressionMode.enabled { return }
+#endif
         do {
             let book = try await storage.loadSubaddressBook()
             receiveSubaddresses = book.entries
