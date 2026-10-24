@@ -64,7 +64,7 @@ struct WalletCreationView: View {
     @State private var seedGenerationError: String?
     @FocusState private var focusedChallengeIndex: Int?
 
-    @State private var setupMode: WalletSetupMode = .import
+    @State private var setupMode: WalletSetupMode = .create
 
     // Import scan tuning presets (for experiments / quick switching)
 
