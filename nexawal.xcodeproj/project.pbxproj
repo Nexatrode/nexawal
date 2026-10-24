@@ -322,9 +322,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = nexawal/nexawal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_NSCameraUsageDescription = "nexawal needs camera access to scan QR codes for sending Monero.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "You can use Face ID to secure your wallet.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -357,9 +358,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = nexawal/nexawal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_NSCameraUsageDescription = "nexawal needs camera access to scan QR codes for sending Monero.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "You can use Face ID to secure your wallet.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

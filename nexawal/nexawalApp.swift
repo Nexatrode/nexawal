@@ -19,14 +19,15 @@ struct nexawalApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if termsAccepted {
-                    // Own the ViewModel here so wallet open/sync cannot start before terms are accepted.
-                    AppRootView()
+#if DEBUG && targetEnvironment(simulator)
+                if LayoutRegressionMode.enabled {
+                    LayoutRegressionView()
                 } else {
-                    TermsAcceptanceRootView {
-                        termsAccepted = true
-                    }
+                    appContent
                 }
+#else
+                appContent
+#endif
             }
             #if targetEnvironment(macCatalyst)
             .background(CatalystWindowConfigurator())
@@ -39,6 +40,19 @@ struct nexawalApp: App {
         .defaultSize(width: CatalystWindow.defaultSize.width, height: CatalystWindow.defaultSize.height)
         .windowResizability(.automatic)
         #endif
+    }
+
+    private var appContent: some View {
+        Group {
+            if termsAccepted {
+                // Own the ViewModel here so wallet open/sync cannot start before terms are accepted.
+                AppRootView()
+            } else {
+                TermsAcceptanceRootView {
+                    termsAccepted = true
+                }
+            }
+        }
     }
 }
 
@@ -107,10 +121,19 @@ private struct AppRootView: View {
             .overlay {
                 if scenePhase != .active { Color.black.ignoresSafeArea() }
             }
+#if targetEnvironment(macCatalyst)
+            // Do not attach a tap recognizer to the whole Catalyst hierarchy: it can
+            // compete with sidebar/list controls for mouse clicks. Only observe drags here.
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 12)
+                    .onChanged { _ in viewModel.noteUserInteraction() }
+            )
+#else
             .simultaneousGesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { _ in viewModel.noteUserInteraction() }
             )
+#endif
             .onChange(of: viewModel.isWalletOpen) {
                 viewModel.noteUserInteraction()
             }

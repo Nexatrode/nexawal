@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import NexaWalLogic
 
 enum MainTab: Hashable {
     case wallet
@@ -45,6 +46,7 @@ struct ContentView: View {
         Group {
             if viewModel.isWalletOpen {
                 MainTabView(viewModel: viewModel, selectedTab: $selectedTab)
+                    .id(viewModel.historySession)
             } else if viewModel.isRestoringSession {
                 UnlockingWalletView()
             } else if viewModel.needsUnlock {
@@ -163,7 +165,7 @@ private struct UnlockExistingWalletView: View {
     }
 }
 
-/// Phone: bottom tabs. iPad / Mac Catalyst (regular × regular): sidebar + detail.
+/// Native adaptive navigation on new iOS; retain legacy iPhone/iPad/Catalyst chrome.
 struct MainTabView: View {
     @ObservedObject var viewModel: WalletViewModel
     @Binding var selectedTab: MainTab
@@ -171,6 +173,11 @@ struct MainTabView: View {
     @Environment(\.classicPalette) private var classicPalette
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    @Environment(\.colorScheme) private var colorScheme
+    // Memory-only, and discarded when the unlocked session ends. Legacy split/tab
+    // branches may recreate their children without throwing away unfinished inputs.
+    @State private var sendDraft = SendFormDraft()
+    @State private var receiveDraft = ReceiveFormDraft()
 
     private let tabs: [MainTab] = [.wallet, .receive, .send, .settings]
 
@@ -178,15 +185,25 @@ struct MainTabView: View {
         horizontalSizeClass == .regular && verticalSizeClass == .regular
     }
 
-    /// iOS/Catalyst `List(selection:)` requires an optional; keep the parent tab non-optional.
-    private var splitTabSelection: Binding<MainTab?> {
-        Binding(
-            get: { selectedTab },
-            set: { if let tab = $0 { selectedTab = tab } }
-        )
+    var body: some View {
+        Group {
+#if !targetEnvironment(macCatalyst)
+            if #available(iOS 27.1, *) {
+                nativeTabNavigation
+            } else {
+                legacyNavigation
+            }
+#else
+            legacyNavigation
+#endif
+        }
+        .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
+        .onChange(of: selectedTab) {
+            viewModel.noteUserInteraction()
+        }
     }
 
-    var body: some View {
+    private var legacyNavigation: some View {
         Group {
             if usesSplitNavigation {
                 NavigationSplitView(columnVisibility: .constant(.all)) {
@@ -194,13 +211,7 @@ struct MainTabView: View {
                         if classicUI {
                             technoSidebar
                         } else {
-                            List(selection: splitTabSelection) {
-                                ForEach(tabs, id: \.self) { tab in
-                                    Label(tab.title, systemImage: tab.systemImage)
-                                        .tag(tab)
-                                }
-                            }
-                            .navigationTitle("nexawal")
+                            standardSidebar
                         }
                     }
                     .toolbar(removing: .sidebarToggle)
@@ -211,19 +222,42 @@ struct MainTabView: View {
                 .navigationSplitViewStyle(.balanced)
                 .tint(classicPalette?.accent ?? .accentColor)
             } else {
-                VStack(spacing: 0) {
-                    tabRoot
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    NeonTabBar(
-                        tabs: tabs,
-                        selectedTab: $selectedTab,
-                        classicUI: classicUI,
-                        palette: classicPalette
-                    )
-                }
+                customCompactTabNavigation
             }
         }
-        .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
+    }
+
+    /// Use explicit actions instead of `List(selection:)` so Catalyst mouse clicks always
+    /// update the shared tab state, including when returning from a pushed wallet screen.
+    private var standardSidebar: some View {
+        let palette = classicPalette ?? ClassicPalette.standard(colorScheme: colorScheme)
+        return List {
+            ForEach(tabs, id: \.self) { tab in
+                let selected = selectedTab == tab
+                Button {
+                    selectedTab = tab
+                    viewModel.noteUserInteraction()
+                } label: {
+                    Label(tab.title, systemImage: tab.systemImage)
+                        .foregroundStyle(selected ? palette.ctaText : palette.primaryText)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 8)
+                        .contentShape(Rectangle())
+                        .background {
+                            if selected {
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(palette.accent)
+                            }
+                        }
+                }
+                .buttonStyle(.plain)
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
+            }
+        }
+        .listStyle(.sidebar)
+        .navigationTitle("nexawal")
     }
 
     /// Match iOS/Android techno tab colors: neon green on black, no solid green/white selection pill.
@@ -241,6 +275,7 @@ struct MainTabView: View {
                 let selected = selectedTab == tab
                 Button {
                     selectedTab = tab
+                    viewModel.noteUserInteraction()
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: tab.systemImage)
@@ -273,16 +308,66 @@ struct MainTabView: View {
 
     @ViewBuilder
     private var tabRoot: some View {
-        switch selectedTab {
+        tabContent(for: selectedTab)
+    }
+
+    @ViewBuilder
+    private func tabContent(for tab: MainTab) -> some View {
+        switch tab {
         case .wallet:
             WalletView(viewModel: viewModel, selectedTab: $selectedTab)
         case .receive:
-            ReceiveView(viewModel: viewModel)
+            ReceiveView(viewModel: viewModel, draft: $receiveDraft)
         case .send:
-            SendView(viewModel: viewModel)
+            SendView(viewModel: viewModel, draft: $sendDraft)
         case .settings:
             SettingsView(viewModel: viewModel)
         }
+    }
+
+    private var customCompactTabNavigation: some View {
+        VStack(spacing: 0) {
+            tabRoot
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            NeonTabBar(
+                tabs: tabs,
+                selectedTab: $selectedTab,
+                classicUI: classicUI,
+                palette: classicPalette
+            )
+        }
+    }
+
+    @available(iOS 27.1, *)
+    private var nativeTabNavigation: some View {
+        TabView(selection: $selectedTab) {
+            ForEach(tabs, id: \.self) { tab in
+                Tab(value: tab) {
+                    tabContent(for: tab)
+                } label: {
+                    Label {
+                        Text(classicUI ? tab.neonTitle : tab.title)
+                            .font(classicUI
+                                ? .system(.caption2, design: .monospaced).weight(.semibold)
+                                : .body)
+                    } icon: {
+                        Image(systemName: tab.systemImage)
+                    }
+                }
+            }
+        }
+        .tabViewStyle(.sidebarAdaptable)
+        // Change placement, not view identity, when folding/resizing. In particular,
+        // keep an open scanner and each tab's NavigationStack attached to one host.
+        .defaultTabBarPlacement(horizontalSizeClass == .regular ? .sidebar : .tabBar)
+        .defaultAdaptableTabBarPlacement(.sidebar)
+        .tint(classicPalette?.accent ?? .accentColor)
+        .toolbarBackground(
+            classicPalette?.panel ?? Color(.secondarySystemBackground),
+            for: .tabBar
+        )
+        .toolbarBackground(.visible, for: .tabBar)
+        .toolbarColorScheme(classicUI ? .dark : colorScheme, for: .tabBar)
     }
 }
 

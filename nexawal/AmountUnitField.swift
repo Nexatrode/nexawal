@@ -1,11 +1,6 @@
 import SwiftUI
 import NexaWalLogic
 
-enum AmountInputMode: Equatable {
-    case xmr
-    case fiat
-}
-
 /// Amount text field with optional XMR ⇄ fiat swap when a live rate is available.
 struct AmountUnitField: View {
     @Binding var text: String
