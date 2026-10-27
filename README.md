@@ -74,6 +74,11 @@ Xcode resolves `MoneroWalletCoreFFI` at the release-candidate revision recorded 
 
 ## Notes
 
+The sync card distinguishes wallet scan completion from contact with the configured
+daemon. Failed checks and observations older than three minutes show a warning and
+a connection retry, while retaining the last known balance and history. Successful
+contact is an observation, not independent proof of the latest canonical chain.
+
 - Uses a native wallet core built from `monero-oxide` via `MoneroWalletCoreFFI`
 - Syncs against standard Monero nodes (local or remote), including the configured I2P RPC path when enabled
 - Default daemon is `https://rpc.nexawal.com` (type a full `http://` or `https://` URL to override)

@@ -38,6 +38,7 @@ class WalletViewModel: ObservableObject {
     /// True when a stored wallet exists and unlock was cancelled/failed — prefer Unlock over Create/Import.
     @Published var needsUnlock: Bool = false
     @Published var errorMessage: String?
+    @Published private(set) var nodeContact = NodeContactState()
     /// True when the most recent refresh failure was a sync stall (no scan progress for an
     /// extended period, even after falling back to a safer sequential scan) rather than a
     /// generic node-unreachable/connection error. Mirrors the Android "Refresh stalled" signal.
@@ -245,6 +246,7 @@ class WalletViewModel: ObservableObject {
     /// bounded background window an active refresh may continue with only the private view key.
     /// The protected idle boundary goes further and drops the view key as well.
     func lockForBackground(closeCore: Bool = false) {
+        nodeContact.reset()
         walletManager.sessionAuthority.invalidate()
         backgroundLockRequested = true
         guard isWalletOpen || isRestoringSession else { return }
@@ -426,6 +428,7 @@ class WalletViewModel: ObservableObject {
 
     /// Create/replace must not inherit the previous wallet's trusted scan checkpoint.
     private func resetScanTrustForNewWallet() {
+        nodeContact.reset()
         balanceSnapshotEpoch.invalidate()
         MoneroConfig.setTrustedScannedHeight(0)
         MoneroConfig.setScanInterrupted(true)
@@ -656,6 +659,7 @@ class WalletViewModel: ObservableObject {
     /// Cancel any in-flight scan and refresh against the currently saved node/policy.
     /// Call after persisting network settings. No-op if no wallet is open.
     func applyNetworkAndReconnect() async {
+        nodeContact.reset()
         guard isWalletOpen else { return }
         if isRefreshing || refreshTask != nil {
             cancelRefresh()
@@ -675,6 +679,8 @@ class WalletViewModel: ObservableObject {
 
         // If one is already running, don't start another.
         if refreshTask != nil { return }
+        let contactGeneration = nodeContact.generation
+        let contactRoute = nodeContactRoute
         let authority = walletManager.sessionAuthority
         let token = authority.token()
 
@@ -703,7 +709,8 @@ class WalletViewModel: ObservableObject {
 
             do {
                 let status = try await self.walletManager.refreshWallet()
-                try await self.finishSuccessfulRefresh(status: status, context: "refresh_done", sessionToken: token)
+                try await self.finishSuccessfulRefresh(status: status, context: "refresh_done", sessionToken: token,
+                    contactGeneration: contactGeneration, contactRoute: contactRoute)
             } catch is CancellationError {
                 guard authority.accepts(token) else { return }
                 // User-cancelled refresh: keep UI calm; polling teardown happens in defer.
@@ -723,7 +730,7 @@ class WalletViewModel: ObservableObject {
     /// Publish one final native snapshot before dropping the UI spinner. Successful native
     /// completion, not `isSynced` (which requires that spinner to be off), authorizes zero.
     private func finishSuccessfulRefresh(status: WalletCoreFFIClient.SyncStatus, context: String,
-        sessionToken: UInt64) async throws {
+        sessionToken: UInt64, contactGeneration: UUID, contactRoute: [String]) async throws {
         let authority = walletManager.sessionAuthority
         let token = sessionToken
         try authority.check(token)
@@ -756,6 +763,9 @@ class WalletViewModel: ObservableObject {
         MoneroConfig.setScanInterrupted(!authoritative)
         applyBalanceSnapshot(total: snapshot.total, unlocked: snapshot.unlocked,
             allowAuthoritativeZero: authoritative)
+        if contactRoute == nodeContactRoute {
+            nodeContact.recordSuccessfulContact(generation: contactGeneration, at: Date())
+        }
         FiatPriceService.shared.recordSeenTransfers(snapshot.history.transfers.map { seenTransfer($0) })
         await persistMetadataUpdate(sessionToken: token)
         try authority.check(token)
@@ -808,29 +818,47 @@ class WalletViewModel: ObservableObject {
     }
 
     func stopForegroundCatchUp() {
+        nodeContact.cancelProbe()
         catchUpTask?.cancel()
         catchUpTask = nil
     }
 
     /// Probe daemon tip; if we are behind and idle, start a refresh.
+    private var nodeContactRoute: [String] {
+        [MoneroConfig.scanNodeURL(), MoneroConfig.networkPolicy.rawValue,
+         MoneroConfig.i2pHTTPProxyAddress ?? ""]
+    }
+
     func checkTipAndResumeIfNeeded() async {
         guard isWalletOpen else { return }
         guard !isRefreshing else { return }
+        guard let probe = nodeContact.beginProbe() else { return }
+        defer { nodeContact.cancel(probe: probe) }
+        let authority = walletManager.sessionAuthority
+        let session = authority.token()
+        let route = nodeContactRoute
 
         do {
             let baseURL = MoneroConfig.scanNodeURL()
             let proxy: String? = (MoneroConfig.networkPolicy == .i2p) ? MoneroConfig.i2pHTTPProxyAddress : nil
             let info = try await MoneroDaemonClient.getInfo(baseURL: baseURL, proxyAddress: proxy, timeout: 8.0)
+            guard !Task.isCancelled, isWalletOpen, authority.accepts(session),
+                  route == nodeContactRoute, nodeContact.accepts(probe) else { return }
+            nodeContact.succeed(probe: probe, at: Date())
             let tip = max(info.height, info.targetHeight)
             if tip > chainHeight {
                 WalletDiagnostics.log("🧭 Catch-up tip advanced: chainHeight \(chainHeight) -> \(tip)")
                 chainHeight = tip
             }
         } catch {
+            guard !Task.isCancelled, isWalletOpen, authority.accepts(session),
+                  route == nodeContactRoute, nodeContact.accepts(probe) else { return }
+            nodeContact.fail(probe: probe)
             // Non-fatal: still try resume from last-known tip if we already know we are behind.
             WalletDiagnostics.log("⚠️ Catch-up tip probe failed: \(error.localizedDescription)")
         }
 
+        guard !Task.isCancelled, isWalletOpen, authority.accepts(session), route == nodeContactRoute else { return }
         guard !isRefreshing else { return }
         // Cursor ahead of last clean checkpoint → same as interrupted tip (partial history).
         let trusted = MoneroConfig.trustedScannedHeight
@@ -1022,6 +1050,8 @@ class WalletViewModel: ObservableObject {
         }
         let authority = walletManager.sessionAuthority
         let token = authority.token()
+        let contactGeneration = nodeContact.generation
+        let contactRoute = nodeContactRoute
         // Claim the manual operation before the first await, so repeated taps cannot
         // start overlapping resets while the old refresh is draining.
         isManualRescanInProgress = true
@@ -1054,7 +1084,8 @@ class WalletViewModel: ObservableObject {
         }, scan: {
             try await walletManager.rescan(from: height, sessionToken: token)
         }, finish: { status in
-            try await finishSuccessfulRefresh(status: status, context: "rescan_done", sessionToken: token)
+            try await finishSuccessfulRefresh(status: status, context: "rescan_done", sessionToken: token,
+                contactGeneration: contactGeneration, contactRoute: contactRoute)
         }, cleanup: {
             stopSyncStatusPolling(clearThroughput: false)
             isRefreshing = false
