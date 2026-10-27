@@ -215,10 +215,10 @@ struct MoneroConfig {
     nonisolated static var i2pRPCAddress: String {
         let saved = UserDefaults.standard.string(forKey: userDefaultsI2PRPCKey)?
             .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        if saved.isEmpty { return "" }
+        if saved.isEmpty { return NetworkRouting.defaultI2PRPCAddress }
         if legacyDefaultI2PRPCAddresses.contains(saved.lowercased()) {
             UserDefaults.standard.removeObject(forKey: userDefaultsI2PRPCKey)
-            return ""
+            return NetworkRouting.defaultI2PRPCAddress
         }
         return saved
     }

@@ -10,6 +10,16 @@
 
 import Foundation
 import CFNetwork
+import NexaWalLogic
+
+private final class NoDaemonRedirects: NSObject, URLSessionTaskDelegate, @unchecked Sendable {
+    func urlSession(_ session: URLSession, task: URLSessionTask,
+                    willPerformHTTPRedirection response: HTTPURLResponse,
+                    newRequest request: URLRequest,
+                    completionHandler: @escaping (URLRequest?) -> Void) {
+        completionHandler(nil)
+    }
+}
 
 enum MoneroDaemonClientError: LocalizedError {
     case invalidBaseURL(String)
@@ -64,6 +74,9 @@ enum MoneroDaemonClient {
         timeout: TimeInterval = 8.0
     ) async throws -> MoneroDaemonInfo {
         let url = try jsonRPCURL(from: baseURL)
+        if url.host?.lowercased().hasSuffix(".i2p") == true {
+            try NetworkRouting.validateI2PConfiguration(nodeAddress: baseURL, proxyAddress: proxyAddress)
+        }
 
         let session: URLSession = try makeSession(proxyAddress: proxyAddress, timeout: timeout)
 
@@ -137,14 +150,15 @@ enum MoneroDaemonClient {
     // MARK: - Helpers
 
     private static func makeSession(proxyAddress: String?, timeout: TimeInterval) throws -> URLSession {
-        guard let proxyAddress, !proxyAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            return .shared
-        }
-
-        let (host, port) = try parseHostPort(proxyAddress)
         let cfg = URLSessionConfiguration.ephemeral
         cfg.timeoutIntervalForRequest = timeout
         cfg.timeoutIntervalForResource = timeout
+        guard let proxyAddress, !proxyAddress.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            cfg.connectionProxyDictionary = [:]
+            return URLSession(configuration: cfg, delegate: NoDaemonRedirects(), delegateQueue: nil)
+        }
+
+        let (host, port) = try parseHostPort(proxyAddress)
 
         // iOS does not expose the CFNetwork HTTPS proxy constants (they're marked unavailable).
         // Using the HTTP proxy keys here is sufficient for typical I2P HTTP proxy setups (e.g. i2p SAM/HTTP proxy),
@@ -155,19 +169,14 @@ enum MoneroDaemonClient {
             kCFNetworkProxiesHTTPPort as String: port
         ]
 
-        return URLSession(configuration: cfg)
+        return URLSession(configuration: cfg, delegate: NoDaemonRedirects(), delegateQueue: nil)
     }
 
     private static func parseHostPort(_ s: String) throws -> (host: String, port: Int) {
         let trimmed = s.trimmingCharacters(in: .whitespacesAndNewlines)
-        // Expect "host:port" (IPv6 not supported here; keep it simple for NexaWal’s current defaults)
-        let parts = trimmed.split(separator: ":", maxSplits: 1, omittingEmptySubsequences: true)
-        guard parts.count == 2 else { throw MoneroDaemonClientError.invalidProxyAddress(s) }
-
-        let host = String(parts[0])
-        guard !host.isEmpty else { throw MoneroDaemonClientError.invalidProxyAddress(s) }
-
-        guard let port = Int(parts[1]), port > 0, port < 65536 else {
+        try NetworkRouting.validateI2PConfiguration(nodeAddress: "http://validation.i2p", proxyAddress: trimmed)
+        guard let proxy = URLComponents(string: trimmed.contains("://") ? trimmed : "http://\(trimmed)"),
+              let host = proxy.host, let port = proxy.port else {
             throw MoneroDaemonClientError.invalidProxyAddress(s)
         }
 

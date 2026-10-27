@@ -910,6 +910,14 @@ struct SettingsView: View {
         }
         let i2pNode = i2pRPCAddress.trimmingCharacters(in: .whitespacesAndNewlines)
         let proxy = i2pProxyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        if policy != .clearnet {
+            do {
+                try NetworkRouting.validateI2PConfiguration(nodeAddress: i2pNode, proxyAddress: proxy)
+            } catch {
+                flashStatus(error.localizedDescription)
+                return
+            }
+        }
         MoneroConfig.setNetworkPolicy(policy)
         MoneroConfig.setI2PRPCAddress(i2pNode)
         MoneroConfig.setI2PHTTPProxyAddress(proxy.isEmpty ? nil : proxy)

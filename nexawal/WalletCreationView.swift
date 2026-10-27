@@ -599,6 +599,10 @@ struct WalletCreationView: View {
         // Fetch daemon height info and compute restoreHeight = node tip - 10.
         do {
             let baseURL = MoneroConfig.scanNodeURL()
+            if MoneroConfig.networkPolicy == .i2p {
+                try NetworkRouting.validateI2PConfiguration(
+                    nodeAddress: baseURL, proxyAddress: MoneroConfig.i2pHTTPProxyAddress)
+            }
 
             // If scanning over I2P, route the request through the configured HTTP proxy.
             let proxy: String? = (MoneroConfig.networkPolicy == .i2p) ? MoneroConfig.i2pHTTPProxyAddress : nil

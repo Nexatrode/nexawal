@@ -171,12 +171,12 @@ actor WalletManager {
             }
             return try getSyncStatus()
         }
+        try applyNetworkProxy()
         refreshInProgress = true
         refreshCancelRequested = false
         refreshGeneration &+= 1
         let generation = refreshGeneration
 
-        applyNetworkProxy()
         applyScanTuning()
         // Always pass an explicit node URL into the core so bulk modes are eligible even when the app is using a "default" node.
         // Passing `nil` forces the core into per-block mode due to the clearnet gating check.
@@ -580,7 +580,7 @@ actor WalletManager {
                 ) { try WalletCoreFFIClient.closeWallet(walletId: walletId, timeoutMilliseconds: 1_000) }
                 currentWalletId = nil
             } else if cleanupIntent.continueRefresh {
-                applyNetworkProxy()
+                try applyNetworkProxy()
                 applyScanTuning()
                 try WalletCoreFFIClient.refreshWalletAsync(walletId: walletId, nodeURL: MoneroConfig.scanNodeURL())
                 backgroundViewOnlyRefreshActive = true
@@ -882,8 +882,8 @@ actor WalletManager {
     @discardableResult
     private func completePendingPreparedSend(for walletId: String, preferredNodeURL: String) throws -> RecoveredPreparedSend? {
         guard let pending = try loadPendingPrepared(for: walletId) else { return nil }
-        applyBroadcastProxy()
         let endpoint = pending.nodeURL.isEmpty ? preferredNodeURL : pending.nodeURL
+        try configureCoreRouting(forBroadcast: true, endpoint: endpoint)
         WalletDiagnostics.log("↩️ Recovering pending prepared send txid=\(pending.prepared.txid) via \(endpoint)")
         let relay = try WalletCoreFFIClient.relayPrepared(
             walletId: walletId,
@@ -929,41 +929,26 @@ actor WalletManager {
         try mutableURL.setResourceValues(resourceValues)
     }
 
-    /// Apply HTTP proxy environment for I2P scan (I2P-only policy).
-    private func applyNetworkProxy() {
-        if MoneroConfig.shouldUseI2PHTTPProxy(forBroadcast: false),
-           let proxy = MoneroConfig.i2pHTTPProxyAddress {
-            applyProxyEnv(proxy)
-        } else {
-            clearProxyEnv()
-        }
+    /// Configure I2P without changing the route of concurrent clearnet clients.
+    private func applyNetworkProxy() throws {
+        try configureCoreRouting(forBroadcast: false)
     }
 
     /// Apply proxy settings for broadcast path (I2P only or hybrid).
-    private func applyBroadcastProxy() {
-        if MoneroConfig.shouldUseI2PHTTPProxy(forBroadcast: true),
-           let proxy = MoneroConfig.i2pHTTPProxyAddress {
-            applyProxyEnv(proxy)
-        } else {
-            clearProxyEnv()
+    private func applyBroadcastProxy() throws {
+        try configureCoreRouting(forBroadcast: true)
+    }
+
+    private func configureCoreRouting(forBroadcast: Bool, endpoint: String? = nil) throws {
+        let policy = MoneroConfig.networkPolicy
+        let requiresI2P = policy == .i2p || (policy == .hybrid && forBroadcast)
+        if requiresI2P {
+            try NetworkRouting.validateI2PConfiguration(
+                nodeAddress: endpoint ?? MoneroConfig.i2pRPCAddress, proxyAddress: MoneroConfig.i2pHTTPProxyAddress)
         }
-    }
-
-    private func applyProxyEnv(_ proxy: String) {
-        let proxyURL = proxy.hasPrefix("http://") || proxy.hasPrefix("https://") ? proxy : "http://\(proxy)"
-        setenv("HTTP_PROXY", proxyURL, 1)
-        setenv("http_proxy", proxyURL, 1)
-        setenv("ALL_PROXY", proxyURL, 1)
-        setenv("all_proxy", proxyURL, 1)
-        unsetenv("NO_PROXY")
-        unsetenv("no_proxy")
-    }
-
-    private func clearProxyEnv() {
-        unsetenv("HTTP_PROXY")
-        unsetenv("http_proxy")
-        unsetenv("ALL_PROXY")
-        unsetenv("all_proxy")
+        // Do not clear this for a hybrid clearnet scan: in-flight clients retain
+        // their own route, and the next broadcast still needs the I2P proxy.
+        try WalletCoreFFIClient.setI2PHTTPProxy(MoneroConfig.i2pHTTPProxyAddress)
     }
 
     /// Keep scan tuning in WalletCore. The shared core defaults are range/75/75;
@@ -1031,7 +1016,7 @@ actor WalletManager {
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
-        applyBroadcastProxy()
+        try applyBroadcastProxy()
 
         // Verbose logging: amount, policy, endpoint, proxy, balances
         let policy = MoneroConfig.networkPolicy
@@ -1078,7 +1063,7 @@ actor WalletManager {
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
-        applyBroadcastProxy()
+        try applyBroadcastProxy()
 
         let policy = MoneroConfig.networkPolicy
         let endpoint = MoneroConfig.broadcastNodeURL()
@@ -1118,7 +1103,7 @@ actor WalletManager {
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
-        applyBroadcastProxy()
+        try applyBroadcastProxy()
 
         let endpoint = MoneroConfig.broadcastNodeURL()
         do {
@@ -1148,7 +1133,7 @@ actor WalletManager {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
             }
-            applyBroadcastProxy()
+            try applyBroadcastProxy()
 
             let endpoint = MoneroConfig.broadcastNodeURL()
             try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
@@ -1191,7 +1176,7 @@ actor WalletManager {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
             }
-            applyBroadcastProxy()
+            try applyBroadcastProxy()
 
             let endpoint = MoneroConfig.broadcastNodeURL()
             try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
@@ -1231,7 +1216,7 @@ actor WalletManager {
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
-        applyBroadcastProxy()
+        try applyBroadcastProxy()
 
         let policy = MoneroConfig.networkPolicy
         let endpoint = MoneroConfig.broadcastNodeURL()
@@ -1271,7 +1256,7 @@ actor WalletManager {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
             }
-            applyBroadcastProxy()
+            try applyBroadcastProxy()
 
             let policy = MoneroConfig.networkPolicy
             let endpoint = MoneroConfig.broadcastNodeURL()
@@ -1322,7 +1307,7 @@ actor WalletManager {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
             }
-            applyBroadcastProxy()
+            try applyBroadcastProxy()
 
             // Verbose logging: amount, policy, endpoint, proxy, balances
             let policy = MoneroConfig.networkPolicy
