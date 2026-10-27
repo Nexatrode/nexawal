@@ -5,9 +5,10 @@ public enum NetworkRouting: Sendable {
     public static let defaultI2PRPCAddress = "7lfi73h743qm663hv4x5q6ccgc4jc5ncl65dfvpe665m6pawwdxa.b32.i2p"
 
     public enum ConfigurationError: LocalizedError {
-        case invalidI2PNode, invalidI2PProxy
+        case invalidClearnetNode, invalidI2PNode, invalidI2PProxy
         public var errorDescription: String? {
             switch self {
+            case .invalidClearnetNode: return "Enter a valid node URL starting with http:// or https://, without a query or fragment."
             case .invalidI2PNode: return "Enter an HTTP I2P RPC address ending in .i2p, with a valid port (not the P2P address)."
             case .invalidI2PProxy: return "Enter an I2P HTTP proxy as host:port, usually 127.0.0.1:4444. SOCKS and HTTPS proxies are not supported."
             }
@@ -49,8 +50,11 @@ public enum NetworkRouting: Sendable {
 
     public static func normalizeURL(_ raw: String) -> String {
         let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let explicit = explicitNodeURL(trimmed) {
-            return explicit
+        // Normalization also reads legacy saved values. Validation of new edits
+        // must not turn an already explicit URL into http://https://... .
+        let lower = trimmed.lowercased()
+        if lower.hasPrefix("http://") || lower.hasPrefix("https://") {
+            return trimmed
         }
         // I2P / legacy host:port values have no scheme. Default those to http.
         return trimmed.isEmpty ? trimmed : "http://\(trimmed)"
@@ -59,8 +63,11 @@ public enum NetworkRouting: Sendable {
     /// Clearnet node field: user must type http:// or https://. No scheme guessing.
     public static func explicitNodeURL(_ raw: String) -> String? {
         let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        let lower = trimmed.lowercased()
-        guard lower.hasPrefix("http://") || lower.hasPrefix("https://") else {
+        guard let url = URLComponents(string: trimmed),
+              let scheme = url.scheme?.lowercased(), ["http", "https"].contains(scheme),
+              let host = url.host, !host.isEmpty, url.url != nil,
+              url.query == nil, url.fragment == nil,
+              url.port.map({ (1...65535).contains($0) }) ?? true else {
             return nil
         }
         return trimmed
