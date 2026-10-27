@@ -74,6 +74,12 @@ Xcode resolves `MoneroWalletCoreFFI` at the release-candidate revision recorded 
 
 ## Notes
 
+Connection edits are validated before any active preferences change. Rejected
+edits retain the saved routing mode and do not reconnect. Both node configuration
+cards stay available so an inactive route can be prepared before switching modes.
+Run `bash scripts/test-connection-settings.sh` for host tests of the actual settings
+code, without opening a wallet or the Keychain.
+
 - Uses a native wallet core built from `monero-oxide` via `MoneroWalletCoreFFI`
 - Syncs against standard Monero nodes (local or remote), including the configured I2P RPC path when enabled
 - Default daemon is `https://rpc.nexawal.com` (type a full `http://` or `https://` URL to override)

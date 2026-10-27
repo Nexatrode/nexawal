@@ -8,6 +8,35 @@ import NexaWalLogic
 struct MoneroConfig {
 
     // MARK: - Constants / Defaults
+
+    /// Validate the entire candidate before changing any saved setting. All writes
+    /// complete on the main actor before the caller starts reconnecting.
+    @MainActor
+    static func applyNetworkSettings(policy: NetworkPolicy, nodeAddress: String,
+        i2pRPCAddress: String, proxyAddress: String) throws -> String {
+        let i2pNode = i2pRPCAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        let proxy = proxyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        let candidate = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        let clearnetNode: String?
+        if policy == .i2p {
+            clearnetNode = nil // Preserve the inactive clearnet preference.
+        } else {
+            guard let valid = NetworkRouting.explicitNodeURL(candidate.isEmpty ? defaultAddress : candidate) else {
+                throw NetworkRouting.ConfigurationError.invalidClearnetNode
+            }
+            clearnetNode = valid
+        }
+        if policy != .clearnet {
+            try NetworkRouting.validateI2PConfiguration(nodeAddress: i2pNode, proxyAddress: proxy)
+        }
+        // No validation or suspension points after the first preference mutation.
+        setNetworkPolicy(policy)
+        setI2PRPCAddress(i2pNode)
+        setI2PHTTPProxyAddress(proxy.isEmpty ? nil : proxy)
+        setUseI2P(policy != .clearnet)
+        if let clearnetNode { setDaemonAddress(clearnetNode) }
+        return clearnetNode ?? daemonAddress
+    }
     nonisolated static let defaultAddress = "https://rpc.nexawal.com"
     nonisolated static let userDefaultsKey = "monero_daemon_address"
 

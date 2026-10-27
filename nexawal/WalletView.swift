@@ -604,11 +604,15 @@ struct SettingsView: View {
                         .pickerStyle(.menu)
                         .tint(classicPalette?.accent ?? .accentColor)
                         .onChange(of: networkPolicy) { _, newValue in
+                            // Restoring a rejected selection must not save or reconnect.
+                            guard newValue != MoneroConfig.networkPolicy else { return }
                             applyNetwork(policy: newValue)
                         }
                     }
 
-                    if networkPolicy != .i2p {
+                    // Keep both sets of draft fields editable before switching modes.
+                    // Otherwise a rejected policy selection can hide the field to fix.
+                    Group {
                         settingsCard(title: L10n.t("Clearnet node")) {
                             outlinedField {
                                 TextField("https://rpc.nexawal.com", text: $nodeAddress)
@@ -619,13 +623,13 @@ struct SettingsView: View {
                                     .onSubmit { applyNetwork() }
                             }
 
-                            secondaryButton("Use this node") {
+                            secondaryButton("Apply connection settings") {
                                 applyNetwork()
                             }
                         }
                     }
 
-                    if networkPolicy != .clearnet {
+                    Group {
                         settingsCard(title: L10n.t("I2P")) {
                             outlinedField {
                                 TextField("I2P node (host:port)", text: $i2pRPCAddress)
@@ -645,7 +649,7 @@ struct SettingsView: View {
                                     .onSubmit { applyNetwork() }
                             }
 
-                            secondaryButton("Apply I2P settings") {
+                            secondaryButton("Apply connection settings") {
                                 applyNetwork()
                             }
                         }
@@ -905,36 +909,17 @@ struct SettingsView: View {
 
     private func applyNetwork(policy: MoneroConfig.NetworkPolicy? = nil) {
         let policy = policy ?? networkPolicy
-        if networkPolicy != policy {
+        do {
+            let savedNode = try MoneroConfig.applyNetworkSettings(policy: policy,
+                nodeAddress: nodeAddress, i2pRPCAddress: i2pRPCAddress, proxyAddress: i2pProxyAddress)
             networkPolicy = policy
-        }
-        let i2pNode = i2pRPCAddress.trimmingCharacters(in: .whitespacesAndNewlines)
-        let proxy = i2pProxyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
-        if policy != .clearnet {
-            do {
-                try NetworkRouting.validateI2PConfiguration(nodeAddress: i2pNode, proxyAddress: proxy)
-            } catch {
-                flashStatus(error.localizedDescription)
-                return
-            }
-        }
-        MoneroConfig.setNetworkPolicy(policy)
-        MoneroConfig.setI2PRPCAddress(i2pNode)
-        MoneroConfig.setI2PHTTPProxyAddress(proxy.isEmpty ? nil : proxy)
-        MoneroConfig.setUseI2P(policy != .clearnet)
-
-        if policy != .i2p {
-            var trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmed.isEmpty {
-                trimmed = MoneroConfig.defaultAddress
-                nodeAddress = trimmed
-            }
-            guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
-                flashStatus(L10n.t("Start the node URL with http:// or https://"))
-                return
-            }
-            nodeAddress = explicit
-            MoneroConfig.setDaemonAddress(explicit)
+            nodeAddress = savedNode
+            i2pRPCAddress = MoneroConfig.i2pRPCAddress
+            i2pProxyAddress = MoneroConfig.i2pHTTPProxyAddress ?? ""
+        } catch {
+            networkPolicy = MoneroConfig.networkPolicy
+            flashStatus(error.localizedDescription)
+            return
         }
 
         persistScanTuning()
