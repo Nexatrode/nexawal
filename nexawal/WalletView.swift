@@ -18,6 +18,9 @@ struct WalletView: View {
     // Transaction details
     @State private var selectedTransfer: WalletCoreFFIClient.Transfer?
 
+    private var nodeStatus: NodeContactState.Status { viewModel.nodeContact.status(at: Date()) }
+    private var nodeNeedsAttention: Bool { !viewModel.isRefreshing && nodeStatus != .fresh }
+
     /// Sync card disclosure (Node / Scanned / …). Default closed; persisted in UserDefaults.
     @AppStorage(MoneroConfig.userDefaultsSyncDetailsExpandedKey) private var syncDetailsExpanded = false
 
@@ -150,6 +153,13 @@ struct WalletView: View {
             case .stalled: key = "Sync stalled"
             case .nodeUnreachable: key = "Node unreachable"
             case .failed: key = "Sync failed"
+            }
+        } else if nodeNeedsAttention {
+            switch nodeStatus {
+            case .unavailable: key = "Node check failed"
+            case .stale: key = "Node status stale"
+            case .unknown: key = viewModel.nodeContact.isChecking ? "Checking node" : "Node not checked"
+            case .fresh: key = "Wallet synced"
             }
         } else if viewModel.isSynced {
             key = "Wallet synced"
@@ -289,6 +299,9 @@ struct WalletView: View {
                     .padding(.horizontal)
 
                     // Sync details (no section title — matches Android card content)
+                    // The timeline invalidates this card as observations age. Evaluate
+                    // against Date() on each render, including successes between ticks.
+                    TimelineView(.periodic(from: .now, by: 15)) { _ in
                     VStack(alignment: .leading, spacing: 8) {
                         Button {
                             withAnimation(.easeInOut(duration: 0.18)) {
@@ -300,7 +313,7 @@ struct WalletView: View {
                                     .fill(
                                         (viewModel.errorMessage?.isEmpty == false && !viewModel.isRefreshing)
                                             ? (classicPalette?.danger ?? .red)
-                                            : (viewModel.isSynced ? (classicPalette?.success ?? .green) : (classicPalette?.accent ?? .orange))
+                                            : (viewModel.isSynced && !nodeNeedsAttention ? (classicPalette?.success ?? .green) : (classicPalette?.accent ?? .orange))
                                     )
                                     .frame(width: 10, height: 10)
                                     .accessibilityHidden(true)
@@ -319,7 +332,23 @@ struct WalletView: View {
                         .buttonStyle(.plain)
                         .accessibilityHint(syncDetailsExpanded ? L10n.t("Hide sync details") : L10n.t("Show sync details"))
 
+                        if nodeNeedsAttention {
+                            Text(nodeStatus == .unavailable
+                                ? L10n.t("The node check failed. Showing last known wallet data.")
+                                : L10n.t("Current node contact has not been verified. Showing last known wallet data."))
+                                .font(.subheadline)
+                                .foregroundStyle(secondaryText)
+                            Button(L10n.t("Check node connection")) {
+                                Task { await viewModel.checkTipAndResumeIfNeeded() }
+                            }
+                            .disabled(viewModel.nodeContact.isChecking)
+                        }
+
                         if syncDetailsExpanded {
+                            if let contact = viewModel.nodeContact.lastSuccess {
+                                classicStatusRow(label: L10n.t("Last node contact"),
+                                    value: contact.formatted(date: .abbreviated, time: .shortened))
+                            }
                             Text(syncDetail())
                                 .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
                                 .foregroundColor(secondaryText)
@@ -370,6 +399,7 @@ struct WalletView: View {
                     )
                     .cornerRadius(classicUI ? 4 : 16)
                     .padding(.horizontal)
+                    }
 
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
@@ -523,6 +553,7 @@ struct WalletView: View {
             .task {
                 await FiatPriceService.shared.refreshIfNeeded(force: false)
             }
+
         }
     }
 
