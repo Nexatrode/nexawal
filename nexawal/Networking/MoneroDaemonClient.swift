@@ -26,6 +26,7 @@ enum MoneroDaemonClientError: LocalizedError {
     case invalidProxyAddress(String)
     case transport(Error)
     case nonHTTPResponse
+    case responseTooLarge
     case httpStatus(Int, body: String)
     case decodingFailed(String)
     case rpcError(code: Int, message: String)
@@ -38,6 +39,8 @@ enum MoneroDaemonClientError: LocalizedError {
             return "Invalid proxy address: \(s)"
         case .transport(let e):
             return "Network error: \(e.localizedDescription)"
+        case .responseTooLarge:
+            return "Daemon response exceeds the 65536-byte limit"
         case .nonHTTPResponse:
             return "Unexpected response type from daemon"
         case .httpStatus(let code, let body):
@@ -58,6 +61,32 @@ struct MoneroDaemonInfo: Sendable, Equatable {
 }
 
 enum MoneroDaemonClient {
+    // Height probes need only a small JSON object, even from a custom daemon.
+    private static let responseByteLimit = 64 * 1024
+    private static let errorByteLimit = 512
+
+    private static func snippet(_ data: Data) -> String {
+        String(decoding: data.prefix(errorByteLimit), as: UTF8.self)
+            + (data.count > errorByteLimit ? "… [truncated]" : "")
+    }
+
+    private static func boundedData(for request: URLRequest, session: URLSession) async throws -> (Data, URLResponse) {
+        let (bytes, response) = try await session.bytes(for: request)
+        // Stop the underlying transfer on overflow, cancellation, and all other exits.
+        defer { bytes.task.cancel() }
+        guard response.expectedContentLength <= Int64(responseByteLimit) else {
+            throw MoneroDaemonClientError.responseTooLarge
+        }
+        var data = Data()
+        for try await byte in bytes {
+            guard data.count < responseByteLimit else {
+                throw MoneroDaemonClientError.responseTooLarge
+            }
+            data.append(byte)
+        }
+        return (data, response)
+    }
+
     // MARK: - Public API
 
     /// Calls the daemon JSON-RPC `get_info` method.
@@ -78,7 +107,8 @@ enum MoneroDaemonClient {
             try NetworkRouting.validateI2PConfiguration(nodeAddress: baseURL, proxyAddress: proxyAddress)
         }
 
-        let session: URLSession = try makeSession(proxyAddress: proxyAddress, timeout: timeout)
+        let session = try makeSession(proxyAddress: proxyAddress, timeout: timeout)
+        defer { session.invalidateAndCancel() }
 
         #if DEBUG
         let proxyDesc = proxyAddress ?? "(none)"
@@ -97,12 +127,12 @@ enum MoneroDaemonClient {
                 req.setValue("application/json", forHTTPHeaderField: "Accept")
                 req.timeoutInterval = timeout
 
-                let (data, response) = try await session.data(for: req)
+                let (data, response) = try await boundedData(for: req, session: session)
                 guard let http = response as? HTTPURLResponse else {
                     throw MoneroDaemonClientError.nonHTTPResponse
                 }
                 guard (200..<300).contains(http.statusCode) else {
-                    let bodyStr = String(data: data, encoding: .utf8) ?? "<non-utf8 body>"
+                    let bodyStr = snippet(data)
                     throw MoneroDaemonClientError.httpStatus(http.statusCode, body: bodyStr)
                 }
 
@@ -110,12 +140,12 @@ enum MoneroDaemonClient {
                 do {
                     decoded = try JSONDecoder().decode(JSONRPCResponse<GetInfoResult>.self, from: data)
                 } catch {
-                    let bodyStr = String(data: data, encoding: .utf8) ?? "<non-utf8 body>"
+                    let bodyStr = snippet(data)
                     throw MoneroDaemonClientError.decodingFailed("\(error.localizedDescription). Body=\(bodyStr)")
                 }
 
                 if let rpcErr = decoded.error {
-                    throw MoneroDaemonClientError.rpcError(code: rpcErr.code, message: rpcErr.message)
+                    throw MoneroDaemonClientError.rpcError(code: rpcErr.code, message: snippet(Data(rpcErr.message.utf8)))
                 }
                 guard let result = decoded.result else {
                     throw MoneroDaemonClientError.decodingFailed("Missing result in JSON-RPC response")
@@ -128,6 +158,13 @@ enum MoneroDaemonClient {
                 #endif
 
                 return MoneroDaemonInfo(height: result.height, targetHeight: effectiveTargetHeight)
+            } catch MoneroDaemonClientError.responseTooLarge {
+                // A size-policy violation is not a compatibility failure.
+                throw MoneroDaemonClientError.responseTooLarge
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch let error as URLError where error.code == .cancelled {
+                throw error
             } catch {
                 #if DEBUG
                 WalletDiagnostics.log("🛰️ get_info failed, falling back to /get_height: \(error.localizedDescription)")
@@ -211,18 +248,19 @@ enum MoneroDaemonClient {
     ) async throws -> MoneroDaemonInfo {
         let url = try heightURL(from: baseURL)
         let session = try makeSession(proxyAddress: proxyAddress, timeout: timeout)
+        defer { session.invalidateAndCancel() }
 
         var req = URLRequest(url: url)
         req.httpMethod = "GET"
         req.setValue("application/json", forHTTPHeaderField: "Accept")
         req.timeoutInterval = timeout
 
-        let (data, response) = try await session.data(for: req)
+        let (data, response) = try await boundedData(for: req, session: session)
         guard let http = response as? HTTPURLResponse else {
             throw MoneroDaemonClientError.nonHTTPResponse
         }
         guard (200..<300).contains(http.statusCode) else {
-            let bodyStr = String(data: data, encoding: .utf8) ?? "<non-utf8 body>"
+            let bodyStr = snippet(data)
             throw MoneroDaemonClientError.httpStatus(http.statusCode, body: bodyStr)
         }
 
@@ -230,7 +268,7 @@ enum MoneroDaemonClient {
         do {
             decoded = try JSONDecoder().decode(GetHeightResponse.self, from: data)
         } catch {
-            let bodyStr = String(data: data, encoding: .utf8) ?? "<non-utf8 body>"
+            let bodyStr = snippet(data)
             throw MoneroDaemonClientError.decodingFailed("\(error.localizedDescription). Body=\(bodyStr)")
         }
 

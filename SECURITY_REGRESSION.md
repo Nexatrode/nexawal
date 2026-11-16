@@ -1,5 +1,17 @@
 # Focused security fixes — September 2026
 
+## Bounded daemon height probes
+
+Swift `get_info` and `/get_height` probes stream at most 64 KiB per response,
+including responses without Content-Length and chunked bodies. Overflow cancels
+the transfer and never triggers a compatibility fallback. Daemon error snippets
+are limited to 512 bytes. Redirects remain disabled.
+
+Run `bash scripts/test-daemon-probes.sh` for loopback-only success, fallback,
+overflow, error-text, redirect, and timeout regressions. This compiles the actual
+app daemon client without opening a wallet or using the Keychain; Python 3 is
+required for the synthetic HTTP fixture.
+
 ## WalletCore v0.1.19 dependency update
 
 The project and SwiftPM resolution pin `c5430e9ba86ca962aae07e6744f8eaa78abff905`. This is a
