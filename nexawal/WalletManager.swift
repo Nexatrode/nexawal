@@ -47,6 +47,7 @@ actor WalletManager {
     private var refreshBatch: Int = 0
     private var currentNetworkMainnet: Bool = true
     private var cachePersistenceSuppressed: Bool = false
+    private var fullWipeInProgress: Bool = false
     private var backgroundViewOnlyRefreshActive: Bool = false
     private var cleanupTask: Task<Void, Error>?
     private var cleanupPending = false
@@ -65,8 +66,26 @@ actor WalletManager {
     private init() {}
 
     private func withSendLock<T>(_ body: () throws -> T) throws -> T {
+        guard !fullWipeInProgress else {
+            throw WalletError.refreshFailed("Wallet reset is in progress.")
+        }
         guard !cleanupPending else { throw WalletError.walletOpenFailed("Wallet session cleanup is still pending") }
         return try sendGate.withLock(body)
+    }
+
+    func beginFullWipe() throws {
+        if fullWipeInProgress { return }
+        guard !sendGate.isInFlight else {
+            throw WalletError.refreshFailed("A send is in progress. Wait for it to finish before wiping the wallet.")
+        }
+        fullWipeInProgress = true
+        cachePersistenceSuppressed = true
+    }
+
+    func finishFullWipe() {
+        fullWipeInProgress = false
+        cachePersistenceSuppressed = false
+        currentNetworkMainnet = true
     }
 
     private func normalizedMnemonic(_ mnemonic: String) -> String {
@@ -108,6 +127,7 @@ actor WalletManager {
         importCache: Bool = true,
         sessionToken: UInt64? = nil
     ) async throws {
+        guard !fullWipeInProgress else { throw WalletError.walletOpenFailed("Wallet reset is in progress") }
         let token = sessionToken ?? sessionAuthority.token()
         try await awaitSessionCleanup()
         try sessionAuthority.check(token)
@@ -159,6 +179,7 @@ actor WalletManager {
 
     /// Refresh the wallet against the Monero node
     func refreshWallet() async throws -> WalletCoreFFIClient.SyncStatus {
+        guard !fullWipeInProgress else { throw WalletError.refreshFailed("Wallet reset is in progress") }
         guard !cleanupPending else { throw WalletError.refreshFailed("Wallet session cleanup is still pending") }
         guard let walletId = currentWalletId else {
             throw WalletError.refreshFailed("No wallet is currently open")
@@ -419,8 +440,12 @@ actor WalletManager {
         // Base the watchdog on the shared WalletCore default. The actual request sizing
         // remains controlled by WalletCore defaults or an explicit environment override.
         let batch = MoneroConfig.defaultScanBatch
+        // I2P RPC can have long pauses while WalletCore retries a block-range request.
+        // Do not report a stalled scan before those native retries can finish and surface
+        // their real result to this waiter.
+        let networkStallTimeout = MoneroConfig.networkPolicy == .i2p ? 240.0 : stallTimeout
         let dynamicStallTimeout = max(
-            stallTimeout,
+            networkStallTimeout,
             min(300.0, max(60.0, Double(batch) * 0.25))
         )
 
@@ -617,6 +642,7 @@ actor WalletManager {
 
     /// Restore spend authority only after the caller has completed Keychain/user-presence auth.
     func unsealWallet(mnemonic: String, walletId: String, sessionToken: UInt64? = nil) async throws {
+        guard !fullWipeInProgress else { throw WalletError.walletOpenFailed("Wallet reset is in progress") }
         let token = sessionToken ?? sessionAuthority.token()
         try await awaitSessionCleanup()
         guard currentWalletId == walletId else {
@@ -635,6 +661,38 @@ actor WalletManager {
     /// Persist a stable checkpoint and remove both private view and spend material from memory.
     func closeWalletSession() async throws {
         try await requestSessionCleanup(close: true, continueRefresh: false)
+    }
+
+    /// Stop native wallet work before deleting the local wallet, cache, and recovery payloads.
+    /// Cache export is suppressed before cancellation because refresh shutdown normally saves a checkpoint.
+    func wipeWalletData(walletId: String) async throws {
+        if !fullWipeInProgress { try beginFullWipe() }
+        await cancelRefresh()
+        try await closeWalletSession()
+        try removePersistedWalletArtifacts(walletId: walletId)
+        currentWalletId = nil
+    }
+
+    private func removePersistedWalletArtifacts(walletId: String) throws {
+        let fileManager = FileManager.default
+        let applicationSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let cachesRoot = applicationSupport.appendingPathComponent("WalletCaches", isDirectory: true)
+        let exactNames = ["\(walletId).cache", "\(walletId).prepared.json"]
+
+        for network in ["mainnet", "stagenet"] {
+            let directory = cachesRoot.appendingPathComponent(network, isDirectory: true)
+            guard fileManager.fileExists(atPath: directory.path) else { continue }
+            let entries = try fileManager.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+            for entry in entries {
+                let name = entry.lastPathComponent
+                let isExactArtifact = exactNames.contains(name)
+                let isRejectedArtifact = exactNames.contains { name.hasPrefix($0 + ".rejected-") }
+                guard isExactArtifact || isRejectedArtifact else { continue }
+                try fileManager.removeItem(at: entry)
+            }
+        }
+
+        UserDefaults.standard.removeObject(forKey: "wallet_cache_\(walletId)")
     }
 
     /// Get the current wallet ID
@@ -690,6 +748,7 @@ actor WalletManager {
 
     /// Force rescan from a specific height. Resets core scan state, clears local cache, and refreshes.
     func rescan(from height: UInt64, sessionToken: UInt64) async throws -> WalletCoreFFIClient.SyncStatus {
+        guard !fullWipeInProgress else { throw WalletError.refreshFailed("Wallet reset is in progress") }
         try await awaitSessionCleanup()
         guard let walletId = currentWalletId else {
             throw WalletError.refreshFailed("No wallet is currently open")
@@ -942,6 +1001,10 @@ actor WalletManager {
     private func configureCoreRouting(forBroadcast: Bool, endpoint: String? = nil) throws {
         let policy = MoneroConfig.networkPolicy
         let requiresI2P = policy == .i2p || (policy == .hybrid && forBroadcast)
+        let routedEndpoint = endpoint ?? (forBroadcast ? MoneroConfig.broadcastNodeURL() : MoneroConfig.scanNodeURL())
+        if !requiresI2P, NetworkRouting.isI2PHostnameURL(routedEndpoint) {
+            throw NetworkRouting.ConfigurationError.i2pNodeRequiresI2PPolicy
+        }
         if requiresI2P {
             try NetworkRouting.validateI2PConfiguration(
                 nodeAddress: endpoint ?? MoneroConfig.i2pRPCAddress, proxyAddress: MoneroConfig.i2pHTTPProxyAddress)
@@ -1016,19 +1079,19 @@ actor WalletManager {
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
-        try applyBroadcastProxy()
+        try applyNetworkProxy()
 
         // Verbose logging: amount, policy, endpoint, proxy, balances
         let policy = MoneroConfig.networkPolicy
-        let endpoint = MoneroConfig.broadcastNodeURL()
+        let endpoint = MoneroConfig.scanNodeURL()
         let proxyDesc = MoneroConfig.i2pHTTPProxyAddress ?? "(none)"
         let amountXMR = Double(amountPiconero) / 1_000_000_000_000.0
         if let (total, unlocked) = try? getBalance() {
             let totalXMR = Double(total) / 1_000_000_000_000.0
             let unlockedXMR = Double(unlocked) / 1_000_000_000_000.0
-            WalletDiagnostics.log("🔎 Preview start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
+            WalletDiagnostics.log("🔎 Preview start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), scan=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
         } else {
-            WalletDiagnostics.log("🔎 Preview start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+            WalletDiagnostics.log("🔎 Preview start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), scan=\(endpoint), proxy=\(proxyDesc)")
         }
 
         let dest = WalletCoreFFIClient.Destination(address: toAddress, amount: amountPiconero)
@@ -1063,10 +1126,10 @@ actor WalletManager {
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
-        try applyBroadcastProxy()
+        try applyNetworkProxy()
 
         let policy = MoneroConfig.networkPolicy
-        let endpoint = MoneroConfig.broadcastNodeURL()
+        let endpoint = MoneroConfig.scanNodeURL()
         let proxyDesc = MoneroConfig.i2pHTTPProxyAddress ?? "(none)"
         let amountXMR = Double(amountPiconero) / 1_000_000_000_000.0
         WalletDiagnostics.log("🔎 Preview (subaddr \(fromSubaddressMinor)) start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
@@ -1103,9 +1166,9 @@ actor WalletManager {
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
-        try applyBroadcastProxy()
+        try applyNetworkProxy()
 
-        let endpoint = MoneroConfig.broadcastNodeURL()
+        let endpoint = MoneroConfig.scanNodeURL()
         do {
             let res = try previewSweepWithFilterOptionalSiblingFallback(
                 walletId: walletId,
@@ -1133,17 +1196,18 @@ actor WalletManager {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
             }
+            let broadcastEndpoint = MoneroConfig.broadcastNodeURL()
             try applyBroadcastProxy()
-
-            let endpoint = MoneroConfig.broadcastNodeURL()
-            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
+            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: broadcastEndpoint)?.txid)
+            try applyNetworkProxy()
+            let preparationEndpoint = MoneroConfig.scanNodeURL()
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String
             do {
                 (prepared, usedEndpoint) = try prepareSweepWithFilterOptionalSiblingFallback(
                     walletId: walletId,
-                    nodeURL: endpoint,
+                    nodeURL: preparationEndpoint,
                     ringLen: ringLen,
                     toAddress: toAddress,
                     filter: filterForSubaddressMinor(fromSubaddressMinor)
@@ -1154,13 +1218,15 @@ actor WalletManager {
                 throw error
             }
 
-            return try persistAndRelayPrepared(
+            let result = try persistAndRelayPrepared(
                 walletId: walletId,
-                usedEndpoint: usedEndpoint,
+                broadcastEndpoint: broadcastEndpoint,
                 prepared: prepared,
                 approvedMaxFee: approvedMaxFee,
                 logLabel: "sweep subaddr \(fromSubaddressMinor)"
             )
+            WalletDiagnostics.log("✅ Swept subaddr \(fromSubaddressMinor) via scan=\(usedEndpoint), broadcast=\(broadcastEndpoint)")
+            return result
         }
     }
 
@@ -1176,10 +1242,11 @@ actor WalletManager {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
             }
+            let broadcastEndpoint = MoneroConfig.broadcastNodeURL()
             try applyBroadcastProxy()
-
-            let endpoint = MoneroConfig.broadcastNodeURL()
-            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
+            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: broadcastEndpoint)?.txid)
+            try applyNetworkProxy()
+            let preparationEndpoint = MoneroConfig.scanNodeURL()
 
             let dest = WalletCoreFFIClient.Destination(address: toAddress, amount: amountPiconero)
             let prepared: WalletCoreFFIClient.PreparedSend
@@ -1187,7 +1254,7 @@ actor WalletManager {
             do {
                 (prepared, usedEndpoint) = try prepareSendWithFilterOptionalSiblingFallback(
                     walletId: walletId,
-                    nodeURL: endpoint,
+                    nodeURL: preparationEndpoint,
                     ringLen: ringLen,
                     destinations: [dest],
                     filter: filterForSubaddressMinor(fromSubaddressMinor)
@@ -1200,11 +1267,12 @@ actor WalletManager {
 
             let result = try persistAndRelayPrepared(
                 walletId: walletId,
-                usedEndpoint: usedEndpoint,
+                broadcastEndpoint: broadcastEndpoint,
                 prepared: prepared,
                 approvedMaxFee: approvedMaxFee,
                 logLabel: "send subaddr \(fromSubaddressMinor)"
             )
+            WalletDiagnostics.log("✅ Sent from subaddr \(fromSubaddressMinor) via scan=\(usedEndpoint), broadcast=\(broadcastEndpoint)")
             return (txid: result.txid, fee: result.fee)
         }
     }
@@ -1216,17 +1284,17 @@ actor WalletManager {
         guard let walletId = currentWalletId else {
             throw WalletError.statusFailed("No wallet is currently open")
         }
-        try applyBroadcastProxy()
+        try applyNetworkProxy()
 
         let policy = MoneroConfig.networkPolicy
-        let endpoint = MoneroConfig.broadcastNodeURL()
+        let endpoint = MoneroConfig.scanNodeURL()
         let proxyDesc = MoneroConfig.i2pHTTPProxyAddress ?? "(none)"
         if let (total, unlocked) = try? getBalance() {
             let totalXMR = Double(total) / 1_000_000_000_000.0
             let unlockedXMR = Double(unlocked) / 1_000_000_000_000.0
-            WalletDiagnostics.log("🔎 Sweep preview start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
+            WalletDiagnostics.log("🔎 Sweep preview start: ring=\(ringLen), policy=\(policy), scan=\(endpoint), broadcast=\(MoneroConfig.broadcastNodeURL()), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
         } else {
-            WalletDiagnostics.log("🔎 Sweep preview start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+            WalletDiagnostics.log("🔎 Sweep preview start: ring=\(ringLen), policy=\(policy), scan=\(endpoint), broadcast=\(MoneroConfig.broadcastNodeURL()), proxy=\(proxyDesc)")
         }
 
         let res: (amount: UInt64, fee: UInt64)
@@ -1256,27 +1324,29 @@ actor WalletManager {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
             }
+            let broadcastEndpoint = MoneroConfig.broadcastNodeURL()
             try applyBroadcastProxy()
 
             let policy = MoneroConfig.networkPolicy
-            let endpoint = MoneroConfig.broadcastNodeURL()
             let proxyDesc = MoneroConfig.i2pHTTPProxyAddress ?? "(none)"
             if let (total, unlocked) = try? getBalance() {
                 let totalXMR = Double(total) / 1_000_000_000_000.0
                 let unlockedXMR = Double(unlocked) / 1_000_000_000_000.0
-                WalletDiagnostics.log("📤 Sweep start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
+                WalletDiagnostics.log("📤 Sweep start: ring=\(ringLen), policy=\(policy), scan=\(MoneroConfig.scanNodeURL()), broadcast=\(broadcastEndpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
             } else {
-                WalletDiagnostics.log("📤 Sweep start: ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+                WalletDiagnostics.log("📤 Sweep start: ring=\(ringLen), policy=\(policy), scan=\(MoneroConfig.scanNodeURL()), broadcast=\(broadcastEndpoint), proxy=\(proxyDesc)")
             }
 
-            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
+            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: broadcastEndpoint)?.txid)
+            try applyNetworkProxy()
+            let preparationEndpoint = MoneroConfig.scanNodeURL()
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String
             do {
                 (prepared, usedEndpoint) = try prepareSweepOptionalSiblingFallback(
                     walletId: walletId,
-                    nodeURL: endpoint,
+                    nodeURL: preparationEndpoint,
                     ringLen: ringLen,
                     toAddress: toAddress
                 )
@@ -1288,12 +1358,12 @@ actor WalletManager {
 
             let result = try persistAndRelayPrepared(
                 walletId: walletId,
-                usedEndpoint: usedEndpoint,
+                broadcastEndpoint: broadcastEndpoint,
                 prepared: prepared,
                 approvedMaxFee: approvedMaxFee,
                 logLabel: "sweep"
             )
-            WalletDiagnostics.log("✅ Swept txid=\(result.txid), amount=\(result.amount) piconero, fee=\(result.fee) piconero via \(policy) endpoint \(usedEndpoint)")
+            WalletDiagnostics.log("✅ Swept txid=\(result.txid), amount=\(result.amount) piconero, fee=\(result.fee) piconero via \(policy), prepared through \(usedEndpoint), broadcast through \(broadcastEndpoint)")
             return result
         }
     }
@@ -1307,30 +1377,32 @@ actor WalletManager {
             guard let walletId = currentWalletId else {
                 throw WalletError.statusFailed("No wallet is currently open")
             }
+            let broadcastEndpoint = MoneroConfig.broadcastNodeURL()
             try applyBroadcastProxy()
 
             // Verbose logging: amount, policy, endpoint, proxy, balances
             let policy = MoneroConfig.networkPolicy
-            let endpoint = MoneroConfig.broadcastNodeURL()
             let proxyDesc = MoneroConfig.i2pHTTPProxyAddress ?? "(none)"
             let amountXMR = Double(amountPiconero) / 1_000_000_000_000.0
             if let (total, unlocked) = try? getBalance() {
                 let totalXMR = Double(total) / 1_000_000_000_000.0
                 let unlockedXMR = Double(unlocked) / 1_000_000_000_000.0
-                WalletDiagnostics.log("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
+                WalletDiagnostics.log("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), scan=\(MoneroConfig.scanNodeURL()), broadcast=\(broadcastEndpoint), proxy=\(proxyDesc), balances total=\(String(format: "%.12f", totalXMR)) XMR, unlocked=\(String(format: "%.12f", unlockedXMR)) XMR")
             } else {
-                WalletDiagnostics.log("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), broadcast=\(endpoint), proxy=\(proxyDesc)")
+                WalletDiagnostics.log("📤 Send start: amount=\(String(format: "%.12f", amountXMR)) XMR, ring=\(ringLen), policy=\(policy), scan=\(MoneroConfig.scanNodeURL()), broadcast=\(broadcastEndpoint), proxy=\(proxyDesc)")
             }
 
             // Finish any prior prepared payload. Do not also construct a new tx in this tap.
-            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: endpoint)?.txid)
+            try SendSafety.requireNewPayment(recoveredTxid: completePendingPreparedSend(for: walletId, preferredNodeURL: broadcastEndpoint)?.txid)
+            try applyNetworkProxy()
+            let preparationEndpoint = MoneroConfig.scanNodeURL()
 
             let prepared: WalletCoreFFIClient.PreparedSend
             let usedEndpoint: String
             do {
                 (prepared, usedEndpoint) = try prepareOptionalSiblingFallback(
                     walletId: walletId,
-                    nodeURL: endpoint,
+                    nodeURL: preparationEndpoint,
                     ringLen: ringLen,
                     toAddress: toAddress,
                     amountPiconero: amountPiconero
@@ -1343,11 +1415,12 @@ actor WalletManager {
 
             let result = try persistAndRelayPrepared(
                 walletId: walletId,
-                usedEndpoint: usedEndpoint,
+                broadcastEndpoint: broadcastEndpoint,
                 prepared: prepared,
                 approvedMaxFee: approvedMaxFee,
                 logLabel: "send"
             )
+            WalletDiagnostics.log("✅ Sent via scan=\(usedEndpoint), broadcast=\(broadcastEndpoint)")
             return (txid: result.txid, fee: result.fee)
         }
     }
@@ -1355,19 +1428,20 @@ actor WalletManager {
     /// Persist a prepared payload, relay it, clear the durable file, and export cache.
     private func persistAndRelayPrepared(
         walletId: String,
-        usedEndpoint: String,
+        broadcastEndpoint: String,
         prepared: WalletCoreFFIClient.PreparedSend,
         approvedMaxFee: UInt64,
         logLabel: String
     ) throws -> (txid: String, amount: UInt64, fee: UInt64) {
         try SendSafety.withApprovedFee(preparedFee: prepared.fee, approvedMaxFee: approvedMaxFee) {
-            try persistPendingPrepared(for: walletId, nodeURL: usedEndpoint, prepared: prepared)
+            try applyBroadcastProxy()
+            try persistPendingPrepared(for: walletId, nodeURL: broadcastEndpoint, prepared: prepared)
             let relay: WalletCoreFFIClient.RelayResult
             do {
                 relay = try WalletCoreFFIClient.relayPrepared(
                     walletId: walletId,
                     prepared: prepared,
-                    nodeURL: usedEndpoint
+                    nodeURL: broadcastEndpoint
                 )
             } catch {
                 let coreMsg = WalletCoreFFIClient.lastErrorMessage() ?? "(none)"

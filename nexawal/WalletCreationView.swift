@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import UniformTypeIdentifiers
 import MoneroWalletCoreFFI
 import NexaWalLogic
 
@@ -54,15 +55,12 @@ struct WalletCreationView: View {
         #endif
     }
 
-    // Create-mode seed backup gate: the app generates the mnemonic (never a user paste),
-    // forces an explicit "I wrote it down" confirmation, then re-checks a few random words
-    // before Create is enabled.
+    // Create-mode seed backup gate: the app generates the mnemonic and requires
+    // explicit acknowledgement that the recovery phrase was written down.
     @State private var generatedMnemonic: String = ""
     @State private var wroteSeedDown: Bool = false
-    @State private var seedChallengeIndices: [Int] = []
-    @State private var seedChallengeAnswers: [String] = ["", "", ""]
     @State private var seedGenerationError: String?
-    @FocusState private var focusedChallengeIndex: Int?
+    @State private var seedCopied = false
 
     @State private var setupMode: WalletSetupMode = .create
 
@@ -72,6 +70,7 @@ struct WalletCreationView: View {
     // Fast-restore-height (create mode only): we fetch daemon height info and set
     // restoreHeight = node tip - 10.
     @State private var suggestedRestoreHeight: UInt64?
+    @State private var suggestedHeightNetworkKey: String?
     @State private var isFetchingSuggestedHeight: Bool = false
     @State private var suggestedHeightError: String?
 
@@ -82,9 +81,22 @@ struct WalletCreationView: View {
     @State private var requireBiometrics: Bool = true
     @State private var biometricsAvailable: Bool = false
 
-    // Pre-wallet node config (same UserDefaults key as Settings).
+    // Pre-wallet route config (same UserDefaults keys as Settings).
     @State private var nodeAddress: String = MoneroConfig.daemonAddress
+    @State private var networkPolicy: MoneroConfig.NetworkPolicy = MoneroConfig.networkPolicy
+    @State private var i2pRPCAddress: String = MoneroConfig.i2pRPCAddress
+    @State private var i2pProxyAddress: String = MoneroConfig.i2pHTTPProxyAddress ?? ""
     @State private var nodeSaveStatus: String?
+
+    private var setupNetworkKey: String {
+        [
+            networkPolicy.rawValue,
+            nodeAddress,
+            i2pRPCAddress,
+            i2pProxyAddress,
+            isMainnet ? "mainnet" : "testnet",
+        ].joined(separator: "\u{0}")
+    }
 
     var body: some View {
         NavigationStack {
@@ -97,12 +109,7 @@ struct WalletCreationView: View {
                     if classicUI, let palette = classicPalette {
                         neonSetupModePicker(palette: palette)
                     } else {
-                        Picker("Mode", selection: $setupMode) {
-                            ForEach(WalletSetupMode.allCases) { mode in
-                                Text(mode.title).tag(mode)
-                            }
-                        }
-                        .pickerStyle(.segmented)
+                        standardSetupModePicker
                     }
 
                     switch setupMode {
@@ -219,7 +226,7 @@ struct WalletCreationView: View {
                             }
                         }
                         .buttonStyle(.borderedProminent)
-                        .disabled(viewModel.isLoading || mnemonicInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                        .disabled(viewModel.isLoading || isFetchingSuggestedHeight || mnemonicInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     } else {
                         Button {
                             // If we already have a persisted wallet, confirm before replacing it.
@@ -238,7 +245,7 @@ struct WalletCreationView: View {
                             }
                         }
                         .buttonStyle(.borderedProminent)
-                        .disabled(viewModel.isLoading || !isSeedBackupGatePassed())
+                        .disabled(viewModel.isLoading || isFetchingSuggestedHeight || !isSeedBackupGatePassed())
                     }
                 }
                 .alert("Replace existing wallet?", isPresented: $showReplaceConfirm) {
@@ -259,29 +266,64 @@ struct WalletCreationView: View {
                 }
 
                 Section(header: NeonSectionHeader(title: L10n.t("Network & Node"))) {
-                    TextField("https://rpc.nexawal.com", text: $nodeAddress)
-                        .font(.system(.body, design: .monospaced))
-                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .accessibilityLabel(L10n.t("Clearnet node URL"))
-                    Text(L10n.t("Type the full URL, including http:// or https://.\nDefault: https://rpc.nexawal.com"))
+                    Picker("How to connect", selection: $networkPolicy) {
+                        Text("Clearnet only").tag(MoneroConfig.NetworkPolicy.clearnet)
+                        Text("I2P only").tag(MoneroConfig.NetworkPolicy.i2p)
+                        Text("Both (scan clearnet, broadcast I2P)").tag(MoneroConfig.NetworkPolicy.hybrid)
+                    }
+                    .pickerStyle(.menu)
+                    .tint(classicPalette?.accent ?? .accentColor)
+
+                    Text(L10n.t("Clearnet only uses a clearnet node. I2P only uses an I2P node and proxy. Both scans on clearnet and broadcasts over I2P."))
                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                         .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
 
+                    if networkPolicy != .i2p {
+                        TextField("https://rpc.nexawal.com", text: $nodeAddress)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .accessibilityLabel(L10n.t("Clearnet node URL"))
+                        Text(L10n.t("Type the full URL, including http:// or https://.\nDefault: https://rpc.nexawal.com"))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    }
+
+                    if networkPolicy != .clearnet {
+                        TextField("I2P node (host:port)", text: $i2pRPCAddress)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .accessibilityLabel(L10n.t("I2P node (host:port)"))
+                        TextField("I2P HTTP proxy (host:port)", text: $i2pProxyAddress)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.never)
+                            .accessibilityLabel(L10n.t("I2P HTTP proxy (host:port)"))
+                        Text(L10n.t("I2P requires an HTTP proxy reachable from this device. 127.0.0.1 refers to this device."))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    }
+
                     Button {
-                        saveNodeAddress()
+                        saveNetworkSettings()
                     } label: {
-                        Text(L10n.neon("Save node", classicUI: classicUI))
+                        Text(L10n.neon("Use this node", classicUI: classicUI))
                     }
                     .neonCTAStyle(classicUI: classicUI, palette: classicPalette)
+                    .disabled(isFetchingSuggestedHeight)
 
                     if let nodeSaveStatus {
                         Text(nodeSaveStatus)
                             .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                            .accessibilityAddTraits(.updatesFrequently)
                     }
                 }
+                .disabled(isFetchingSuggestedHeight || viewModel.isLoading)
 
                 Section(header: NeonSectionHeader(title: L10n.t("Info"))) {
                     HStack {
@@ -297,7 +339,7 @@ struct WalletCreationView: View {
             .navigationBarTitleDisplayMode(.inline)
             .neonFormChrome(classicUI: classicUI, palette: classicPalette)
             .tint(classicPalette?.accent ?? .accentColor)
-            .scrollDismissesKeyboard(.interactively)
+            .formKeyboardDismissal()
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(classicUI ? "nexawal" : L10n.t("Create Wallet"))
@@ -305,59 +347,89 @@ struct WalletCreationView: View {
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
                         .tracking(classicUI ? 2 : 0)
                 }
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button(L10n.t("Done")) {
-                        isMnemonicFocused = false
-                        focusedChallengeIndex = nil
-                        UIApplication.shared.sendAction(
-                            #selector(UIResponder.resignFirstResponder),
-                            to: nil, from: nil, for: nil
-                        )
-                    }
-                }
+
             }
         }
         .onChange(of: scenePhase) {
             if scenePhase == .background {
                 mnemonicInput = ""
                 generatedMnemonic = ""
-                seedChallengeAnswers = ["", "", ""]
                 wroteSeedDown = false
+            } else if scenePhase == .active, setupMode == .create, generatedMnemonic.isEmpty {
+                // Backgrounding deliberately discards an uncommitted seed. Make a fresh
+                // candidate as soon as the user returns instead of leaving the setup blank.
+                generateNewSeed()
             }
         }
         .onDisappear {
             mnemonicInput = ""
             generatedMnemonic = ""
-            seedChallengeAnswers = ["", "", ""]
         }
         .task {
+            // Seed creation is local and must not wait for the optional node-height lookup.
+            // A slow/unreachable RPC must never leave the Create Wallet screen without words.
+            if setupMode == .create, scenePhase == .active, generatedMnemonic.isEmpty {
+                generateNewSeed()
+            }
+
             // Authoritative: check persisted wallet presence (metadata) rather than in-memory UI state.
             hasStoredWallet = await viewModel.hasStoredWallet()
             let available = await viewModel.deviceAuthenticationAvailable()
             biometricsAvailable = available
             requireBiometrics = available
 
-            // Best-effort: fetch suggested restore height for create mode.
-            // This is UI-only guidance; actual application happens in createOrImport().
-            await refreshSuggestedRestoreHeightIfNeeded()
-
-            if setupMode == .create, scenePhase == .active {
-                generateNewSeed()
-            }
         }
         .onChange(of: setupMode) {
-            Task { await refreshSuggestedRestoreHeightIfNeeded() }
+            if setupMode != .create {
+                suggestedRestoreHeight = nil
+                suggestedHeightNetworkKey = nil
+                suggestedHeightError = nil
+            }
             if setupMode == .create, generatedMnemonic.isEmpty {
                 generateNewSeed()
             }
         }
-        .onChange(of: isMainnet) {
-            Task { await refreshSuggestedRestoreHeightIfNeeded() }
+        .onChange(of: setupNetworkKey) {
+            suggestedRestoreHeight = nil
+            suggestedHeightNetworkKey = nil
+            suggestedHeightError = nil
         }
     }
 
     // MARK: - Neon setup mode picker
+
+    /// Button-backed standard picker. This avoids relying on a segmented Picker's
+    /// native hit testing inside the app's first-run setup hierarchy.
+    private var standardSetupModePicker: some View {
+        HStack(spacing: 0) {
+            ForEach(WalletSetupMode.allCases) { mode in
+                let selected = setupMode == mode
+                Button {
+                    setupMode = mode
+                } label: {
+                    Text(mode.title)
+                        .font(.subheadline.weight(.medium))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                        .foregroundStyle(selected ? Color.primary : Color.secondary)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 9)
+                        .background {
+                            if selected {
+                                RoundedRectangle(cornerRadius: 7)
+                                    .fill(Color(uiColor: .systemBackground))
+                            }
+                        }
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(mode.title)
+                .accessibilityAddTraits(selected ? .isSelected : [])
+            }
+        }
+        .padding(3)
+        .background(Color(uiColor: .tertiarySystemFill), in: RoundedRectangle(cornerRadius: 9))
+    }
 
     @ViewBuilder
     private func neonSetupModePicker(palette: ClassicPalette) -> some View {
@@ -375,6 +447,8 @@ struct WalletCreationView: View {
                         .background(selected ? palette.cta : Color.clear)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel(mode.title)
+                .accessibilityAddTraits(selected ? .isSelected : [])
             }
         }
         .background(palette.panel)
@@ -396,6 +470,13 @@ struct WalletCreationView: View {
 
             mnemonicWordGrid
 
+            Button {
+                copyRecoverySeed()
+            } label: {
+                Label(seedCopied ? L10n.t("Copied") : L10n.t("Copy recovery seed"), systemImage: seedCopied ? "checkmark" : "doc.on.doc")
+            }
+            .disabled(generatedMnemonic.isEmpty)
+
             if let seedGenerationError {
                 Text(seedGenerationError)
                     .font(.caption)
@@ -411,9 +492,6 @@ struct WalletCreationView: View {
             NeonToggle(title: L10n.t("I wrote down my recovery seed"), isOn: $wroteSeedDown)
                 .disabled(generatedMnemonic.isEmpty)
 
-            if wroteSeedDown {
-                seedChallengeView
-            }
         }
     }
 
@@ -438,42 +516,16 @@ struct WalletCreationView: View {
         .privacySensitive()
     }
 
-    private var seedChallengeView: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Confirm you wrote it down: enter the requested words below.")
-                .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
-                .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
-
-            ForEach(Array(seedChallengeIndices.enumerated()), id: \.offset) { i, wordIndex in
-                HStack {
-                    Text(L10n.format("Word #%lld:", Int64(wordIndex + 1)))
-                        .font(.system(.body, design: .monospaced))
-                    TextField("Seed word", text: challengeBinding(for: i))
-                        .labelsHidden()
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .font(.system(.body, design: .monospaced))
-                        .focused($focusedChallengeIndex, equals: i)
-                        .accessibilityLabel(L10n.format("Word #%lld:", Int64(wordIndex + 1)))
-                }
-            }
-
-            if !seedChallengeIndices.isEmpty, !allChallengesMatch() {
-                Text("Word(s) don't match yet.")
-                    .font(.caption)
-                    .foregroundColor(classicPalette?.danger ?? .red)
-            }
-        }
-    }
-
-    private func challengeBinding(for index: Int) -> Binding<String> {
-        Binding(
-            get: { seedChallengeAnswers.indices.contains(index) ? seedChallengeAnswers[index] : "" },
-            set: { newValue in
-                guard seedChallengeAnswers.indices.contains(index) else { return }
-                seedChallengeAnswers[index] = newValue
-            }
+    private func copyRecoverySeed() {
+        let phrase = generatedMnemonic.split(whereSeparator: \.isWhitespace).joined(separator: " ")
+        guard !phrase.isEmpty else { return }
+        UIPasteboard.general.setItems(
+            [[UTType.plainText.identifier: phrase]],
+            options: [.localOnly: true, .expirationDate: Date().addingTimeInterval(60)]
         )
+        seedCopied = true
+        UIAccessibility.post(notification: .announcement, argument: L10n.t("Copied"))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { seedCopied = false }
     }
 
     private func generateNewSeed() {
@@ -486,59 +538,31 @@ struct WalletCreationView: View {
             seedGenerationError = L10n.format("Couldn't generate a seed: %@", error.localizedDescription)
         }
         wroteSeedDown = false
-        seedChallengeAnswers = ["", "", ""]
-        regenerateChallenges()
-    }
-
-    private func regenerateChallenges() {
-        let wordCount = generatedMnemonic.split(separator: " ").count
-        guard wordCount >= 3 else {
-            seedChallengeIndices = []
-            return
-        }
-        var indices = Set<Int>()
-        while indices.count < 3 {
-            indices.insert(Int.random(in: 0..<wordCount))
-        }
-        seedChallengeIndices = indices.sorted()
-        seedChallengeAnswers = ["", "", ""]
-    }
-
-    private func allChallengesMatch() -> Bool {
-        let words = generatedMnemonic.split(separator: " ").map(String.init)
-        guard !seedChallengeIndices.isEmpty, seedChallengeIndices.count == seedChallengeAnswers.count else { return false }
-        for (i, wordIndex) in seedChallengeIndices.enumerated() {
-            guard words.indices.contains(wordIndex) else { return false }
-            let expected = words[wordIndex].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-            let actual = seedChallengeAnswers[i].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-            guard !actual.isEmpty, actual == expected else { return false }
-        }
-        return true
+        seedCopied = false
     }
 
     private func isSeedBackupGatePassed() -> Bool {
-        !generatedMnemonic.isEmpty && wroteSeedDown && allChallengesMatch()
+        !generatedMnemonic.isEmpty && wroteSeedDown
     }
 
     private func createOrImport(isReplace: Bool) async {
-        // Persist whatever is in the node field so create/import works even if Save wasn't tapped.
-        let trimmedNode = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !trimmedNode.isEmpty {
-            guard let explicit = NetworkRouting.explicitNodeURL(trimmedNode) else {
-                viewModel.errorMessage = L10n.t("Start the node URL with http:// or https://")
-                return
-            }
-            nodeAddress = explicit
-            MoneroConfig.setDaemonAddress(explicit)
+        guard applySetupNetwork() else { return }
+        if setupMode == .create, suggestedHeightNetworkKey != setupNetworkKey {
+            // Keep the normal Create Wallet path fast by attempting the optional
+            // near-tip height after the selected route is validated and applied.
+            // The lookup is bounded and failures retain the full-scan height of 0.
+            await refreshSuggestedRestoreHeightIfNeeded()
         }
-
         // For create mode, we hide the restore height input and use the suggested height.
         // For import mode, we take the user's input.
         let rawHeight = UInt64(restoreHeightInput.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0
         let effectiveHeight: UInt64 = {
             // Feather-style optimization: for *new wallets only*, if the user leaves restore
-            // height at 0, use a fast restore height near tip: node tip - 10.
-            if setupMode == .create, rawHeight == 0, let suggested = suggestedRestoreHeight {
+            // height at 0, use a fast restore height near tip only when it came from this route.
+            if setupMode == .create,
+               rawHeight == 0,
+               suggestedHeightNetworkKey == setupNetworkKey,
+               let suggested = suggestedRestoreHeight {
                 return suggested
             }
             return rawHeight
@@ -566,23 +590,55 @@ struct WalletCreationView: View {
         hasStoredWallet = await viewModel.hasStoredWallet()
     }
 
-    private func saveNodeAddress() {
-        let trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
-            nodeSaveStatus = L10n.t("Start the node URL with http:// or https://")
-            return
+    private func applySetupNetwork() -> Bool {
+        let effectiveI2PNode = NetworkRouting.effectiveI2PRPCAddress(i2pRPCAddress)
+        let proxy = i2pProxyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        var explicitClearnetNode: String?
+
+        if networkPolicy != .i2p {
+            let trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
+                nodeSaveStatus = L10n.t("Start the node URL with http:// or https://")
+                return false
+            }
+            guard !NetworkRouting.isI2PHostnameURL(explicit) else {
+                nodeSaveStatus = L10n.t("I2P node addresses require I2P only or Both and an HTTP proxy.")
+                return false
+            }
+            explicitClearnetNode = explicit
         }
-        nodeAddress = explicit
-        MoneroConfig.setDaemonAddress(explicit)
-        let savedNodeStatus = L10n.t("Saved node")
-        nodeSaveStatus = savedNodeStatus
-        Task {
-            await refreshSuggestedRestoreHeightIfNeeded()
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
-            if nodeSaveStatus == savedNodeStatus {
-                nodeSaveStatus = nil
+
+        if networkPolicy != .clearnet {
+            do {
+                try NetworkRouting.validateI2PConfiguration(nodeAddress: effectiveI2PNode, proxyAddress: proxy)
+            } catch {
+                nodeSaveStatus = error.localizedDescription
+                return false
             }
         }
+
+        // Write preferences only after every active endpoint has passed validation.
+        i2pRPCAddress = effectiveI2PNode
+        MoneroConfig.setNetworkPolicy(networkPolicy)
+        MoneroConfig.setI2PRPCAddress(effectiveI2PNode)
+        MoneroConfig.setI2PHTTPProxyAddress(proxy.isEmpty ? nil : proxy)
+        MoneroConfig.setUseI2P(networkPolicy != .clearnet)
+        if let explicitClearnetNode {
+            nodeAddress = explicitClearnetNode
+            MoneroConfig.setDaemonAddress(explicitClearnetNode)
+        }
+
+        switch networkPolicy {
+        case .clearnet: nodeSaveStatus = L10n.t("Saved clearnet")
+        case .i2p: nodeSaveStatus = L10n.t("Saved I2P")
+        case .hybrid: nodeSaveStatus = L10n.t("Saved both")
+        }
+        return true
+    }
+
+    private func saveNetworkSettings() {
+        guard applySetupNetwork() else { return }
+        Task { await refreshSuggestedRestoreHeightIfNeeded() }
     }
 
     private func refreshSuggestedRestoreHeightIfNeeded() async {
@@ -595,6 +651,9 @@ struct WalletCreationView: View {
 
         isFetchingSuggestedHeight = true
         suggestedHeightError = nil
+        suggestedRestoreHeight = nil
+        suggestedHeightNetworkKey = nil
+        let requestNetworkKey = setupNetworkKey
 
         // Fetch daemon height info and compute restoreHeight = node tip - 10.
         do {
@@ -611,18 +670,27 @@ struct WalletCreationView: View {
             WalletDiagnostics.log("🛰️ Suggested height: policy=\(MoneroConfig.networkPolicy), url=\(baseURL), proxy=\(proxy ?? "(none)")")
             #endif
 
-            let info = try await MoneroDaemonClient.getInfo(baseURL: baseURL, proxyAddress: proxy)
+            let info = try await MoneroDaemonClient.getInfo(
+                baseURL: baseURL,
+                proxyAddress: proxy,
+                timeout: MoneroConfig.daemonProbeTimeout
+            )
             let tip = info.targetHeight
             let suggested = tip > 10 ? (tip - 10) : 0
-            suggestedRestoreHeight = suggested
-            suggestedHeightError = nil
+            if requestNetworkKey == setupNetworkKey {
+                suggestedRestoreHeight = suggested
+                suggestedHeightNetworkKey = requestNetworkKey
+                suggestedHeightError = nil
+            }
         } catch {
             // Non-fatal: this is only used to suggest a fast height.
-            suggestedRestoreHeight = nil
-            suggestedHeightError = L10n.t("Couldn't fetch a fast restore height from the node. Leaving restore height as 0.")
-            #if DEBUG
-            WalletDiagnostics.log("🛰️ Suggested height failed: \(error.localizedDescription)")
-            #endif
+            if requestNetworkKey == setupNetworkKey {
+                suggestedRestoreHeight = nil
+                suggestedHeightError = L10n.t("Couldn't fetch a fast restore height from the node. Leaving restore height as 0.")
+                #if DEBUG
+                WalletDiagnostics.log("🛰️ Suggested height failed: \(error.localizedDescription)")
+                #endif
+            }
         }
 
         isFetchingSuggestedHeight = false

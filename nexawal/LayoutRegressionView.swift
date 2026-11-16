@@ -1,5 +1,6 @@
 #if DEBUG && targetEnvironment(simulator)
 import SwiftUI
+import NexaWalLogic
 
 /// Isolated UI fixture: no terms acceptance, stored wallet, Keychain unlock, or sync.
 /// It renders the real forms with an unopened/zero-balance model, so it cannot send.
@@ -10,6 +11,8 @@ enum LayoutRegressionMode {
 struct LayoutRegressionView: View {
     @StateObject private var model = WalletViewModel()
     @State private var selectedTab: MainTab = .send
+    @State private var sendDraft = SendFormDraft()
+    @State private var receiveDraft = ReceiveFormDraft()
     @State private var neon = false
     @State private var sessionRevision = 0
     @Environment(\.colorScheme) private var colorScheme
@@ -29,10 +32,22 @@ struct LayoutRegressionView: View {
             }
             .font(.caption)
             .padding(8)
-            MainTabView(viewModel: model, selectedTab: $selectedTab)
+            MainTabView(
+                viewModel: model,
+                selectedTab: $selectedTab,
+                sendDraft: $sendDraft,
+                receiveDraft: $receiveDraft
+            )
                 .id(sessionRevision)
         }
         .classicTheme(enabled: neon, colorScheme: colorScheme)
+        .onAppear {
+            // Allow real form editing for keyboard checks without opening a native
+            // wallet, loading recovery data, or funding the fixture.
+            if ProcessInfo.processInfo.arguments.contains("--ui-keyboard-regression") {
+                model.isWalletOpen = true
+            }
+        }
     }
 }
 #endif

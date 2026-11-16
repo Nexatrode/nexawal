@@ -17,6 +17,7 @@ struct TermsAcceptanceView: View {
                     Text(L10n.t("Terms of Use"))
                         .font(classicUI ? .system(.title2, design: .monospaced).weight(.bold) : .title2.bold())
                         .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                        .accessibilityAddTraits(.isHeader)
 
                     Text(L10n.t("nexawal by Nexatrode LLC is a self-custodial interface for managing digital assets. You hold exclusive responsibility for your private keys and 25-word seed phrase."))
                         .font(classicUI ? .system(.body, design: .monospaced) : .body)

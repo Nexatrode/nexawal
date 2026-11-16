@@ -20,6 +20,7 @@ struct ReceiveView: View {
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let addressFont = Font.system(.caption, design: .monospaced)
 
@@ -102,6 +103,7 @@ struct ReceiveView: View {
             Text("Receive Address")
                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                 .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                .accessibilityAddTraits(.isHeader)
 
             if viewModel.receiveSubaddresses.isEmpty {
                 Text("Loading addresses…")
@@ -173,6 +175,7 @@ struct ReceiveView: View {
             Text(L10n.neon("Payment Request (optional)", classicUI: classicUI))
                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                 .foregroundColor(classicPalette?.primaryText ?? .primary)
+                .accessibilityAddTraits(.isHeader)
 
             VStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
@@ -336,11 +339,11 @@ struct ReceiveView: View {
         UIPasteboard.general.string = text
         AppHaptics.light()
         copyConfirmationText = message
-        withAnimation {
+        withAnimation(reduceMotion ? nil : .default) {
             showCopyConfirmation = true
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            withAnimation {
+            withAnimation(reduceMotion ? nil : .default) {
                 showCopyConfirmation = false
             }
         }
@@ -357,7 +360,6 @@ private struct QRCodeView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     private static let context = CIContext()
-    private static let filter = CIFilter.qrCodeGenerator()
 
     var body: some View {
         GeometryReader { proxy in
@@ -391,10 +393,13 @@ private struct QRCodeView: View {
     private func generateQRCode(for string: String, side: CGFloat) -> UIImage? {
         guard !string.isEmpty else { return nil }
         let data = Data(string.utf8)
-        QRCodeView.filter.setValue(data, forKey: "inputMessage")
-        QRCodeView.filter.setValue("M", forKey: "inputCorrectionLevel")
+        // CIFilter instances are mutable. Keep each render isolated so two
+        // simultaneous address/URI updates cannot overwrite one another.
+        let filter = CIFilter.qrCodeGenerator()
+        filter.setValue(data, forKey: "inputMessage")
+        filter.setValue("M", forKey: "inputCorrectionLevel")
 
-        guard let outputImage = QRCodeView.filter.outputImage else {
+        guard let outputImage = filter.outputImage else {
             return nil
         }
 

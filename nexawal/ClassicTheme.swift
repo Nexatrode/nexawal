@@ -123,6 +123,7 @@ extension View {
             .tint(enabled
                 ? ClassicPalette.resolve(colorScheme: .dark).accent
                 : ClassicPalette.standard(colorScheme: colorScheme).accent)
+            .modifier(RespectReduceMotion())
             .preferredColorScheme(enabled ? .dark : nil)
     }
 
@@ -168,6 +169,18 @@ extension View {
     }
 }
 
+private struct RespectReduceMotion: ViewModifier {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    func body(content: Content) -> some View {
+        content.transaction { transaction in
+            if reduceMotion {
+                transaction.animation = nil
+            }
+        }
+    }
+}
+
 struct NeonSecondaryButtonStyle: ButtonStyle {
     let palette: ClassicPalette
 
@@ -208,6 +221,7 @@ struct NeonSectionHeader: View {
         Text(classicUI ? title.uppercased() : title)
             .font(classicUI ? .system(.caption, design: .monospaced).weight(.semibold) : .caption)
             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+            .accessibilityAddTraits(.isHeader)
     }
 }
 
@@ -261,6 +275,7 @@ private struct NeonThemeSwitch: View {
     let title: String?
     let palette: ClassicPalette
     let action: () -> Void
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         // Match Material3 switch proportions (~52×32).
@@ -295,14 +310,21 @@ private struct NeonThemeSwitch: View {
                         y: 0
                     )
             }
-            .animation(.easeInOut(duration: 0.18), value: isOn)
+            .animation(reduceMotion ? nil : .easeInOut(duration: 0.18), value: isOn)
         }
         .buttonStyle(.plain)
         .frame(width: width, height: max(height, 44), alignment: .center) // HIG-friendly hit target
-        .accessibilityLabel(title ?? "Toggle")
-        .accessibilityValue(isOn ? L10n.t("On") : L10n.t("Off"))
-        .accessibilityAddTraits(.isButton)
-        .accessibilityAction { action() }
+        // Keep the custom visuals, but expose native switch semantics and actions.
+        .accessibilityRepresentation {
+            Toggle(title ?? L10n.t("Toggle"), isOn: Binding(
+                get: { isOn },
+                set: { newValue in
+                    if newValue != isOn { action() }
+                }
+            ))
+            .labelsHidden()
+            .accessibilityLabel(title ?? L10n.t("Toggle"))
+        }
     }
 }
 
@@ -326,12 +348,13 @@ struct NeonDisclosureGroup<Content: View>: View {
 
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         if classicUI, let palette = classicPalette {
             VStack(alignment: .leading, spacing: 10) {
                 Button {
-                    withAnimation(.easeInOut(duration: 0.18)) {
+                    withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.18)) {
                         isExpanded.toggle()
                     }
                 } label: {
@@ -348,6 +371,22 @@ struct NeonDisclosureGroup<Content: View>: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+                .accessibilityRepresentation {
+                    DisclosureGroup(
+                        title,
+                        isExpanded: Binding(
+                            get: { isExpanded },
+                            set: { newValue in
+                                guard newValue != isExpanded else { return }
+                                withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.18)) {
+                                    isExpanded = newValue
+                                }
+                            }
+                        )
+                    ) {
+                        EmptyView()
+                    }
+                }
 
                 if isExpanded {
                     content()

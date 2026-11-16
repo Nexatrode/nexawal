@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 import NexaWalLogic
 
-enum MainTab: Hashable {
+enum MainTab: String, Hashable {
     case wallet
     case receive
     case send
@@ -34,25 +34,71 @@ enum MainTab: Hashable {
         case .settings: return "gearshape.fill"
         }
     }
+
+    /// `qrcode` draws shorter than the other tab symbols. A title stacked under the
+    /// raw image sits higher than Wallet, Send, and Settings, which is obvious on
+    /// a 375pt phone. Every icon is centered in the same canvas so the row lines up.
+    func tabBarIcon(weight: UIImage.SymbolWeight) -> UIImage {
+        TabBarIcon.image(systemName: systemImage, weight: weight)
+    }
+}
+
+private enum TabBarIcon {
+    static let canvas = CGSize(width: 32, height: 26)
+    private static var cache: [String: UIImage] = [:]
+
+    static func image(systemName: String, weight: UIImage.SymbolWeight) -> UIImage {
+        let key = "\(systemName)-\(weight.rawValue)"
+        if let cached = cache[key] { return cached }
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: weight)
+        let symbol = UIImage(systemName: systemName, withConfiguration: config)
+        let rendered = UIGraphicsImageRenderer(size: canvas).image { _ in
+            guard let symbol else { return }
+            symbol.withTintColor(.black).draw(in: CGRect(
+                x: (canvas.width - symbol.size.width) / 2,
+                y: (canvas.height - symbol.size.height) / 2,
+                width: symbol.size.width,
+                height: symbol.size.height
+            ))
+        }.withRenderingMode(.alwaysTemplate)
+        cache[key] = rendered
+        return rendered
+    }
 }
 
 struct ContentView: View {
     @ObservedObject var viewModel: WalletViewModel
+    var onWipeRequested: () -> Void = {}
     @AppStorage(MoneroConfig.userDefaultsTechnoThemeKey) private var technoThemeEnabled: Bool = MoneroConfig.defaultTechnoThemeEnabled
     @Environment(\.colorScheme) private var colorScheme
-    @State private var selectedTab: MainTab = .wallet
+    @State private var selectedTab = MainTab.wallet
+    // Keep in-progress form drafts above the authenticated/locked surface switch. A Face ID
+    // relock may replace that surface while a slow native preview is still completing.
+    @State private var sendDraft = SendFormDraft()
+    @State private var receiveDraft = ReceiveFormDraft()
 
     var body: some View {
         Group {
-            if viewModel.isWalletOpen {
-                MainTabView(viewModel: viewModel, selectedTab: $selectedTab)
-                    .id(viewModel.historySession)
-            } else if viewModel.isRestoringSession {
-                UnlockingWalletView()
-            } else if viewModel.needsUnlock {
-                UnlockExistingWalletView(viewModel: viewModel)
+            if viewModel.retainsWalletShell || viewModel.showsAuthenticatedShell {
+                ZStack {
+                    MainTabView(
+                        viewModel: viewModel,
+                        selectedTab: $selectedTab,
+                        sendDraft: $sendDraft,
+                        receiveDraft: $receiveDraft,
+                        onWipeRequested: onWipeRequested
+                    )
+                        .opacity(viewModel.showsAuthenticatedShell ? 1 : 0)
+                        .allowsHitTesting(viewModel.showsAuthenticatedShell)
+                        .accessibilityHidden(!viewModel.showsAuthenticatedShell)
+
+                    if !viewModel.showsAuthenticatedShell {
+                        lockedWalletSurface
+                            .zIndex(1)
+                    }
+                }
             } else {
-                WalletCreationView(viewModel: viewModel)
+                lockedWalletSurface
             }
         }
         // Techno Theme ON = neon terminal look; OFF (default) = standard look.
@@ -65,8 +111,26 @@ struct ContentView: View {
         .onChange(of: viewModel.isRefreshing) { _, refreshing in
             UIApplication.shared.isIdleTimerDisabled = refreshing
         }
+        .onChange(of: viewModel.historySession) { _, _ in
+            // A new wallet or explicit rescan invalidates the old recipient/payment context.
+            // Ordinary Face ID relocks do not change historySession, so the draft and its
+            // in-memory preview can finish and remain visible through that relock.
+            sendDraft = SendFormDraft()
+            receiveDraft = ReceiveFormDraft()
+        }
         .onDisappear {
             UIApplication.shared.isIdleTimerDisabled = false
+        }
+    }
+
+    @ViewBuilder
+    private var lockedWalletSurface: some View {
+        if viewModel.isRestoringSession {
+            UnlockingWalletView()
+        } else if viewModel.needsUnlock {
+            UnlockExistingWalletView(viewModel: viewModel, onWipeRequested: onWipeRequested)
+        } else {
+            WalletCreationView(viewModel: viewModel)
         }
     }
 }
@@ -101,6 +165,7 @@ private struct UnlockingWalletView: View {
 /// Unlock-only surface after Face ID cancel (or unlock failure) when a stored wallet exists.
 private struct UnlockExistingWalletView: View {
     @ObservedObject var viewModel: WalletViewModel
+    var onWipeRequested: () -> Void
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
 
@@ -158,6 +223,12 @@ private struct UnlockExistingWalletView: View {
                 }
                 .disabled(viewModel.isLoading)
                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+
+                Button(role: .destructive, action: onWipeRequested) {
+                    Label(L10n.t("Wipe wallet and start over"), systemImage: "trash")
+                        .font(classicUI ? .system(.footnote, design: .monospaced) : .footnote)
+                }
+                .disabled(viewModel.isLoading)
             }
             .padding()
         }
@@ -169,16 +240,14 @@ private struct UnlockExistingWalletView: View {
 struct MainTabView: View {
     @ObservedObject var viewModel: WalletViewModel
     @Binding var selectedTab: MainTab
+    @Binding var sendDraft: SendFormDraft
+    @Binding var receiveDraft: ReceiveFormDraft
+    var onWipeRequested: () -> Void = {}
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     @Environment(\.colorScheme) private var colorScheme
-    // Memory-only, and discarded when the unlocked session ends. Legacy split/tab
-    // branches may recreate their children without throwing away unfinished inputs.
-    @State private var sendDraft = SendFormDraft()
-    @State private var receiveDraft = ReceiveFormDraft()
-
     private let tabs: [MainTab] = [.wallet, .receive, .send, .settings]
 
     private var usesSplitNavigation: Bool {
@@ -186,7 +255,9 @@ struct MainTabView: View {
     }
 
     var body: some View {
-        Group {
+        // A concrete host anchors the native Duo sidebar presentation across tab
+        // changes. A transparent Group can leave its toggle without a presenter.
+        ZStack {
 #if !targetEnvironment(macCatalyst)
             if #available(iOS 27.1, *) {
                 nativeTabNavigation
@@ -198,6 +269,29 @@ struct MainTabView: View {
 #endif
         }
         .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
+        .safeAreaInset(edge: .top, spacing: 0) {
+            if viewModel.showsAuthenticatedShell && !viewModel.walletActionsReady {
+                HStack(spacing: 10) {
+                    ProgressView()
+                        .tint(classicPalette?.accent ?? .accentColor)
+                    Text(L10n.neon(
+                        "Finishing the current wallet operation. Wallet actions are paused until it completes.",
+                        classicUI: classicUI
+                    ))
+                        .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                        .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .background(classicPalette?.panel ?? Color(.secondarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: classicUI ? 4 : 12))
+                .padding(.horizontal, 12)
+                .padding(.top, 8)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(L10n.t("Finishing the current wallet operation. Wallet actions are paused until it completes."))
+            }
+        }
         .onChange(of: selectedTab) {
             viewModel.noteUserInteraction()
         }
@@ -313,16 +407,20 @@ struct MainTabView: View {
 
     @ViewBuilder
     private func tabContent(for tab: MainTab) -> some View {
-        switch tab {
-        case .wallet:
-            WalletView(viewModel: viewModel, selectedTab: $selectedTab)
-        case .receive:
-            ReceiveView(viewModel: viewModel, draft: $receiveDraft)
-        case .send:
-            SendView(viewModel: viewModel, draft: $sendDraft)
-        case .settings:
-            SettingsView(viewModel: viewModel)
+        Group {
+            switch tab {
+            case .wallet:
+                WalletView(viewModel: viewModel, selectedTab: $selectedTab)
+            case .receive:
+                ReceiveView(viewModel: viewModel, draft: $receiveDraft)
+            case .send:
+                SendView(viewModel: viewModel, draft: $sendDraft)
+            case .settings:
+                SettingsView(viewModel: viewModel, onWipeRequested: onWipeRequested)
+            }
         }
+        // This modifier is scoped to each page so native/custom tab controls remain usable.
+        .disabled(!viewModel.walletActionsReady)
     }
 
     private var customCompactTabNavigation: some View {
@@ -342,23 +440,24 @@ struct MainTabView: View {
     private var nativeTabNavigation: some View {
         TabView(selection: $selectedTab) {
             ForEach(tabs, id: \.self) { tab in
-                Tab(value: tab) {
-                    tabContent(for: tab)
-                } label: {
-                    Label {
-                        Text(classicUI ? tab.neonTitle : tab.title)
-                            .font(classicUI
-                                ? .system(.caption2, design: .monospaced).weight(.semibold)
-                                : .body)
-                    } icon: {
-                        Image(systemName: tab.systemImage)
+                tabContent(for: tab)
+                    .tabItem {
+                        Label {
+                            Text(classicUI ? tab.neonTitle : tab.title)
+                                .font(classicUI
+                                    ? .system(.caption2, design: .monospaced).weight(.semibold)
+                                    : .body)
+                                .lineLimit(1)
+                                .frame(height: 22, alignment: .center)
+                        } icon: {
+                            Image(uiImage: tab.tabBarIcon(weight: .regular))
+                                .renderingMode(.template)
+                        }
                     }
-                }
+                    .tag(tab)
             }
         }
         .tabViewStyle(.sidebarAdaptable)
-        // Change placement, not view identity, when folding/resizing. In particular,
-        // keep an open scanner and each tab's NavigationStack attached to one host.
         .defaultTabBarPlacement(horizontalSizeClass == .regular ? .sidebar : .tabBar)
         .defaultAdaptableTabBarPlacement(.sidebar)
         .tint(classicPalette?.accent ?? .accentColor)
@@ -383,27 +482,30 @@ private struct NeonTabBar: View {
                 .fill(palette?.border.opacity(classicUI ? 0.45 : 0) ?? Color(.separator))
                 .frame(height: classicUI ? 1 : 0.33)
 
-            HStack(spacing: 0) {
+            HStack(alignment: .top, spacing: 0) {
                 ForEach(tabs, id: \.self) { tab in
                     let selected = selectedTab == tab
                     Button {
                         selectedTab = tab
                     } label: {
                         VStack(spacing: 4) {
-                            Image(systemName: tab.systemImage)
-                                .font(.system(size: 20, weight: selected ? .semibold : .regular))
+                            Image(uiImage: tab.tabBarIcon(weight: selected ? .semibold : .regular))
+                                .renderingMode(.template)
+                                .frame(width: TabBarIcon.canvas.width, height: TabBarIcon.canvas.height)
                                 .accessibilityHidden(true)
                             Text(classicUI ? tab.neonTitle : tab.title)
                                 .font(
                                     classicUI
-                                        ? .system(size: 10, weight: .semibold, design: .monospaced)
-                                        : .system(size: 10, weight: selected ? .semibold : .medium)
+                                        ? .system(.caption2, design: .monospaced).weight(.semibold)
+                                        : .caption.weight(selected ? .semibold : .medium)
                                 )
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.8)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: .infinity, alignment: .center)
                         }
                         .foregroundStyle(itemColor(selected: selected))
-                        .frame(maxWidth: .infinity)
+                        .frame(maxWidth: .infinity, alignment: .top)
                         .padding(.top, 8)
                         .padding(.bottom, 6)
                         .contentShape(Rectangle())

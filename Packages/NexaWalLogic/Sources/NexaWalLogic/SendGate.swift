@@ -21,6 +21,12 @@ public final class SendGate: @unchecked Sendable {
 
     public init() {}
 
+    public var isInFlight: Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        return inFlight
+    }
+
     public func tryBegin() -> Bool {
         lock.lock()
         defer { lock.unlock() }

@@ -88,3 +88,23 @@ Use only a disposable test wallet: cancel Face ID/passcode while confirming a se
 node's fee after preview for exact and sweep sends; verify no increased-fee payload is persisted or
 broadcast; then retry with a new preview. Check interrupted-send recovery, background/foreground,
 and launch using the final signed release build. These checks are not replaced by host unit tests.
+
+### VoiceOver wallet safety checks
+
+On an iPhone and an iPad, use VoiceOver and a disposable wallet. Repeat at an
+accessibility text size in English and in a supported non-English locale.
+
+- On Create Wallet, swipe through the recovery words in order. Activate Copy
+  recovery seed and verify that VoiceOver announces the localized copy feedback
+  without speaking the clipboard contents. Verify that the backup acknowledgment
+  remains reachable.
+- Preview an exact send and a Send Max from a funded stagenet test wallet.
+  Review the amount, full destination, and fee with VoiceOver. On Send Max, verify
+  that VoiceOver reads the message that the final amount is recalculated. Cancel
+  each confirmation and verify that focus returns to the send screen.
+- Open Wipe wallet and start over from Settings and from a locked test wallet.
+  Swipe through the title and warning before activating a button. Verify that
+  the recovery backup instruction, Cancel, and the destructive action are
+  distinct and reachable. Cancel first and verify that the original wallet is
+  still present. Repeat with a disposable wallet and confirm the wipe. Verify
+  that VoiceOver can reach the Terms of Use screen afterward.

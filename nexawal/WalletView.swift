@@ -14,6 +14,8 @@ struct WalletView: View {
     @ObservedObject var viewModel: WalletViewModel
     @ObservedObject private var fiatPrices = FiatPriceService.shared
     @Binding var selectedTab: MainTab
+    @ScaledMetric(relativeTo: .largeTitle) private var balanceFontSize: CGFloat = 38
+    @ScaledMetric(relativeTo: .title2) private var unlockedBalanceFontSize: CGFloat = 20
 
     // Transaction details
     @State private var selectedTransfer: WalletCoreFFIClient.Transfer?
@@ -23,6 +25,7 @@ struct WalletView: View {
 
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var showSyncProgress: Bool {
         !viewModel.isSynced || viewModel.isRefreshing
@@ -208,7 +211,9 @@ struct WalletView: View {
                                 .tracking(classicUI ? 2 : 0)
 
                             Text(viewModel.formatDisplayPiconero(viewModel.totalBalance))
-                                .font(.system(size: 38, weight: .bold, design: .monospaced))
+                                .font(.system(size: balanceFontSize, weight: .bold, design: .monospaced))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.65)
                                 .foregroundColor(primaryText)
                             FiatApproxText(
                                 piconero: viewModel.totalBalance,
@@ -223,7 +228,9 @@ struct WalletView: View {
                                         .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                                         .foregroundColor(secondaryText)
                                     Text(viewModel.formatDisplayPiconero(viewModel.unlockedBalance))
-                                        .font(.system(size: 20, weight: .semibold, design: .monospaced))
+                                        .font(.system(size: unlockedBalanceFontSize, weight: .semibold, design: .monospaced))
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.65)
                                         .foregroundColor(classicPalette?.accent ?? .blue)
                                     FiatApproxText(
                                         piconero: viewModel.unlockedBalance,
@@ -291,7 +298,7 @@ struct WalletView: View {
                     // Sync details (no section title — matches Android card content)
                     VStack(alignment: .leading, spacing: 8) {
                         Button {
-                            withAnimation(.easeInOut(duration: 0.18)) {
+                            withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.18)) {
                                 syncDetailsExpanded.toggle()
                             }
                         } label: {
@@ -376,6 +383,7 @@ struct WalletView: View {
                             Text(L10n.neon("Recent Transactions", classicUI: classicUI))
                                 .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                                 .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                                .accessibilityAddTraits(.isHeader)
                             Spacer()
                             Text("\(viewModel.totalHistoryCount)")
                                 .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
@@ -517,6 +525,20 @@ struct WalletView: View {
             }
             .background(pageBackground.ignoresSafeArea())
             .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+#if !targetEnvironment(macCatalyst)
+                if #available(iOS 27.1, *) {
+                    // Duo puts its sidebar toggle in the navigation bar. Keep the
+                    // Wallet bar present just like Receive, Send, and Settings.
+                    ToolbarItem(placement: .principal) {
+                        Text(L10n.neon("Wallet", classicUI: classicUI))
+                            .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
+                            .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                    }
+                }
+#endif
+            }
             .refreshable {
                 await viewModel.refreshWallet()
             }
@@ -547,6 +569,7 @@ struct SettingsView: View {
     private static let sourceRepoURL = "https://github.com/nexatrode/nexawal"
 
     @ObservedObject var viewModel: WalletViewModel
+    var onWipeRequested: () -> Void = {}
     @State private var nodeAddress: String
     @State private var networkPolicy: MoneroConfig.NetworkPolicy
     @State private var i2pRPCAddress: String
@@ -569,9 +592,11 @@ struct SettingsView: View {
     @AppStorage(SendSounds.setting) private var sendSoundsEnabled: Bool = MoneroConfig.defaultSendSoundsEnabled
     @Environment(\.classicUI) private var classicUI
     @Environment(\.classicPalette) private var classicPalette
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    init(viewModel: WalletViewModel) {
+    init(viewModel: WalletViewModel, onWipeRequested: @escaping () -> Void = {}) {
         self._viewModel = ObservedObject(initialValue: viewModel)
+        self.onWipeRequested = onWipeRequested
         self._nodeAddress = State(initialValue: MoneroConfig.daemonAddress)
         self._networkPolicy = State(initialValue: MoneroConfig.networkPolicy)
         self._i2pRPCAddress = State(initialValue: MoneroConfig.i2pRPCAddress)
@@ -805,9 +830,21 @@ struct SettingsView: View {
                         .accessibilityLabel(Self.sourceRepoURL)
                         .accessibilityHint(L10n.t("Copies the source link"))
                     }
+
+                    settingsCard(title: L10n.t("Danger Zone")) {
+                        Text(L10n.t("Permanently remove this wallet and all NexaWal data stored on this device."))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                        Button(role: .destructive, action: onWipeRequested) {
+                            Label(L10n.t("Wipe wallet and start over"), systemImage: "trash")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .buttonStyle(.bordered)
+                    }
                 }
                 .padding()
             }
+            .formKeyboardDismissal()
             .navigationBarTitleDisplayMode(.inline)
             .background((classicPalette?.background ?? Color(.systemBackground)).ignoresSafeArea())
             .scrollContentBackground(classicUI ? .hidden : .automatic)
@@ -861,6 +898,7 @@ struct SettingsView: View {
             Text(classicUI ? title.uppercased() : title)
                 .font(classicUI ? .system(.caption, design: .monospaced).weight(.semibold) : .caption)
                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                .accessibilityAddTraits(.isHeader)
 
             VStack(alignment: .leading, spacing: 12) {
                 content()
@@ -905,11 +943,24 @@ struct SettingsView: View {
 
     private func applyNetwork(policy: MoneroConfig.NetworkPolicy? = nil) {
         let policy = policy ?? networkPolicy
-        if networkPolicy != policy {
-            networkPolicy = policy
-        }
-        let i2pNode = i2pRPCAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        let i2pNode = NetworkRouting.effectiveI2PRPCAddress(i2pRPCAddress)
         let proxy = i2pProxyAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        var explicitClearnetNode: String?
+        if policy != .i2p {
+            var trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+            if trimmed.isEmpty {
+                trimmed = MoneroConfig.defaultAddress
+            }
+            guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
+                flashStatus(L10n.t("Start the node URL with http:// or https://"))
+                return
+            }
+            guard !NetworkRouting.isI2PHostnameURL(explicit) else {
+                flashStatus(L10n.t("I2P node addresses require I2P only or Both and an HTTP proxy."))
+                return
+            }
+            explicitClearnetNode = explicit
+        }
         if policy != .clearnet {
             do {
                 try NetworkRouting.validateI2PConfiguration(nodeAddress: i2pNode, proxyAddress: proxy)
@@ -918,21 +969,14 @@ struct SettingsView: View {
                 return
             }
         }
+        networkPolicy = policy
+        i2pRPCAddress = i2pNode
         MoneroConfig.setNetworkPolicy(policy)
         MoneroConfig.setI2PRPCAddress(i2pNode)
         MoneroConfig.setI2PHTTPProxyAddress(proxy.isEmpty ? nil : proxy)
         MoneroConfig.setUseI2P(policy != .clearnet)
 
-        if policy != .i2p {
-            var trimmed = nodeAddress.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmed.isEmpty {
-                trimmed = MoneroConfig.defaultAddress
-                nodeAddress = trimmed
-            }
-            guard let explicit = NetworkRouting.explicitNodeURL(trimmed) else {
-                flashStatus(L10n.t("Start the node URL with http:// or https://"))
-                return
-            }
+        if let explicit = explicitClearnetNode {
             nodeAddress = explicit
             MoneroConfig.setDaemonAddress(explicit)
         }
@@ -991,13 +1035,13 @@ struct SettingsView: View {
     }
 
     private func flashStatus(_ message: String) {
-        withAnimation {
+        withAnimation(reduceMotion ? nil : .default) {
             saveConfirmation = message
         }
         Task {
             try? await Task.sleep(nanoseconds: 1_800_000_000)
             await MainActor.run {
-                withAnimation {
+                withAnimation(reduceMotion ? nil : .default) {
                     if saveConfirmation == message {
                         saveConfirmation = nil
                     }

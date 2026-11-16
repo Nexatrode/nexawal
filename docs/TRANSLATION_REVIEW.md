@@ -12,6 +12,10 @@ quality. Review the drafts with fluent speakers, especially seed backup, sending
 authentication and privacy wording. Existing `translated` status is not evidence
 of independent human review either.
 
+The wallet wipe, recovery copy, I2P guidance and selected-subaddress status
+translations added to close the November catalog gaps are also machine-generated
+drafts marked `needs_review`.
+
 Full bundled legal documents remain English; localized UI summaries are not
 translations of the legal agreement. Diagnostic/native error details and
 addresses, transaction IDs, ISO currency codes and protocol URLs stay verbatim.

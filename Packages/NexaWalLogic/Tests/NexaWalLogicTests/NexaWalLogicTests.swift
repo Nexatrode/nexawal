@@ -3,7 +3,7 @@ import XCTest
 
 final class NetworkRoutingTests: XCTestCase {
     private let clearnet = "http://127.0.0.1:18092"
-    private let i2p = "cvxtgqjorfif6i5x5fenys6fj7hzddbgavpyutps6gphywnlklqa.b32.i2p:18081"
+    private let i2p = "example.b32.i2p:18081"
 
     func testScanUsesClearnetForClearnetAndHybrid() {
         XCTAssertEqual(NetworkRouting.scanNodeURL(policy: .clearnet, clearnetNodeURL: clearnet, i2pRPCAddress: i2p), clearnet)
@@ -70,11 +70,14 @@ final class SendSafetyTests: XCTestCase {
 final class SendGateTests: XCTestCase {
     func testSecondConcurrentLockFailsFast() throws {
         let gate = SendGate()
+        XCTAssertFalse(gate.isInFlight)
         XCTAssertTrue(gate.tryBegin())
+        XCTAssertTrue(gate.isInFlight)
         XCTAssertThrowsError(try gate.withLock { XCTFail("second lock should not run") }) { error in
             XCTAssertEqual(error as? SendGate.Error, .alreadyInProgress)
         }
         gate.end()
+        XCTAssertFalse(gate.isInFlight)
         try gate.withLock { }
     }
 }

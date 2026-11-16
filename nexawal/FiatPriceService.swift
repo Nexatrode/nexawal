@@ -12,6 +12,7 @@ final class FiatPriceService: ObservableObject {
     private var inFlight: Task<Void, Never>?
     private var staleTask: Task<Void, Never>?
     private var foregroundActive = false
+    private var walletWipeGeneration: UInt64 = 0
 
     private init() {
         republishFromCache()
@@ -28,6 +29,15 @@ final class FiatPriceService: ObservableObject {
         foregroundActive = false
         inFlight?.cancel()
         stopLoop()
+    }
+
+    func resetForWalletWipe() {
+        walletWipeGeneration &+= 1
+        foregroundActive = false
+        inFlight?.cancel()
+        inFlight = nil
+        stopLoop()
+        publish(nil)
     }
 
     func settingsDidChange() {
@@ -124,7 +134,8 @@ final class FiatPriceService: ObservableObject {
             return
         }
         let currency = MoneroConfig.fiatCurrency
-        let task = Task { await self.fetchAndPublish(currency: currency) }
+        let generation = walletWipeGeneration
+        let task = Task { await self.fetchAndPublish(currency: currency, generation: generation) }
         inFlight = task
         await task.value
         inFlight = nil
@@ -143,14 +154,16 @@ final class FiatPriceService: ObservableObject {
         return now - current.fetchedAtMs < FiatEstimate.refreshIntervalMs
     }
 
-    private func fetchAndPublish(currency: String) async {
+    private func fetchAndPublish(currency: String, generation: UInt64) async {
         do {
             let rate = try await Self.fetchRate(currency: currency)
+            guard generation == walletWipeGeneration, !Task.isCancelled else { return }
             MoneroConfig.setCachedFiatRate(rate)
             if canFetch && foregroundActive && MoneroConfig.fiatCurrency == currency {
                 publish(FiatEstimate.liveRate(rate, nowMs: nowMs()))
             }
         } catch {
+            guard generation == walletWipeGeneration, !Task.isCancelled else { return }
             republishFromCache()
         }
     }

@@ -36,6 +36,9 @@ struct SendView: View {
     @Binding private var fromSubaddressMinor: UInt32
     @Binding private var sendFromSubaddressEnabled: Bool
     @State private var subaddressUnlockedOverride: UInt64?
+    @State private var isLoadingSubaddressBalance = false
+    @State private var subaddressBalanceLoadFailed = false
+    @State private var subaddressBalanceRequestID = 0
 
     // Outputs
     @State private var estimatedFeePiconero: UInt64?
@@ -59,9 +62,9 @@ struct SendView: View {
         _sendFromSubaddressEnabled = draft.sendFromSubaddressEnabled
     }
 
-    private func availablePiconero() -> UInt64 {
-        if sendFromSubaddressEnabled, let v = subaddressUnlockedOverride {
-            return v
+    private func availablePiconero() -> UInt64? {
+        if sendFromSubaddressEnabled {
+            return subaddressUnlockedOverride
         }
         return viewModel.unlockedBalance
     }
@@ -74,26 +77,52 @@ struct SendView: View {
     }
 
     private func refreshSubaddressBalanceIfNeeded() async {
+        subaddressBalanceRequestID &+= 1
+        let requestID = subaddressBalanceRequestID
         guard sendFromSubaddressEnabled else {
             subaddressUnlockedOverride = nil
+            isLoadingSubaddressBalance = false
+            subaddressBalanceLoadFailed = false
             return
         }
+        let requestedMinor = fromSubaddressMinor
+        // A balance fetched for the previous subaddress is not valid while the
+        // newly selected source is being queried.
+        subaddressUnlockedOverride = nil
+        isLoadingSubaddressBalance = true
+        subaddressBalanceLoadFailed = false
         do {
-            let bal = try await walletManager.getBalance(fromSubaddressMinor: fromSubaddressMinor)
+            let bal = try await walletManager.getBalance(fromSubaddressMinor: requestedMinor)
+            guard requestID == subaddressBalanceRequestID,
+                  sendFromSubaddressEnabled,
+                  fromSubaddressMinor == requestedMinor else { return }
             subaddressUnlockedOverride = bal.unlocked
+            subaddressBalanceLoadFailed = false
         } catch {
-            // Best effort: if it fails, fall back to wallet-wide balance.
+            guard requestID == subaddressBalanceRequestID,
+                  sendFromSubaddressEnabled,
+                  fromSubaddressMinor == requestedMinor else { return }
+            // Never show the wallet-wide balance as the selected subaddress balance.
             subaddressUnlockedOverride = nil
+            subaddressBalanceLoadFailed = true
         }
+        guard requestID == subaddressBalanceRequestID else { return }
+        isLoadingSubaddressBalance = false
     }
 
     var body: some View {
         NavigationStack {
             AdaptiveFormScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    if availablePiconero() > 0 {
-                        Text(verbatim: "\(availableLabel()): \(viewModel.formatDisplayPiconero(availablePiconero()))")
+                    if let available = availablePiconero(), sendFromSubaddressEnabled || available > 0 {
+                        Text(verbatim: "\(availableLabel()): \(viewModel.formatDisplayPiconero(available))")
                             .font(classicUI ? .system(.subheadline, design: .monospaced) : .subheadline)
+                            .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    } else if sendFromSubaddressEnabled {
+                        Text(shouldShowSubaddressBalanceError
+                             ? L10n.t("Selected subaddress balance unavailable. Try again before sending.")
+                             : L10n.t("Checking selected subaddress balance…"))
+                            .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
                             .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                     }
 
@@ -156,8 +185,14 @@ struct SendView: View {
             // Ensure subaddress list is loaded for picker
             Task {
                 await viewModel.loadReceiveSubaddresses()
-                await refreshSubaddressBalanceIfNeeded()
+                if viewModel.walletActionsReady {
+                    await refreshSubaddressBalanceIfNeeded()
+                }
             }
+        }
+        .onChange(of: viewModel.walletActionsReady) { _, ready in
+            guard ready else { return }
+            Task { await refreshSubaddressBalanceIfNeeded() }
         }
         .onChange(of: currentPreviewIntent()) { _, intent in
             if approvedIntent != intent && pendingIntent != intent { invalidatePreview() }
@@ -230,6 +265,10 @@ struct SendView: View {
         } message: {
             Text(confirmationMessage())
         }
+    }
+
+    private var shouldShowSubaddressBalanceError: Bool {
+        subaddressBalanceLoadFailed && !isLoadingSubaddressBalance
     }
 
     private var fieldCorner: CGFloat { classicUI ? 4 : 8 }
@@ -320,6 +359,7 @@ struct SendView: View {
                 Text(L10n.t("Payment URI"))
                     .font(classicUI ? .system(.headline, design: .monospaced).weight(.bold) : .headline)
                     .foregroundStyle(classicPalette?.primaryText ?? .primary)
+                    .accessibilityAddTraits(.isHeader)
 
                 if !paymentRecipientName.isEmpty {
                     LabeledContent(L10n.t("Recipient"), value: paymentRecipientName)
@@ -445,6 +485,13 @@ struct SendView: View {
                 .font(classicUI ? .system(.caption, design: .monospaced).weight(.semibold) : .caption)
                 .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
+
+            if viewModel.isRefreshing {
+                Text(L10n.t("Wait for wallet sync to finish before preparing a send."))
+                    .font(classicUI ? .system(.caption, design: .monospaced) : .caption)
+                    .foregroundStyle(classicPalette?.secondaryText ?? .secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
 
             if classicUI, let palette = classicPalette {
                 Button {
@@ -699,7 +746,10 @@ struct SendView: View {
 
                 // Balance sanity check for exact-amount sends.
                 // If sending from a subaddress, validate against that subaddress's unlocked balance.
-                let available = availablePiconero()
+                guard let available = availablePiconero() else {
+                    errorMessage = L10n.t("Selected subaddress balance unavailable. Try again before sending.")
+                    return
+                }
                 if !SendSafety.hasUnlockedForExactSend(
                     amountPiconero: amountPico,
                     feePiconero: approvedMaxFee,
@@ -799,7 +849,7 @@ struct SendView: View {
     }
 
     private func canSendExact() -> Bool {
-        canSend() && !isMaxMode
+        canSend() && !isMaxMode && (!sendFromSubaddressEnabled || subaddressUnlockedOverride != nil)
     }
 
     private func canSendMax() -> Bool {

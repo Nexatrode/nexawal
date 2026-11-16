@@ -4,12 +4,18 @@ import Foundation
 public enum NetworkRouting: Sendable {
     public static let defaultI2PRPCAddress = "7lfi73h743qm663hv4x5q6ccgc4jc5ncl65dfvpe665m6pawwdxa.b32.i2p"
 
+    public static func effectiveI2PRPCAddress(_ address: String) -> String {
+        let trimmed = address.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? defaultI2PRPCAddress : trimmed
+    }
+
     public enum ConfigurationError: LocalizedError {
-        case invalidI2PNode, invalidI2PProxy
+        case invalidI2PNode, invalidI2PProxy, i2pNodeRequiresI2PPolicy
         public var errorDescription: String? {
             switch self {
             case .invalidI2PNode: return "Enter an HTTP I2P RPC address ending in .i2p, with a valid port (not the P2P address)."
             case .invalidI2PProxy: return "Enter an I2P HTTP proxy as host:port, usually 127.0.0.1:4444. SOCKS and HTTPS proxies are not supported."
+            case .i2pNodeRequiresI2PPolicy: return "I2P node addresses require I2P only or Both and an HTTP proxy."
             }
         }
     }
@@ -64,6 +70,13 @@ public enum NetworkRouting: Sendable {
             return nil
         }
         return trimmed
+    }
+
+    public static func isI2PHostnameURL(_ raw: String) -> Bool {
+        guard let host = URLComponents(string: normalizeURL(raw))?.host?.lowercased() else {
+            return false
+        }
+        return host.trimmingCharacters(in: CharacterSet(charactersIn: ".")).hasSuffix(".i2p")
     }
 
     public static func scanNodeAddress(policy: Policy, clearnetNodeAddress: String, i2pRPCAddress: String) -> String {

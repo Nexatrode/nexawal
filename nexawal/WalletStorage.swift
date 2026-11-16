@@ -344,9 +344,11 @@ actor WalletStorage {
 
     /// Remove all stored wallet data.
     func clearWallet() throws {
+        // Remove the secret first. If Keychain refuses deletion, keep its metadata so the
+        // app does not silently present an empty setup while the old seed still exists.
+        try deleteMnemonic()
         defaults.removeObject(forKey: metadataKey)
         defaults.removeObject(forKey: subaddressesKey)
-        try deleteMnemonic()
     }
 
     /// Check if metadata exists.

@@ -177,6 +177,7 @@ struct TransactionsView: View {
             }
         }
         .modifier(NativeTransactionSearch(enabled: !classicUI, text: $search))
+        .formKeyboardDismissal()
         .onAppear { if !initialized { filter = initialFilter; initialized = true } }
         .onChange(of: model.scrollTarget) { _, target in if let target { proxy.scrollTo(target, anchor: .top) } }
         .task(id: query) {
@@ -221,10 +222,11 @@ private struct NativeTransactionSearch: ViewModifier {
 
 private struct NeonDateRangeToggleStyle: ToggleStyle {
     let palette: ClassicPalette
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     func makeBody(configuration: Configuration) -> some View {
         Button {
-            withAnimation(.easeInOut(duration: 0.16)) {
+            withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.16)) {
                 configuration.isOn.toggle()
             }
         } label: {
@@ -252,10 +254,14 @@ private struct NeonDateRangeToggleStyle: ToggleStyle {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityElement(children: .combine)
-        .accessibilityValue(configuration.isOn ? "On" : "Off")
-        .accessibilityAddTraits(.isButton)
-        .accessibilityAction { configuration.isOn.toggle() }
+        // Preserve the custom terminal artwork while exposing the control as a real
+        // switch to VoiceOver, Switch Control, and other assistive technologies.
+        .accessibilityRepresentation {
+            Toggle(isOn: configuration.$isOn) {
+                configuration.label
+            }
+            .toggleStyle(.switch)
+        }
     }
 }
 
@@ -281,7 +287,7 @@ private struct NeonTransactionFilter: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(Text(option.title))
-                .accessibilityValue(selection == option.value ? "Selected" : "")
+                .accessibilityAddTraits(selection == option.value ? .isSelected : [])
             }
         }
         .overlay {
@@ -398,6 +404,7 @@ struct WalletTransferDetails: View {
                     Text(L10n.neon("Summary", classicUI: classicUI))
                         .font(classicUI ? .system(.subheadline, design: .monospaced).weight(.bold) : .subheadline)
                         .foregroundStyle(palette?.accent ?? .secondary)
+                        .accessibilityAddTraits(.isHeader)
                 }
                 Section {
                     Text(transfer.txid)
@@ -441,6 +448,7 @@ struct WalletTransferDetails: View {
                     Text(L10n.neon("Identifiers", classicUI: classicUI))
                         .font(classicUI ? .system(.subheadline, design: .monospaced).weight(.bold) : .subheadline)
                         .foregroundStyle(palette?.accent ?? .secondary)
+                        .accessibilityAddTraits(.isHeader)
                 }
             }
             .listRowBackground(palette?.panel ?? Color(.secondarySystemGroupedBackground))

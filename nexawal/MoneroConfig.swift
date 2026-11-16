@@ -188,6 +188,11 @@ struct MoneroConfig {
         )
     }
 
+    /// I2P circuits can take longer to answer than ordinary clearnet RPC probes.
+    nonisolated static var daemonProbeTimeout: TimeInterval {
+        networkPolicy == .i2p ? 60.0 : 8.0
+    }
+
     nonisolated static func scanNodeURL() -> String {
         // Apply account lookahead for the core.
         setenv("WALLETCORE_ACCOUNT_GAP", "\(accountGap)", 1)
@@ -208,19 +213,10 @@ struct MoneroConfig {
         UserDefaults.standard.set(enabled, forKey: userDefaultsI2PModeKey)
     }
 
-    private nonisolated static let legacyDefaultI2PRPCAddresses: Set<String> = [
-        "cvxtgqjorfif6i5x5fenys6fj7hzddbgavpyutps6gphywnlklqa.b32.i2p:18081",
-    ]
-
     nonisolated static var i2pRPCAddress: String {
-        let saved = UserDefaults.standard.string(forKey: userDefaultsI2PRPCKey)?
-            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        if saved.isEmpty { return NetworkRouting.defaultI2PRPCAddress }
-        if legacyDefaultI2PRPCAddresses.contains(saved.lowercased()) {
-            UserDefaults.standard.removeObject(forKey: userDefaultsI2PRPCKey)
-            return NetworkRouting.defaultI2PRPCAddress
-        }
-        return saved
+        NetworkRouting.effectiveI2PRPCAddress(
+            UserDefaults.standard.string(forKey: userDefaultsI2PRPCKey) ?? ""
+        )
     }
 
     @MainActor

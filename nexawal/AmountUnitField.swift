@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 import NexaWalLogic
 
 /// Amount text field with optional XMR ⇄ fiat swap when a live rate is available.

@@ -2,6 +2,12 @@ import XCTest
 @testable import NexaWalLogic
 
 final class NetworkRoutingPrivacyTests: XCTestCase {
+    func testEmptyI2PNodeRestoresDefaultAndCustomNodeIsPreserved() {
+        XCTAssertEqual(NetworkRouting.effectiveI2PRPCAddress(""), NetworkRouting.defaultI2PRPCAddress)
+        XCTAssertEqual(NetworkRouting.effectiveI2PRPCAddress("  \n"), NetworkRouting.defaultI2PRPCAddress)
+        XCTAssertEqual(NetworkRouting.effectiveI2PRPCAddress("custom.b32.i2p:18081"), "custom.b32.i2p:18081")
+    }
+
     func testValidHTTPProxyAndI2PRPC() throws {
         try NetworkRouting.validateI2PConfiguration(nodeAddress: NetworkRouting.defaultI2PRPCAddress, proxyAddress: "127.0.0.1:4444")
         try NetworkRouting.validateI2PConfiguration(nodeAddress: "http://custom.i2p:18081", proxyAddress: "http://[::1]:4444")
