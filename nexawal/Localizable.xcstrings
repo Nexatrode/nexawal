@@ -116133,7 +116133,7 @@
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Node check failed"
+            "value": "ノードの確認に失敗しました"
           }
         },
         "ko": {
@@ -116461,7 +116461,7 @@
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Node status stale"
+            "value": "ノードの状態が古くなっています"
           }
         },
         "ko": {
@@ -116789,7 +116789,7 @@
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Checking node"
+            "value": "ノードを確認中"
           }
         },
         "ko": {
@@ -117117,7 +117117,7 @@
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Node not checked"
+            "value": "ノードは未確認です"
           }
         },
         "ko": {
@@ -118101,7 +118101,7 @@
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Check node connection"
+            "value": "ノードへの接続を確認"
           }
         },
         "ko": {
@@ -118429,7 +118429,7 @@
         "ja": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "Last node contact"
+            "value": "最後にノードへ接続した日時"
           }
         },
         "ko": {
