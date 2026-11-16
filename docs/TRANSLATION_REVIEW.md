@@ -12,7 +12,7 @@ quality. Review the drafts with fluent speakers, especially seed backup, sending
 authentication and privacy wording. Existing `translated` status is not evidence
 of independent human review either.
 
-The wallet wipe, recovery copy, I2P guidance and selected-subaddress status
+The wallet wipe, recovery copy, I2P guidance, selected-subaddress status, and node-contact status
 translations added to close the November catalog gaps are also machine-generated
 drafts marked `needs_review`.
 
