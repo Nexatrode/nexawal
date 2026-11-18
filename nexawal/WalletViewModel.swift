@@ -323,6 +323,7 @@ class WalletViewModel: ObservableObject {
             backgroundLockRequested = false
         } catch {
             await refreshToDrain?.value
+            await walletManager.finishFullWipe()
             isWalletOpen = false
             isRestoringSession = false
             let hasMetadata = await storage.isWalletStored()

@@ -986,9 +986,11 @@ struct SettingsView: View {
             i2pRPCAddress = MoneroConfig.i2pRPCAddress
             i2pProxyAddress = MoneroConfig.i2pHTTPProxyAddress ?? ""
         } catch NetworkRouting.ConfigurationError.i2pNodeRequiresI2PPolicy {
+            networkPolicy = MoneroConfig.networkPolicy
             flashStatus(L10n.t("I2P node addresses require I2P only or Both and an HTTP proxy."))
             return
         } catch {
+            networkPolicy = MoneroConfig.networkPolicy
             flashStatus(error.localizedDescription)
             return
         }
